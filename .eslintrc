@@ -1,4 +1,4 @@
-module.exports = {
+ {
     "env": {
         "browser": true,
         "es6": true,
@@ -84,7 +84,7 @@ module.exports = {
         "@typescript-eslint/dot-notation": "error",
         "@typescript-eslint/indent": [
             "error",
-            4,
+            2,
             {
                 "FunctionDeclaration": {
                     "parameters": "first"
@@ -267,4 +267,4 @@ module.exports = {
         "valid-typeof": "off",
 
     }
-};
+}
