@@ -31,6 +31,19 @@ nav {
   }
 }
 
+@media screen and (max-width: 992px) {
+  .hamburger {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .logo,
+  .hamburger {
+    display: none;
+  }
+}
+
 // header {
 //   background-image: url('./../../assets/img/header.jpg');
 //   background-repeat: no-repeat;
