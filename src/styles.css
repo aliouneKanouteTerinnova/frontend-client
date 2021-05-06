@@ -7,8 +7,7 @@ body {
 body {
   margin: 0;
   font-family: Roboto, 'Helvetica Neue', sans-serif;
-  /* for test */
-  background-color: aqua;
+  background-color: #1f3333;
 }
 
 html,
