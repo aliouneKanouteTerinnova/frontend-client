@@ -1,27 +1,7 @@
-.content {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-evenly;
-  margin: auto;
-}
-
 .buttonEl {
   display: flex;
   justify-content: space-evenly;
   margin-top: 25px;
-}
-
-.buttonE2 {
-  display: flex;
-  justify-content: space-evenly;
-  margin-top: 25px;
-}
-
-.example-card {
-  max-width: 200px;
-  margin: auto;
-  margin-top: 14px;
-  padding-bottom: 25px;
 }
 
 .example-header-image {
