@@ -5,6 +5,9 @@ import { CategoriesService } from './../../services/categories/categories.servic
 // import { Category } from './../../models/category/category';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+// import { v4 as uuidv4 } from 'uuid';
+
+// uuidv4();
 
 @Component({
   selector: 'app-products',
@@ -17,7 +20,6 @@ export class ProductsComponent implements OnInit {
   categorys = {};
   closeResult = '';
   ModalForm: FormGroup;
-  // postId: number
 
   constructor(
     private modalService: NgbModal,
@@ -94,7 +96,7 @@ export class ProductsComponent implements OnInit {
   //   this.submited = true;
   //   const products = new Products();
 
-  //   products.id = products.id;
+  //   products.id = Math.floor(Math.random() * 100);
   //   products.name = this.ModalForm.get('Name').value;
   //   products.get_absolute_url = '';
   //   products.description = this.ModalForm.get('Description').value;
