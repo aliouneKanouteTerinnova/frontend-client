@@ -21,6 +21,7 @@ export class ProductsComponent implements OnInit {
   categorys: Category;
   closeResult = '';
   ModalForm: FormGroup;
+  id: number;
 
   constructor(
     private modalService: NgbModal,
@@ -85,14 +86,6 @@ export class ProductsComponent implements OnInit {
     }
   }
 
-  share() {
-    window.alert('The product has been shared!');
-  }
-
-  view() {
-    window.alert('The product has been viewed!');
-  }
-
   addProduct() {
     this.submited = true;
     const products = new Products();
@@ -121,7 +114,7 @@ export class ProductsComponent implements OnInit {
         });
         setTimeout(() => {
           window.location.reload();
-        }, 1000);
+        }, 1600);
 
         console.log(res);
       },
@@ -135,4 +128,35 @@ export class ProductsComponent implements OnInit {
       }
     );
   }
+
+  deleteProducts(id) {
+    this.productsService.deleteProduct(id).subscribe(
+      (d) => {
+        Swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          title: 'The product has been deleted!',
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        setTimeout(() => {
+          window.location.reload();
+        }, 1600);
+      },
+      (err) => {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Something went wrong!',
+        });
+        console.log(err);
+      }
+    );
+
+    console.log('The product has been deleted!');
+  }
+
+  // updateProducts(product) {
+  //   console.log('The product has been updated!');
+  // }
 }

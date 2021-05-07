@@ -1,6 +1,6 @@
 <div class="container">
   <div class="text-center">
-    <button class="add_product" (click)="open(content)">
+    <button mat-raised-button color="primary" (click)="open(content)">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="20"
@@ -33,9 +33,9 @@
       <p *ngIf="product.description">Description: {{ product.description }}</p>
       <p>Price : {{ product.price }}</p>
 
-      <button (click)="share()">Share</button>
+      <button class="mr-3 btn btn-primary" (click)="updateProducts(product)">Up date</button>
 
-      <button (click)="view()">View</button>
+      <button mat-raised-button color="warn" (click)="deleteProducts(product.id)">Delete</button>
       <hr />
     </div>
   </div>
