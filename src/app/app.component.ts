@@ -7,4 +7,5 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'frontend-client';
+  nombre = [1, 2, 3, 4, 4];
 }
