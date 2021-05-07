@@ -22,7 +22,7 @@
       <hr />
     </div>
 
-    <div class="col-4">
+    <!-- <div class="col-4">
       <button class="add_product" (click)="open(content)">
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -38,11 +38,11 @@
         </svg>
         Add Product
       </button>
-    </div>
+    </div> -->
   </div>
 </div>
 
-<ng-template #content let-modal>
+<!-- <ng-template #content let-modal>
   <div class="modal-header">
     <h4 class="modal-title" id="modal-basic-title">Add Product</h4>
     <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
@@ -57,8 +57,7 @@
             <label for="name">Category</label>
             <div class="input-group">
               <select name="category" id="category" class="form-control" formControlName="Category">
-                <option value="phone">phone</option>
-                <option value="laptop">laptop</option>
+                <option value="laptop" *ngFor="let category of categorys">{{ category.name }}</option>
               </select>
             </div>
           </div>
@@ -112,4 +111,4 @@
       </div>
     </form>
   </div>
-</ng-template>
+</ng-template> -->

@@ -11,6 +11,9 @@ export class ProductsService {
 
   constructor(private httpClient: HttpClient) {}
 
+  // getAllProducts() {
+  //   return this.httpClient.get<any>(`${this.basUrl}`);
+  // }
   getAllProducts() {
     return this.httpClient.get<any>(`${environment.url}products`);
   }
