@@ -1,13 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductsService } from './../../services/products/products.service';
 import { CategoriesService } from './../../services/categories/categories.service';
-// import { Products } from './../../models/products/products';
-// import { Category } from './../../models/category/category';
+import { Products } from './../../models/products/products';
+import { Category } from './../../models/category/category';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-// import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidv4 } from 'uuid';
+import Swal from 'sweetalert2';
 
-// uuidv4();
+uuidv4();
 
 @Component({
   selector: 'app-products',
@@ -17,7 +18,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class ProductsComponent implements OnInit {
   submited = false;
   products = [];
-  categorys = {};
+  categorys: Category;
   closeResult = '';
   ModalForm: FormGroup;
 
@@ -63,26 +64,26 @@ export class ProductsComponent implements OnInit {
     this.submited = true;
   }
 
-  // open(content) {
-  //   this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then(
-  //     (result) => {
-  //       this.closeResult = `Closed with: ${result}`;
-  //     },
-  //     (reason) => {
-  //       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-  //     }
-  //   );
-  // }
+  open(content) {
+    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then(
+      (result) => {
+        this.closeResult = `Closed with: ${result}`;
+      },
+      (reason) => {
+        this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+      }
+    );
+  }
 
-  // private getDismissReason(reason: any): string {
-  //   if (reason === ModalDismissReasons.ESC) {
-  //     return 'by pressing ESC';
-  //   } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
-  //     return 'by clicking on a backdrop';
-  //   } else {
-  //     return `with: ${reason}`;
-  //   }
-  // }
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return `with: ${reason}`;
+    }
+  }
 
   share() {
     window.alert('The product has been shared!');
@@ -92,30 +93,46 @@ export class ProductsComponent implements OnInit {
     window.alert('The product has been viewed!');
   }
 
-  // addProduct() {
-  //   this.submited = true;
-  //   const products = new Products();
+  addProduct() {
+    this.submited = true;
+    const products = new Products();
 
-  //   products.id = Math.floor(Math.random() * 100);
-  //   products.name = this.ModalForm.get('Name').value;
-  //   products.get_absolute_url = '';
-  //   products.description = this.ModalForm.get('Description').value;
-  //   products.price = this.ModalForm.get('Price').value;
-  //   // products.category = this.ModalForm.get('Category').value;
-  //   products.category = 1;
-  //   products.get_image = '';
-  //   products.get_thumbnail = '';
+    products.id = Math.floor(Math.random() * 100);
+    products.name = this.ModalForm.get('Name').value;
+    products.get_absolute_url = '';
+    products.description = this.ModalForm.get('Description').value;
+    products.price = this.ModalForm.get('Price').value;
+    // products.category = this.ModalForm.get('Category').value;
+    products.category = 2;
+    products.get_image = '';
+    products.get_thumbnail = '';
 
-  //   console.log(products);
-  //   console.log(products.id);
+    console.log(products);
+    console.log(products.id);
 
-  //   this.productsService.addProduct(products).subscribe(
-  //     (res) => {
-  //       console.log(res);
-  //     },
-  //     (err) => {
-  //       console.log(err);
-  //     }
-  //   );
-  // }
+    this.productsService.addProduct(products).subscribe(
+      (res) => {
+        Swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          title: 'Your work has been saved',
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        setTimeout(() => {
+          window.location.reload();
+        }, 1000);
+
+        console.log(res);
+      },
+      (err) => {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Something went wrong!',
+        });
+        console.log(err);
+      }
+    );
+  }
 }
