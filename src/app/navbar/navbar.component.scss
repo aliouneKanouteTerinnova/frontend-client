@@ -1,4 +1,5 @@
 nav {
+  padding: 1rem;
   .navbar-nav li a {
     color: #fff;
   }
@@ -29,19 +30,6 @@ nav {
   img {
     width: 187px;
     height: 200px;
-  }
-}
-
-@media screen and (max-width: 992px) {
-  .hamburger {
-    display: none;
-  }
-}
-
-@media screen and (max-width: 768px) {
-  .logo,
-  .hamburger {
-    display: none;
   }
 }
 
