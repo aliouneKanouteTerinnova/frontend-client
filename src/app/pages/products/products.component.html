@@ -1,5 +1,5 @@
 <div class="container">
-  <!-- <div class="text-center">
+  <div class="text-center">
     <button class="add_product" (click)="open(content)">
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -15,7 +15,7 @@
       </svg>
       Add Product
     </button>
-  </div> -->
+  </div>
   <h2>Products</h2>
   <div class="row">
     <div *ngFor="let product of products" class="col-8">
@@ -23,8 +23,8 @@
         <img src="{{ product.img }}" alt="img" />
       </div>
 
-      <h4>
-        <a [title]="product.name + ' details'"> Category : {{ product.category }} </a>
+      <h4 *ngFor="let category of categorys">
+        <a [title]="product.name + ' details'"> Category : {{ category.name }} </a>
       </h4>
       <h4>
         <a [title]="product.name + ' details'"> Name : {{ product.name }} </a>
@@ -41,7 +41,7 @@
   </div>
 </div>
 
-<!-- <ng-template #content let-modal>
+<ng-template #content let-modal>
   <div class="modal-header">
     <h4 class="modal-title" id="modal-basic-title">Add Product</h4>
     <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
@@ -110,4 +110,4 @@
       </div>
     </form>
   </div>
-</ng-template> -->
+</ng-template>
