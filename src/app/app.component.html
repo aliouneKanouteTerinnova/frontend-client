@@ -1,13 +1,17 @@
 <mat-toolbar color="primary">
   <mat-toolbar-row>
-    <span>Vaanah</span>
+    <span routerLink="/" style="cursor: pointer">Vaanah</span>
     <span class="exemple-spacer"></span>
     <mat-icon class="exemple-icon">favorite</mat-icon>
     <mat-icon class="exemple-icon">delete</mat-icon>
   </mat-toolbar-row>
 </mat-toolbar>
-<div class="exemple-button">
+<div class="exemple-button mb-5">
   <button mat-raised-button color="primary">Primary</button>
   <button mat-raised-button color="accent">Accent</button>
   <button mat-raised-button color="warn">Warning</button>
+  <button mat-raised-button routerLink="/products">Products</button>
 </div>
+<!-- <app-navbar></app-navbar> -->
+
+<router-outlet></router-outlet>
