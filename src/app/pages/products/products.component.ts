@@ -21,7 +21,6 @@ export class ProductsComponent implements OnInit {
   categorys: Category;
   closeResult = '';
   ModalForm: FormGroup;
-  id: number;
 
   constructor(
     private modalService: NgbModal,
