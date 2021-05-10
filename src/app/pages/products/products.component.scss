@@ -23,3 +23,17 @@ button:disabled {
   right: -87%;
   top: -42px;
 }
+
+.product {
+  border: 1px solid #fff;
+  margin: 10px;
+  padding: 1rem 1.5rem;
+  border-radius: 6px;
+  background-color: #00000061;
+
+  &:hover {
+    // box-shadow: 0 30px 45px 5px rgb(0 0 0 / 30%);
+    transform: translateY(-5px);
+    transition: 0.2s;
+  }
+}

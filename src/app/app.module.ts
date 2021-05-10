@@ -16,9 +16,10 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ProductsComponent } from './pages/products/products.component';
 import { UpdateProductComponent } from './pages/products/update-product/update-product.component';
+import { StoresComponent } from './pages/stores/stores.component';
 
 @NgModule({
-  declarations: [AppComponent, NavbarComponent, ProductsComponent, UpdateProductComponent],
+  declarations: [AppComponent, NavbarComponent, ProductsComponent, UpdateProductComponent, StoresComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
