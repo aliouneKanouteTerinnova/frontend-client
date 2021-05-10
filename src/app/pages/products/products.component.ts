@@ -155,7 +155,16 @@ export class ProductsComponent implements OnInit {
     console.log('The product has been deleted!');
   }
 
-  // updateProducts(product) {
-  //   console.log('The product has been updated!');
+  // updateProducts(product: Products) {
+  //   console.log(product);
+  //   this.productsService.updateProduct(product).subscribe(
+  //     (res) => {
+  //       console.log(res);
+  //     },
+  //     (err) => {
+  //       console.log(err);
+  //     }
+  //   );
+  //   console.log('The product has been updated!', product);
   // }
 }

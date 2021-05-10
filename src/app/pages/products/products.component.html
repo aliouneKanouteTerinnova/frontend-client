@@ -23,9 +23,15 @@
         <img src="{{ product.img }}" alt="img" />
       </div>
 
+      <!-- <label for="name">Category</label><br />
+      <select name="category" class="form-control up" [(ngModel)]="category">
+        <option value="laptop" *ngFor="let category of categorys">{{ category.name }}</option>
+      </select> -->
+
       <h4 *ngFor="let category of categorys">
         <a [title]="product.name + ' details'"> Category : {{ category.name }} </a>
       </h4>
+
       <h4>
         <a [title]="product.name + ' details'"> Name : {{ product.name }} </a>
       </h4>
@@ -33,9 +39,12 @@
       <p *ngIf="product.description">Description: {{ product.description }}</p>
       <p>Price : {{ product.price }}</p>
 
-      <button class="mr-3 btn btn-primary" (click)="updateProducts(product)">Up date</button>
+      <div class="mt-3">
+        <!-- (click)="updateProducts(product)" -->
+        <button class="mr-3 btn btn-primary" routerLink="/update-product/{{ product.id }}">Up date</button>
 
-      <button mat-raised-button color="warn" (click)="deleteProducts(product.id)">Delete</button>
+        <button mat-raised-button color="warn" (click)="deleteProducts(product.id)">Delete</button>
+      </div>
       <hr />
     </div>
   </div>

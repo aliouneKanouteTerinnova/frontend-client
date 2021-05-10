@@ -6,7 +6,8 @@ export const environment = {
   production: false,
   // url: 'http://192.168.1.19:8000/',
   // url: 'http://192.168.1.16:8000/',
-  url: 'http://192.168.43.196:8000/',
+  // url: 'http://192.168.43.196:8000/',
+  url: 'http://localhost:8000/',
 };
 
 /*
