@@ -1,5 +1,8 @@
+/* eslint-disable object-shorthand */
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { User } from 'src/app/models/user';
+import { AuthenticationsService } from 'src/app/services/authentications.service';
 
 @Component({
   selector: 'app-registration',
@@ -7,21 +10,37 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrls: ['./registration.component.css'],
 })
 export class RegistrationComponent implements OnInit {
-  title = 'demoApp';
-  email: string;
-  password: string;
   remail: string;
   rpassword: string;
+  checked = false;
+  indeterminate = false;
+  labelPosition: 'before' | 'after' = 'after';
+  disabled = false;
   rcpassword: string;
+  errorMessage: string;
+  successMessage: string;
 
-  constructor(private snackBar: MatSnackBar) {}
+  constructor(private snackBar: MatSnackBar, private authService: AuthenticationsService) {}
   ngOnInit(): void {}
-  register() {}
-  login() {
-    if (this.email == 'admin' && this.password == 'admin') {
-      this.snackBar.open('Login Successful', '', { duration: 1000 });
+  register() {
+    const username = this.remail.split('@')[0];
+    const user: User = {
+      user: {
+        username: username,
+        email: this.remail,
+        password: this.rpassword,
+      },
+    };
+    if (this.rpassword === this.rcpassword) {
+      this.authService.register(user).subscribe((response) => {
+        console.log(response);
+        this.successMessage = 'User created ';
+        this.rpassword = '';
+        this.rcpassword = '';
+        this.remail = '';
+      });
     } else {
-      this.snackBar.open('Login error', '', { duration: 1000 });
+      this.errorMessage = 'An error occured';
     }
   }
 }

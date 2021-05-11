@@ -1,1 +1,37 @@
-<p>registration works!</p>
+<div class="center-content">
+  <span class="successMessage" *ngIf="successMessage">{{ successMessage }}</span>
+  <mat-card class="example-card">
+    <mat-card-content>
+      <mat-tab-group>
+        <mat-tab label="Inscription">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Email</mat-label>
+            <input type="email" matInput placeholder="Email" value="" [(ngModel)]="remail" />
+          </mat-form-field>
+
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Password</mat-label>
+            <input type="password" matInput placeholder="Password" [(ngModel)]="rpassword" />
+          </mat-form-field>
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Password</mat-label>
+            <input type="password" matInput placeholder="Password" [(ngModel)]="rcpassword" />
+          </mat-form-field>
+          <mat-checkbox
+            class="example-full-width"
+            id="example-checkbox"
+            class="example-margin"
+            [(ngModel)]="checked"
+            [(indeterminate)]="indeterminate"
+            [labelPosition]="labelPosition"
+            [disabled]="disabled"
+          >
+            <div class="conditions">J'accepte les conditions</div>
+          </mat-checkbox>
+          <button mat-raised-button color="primary" (click)="register()">S'Inscrire</button>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-card-content>
+  </mat-card>
+  <span class="errorMessage" *ngIf="errorMessage">{{ errorMessage }}</span>
+</div>
