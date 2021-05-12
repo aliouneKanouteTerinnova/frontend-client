@@ -31,26 +31,33 @@ export class StoresComponent implements OnInit {
     return this.createStore.controls;
   }
 
-  onSubmit() {
-    this.submited = true;
-    const data = new Store();
+  // onSubmit() {
+  //   this.submited = true;
+  //   const data = new Store();
 
-    data.name = this.createStore.get('name').value;
-    data.created_at = this.createStore.get('created_at').value;
-    data.created_by = this.createStore.get('created_by').value;
-    data.store_address = this.createStore.get('store_address').value;
+  //   data.name = this.createStore.get('name').value;
+  //   data.created_at = this.createStore.get('created_at').value;
+  //   data.created_by = this.createStore.get('created_by').value;
+  //   data.store_address = this.createStore.get('store_address').value;
 
-    console.log(data);
+  //   console.log(data);
 
-    this.storesService.createStores(data, this.token).subscribe((res) => {
-      console.log(res);
-    });
-  }
+  //   this.storesService.createStores(data, this.token).subscribe((res) => {
+  //     console.log(res);
+  //   });
+  // }
 
   getStores() {
     this.storesService.getAllStores().subscribe((res) => {
       console.log(res);
       this.stores = res.stores;
     });
+  }
+
+  deleteStore(id) {
+    this.storesService.deleteStores(id, this.token).subscribe((res) => {
+      console.log(res);
+    });
+    console.log('delete clicked ', id);
   }
 }

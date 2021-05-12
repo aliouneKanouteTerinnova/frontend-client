@@ -1,112 +1,16 @@
-<form [formGroup]="createStore" (ngSubmit)="onSubmit()" class="container col-sm-10 col-md-8 col-lg-6">
-  <div class="form-group">
-    <!-- Shop Name -->
-    <div class="row">
-      <div class="col-6">
-        <label for="shop-name">Shop name</label>
-        <input type="text" name="shop-name" id="" formControlName="name" class="form-control" />
-
-        <div *ngIf="submited && f.name.errors" class="text-danger">
-          <div *ngIf="f.name.errors.required" class="text-danger">donnees invalid !</div>
-        </div>
-      </div>
-
-      <div class="col-6">
-        <label for="created_at">Created at</label>
-        <input disabled type="text" name="created_at" formControlName="created_at" class="form-control" />
-
-        <div *ngIf="submited && f.created_at.errors" class="text-danger">
-          <div *ngIf="f.created_at.errors.required" class="text-danger">donnees invalid !</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="row mt-3">
-      <div class="col-6">
-        <label for="created_by">Created by</label>
-        <input type="number" name="created_by" formControlName="created_by" class="form-control" />
-
-        <div *ngIf="submited && f.created_by.errors" class="text-danger">
-          <div *ngIf="f.created_by.errors.required" class="text-danger">donnees invalid !</div>
-        </div>
-      </div>
-
-      <div class="col-6">
-        <label for="store_address">Store adress</label>
-        <input type="text" name="store_address" formControlName="store_address" class="form-control" />
-
-        <div *ngIf="submited && f.store_address.errors" class="text-danger">
-          <div *ngIf="f.store_adress.errors.required" class="text-danger">donnees invalid !</div>
-        </div>
-      </div>
-    </div>
-    <!-- Description -->
-    <!-- <div class="row mt-3">
-      <div class="col">
-        <label for="description">Description</label>
-        <textarea class="form-control" name="description" cols="30" rows="3" formControlName="description"></textarea>
-      </div>
-    </div> -->
-    <!-- FirstName And LastName -->
-    <!-- <div class="row mt-3">
-      <div class="col-6">
-        <label for="first-name">First name</label>
-        <input type="text" name="first-name" id="" formControlName="firstName" class="form-control" />
-      </div>
-
-      <div class="col-6">
-        <label for="last-name">Last name</label>
-        <input type="text" name="last-name" id="" formControlName="lastName" class="form-control" />
-      </div>
-    </div> -->
-    <!-- Email and Phone -->
-    <!-- <div class="row mt-3">
-      <div class="col-6">
-        <label for="email">Email</label>
-        <input type="email" name="email" formControlName="email" class="form-control" />
-      </div>
-
-      <div class="col-6">
-        <label for="phone">Phone</label>
-        <input type="tel" name="phone" id="" formControlName="phone" class="form-control" />
-      </div>
-    </div> -->
-    <!-- Adresse and City -->
-    <!-- <div class="row mt-3">
-      <div class="col-6">
-        <label for="adress">Adress</label>
-        <input type="text" name="adress" formControlName="adress" class="form-control" />
-      </div>
-
-      <div class="col-6">
-        <label for="city">City</label>
-        <input type="text" name="city" formControlName="city" class="form-control" />
-      </div>
-    </div> -->
-    <!-- Country and Code postal -->
-    <!-- <div class="row mt-3">
-      <div class="col-6">
-        <label for="country">Country</label>
-        <select name="country" class="form-control">
-          <option value="">Select Country</option>
-          <option value="senegal">Senegal</option>
-          <option value="cameroun">Cameroun</option>
-        </select>
-      </div>
-
-      <div class="col-3">
-        <label for="codePostal">Code postal</label>
-        <input type="number" name="codePostal" formControlName="codePostal" class="form-control" />
-      </div>
-    </div> -->
-  </div>
-  <!-- [disabled]="createStore.invalid" -->
-  <button class="btn btn-primary btn-block mt-5">Create</button>
-</form>
-
 <div class="stores container col-sm-10 col-md-6 col-lg-12">
-  <div class="store" style="width: 25rem" *ngFor="let store of stores">
+  <div class="store" style="width: 30rem" *ngFor="let store of stores">
     <div class="card-body name" routerLink=""><b>Name:</b> {{ store.name }}</div>
     <div class="card-body adresse"><b>Adresse:</b> {{ store.store_address }}</div>
+    <div class="float-right" style="position: relative">
+      <!-- <button class="btn btn-primary btn-sm">Update</button> -->
+      <button
+        class="btn btn-danger btn-sm"
+        style="position: absolute; bottom: 0px; right: -10px"
+        (click)="deleteStore(store.id)"
+      >
+        Delete
+      </button>
+    </div>
   </div>
 </div>

@@ -18,7 +18,15 @@ export class StoresService {
   createStores(store: Store, token: string) {
     token = 'token ' + token;
     return this.http.post(`${this.url}/createstore`, store, {
-      headers: new HttpHeaders().set('token', token),
+      headers: new HttpHeaders().set('Authorization', token),
+      observe: 'response',
+    });
+  }
+
+  deleteStores(id: number, token: string) {
+    token = 'token ' + token;
+    return this.http.delete<any>(`${this.url}/deletestore/${id}`, {
+      headers: new HttpHeaders().set('Authorization', token),
       observe: 'response',
     });
   }
