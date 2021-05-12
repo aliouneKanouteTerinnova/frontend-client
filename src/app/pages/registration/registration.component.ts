@@ -11,6 +11,7 @@ import { User } from 'src/app/models/user';
 import { AuthenticationsService } from 'src/app/services/authentications.service';
 import { TranslateService } from '@ngx-translate/core';
 import { I18nServiceService } from 'src/app/services/i18n-service/i18n-service.service';
+import { MustMatch } from 'src/app/_helpers/must-match.validator';
 
 @Component({
   selector: 'app-registration',
@@ -42,13 +43,18 @@ export class RegistrationComponent implements OnInit {
   }
   ngOnInit(): void {
     this.i18nService.localeEvent.subscribe((locale) => this.translate.use(locale));
-    this.loginForm = this.formBuilder.group({
-      username: [null, Validators.required],
-      email: [null, [Validators.required, Validators.pattern(this.emailRegex)]],
-      password: [null, Validators.required],
-      password2: [null, Validators.required],
-      checked: false,
-    });
+    this.loginForm = this.formBuilder.group(
+      {
+        username: [null, Validators.required],
+        email: [null, [Validators.required, Validators.pattern(this.emailRegex)]],
+        password: [null, [Validators.required, Validators.minLength(8)]],
+        password2: [null, Validators.required],
+        checked: false,
+      },
+      {
+        validator: MustMatch('password', 'password2'),
+      }
+    );
   }
   register() {
     const username = this.loginForm.get('username').value;

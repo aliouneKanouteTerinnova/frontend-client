@@ -27,6 +27,9 @@
               <mat-error *ngIf="loginForm.controls.password.touched && loginForm.controls.password.invalid">
                 <mat-error *ngIf="loginForm.controls.password.touched && loginForm.controls.password.invalid">
                   <span *ngIf="loginForm.controls.password.errors.required">This field is mandatory.</span>
+                  <span *ngIf="loginForm.controls.password.errors.minlength"
+                    >Password must be at least 6 characters</span
+                  >
                 </mat-error>
               </mat-error>
             </mat-form-field>
@@ -35,14 +38,7 @@
               <input type="password" matInput placeholder="Confirm your password" formControlName="password2" />
               <mat-error *ngIf="loginForm.controls.password2.touched && loginForm.controls.password2.invalid">
                 <span *ngIf="loginForm.controls.password2.errors.required">This field is mandatory.</span>
-                <div
-                  *ngIf="
-                    !loginForm.controls.password2.invalid &&
-                    loginForm.get('password2').value !== loginForm.get('password').value
-                  "
-                >
-                  The passwords entered do not match
-                </div>
+                <span *ngIf="loginForm.controls.password2.errors.mustMatch">Passwords must match</span>
               </mat-error>
             </mat-form-field>
             <mat-checkbox
