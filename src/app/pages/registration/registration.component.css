@@ -47,7 +47,7 @@
   color: #29235c;
 }
 
-::ng-deep .mat-tab-list .mat-tab-labels .mat-tab-label-active {
+:host ::ng-deep .mat-tab-list .mat-tab-labels .mat-tab-label-active {
   color: #f39200;
   background-color: #29235c;
   border: 1px solid black;
