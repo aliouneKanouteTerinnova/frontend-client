@@ -8,7 +8,6 @@ import { SharedModule } from './shared/shared.module';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { RegistrationComponent } from './pages/registration/registration.component';
-import { CookieService } from 'ngx-cookie-service';
 
 @NgModule({
   declarations: [AppComponent, RegistrationComponent],
@@ -20,7 +19,7 @@ import { CookieService } from 'ngx-cookie-service';
     HttpClientModule,
     SharedModule,
   ],
-  providers: [CookieService],
+  providers: [],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
