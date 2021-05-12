@@ -71,7 +71,6 @@ export class RegistrationComponent implements OnInit {
       return;
     }
     this.authService.register(user).subscribe((response) => {
-      console.log(response);
       this.successMessage = 'User created ';
       this.rpassword = '';
       this.rcpassword = '';
