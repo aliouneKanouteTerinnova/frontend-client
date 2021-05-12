@@ -9,6 +9,8 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 import { User } from 'src/app/models/user';
 import { AuthenticationsService } from 'src/app/services/authentications.service';
+import { TranslateService } from '@ngx-translate/core';
+import { I18nServiceService } from 'src/app/services/i18n-service/i18n-service.service';
 
 @Component({
   selector: 'app-registration',
@@ -31,9 +33,15 @@ export class RegistrationComponent implements OnInit {
   constructor(
     private snackBar: MatSnackBar,
     private authService: AuthenticationsService,
-    private formBuilder: FormBuilder
-  ) {}
+    private formBuilder: FormBuilder,
+    private translate: TranslateService,
+    private i18nService: I18nServiceService
+  ) {
+    translate.setDefaultLang('de');
+    translate.use('de');
+  }
   ngOnInit(): void {
+    this.i18nService.localeEvent.subscribe((locale) => this.translate.use(locale));
     this.loginForm = this.formBuilder.group({
       username: [null, Validators.required],
       email: [null, [Validators.required, Validators.pattern(this.emailRegex)]],

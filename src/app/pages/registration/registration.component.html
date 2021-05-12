@@ -3,7 +3,7 @@
   <mat-card class="example-card">
     <mat-card-content>
       <mat-tab-group>
-        <mat-tab label="Inscription">
+        <mat-tab label="{{ 'CONNEXION_TITLE' | translate }}">
           <form [formGroup]="loginForm" (submit)="register()">
             <mat-form-field class="example-full-width" appearance="outline">
               <mat-label>Username</mat-label>
@@ -46,9 +46,9 @@
               [labelPosition]="labelPosition"
               [disabled]="disabled"
             >
-              <div class="conditions">J'accepte les conditions</div>
+              <div class="conditions">Ich akzeptiere die Bedingungen</div>
             </mat-checkbox>
-            <button mat-raised-button color="primary">S'Inscrire</button>
+            <button mat-raised-button color="primary">{{ 'CONNEXION_BUTTON' | translate }}</button>
           </form>
         </mat-tab>
       </mat-tab-group>
