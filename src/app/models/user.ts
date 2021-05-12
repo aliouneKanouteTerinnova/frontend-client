@@ -1,9 +1,9 @@
-class UserModel {
+type UserModel = {
   username: string;
   email: string;
   password: string;
-}
+};
 
-export class User {
+export type User = {
   user: UserModel;
-}
+};

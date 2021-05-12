@@ -4,31 +4,52 @@
     <mat-card-content>
       <mat-tab-group>
         <mat-tab label="Inscription">
-          <mat-form-field class="example-full-width" appearance="outline">
-            <mat-label>Email</mat-label>
-            <input type="email" matInput placeholder="Email" value="" [(ngModel)]="remail" />
-          </mat-form-field>
+          <form [formGroup]="loginForm" (submit)="register()">
+            <mat-form-field class="example-full-width" appearance="outline">
+              <mat-label>Username</mat-label>
+              <input type="email" matInput placeholder="Email" formControlName="username" required />
+              <mat-error *ngIf="loginForm.controls.username.touched && loginForm.controls.username.invalid">
+                <span *ngIf="loginForm.controls.username.errors.required">This field is mandatory.</span>
+              </mat-error>
+            </mat-form-field>
+            <mat-form-field class="example-full-width" appearance="outline">
+              <mat-label>Email</mat-label>
+              <input type="email" matInput placeholder="Email" formControlName="email" required />
+              <mat-error *ngIf="loginForm.controls.email.touched && loginForm.controls.email.invalid">
+                <span *ngIf="loginForm.controls.email.errors.required">This field is mandatory.</span>
+                <span *ngIf="loginForm.controls.email.errors.pattern">This field is invalid.</span>
+              </mat-error>
+            </mat-form-field>
 
-          <mat-form-field class="example-full-width" appearance="outline">
-            <mat-label>Password</mat-label>
-            <input type="password" matInput placeholder="Password" [(ngModel)]="rpassword" />
-          </mat-form-field>
-          <mat-form-field class="example-full-width" appearance="outline">
-            <mat-label>Password</mat-label>
-            <input type="password" matInput placeholder="Password" [(ngModel)]="rcpassword" />
-          </mat-form-field>
-          <mat-checkbox
-            class="example-full-width"
-            id="example-checkbox"
-            class="example-margin"
-            [(ngModel)]="checked"
-            [(indeterminate)]="indeterminate"
-            [labelPosition]="labelPosition"
-            [disabled]="disabled"
-          >
-            <div class="conditions">J'accepte les conditions</div>
-          </mat-checkbox>
-          <button mat-raised-button color="primary" (click)="register()">S'Inscrire</button>
+            <mat-form-field class="example-full-width" appearance="outline">
+              <mat-label>Password</mat-label>
+              <input type="password" matInput placeholder="Password" formControlName="password" />
+              <mat-error *ngIf="loginForm.controls.email.touched && loginForm.controls.email.invalid">
+                <mat-error *ngIf="loginForm.controls.password.touched && loginForm.controls.password.invalid">
+                  <span *ngIf="loginForm.controls.password.errors.required">This field is mandatory.</span>
+                </mat-error>
+              </mat-error>
+            </mat-form-field>
+            <mat-form-field class="example-full-width" appearance="outline">
+              <mat-label>Confirm Password</mat-label>
+              <input type="password" matInput placeholder="Confirm your password" formControlName="password2" />
+              <mat-error *ngIf="loginForm.controls.password2.touched && loginForm.controls.password2.invalid">
+                <span *ngIf="loginForm.controls.password2.errors.required">This field is mandatory.</span>
+              </mat-error>
+            </mat-form-field>
+            <mat-checkbox
+              formControlName="checked"
+              class="example-full-width"
+              id="example-checkbox"
+              class="example-margin"
+              [(indeterminate)]="indeterminate"
+              [labelPosition]="labelPosition"
+              [disabled]="disabled"
+            >
+              <div class="conditions">J'accepte les conditions</div>
+            </mat-checkbox>
+            <button mat-raised-button color="primary">S'Inscrire</button>
+          </form>
         </mat-tab>
       </mat-tab-group>
     </mat-card-content>
