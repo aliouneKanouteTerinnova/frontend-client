@@ -13,7 +13,7 @@
 
       <div class="col-6">
         <label for="created_at">Created at</label>
-        <input type="text" name="created_at" formControlName="created_at" class="form-control" />
+        <input disabled type="text" name="created_at" formControlName="created_at" class="form-control" />
 
         <div *ngIf="submited && f.created_at.errors" class="text-danger">
           <div *ngIf="f.created_at.errors.required" class="text-danger">donnees invalid !</div>
@@ -24,7 +24,7 @@
     <div class="row mt-3">
       <div class="col-6">
         <label for="created_by">Created by</label>
-        <input type="text" name="created_by" formControlName="created_by" class="form-control" />
+        <input type="number" name="created_by" formControlName="created_by" class="form-control" />
 
         <div *ngIf="submited && f.created_by.errors" class="text-danger">
           <div *ngIf="f.created_by.errors.required" class="text-danger">donnees invalid !</div>
@@ -32,10 +32,10 @@
       </div>
 
       <div class="col-6">
-        <label for="store_adress">Store adress</label>
-        <input type="text" name="store_adress" formControlName="store_adress" class="form-control" />
+        <label for="store_address">Store adress</label>
+        <input type="text" name="store_address" formControlName="store_address" class="form-control" />
 
-        <div *ngIf="submited && f.store_adress.errors" class="text-danger">
+        <div *ngIf="submited && f.store_address.errors" class="text-danger">
           <div *ngIf="f.store_adress.errors.required" class="text-danger">donnees invalid !</div>
         </div>
       </div>
@@ -100,6 +100,13 @@
       </div>
     </div> -->
   </div>
-
-  <button [disabled]="createStore.invalid" class="btn btn-primary btn-block mt-5">Create</button>
+  <!-- [disabled]="createStore.invalid" -->
+  <button class="btn btn-primary btn-block mt-5">Create</button>
 </form>
+
+<div class="stores container col-sm-10 col-md-6 col-lg-12">
+  <div class="store" style="width: 25rem" *ngFor="let store of stores">
+    <div class="card-body name" routerLink=""><b>Name:</b> {{ store.name }}</div>
+    <div class="card-body adresse"><b>Adresse:</b> {{ store.store_address }}</div>
+  </div>
+</div>
