@@ -3,5 +3,9 @@
   "INSCRIPTION_TITLE": "Registrierung",
   "CONNEXION_BUTTON": "VERBINDEN",
   "INSCRIPTION_BUTTON": "REGISTER",
-  "USER_CONDITION": "Ich akzeptiere die Bedingungen"
+  "USER_CONDITION": "Ich akzeptiere die Bedingungen",
+  "USERNAME": "Vornamen",
+  "EMAIL": "E-Mail",
+  "CONFIRM_PASSWORD": "Passwortbestätigung",
+  "PASSWORD": "Passwort"
 }
