@@ -5,7 +5,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
-import { Auth, AuthUser } from 'src/app/models/auth';
+import { Auth, AuthResponded, AuthUser } from 'src/app/models/auth';
 import { AuthenticationsService } from 'src/app/services/authentications.service';
 
 @Component({
@@ -26,7 +26,7 @@ export class RegistrationComponent implements OnInit {
   errorResponse: any;
   loginForm: FormGroup;
   emailRegex = /^(([^<>+()\[\]\\.,;:\s@"-#$%&=]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,3}))$/;
-  userResponded: AuthUser;
+  userResponded: AuthResponded;
 
   constructor(private authService: AuthenticationsService, private formBuilder: FormBuilder) {}
 

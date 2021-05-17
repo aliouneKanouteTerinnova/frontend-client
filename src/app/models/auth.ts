@@ -12,3 +12,7 @@ export type AuthUser = {
 export type Auth = {
   user: AuthModel;
 };
+
+export type AuthResponded = {
+  user: AuthUser;
+};

@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Auth } from './models/auth';
+import { Auth, AuthResponded } from './models/auth';
 import { AuthenticationsService } from './services/authentications.service';
 
 @Component({
@@ -8,8 +8,10 @@ import { AuthenticationsService } from './services/authentications.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   constructor(private authService: AuthenticationsService, private router: Router) {}
+
+  ngOnInit() {}
 
   goLogin() {
     void this.router.navigate(['/register']);
