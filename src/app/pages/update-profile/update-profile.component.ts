@@ -28,9 +28,27 @@ export class UpdateProfileComponent implements OnInit {
       const user: AuthResponded = data.body;
       this.registerForm.patchValue({
         username: user.user.username,
-        email: user.user.username,
+        email: user.user.email,
       });
     });
   }
-  update() {}
+  update() {
+    const username = this.registerForm.get('username').value;
+    const email = this.registerForm.get('email').value;
+    const user = {
+      user: {
+        username: username,
+        email: email,
+      },
+    };
+    this.authService.update(user, this.currentUser.user.token).subscribe(
+      (data) => {
+        this.successMessage = 'User updated successfully ';
+        this.errorMessage = '';
+      },
+      (error) => {
+        this.errorMessage = 'Username/Password not correct';
+      }
+    );
+  }
 }

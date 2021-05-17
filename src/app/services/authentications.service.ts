@@ -56,6 +56,16 @@ export class AuthenticationsService {
       .pipe(map((userResponded) => userResponded));
   }
 
+  // Update User Profile
+
+  update(username: any, token: string) {
+    token = 'token ' + token;
+    return this.httpClient.put(`${environment.baseUrl}user`, username, {
+      headers: new HttpHeaders().set('Authorization', token),
+      observe: 'response',
+    });
+  }
+
   // User Registration
 
   register(user: User) {
