@@ -1,0 +1,62 @@
+<div class="center-content">
+  <span class="successMessage" *ngIf="successMessage">{{ successMessage }}</span>
+  <mat-card class="example-card">
+    <mat-card-content>
+      <mat-tab-group>
+        <mat-tab label="{{ 'CONNEXION_TITLE' | translate }}">
+          <form [formGroup]="loginForm" (submit)="register()">
+            <mat-form-field class="example-full-width" appearance="outline">
+              <mat-label>Username</mat-label>
+              <input type="email" matInput placeholder="Username" formControlName="username" required />
+              <mat-error *ngIf="loginForm.controls.username.touched && loginForm.controls.username.invalid">
+                <span *ngIf="loginForm.controls.username.errors.required">This field is mandatory.</span>
+              </mat-error>
+            </mat-form-field>
+            <mat-form-field class="example-full-width" appearance="outline">
+              <mat-label>Email</mat-label>
+              <input type="email" matInput placeholder="Email" formControlName="email" required />
+              <mat-error *ngIf="loginForm.controls.email.touched && loginForm.controls.email.invalid">
+                <span *ngIf="loginForm.controls.email.errors.required">This field is mandatory.</span>
+                <span *ngIf="loginForm.controls.email.errors.pattern">This field is invalid.</span>
+              </mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="example-full-width" appearance="outline">
+              <mat-label>Password</mat-label>
+              <input type="password" matInput placeholder="Password" formControlName="password" />
+              <mat-error *ngIf="loginForm.controls.password.touched && loginForm.controls.password.invalid">
+                <mat-error *ngIf="loginForm.controls.password.touched && loginForm.controls.password.invalid">
+                  <span *ngIf="loginForm.controls.password.errors.required">This field is mandatory.</span>
+                  <span *ngIf="loginForm.controls.password.errors.minlength"
+                    >Password must be at least 6 characters</span
+                  >
+                </mat-error>
+              </mat-error>
+            </mat-form-field>
+            <mat-form-field class="example-full-width" appearance="outline">
+              <mat-label>Confirm Password</mat-label>
+              <input type="password" matInput placeholder="Confirm your password" formControlName="password2" />
+              <mat-error *ngIf="loginForm.controls.password2.touched && loginForm.controls.password2.invalid">
+                <span *ngIf="loginForm.controls.password2.errors.required">This field is mandatory.</span>
+                <span *ngIf="loginForm.controls.password2.errors.mustMatch">Passwords must match</span>
+              </mat-error>
+            </mat-form-field>
+            <mat-checkbox
+              formControlName="checked"
+              class="example-full-width"
+              id="example-checkbox"
+              class="example-margin"
+              [(indeterminate)]="indeterminate"
+              [labelPosition]="labelPosition"
+              [disabled]="disabled"
+            >
+              <div class="conditions">Ich akzeptiere die Bedingungen</div>
+            </mat-checkbox>
+            <button mat-raised-button color="primary">{{ 'CONNEXION_BUTTON' | translate }}</button>
+          </form>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-card-content>
+  </mat-card>
+  <span class="errorMessage" *ngIf="errorMessage">{{ errorMessage }}</span>
+</div>
