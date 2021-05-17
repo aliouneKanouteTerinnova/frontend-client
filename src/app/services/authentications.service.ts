@@ -1,11 +1,13 @@
 /* eslint-disable @typescript-eslint/no-unsafe-return */
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
-import { environment } from 'src/environments/environment';
-import { Auth, AuthResponded, AuthUser } from '../models/auth';
 import { map } from 'rxjs/operators';
 import { CookieService } from 'ngx-cookie-service';
 import { BehaviorSubject, Observable } from 'rxjs';
+
+import { environment } from '../../environments/environment';
+import { Auth, AuthResponded, AuthUser } from '../models/auth';
+import { User } from '../models/user';
 
 @Injectable({
   providedIn: 'root',
@@ -50,5 +52,11 @@ export class AuthenticationsService {
       headers: new HttpHeaders().set('Authorization', token),
       observe: 'response',
     });
+  }
+
+  // User Registration
+
+  register(user: User) {
+    return this.httpClient.post(`${environment.baseUrl}users`, user);
   }
 }
