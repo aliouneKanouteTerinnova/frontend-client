@@ -1,5 +1,5 @@
 .container {
-  color: #fff;
+  color: #101010;
 }
 
 .button:hover,
@@ -26,13 +26,13 @@ button:disabled {
 
 .product {
   // border: 1px solid #fff;
-  margin: 10px;
+  margin: 20px;
   padding: 1rem 1.5rem;
   border-radius: 6px;
-  background-color: #00000061;
+  background-color: #f0f0f0;
 
   &:hover {
-    // box-shadow: 0 30px 45px 5px rgb(0 0 0 / 30%);
+    box-shadow: 20px 20px 60px #cccccc, -20px -20px 60px #ffffff;
     transform: translateY(-5px);
     transition: 0.2s;
   }

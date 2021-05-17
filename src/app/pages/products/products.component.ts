@@ -111,9 +111,8 @@ export class ProductsComponent implements OnInit {
           showConfirmButton: false,
           timer: 1500,
         });
-        setTimeout(() => {
-          window.location.reload();
-        }, 1600);
+        this.getProducts();
+        this.modalService.dismissAll();
 
         console.log(res);
       },
@@ -138,9 +137,7 @@ export class ProductsComponent implements OnInit {
           showConfirmButton: false,
           timer: 1500,
         });
-        setTimeout(() => {
-          window.location.reload();
-        }, 1600);
+        this.getProducts();
       },
       (err) => {
         Swal.fire({
