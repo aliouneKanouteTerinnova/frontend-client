@@ -8,7 +8,7 @@ import Swal from 'sweetalert2';
 @Component({
   selector: 'app-update-product',
   templateUrl: './update-product.component.html',
-  styleUrls: ['./update-product.component.css'],
+  styleUrls: ['./update-product.component.scss'],
 })
 export class UpdateProductComponent implements OnInit {
   updateProducts: FormGroup;

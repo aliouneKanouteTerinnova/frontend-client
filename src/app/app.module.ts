@@ -18,6 +18,7 @@ import { ProductsComponent } from './pages/products/products.component';
 import { UpdateProductComponent } from './pages/products/update-product/update-product.component';
 import { StoresComponent } from './pages/stores/stores.component';
 import { EditStoresComponent } from './pages/stores/edit-stores/edit-stores.component';
+import { CreateStoresComponent } from './pages/stores/create-stores/create-stores.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { EditStoresComponent } from './pages/stores/edit-stores/edit-stores.comp
     UpdateProductComponent,
     StoresComponent,
     EditStoresComponent,
+    CreateStoresComponent,
   ],
   imports: [
     BrowserModule,
