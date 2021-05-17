@@ -22,13 +22,6 @@ export function HttpLoaderFactory(http: HttpClient) {
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
-    TranslateModule.forRoot(),
-    HttpClientModule,
-    SharedModule,
-    FormsModule,
-    ReactiveFormsModule,
-  ],
-  providers: [CookieService],
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
@@ -37,8 +30,12 @@ export function HttpLoaderFactory(http: HttpClient) {
       },
       isolate: true,
     }),
+    HttpClientModule,
+    SharedModule,
+    FormsModule,
+    ReactiveFormsModule,
   ],
-  providers: [],
+  providers: [CookieService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

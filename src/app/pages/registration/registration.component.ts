@@ -1,4 +1,3 @@
-
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable max-len */
@@ -32,10 +31,11 @@ export class RegistrationComponent implements OnInit {
   successMessage: string = '';
   errorResponse: any;
   loginForm: FormGroup;
+  registerForm: FormGroup;
   emailRegex = /^(([^<>+()\[\]\\.,;:\s@"-#$%&=]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,3}))$/;
   userResponded: AuthResponded;
 
-   constructor(
+  constructor(
     private snackBar: MatSnackBar,
     private authService: AuthenticationsService,
     private formBuilder: FormBuilder,
@@ -48,7 +48,7 @@ export class RegistrationComponent implements OnInit {
 
   ngOnInit(): void {
     this.i18nService.localeEvent.subscribe((locale) => this.translate.use(locale));
-    this.loginForm = this.formBuilder.group(
+    this.registerForm = this.formBuilder.group(
       {
         username: [null, Validators.required],
         email: [null, [Validators.required, Validators.pattern(this.emailRegex)]],
@@ -65,10 +65,10 @@ export class RegistrationComponent implements OnInit {
       password: [null, Validators.required],
     });
   }
-   register() {
-    const username = this.loginForm.get('username').value;
-    const email = this.loginForm.get('email').value;
-    const password = this.loginForm.get('password').value;
+  register() {
+    const username = this.registerForm.get('username').value;
+    const email = this.registerForm.get('email').value;
+    const password = this.registerForm.get('password').value;
     const user: User = {
       user: {
         username: username,
@@ -76,7 +76,7 @@ export class RegistrationComponent implements OnInit {
         password: password,
       },
     };
-    if (!this.loginForm.valid) {
+    if (!this.registerForm.valid) {
       return;
     }
     this.authService.register(user).subscribe((response) => {
@@ -108,5 +108,3 @@ export class RegistrationComponent implements OnInit {
     );
   }
 }
-
-  

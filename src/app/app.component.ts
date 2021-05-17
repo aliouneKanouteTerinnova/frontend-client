@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-floating-promises */
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from './models/user';
 import { Auth, AuthResponded } from './models/auth';
@@ -21,6 +21,4 @@ export class AppComponent implements OnInit {
   goLogin() {
     void this.router.navigate(['/register']);
   }
-
-  
 }

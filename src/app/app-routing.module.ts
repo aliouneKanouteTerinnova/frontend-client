@@ -9,16 +9,6 @@ const routes: Routes = [
     component: RegistrationComponent,
   },
 ];
-
-import { Routes, RouterModule } from '@angular/router';
-import { RegistrationComponent } from './pages/registration/registration.component';
-
-const routes: Routes = [
-  {
-    path: 'register',
-    component: RegistrationComponent,
-  },
-];
 @NgModule({
   declarations: [],
   imports: [CommonModule, RouterModule.forRoot(routes)],
