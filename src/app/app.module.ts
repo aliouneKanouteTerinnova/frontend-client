@@ -11,13 +11,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { RegistrationComponent } from './pages/registration/registration.component';
 import { CookieService } from 'ngx-cookie-service';
+import { UpdateProfileComponent } from './pages/update-profile/update-profile.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
 
 @NgModule({
-  declarations: [AppComponent, RegistrationComponent],
+  declarations: [AppComponent, RegistrationComponent, UpdateProfileComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,

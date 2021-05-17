@@ -2,11 +2,16 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { RegistrationComponent } from './pages/registration/registration.component';
+import { UpdateProfileComponent } from './pages/update-profile/update-profile.component';
 
 const routes: Routes = [
   {
     path: 'register',
     component: RegistrationComponent,
+  },
+  {
+    path: 'update',
+    component: UpdateProfileComponent,
   },
 ];
 @NgModule({

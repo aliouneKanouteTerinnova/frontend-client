@@ -48,10 +48,12 @@ export class AuthenticationsService {
   // Get user authenticated
   getUser(token: string) {
     token = 'token ' + token;
-    return this.httpClient.get(`${environment.baseUrl}user`, {
-      headers: new HttpHeaders().set('Authorization', token),
-      observe: 'response',
-    });
+    return this.httpClient
+      .get<AuthResponded>(`${environment.baseUrl}user`, {
+        headers: new HttpHeaders().set('Authorization', token),
+        observe: 'response',
+      })
+      .pipe(map((userResponded) => userResponded));
   }
 
   // User Registration
