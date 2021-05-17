@@ -26,11 +26,11 @@
                 </mat-error>
               </mat-error>
             </mat-form-field>
-            <button mat-raised-button color="primary">Se Connecter</button>
+            <button mat-raised-button color="primary">SE CONNECTER</button>
           </form>
         </mat-tab>
         /*registration*/
-        <mat-tab label="{{ 'CONNEXION_TITLE' | translate }}">
+        <mat-tab label="inscription">
           <form [formGroup]="registerForm" (submit)="register()">
             <mat-form-field class="example-full-width" appearance="outline">
               <mat-label>Username</mat-label>
@@ -77,9 +77,9 @@
               [labelPosition]="labelPosition"
               [disabled]="disabled"
             >
-              <div class="conditions">Ich akzeptiere die Bedingungen</div>
+              <div class="conditions">J'accepte les conditions</div>
             </mat-checkbox>
-            <button mat-raised-button color="primary">{{ 'CONNEXION_BUTTON' | translate }}</button>
+            <button mat-raised-button color="primary">S'INSCRIRE</button>
           </form>
         </mat-tab>
       </mat-tab-group>

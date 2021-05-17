@@ -5,6 +5,10 @@ import { RegistrationComponent } from './pages/registration/registration.compone
 
 const routes: Routes = [
   {
+    path: '',
+    component: RegistrationComponent,
+  },
+  {
     path: 'register',
     component: RegistrationComponent,
   },
