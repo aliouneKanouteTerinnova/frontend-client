@@ -1,3 +1,4 @@
+import { EditStoresComponent } from './pages/stores/edit-stores/edit-stores.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
@@ -9,7 +10,8 @@ import { ProductsComponent } from './pages/products/products.component';
 const routes: Routes = [
   { path: 'products', component: ProductsComponent },
   { path: 'update-product/:id', component: UpdateProductComponent },
-  { path: 'create-store', component: StoresComponent },
+  { path: 'list-store', component: StoresComponent },
+  { path: 'edit-stores/:id', component: EditStoresComponent },
 ];
 
 @NgModule({

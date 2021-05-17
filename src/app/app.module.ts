@@ -17,9 +17,17 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ProductsComponent } from './pages/products/products.component';
 import { UpdateProductComponent } from './pages/products/update-product/update-product.component';
 import { StoresComponent } from './pages/stores/stores.component';
+import { EditStoresComponent } from './pages/stores/edit-stores/edit-stores.component';
 
 @NgModule({
-  declarations: [AppComponent, NavbarComponent, ProductsComponent, UpdateProductComponent, StoresComponent],
+  declarations: [
+    AppComponent,
+    NavbarComponent,
+    ProductsComponent,
+    UpdateProductComponent,
+    StoresComponent,
+    EditStoresComponent,
+  ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
