@@ -1,3 +1,4 @@
+
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable max-len */
@@ -12,6 +13,7 @@ import { AuthenticationsService } from 'src/app/services/authentications.service
 import { TranslateService } from '@ngx-translate/core';
 import { I18nServiceService } from 'src/app/services/i18n-service/i18n-service.service';
 import { MustMatch } from 'src/app/_helpers/must-match.validator';
+import { Auth, AuthResponded, AuthUser } from 'src/app/models/auth';
 
 @Component({
   selector: 'app-registration',
@@ -27,11 +29,13 @@ export class RegistrationComponent implements OnInit {
   disabled = false;
   rcpassword: string;
   errorMessage: string;
-  successMessage: string;
+  successMessage: string = '';
+  errorResponse: any;
   loginForm: FormGroup;
   emailRegex = /^(([^<>+()\[\]\\.,;:\s@"-#$%&=]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,3}))$/;
+  userResponded: AuthResponded;
 
-  constructor(
+   constructor(
     private snackBar: MatSnackBar,
     private authService: AuthenticationsService,
     private formBuilder: FormBuilder,
@@ -41,6 +45,7 @@ export class RegistrationComponent implements OnInit {
     translate.setDefaultLang('de');
     translate.use('de');
   }
+
   ngOnInit(): void {
     this.i18nService.localeEvent.subscribe((locale) => this.translate.use(locale));
     this.loginForm = this.formBuilder.group(
@@ -55,8 +60,12 @@ export class RegistrationComponent implements OnInit {
         validator: MustMatch('password', 'password2'),
       }
     );
+    this.loginForm = this.formBuilder.group({
+      email: [null, [Validators.required, Validators.pattern(this.emailRegex)]],
+      password: [null, Validators.required],
+    });
   }
-  register() {
+   register() {
     const username = this.loginForm.get('username').value;
     const email = this.loginForm.get('email').value;
     const password = this.loginForm.get('password').value;
@@ -77,4 +86,27 @@ export class RegistrationComponent implements OnInit {
       this.remail = '';
     });
   }
+  login() {
+    const email = this.loginForm.get('email').value;
+    const password = this.loginForm.get('password').value;
+    const user: Auth = {
+      user: {
+        email: email,
+        password: password,
+      },
+    };
+    this.authService.login(user).subscribe(
+      (data) => {
+        this.userResponded = data;
+        this.successMessage = 'User authenticated ';
+        this.errorMessage = '';
+      },
+      (error) => {
+        this.errorMessage = 'Username/Password not correct';
+        this.errorResponse = error;
+      }
+    );
+  }
 }
+
+  

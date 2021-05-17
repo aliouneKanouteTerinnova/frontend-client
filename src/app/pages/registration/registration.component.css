@@ -48,8 +48,8 @@
 }
 
 :host ::ng-deep .mat-tab-list .mat-tab-labels .mat-tab-label-active {
-  color: #f39200;
-  background-color: #29235c;
+  color: #ffff;
+  background-color: #f39200;
   border: 1px solid black;
 }
 
@@ -63,4 +63,15 @@
 }
 .successMessage {
   color: green;
+}
+a {
+  text-decoration: none;
+  font-size: 0.7rem;
+}
+.social-network {
+  padding: 5px;
+  margin-top: 15px;
+}
+.social-network h4 {
+  font-weight: bold;
 }
