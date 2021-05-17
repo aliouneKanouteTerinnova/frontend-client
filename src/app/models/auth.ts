@@ -1,14 +1,14 @@
-class AuthModel {
+type AuthModel = {
   email: string;
   password: string;
-}
+};
 
-export class AuthUser {
+export type AuthUser = {
   email: string;
   username: string;
   token: string;
-}
+};
 
-export class Auth {
+export type Auth = {
   user: AuthModel;
-}
+};
