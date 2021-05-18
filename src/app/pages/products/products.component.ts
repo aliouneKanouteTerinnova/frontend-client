@@ -31,11 +31,17 @@ export class ProductsComponent implements OnInit {
 
   ngOnInit(): void {
     this.ModalForm = this.fb.group({
-      Category: ['', Validators.required],
-      Name: ['', Validators.required],
-      Description: ['', Validators.required],
-      Price: ['', Validators.required],
-      Image: ['', Validators.required],
+      store: ['', Validators.required],
+      category: ['', Validators.required],
+      name: ['', Validators.required],
+      slug: ['', Validators.required],
+      description: ['', Validators.required],
+      price: ['', Validators.required],
+      date_added: ['', Validators.required],
+      created_by: ['', Validators.required],
+      // last_updated: ['', Validators.required],
+      quantity: ['', Validators.required],
+      is_active: ['', Validators.required],
     });
 
     this.getProducts();
@@ -45,14 +51,14 @@ export class ProductsComponent implements OnInit {
   getProducts() {
     this.productsService.getAllProducts().subscribe((data) => {
       console.log('Product', data);
-      this.products = data;
+      this.products = data.products;
     });
   }
 
   getCategory() {
     this.categoryService.getAllCategories().subscribe((data) => {
-      console.log('Category', data);
-      this.categorys = data;
+      console.log('Category', data.categories);
+      this.categorys = data.categories;
     });
   }
 
@@ -64,68 +70,69 @@ export class ProductsComponent implements OnInit {
     this.submited = true;
   }
 
-  open(content) {
-    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then(
-      (result) => {
-        this.closeResult = `Closed with: ${result}`;
-      },
-      (reason) => {
-        this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-      }
-    );
-  }
+  // open(content) {
+  //   this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then(
+  //     (result) => {
+  //       this.closeResult = `Closed with: ${result}`;
+  //     },
+  //     (reason) => {
+  //       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+  //     }
+  //   );
+  // }
 
-  private getDismissReason(reason: any): string {
-    if (reason === ModalDismissReasons.ESC) {
-      return 'by pressing ESC';
-    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
-      return 'by clicking on a backdrop';
-    } else {
-      return `with: ${reason}`;
-    }
-  }
+  // private getDismissReason(reason: any): string {
+  //   if (reason === ModalDismissReasons.ESC) {
+  //     return 'by pressing ESC';
+  //   } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+  //     return 'by clicking on a backdrop';
+  //   } else {
+  //     return `with: ${reason}`;
+  //   }
+  // }
 
-  addProduct() {
-    this.submited = true;
-    const products = new Products();
+  // addProduct() {
+  //   this.submited = true;
+  //   const products = new Products();
 
-    products.id = Math.floor(Math.random() * 100);
-    products.name = this.ModalForm.get('Name').value;
-    products.get_absolute_url = '';
-    products.description = this.ModalForm.get('Description').value;
-    products.price = this.ModalForm.get('Price').value;
-    // products.category = this.ModalForm.get('Category').value;
-    products.category = 2;
-    products.get_image = '';
-    products.get_thumbnail = '';
+  //   products.id = Math.floor(Math.random() * 100);
+  //   products.name = this.ModalForm.get('name').value;
+  //   products.slug = this.ModalForm.get('slug').value;
+  //   products.store = this.ModalForm.get('store').value;
+  //   products.description = this.ModalForm.get('description').value;
+  //   products.price = this.ModalForm.get('price').value;
+  //   products.date_added = '';
+  //   // products.created_by
+  //   products.quantity = this.ModalForm.get('quantity').value;
+  //   products.is_active = this.ModalForm.get('is_active').value;
 
-    console.log(products);
-    console.log(products.id);
+  //   console.log(products);
+  //   console.log(products.id);
 
-    this.productsService.addProduct(products).subscribe(
-      (res) => {
-        Swal.fire({
-          position: 'top-end',
-          icon: 'success',
-          title: 'Your work has been saved',
-          showConfirmButton: false,
-          timer: 1500,
-        });
-        this.getProducts();
-        this.modalService.dismissAll();
+  //   this.productsService.addProduct(products).subscribe(
+  //     (res) => {
+  //       Swal.fire({
+  //         position: 'top-end',
+  //         icon: 'success',
+  //         title: 'Your work has been saved',
+  //         showConfirmButton: false,
+  //         timer: 1500,
+  //       });
+  //       this.getProducts();
+  //       this.modalService.dismissAll();
 
-        console.log(res);
-      },
-      (err) => {
-        Swal.fire({
-          icon: 'error',
-          title: 'Oops...',
-          text: 'Something went wrong!',
-        });
-        console.log(err);
-      }
-    );
-  }
+  //       console.log(res);
+  //     },
+  //     (err) => {
+  //       Swal.fire({
+  //         icon: 'error',
+  //         title: 'Oops...',
+  //         text: 'Something went wrong!',
+  //       });
+  //       console.log(err);
+  //     }
+  //   );
+  // }
 
   deleteProducts(id) {
     this.productsService.deleteProduct(id).subscribe(

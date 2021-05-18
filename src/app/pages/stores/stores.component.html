@@ -13,7 +13,7 @@
           <div class="card-body adresse"><b>Adresse:</b> {{ store.store_address }}</div>
         </div>
         <div class="button">
-          <button mat-raised-button color="accent" routerLink="/edit-stores/{{ store.id }}" class="mr-3">Edit</button>
+          <button mat-raised-button color="accent" routerLink="/updatestore/{{ store.id }}" class="mr-3">Edit</button>
           <button mat-raised-button color="warn" (click)="deleteStore(store.id)">Delete</button>
         </div>
       </div>

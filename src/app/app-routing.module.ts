@@ -10,9 +10,10 @@ import { CreateStoresComponent } from './pages/stores/create-stores/create-store
 
 const routes: Routes = [
   { path: 'products', component: ProductsComponent },
+  { path: 'addproduct', component: UpdateProductComponent },
   { path: 'update-product/:id', component: UpdateProductComponent },
   { path: 'list-store', component: StoresComponent },
-  { path: 'edit-stores/:id', component: EditStoresComponent },
+  { path: 'updatestore/:id', component: EditStoresComponent },
   { path: 'create-store', component: CreateStoresComponent },
 ];
 

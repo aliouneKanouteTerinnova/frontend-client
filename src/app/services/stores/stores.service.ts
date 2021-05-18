@@ -7,7 +7,7 @@ import { Store } from './../../pages/stores/store';
   providedIn: 'root',
 })
 export class StoresService {
-  url = 'http://192.168.1.16:8000/store';
+  url = 'http://192.168.1.16:8000/api';
 
   constructor(private http: HttpClient) {}
 

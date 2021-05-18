@@ -14,15 +14,13 @@ const httpOptions = {
   providedIn: 'root',
 })
 export class ProductsService {
-  basUrl = 'http://ec2-3-122-251-34.eu-central-1.compute.amazonaws.com/api/';
-
   constructor(private httpClient: HttpClient) {}
 
   // getAllProducts() {
   //   return this.httpClient.get<any>(`${this.basUrl}`);
   // }
   getAllProducts() {
-    return this.httpClient.get<any>(`${environment.url}products`);
+    return this.httpClient.get<any>(`${environment.url}/products`);
   }
 
   getLatestProducts() {
@@ -30,7 +28,7 @@ export class ProductsService {
   }
 
   addProduct(product: Products) {
-    return this.httpClient.post(`${environment.url}addproduct`, product);
+    return this.httpClient.post(`${environment.url}`, product);
   }
 
   // updateProduct(product: Products): Observable<Products> {
@@ -38,7 +36,7 @@ export class ProductsService {
   //   return this.httpClient.put<Products>(url, product, httpOptions);
   // }
   updateProduct(id: number, product: any) {
-    return this.httpClient.put(`${environment.url}updateproduct/${id}`, product);
+    return this.httpClient.put(`${environment.url}/${id}`, product);
   }
 
   getCurrentData(id) {
@@ -46,6 +44,6 @@ export class ProductsService {
   }
 
   deleteProduct(id: number) {
-    return this.httpClient.delete(`${environment.url}deleteproduct/${id}`);
+    return this.httpClient.delete(`${environment.url}/${id}`);
   }
 }

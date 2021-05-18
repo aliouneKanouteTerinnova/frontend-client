@@ -1,6 +1,6 @@
 <div class="container">
   <div class="text-center">
-    <button mat-raised-button color="primary" (click)="open(content)">
+    <button mat-raised-button color="primary" routerLink="/addproduct">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="20"
@@ -17,99 +17,29 @@
     </button>
   </div>
   <h2>Products</h2>
-  <div class="row">
-    <div *ngFor="let product of products" class="col-3 product">
-      <div *ngIf="product.img">
-        <img src="{{ product.img }}" alt="img" />
-      </div>
+  <div class="container">
+    <div class="row">
+      <div class="col product" *ngFor="let product of products">
+        <div class="store_name"><b>Store: </b> {{ product.store }}</div>
+        <div class="img mb-2">
+          <img class="img-thumbnail" src="./../../../assets/img/vanaa_logo.svg" alt="" />
+        </div>
+        <div class="content">
+          <h3 class="name"><b>Name: </b>{{ product.name }}</h3>
+          <span class="slug"><b>Slug: </b>{{ product.slug }}</span>
+          <p class="description">
+            <b>Description: </b>
+            {{ product.description }}
+          </p>
+          <div class="price"><b>Price: </b> {{ product.price }}</div>
+          <div class="quantity"><b>Quantity: </b> {{ product.quantity }}</div>
+        </div>
+        <div class="button_group mt-3">
+          <button mat-raised-button color="accent" class="mr-3">Update</button>
 
-      <h4 *ngFor="let category of categorys">
-        <a [title]="product.name + ' details'"> Category : {{ category.name }} </a>
-      </h4>
-
-      <h4>
-        <a [title]="product.name + ' details'"> Name : {{ product.name }} </a>
-      </h4>
-
-      <p *ngIf="product.description">Description: {{ product.description }}</p>
-      <p>Price : {{ product.price }}</p>
-
-      <div class="mt-3">
-        <button class="mr-3 btn btn-primary" routerLink="/update-product/{{ product.id }}">Up date</button>
-
-        <button mat-raised-button color="warn" (click)="deleteProducts(product.id)">Delete</button>
+          <button mat-raised-button color="warn">Delete</button>
+        </div>
       </div>
     </div>
   </div>
 </div>
-
-<ng-template #content let-modal>
-  <div class="modal-header">
-    <h4 class="modal-title" id="modal-basic-title">Add Product</h4>
-    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
-  <div class="modal-body">
-    <form [formGroup]="ModalForm" (ngSubmit)="onSubmit()">
-      <div class="form-group">
-        <div class="row mb-2">
-          <div class="col-6">
-            <label for="name">Category</label>
-            <div class="input-group">
-              <select name="category" id="category" class="form-control" formControlName="Category">
-                <option value="laptop" *ngFor="let category of categorys">{{ category.name }}</option>
-              </select>
-            </div>
-          </div>
-
-          <div class="col-6">
-            <label for="name">Name</label>
-            <div class="input-group">
-              <input type="text" id="name" class="form-control" placeholder="name" name="name" formControlName="Name" />
-            </div>
-          </div>
-        </div>
-        <div class="row mb-2">
-          <div class="col-6">
-            <label for="description">Description</label>
-            <div class="input-group">
-              <input
-                type="text"
-                id="description"
-                class="form-control"
-                placeholder="description"
-                name="description"
-                formControlName="Description"
-              />
-            </div>
-          </div>
-
-          <div class="col-6">
-            <label for="name">Price</label>
-            <div class="input-group">
-              <input
-                type="number"
-                id="price"
-                class="form-control"
-                placeholder="price"
-                name="price"
-                formControlName="Price"
-              />
-            </div>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="col-4">
-            <label for="img">Image</label>
-            <input type="file" name="img" id="img" />
-          </div>
-        </div>
-        <div class="input-group-append">
-          <button class="btn btn-outline-secondary" (click)="addProduct()" type="button">Add</button>
-        </div>
-      </div>
-    </form>
-  </div>
-</ng-template>

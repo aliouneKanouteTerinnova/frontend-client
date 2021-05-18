@@ -8,23 +8,21 @@ import { Category } from '../../models/category/category';
   providedIn: 'root',
 })
 export class CategoriesService {
-  basUrl = 'http://ec2-3-122-251-34.eu-central-1.compute.amazonaws.com/api/';
-
   constructor(private httpClient: HttpClient) {}
 
   getAllCategories() {
-    return this.httpClient.get<any>(`${environment.url}categories`);
+    return this.httpClient.get<any>(`${environment.url}/categories`);
   }
 
   addCategory(category: Category) {
-    return this.httpClient.post(`${environment.url}addcategory`, category);
+    return this.httpClient.post(`${environment.url}`, category);
   }
 
   updateCategory(id: number, category: any) {
-    return this.httpClient.put(`${environment.url}updatecategory/${id}`, category);
+    return this.httpClient.put(`${environment.url}/${id}`, category);
   }
 
   deleteCategory(id: number) {
-    return this.httpClient.delete(`${environment.url}deletecategory/${id}`);
+    return this.httpClient.delete(`${environment.url}/${id}`);
   }
 }

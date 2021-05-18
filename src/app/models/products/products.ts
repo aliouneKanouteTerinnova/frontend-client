@@ -1,10 +1,14 @@
 export class Products {
   id: number;
-  name: string;
-  get_absolute_url: string;
-  description: string;
-  price: string;
+  store: number;
   category: number;
-  get_image: string;
-  get_thumbnail: string;
+  created_by: number;
+  name: string;
+  slug: string;
+  description: string;
+  price: number;
+  date_added: string;
+  last_updated: string;
+  quantity: number;
+  is_active: boolean;
 }

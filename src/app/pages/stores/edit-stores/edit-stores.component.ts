@@ -12,7 +12,7 @@ import Swal from 'sweetalert2';
 })
 export class EditStoresComponent implements OnInit {
   token =
-    'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MiwiZXhwIjoxNjIxMzQxMDg4fQ.o6ypxFQZGa6SMBUwEF2Bjx_mvBmcEjGKaSI4iJzsJPE';
+    'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwiZXhwIjoxNjIxNDM1OTU2fQ.KHwUIX3Ow1-Qrlz9jZcE75kkMZeQtBcJiMv2gVXyTek';
 
   editStore = new FormGroup({
     name: new FormControl(''),
