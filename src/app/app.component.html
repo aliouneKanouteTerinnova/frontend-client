@@ -3,7 +3,8 @@
     <span>Vaanah</span>
     <span class="exemple-spacer"></span>
     <mat-icon class="exemple-icon">favorite</mat-icon>
-    <mat-icon class="exemple-icon">delete</mat-icon>
+    <button mat-raised-button color="warn" (click)="logOut()" *ngIf="isLoggedIn()">Logout</button>
+    <button mat-raised-button color="accent" (click)="logIn()" *ngIf="!isLoggedIn()">LogIn</button>
   </mat-toolbar-row>
 </mat-toolbar>
 <div class="exemple-button">

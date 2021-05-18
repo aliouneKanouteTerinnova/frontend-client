@@ -71,4 +71,10 @@ export class AuthenticationsService {
   register(user: User) {
     return this.httpClient.post(`${environment.baseUrl}users`, user);
   }
+
+  // User Logout
+  logOut() {
+    this.cookieService.delete('currentUser');
+    this.currentUserSubject.next(null);
+  }
 }

@@ -6,6 +6,10 @@ import { UpdateProfileComponent } from './pages/update-profile/update-profile.co
 
 const routes: Routes = [
   {
+    path: '',
+    component: RegistrationComponent,
+  },
+  {
     path: 'register',
     component: RegistrationComponent,
   },
