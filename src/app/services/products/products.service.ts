@@ -27,8 +27,12 @@ export class ProductsService {
     return this.httpClient.get<any>(`${environment.url}latest-products/`);
   }
 
-  addProduct(product: Products) {
-    return this.httpClient.post(`${environment.url}`, product);
+  addProduct(product: Products, token: string) {
+    token = 'token ' + token;
+    return this.httpClient.post(`${environment.url}/products`, product, {
+      headers: new HttpHeaders().set('Authorization', token),
+      observe: 'response',
+    });
   }
 
   // updateProduct(product: Products): Observable<Products> {

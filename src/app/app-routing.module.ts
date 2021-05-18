@@ -1,3 +1,4 @@
+import { CreateProductComponent } from './pages/products/create-product/create-product.component';
 import { EditStoresComponent } from './pages/stores/edit-stores/edit-stores.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -10,7 +11,7 @@ import { CreateStoresComponent } from './pages/stores/create-stores/create-store
 
 const routes: Routes = [
   { path: 'products', component: ProductsComponent },
-  { path: 'addproduct', component: UpdateProductComponent },
+  { path: 'addproduct', component: CreateProductComponent },
   { path: 'update-product/:id', component: UpdateProductComponent },
   { path: 'list-store', component: StoresComponent },
   { path: 'updatestore/:id', component: EditStoresComponent },

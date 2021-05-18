@@ -1,10 +1,8 @@
+import { StoresService } from 'src/app/services/stores/stores.service';
 import { Component, OnInit } from '@angular/core';
 import { ProductsService } from './../../services/products/products.service';
 import { CategoriesService } from './../../services/categories/categories.service';
-import { Products } from './../../models/products/products';
 import { Category } from './../../models/category/category';
-import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { v4 as uuidv4 } from 'uuid';
 import Swal from 'sweetalert2';
 
@@ -18,34 +16,27 @@ uuidv4();
 export class ProductsComponent implements OnInit {
   submited = false;
   products = [];
+  stores: [];
   categorys: Category;
   closeResult = '';
-  ModalForm: FormGroup;
 
   constructor(
-    private modalService: NgbModal,
-    private fb: FormBuilder,
     private productsService: ProductsService,
-    private categoryService: CategoriesService
+    private categoryService: CategoriesService,
+    private storesService: StoresService
   ) {}
 
   ngOnInit(): void {
-    this.ModalForm = this.fb.group({
-      store: ['', Validators.required],
-      category: ['', Validators.required],
-      name: ['', Validators.required],
-      slug: ['', Validators.required],
-      description: ['', Validators.required],
-      price: ['', Validators.required],
-      date_added: ['', Validators.required],
-      created_by: ['', Validators.required],
-      // last_updated: ['', Validators.required],
-      quantity: ['', Validators.required],
-      is_active: ['', Validators.required],
-    });
-
+    this.getStores();
     this.getProducts();
     this.getCategory();
+  }
+
+  getStores() {
+    this.storesService.getAllStores().subscribe((data) => {
+      console.log(data);
+      this.stores = data.stores;
+    });
   }
 
   getProducts() {
@@ -62,77 +53,9 @@ export class ProductsComponent implements OnInit {
     });
   }
 
-  get f() {
-    return this.ModalForm.controls;
-  }
-
   onSubmit() {
     this.submited = true;
   }
-
-  // open(content) {
-  //   this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then(
-  //     (result) => {
-  //       this.closeResult = `Closed with: ${result}`;
-  //     },
-  //     (reason) => {
-  //       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-  //     }
-  //   );
-  // }
-
-  // private getDismissReason(reason: any): string {
-  //   if (reason === ModalDismissReasons.ESC) {
-  //     return 'by pressing ESC';
-  //   } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
-  //     return 'by clicking on a backdrop';
-  //   } else {
-  //     return `with: ${reason}`;
-  //   }
-  // }
-
-  // addProduct() {
-  //   this.submited = true;
-  //   const products = new Products();
-
-  //   products.id = Math.floor(Math.random() * 100);
-  //   products.name = this.ModalForm.get('name').value;
-  //   products.slug = this.ModalForm.get('slug').value;
-  //   products.store = this.ModalForm.get('store').value;
-  //   products.description = this.ModalForm.get('description').value;
-  //   products.price = this.ModalForm.get('price').value;
-  //   products.date_added = '';
-  //   // products.created_by
-  //   products.quantity = this.ModalForm.get('quantity').value;
-  //   products.is_active = this.ModalForm.get('is_active').value;
-
-  //   console.log(products);
-  //   console.log(products.id);
-
-  //   this.productsService.addProduct(products).subscribe(
-  //     (res) => {
-  //       Swal.fire({
-  //         position: 'top-end',
-  //         icon: 'success',
-  //         title: 'Your work has been saved',
-  //         showConfirmButton: false,
-  //         timer: 1500,
-  //       });
-  //       this.getProducts();
-  //       this.modalService.dismissAll();
-
-  //       console.log(res);
-  //     },
-  //     (err) => {
-  //       Swal.fire({
-  //         icon: 'error',
-  //         title: 'Oops...',
-  //         text: 'Something went wrong!',
-  //       });
-  //       console.log(err);
-  //     }
-  //   );
-  // }
 
   deleteProducts(id) {
     this.productsService.deleteProduct(id).subscribe(

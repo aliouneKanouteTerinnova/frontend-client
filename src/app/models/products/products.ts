@@ -2,7 +2,7 @@ export class Products {
   id: number;
   store: number;
   category: number;
-  created_by: number;
+  created_by: string;
   name: string;
   slug: string;
   description: string;

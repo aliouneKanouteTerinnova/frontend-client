@@ -46,7 +46,6 @@ export class UpdateProductComponent implements OnInit {
   getProducts() {
     this.productsService.getAllProducts().subscribe((data) => {
       console.log('Product', data);
-      // this.products = data;
       this.name = data.name;
       this.description = data.description;
       this.price = data.price;
