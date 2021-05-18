@@ -48,7 +48,19 @@ export class AuthenticationsService {
   // Get user authenticated
   getUser(token: string) {
     token = 'token ' + token;
-    return this.httpClient.get(`${environment.baseUrl}user`, {
+    return this.httpClient
+      .get<AuthResponded>(`${environment.baseUrl}user`, {
+        headers: new HttpHeaders().set('Authorization', token),
+        observe: 'response',
+      })
+      .pipe(map((userResponded) => userResponded));
+  }
+
+  // Update User Profile
+
+  update(username: any, token: string) {
+    token = 'token ' + token;
+    return this.httpClient.put(`${environment.baseUrl}user`, username, {
       headers: new HttpHeaders().set('Authorization', token),
       observe: 'response',
     });

@@ -29,7 +29,6 @@
             <button mat-raised-button color="primary">SE CONNECTER</button>
           </form>
         </mat-tab>
-        /*registration*/
         <mat-tab label="inscription">
           <form [formGroup]="registerForm" (submit)="register()">
             <mat-form-field class="example-full-width" appearance="outline">
@@ -77,7 +76,7 @@
               [labelPosition]="labelPosition"
               [disabled]="disabled"
             >
-              <div class="conditions">J'accepte les conditions</div>
+              <div class="conditions">J'accepte les conditions d'utilisations</div>
             </mat-checkbox>
             <button mat-raised-button color="primary">S'INSCRIRE</button>
           </form>
