@@ -19,6 +19,7 @@ import { UpdateProductComponent } from './pages/products/update-product/update-p
 import { StoresComponent } from './pages/stores/stores.component';
 import { EditStoresComponent } from './pages/stores/edit-stores/edit-stores.component';
 import { CreateStoresComponent } from './pages/stores/create-stores/create-stores.component';
+import { CreateProductComponent } from './pages/products/create-product/create-product.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { CreateStoresComponent } from './pages/stores/create-stores/create-store
     StoresComponent,
     EditStoresComponent,
     CreateStoresComponent,
+    CreateProductComponent,
   ],
   imports: [
     BrowserModule,
