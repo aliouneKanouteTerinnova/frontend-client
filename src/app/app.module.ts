@@ -36,6 +36,7 @@ import { StoresComponent } from './pages/stores/stores.component';
 import { EditStoresComponent } from './pages/stores/edit-stores/edit-stores.component';
 import { CreateStoresComponent } from './pages/stores/create-stores/create-stores.component';
 import { CreateProductComponent } from './pages/products/create-product/create-product.component';
+import { CategoriesComponent } from './pages/categories/categories.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -49,6 +50,7 @@ import { CreateProductComponent } from './pages/products/create-product/create-p
     EditStoresComponent,
     CreateStoresComponent,
     CreateProductComponent,
+    CategoriesComponent,
   ],
 
   // @NgModule({
