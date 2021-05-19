@@ -1,0 +1,47 @@
+<div class="container">
+  <div class="text-center">
+    <button mat-raised-button color="primary" routerLink="/addproduct">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="20"
+        height="20"
+        fill="currentColor"
+        class="bi bi-plus"
+        viewBox="0 0 16 16"
+      >
+        <path
+          d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"
+        />
+      </svg>
+      Add Product
+    </button>
+  </div>
+  <h2>Products</h2>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-5 col-lg-3 product" *ngFor="let product of products">
+        <div class="store_name"><b>Store: </b> {{ product.store }}</div>
+        <div class="img mb-2">
+          <img class="img-thumbnail" src="./../../../assets/img/vanaa_logo.svg" alt="" />
+        </div>
+        <div class="content">
+          <h3 class="name"><b>Name: </b>{{ product.name }}</h3>
+          <span class="slug"><b>Slug: </b>{{ product.slug }}</span>
+          <p class="description">
+            <b>Description: </b>
+            {{ product.description }}
+          </p>
+          <div class="price"><b>Price: </b> {{ product.price }}</div>
+          <div class="quantity"><b>Quantity: </b> {{ product.quantity }}</div>
+        </div>
+        <div class="button_group mt-3">
+          <button mat-raised-button color="accent" class="mr-3" routerLink="/update-product/{{ product.id }}">
+            Update
+          </button>
+
+          <button mat-raised-button color="warn" (click)="deleteProducts(product.id)">Delete</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
