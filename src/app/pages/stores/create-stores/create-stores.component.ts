@@ -14,7 +14,7 @@ export class CreateStoresComponent implements OnInit {
   createStore: FormGroup;
   submited = false;
   token =
-    'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwiZXhwIjoxNjIxNDM1OTU2fQ.KHwUIX3Ow1-Qrlz9jZcE75kkMZeQtBcJiMv2gVXyTek';
+    'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwiZXhwIjoxNjIxNDQ2ODI5fQ.Gm67L6y9l50dUDWALEY49_KrnP1Rb3n-xRJsXtjjp5U';
   constructor(private fb: FormBuilder, private storesService: StoresService, private route: Router) {}
 
   ngOnInit(): void {
@@ -35,9 +35,10 @@ export class CreateStoresComponent implements OnInit {
     const data = new Store();
 
     data.name = this.createStore.get('name').value;
-    data.created_at = this.createStore.get('created_at').value;
-    data.created_by = this.createStore.get('created_by').value;
+    data.created_at = '';
+    data.created_by = 2;
     data.store_address = this.createStore.get('store_address').value;
+    data.is_active = true;
 
     console.log(data);
 

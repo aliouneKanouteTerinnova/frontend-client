@@ -17,7 +17,7 @@ export class StoresService {
 
   createStores(store: Store, token: string) {
     token = 'token ' + token;
-    return this.http.post(`${environment.url}/createstore`, store, {
+    return this.http.post(`${environment.url}/stores`, store, {
       headers: new HttpHeaders().set('Authorization', token),
       observe: 'response',
     });
