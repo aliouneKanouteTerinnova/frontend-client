@@ -2,14 +2,8 @@
   <div class="">
     <label for="name">Name</label>
     <div class="input-group">
-      <input
-        type="text"
-        class="form-control"
-        placeholder="name"
-        name="name"
-        formControlName="name"
-        [(ngModel)]="name"
-      />
+      <input type="text" class="form-control" placeholder="name" name="name" formControlName="name" />
+      <!-- [(ngModel)]="name" -->
     </div>
   </div>
 
@@ -22,22 +16,34 @@
         placeholder="description"
         name="description"
         formControlName="description"
-        [(ngModel)]="description"
       />
+      <!-- [(ngModel)]="description" -->
     </div>
   </div>
 
   <div class="">
     <label for="name">Price</label>
     <div class="input-group">
-      <input
-        type="number"
-        class="form-control"
-        placeholder="price"
-        name="price"
-        formControlName="price"
-        [(ngModel)]="price"
-      />
+      <input type="number" class="form-control" placeholder="price" name="price" formControlName="price" />
+      <!-- [(ngModel)]="price" -->
+    </div>
+  </div>
+
+  <div class="">
+    <label for="quantity">Quantity</label>
+    <div class="input-group">
+      <input type="number" class="form-control" placeholder="quantity" name="quantity" formControlName="quantity" />
+      <!-- [(ngModel)]="quantity" -->
+    </div>
+  </div>
+
+  <div class="">
+    <div class="form-check mt-4 ml-3">
+      <input type="checkbox" class="form-check-input" />
+      <!-- (change)="checkCheckBoxvalue($event)"
+        #ch
+        (click)="checkCheckBoxvalue(ch)" -->
+      <label for="active" class="form-check-label">Is active</label>
     </div>
   </div>
 

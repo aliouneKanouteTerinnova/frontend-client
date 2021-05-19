@@ -21,7 +21,7 @@ export class CreateProductComponent implements OnInit {
   stores: [];
   products = [];
   token =
-    'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwiZXhwIjoxNjIxNDQ2ODI5fQ.Gm67L6y9l50dUDWALEY49_KrnP1Rb3n-xRJsXtjjp5U';
+    'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwiZXhwIjoxNjIxNTEzMTk4fQ.u_Mf7IhHTOwy6HlvwocG3IT6eBVjt6JGhegUP1qJiGk';
   constructor(
     private route: Router,
     private fb: FormBuilder,
@@ -84,7 +84,7 @@ export class CreateProductComponent implements OnInit {
     products.is_active = true;
     products.quantity = this.createProductForm.get('quantity').value;
     products.category = 2;
-    products.store = 2;
+    products.store = 1;
 
     console.log(products);
 

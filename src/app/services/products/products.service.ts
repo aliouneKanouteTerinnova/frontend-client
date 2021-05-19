@@ -39,12 +39,12 @@ export class ProductsService {
   //   const url = `${environment.url}updateproduct/${product.id}`;
   //   return this.httpClient.put<Products>(url, product, httpOptions);
   // }
-  updateProduct(id: number, product: any) {
-    return this.httpClient.put(`${environment.url}/${id}`, product);
+  updateProduct(id: number, data: any) {
+    return this.httpClient.put<any>(`${environment.url}/products/${id}`, data);
   }
 
   getCurrentData(id) {
-    return this.httpClient.get(`${environment.url}/${id}`);
+    return this.httpClient.get(`${environment.url}/products/${id}`);
   }
 
   deleteProduct(id: number) {

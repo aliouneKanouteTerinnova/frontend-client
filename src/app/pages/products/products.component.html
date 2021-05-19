@@ -35,7 +35,9 @@
           <div class="quantity"><b>Quantity: </b> {{ product.quantity }}</div>
         </div>
         <div class="button_group mt-3">
-          <button mat-raised-button color="accent" class="mr-3">Update</button>
+          <button mat-raised-button color="accent" class="mr-3" routerLink="/update-product/{{ product.id }}">
+            Update
+          </button>
 
           <button mat-raised-button color="warn">Delete</button>
         </div>
