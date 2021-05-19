@@ -19,6 +19,8 @@ export class ProductsComponent implements OnInit {
   stores: [];
   categorys: Category;
   closeResult = '';
+  token =
+    'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwiZXhwIjoxNjIxNTEzMTk4fQ.u_Mf7IhHTOwy6HlvwocG3IT6eBVjt6JGhegUP1qJiGk';
 
   constructor(
     private productsService: ProductsService,
@@ -57,8 +59,8 @@ export class ProductsComponent implements OnInit {
     this.submited = true;
   }
 
-  deleteProducts(id) {
-    this.productsService.deleteProduct(id).subscribe(
+  deleteProducts(id, token) {
+    this.productsService.deleteProduct(id, this.token).subscribe(
       (d) => {
         Swal.fire({
           position: 'top-end',

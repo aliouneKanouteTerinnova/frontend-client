@@ -47,7 +47,11 @@ export class ProductsService {
     return this.httpClient.get(`${environment.url}/products/${id}`);
   }
 
-  deleteProduct(id: number) {
-    return this.httpClient.delete(`${environment.url}/${id}`);
+  deleteProduct(id: number, token: string) {
+    token = 'token ' + token;
+    return this.httpClient.delete(`${environment.url}/products/${id}`, {
+      headers: new HttpHeaders().set('Authorization', token),
+      observe: 'response',
+    });
   }
 }
