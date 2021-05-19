@@ -37,7 +37,7 @@ export class StoresService {
 
   deleteStores(id: number, token: string) {
     token = 'token ' + token;
-    return this.http.delete<any>(`${environment.url}/deletestore/${id}`, {
+    return this.http.delete<any>(`${environment.url}/stores/${id}`, {
       headers: new HttpHeaders().set('Authorization', token),
       observe: 'response',
     });
