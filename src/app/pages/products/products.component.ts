@@ -5,6 +5,7 @@ import { CategoriesService } from './../../services/categories/categories.servic
 import { Category } from './../../models/category/category';
 import { v4 as uuidv4 } from 'uuid';
 import Swal from 'sweetalert2';
+import { AuthenticationsService } from 'src/app/services/authentications.service';
 
 uuidv4();
 
@@ -19,16 +20,17 @@ export class ProductsComponent implements OnInit {
   stores: [];
   categorys: Category;
   closeResult = '';
-  token =
-    'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwiZXhwIjoxNjIxNTEzMTk4fQ.u_Mf7IhHTOwy6HlvwocG3IT6eBVjt6JGhegUP1qJiGk';
+  currentUser: any;
 
   constructor(
     private productsService: ProductsService,
     private categoryService: CategoriesService,
-    private storesService: StoresService
+    private storesService: StoresService,
+    private authService: AuthenticationsService
   ) {}
 
   ngOnInit(): void {
+    this.currentUser = this.authService.currentUserValue;
     this.getStores();
     this.getProducts();
     this.getCategory();
@@ -59,8 +61,8 @@ export class ProductsComponent implements OnInit {
     this.submited = true;
   }
 
-  deleteProducts(id, token) {
-    this.productsService.deleteProduct(id, this.token).subscribe(
+  deleteProducts(id) {
+    this.productsService.deleteProduct(id, this.currentUser.user.token).subscribe(
       (d) => {
         Swal.fire({
           position: 'top-end',

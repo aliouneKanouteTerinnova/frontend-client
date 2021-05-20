@@ -7,17 +7,17 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root',
 })
 export class StoresService {
-  // url = 'http://192.168.1.16:8000/api';
+  // baseUrl = 'http://192.168.1.16:8000/api';
 
   constructor(private http: HttpClient) {}
 
   getAllStores() {
-    return this.http.get<any>(`${environment.url}/stores`);
+    return this.http.get<any>(`${environment.baseUrl}stores`);
   }
 
   createStores(store: Store, token: string) {
     token = 'token ' + token;
-    return this.http.post(`${environment.url}/stores`, store, {
+    return this.http.post(`${environment.baseUrl}stores`, store, {
       headers: new HttpHeaders().set('Authorization', token),
       observe: 'response',
     });
@@ -25,19 +25,19 @@ export class StoresService {
 
   upDateStores(id: number, store: Store, token: string) {
     token = 'token ' + token;
-    return this.http.put<any>(`${environment.url}/updatestore/${id}`, store, {
+    return this.http.put<any>(`${environment.baseUrl}updatestore/${id}`, store, {
       headers: new HttpHeaders().set('Authorization', token),
       observe: 'response',
     });
   }
 
-  getCurrentData(id) {
-    return this.http.get<any>(`${environment.url}/stores/${id}`);
+  getCurrentData(id: string) {
+    return this.http.get<any>(`${environment.baseUrl}stores/${id}`);
   }
 
   deleteStores(id: number, token: string) {
     token = 'token ' + token;
-    return this.http.delete<any>(`${environment.url}/stores/${id}`, {
+    return this.http.delete<any>(`${environment.baseUrl}stores/${id}`, {
       headers: new HttpHeaders().set('Authorization', token),
       observe: 'response',
     });

@@ -33,7 +33,7 @@ export class AuthenticationsService {
   // Authentication
 
   login(user: any) {
-    return this.httpClient.post<AuthResponded>(`${environment.baseUrl}users/login`, user).pipe(
+    return this.httpClient.post<AuthResponded>(`${environment.baseUrl}users/login/`, user).pipe(
       map((userResponded) => {
         // login successful if there's a jwt token in the response
         if (userResponded) {
@@ -69,7 +69,7 @@ export class AuthenticationsService {
   // User Registration
 
   register(user: User) {
-    return this.httpClient.post(`${environment.baseUrl}users`, user);
+    return this.httpClient.post<any>(`${environment.baseUrl}users/register/`, user);
   }
 
   // User Logout

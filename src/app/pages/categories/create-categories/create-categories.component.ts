@@ -5,6 +5,7 @@ import { Category } from 'src/app/models/category/category';
 import { CategoriesService } from 'src/app/services/categories/categories.service';
 import Swal from 'sweetalert2';
 import { v4 as uuidv4 } from 'uuid';
+import { AuthenticationsService } from 'src/app/services/authentications.service';
 uuidv4();
 
 @Component({
@@ -15,11 +16,16 @@ uuidv4();
 export class CreateCategoriesComponent implements OnInit {
   createCategoriesForm: FormGroup;
   categorys: Category;
-  token =
-    'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwiZXhwIjoxNjIxNTEzMTk4fQ.u_Mf7IhHTOwy6HlvwocG3IT6eBVjt6JGhegUP1qJiGk';
-  constructor(private route: Router, private fb: FormBuilder, private categoryService: CategoriesService) {}
+  currentUser: any;
+  constructor(
+    private route: Router,
+    private fb: FormBuilder,
+    private categoryService: CategoriesService,
+    private authService: AuthenticationsService
+  ) {}
 
   ngOnInit(): void {
+    this.currentUser = this.authService.currentUserValue;
     this.createCategoriesForm = this.fb.group({
       name: ['', Validators.required],
       slug: ['', Validators.required],
@@ -42,7 +48,7 @@ export class CreateCategoriesComponent implements OnInit {
 
     console.log(categories);
 
-    this.categoryService.addCategory(categories, this.token).subscribe(
+    this.categoryService.addCategory(categories, this.currentUser.user.token).subscribe(
       (res) => {
         Swal.fire({
           position: 'top-end',

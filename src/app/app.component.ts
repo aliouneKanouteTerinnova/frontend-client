@@ -48,6 +48,5 @@ export class AppComponent implements OnInit {
 
   logIn() {
     void this.router.navigate(['/register']);
-    location.reload();
   }
 }

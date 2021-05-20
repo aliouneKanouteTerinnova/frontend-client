@@ -17,39 +17,39 @@ export class ProductsService {
   constructor(private httpClient: HttpClient) {}
 
   // getAllProducts() {
-  //   return this.httpClient.get<any>(`${this.basUrl}`);
+  //   return this.httpClient.get<any>(`${this.basbaseUrl}`);
   // }
   getAllProducts() {
-    return this.httpClient.get<any>(`${environment.url}/products`);
+    return this.httpClient.get<any>(`${environment.baseUrl}products`);
   }
 
   getLatestProducts() {
-    return this.httpClient.get<any>(`${environment.url}latest-products/`);
+    return this.httpClient.get<any>(`${environment.baseUrl}latest-products/`);
   }
 
   addProduct(product: Products, token: string) {
     token = 'token ' + token;
-    return this.httpClient.post(`${environment.url}/products`, product, {
+    return this.httpClient.post(`${environment.baseUrl}products`, product, {
       headers: new HttpHeaders().set('Authorization', token),
       observe: 'response',
     });
   }
 
   // updateProduct(product: Products): Observable<Products> {
-  //   const url = `${environment.url}updateproduct/${product.id}`;
-  //   return this.httpClient.put<Products>(url, product, httpOptions);
+  //   const baseUrl = `${environment.baseUrl}updateproduct/${product.id}`;
+  //   return this.httpClient.put<Products>(baseUrl, product, httpOptions);
   // }
   updateProduct(id: number, data: any) {
-    return this.httpClient.put<any>(`${environment.url}/products/${id}`, data);
+    return this.httpClient.put<any>(`${environment.baseUrl}products/${id}`, data);
   }
 
-  getCurrentData(id) {
-    return this.httpClient.get(`${environment.url}/products/${id}`);
+  getCurrentData(id: any) {
+    return this.httpClient.get(`${environment.baseUrl}products/${id}`);
   }
 
   deleteProduct(id: number, token: string) {
     token = 'token ' + token;
-    return this.httpClient.delete(`${environment.url}/products/${id}`, {
+    return this.httpClient.delete(`${environment.baseUrl}products/${id}`, {
       headers: new HttpHeaders().set('Authorization', token),
       observe: 'response',
     });

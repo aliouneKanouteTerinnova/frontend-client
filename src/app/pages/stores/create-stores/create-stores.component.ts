@@ -4,6 +4,7 @@ import { StoresService } from 'src/app/services/stores/stores.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import Swal from 'sweetalert2';
+import { AuthenticationsService } from 'src/app/services/authentications.service';
 
 @Component({
   selector: 'app-create-stores',
@@ -13,11 +14,16 @@ import Swal from 'sweetalert2';
 export class CreateStoresComponent implements OnInit {
   createStore: FormGroup;
   submited = false;
-  token =
-    'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwiZXhwIjoxNjIxNDQ2ODI5fQ.Gm67L6y9l50dUDWALEY49_KrnP1Rb3n-xRJsXtjjp5U';
-  constructor(private fb: FormBuilder, private storesService: StoresService, private route: Router) {}
+  currentUser: any;
+  constructor(
+    private fb: FormBuilder,
+    private storesService: StoresService,
+    private route: Router,
+    private authService: AuthenticationsService
+  ) {}
 
   ngOnInit(): void {
+    this.currentUser = this.authService.currentUserValue;
     this.createStore = this.fb.group({
       name: ['', Validators.required],
       created_at: [''],
@@ -42,13 +48,13 @@ export class CreateStoresComponent implements OnInit {
 
     console.log(data);
 
-    this.storesService.createStores(data, this.token).subscribe(
+    this.storesService.createStores(data, this.currentUser.user.token).subscribe(
       (res) => {
         console.log(res);
         Swal.fire({
           position: 'top-end',
           icon: 'success',
-          title: 'Product modified',
+          title: 'Store created',
           showConfirmButton: false,
           timer: 1500,
         });

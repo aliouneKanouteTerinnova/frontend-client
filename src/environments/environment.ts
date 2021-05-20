@@ -5,11 +5,6 @@
 export const environment = {
   production: false,
   baseUrl: 'http://127.0.0.1:8000/api/',
-  // url: 'http://192.168.1.19:8000/',
-  // url: 'http://192.168.1.16:8000/api',
-  // url: 'http://192.168.43.196:8000/',
-  // url: 'http://localhost:8000/',
-  url: 'http://127.0.0.1:8000/api',
 };
 
 /*

@@ -12,11 +12,12 @@ import { StoresComponent } from './pages/stores/stores.component';
 import { UpdateProductComponent } from './pages/products/update-product/update-product.component';
 import { ProductsComponent } from './pages/products/products.component';
 import { CreateStoresComponent } from './pages/stores/create-stores/create-stores.component';
+import { AuthGuard } from './guards/auth.guard';
 
 const routes: Routes = [
   {
     path: '',
-    component: RegistrationComponent,
+    component: ProductsComponent,
   },
   {
     path: 'register',
@@ -27,13 +28,13 @@ const routes: Routes = [
     component: UpdateProfileComponent,
   },
   { path: 'products', component: ProductsComponent },
-  { path: 'addproduct', component: CreateProductComponent },
-  { path: 'update-product/:id', component: UpdateProductComponent },
+  { path: 'addproduct', component: CreateProductComponent, canActivate: [AuthGuard] },
+  { path: 'update-product/:id', component: UpdateProductComponent, canActivate: [AuthGuard] },
   { path: 'list-store', component: StoresComponent },
-  { path: 'updatestore/:id', component: EditStoresComponent },
-  { path: 'create-store', component: CreateStoresComponent },
+  { path: 'updatestore/:id', component: EditStoresComponent, canActivate: [AuthGuard] },
+  { path: 'create-store', component: CreateStoresComponent, canActivate: [AuthGuard] },
   { path: 'categories', component: CategoriesComponent },
-  { path: 'create-categories', component: CreateCategoriesComponent },
+  { path: 'create-categories', component: CreateCategoriesComponent, canActivate: [AuthGuard] },
 ];
 @NgModule({
   declarations: [],

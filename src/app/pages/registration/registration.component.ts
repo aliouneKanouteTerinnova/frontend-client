@@ -13,6 +13,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { I18nServiceService } from 'src/app/services/i18n-service/i18n-service.service';
 import { MustMatch } from 'src/app/_helpers/must-match.validator';
 import { Auth, AuthResponded, AuthUser } from 'src/app/models/auth';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-registration',
@@ -40,7 +41,8 @@ export class RegistrationComponent implements OnInit {
     private authService: AuthenticationsService,
     private formBuilder: FormBuilder,
     private translate: TranslateService,
-    private i18nService: I18nServiceService
+    private i18nService: I18nServiceService,
+    private router: Router
   ) {
     translate.setDefaultLang('de');
     translate.use('de');
@@ -54,7 +56,7 @@ export class RegistrationComponent implements OnInit {
         email: [null, [Validators.required, Validators.pattern(this.emailRegex)]],
         password: [null, [Validators.required, Validators.minLength(8)]],
         password2: [null, Validators.required],
-        checked: false,
+        checked: [false, Validators.required],
       },
       {
         validator: MustMatch('password', 'password2'),
@@ -80,7 +82,8 @@ export class RegistrationComponent implements OnInit {
       return;
     }
     this.authService.register(user).subscribe((response) => {
-      this.successMessage = 'User created ';
+      console.log(response);
+      this.successMessage = 'User created, you can now log in';
       this.rpassword = '';
       this.rcpassword = '';
       this.remail = '';
@@ -97,13 +100,16 @@ export class RegistrationComponent implements OnInit {
     };
     this.authService.login(user).subscribe(
       (data) => {
+        console.log(data);
         this.userResponded = data;
+        this.router.navigate(['products']);
         this.successMessage = 'User authenticated ';
         this.errorMessage = '';
       },
       (error) => {
         this.errorMessage = 'Username/Password not correct';
         this.errorResponse = error;
+        console.log(error);
       }
     );
   }

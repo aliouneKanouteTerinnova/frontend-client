@@ -2,11 +2,12 @@
   <mat-toolbar-row>
     <span routerLink="/" style="cursor: pointer">Vaanah</span>
     <span class="exemple-spacer"></span>
-    <mat-icon class="exemple-icon">favorite</mat-icon>
+    <!-- <mat-icon class="exemple-icon">favorite</mat-icon> -->
     <button mat-raised-button color="warn" (click)="logOut()" *ngIf="isLoggedIn()">Logout</button>
     <button mat-raised-button color="accent" (click)="logIn()" *ngIf="!isLoggedIn()">LogIn</button>
   </mat-toolbar-row>
 </mat-toolbar>
+<!-- <app-navbar></app-navbar> -->
 
 <div class="exemple-button mb-5">
   <button mat-raised-button color="primary" (click)="goRegister()">Primary</button>
