@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { environment } from '../../../environments/environment';
 import { Category } from '../../models/category/category';
@@ -14,8 +14,12 @@ export class CategoriesService {
     return this.httpClient.get<any>(`${environment.url}/categories`);
   }
 
-  addCategory(category: Category) {
-    return this.httpClient.post(`${environment.url}`, category);
+  addCategory(category: Category, token: string) {
+    token = 'token ' + token;
+    return this.httpClient.post(`${environment.url}/categories`, category, {
+      headers: new HttpHeaders().set('Authorization', token),
+      observe: 'response',
+    });
   }
 
   updateCategory(id: number, category: any) {
