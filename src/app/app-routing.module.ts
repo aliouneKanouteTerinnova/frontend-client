@@ -1,3 +1,4 @@
+import { CreateCategoriesComponent } from './pages/categories/create-categories/create-categories.component';
 import { CategoriesComponent } from './pages/categories/categories.component';
 import { CreateProductComponent } from './pages/products/create-product/create-product.component';
 import { EditStoresComponent } from './pages/stores/edit-stores/edit-stores.component';
@@ -32,6 +33,7 @@ const routes: Routes = [
   { path: 'updatestore/:id', component: EditStoresComponent },
   { path: 'create-store', component: CreateStoresComponent },
   { path: 'categories', component: CategoriesComponent },
+  { path: 'create-categories', component: CreateCategoriesComponent },
 ];
 @NgModule({
   declarations: [],
