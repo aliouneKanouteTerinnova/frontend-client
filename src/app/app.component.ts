@@ -1,14 +1,20 @@
 /* eslint-disable @typescript-eslint/no-floating-promises */
-import { Component, OnInit } from '@angular/core';
+
 import { Router } from '@angular/router';
 import { User } from './models/user';
 import { Auth, AuthResponded } from './models/auth';
 import { AuthenticationsService } from './services/authentications.service';
+/* eslint-disable @typescript-eslint/quotes */
+/* eslint-disable @typescript-eslint/semi */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/naming-convention */
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css'],
+  styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
   currentUser: any;

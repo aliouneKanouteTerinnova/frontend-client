@@ -1,0 +1,52 @@
+<form class="form-group container col-6" [formGroup]="updateProducts" (ngSubmit)="onSubmit()">
+  <div class="">
+    <label for="name">Name</label>
+    <div class="input-group">
+      <input type="text" class="form-control" placeholder="name" name="name" formControlName="name" />
+      <!-- [(ngModel)]="name" -->
+    </div>
+  </div>
+
+  <div class="">
+    <label for="description">Description</label>
+    <div class="input-group">
+      <input
+        type="text"
+        class="form-control"
+        placeholder="description"
+        name="description"
+        formControlName="description"
+      />
+      <!-- [(ngModel)]="description" -->
+    </div>
+  </div>
+
+  <div class="">
+    <label for="name">Price</label>
+    <div class="input-group">
+      <input type="number" class="form-control" placeholder="price" name="price" formControlName="price" />
+      <!-- [(ngModel)]="price" -->
+    </div>
+  </div>
+
+  <div class="">
+    <label for="quantity">Quantity</label>
+    <div class="input-group">
+      <input type="number" class="form-control" placeholder="quantity" name="quantity" formControlName="quantity" />
+      <!-- [(ngModel)]="quantity" -->
+    </div>
+  </div>
+
+  <div class="">
+    <div class="form-check mt-4 ml-3">
+      <input type="checkbox" class="form-check-input" />
+      <!-- (change)="checkCheckBoxvalue($event)"
+        #ch
+        (click)="checkCheckBoxvalue(ch)" -->
+      <label for="active" class="form-check-label">Is active</label>
+    </div>
+  </div>
+
+  <button class="btn btn-primary mt-3">Up date</button>
+  <button class="btn btn-danger mt-3 ml-3" routerLink="/products">Retour</button>
+</form>
