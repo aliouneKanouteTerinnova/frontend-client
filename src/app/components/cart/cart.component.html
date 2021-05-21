@@ -26,9 +26,10 @@
                   height="60"
                   class="order-1"
                 />
-                <span class="text-danger" style="cursor: pointer"
+                <!-- <span class="text-danger" style="cursor: pointer"
                   ><i class="fa fa-trash" (click)="cartService.DeleteProductFromCart(i)"></i
-                ></span>
+                ></span> -->
+                <button mat-raised-button color="warn" (click)="cartService.DeleteProductFromCart(i)">delete</button>
               </td>
               <td>
                 <p>{{ c.product.name }}</p>
