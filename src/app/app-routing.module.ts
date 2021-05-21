@@ -14,6 +14,7 @@ import { ProductsComponent } from './pages/products/products.component';
 import { CreateStoresComponent } from './pages/stores/create-stores/create-stores.component';
 import { AuthGuard } from './guards/auth.guard';
 import { CartComponent } from './components/cart/cart.component';
+import { UpdateCategoriesComponent } from './pages/categories/update-categories/update-categories.component';
 
 const routes: Routes = [
   {
@@ -37,6 +38,7 @@ const routes: Routes = [
   { path: 'create-store', component: CreateStoresComponent, canActivate: [AuthGuard] },
   { path: 'categories', component: CategoriesComponent },
   { path: 'create-categories', component: CreateCategoriesComponent, canActivate: [AuthGuard] },
+  { path: 'update-categories/:id', component: UpdateCategoriesComponent, canActivate: [AuthGuard] },
 ];
 @NgModule({
   declarations: [],

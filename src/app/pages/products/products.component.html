@@ -39,7 +39,7 @@
         </div>
         <div class="button_group mt-3">
           <button mat-raised-button color="accent" class="mr-3" (click)="addProducts(product.id)">Add to cart</button>
-          <!-- <button
+          <button
             mat-raised-button
             color="accent"
             class="mr-3"
@@ -47,7 +47,7 @@
             *ngIf="currentUser"
           >
             Update
-          </button> -->
+          </button>
 
           <button mat-raised-button color="warn" (click)="deleteProducts(product.id)" *ngIf="currentUser">
             Delete

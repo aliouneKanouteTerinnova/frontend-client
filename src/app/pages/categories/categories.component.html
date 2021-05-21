@@ -27,15 +27,15 @@
           <div class="card-body adresse"><b>Description:</b> {{ category.description }}</div>
         </div>
         <div class="button">
-          <!-- <button
+          <button
             mat-raised-button
             color="accent"
-            routerLink="/updatestore/{{ store.id }}"
+            routerLink="/update-categories/{{ category.id }}"
             class="mr-3"
             *ngIf="currentUser"
           >
             Edit
-          </button> -->
+          </button>
           <button mat-raised-button color="warn" (click)="deleteStore(store.id)" *ngIf="currentUser">Delete</button>
         </div>
       </div>

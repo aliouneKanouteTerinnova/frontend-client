@@ -39,6 +39,7 @@ import { CreateProductComponent } from './pages/products/create-product/create-p
 import { CategoriesComponent } from './pages/categories/categories.component';
 import { CreateCategoriesComponent } from './pages/categories/create-categories/create-categories.component';
 import { CartComponent } from './components/cart/cart.component';
+import { UpdateCategoriesComponent } from './pages/categories/update-categories/update-categories.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -55,6 +56,7 @@ import { CartComponent } from './components/cart/cart.component';
     CategoriesComponent,
     CreateCategoriesComponent,
     CartComponent,
+    UpdateCategoriesComponent,
   ],
 
   // @NgModule({

@@ -36,16 +36,8 @@ export class ProductsComponent implements OnInit {
   ngOnInit(): void {
     this.currentUser = this.authService.currentUserValue;
     this.cartService.cartDataObs$.subscribe((data) => (this.cartData = data));
-    this.getStores();
     this.getProducts();
     this.getCategory();
-  }
-
-  getStores() {
-    this.storesService.getAllStores().subscribe((data) => {
-      console.log(data);
-      this.stores = data.stores;
-    });
   }
 
   getProducts() {
@@ -114,4 +106,7 @@ export class ProductsComponent implements OnInit {
   //   );
   //   console.log('The product has been updated!', product);
   // }
+}
+function id(id: any) {
+  throw new Error('Function not implemented.');
 }
