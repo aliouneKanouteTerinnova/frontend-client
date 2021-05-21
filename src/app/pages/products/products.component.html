@@ -35,7 +35,10 @@
           <div class="quantity"><b>Quantity: </b> {{ product.quantity }}</div>
         </div>
         <div class="button_group mt-3">
-          <button
+          <button mat-raised-button color="accent" class="mr-3" (click)="addProducts(product.id)" *ngIf="currentUser">
+            Add to cart
+          </button>
+          <!-- <button
             mat-raised-button
             color="accent"
             class="mr-3"
@@ -43,7 +46,7 @@
             *ngIf="currentUser"
           >
             Update
-          </button>
+          </button> -->
 
           <button mat-raised-button color="warn" (click)="deleteProducts(product.id)" *ngIf="currentUser">
             Delete

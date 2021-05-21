@@ -6,6 +6,7 @@ import { Category } from './../../models/category/category';
 import { v4 as uuidv4 } from 'uuid';
 import Swal from 'sweetalert2';
 import { AuthenticationsService } from 'src/app/services/authentications.service';
+import { CartService } from 'src/app/services/cart.service';
 
 uuidv4();
 
@@ -26,7 +27,8 @@ export class ProductsComponent implements OnInit {
     private productsService: ProductsService,
     private categoryService: CategoriesService,
     private storesService: StoresService,
-    private authService: AuthenticationsService
+    private authService: AuthenticationsService,
+    private cartService: CartService
   ) {}
 
   ngOnInit(): void {
@@ -84,6 +86,17 @@ export class ProductsComponent implements OnInit {
     );
 
     console.log('The product has been deleted!');
+  }
+
+  addProducts(id) {
+    this.cartService.AddProductToCart(id);
+    Swal.fire({
+      position: 'top-end',
+      icon: 'success',
+      title: 'Product added to cart!',
+      showConfirmButton: false,
+      timer: 1500,
+    });
   }
 
   // updateProducts(product: Products) {
