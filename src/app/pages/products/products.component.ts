@@ -7,6 +7,7 @@ import { v4 as uuidv4 } from 'uuid';
 import Swal from 'sweetalert2';
 import { AuthenticationsService } from 'src/app/services/authentications.service';
 import { CartService } from 'src/app/services/cart.service';
+import { CartModelServer } from 'src/app/models/cart';
 
 uuidv4();
 
@@ -22,6 +23,7 @@ export class ProductsComponent implements OnInit {
   categorys: Category;
   closeResult = '';
   currentUser: any;
+  cartData: CartModelServer;
 
   constructor(
     private productsService: ProductsService,
@@ -33,6 +35,7 @@ export class ProductsComponent implements OnInit {
 
   ngOnInit(): void {
     this.currentUser = this.authService.currentUserValue;
+    this.cartService.cartDataObs$.subscribe((data) => (this.cartData = data));
     this.getStores();
     this.getProducts();
     this.getCategory();

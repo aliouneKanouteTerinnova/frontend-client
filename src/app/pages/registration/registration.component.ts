@@ -6,6 +6,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import Swal from 'sweetalert2';
 
 import { User } from 'src/app/models/user';
 import { AuthenticationsService } from 'src/app/services/authentications.service';
@@ -82,8 +83,13 @@ export class RegistrationComponent implements OnInit {
       return;
     }
     this.authService.register(user).subscribe((response) => {
-      console.log(response);
-      this.successMessage = 'User created, you can now log in';
+      Swal.fire({
+        position: 'top-end',
+        icon: 'success',
+        title: 'Registred, you can log In now!',
+        showConfirmButton: false,
+        timer: 1500,
+      });
       this.rpassword = '';
       this.rcpassword = '';
       this.remail = '';

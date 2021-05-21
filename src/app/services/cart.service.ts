@@ -6,6 +6,7 @@ import { environment } from 'src/environments/environment';
 import { CartModelPublic, CartModelServer } from '../models/cart';
 import { Products } from '../models/products/products';
 import { ProductsService } from './products/products.service';
+import { CookieService } from 'ngx-cookie-service';
 
 @Injectable({
   providedIn: 'root',
@@ -25,21 +26,28 @@ export class CartService {
     ],
     total: 0,
   };
+  info: CartModelPublic;
 
   cartTotal$ = new BehaviorSubject<Number>(0);
   // Data variable to store the cart information on the client's local storage
 
   cartDataObs$ = new BehaviorSubject<CartModelServer>(this.cartDataServer);
 
-  constructor(private productService: ProductsService, private httpClient: HttpClient, private router: Router) {
-    this.cartTotal$.next(this.cartDataServer.total);
-    this.cartDataObs$.next(this.cartDataServer);
+  constructor(
+    private productService: ProductsService,
+    private httpClient: HttpClient,
+    private router: Router,
+    private cookieService: CookieService
+  ) {
+    if (cookieService.check('cart')) {
+      this.info = JSON.parse(this.cookieService.get('cart'));
+      this.cartTotal$.next(this.cartDataServer.total);
+      this.cartDataObs$.next(this.cartDataServer);
+    }
 
-    let info: CartModelPublic = JSON.parse(localStorage.getItem('cart'));
-
-    if (info !== null && info !== undefined && info.prodData[0].incart !== 0) {
-      // assign the value to our data variable which corresponds to the LocalStorage data format
-      this.cartDataClient = info;
+    if (this.info !== null && this.info !== undefined && this.info.prodData[0].incart !== 0) {
+      // assign the value to our data variable which corresponds to the this.cookieService data format
+      this.cartDataClient = this.info;
       // Loop through each entry and put it in the cartDataServer object
       this.cartDataClient.prodData.forEach((p) => {
         this.productService.getCurrentData(p.id).subscribe((actualProdInfo: Products) => {
@@ -48,7 +56,7 @@ export class CartService {
             this.cartDataServer.data[0].product = actualProdInfo;
             this.CalculateTotal();
             this.cartDataClient.total = this.cartDataServer.total;
-            localStorage.setItem('cart', JSON.stringify(this.cartDataClient));
+            this.cookieService.set('cart', JSON.stringify(this.cartDataClient));
           } else {
             this.cartDataServer.data.push({
               numInCart: p.incart,
@@ -56,9 +64,9 @@ export class CartService {
             });
             this.CalculateTotal();
             this.cartDataClient.total = this.cartDataServer.total;
-            localStorage.setItem('cart', JSON.stringify(this.cartDataClient));
+            this.cookieService.set('cart', JSON.stringify(this.cartDataClient));
           }
-          this.cartDataObs$.next({ ...this.cartDataServer });
+          this.cartDataObs$.next(this.cartDataServer);
         });
       });
     }
@@ -84,8 +92,8 @@ export class CartService {
         this.cartDataClient.prodData[0].incart = this.cartDataServer.data[0].numInCart;
         this.cartDataClient.prodData[0].id = prod['product'].id;
         this.cartDataClient.total = this.cartDataServer.total;
-        localStorage.setItem('cart', JSON.stringify(this.cartDataClient));
-        this.cartDataObs$.next({ ...this.cartDataServer });
+        this.cookieService.set('cart', JSON.stringify(this.cartDataClient));
+        this.cartDataObs$.next(this.cartDataServer);
         // this.toast.success(`${prod.name} added to the cart.`, "Product Added", {
         //   timeOut: 1500,
         //   progressBar: true,
@@ -139,8 +147,8 @@ export class CartService {
         }
         this.CalculateTotal();
         this.cartDataClient.total = this.cartDataServer.total;
-        localStorage.setItem('cart', JSON.stringify(this.cartDataClient));
-        this.cartDataObs$.next({ ...this.cartDataServer });
+        this.cookieService.set('cart', JSON.stringify(this.cartDataClient));
+        this.cartDataObs$.next(this.cartDataServer);
       } // END of ELSE
     });
   }
@@ -153,8 +161,8 @@ export class CartService {
       this.cartDataClient.prodData[index].incart = data.numInCart;
       this.CalculateTotal();
       this.cartDataClient.total = this.cartDataServer.total;
-      this.cartDataObs$.next({ ...this.cartDataServer });
-      localStorage.setItem('cart', JSON.stringify(this.cartDataClient));
+      this.cartDataObs$.next(this.cartDataServer);
+      this.cookieService.set('cart', JSON.stringify(this.cartDataClient));
     } else {
       // @ts-ignore
       data.numInCart--;
@@ -162,14 +170,14 @@ export class CartService {
       // @ts-ignore
       if (data.numInCart < 1) {
         this.DeleteProductFromCart(index);
-        this.cartDataObs$.next({ ...this.cartDataServer });
+        this.cartDataObs$.next(this.cartDataServer);
       } else {
         // @ts-ignore
-        this.cartDataObs$.next({ ...this.cartDataServer });
+        this.cartDataObs$.next(this.cartDataServer);
         this.cartDataClient.prodData[index].incart = data.numInCart;
         this.CalculateTotal();
         this.cartDataClient.total = this.cartDataServer.total;
-        localStorage.setItem('cart', JSON.stringify(this.cartDataClient));
+        this.cookieService.set('cart', JSON.stringify(this.cartDataClient));
       }
     }
   }
@@ -186,9 +194,9 @@ export class CartService {
 
       if (this.cartDataClient.total === 0) {
         this.cartDataClient = { prodData: [{ incart: 0, id: 0 }], total: 0 };
-        localStorage.setItem('cart', JSON.stringify(this.cartDataClient));
+        this.cookieService.set('cart', JSON.stringify(this.cartDataClient));
       } else {
-        localStorage.setItem('cart', JSON.stringify(this.cartDataClient));
+        this.cookieService.set('cart', JSON.stringify(this.cartDataClient));
       }
 
       if (this.cartDataServer.total === 0) {
@@ -201,9 +209,9 @@ export class CartService {
           ],
           total: 0,
         };
-        this.cartDataObs$.next({ ...this.cartDataServer });
+        this.cartDataObs$.next(this.cartDataServer);
       } else {
-        this.cartDataObs$.next({ ...this.cartDataServer });
+        this.cartDataObs$.next(this.cartDataServer);
       }
     }
     // If the user doesn't want to delete the product, hits the CANCEL button
@@ -235,6 +243,6 @@ export class CartService {
       ],
       total: 0,
     };
-    this.cartDataObs$.next({ ...this.cartDataServer });
+    this.cartDataObs$.next(this.cartDataServer);
   }
 }

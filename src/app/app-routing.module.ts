@@ -13,6 +13,7 @@ import { UpdateProductComponent } from './pages/products/update-product/update-p
 import { ProductsComponent } from './pages/products/products.component';
 import { CreateStoresComponent } from './pages/stores/create-stores/create-stores.component';
 import { AuthGuard } from './guards/auth.guard';
+import { CartComponent } from './components/cart/cart.component';
 
 const routes: Routes = [
   {
@@ -28,6 +29,7 @@ const routes: Routes = [
     component: UpdateProfileComponent,
   },
   { path: 'products', component: ProductsComponent },
+  { path: 'cart', component: CartComponent },
   { path: 'addproduct', component: CreateProductComponent, canActivate: [AuthGuard] },
   { path: 'update-product/:id', component: UpdateProductComponent, canActivate: [AuthGuard] },
   { path: 'list-store', component: StoresComponent },
