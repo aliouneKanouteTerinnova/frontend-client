@@ -39,8 +39,12 @@ export class ProductsService {
   //   const baseUrl = `${environment.baseUrl}updateproduct/${product.id}`;
   //   return this.httpClient.put<Products>(baseUrl, product, httpOptions);
   // }
-  updateProduct(id: number, data: any) {
-    return this.httpClient.put<any>(`${environment.baseUrl}products/${id}`, data);
+  updateProduct(id: number, data: any, token: string) {
+    token = 'token ' + token;
+    return this.httpClient.put<any>(`${environment.baseUrl}products/${id}`, data, {
+      headers: new HttpHeaders().set('Authorization', token),
+      observe: 'response',
+    });
   }
 
   getCurrentData(id: any) {

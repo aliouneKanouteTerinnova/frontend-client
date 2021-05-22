@@ -1,0 +1,38 @@
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <form [formGroup]="createCategoriesForm" (ngSubmit)="onSubmit()">
+        <div class="row">
+          <div class="form-group col-6">
+            <label for="name">Name</label>
+            <input type="text" class="form-control" formControlName="name" />
+          </div>
+        </div>
+
+        <div class="row">
+          <!-- <div class="form-group col-6">
+            <label for="slug">Slug</label>
+            <input type="text" class="form-control" formControlName="slug" />
+          </div> -->
+
+          <div class="form-group col-6">
+            <label for="description">Description</label>
+            <input type="text" class="form-control" formControlName="description" />
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="form-check mt-4 ml-3">
+            <input type="checkbox" class="form-check-input" formControlName="is_active" />
+            <!-- (change)="checkCheckBoxvalue($event)"
+              #ch
+              (click)="checkCheckBoxvalue(ch)" -->
+            <label for="active" class="form-check-label">Is active</label>
+          </div>
+        </div>
+
+        <button mat-raised-button color="accent" class="btn-block">Create</button>
+      </form>
+    </div>
+  </div>
+</div>

@@ -39,6 +39,13 @@
           <div *ngIf="f.store_adress.errors.required" class="text-danger">donnees invalid !</div>
         </div> -->
       </div>
+      <div class="form-check mt-4 ml-3">
+        <input type="checkbox" class="form-check-input" formControlName="is_active" />
+        <!-- (change)="checkCheckBoxvalue($event)"
+          #ch
+          (click)="checkCheckBoxvalue(ch)" -->
+        <label for="active" class="form-check-label">Is active</label>
+      </div>
     </div>
   </div>
   <button [disabled]="editStore.invalid" class="btn btn-primary btn-block mt-5">Save</button>
