@@ -9,6 +9,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatInputModule } from '@angular/material/input';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatCarouselModule } from '@ngmodule/material-carousel';
 
 @NgModule({
   declarations: [],
@@ -23,6 +24,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     MatTabsModule,
     MatInputModule,
     MatCheckboxModule,
+    MatCarouselModule,
     FormsModule,
     ReactiveFormsModule,
   ],
