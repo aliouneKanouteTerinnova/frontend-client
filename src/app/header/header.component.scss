@@ -1,6 +1,6 @@
 header {
   position: relative;
-  margin-top: -170px;
+  margin-top: -230px;
   z-index: 0;
   .carousel-item {
     img {
@@ -33,5 +33,21 @@ header {
         text-decoration: none;
       }
     }
+  }
+}
+.next-icon,
+.prev-icon {
+  background-color: #ffffff8a;
+  padding: 1rem 1.2rem;
+  border-radius: 50%;
+}
+
+@media screen and (max-width: 768px) {
+  header {
+    margin-top: -255px;
+  }
+  img {
+    background-size: cover;
+    height: 50vh !important;
   }
 }
