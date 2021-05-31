@@ -41,6 +41,7 @@ import { CreateCategoriesComponent } from './pages/categories/create-categories/
 import { HeaderComponent } from './components/header/header.component';
 import { HomeComponent } from './pages/home/home.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { MenuComponent } from './components/shared/menu/menu.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -59,6 +60,7 @@ import { FooterComponent } from './components/footer/footer.component';
     HeaderComponent,
     HomeComponent,
     FooterComponent,
+    MenuComponent,
   ],
 
   // @NgModule({
