@@ -46,10 +46,15 @@
   font-size: 0.7rem;
   color: #29235c;
 }
-
 :host ::ng-deep .mat-tab-list .mat-tab-labels .mat-tab-label-active {
   color: #ffff;
   background-color: #f39200;
+  border: 1px solid black;
+}
+
+:host ::ng-deep .mat-tab-list {
+  color: #ffff;
+  background-color: #161007;
   border: 1px solid black;
 }
 

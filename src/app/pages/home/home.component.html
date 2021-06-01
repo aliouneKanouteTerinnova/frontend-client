@@ -1,0 +1,120 @@
+<div class="scrollBar">
+  <div>
+    <button mat-raised-button color="primary" class="categoryScroll"><span>CATEGORY V</span></button>
+  </div>
+  <div class="_2KdhY">
+    <div class="_2B5SH _1nF12 _3S3n_">
+      <div class="_1Fn_q _2e6WW" *ngIf="left">
+        <button type="button" title="scroll" class="_1Abnl _3d86A hvMNc _1mizB" (click)="handleLeftClick()">
+          <svg width="24" height="24" class="_1A-eG" version="1.1" viewBox="0 0 32 32" aria-hidden="false">
+            <path d="M20.6667 24.6666l-2 2L8 16 18.6667 5.3333l2 2L12 16l8.6667 8.6666z"></path>
+          </svg>
+        </button>
+      </div>
+      <div class="_1czme _2e6WW" *ngIf="right">
+        <button type="button" title="scroll" class="_1Abnl _3d86A y6Io2 _2wD_J" (click)="handleRightClick()">
+          <svg width="150" height="150" class="_1A-eG" version="1.1" viewBox="0 0 32 32" aria-hidden="false">
+            <path d="M11.3333 7.3333l2-2L24 16 13.3333 26.6666l-2-2L20 16l-8.6667-8.6667z"></path>
+          </svg>
+        </button>
+      </div>
+
+      <div class="_1RBDA">
+        <div></div>
+        <div class="_2QwuK">
+          <div class="_22XDl">
+            <div class="mkUrf" *ngFor="let country of countries">
+              <div class="uCURQ _3CVLp">
+                <a title="More building images" class="zVhYF xLon9 _1CBrG _1ByhS" href="/s/photos/building">{{
+                  country
+                }}</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="main">
+  <div class="product" *ngFor="let product of products">
+    <img src="{{ product.src }}" alt="" />
+    <div class="overview1">
+      <!-- <h3>overview:</h3> -->
+      <div class="product-icon">
+        <div class="icon-element">
+          <img class="icon" src="./../../assets/img/icons/panier.svg" alt="user_icon" /><span>aimer</span>
+        </div>
+        <div class="icon-element">
+          <img class="icon" src="./../../assets/img/icons/panier.svg" alt="user_icon" /><span>ajouter</span>
+        </div>
+      </div>
+      <span class="price">{{ product.price }}</span>
+    </div>
+    <div class="product-info">
+      <h3>{{ product.name }}</h3>
+      <span class="rating"></span>
+    </div>
+  </div>
+</div>
+<div class="subtitle"><h3>MEILLEURES VENTES</h3></div>
+<div class="main">
+  <div class="product" *ngFor="let product of bestSelling">
+    <img src="{{ product.src }}" alt="" />
+    <div class="overview1">
+      <!-- <h3>overview:</h3> -->
+      <div class="product-icon">
+        <div class="icon-element">
+          <img class="icon" src="./../../assets/img/icons/panier.svg" alt="user_icon" /><span>aimer</span>
+        </div>
+        <div class="icon-element">
+          <img class="icon" src="./../../assets/img/icons/panier.svg" alt="user_icon" /><span>ajouter</span>
+        </div>
+      </div>
+      <span class="price">{{ product.price }}</span>
+    </div>
+    <div class="product-info">
+      <h3>{{ product.name }}</h3>
+      <span class="rating"></span>
+    </div>
+  </div>
+</div>
+<div class="advertise">
+  <div class="title">
+    <h3>
+      Lorem ips <br />
+      dolor sit amet
+    </h3>
+    <h6>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore<br />
+      magna aliqua. Ut enim ad minim veniam, quis nostrud
+    </h6>
+    <button mat-button class="advertiseBtn"><span>EN SAVOIR PLUS ></span></button>
+  </div>
+  <div class="imgEl">
+    <img src="./../../assets/img/clothes.png" alt="advertise" />
+  </div>
+</div>
+<div class="subtitle"><h3>LES BONNES AFFAIRES</h3></div>
+<div class="main">
+  <div class="product" *ngFor="let product of goodStuff">
+    <img src="{{ product.src }}" alt="" />
+    <div class="overview1">
+      <!-- <h3>overview:</h3> -->
+      <div class="product-icon">
+        <div class="icon-element">
+          <img class="icon" src="./../../assets/img/icons/panier.svg" alt="user_icon" /><span>aimer</span>
+        </div>
+        <div class="icon-element">
+          <img class="icon" src="./../../assets/img/icons/panier.svg" alt="user_icon" /><span>ajouter</span>
+        </div>
+      </div>
+      <span class="price">{{ product.price }}</span>
+    </div>
+    <div class="product-info">
+      <h3>{{ product.name }}</h3>
+      <span class="rating"></span>
+    </div>
+  </div>
+</div>

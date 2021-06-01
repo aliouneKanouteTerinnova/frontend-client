@@ -1,4 +1,4 @@
-FROM node:latest as build
+FROM node:10.13.0-alpine as build
 
 WORKDIR /usr/local/app
 
@@ -17,4 +17,4 @@ COPY .htpasswd /etc/apache2/
 
 COPY nginx.conf /etc/nginx/nginx.conf 
 
-EXPOSE 80
+# EXPOSE 80
