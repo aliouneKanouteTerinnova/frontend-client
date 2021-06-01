@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Category } from 'src/app/models/category/category';
+import { AuthenticationsService } from 'src/app/services/authentications.service';
 import { CategoriesService } from 'src/app/services/categories/categories.service';
 
 @Component({
@@ -9,10 +10,12 @@ import { CategoriesService } from 'src/app/services/categories/categories.servic
 })
 export class CategoriesComponent implements OnInit {
   categories: Category;
+  currentUser: any;
 
-  constructor(private categoryService: CategoriesService) {}
+  constructor(private categoryService: CategoriesService, private authService: AuthenticationsService) {}
 
   ngOnInit(): void {
+    this.currentUser = this.authService.currentUserValue;
     this.getCategory();
   }
 

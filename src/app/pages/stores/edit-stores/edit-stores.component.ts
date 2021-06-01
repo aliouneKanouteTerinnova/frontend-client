@@ -17,6 +17,7 @@ export class EditStoresComponent implements OnInit {
     // created_at: new FormControl(''),
     // created_by: new FormControl(''),
     store_address: new FormControl(''),
+    is_active: new FormControl(''),
   });
 
   currentUser: any;
@@ -37,11 +38,12 @@ export class EditStoresComponent implements OnInit {
     //   store_address: ['', Validators.required],
     // });
     this.storesService.getCurrentData(this.router.snapshot.params.id).subscribe((res) => {
-      console.log(res);
-      // this.editStore.patchValue({
-      //   name: user.user.username,
-      //   store_address: user.user.email,
-      // });
+      console.log(res.store[0].id);
+      this.editStore.patchValue({
+        name: res.store[0].name,
+        store_address: res.store[0].store_address,
+        is_active: res.store[0].is_active,
+      });
     });
   }
 
@@ -53,8 +55,17 @@ export class EditStoresComponent implements OnInit {
     data.store_address = this.editStore.get('store_address').value;
 
     console.log(data);
+    this.storesService.getCurrentData(this.router.snapshot.params.id).subscribe((response) => {
+      console.log(response);
+    });
 
-    this.storesService.upDateStores(this.router.snapshot.params.id, data, this.currentUser.user.token).subscribe(
+    const store = {
+      id: this.router.snapshot.params.id,
+      name: this.editStore.get('name').value,
+      is_active: this.editStore.get('is_active').value,
+    };
+
+    this.storesService.upDateStores(this.router.snapshot.params.id, store, this.currentUser.user.token).subscribe(
       (res) => {
         console.log(res);
         Swal.fire({

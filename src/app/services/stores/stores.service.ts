@@ -23,9 +23,9 @@ export class StoresService {
     });
   }
 
-  upDateStores(id: number, store: Store, token: string) {
+  upDateStores(id: number, store: any, token: string) {
     token = 'token ' + token;
-    return this.http.put<any>(`${environment.baseUrl}updatestore/${id}`, store, {
+    return this.http.put<any>(`${environment.baseUrl}stores/${id}`, store, {
       headers: new HttpHeaders().set('Authorization', token),
       observe: 'response',
     });
