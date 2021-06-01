@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css'],
+  styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
   products = [
@@ -187,8 +187,51 @@ export class HomeComponent implements OnInit {
       price: '20 000 FCFA',
     },
   ];
+  allCountries = ['EUROPE', 'AFRIQUE', 'ASIE', 'AMERIQUE', 'OCEANIE', 'OTHERS'];
+  countries = [];
+  left = false;
+  right = true;
+  firstIndex = 0;
 
   constructor() {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.countries = this.allCountries.slice(this.firstIndex, this.firstIndex + 3);
+    this.firstIndex = this.firstIndex + 1;
+    console.log(this.allCountries, this.countries, this.firstIndex);
+  }
+  handleLeftClick() {
+    if (this.firstIndex > 0) {
+      this.left = true;
+      this.right = true;
+      this.firstIndex = this.firstIndex - 1;
+      this.countries = this.allCountries.slice(this.firstIndex, this.firstIndex + 3);
+    }
+    if (this.firstIndex <= 0) {
+      this.firstIndex = 1;
+      this.left = false;
+      this.right = true;
+    }
+    console.log(this.allCountries, this.countries, this.firstIndex);
+  }
+  handleRightClick() {
+    if (this.allCountries.length - this.firstIndex >= 3) {
+      if (this.left && this.right) {
+        this.firstIndex = this.firstIndex + 1;
+        this.countries = this.allCountries.slice(this.firstIndex, this.firstIndex + 3);
+      } else {
+        this.countries = this.allCountries.slice(this.firstIndex, this.firstIndex + 3);
+        this.firstIndex = this.firstIndex + 1;
+      }
+      this.left = true;
+      this.right = true;
+
+      if (this.allCountries.length - this.firstIndex <= 3) {
+        this.firstIndex = this.allCountries.length - 3;
+        this.left = true;
+        this.right = false;
+      }
+    }
+    console.log(this.allCountries, this.countries, this.firstIndex);
+  }
 }

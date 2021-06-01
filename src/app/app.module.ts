@@ -38,9 +38,7 @@ import { CreateStoresComponent } from './pages/stores/create-stores/create-store
 import { CreateProductComponent } from './pages/products/create-product/create-product.component';
 import { CategoriesComponent } from './pages/categories/categories.component';
 import { CreateCategoriesComponent } from './pages/categories/create-categories/create-categories.component';
-import { HeaderComponent } from './components/header/header.component';
 import { HomeComponent } from './pages/home/home.component';
-import { FooterComponent } from './components/footer/footer.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -56,9 +54,7 @@ import { FooterComponent } from './components/footer/footer.component';
     CreateProductComponent,
     CategoriesComponent,
     CreateCategoriesComponent,
-    HeaderComponent,
     HomeComponent,
-    FooterComponent,
   ],
 
   // @NgModule({
