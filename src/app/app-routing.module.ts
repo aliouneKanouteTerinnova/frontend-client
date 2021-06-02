@@ -13,13 +13,12 @@ import { UpdateProductComponent } from './pages/products/update-product/update-p
 import { ProductsComponent } from './pages/products/products.component';
 import { CreateStoresComponent } from './pages/stores/create-stores/create-stores.component';
 import { AuthGuard } from './guards/auth.guard';
-import { CartComponent } from './components/cart/cart.component';
-import { UpdateCategoriesComponent } from './pages/categories/update-categories/update-categories.component';
+import { HomeComponent } from './pages/home/home.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: ProductsComponent,
+    component: HomeComponent,
   },
   {
     path: 'register',
@@ -30,7 +29,6 @@ const routes: Routes = [
     component: UpdateProfileComponent,
   },
   { path: 'products', component: ProductsComponent },
-  { path: 'cart', component: CartComponent },
   { path: 'addproduct', component: CreateProductComponent, canActivate: [AuthGuard] },
   { path: 'update-product/:id', component: UpdateProductComponent, canActivate: [AuthGuard] },
   { path: 'list-store', component: StoresComponent },
@@ -38,7 +36,6 @@ const routes: Routes = [
   { path: 'create-store', component: CreateStoresComponent, canActivate: [AuthGuard] },
   { path: 'categories', component: CategoriesComponent },
   { path: 'create-categories', component: CreateCategoriesComponent, canActivate: [AuthGuard] },
-  { path: 'update-categories/:id', component: UpdateCategoriesComponent, canActivate: [AuthGuard] },
 ];
 @NgModule({
   declarations: [],
