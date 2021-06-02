@@ -9,9 +9,14 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { NavbarComponent } from './navbar/navbar.component';
+import { HeaderComponent } from './header/header.component';
+
 import { RegistrationComponent } from './pages/registration/registration.component';
 import { CookieService } from 'ngx-cookie-service';
 import { UpdateProfileComponent } from './pages/update-profile/update-profile.component';
+// @NgModule({
+//   declarations: [AppComponent, ],
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -41,12 +46,15 @@ import { CreateCategoriesComponent } from './pages/categories/create-categories/
 import { HomeComponent } from './pages/home/home.component';
 
 @NgModule({
+//   declarations: [AppComponent, RegistrationComponent, UpdateProfileComponent, NavbarComponent, HeaderComponent],
+
   declarations: [
     AppComponent,
     RegistrationComponent,
     UpdateProfileComponent,
     AppComponent,
     NavbarComponent,
+    HeaderComponent
     ProductsComponent,
     UpdateProductComponent,
     StoresComponent,
@@ -58,18 +66,7 @@ import { HomeComponent } from './pages/home/home.component';
     HomeComponent,
 
   ],
-
-  // @NgModule({
-  // declarations: [
-  //   AppComponent,
-  //   NavbarComponent,
-  //   ProductsComponent,
-  //   UpdateProductComponent,
-  //   StoresComponent,
-  //   EditStoresComponent,
-  //   CreateStoresComponent,
-  //   CreateProductComponent,
-  // ],
+  
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
