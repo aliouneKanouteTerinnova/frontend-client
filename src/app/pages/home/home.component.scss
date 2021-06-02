@@ -23,7 +23,7 @@
   overflow: hidden;
   position: relative;
   margin: 1rem;
-  width: 200px;
+  width: 215px;
 }
 
 .product img {
@@ -96,9 +96,10 @@
 }
 
 .title h3 {
-  font-size: 1.5rem;
+  font-size: 2.5rem;
   color: white;
-  font-weight: bolder;
+  font-weight: bold;
+  letter-spacing: 2.5px;
 }
 .advertiseBtn {
   color: black;
@@ -274,6 +275,8 @@
   color: #29235c;
   transition: border-color 0.1s ease-in-out;
   width: 145px;
+  margin-top: 25px;
+  margin-left: 25px;
 }
 .uCURQ {
   overflow: hidden;
@@ -302,7 +305,7 @@
 
 ._2KdhY {
   margin-top: 24px;
-  margin-right: 34px;
+  margin-right: 80px;
 }
 ._1nF12:before {
   left: 0;

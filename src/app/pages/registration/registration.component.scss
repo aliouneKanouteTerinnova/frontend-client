@@ -1,25 +1,36 @@
 .example-card {
-  max-width: 400px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin-right: 25px;
+  margin-top: 5px;
+  flex-wrap: nowrap;
 }
 
-.example-header-image {
-  background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+.globe-image {
+  margin-right: 0%;
+  padding: 20px;
+  margin-top: 0%;
   background-size: cover;
 }
-.center-content {
-  margin-top: 100px;
-  text-align: -webkit-center;
+
+.globe {
+  height: 500px;
+  width: 500px;
+  border-bottom-left-radius: 75px;
+  border-top-left-radius: 75px;
 }
-.example-form {
-  min-width: 150px;
-  max-width: 500px;
-  width: 100%;
+
+.center-content {
+  width: 300px;
 }
 
 .example-full-width {
   margin-top: 10px;
   width: 100%;
 }
+
 .mat-raised-button {
   margin-top: 10px;
   width: 100%;
@@ -27,35 +38,65 @@
   height: 40px;
   border-radius: 10px;
 }
+
 .example-h2 {
   margin: 10px;
-}
-
-.example-section {
-  display: flex;
-  align-content: center;
-  align-items: center;
-  height: 60px;
 }
 
 .example-margin {
   margin: 0 10px;
 }
+
 .conditions {
   margin-left: 0px;
   font-size: 0.7rem;
   color: #29235c;
 }
-:host ::ng-deep .mat-tab-list .mat-tab-labels .mat-tab-label-active {
-  color: #ffff;
-  background-color: #f39200;
-  border: 1px solid black;
+
+.button {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  margin-right: 0px;
 }
 
-:host ::ng-deep .mat-tab-list {
-  color: #ffff;
-  background-color: #161007;
-  border: 1px solid black;
+.button button {
+  width: 50%;
+  border: none;
+  height: 40px;
+  border: 0.5px solid rgb(117, 117, 117);
+}
+
+.inscriptionBtn {
+  color: #f39200;
+}
+
+.title {
+  display: flex;
+  margin: auto;
+  align-items: center;
+  justify-content: center;
+  margin-top: 30px;
+  margin-bottom: 2px;
+}
+.title h3 {
+  font-size: 1.8rem;
+  font-weight: bolder;
+  color: #29235c;
+}
+
+.forgotPw {
+  font-size: 0.8rem;
+  display: flex;
+  text-decoration: none;
+  align-items: center;
+  justify-content: center;
+  color: #29235c;
+  margin-top: 2px;
+}
+.forgotPw a {
+  color: #29235c;
+  font-weight: bold;
 }
 
 #example-checkbox {
@@ -74,9 +115,36 @@ a {
   font-size: 0.7rem;
 }
 .social-network {
-  padding: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #29235c;
+  margin-top: 2px;
+}
+
+.social-network ul {
+  display: flex;
+  flex-direction: row;
+  list-style-type: none;
+}
+
+.social-network img {
+  width: 30px;
+  height: 30px;
+  margin-right: 1rem;
+}
+.social-title {
+  font-size: 1rem;
+  font-weight: bolder;
+  display: flex;
+  text-decoration: none;
+  align-items: center;
+  justify-content: center;
   margin-top: 15px;
 }
-.social-network h4 {
-  font-weight: bold;
+
+@media only screen and (max-width: 900px) {
+  .globe-image {
+    display: none;
+  }
 }

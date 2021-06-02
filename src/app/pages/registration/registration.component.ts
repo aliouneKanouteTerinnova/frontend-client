@@ -36,6 +36,8 @@ export class RegistrationComponent implements OnInit {
   registerForm: FormGroup;
   emailRegex = /^(([^<>+()\[\]\\.,;:\s@"-#$%&=]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,3}))$/;
   userResponded: AuthResponded;
+  isConnection = true;
+  isInscription = false;
 
   constructor(
     private snackBar: MatSnackBar,
@@ -68,6 +70,17 @@ export class RegistrationComponent implements OnInit {
       password: [null, Validators.required],
     });
   }
+
+  connexion() {
+    this.isConnection = true;
+    this.isInscription = false;
+  }
+
+  inscription() {
+    this.isConnection = false;
+    this.isInscription = true;
+  }
+
   register() {
     const username = this.registerForm.get('username').value;
     const email = this.registerForm.get('email').value;
