@@ -9,7 +9,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { NavbarComponent } from './navbar/navbar.component';
+// import { NavbarComponent } from './navbar/navbar.component';
 import { HeaderComponent } from './header/header.component';
 
 import { RegistrationComponent } from './pages/registration/registration.component';
@@ -46,7 +46,7 @@ import { CreateCategoriesComponent } from './pages/categories/create-categories/
 import { HomeComponent } from './pages/home/home.component';
 
 @NgModule({
-//   declarations: [AppComponent, RegistrationComponent, UpdateProfileComponent, NavbarComponent, HeaderComponent],
+  //   declarations: [AppComponent, RegistrationComponent, UpdateProfileComponent, NavbarComponent, HeaderComponent],
 
   declarations: [
     AppComponent,
@@ -54,7 +54,7 @@ import { HomeComponent } from './pages/home/home.component';
     UpdateProfileComponent,
     AppComponent,
     NavbarComponent,
-    HeaderComponent
+    HeaderComponent,
     ProductsComponent,
     UpdateProductComponent,
     StoresComponent,
@@ -64,9 +64,8 @@ import { HomeComponent } from './pages/home/home.component';
     CategoriesComponent,
     CreateCategoriesComponent,
     HomeComponent,
-
   ],
-  
+
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
