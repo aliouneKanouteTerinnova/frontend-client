@@ -198,7 +198,6 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     this.countries = this.allCountries.slice(this.firstIndex, this.firstIndex + 3);
     this.firstIndex = this.firstIndex + 1;
-    console.log(this.allCountries, this.countries, this.firstIndex);
   }
   handleLeftClick() {
     if (this.firstIndex > 0) {
@@ -212,7 +211,6 @@ export class HomeComponent implements OnInit {
       this.left = false;
       this.right = true;
     }
-    console.log(this.allCountries, this.countries, this.firstIndex);
   }
   handleRightClick() {
     if (this.allCountries.length - this.firstIndex >= 3) {
@@ -232,6 +230,5 @@ export class HomeComponent implements OnInit {
         this.right = false;
       }
     }
-    console.log(this.allCountries, this.countries, this.firstIndex);
   }
 }

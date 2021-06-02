@@ -15,7 +15,6 @@ import { CreateStoresComponent } from './pages/stores/create-stores/create-store
 import { AuthGuard } from './guards/auth.guard';
 import { HomeComponent } from './pages/home/home.component';
 
-
 const routes: Routes = [
   {
     path: '',
@@ -30,7 +29,6 @@ const routes: Routes = [
     component: UpdateProfileComponent,
   },
   { path: 'products', component: ProductsComponent },
-  { path: 'cart', component: CartComponent },
   { path: 'addproduct', component: CreateProductComponent, canActivate: [AuthGuard] },
   { path: 'update-product/:id', component: UpdateProductComponent, canActivate: [AuthGuard] },
   { path: 'list-store', component: StoresComponent },
@@ -38,7 +36,6 @@ const routes: Routes = [
   { path: 'create-store', component: CreateStoresComponent, canActivate: [AuthGuard] },
   { path: 'categories', component: CategoriesComponent },
   { path: 'create-categories', component: CreateCategoriesComponent, canActivate: [AuthGuard] },
-  { path: 'update-categories/:id', component: UpdateCategoriesComponent, canActivate: [AuthGuard] },
 ];
 @NgModule({
   declarations: [],
