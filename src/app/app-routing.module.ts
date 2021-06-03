@@ -21,7 +21,15 @@ const routes: Routes = [
     component: HomeComponent,
   },
   {
+    path: 'home',
+    component: HomeComponent,
+  },
+  {
     path: 'register',
+    component: RegistrationComponent,
+  },
+  {
+    path: 'email/verify',
     component: RegistrationComponent,
   },
   {

@@ -16,8 +16,8 @@
 }
 
 .globe {
-  height: 500px;
-  width: 500px;
+  height: 800px;
+  width: 600px;
   border-bottom-left-radius: 75px;
   border-top-left-radius: 75px;
 }
@@ -104,9 +104,6 @@
   margin-left: 0px;
 }
 
-.errorMessage {
-  color: red;
-}
 .successMessage {
   color: green;
 }
@@ -141,6 +138,20 @@ a {
   align-items: center;
   justify-content: center;
   margin-top: 15px;
+}
+
+.errorMessage {
+  display: flex;
+  text-decoration: none;
+  align-items: center;
+  justify-content: center;
+  margin-top: 15px;
+  padding: 5px;
+}
+
+.errorMessage span {
+  color: rgb(165, 27, 27);
+  font-size: 1rem;
 }
 
 @media only screen and (max-width: 900px) {

@@ -1,8 +1,6 @@
 /* eslint-disable @typescript-eslint/no-floating-promises */
 
 import { Router } from '@angular/router';
-import { User } from './models/user';
-import { Auth, AuthResponded } from './models/auth';
 import { AuthenticationsService } from './services/authentications.service';
 /* eslint-disable @typescript-eslint/quotes */
 /* eslint-disable @typescript-eslint/semi */

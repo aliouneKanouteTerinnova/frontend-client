@@ -74,6 +74,38 @@
       </mat-form-field>
 
       <mat-form-field class="example-full-width" appearance="outline">
+        <mat-label>Address</mat-label>
+        <input type="email" matInput placeholder="Address" formControlName="address" required />
+        <mat-error *ngIf="registerForm.controls.address.touched && registerForm.controls.address.invalid">
+          <span *ngIf="registerForm.controls.address.errors.required">This field is mandatory.</span>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width" appearance="outline">
+        <mat-label>Type User</mat-label>
+        <select matNativeControl formControlName="typeUser" required>
+          <option *ngFor="let user of listType" [value]="user">
+            {{ user }}
+          </option>
+        </select>
+        <mat-error *ngIf="registerForm.controls.typeUser.touched && registerForm.controls.typeUser.invalid">
+          <span *ngIf="registerForm.controls.typeUser.errors.required">This field is mandatory.</span>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width" appearance="outline">
+        <mat-label>Sexe</mat-label>
+        <select matNativeControl formControlName="gender" required>
+          <option *ngFor="let gender of listGender" [value]="gender">
+            {{ gender }}
+          </option>
+        </select>
+        <mat-error *ngIf="registerForm.controls.gender.touched && registerForm.controls.gender.invalid">
+          <span *ngIf="registerForm.controls.gender.errors.required">This field is mandatory.</span>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width" appearance="outline">
         <mat-label>Password</mat-label>
         <input type="password" matInput placeholder="Password" formControlName="password" />
         <mat-error *ngIf="registerForm.controls.password.touched && registerForm.controls.password.invalid">
@@ -83,6 +115,7 @@
           </mat-error>
         </mat-error>
       </mat-form-field>
+
       <mat-form-field class="example-full-width" appearance="outline">
         <mat-label>Confirm Password</mat-label>
         <input type="password" matInput placeholder="Confirm your password" formControlName="password2" />
@@ -91,6 +124,7 @@
           <span *ngIf="registerForm.controls.password2.errors.mustMatch">Passwords must match</span>
         </mat-error>
       </mat-form-field>
+
       <mat-checkbox
         formControlName="checked"
         class="example-full-width"
@@ -105,6 +139,8 @@
       <button mat-raised-button color="primary">S'INSCRIRE</button>
     </form>
 
-    <span class="errorMessage" *ngIf="errorMessage">{{ errorMessage }}</span>
+    <div class="errorMessage">
+      <span class="errorMessage" *ngIf="errorMessage">{{ errorMessage }}</span>
+    </div>
   </div>
 </div>

@@ -1,10 +1,10 @@
+/* eslint-disable @typescript-eslint/naming-convention */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable max-len */
 /* eslint-disable @typescript-eslint/unbound-method */
 /* eslint-disable object-shorthand */
 import { Component, OnInit } from '@angular/core';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
 
@@ -13,8 +13,11 @@ import { AuthenticationsService } from 'src/app/services/authentications.service
 import { TranslateService } from '@ngx-translate/core';
 import { I18nServiceService } from 'src/app/services/i18n-service/i18n-service.service';
 import { MustMatch } from 'src/app/_helpers/must-match.validator';
-import { Auth, AuthResponded, AuthUser } from 'src/app/models/auth';
-import { Router } from '@angular/router';
+import { Auth, AuthResponded } from 'src/app/models/auth';
+import { Router, ActivatedRoute } from '@angular/router';
+import { AccountType } from 'src/app/enums/account-type.enum';
+import { Gender } from 'src/app/enums/gender.enum';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'app-registration',
@@ -38,25 +41,52 @@ export class RegistrationComponent implements OnInit {
   userResponded: AuthResponded;
   isConnection = true;
   isInscription = false;
+  listType = ['SELLER', 'CUSTOMER'];
+  listGender = ['M', 'F', 'OTHERS'];
+  token: any;
+  isActivated = false;
+  resendLink = false;
 
   constructor(
-    private snackBar: MatSnackBar,
     private authService: AuthenticationsService,
     private formBuilder: FormBuilder,
     private translate: TranslateService,
     private i18nService: I18nServiceService,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
   ) {
-    translate.setDefaultLang('de');
-    translate.use('de');
+    this.route.queryParams.subscribe((params) => {
+      if (params.token) {
+        this.token = params.token;
+      } else {
+        this.token = null;
+      }
+    });
+    // translate.setDefaultLang('de');
+    // translate.use('de');
   }
 
   ngOnInit(): void {
+    if (this.token !== null) {
+      this.authService.verifyToken(this.token).subscribe(
+        (data) => {
+          if (Number(data.code) === 200) {
+            this.isActivated = true;
+          }
+        },
+        (error) => {
+          this.resendLink = true;
+        }
+      );
+    }
     this.i18nService.localeEvent.subscribe((locale) => this.translate.use(locale));
     this.registerForm = this.formBuilder.group(
       {
         username: [null, Validators.required],
         email: [null, [Validators.required, Validators.pattern(this.emailRegex)]],
+        typeUser: [null, Validators.required],
+        gender: [null, Validators.required],
+        address: [null, Validators.required],
         password: [null, [Validators.required, Validators.minLength(8)]],
         password2: [null, Validators.required],
         checked: [false, Validators.required],
@@ -83,14 +113,18 @@ export class RegistrationComponent implements OnInit {
 
   register() {
     const username = this.registerForm.get('username').value;
+    const typeUser = this.registerForm.get('typeUser').value;
     const email = this.registerForm.get('email').value;
     const password = this.registerForm.get('password').value;
+    const address = this.registerForm.get('address').value;
+    const gender = this.registerForm.get('gender').value;
     const user: User = {
-      user: {
-        username: username,
-        email: email,
-        password: password,
-      },
+      email: email,
+      username: username,
+      account_type: typeUser,
+      gender: gender,
+      address: address,
+      password: password,
     };
     if (!this.registerForm.valid) {
       return;
@@ -99,9 +133,9 @@ export class RegistrationComponent implements OnInit {
       Swal.fire({
         position: 'top-end',
         icon: 'success',
-        title: 'Registred, you can log In now!',
+        title: 'Check your mail to activate your account!',
         showConfirmButton: false,
-        timer: 1500,
+        timer: 2000,
       });
       this.rpassword = '';
       this.rcpassword = '';
@@ -112,23 +146,19 @@ export class RegistrationComponent implements OnInit {
     const email = this.loginForm.get('email').value;
     const password = this.loginForm.get('password').value;
     const user: Auth = {
-      user: {
-        email: email,
-        password: password,
-      },
+      email: email,
+      password: password,
     };
     this.authService.login(user).subscribe(
       (data) => {
-        console.log(data);
         this.userResponded = data;
-        this.router.navigate(['products']);
+        this.router.navigate(['home']);
         this.successMessage = 'User authenticated ';
         this.errorMessage = '';
       },
       (error) => {
         this.errorMessage = 'Username/Password not correct';
         this.errorResponse = error;
-        console.log(error);
       }
     );
   }
