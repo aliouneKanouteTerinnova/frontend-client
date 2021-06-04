@@ -35,6 +35,8 @@ nav {
   top: -215px;
   border-radius: 50%;
   z-index: 1;
+  cursor: pointer;
+  border: 1px solid gray;
   img {
     // width: 187px;
     // height: 200px;
@@ -58,9 +60,10 @@ nav {
 
 @media screen and (max-width: 980px) {
   nav {
-    background-image: none;
+    background-image: none !important;
     background-color: transparent !important;
     height: 70px;
+    // box-shadow: 0 0 20px 5px rgba(0, 0, 0, 0.1);
   }
   .navbar-nav-block {
     li {

@@ -6,7 +6,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { BehaviorSubject, Observable } from 'rxjs';
 
 import { environment } from '../../environments/environment';
-import { Auth, AuthResponded, AuthUser } from '../models/auth';
+import { Auth, AuthResponded } from '../models/auth';
 import { User } from '../models/user';
 
 @Injectable({
@@ -32,7 +32,7 @@ export class AuthenticationsService {
 
   // Authentication
 
-  login(user: any) {
+  login(user: Auth) {
     return this.httpClient.post<AuthResponded>(`${environment.baseUrl}users/login/`, user).pipe(
       map((userResponded) => {
         // login successful if there's a jwt token in the response
@@ -70,6 +70,11 @@ export class AuthenticationsService {
 
   register(user: User) {
     return this.httpClient.post<any>(`${environment.baseUrl}users/register/`, user);
+  }
+
+  //Verify token
+  verifyToken(token: any) {
+    return this.httpClient.get<any>(`${environment.baseUrl}users/verify/?token=` + token);
   }
 
   // User Logout

@@ -1,5 +1,5 @@
 <div class="scrollBar">
-  <div>
+  <div class="buttonEl">
     <button mat-raised-button color="primary" class="categoryScroll"><span>CATEGORY V</span></button>
   </div>
   <div class="_2KdhY">
@@ -40,7 +40,7 @@
 <div class="main">
   <div class="product" *ngFor="let product of products">
     <img src="{{ product.src }}" alt="" />
-    <div class="overview1">
+    <div class="overview1" routerLink="/product-detail/{{ product.id }}">
       <!-- <h3>overview:</h3> -->
       <div class="product-icon">
         <div class="icon-element">
