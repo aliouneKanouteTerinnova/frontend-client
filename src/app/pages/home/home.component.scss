@@ -23,8 +23,10 @@
   overflow: hidden;
   position: relative;
   margin: 1rem;
+
   width: 200px;
   cursor: pointer;
+
 }
 
 .product img {
@@ -78,6 +80,7 @@
   background-color: #29235c;
   opacity: 0.5;
 }
+
 .product-icon {
   display: flex;
   flex-direction: row;
@@ -85,22 +88,27 @@
   align-items: center;
   margin: auto;
 }
+
 .advertise .title {
   margin-left: 200px;
 }
+
 .advertise .imgEl {
   margin-right: 120px;
 }
+
 .advertise .imgEl img {
   width: 300px;
   height: 300px;
 }
 
 .title h3 {
-  font-size: 1.5rem;
+  font-size: 2.5rem;
   color: white;
-  font-weight: bolder;
+  font-weight: bold;
+  letter-spacing: 2.5px;
 }
+
 .advertiseBtn {
   color: black;
   width: 20rem;
@@ -139,6 +147,7 @@
     padding: 1rem;
     background-color: #29235c;
     border-radius: 15px;
+
     &:before {
       color: white;
       width: 25rem;
@@ -147,6 +156,7 @@
       border-radius: 15px;
       content: 'REJOINDRE NOS VENDEURS!';
     }
+
     &:span {
       display: none;
     }
@@ -165,6 +175,7 @@
   align-items: center;
   margin: auto;
 }
+
 .advertise {
   display: flex;
   flex-direction: row;
@@ -188,6 +199,7 @@
   font-size: 1rem;
   margin: auto;
 }
+
 .icon-element {
   display: flex;
   flex-direction: column;
@@ -195,6 +207,7 @@
   align-items: center;
   margin: auto;
 }
+
 .icon-element span {
   color: white;
   font-size: 0.8rem;
@@ -207,6 +220,7 @@
   justify-content: center;
   align-items: center;
 }
+
 .subtitle h3 {
   font-size: 2rem;
   font-weight: bolder;
@@ -216,6 +230,7 @@
 ._1Fn_q {
   left: -46px;
 }
+
 ._2B5SH {
   position: relative;
   isolation: isolate;
@@ -224,6 +239,7 @@
 ._1czme {
   right: -46px;
 }
+
 ._2e6WW {
   position: absolute;
   z-index: 2;
@@ -231,9 +247,11 @@
   align-items: center;
   height: 100%;
 }
+
 .hvMNc ._1A-eG {
   margin-left: -6px;
 }
+
 ._1A-eG {
   fill: #767676;
   transition: fill 0.1s ease-in-out;
@@ -241,6 +259,7 @@
   height: 30px;
   font-weight: bolder;
 }
+
 ._1Abnl {
   height: 40px;
   display: flex;
@@ -254,6 +273,7 @@
   background-color: initial;
   text-align: inherit;
 }
+
 ._1mizB {
   padding-right: 8px;
 }
@@ -264,10 +284,12 @@
   display: flex;
   justify-content: space-between;
 }
+
 .mkUrf {
   padding-bottom: 0;
   padding-left: 8px;
 }
+
 .categoryScroll {
   overflow: hidden;
   text-align: center;
@@ -275,7 +297,10 @@
   color: #29235c;
   transition: border-color 0.1s ease-in-out;
   width: 145px;
+  margin-top: 25px;
+  margin-left: 25px;
 }
+
 .uCURQ {
   overflow: hidden;
   text-align: center;
@@ -286,9 +311,11 @@
   transition: border-color 0.1s ease-in-out;
   width: 145px;
 }
+
 .uCURQ:hover {
   border-color: #767676;
 }
+
 .zVhYF {
   padding: 13px;
   font-size: 14px;
@@ -297,18 +324,21 @@
   font-weight: bolder;
   color: #29235c;
 }
+
 ._3CVLp {
   text-transform: capitalize;
 }
 
 ._2KdhY {
   margin-top: 24px;
-  margin-right: 34px;
+  margin-right: 80px;
 }
+
 ._1nF12:before {
   left: 0;
   background: linear-gradient(270deg, hsla(0, 0%, 100%, 0) 0, #fff 90%, #fff);
 }
+
 ._2B5SH:after,
 ._2B5SH:before {
   transition: opacity 0.2s ease-in-out;
@@ -366,6 +396,7 @@
   bottom: 0;
   z-index: 1;
 }
+
 @media screen and (max-width: 768px) {
   .scrollBar {
     display: flex;
@@ -373,6 +404,7 @@
     align-items: center;
     justify-content: center;
   }
+
   .uCURQ {
     overflow: hidden;
     text-align: center;
@@ -383,6 +415,7 @@
     transition: border-color 0.1s ease-in-out;
     width: 90px;
   }
+
   .advertise {
     display: flex;
     flex-direction: column-reverse;
@@ -394,6 +427,7 @@
     height: 470px;
     background-color: #f39200;
   }
+
   .advertise .title {
     margin: auto;
     margin-bottom: 70px;
@@ -404,10 +438,12 @@
     margin: auto;
     margin-top: 75px;
   }
+
   .advertise .imgEl img {
     width: 250px;
     height: 250px;
   }
+
   .advertiseBtn {
     color: black;
     width: 10rem;
@@ -472,9 +508,11 @@
     margin: 1rem;
     width: 100px;
   }
+
   .product img {
     width: 100%;
   }
+
   .price {
     display: flex;
     align-items: center;
@@ -486,6 +524,7 @@
     font-size: 0.7rem;
     margin: auto;
   }
+
   .product-info {
     color: #eee;
     display: flex;
@@ -494,6 +533,7 @@
     padding: 0.25rem 0.5rem 0.5rem;
     letter-spacing: 0.25px;
   }
+
   .overview1 {
     padding: 2rem;
     position: absolute;
@@ -507,6 +547,7 @@
     transform: scale(0.1);
     transition: transform 330ms ease-in-out;
   }
+
   .product-icon {
     display: flex;
     flex-direction: column;
@@ -520,6 +561,7 @@
     font-size: 0.45rem;
     color: #29235c;
   }
+
   .icon {
     font-size: 0.5rem;
   }
@@ -531,12 +573,15 @@
     padding: 0.125rem 0.25rem;
     font-family: Helvetica Neue;
   }
+
   .advertise .imgEl {
     margin-top: 105px;
   }
+
   .advertise .title {
     margin-bottom: 100px;
   }
+
   .advertise {
     height: 550px;
   }
@@ -548,6 +593,7 @@
     align-items: center;
     justify-content: center;
   }
+
   .advertise .imgEl img {
     width: 240px;
     height: 240px;

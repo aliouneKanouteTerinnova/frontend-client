@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthResponded } from 'src/app/models/auth';
+import { AuthenticationsService } from 'src/app/services/authentications.service';
 
 @Component({
   selector: 'app-home',
@@ -193,10 +195,13 @@ export class HomeComponent implements OnInit {
   left = false;
   right = true;
   firstIndex = 0;
+  currentUser: AuthResponded;
 
-  constructor() {}
+  constructor(private authService: AuthenticationsService) {}
 
   ngOnInit(): void {
+    this.currentUser = this.authService.currentUserValue;
+    console.log(this.currentUser);
     this.countries = this.allCountries.slice(this.firstIndex, this.firstIndex + 3);
     this.firstIndex = this.firstIndex + 1;
   }

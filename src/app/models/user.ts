@@ -1,9 +1,12 @@
-type UserModel = {
-  username: string;
-  email: string;
-  password: string;
-};
+/* eslint-disable @typescript-eslint/naming-convention */
+import { AccountType } from '../enums/account-type.enum';
+import { Gender } from '../enums/gender.enum';
 
 export type User = {
-  user: UserModel;
+  email: string;
+  username: string;
+  account_type: AccountType;
+  gender: Gender;
+  address: string;
+  password: string;
 };
