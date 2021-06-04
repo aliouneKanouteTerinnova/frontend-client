@@ -1,3 +1,5 @@
+import { CheckoutComponent } from './pages/checkout/checkout.component';
+import { ProductDetailComponent } from './pages/products/product-detail/product-detail.component';
 import { CreateCategoriesComponent } from './pages/categories/create-categories/create-categories.component';
 import { CategoriesComponent } from './pages/categories/categories.component';
 import { CreateProductComponent } from './pages/products/create-product/create-product.component';
@@ -38,7 +40,9 @@ const routes: Routes = [
   },
   { path: 'products', component: ProductsComponent },
   { path: 'addproduct', component: CreateProductComponent, canActivate: [AuthGuard] },
+  { path: 'checkout', component: CheckoutComponent },
   { path: 'update-product/:id', component: UpdateProductComponent, canActivate: [AuthGuard] },
+  { path: 'product-detail/:id', component: ProductDetailComponent },
   { path: 'list-store', component: StoresComponent },
   { path: 'updatestore/:id', component: EditStoresComponent, canActivate: [AuthGuard] },
   { path: 'create-store', component: CreateStoresComponent, canActivate: [AuthGuard] },

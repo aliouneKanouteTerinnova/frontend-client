@@ -9,6 +9,7 @@ nav {
   }
 
   .navbar-brand {
+    cursor: pointer;
     img {
       width: 230px;
       height: 275px;
@@ -36,6 +37,7 @@ nav {
   position: relative;
   z-index: 1;
   top: -80px;
+  width: 50%;
 }
 .categoryBtn {
   padding: 0.5rem 1.7rem;
