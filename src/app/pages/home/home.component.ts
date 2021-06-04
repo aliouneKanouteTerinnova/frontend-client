@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthResponded } from 'src/app/models/auth';
 import { AuthenticationsService } from 'src/app/services/authentications.service';
 import { ProductsService } from 'src/app/services/products/products.service';
@@ -19,9 +20,14 @@ export class HomeComponent implements OnInit {
   firstIndex = 0;
   currentUser: AuthResponded;
 
-  constructor(private authService: AuthenticationsService, private productsService: ProductsService) {}
+  constructor(
+    private authService: AuthenticationsService,
+    private productsService: ProductsService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
+    console.log(this.router.url);
     this.currentUser = this.authService.currentUserValue;
     console.log(this.currentUser);
     this.countries = this.allCountries.slice(this.firstIndex, this.firstIndex + 3);
