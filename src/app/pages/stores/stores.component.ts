@@ -13,7 +13,7 @@ export class StoresComponent implements OnInit {
   stores: [];
 
   token =
-    'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwiZXhwIjoxNjIxNDM1OTU2fQ.KHwUIX3Ow1-Qrlz9jZcE75kkMZeQtBcJiMv2gVXyTek';
+    'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6NSwiZXhwIjoxNjIyOTE2NDU2fQ.fSA7vDs0_Y7AMUvXRIU3Ka_dMNk561wxcSvAZNAcS-Y';
 
   constructor(private fb: FormBuilder, private storesService: StoresService) {}
 

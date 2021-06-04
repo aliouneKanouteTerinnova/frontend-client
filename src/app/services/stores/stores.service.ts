@@ -23,7 +23,7 @@ export class StoresService {
     });
   }
 
-  upDateStores(id: number, store: Store, token: string) {
+  upDateStores(id: string, store: Store, token: string) {
     token = 'token ' + token;
     return this.http.put<any>(`${environment.url}/updatestore/${id}`, store, {
       headers: new HttpHeaders().set('Authorization', token),
@@ -35,9 +35,9 @@ export class StoresService {
     return this.http.get<any>(`${environment.url}/stores/${id}`);
   }
 
-  deleteStores(id: number, token: string) {
+  deleteStores(id: string, token: string) {
     token = 'token ' + token;
-    return this.http.delete<any>(`${environment.url}/deletestore/${id}`, {
+    return this.http.delete<any>(`${environment.url}/stores/${id}`, {
       headers: new HttpHeaders().set('Authorization', token),
       observe: 'response',
     });

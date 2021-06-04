@@ -14,7 +14,7 @@ export class CreateStoresComponent implements OnInit {
   createStore: FormGroup;
   submited = false;
   token =
-    'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwiZXhwIjoxNjIxNDQ2ODI5fQ.Gm67L6y9l50dUDWALEY49_KrnP1Rb3n-xRJsXtjjp5U';
+    'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6NSwiZXhwIjoxNjIyOTE2NDU2fQ.fSA7vDs0_Y7AMUvXRIU3Ka_dMNk561wxcSvAZNAcS-Y';
   constructor(private fb: FormBuilder, private storesService: StoresService, private route: Router) {}
 
   ngOnInit(): void {
