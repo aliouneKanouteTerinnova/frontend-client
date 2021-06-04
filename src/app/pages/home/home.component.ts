@@ -10,6 +10,7 @@ import { AuthenticationsService } from 'src/app/services/authentications.service
 export class HomeComponent implements OnInit {
   products = [
     {
+      id: 1,
       src: 'https://sn.jumia.is/unsafe/fit-in/300x300/filters:fill(white)/product/50/34406/1.jpg?9854',
       name: 'TOPICREM Ultra-Hydratant Gel 1L + Rasoir Gillette',
       price: '20 000 FCFA',
