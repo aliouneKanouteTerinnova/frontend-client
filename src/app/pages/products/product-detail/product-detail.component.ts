@@ -1,7 +1,8 @@
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { CartService } from 'src/app/services/cart.service';
 import { ProductsService } from 'src/app/services/products/products.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-product-detail',
@@ -13,7 +14,11 @@ export class ProductDetailComponent implements OnInit {
   product: any;
   fakePrice: number;
   indexPhoto: number;
-  constructor(private productService: ProductsService, private router: ActivatedRoute) {}
+  constructor(
+    private productService: ProductsService,
+    private router: ActivatedRoute,
+    private cartService: CartService
+  ) {}
 
   ngOnInit(): void {
     this.idProduct = this.router.snapshot.params.id;
@@ -24,6 +29,17 @@ export class ProductDetailComponent implements OnInit {
       this.product = response['product'];
       console.log(this.idProduct);
       this.fakePrice = Number(this.product.price) + 1000;
+    });
+  }
+
+  addToCart(id: Number) {
+    this.cartService.AddProductToCart(id);
+    Swal.fire({
+      position: 'top-end',
+      icon: 'success',
+      title: 'Product added to cart!',
+      showConfirmButton: false,
+      timer: 2000,
     });
   }
 }

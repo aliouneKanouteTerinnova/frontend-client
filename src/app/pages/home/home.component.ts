@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
+
 import { AuthResponded } from 'src/app/models/auth';
 import { AuthenticationsService } from 'src/app/services/authentications.service';
+import { CartService } from 'src/app/services/cart.service';
 import { ProductsService } from 'src/app/services/products/products.service';
 
 @Component({
@@ -23,7 +26,8 @@ export class HomeComponent implements OnInit {
   constructor(
     private authService: AuthenticationsService,
     private productsService: ProductsService,
-    private router: Router
+    private router: Router,
+    private cartService: CartService
   ) {}
 
   ngOnInit(): void {
@@ -46,6 +50,16 @@ export class HomeComponent implements OnInit {
       this.left = false;
       this.right = true;
     }
+  }
+  addToCart(id: Number) {
+    this.cartService.AddProductToCart(id);
+    Swal.fire({
+      position: 'top-end',
+      icon: 'success',
+      title: 'Product added to cart!',
+      showConfirmButton: false,
+      timer: 2000,
+    });
   }
   handleRightClick() {
     if (this.allCountries.length - this.firstIndex >= 3) {

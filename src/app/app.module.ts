@@ -36,6 +36,7 @@ import { HomeComponent } from './pages/home/home.component';
 import { MenuComponent } from './components/shared/menu/menu.component';
 import { CheckoutComponent } from './pages/checkout/checkout.component';
 import { ProductDetailComponent } from './pages/products/product-detail/product-detail.component';
+import { CartComponent } from './pages/cart/cart.component';
 
 @NgModule({
   declarations: [
@@ -57,6 +58,7 @@ import { ProductDetailComponent } from './pages/products/product-detail/product-
     MenuComponent,
     CheckoutComponent,
     ProductDetailComponent,
+    CartComponent,
   ],
 
   imports: [

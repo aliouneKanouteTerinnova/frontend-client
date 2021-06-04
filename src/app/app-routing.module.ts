@@ -16,7 +16,7 @@ import { ProductsComponent } from './pages/products/products.component';
 import { CreateStoresComponent } from './pages/stores/create-stores/create-stores.component';
 import { AuthGuard } from './guards/auth.guard';
 import { HomeComponent } from './pages/home/home.component';
-import { CartComponent } from './components/cart/cart.component';
+import { CartComponent } from './pages/cart/cart.component';
 
 const routes: Routes = [
   {
