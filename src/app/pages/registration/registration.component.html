@@ -9,6 +9,7 @@
     </div>
   </div>
   <div class="center-content">
+    <span class="successMessage" *ngIf="successMessage">{{ successMessage }}</span>
     <div class="button">
       <button
         class="connexionBtn"
@@ -25,7 +26,6 @@
         inscription
       </button>
     </div>
-    <span class="successMessage" *ngIf="successMessage">{{ successMessage }}</span>
     <form [formGroup]="loginForm" (submit)="login()" *ngIf="isConnection">
       <mat-form-field class="example-full-width" appearance="outline">
         <mat-label>Email</mat-label>
