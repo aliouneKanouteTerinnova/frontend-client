@@ -58,7 +58,7 @@ nav {
 
 @media screen and (max-width: 980px) {
   nav {
-    background-image: none;
+    background-image: none !important;
     background-color: transparent !important;
     height: 70px;
   }
@@ -81,5 +81,11 @@ nav {
   .social_link img,
   .lang {
     display: none;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  nav {
+    padding: 0 4rem !important;
   }
 }
