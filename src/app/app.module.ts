@@ -9,32 +9,21 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-// import { NavbarComponent } from './navbar/navbar.component';
 import { HeaderComponent } from './header/header.component';
 
 import { RegistrationComponent } from './pages/registration/registration.component';
 import { CookieService } from 'ngx-cookie-service';
 import { UpdateProfileComponent } from './pages/update-profile/update-profile.component';
-// @NgModule({
-//   declarations: [AppComponent, ],
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
 
-// import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-// import { TranslateModule } from '@ngx-translate/core';
-// import { SharedModule } from './shared/shared.module';
 import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
-// import { HttpClientModule } from '@angular/common/http';
-
-// import { AppRoutingModule } from './app-routing.module';
-// import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
-// import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ProductsComponent } from './pages/products/products.component';
 import { UpdateProductComponent } from './pages/products/update-product/update-product.component';
 import { StoresComponent } from './pages/stores/stores.component';
@@ -48,8 +37,6 @@ import { CheckoutComponent } from './pages/checkout/checkout.component';
 import { ProductDetailComponent } from './pages/products/product-detail/product-detail.component';
 
 @NgModule({
-  //   declarations: [AppComponent, RegistrationComponent, UpdateProfileComponent, NavbarComponent, HeaderComponent],
-
   declarations: [
     AppComponent,
     RegistrationComponent,
@@ -88,18 +75,7 @@ import { ProductDetailComponent } from './pages/products/product-detail/product-
     ReactiveFormsModule,
   ],
   providers: [CookieService],
-  // HttpClientModule,
-  // TranslateModule.forRoot(),
-  // MatButtonModule,
-  // MatToolbarModule,
-  // MatIconModule,
-  // MatCardModule,
-  // NgbModule,
-  // ReactiveFormsModule,
-  // FormsModule,
-  // SharedModule,
-  // ],
-  // providers: [],
+
   bootstrap: [AppComponent],
 })
 export class AppModule {}
