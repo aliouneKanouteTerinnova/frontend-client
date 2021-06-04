@@ -64,22 +64,24 @@ header {
   header {
     margin-top: -255px;
 
-    .text_content {
-      h1,
-      p,
-      a {
-        display: none;
-      }
-
-      .search {
-        position: relative;
-        left: -139px;
-        width: 200px;
-      }
+    img {
+      background-size: cover;
+      height: 50vh !important;
     }
   }
-  img {
-    background-size: cover;
-    height: 50vh !important;
+}
+@media screen and (max-width: 1024px) {
+  .text_content {
+    h1,
+    p,
+    a {
+      display: none;
+    }
+
+    .search {
+      position: relative;
+      left: -139px;
+      width: 200px;
+    }
   }
 }
