@@ -75,6 +75,7 @@ nav {
     display: block;
     width: 150px;
     height: 160px;
+    top: -170px;
     img {
       width: 140px;
       height: 245px;
@@ -84,5 +85,11 @@ nav {
   .social_link img,
   .lang {
     display: none;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  nav {
+    padding: 0 !important;
   }
 }
