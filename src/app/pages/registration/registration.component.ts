@@ -72,6 +72,7 @@ export class RegistrationComponent implements OnInit {
         (data) => {
           if (Number(data.code) === 200) {
             this.isActivated = true;
+            this.successMessage = 'Account activated successfully, you can now lob in';
           }
         },
         (error) => {

@@ -55,7 +55,10 @@
       <span class="price">{{ product.price }}</span>
     </div>
     <div class="product-info">
-      <h3>{{ product.name }}</h3>
+      <a routerLink="/product-detail/{{ product.id }}/{{ i }}/"
+        ><h3>{{ product.name }}</h3></a
+      >
+
       <span class="rating"></span>
     </div>
   </div>
