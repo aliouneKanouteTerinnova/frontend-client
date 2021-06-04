@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthResponded } from 'src/app/models/auth';
 import { AuthenticationsService } from 'src/app/services/authentications.service';
+import { ProductsService } from 'src/app/services/products/products.service';
 
 @Component({
   selector: 'app-home',
@@ -8,172 +9,9 @@ import { AuthenticationsService } from 'src/app/services/authentications.service
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
-  products = [
-    {
-      src: 'https://sn.jumia.is/unsafe/fit-in/300x300/filters:fill(white)/product/17/58424/1.jpg?6353',
-      name: 'Generic Tensiomètre LCD numérique pour tensiomètre-blanc',
-      price: '30 442 FCFA',
-    },
-    {
-      src: 'https://sn.jumia.is/unsafe/fit-in/300x300/filters:fill(white)/product/50/34406/1.jpg?9854',
-      name: 'TOPICREM Ultra-Hydratant Gel 1L + Rasoir Gillette',
-      price: '20 000 FCFA',
-    },
-    {
-      src: 'https://sn.jumia.is/unsafe/fit-in/300x300/filters:fill(white)/product/17/58424/1.jpg?6353',
-      name: 'Generic Tensiomètre LCD numérique pour tensiomètre-blanc',
-      price: '30 442 FCFA',
-    },
-    {
-      src: 'https://sn.jumia.is/unsafe/fit-in/300x300/filters:fill(white)/product/50/34406/1.jpg?9854',
-      name: 'TOPICREM Ultra-Hydratant Gel 1L + Rasoir Gillette',
-      price: '20 000 FCFA',
-    },
-    {
-      src: 'https://sn.jumia.is/unsafe/fit-in/300x300/filters:fill(white)/product/17/58424/1.jpg?6353',
-      name: 'Generic Tensiomètre LCD numérique pour tensiomètre-blanc',
-      price: '30 442 FCFA',
-    },
-    {
-      src: 'https://sn.jumia.is/unsafe/fit-in/300x300/filters:fill(white)/product/50/34406/1.jpg?9854',
-      name: 'TOPICREM Ultra-Hydratant Gel 1L + Rasoir Gillette',
-      price: '20 000 FCFA',
-    },
-    {
-      src: 'https://sn.jumia.is/unsafe/fit-in/300x300/filters:fill(white)/product/17/58424/1.jpg?6353',
-      name: 'Generic Tensiomètre LCD numérique pour tensiomètre-blanc',
-      price: '30 442 FCFA',
-    },
-    {
-      src: 'https://sn.jumia.is/unsafe/fit-in/300x300/filters:fill(white)/product/50/34406/1.jpg?9854',
-      name: 'TOPICREM Ultra-Hydratant Gel 1L + Rasoir Gillette',
-      price: '20 000 FCFA',
-    },
-    {
-      src: 'https://sn.jumia.is/unsafe/fit-in/300x300/filters:fill(white)/product/17/58424/1.jpg?6353',
-      name: 'Generic Tensiomètre LCD numérique pour tensiomètre-blanc',
-      price: '30 442 FCFA',
-    },
-    {
-      src: 'https://sn.jumia.is/unsafe/fit-in/300x300/filters:fill(white)/product/50/34406/1.jpg?9854',
-      name: 'TOPICREM Ultra-Hydratant Gel 1L + Rasoir Gillette',
-      price: '20 000 FCFA',
-    },
-    {
-      src: 'https://sn.jumia.is/unsafe/fit-in/300x300/filters:fill(white)/product/17/58424/1.jpg?6353',
-      name: 'Generic Tensiomètre LCD numérique pour tensiomètre-blanc',
-      price: '30 442 FCFA',
-    },
-    {
-      src: 'https://sn.jumia.is/unsafe/fit-in/300x300/filters:fill(white)/product/50/34406/1.jpg?9854',
-      name: 'TOPICREM Ultra-Hydratant Gel 1L + Rasoir Gillette',
-      price: '20 000 FCFA',
-    },
-    {
-      src: 'https://sn.jumia.is/unsafe/fit-in/300x300/filters:fill(white)/product/17/58424/1.jpg?6353',
-      name: 'Generic Tensiomètre LCD numérique pour tensiomètre-blanc',
-      price: '30 442 FCFA',
-    },
-    {
-      src: 'https://sn.jumia.is/unsafe/fit-in/300x300/filters:fill(white)/product/50/34406/1.jpg?9854',
-      name: 'TOPICREM Ultra-Hydratant Gel 1L + Rasoir Gillette',
-      price: '20 000 FCFA',
-    },
-    {
-      src: 'https://sn.jumia.is/unsafe/fit-in/300x300/filters:fill(white)/product/17/58424/1.jpg?6353',
-      name: 'Generic Tensiomètre LCD numérique pour tensiomètre-blanc',
-      price: '30 442 FCFA',
-    },
-    {
-      src: 'https://sn.jumia.is/unsafe/fit-in/300x300/filters:fill(white)/product/50/34406/1.jpg?9854',
-      name: 'TOPICREM Ultra-Hydratant Gel 1L + Rasoir Gillette',
-      price: '20 000 FCFA',
-    },
-    {
-      src: 'https://sn.jumia.is/unsafe/fit-in/300x300/filters:fill(white)/product/17/58424/1.jpg?6353',
-      name: 'Generic Tensiomètre LCD numérique pour tensiomètre-blanc',
-      price: '30 442 FCFA',
-    },
-  ];
-  bestSelling = [
-    {
-      src: 'https://sn.jumia.is/unsafe/fit-in/300x300/filters:fill(white)/product/50/34406/1.jpg?9854',
-      name: 'TOPICREM Ultra-Hydratant Gel 1L + Rasoir Gillette',
-      price: '20 000 FCFA',
-    },
-    {
-      src: 'https://sn.jumia.is/unsafe/fit-in/300x300/filters:fill(white)/product/17/58424/1.jpg?6353',
-      name: 'Generic Tensiomètre LCD numérique pour tensiomètre-blanc',
-      price: '30 442 FCFA',
-    },
-    {
-      src: 'https://sn.jumia.is/unsafe/fit-in/300x300/filters:fill(white)/product/50/34406/1.jpg?9854',
-      name: 'TOPICREM Ultra-Hydratant Gel 1L + Rasoir Gillette',
-      price: '20 000 FCFA',
-    },
-    {
-      src: 'https://sn.jumia.is/unsafe/fit-in/300x300/filters:fill(white)/product/17/58424/1.jpg?6353',
-      name: 'Generic Tensiomètre LCD numérique pour tensiomètre-blanc',
-      price: '30 442 FCFA',
-    },
-    {
-      src: 'https://sn.jumia.is/unsafe/fit-in/300x300/filters:fill(white)/product/50/34406/1.jpg?9854',
-      name: 'TOPICREM Ultra-Hydratant Gel 1L + Rasoir Gillette',
-      price: '20 000 FCFA',
-    },
-    {
-      src: 'https://sn.jumia.is/unsafe/fit-in/300x300/filters:fill(white)/product/17/58424/1.jpg?6353',
-      name: 'Generic Tensiomètre LCD numérique pour tensiomètre-blanc',
-      price: '30 442 FCFA',
-    },
-    {
-      src: 'https://sn.jumia.is/unsafe/fit-in/300x300/filters:fill(white)/product/50/34406/1.jpg?9854',
-      name: 'TOPICREM Ultra-Hydratant Gel 1L + Rasoir Gillette',
-      price: '20 000 FCFA',
-    },
-    {
-      src: 'https://sn.jumia.is/unsafe/fit-in/300x300/filters:fill(white)/product/50/34406/1.jpg?9854',
-      name: 'TOPICREM Ultra-Hydratant Gel 1L + Rasoir Gillette',
-      price: '20 000 FCFA',
-    },
-    {
-      src: 'https://sn.jumia.is/unsafe/fit-in/300x300/filters:fill(white)/product/50/34406/1.jpg?9854',
-      name: 'TOPICREM Ultra-Hydratant Gel 1L + Rasoir Gillette',
-      price: '20 000 FCFA',
-    },
-    {
-      src: 'https://sn.jumia.is/unsafe/fit-in/300x300/filters:fill(white)/product/17/58424/1.jpg?6353',
-      name: 'Generic Tensiomètre LCD numérique pour tensiomètre-blanc',
-      price: '30 442 FCFA',
-    },
-  ];
-  goodStuff = [
-    {
-      src: 'https://sn.jumia.is/unsafe/fit-in/300x300/filters:fill(white)/product/17/58424/1.jpg?6353',
-      name: 'Generic Tensiomètre LCD numérique pour tensiomètre-blanc',
-      price: '30 442 FCFA',
-    },
-    {
-      src: 'https://sn.jumia.is/unsafe/fit-in/300x300/filters:fill(white)/product/50/34406/1.jpg?9854',
-      name: 'TOPICREM Ultra-Hydratant Gel 1L + Rasoir Gillette',
-      price: '20 000 FCFA',
-    },
-    {
-      src: 'https://sn.jumia.is/unsafe/fit-in/300x300/filters:fill(white)/product/17/58424/1.jpg?6353',
-      name: 'Generic Tensiomètre LCD numérique pour tensiomètre-blanc',
-      price: '30 442 FCFA',
-    },
-    {
-      src: 'https://sn.jumia.is/unsafe/fit-in/300x300/filters:fill(white)/product/50/34406/1.jpg?9854',
-      name: 'TOPICREM Ultra-Hydratant Gel 1L + Rasoir Gillette',
-      price: '20 000 FCFA',
-    },
-    {
-      src: 'https://sn.jumia.is/unsafe/fit-in/300x300/filters:fill(white)/product/50/34406/1.jpg?9854',
-      name: 'TOPICREM Ultra-Hydratant Gel 1L + Rasoir Gillette',
-      price: '20 000 FCFA',
-    },
-  ];
+  products = [];
+  bestSelling = [];
+  goodStuff = [];
   allCountries = ['EUROPE', 'AFRIQUE', 'ASIE', 'AMERIQUE', 'OCEANIE', 'OTHERS'];
   countries = [];
   left = false;
@@ -181,13 +19,14 @@ export class HomeComponent implements OnInit {
   firstIndex = 0;
   currentUser: AuthResponded;
 
-  constructor(private authService: AuthenticationsService) {}
+  constructor(private authService: AuthenticationsService, private productsService: ProductsService) {}
 
   ngOnInit(): void {
     this.currentUser = this.authService.currentUserValue;
     console.log(this.currentUser);
     this.countries = this.allCountries.slice(this.firstIndex, this.firstIndex + 3);
     this.firstIndex = this.firstIndex + 1;
+    this.getProducts();
   }
   handleLeftClick() {
     if (this.firstIndex > 0) {
@@ -220,5 +59,14 @@ export class HomeComponent implements OnInit {
         this.right = false;
       }
     }
+  }
+  getProducts() {
+    this.productsService.getAllProducts().subscribe((data) => {
+      console.log('Product', data);
+      this.products = data.products;
+      this.products = this.products.slice(0, 15);
+      this.bestSelling = this.products.slice(0, 5);
+      this.goodStuff = this.products.slice(3, 8);
+    });
   }
 }

@@ -44,6 +44,7 @@ import { CreateProductComponent } from './pages/products/create-product/create-p
 import { CategoriesComponent } from './pages/categories/categories.component';
 import { CreateCategoriesComponent } from './pages/categories/create-categories/create-categories.component';
 import { HomeComponent } from './pages/home/home.component';
+import { ProductDetailComponent } from './pages/products/product-detail/product-detail.component';
 
 @NgModule({
   //   declarations: [AppComponent, RegistrationComponent, UpdateProfileComponent, NavbarComponent, HeaderComponent],
@@ -64,6 +65,7 @@ import { HomeComponent } from './pages/home/home.component';
     CategoriesComponent,
     CreateCategoriesComponent,
     HomeComponent,
+    ProductDetailComponent,
   ],
 
   imports: [
