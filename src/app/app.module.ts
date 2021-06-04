@@ -12,9 +12,9 @@ import { AppComponent } from './app.component';
 // import { NavbarComponent } from './navbar/navbar.component';
 import { HeaderComponent } from './header/header.component';
 
-import { RegistrationComponent } from './pages/registration/registration.component';
+import { RegistrationComponent } from './pages/user/registration/registration.component';
 import { CookieService } from 'ngx-cookie-service';
-import { UpdateProfileComponent } from './pages/update-profile/update-profile.component';
+import { UpdateProfileComponent } from './pages/user/update-profile/update-profile.component';
 // @NgModule({
 //   declarations: [AppComponent, ],
 
@@ -44,6 +44,7 @@ import { CreateProductComponent } from './pages/products/create-product/create-p
 import { CategoriesComponent } from './pages/categories/categories.component';
 import { CreateCategoriesComponent } from './pages/categories/create-categories/create-categories.component';
 import { HomeComponent } from './pages/home/home.component';
+import { ResetPasswordComponent } from './pages/user/reset-password/reset-password.component';
 
 @NgModule({
   //   declarations: [AppComponent, RegistrationComponent, UpdateProfileComponent, NavbarComponent, HeaderComponent],
@@ -64,6 +65,7 @@ import { HomeComponent } from './pages/home/home.component';
     CategoriesComponent,
     CreateCategoriesComponent,
     HomeComponent,
+    ResetPasswordComponent,
   ],
 
   imports: [

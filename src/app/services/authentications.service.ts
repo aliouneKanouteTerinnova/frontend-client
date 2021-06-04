@@ -82,4 +82,13 @@ export class AuthenticationsService {
     this.cookieService.delete('currentUser');
     this.currentUserSubject.next(null);
   }
+
+  //Password reset
+  getEmailToResetPassword(email: any) {
+    return this.httpClient.post<any>(`${environment.baseUrl}users/password/reset/`, email);
+  }
+
+  resetPassword(value: any) {
+    return this.httpClient.patch<any>(`${environment.baseUrl}users/password/reset/complete/`, value);
+  }
 }
