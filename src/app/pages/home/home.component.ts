@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthResponded } from 'src/app/models/auth';
+import { AuthenticationsService } from 'src/app/services/authentications.service';
 
 @Component({
   selector: 'app-home',
@@ -8,6 +10,7 @@ import { Component, OnInit } from '@angular/core';
 export class HomeComponent implements OnInit {
   products = [
     {
+      id: 1,
       src: 'https://sn.jumia.is/unsafe/fit-in/300x300/filters:fill(white)/product/50/34406/1.jpg?9854',
       name: 'TOPICREM Ultra-Hydratant Gel 1L + Rasoir Gillette',
       price: '20 000 FCFA',
@@ -192,10 +195,13 @@ export class HomeComponent implements OnInit {
   left = false;
   right = true;
   firstIndex = 0;
+  currentUser: AuthResponded;
 
-  constructor() {}
+  constructor(private authService: AuthenticationsService) {}
 
   ngOnInit(): void {
+    this.currentUser = this.authService.currentUserValue;
+    console.log(this.currentUser);
     this.countries = this.allCountries.slice(this.firstIndex, this.firstIndex + 3);
     this.firstIndex = this.firstIndex + 1;
   }

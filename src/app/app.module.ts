@@ -45,6 +45,7 @@ import { CategoriesComponent } from './pages/categories/categories.component';
 import { CreateCategoriesComponent } from './pages/categories/create-categories/create-categories.component';
 import { HomeComponent } from './pages/home/home.component';
 import { CheckoutComponent } from './pages/checkout/checkout.component';
+import { ProductDetailComponent } from './pages/products/product-detail/product-detail.component';
 
 @NgModule({
   //   declarations: [AppComponent, RegistrationComponent, UpdateProfileComponent, NavbarComponent, HeaderComponent],
@@ -66,6 +67,7 @@ import { CheckoutComponent } from './pages/checkout/checkout.component';
     CreateCategoriesComponent,
     HomeComponent,
     CheckoutComponent,
+    ProductDetailComponent,
   ],
 
   imports: [
