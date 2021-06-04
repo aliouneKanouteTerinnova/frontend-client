@@ -33,6 +33,7 @@ import { CreateProductComponent } from './pages/products/create-product/create-p
 import { CategoriesComponent } from './pages/categories/categories.component';
 import { CreateCategoriesComponent } from './pages/categories/create-categories/create-categories.component';
 import { HomeComponent } from './pages/home/home.component';
+import { MenuComponent } from './components/shared/menu/menu.component';
 import { CheckoutComponent } from './pages/checkout/checkout.component';
 import { ProductDetailComponent } from './pages/products/product-detail/product-detail.component';
 
@@ -53,6 +54,7 @@ import { ProductDetailComponent } from './pages/products/product-detail/product-
     CategoriesComponent,
     CreateCategoriesComponent,
     HomeComponent,
+    MenuComponent,
     CheckoutComponent,
     ProductDetailComponent,
   ],
