@@ -33,7 +33,7 @@ export class RegistrationComponent implements OnInit {
   disabled = false;
   rcpassword: string;
   errorMessage: string;
-  successMessage: string = '';
+  successMessage: string;
   errorResponse: any;
   loginForm: FormGroup;
   registerForm: FormGroup;
@@ -72,11 +72,12 @@ export class RegistrationComponent implements OnInit {
         (data) => {
           if (Number(data.code) === 200) {
             this.isActivated = true;
-            this.successMessage = 'Account activated successfully, you can now lob in';
+            this.successMessage = 'Account activated successfully, you can now log in';
           }
         },
         (error) => {
           this.resendLink = true;
+          this.errorMessage = 'Token expired, could you register again';
         }
       );
     }
@@ -130,18 +131,29 @@ export class RegistrationComponent implements OnInit {
     if (!this.registerForm.valid) {
       return;
     }
-    this.authService.register(user).subscribe((response) => {
-      Swal.fire({
-        position: 'top-end',
-        icon: 'success',
-        title: 'Check your mail to activate your account!',
-        showConfirmButton: false,
-        timer: 2000,
-      });
-      this.rpassword = '';
-      this.rcpassword = '';
-      this.remail = '';
-    });
+    this.authService.register(user).subscribe(
+      (response) => {
+        Swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          title: 'Check your mail to activate your account!',
+          showConfirmButton: false,
+          timer: 2000,
+        });
+        this.rpassword = '';
+        this.rcpassword = '';
+        this.remail = '';
+      },
+      (error) => {
+        if (error.error.errors.email) {
+          this.errorMessage = error.error.errors.email;
+        } else {
+          if (error.error.errors.username) {
+            this.errorMessage = error.error.errors.username;
+          }
+        }
+      }
+    );
   }
   login() {
     const email = this.loginForm.get('email').value;
@@ -158,8 +170,7 @@ export class RegistrationComponent implements OnInit {
         this.errorMessage = '';
       },
       (error) => {
-        this.errorMessage = 'Username/Password not correct';
-        this.errorResponse = error;
+        this.errorMessage = 'Username or password not correct';
       }
     );
   }
