@@ -158,8 +158,7 @@ export class RegistrationComponent implements OnInit {
         this.errorMessage = '';
       },
       (error) => {
-        this.errorMessage = 'Username/Password not correct';
-        this.errorResponse = error;
+        this.errorMessage = error.error.errors.error;
       }
     );
   }
