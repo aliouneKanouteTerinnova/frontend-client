@@ -44,6 +44,7 @@ export class RegistrationComponent implements OnInit {
   listType = ['SELLER', 'CUSTOMER'];
   listGender = ['M', 'F', 'OTHERS'];
   token: any;
+  email: any;
   isActivated = false;
   resendLink = false;
 
@@ -57,6 +58,8 @@ export class RegistrationComponent implements OnInit {
   ) {
     this.route.queryParams.subscribe((params) => {
       if (params.token) {
+        console.log(params);
+        this.email = params.token;
         this.token = params.token;
       } else {
         this.token = null;
@@ -68,7 +71,7 @@ export class RegistrationComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.token !== null) {
-      this.authService.verifyToken(this.token).subscribe(
+      this.authService.verifyToken(this.token, this.email).subscribe(
         (data) => {
           if (Number(data.code) === 200) {
             this.isActivated = true;
@@ -76,6 +79,7 @@ export class RegistrationComponent implements OnInit {
           }
         },
         (error) => {
+          console.log(error);
           this.resendLink = true;
           this.errorMessage = 'Token expired, could you register again';
         }
@@ -107,6 +111,7 @@ export class RegistrationComponent implements OnInit {
     this.isConnection = true;
     this.isInscription = false;
   }
+  resend() {}
 
   inscription() {
     this.isConnection = false;

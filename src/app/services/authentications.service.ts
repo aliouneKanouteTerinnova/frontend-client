@@ -73,8 +73,8 @@ export class AuthenticationsService {
   }
 
   //Verify token
-  verifyToken(token: any) {
-    return this.httpClient.get<any>(`${environment.baseUrl}users/verify/?token=` + token);
+  verifyToken(token: any, email: any) {
+    return this.httpClient.get<any>(`${environment.baseUrl}users/verify/?token=` + token + `&email=` + email);
   }
 
   // User Logout

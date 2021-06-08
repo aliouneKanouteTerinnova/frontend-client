@@ -143,5 +143,6 @@
     <div class="errorMessage">
       <span class="errorMessage" *ngIf="errorMessage">{{ errorMessage }}</span>
     </div>
+    <div *ngIf="resendLink"><button mat-raised-button color="primary" (click)="resend()">Resend mail</button></div>
   </div>
 </div>
