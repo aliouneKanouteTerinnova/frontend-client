@@ -23,7 +23,9 @@
   overflow: hidden;
   position: relative;
   margin: 1rem;
-  width: 215px;
+
+  width: 200px;
+  cursor: pointer;
 }
 
 .product img {
@@ -61,7 +63,7 @@
   width: 100%;
   overflow: auto;
   left: 0;
-  bottom: 105px;
+  bottom: 50px;
   top: 0;
   right: 0;
   transform: scale(0.1);
@@ -295,7 +297,7 @@
   transition: border-color 0.1s ease-in-out;
   width: 145px;
   margin-top: 25px;
-  margin-left: 25px;
+  margin-left: 55px;
 }
 
 .uCURQ {
@@ -538,7 +540,7 @@
     width: 100%;
     overflow: auto;
     left: 0;
-    bottom: 95px;
+    bottom: 40px;
     top: 0;
     right: 0;
     transform: scale(0.1);

@@ -1,3 +1,5 @@
+<app-navbar></app-navbar>
+<app-header></app-header>
 <div class="scrollBar">
   <div class="buttonEl">
     <button mat-raised-button color="primary" class="categoryScroll"><span>CATEGORY V</span></button>
@@ -38,8 +40,8 @@
 </div>
 
 <div class="main">
-  <div class="product" *ngFor="let product of products">
-    <img src="{{ product.src }}" alt="" />
+  <div class="product" *ngFor="let product of products; let i = index">
+    <img src="./../../assets/img/Products/{{ i }}.png" alt="" />
     <div class="overview1">
       <!-- <h3>overview:</h3> -->
       <div class="product-icon">
@@ -47,21 +49,29 @@
           <img class="icon" src="./../../assets/img/icons/panier.svg" alt="user_icon" /><span>aimer</span>
         </div>
         <div class="icon-element">
-          <img class="icon" src="./../../assets/img/icons/panier.svg" alt="user_icon" /><span>ajouter</span>
+          <img
+            class="icon"
+            src="./../../assets/img/icons/panier.svg"
+            alt="user_icon"
+            (click)="addToCart(product.id)"
+          /><span>ajouter</span>
         </div>
       </div>
       <span class="price">{{ product.price }}</span>
     </div>
     <div class="product-info">
-      <h3>{{ product.name }}</h3>
+      <a routerLink="/product-detail/{{ product.id }}/{{ i }}/"
+        ><h3>{{ product.name }}</h3></a
+      >
+
       <span class="rating"></span>
     </div>
   </div>
 </div>
 <div class="subtitle"><h3>MEILLEURES VENTES</h3></div>
 <div class="main">
-  <div class="product" *ngFor="let product of bestSelling">
-    <img src="{{ product.src }}" alt="" />
+  <div class="product" *ngFor="let product of bestSelling; let i = index">
+    <img src="./../../assets/img/Products/{{ i }}.png" alt="" />
     <div class="overview1">
       <!-- <h3>overview:</h3> -->
       <div class="product-icon">
@@ -69,7 +79,12 @@
           <img class="icon" src="./../../assets/img/icons/panier.svg" alt="user_icon" /><span>aimer</span>
         </div>
         <div class="icon-element">
-          <img class="icon" src="./../../assets/img/icons/panier.svg" alt="user_icon" /><span>ajouter</span>
+          <img
+            class="icon"
+            src="./../../assets/img/icons/panier.svg"
+            alt="user_icon"
+            (click)="addToCart(product.id)"
+          /><span>ajouter</span>
         </div>
       </div>
       <span class="price">{{ product.price }}</span>
@@ -98,8 +113,8 @@
 </div>
 <div class="subtitle"><h3>LES BONNES AFFAIRES</h3></div>
 <div class="main">
-  <div class="product" *ngFor="let product of goodStuff">
-    <img src="{{ product.src }}" alt="" />
+  <div class="product" *ngFor="let product of goodStuff; let i = index">
+    <img src="./../../assets/img/Products/{{ i }}.png" alt="" />
     <div class="overview1">
       <!-- <h3>overview:</h3> -->
       <div class="product-icon">
@@ -107,7 +122,12 @@
           <img class="icon" src="./../../assets/img/icons/panier.svg" alt="user_icon" /><span>aimer</span>
         </div>
         <div class="icon-element">
-          <img class="icon" src="./../../assets/img/icons/panier.svg" alt="user_icon" /><span>ajouter</span>
+          <img
+            class="icon"
+            src="./../../assets/img/icons/panier.svg"
+            alt="user_icon"
+            (click)="addToCart(product.id)"
+          /><span>ajouter</span>
         </div>
       </div>
       <span class="price">{{ product.price }}</span>

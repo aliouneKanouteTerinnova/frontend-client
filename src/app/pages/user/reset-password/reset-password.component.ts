@@ -71,6 +71,8 @@ export class ResetPasswordComponent implements OnInit {
       token: this.token,
       uidb64: this.uuid,
     };
+    console.log(value);
+
     this.authService.resetPassword(value).subscribe(
       (data) => {
         console.log(data);

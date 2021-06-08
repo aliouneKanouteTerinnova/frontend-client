@@ -25,6 +25,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.currentUser = this.authService.currentUserValue;
+    console.log(this.router.url);
   }
 
   goRegister() {

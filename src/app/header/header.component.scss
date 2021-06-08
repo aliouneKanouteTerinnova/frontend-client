@@ -1,6 +1,6 @@
 header {
   position: relative;
-  margin-top: -230px;
+  margin-top: -275px;
   z-index: 0;
   .carousel-item {
     img {
@@ -10,21 +10,30 @@ header {
   }
 
   .text_content {
-    background-color: #f39221;
+    color: #fff;
     position: absolute;
     z-index: 2;
     right: 12%;
-    top: 20%;
+    top: 35%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+
+    height: 50%;
     h1 {
+      font-weight: bold;
       font-size: 2.5rem;
+      letter-spacing: 2px;
     }
 
     p {
       font-size: 1.2rem;
+      letter-spacing: 1px;
+      line-height: 1.3;
     }
 
     a {
-      font-size: 1.5rem;
+      font-size: 1.7rem;
       color: #fff;
 
       &:hover {
@@ -32,6 +41,15 @@ header {
         transition: 0.2s;
         text-decoration: none;
       }
+    }
+
+    .search {
+      padding: 1.2rem;
+      font-size: 1.5rem;
+      background-color: #e6e2e29c;
+      color: #fff;
+      border: none;
+      border-radius: 60px;
     }
   }
 }
@@ -45,9 +63,25 @@ header {
 @media screen and (max-width: 768px) {
   header {
     margin-top: -255px;
+
+    img {
+      background-size: cover;
+      height: 50vh !important;
+    }
   }
-  img {
-    background-size: cover;
-    height: 50vh !important;
+}
+@media screen and (max-width: 1024px) {
+  .text_content {
+    h1,
+    p,
+    a {
+      display: none;
+    }
+
+    .search {
+      position: relative;
+      left: -139px;
+      width: 200px;
+    }
   }
 }

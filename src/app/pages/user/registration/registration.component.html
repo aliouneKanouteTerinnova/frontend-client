@@ -1,3 +1,4 @@
+<app-navbar></app-navbar>
 <div class="title">
   <h3 *ngIf="isConnection">SE CONNECTER</h3>
   <h3 *ngIf="isInscription">S'INSCRIRE</h3>
@@ -9,6 +10,7 @@
     </div>
   </div>
   <div class="center-content">
+    <span class="successMessage" *ngIf="successMessage">{{ successMessage }}</span>
     <div class="button">
       <button
         class="connexionBtn"
@@ -25,7 +27,6 @@
         inscription
       </button>
     </div>
-    <span class="successMessage" *ngIf="successMessage">{{ successMessage }}</span>
     <form [formGroup]="loginForm" (submit)="login()" *ngIf="isConnection">
       <mat-form-field class="example-full-width" appearance="outline">
         <mat-label>Email</mat-label>
@@ -47,7 +48,7 @@
         </mat-error>
       </mat-form-field>
       <button mat-raised-button color="primary">SE CONNECTER</button>
-      <span class="forgotPw"><a href="">Mot de passe oublié</a></span>
+      <span class="forgotPw"><a routerLink="/user/reset-password">Mot de passe oublié</a></span>
       <h3 class="social-title">SE CONNECTER AVEC</h3>
       <div class="social-network">
         <ul>
@@ -142,5 +143,6 @@
     <div class="errorMessage">
       <span class="errorMessage" *ngIf="errorMessage">{{ errorMessage }}</span>
     </div>
+    <div *ngIf="resendLink"><button mat-raised-button color="primary" (click)="resend()">Resend mail</button></div>
   </div>
 </div>
