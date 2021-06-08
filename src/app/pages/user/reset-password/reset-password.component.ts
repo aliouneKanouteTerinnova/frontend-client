@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AuthenticationsService } from 'src/app/services/authentications.service';
 import { MustMatch } from 'src/app/_helpers/must-match.validator';
-
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-reset-password',
   templateUrl: './reset-password.component.html',
@@ -23,7 +23,8 @@ export class ResetPasswordComponent implements OnInit {
   constructor(
     private authService: AuthenticationsService,
     private formBuilder: FormBuilder,
-    private router: ActivatedRoute
+    private router: ActivatedRoute,
+    private route: Router
   ) {}
 
   ngOnInit(): void {
@@ -55,30 +56,55 @@ export class ResetPasswordComponent implements OnInit {
     };
     this.authService.getEmailToResetPassword(email).subscribe(
       (data) => {
+        Swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          title: 'We have sent you a link to reset your password',
+          showConfirmButton: true,
+          // timer: 1500,
+        });
         console.log(data);
         // this.successMessage = 'User authenticated ';
       },
       (error) => {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Something went wrong!',
+        });
         this.errorMessage = 'Username/Password not correct';
       }
     );
   }
 
   resetPass() {
-    const password = this.resetForm.get('password').value;
+    const password = this.resetPassForm.get('password').value;
+    console.log(password);
     const value = {
       password: password,
       token: this.token,
       uidb64: this.uuid,
     };
-    console.log(value);
 
     this.authService.resetPassword(value).subscribe(
       (data) => {
+        Swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          title: 'Password reset success',
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        this.route.navigate(['/register']);
         console.log(data);
         // this.successMessage = 'User authenticated ';
       },
       (error) => {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Something went wrong!',
+        });
         this.errorMessage = 'Username/Password not correct';
       }
     );
