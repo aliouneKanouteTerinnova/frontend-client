@@ -8,7 +8,7 @@ export const environment = {
   // url: 'http://192.168.1.16:8000/api',
   // url: 'http://192.168.43.196:8000/',
   // url: 'http://localhost:8000/',
-  url: 'http://3.122.225.2:8000/api',
+  url: 'http://192.168.1.17:8000/api',
 };
 
 /*
