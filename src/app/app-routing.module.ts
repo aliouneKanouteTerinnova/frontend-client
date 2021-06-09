@@ -1,3 +1,4 @@
+import { ResetPassEmailComponent } from './pages/user/reset-password/reset-pass-email/reset-pass-email.component';
 import { CheckoutComponent } from './pages/checkout/checkout.component';
 import { ProductDetailComponent } from './pages/products/product-detail/product-detail.component';
 import { CreateCategoriesComponent } from './pages/categories/create-categories/create-categories.component';
@@ -30,7 +31,7 @@ const routes: Routes = [
   },
   {
     path: 'user/reset-password',
-    component: ResetPasswordComponent,
+    component: ResetPassEmailComponent,
   },
 
   {

@@ -40,6 +40,7 @@ import { MenuComponent } from './components/shared/menu/menu.component';
 import { CheckoutComponent } from './pages/checkout/checkout.component';
 import { ProductDetailComponent } from './pages/products/product-detail/product-detail.component';
 import { CartComponent } from './pages/cart/cart.component';
+import { ResetPassEmailComponent } from './pages/user/reset-password/reset-pass-email/reset-pass-email.component';
 
 @NgModule({
   declarations: [
@@ -63,6 +64,7 @@ import { CartComponent } from './pages/cart/cart.component';
     CheckoutComponent,
     ProductDetailComponent,
     CartComponent,
+    ResetPassEmailComponent,
   ],
 
   imports: [
