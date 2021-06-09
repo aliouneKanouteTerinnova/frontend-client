@@ -585,6 +585,12 @@
     height: 550px;
   }
 }
+
+footer {
+  background-color: #b3b3b3;
+  height: 40vh;
+  margin-top: 2rem;
+}
 @media screen and (max-width: 900px) {
   .scrollBar {
     display: flex;
