@@ -1,3 +1,4 @@
+<app-navbar></app-navbar>
 <form [formGroup]="editStore" (ngSubmit)="onSubmit()" class="container col-sm-10 col-md-8 col-lg-6">
   <div class="form-group">
     <!-- Shop Name -->
@@ -38,6 +39,13 @@
         <!-- <div *ngIf="submited && f.store_address.errors" class="text-danger">
           <div *ngIf="f.store_adress.errors.required" class="text-danger">donnees invalid !</div>
         </div> -->
+      </div>
+      <div class="form-check mt-4 ml-3">
+        <input type="checkbox" class="form-check-input" formControlName="is_active" />
+        <!-- (change)="checkCheckBoxvalue($event)"
+          #ch
+          (click)="checkCheckBoxvalue(ch)" -->
+        <label for="active" class="form-check-label">Is active</label>
       </div>
     </div>
   </div>

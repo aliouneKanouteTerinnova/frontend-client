@@ -8,6 +8,7 @@ import { CategoriesService } from 'src/app/services/categories/categories.servic
 import { StoresService } from 'src/app/services/stores/stores.service';
 import Swal from 'sweetalert2';
 import { v4 as uuidv4 } from 'uuid';
+import { AuthenticationsService } from 'src/app/services/authentications.service';
 uuidv4();
 
 @Component({
@@ -20,24 +21,28 @@ export class CreateProductComponent implements OnInit {
   categorys: Category;
   stores: [];
   products = [];
-  token =
-    'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwiZXhwIjoxNjIxNTEzMTk4fQ.u_Mf7IhHTOwy6HlvwocG3IT6eBVjt6JGhegUP1qJiGk';
+  currentUser: any;
+  categoryId: any;
+  storeId: any;
   constructor(
     private route: Router,
     private fb: FormBuilder,
     private categoryService: CategoriesService,
     private storesService: StoresService,
-    private productsService: ProductsService
+    private productsService: ProductsService,
+    private authService: AuthenticationsService
   ) {}
 
   ngOnInit(): void {
+    this.currentUser = this.authService.currentUserValue;
     this.createProductForm = this.fb.group({
       name: ['', Validators.required],
       slug: ['', Validators.required],
       description: ['', Validators.required],
       price: ['', Validators.required],
       quantity: ['', Validators.required],
-      // store: ['', Validators.required],
+      category: '',
+      store: '',
     });
 
     this.getProducts();
@@ -69,6 +74,14 @@ export class CreateProductComponent implements OnInit {
     });
   }
 
+  categoryEvent(event) {
+    this.categoryId = event.target.value;
+  }
+
+  storeEvent(event) {
+    this.storeId = event.target.value;
+  }
+
   onSubmit() {
     console.log('submited');
 
@@ -83,17 +96,15 @@ export class CreateProductComponent implements OnInit {
     products.created_by = '';
     products.is_active = true;
     products.quantity = this.createProductForm.get('quantity').value;
-    products.category = 2;
-    products.store = 1;
+    products.category = this.categoryId;
+    products.store = this.storeId;
 
-    console.log(products);
-
-    this.productsService.addProduct(products, this.token).subscribe(
+    this.productsService.addProduct(products, this.currentUser.user.token).subscribe(
       (res) => {
         Swal.fire({
           position: 'top-end',
           icon: 'success',
-          title: 'Your work has been saved',
+          title: 'Product Created',
           showConfirmButton: false,
           timer: 1500,
         });

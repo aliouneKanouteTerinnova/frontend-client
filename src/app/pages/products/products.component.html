@@ -1,6 +1,7 @@
+<app-navbar></app-navbar>
 <div class="container">
   <div class="text-center">
-    <button mat-raised-button color="primary" routerLink="/addproduct">
+    <button mat-raised-button color="primary" routerLink="/addproduct" *ngIf="currentUser">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="20"
@@ -15,6 +16,9 @@
       </svg>
       Add Product
     </button>
+  </div>
+  <div class="text-right">
+    <button mat-raised-button color="accent" routerLink="/cart">View cart</button>
   </div>
   <h2>Products</h2>
   <div class="container">
@@ -35,11 +39,20 @@
           <div class="quantity"><b>Quantity: </b> {{ product.quantity }}</div>
         </div>
         <div class="button_group mt-3">
-          <button mat-raised-button color="accent" class="mr-3" routerLink="/update-product/{{ product.id }}">
+          <button mat-raised-button color="accent" class="mr-3" (click)="addProducts(product.id)">Add to cart</button>
+          <button
+            mat-raised-button
+            color="accent"
+            class="mr-3"
+            routerLink="/update-product/{{ product.id }}"
+            *ngIf="currentUser"
+          >
             Update
           </button>
 
-          <button mat-raised-button color="warn" (click)="deleteProducts(product.id)">Delete</button>
+          <button mat-raised-button color="warn" (click)="deleteProducts(product.id)" *ngIf="currentUser">
+            Delete
+          </button>
         </div>
       </div>
     </div>

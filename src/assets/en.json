@@ -1,0 +1,11 @@
+{
+  "CONNEXION_TITLE": "connexion",
+  "INSCRIPTION_TITLE": "registration",
+  "CONNEXION_BUTTON": "LOGIN",
+  "INSCRIPTION_BUTTON": "REGISTER",
+  "USER_CONDITION": "I accept the conditions",
+  "USERNAME_TILE": "USERNAME",
+  "EMAIL": "E-Mail",
+  "CONFIRM_PASSWORD": "Confirm Password",
+  "PASSWORD": "Password"
+}

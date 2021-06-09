@@ -1,0 +1,95 @@
+<app-navbar></app-navbar>
+<div class="container">
+  <div *ngIf="cartData.data[0].numInCart === 0" class="text-center my-5">
+    <h4>Your Cart Is Empty</h4>
+    <button class="btn btn-primary btn-lg mt-3" routerLink="/">GO TO SHOP</button>
+  </div>
+
+  <ng-container *ngIf="cartData.data[0].numInCart !== 0">
+    <div class="row">
+      <div class="col my-4">
+        <table class="table">
+          <thead class="table">
+            <tr class="text-center">
+              <th>Category</th>
+              <th>Title</th>
+              <th>Price</th>
+              <th>Quantity</th>
+              <th>Subtotal</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let c of cartData.data; let i = index">
+              <td class="d-flex align-items-center justify-content-around">
+                <img
+                  src="./../../../assets/img/vanaa_logo.svg"
+                  alt="{{ c.product.name }}"
+                  height="60"
+                  class="order-1"
+                />
+                <!-- <span class="text-danger" style="cursor: pointer"
+                  ><i class="fa fa-trash" (click)="cartService.DeleteProductFromCart(i)"></i
+                ></span> -->
+                <button mat-raised-button color="warn" (click)="cartService.DeleteProductFromCart(i)">delete</button>
+              </td>
+              <td>
+                <p>{{ c.product.name }}</p>
+              </td>
+              <td>
+                <p>{{ c.product.price }}</p>
+              </td>
+              <td>
+                <form>
+                  <div class="value-button" id="decrease" (click)="ChangeQuantity(i, false)">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="16"
+                      fill="currentColor"
+                      class="bi bi-minus"
+                      viewBox="0 0 16 16"
+                    >
+                      <path d="M5.5 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H6a.5.5 0 0 1-.5-.5z" />
+                    </svg>
+                  </div>
+                  <input type="number" id="number" [value]="c.numInCart" readonly [max]="c.product.quantity" />
+                  <div class="value-button" id="increase" (click)="ChangeQuantity(i, true)">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="20"
+                      height="20"
+                      fill="currentColor"
+                      class="bi bi-plus"
+                      viewBox="0 0 16 16"
+                    >
+                      <path
+                        d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"
+                      />
+                    </svg>
+                  </div>
+                </form>
+              </td>
+              <td>
+                <p>{{ cartService.CalculateSubTotal(i) }}</p>
+              </td>
+            </tr>
+            <tr class="border-0">
+              <td style="border: none"></td>
+              <td></td>
+              <td></td>
+              <td>TOTAL</td>
+              <td>{{ cartTotal }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="col-md-12 d-flex mb-5">
+        <div class="d-flex w-100 justify-content-between flex-sm-column flex-md-row">
+          <button mat-raised-button color="accent" routerLink="/">Continue Shopping</button>
+          <button mat-raised-button color="warn" routerLink="/checkout">Checkout</button>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+</div>

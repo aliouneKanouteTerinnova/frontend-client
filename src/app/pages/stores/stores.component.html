@@ -1,6 +1,21 @@
+<app-navbar></app-navbar>
 <div class="container">
   <div class="text-right">
-    <button mat-raised-button color="primary" routerLink="/create-store">Create store</button>
+    <button mat-raised-button color="primary" routerLink="/create-store">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="20"
+        height="20"
+        fill="currentColor"
+        class="bi bi-plus"
+        viewBox="0 0 16 16"
+      >
+        <path
+          d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"
+        />
+      </svg>
+      Create store
+    </button>
   </div>
 </div>
 
@@ -13,8 +28,16 @@
           <div class="card-body adresse"><b>Adresse:</b> {{ store.store_address }}</div>
         </div>
         <div class="button">
-          <button mat-raised-button color="accent" routerLink="/updatestore/{{ store.id }}" class="mr-3">Edit</button>
-          <button mat-raised-button color="warn" (click)="deleteStore(store.id)">Delete</button>
+          <button
+            mat-raised-button
+            color="accent"
+            routerLink="/updatestore/{{ store.id }}"
+            class="mr-3"
+            *ngIf="currentUser"
+          >
+            Edit
+          </button>
+          <button mat-raised-button color="warn" (click)="deleteStore(store.id)" *ngIf="currentUser">Delete</button>
         </div>
       </div>
     </div>

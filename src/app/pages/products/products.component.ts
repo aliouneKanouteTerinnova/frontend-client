@@ -5,6 +5,9 @@ import { CategoriesService } from './../../services/categories/categories.servic
 import { Category } from './../../models/category/category';
 import { v4 as uuidv4 } from 'uuid';
 import Swal from 'sweetalert2';
+import { AuthenticationsService } from 'src/app/services/authentications.service';
+import { CartService } from 'src/app/services/cart.service';
+import { CartModelServer } from 'src/app/models/cart';
 
 uuidv4();
 
@@ -19,26 +22,22 @@ export class ProductsComponent implements OnInit {
   stores: [];
   categorys: Category;
   closeResult = '';
-  token =
-    'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwiZXhwIjoxNjIxNTEzMTk4fQ.u_Mf7IhHTOwy6HlvwocG3IT6eBVjt6JGhegUP1qJiGk';
+  currentUser: any;
+  cartData: CartModelServer;
 
   constructor(
     private productsService: ProductsService,
     private categoryService: CategoriesService,
-    private storesService: StoresService
+    private storesService: StoresService,
+    private authService: AuthenticationsService,
+    private cartService: CartService
   ) {}
 
   ngOnInit(): void {
-    this.getStores();
+    this.currentUser = this.authService.currentUserValue;
+    this.cartService.cartDataObs$.subscribe((data) => (this.cartData = data));
     this.getProducts();
     this.getCategory();
-  }
-
-  getStores() {
-    this.storesService.getAllStores().subscribe((data) => {
-      console.log(data);
-      this.stores = data.stores;
-    });
   }
 
   getProducts() {
@@ -59,8 +58,8 @@ export class ProductsComponent implements OnInit {
     this.submited = true;
   }
 
-  deleteProducts(id, token) {
-    this.productsService.deleteProduct(id, this.token).subscribe(
+  deleteProducts(id) {
+    this.productsService.deleteProduct(id, this.currentUser.user.token).subscribe(
       (d) => {
         Swal.fire({
           position: 'top-end',
@@ -84,6 +83,17 @@ export class ProductsComponent implements OnInit {
     console.log('The product has been deleted!');
   }
 
+  addProducts(id) {
+    this.cartService.AddProductToCart(id);
+    Swal.fire({
+      position: 'top-end',
+      icon: 'success',
+      title: 'Product added to cart!',
+      showConfirmButton: false,
+      timer: 1500,
+    });
+  }
+
   // updateProducts(product: Products) {
   //   console.log(product);
   //   this.productsService.updateProduct(product).subscribe(
@@ -96,4 +106,7 @@ export class ProductsComponent implements OnInit {
   //   );
   //   console.log('The product has been updated!', product);
   // }
+}
+function id(id: any) {
+  throw new Error('Function not implemented.');
 }

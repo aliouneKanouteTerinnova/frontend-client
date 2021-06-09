@@ -1,3 +1,4 @@
+// import { Products } from 'src/app/models/products/products';
 export class Category {
   id: number;
   name: string;
@@ -5,4 +6,5 @@ export class Category {
   slug: string;
   created_by: string;
   is_active: boolean;
+  products: string;
 }

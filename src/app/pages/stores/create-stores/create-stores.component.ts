@@ -4,6 +4,7 @@ import { StoresService } from 'src/app/services/stores/stores.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import Swal from 'sweetalert2';
+import { AuthenticationsService } from 'src/app/services/authentications.service';
 
 @Component({
   selector: 'app-create-stores',
@@ -13,17 +14,23 @@ import Swal from 'sweetalert2';
 export class CreateStoresComponent implements OnInit {
   createStore: FormGroup;
   submited = false;
-  token =
-    'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6NSwiZXhwIjoxNjIyOTE2NDU2fQ.fSA7vDs0_Y7AMUvXRIU3Ka_dMNk561wxcSvAZNAcS-Y';
-  constructor(private fb: FormBuilder, private storesService: StoresService, private route: Router) {}
+  currentUser: any;
+  constructor(
+    private fb: FormBuilder,
+    private storesService: StoresService,
+    private route: Router,
+    private authService: AuthenticationsService
+  ) {}
 
   ngOnInit(): void {
+    this.currentUser = this.authService.currentUserValue;
     this.createStore = this.fb.group({
       name: ['', Validators.required],
       created_at: [''],
       created_by: [''],
       store_address: ['', Validators.required],
     });
+    console.log(this.currentUser);
   }
 
   get f() {
@@ -35,20 +42,27 @@ export class CreateStoresComponent implements OnInit {
     const data = new Store();
 
     data.name = this.createStore.get('name').value;
-    data.created_at = '';
-    data.created_by = 2;
+    // data.created_at = '';
+    data.created_by = 1;
     data.store_address = this.createStore.get('store_address').value;
     data.is_active = true;
 
-    console.log(data);
+    // const data = {
+    //   name: this.createStore.get('name').value,
+    //   // created_by: 1,
+    //   address: this.createStore.get('store_address').value,
+    //   is_active: true,
+    // };
 
-    this.storesService.createStores(data, this.token).subscribe(
+    console.log(data);
+    console.log(this.currentUser.user.token);
+    this.storesService.createStores(data, this.currentUser.user.token).subscribe(
       (res) => {
         console.log(res);
         Swal.fire({
           position: 'top-end',
           icon: 'success',
-          title: 'Product modified',
+          title: 'Store created',
           showConfirmButton: false,
           timer: 1500,
         });
@@ -58,7 +72,7 @@ export class CreateStoresComponent implements OnInit {
         Swal.fire({
           icon: 'error',
           title: 'Oops...',
-          text: 'Something went wrong!',
+          text: err.statusText,
         });
         console.log(err);
       }

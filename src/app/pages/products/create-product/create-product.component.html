@@ -1,3 +1,4 @@
+<app-navbar></app-navbar>
 <div class="container">
   <div class="row">
     <div class="col">
@@ -5,8 +6,8 @@
         <div class="row">
           <div class="form-group col-6">
             <label for="category">Category</label>
-            <select class="form-control">
-              <option *ngFor="let category of categorys" [value]="category">{{ category.name }}</option>
+            <select class="form-control" formControlName="category" (change)="categoryEvent($event)">
+              <option *ngFor="let category of categorys" value="{{ category.id }}">{{ category.name }}</option>
             </select>
           </div>
 
@@ -43,8 +44,8 @@
         <div class="row">
           <div class="form-group col-6">
             <label for="store">Store</label>
-            <select class="form-control">
-              <option *ngFor="let store of stores" [value]="store">{{ store.name }}</option>
+            <select class="form-control" formControlName="store" (change)="storeEvent($event)">
+              <option *ngFor="let store of stores" value="{{ store.id }}">{{ store.name }}</option>
             </select>
             <!-- <input type="text" class="form-control" formControlName="store" /> -->
           </div>
