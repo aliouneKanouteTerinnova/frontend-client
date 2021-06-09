@@ -1,3 +1,4 @@
+import { ResetPassEmailComponent } from './pages/user/reset-password/reset-pass-email/reset-pass-email.component';
 import { CheckoutComponent } from './pages/checkout/checkout.component';
 import { ProductDetailComponent } from './pages/products/product-detail/product-detail.component';
 import { CreateCategoriesComponent } from './pages/categories/create-categories/create-categories.component';
@@ -6,8 +7,8 @@ import { CreateProductComponent } from './pages/products/create-product/create-p
 import { EditStoresComponent } from './pages/stores/edit-stores/edit-stores.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RegistrationComponent } from './pages/registration/registration.component';
-import { UpdateProfileComponent } from './pages/update-profile/update-profile.component';
+import { RegistrationComponent } from './pages/user/registration/registration.component';
+import { UpdateProfileComponent } from './pages/user/update-profile/update-profile.component';
 import { Routes, RouterModule } from '@angular/router';
 
 import { StoresComponent } from './pages/stores/stores.component';
@@ -16,6 +17,7 @@ import { ProductsComponent } from './pages/products/products.component';
 import { CreateStoresComponent } from './pages/stores/create-stores/create-stores.component';
 import { AuthGuard } from './guards/auth.guard';
 import { HomeComponent } from './pages/home/home.component';
+import { ResetPasswordComponent } from './pages/user/reset-password/reset-password.component';
 import { CartComponent } from './pages/cart/cart.component';
 
 const routes: Routes = [
@@ -26,6 +28,15 @@ const routes: Routes = [
   {
     path: 'home',
     component: HomeComponent,
+  },
+  {
+    path: 'user/reset-password',
+    component: ResetPassEmailComponent,
+  },
+
+  {
+    path: 'api/users/password/reset/:uidb64/:token',
+    component: ResetPasswordComponent,
   },
   {
     path: 'cart',

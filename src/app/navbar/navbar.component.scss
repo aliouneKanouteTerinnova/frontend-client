@@ -65,6 +65,10 @@ nav {
     background-color: transparent !important;
     height: 70px;
     // box-shadow: 0 0 20px 5px rgba(0, 0, 0, 0.1);
+
+    .ml-1 {
+      cursor: pointer;
+    }
   }
   .navbar-nav-block {
     li {
