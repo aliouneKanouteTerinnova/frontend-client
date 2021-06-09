@@ -72,9 +72,16 @@ export class AuthenticationsService {
     return this.httpClient.post<any>(`${environment.baseUrl}users/register/`, user);
   }
 
-  //Verify token
+  // Verify token
+
   verifyToken(token: any, email: any) {
     return this.httpClient.get<any>(`${environment.baseUrl}users/verify/?token=` + token + `&email=` + email);
+  }
+
+  // Resend mail
+
+  resend(email: any) {
+    return this.httpClient.post<any>(`${environment.baseUrl}users/resend/`, email);
   }
 
   // User Logout

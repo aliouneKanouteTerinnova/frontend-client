@@ -57,7 +57,7 @@
           /><span>ajouter</span>
         </div>
       </div>
-      <span class="price">{{ product.price }}</span>
+      <span class="price">{{ product.price | currency: 'XOF' }}</span>
     </div>
     <div class="product-info">
       <a routerLink="/product-detail/{{ product.id }}/{{ i }}/"
@@ -87,7 +87,7 @@
           /><span>ajouter</span>
         </div>
       </div>
-      <span class="price">{{ product.price }}</span>
+      <span class="price">{{ product.price | currency: 'XOF' }}</span>
     </div>
     <div class="product-info">
       <h3>{{ product.name }}</h3>
@@ -130,7 +130,7 @@
           /><span>ajouter</span>
         </div>
       </div>
-      <span class="price">{{ product.price }}</span>
+      <span class="price">{{ product.price | currency: 'XOF' }}</span>
     </div>
     <div class="product-info">
       <h3>{{ product.name }}</h3>
