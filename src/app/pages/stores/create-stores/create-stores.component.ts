@@ -72,7 +72,7 @@ export class CreateStoresComponent implements OnInit {
         Swal.fire({
           icon: 'error',
           title: 'Oops...',
-          text: err.statusText,
+          text: err.error.error,
         });
         console.log(err);
       }
