@@ -31,7 +31,7 @@ import { ProductDetailComponent } from './pages/products/product-detail/product-
 import { CartComponent } from './pages/cart/cart.component';
 
 export function rootLoaderFactory(http: HttpClient) {
-  return new TranslateHttpLoader(http, 'assets/i18n.', '.json');
+  return new TranslateHttpLoader(http);
 }
 
 @NgModule({

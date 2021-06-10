@@ -1,5 +1,46 @@
 {
-  "title": "Verbindung",
-  "inscription": "Registrierung",
-  "connexion": "VERBINDEN"
+  "registration": {
+    "register": {
+      "title": "ABONNIEREN",
+      "sub_title": "einschreibung",
+      "username": "Benutzername",
+      "email": "E-Mail",
+      "address": "Anschrift",
+      "type_user": "Typ Benutzer",
+      "sexe": "Sexte",
+      "password": "Passwort",
+      "confirm_password": "Bestätigen Sie das Passwort",
+      "conditions": "Ich akzeptiere alle Bedingungen",
+      "inscription": "Registrierung",
+      "registration": "ABONNIEREN",
+      "resend": "E-Mail erneut senden"
+    },
+    "login": {
+      "title": "ANMELDEN",
+      "sub_title": "registrierung",
+      "email": "E-Mail",
+      "password": "Kennwort",
+      "connect_with": "VERBINDEN MIT",
+      "inscription": "registrierung",
+      "reset_password": "Passwort vergessen",
+      "connexion": "ANMELDEN"
+    },
+    "errors": {
+      "required_error": "Dieses Feld ist obligatorisch.",
+      "password_error": "Das passwort muss mindestens 6 zeichen lang sein",
+      "invalid_error": "Dieses feld ist ungültig.",
+      "match_password": "Passwörter müssen übereinstimmen"
+    }
+  },
+  "nav": {
+    "compte": "KOMPTE",
+    "panier": "ANZEIGE",
+    "category": "KATEGORIE"
+  },
+  "home": {
+    "category": " KATEGORIE V",
+    "best_sale": "BESTE VERKÄUFE",
+    "good_deals": "GUTE DEALS",
+    "plus": "MEHR LERNEN >"
+  }
 }

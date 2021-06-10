@@ -1,5 +1,46 @@
 {
-  "title": "connexion",
-  "inscription": "registration",
-  "connexion": "LOGIN"
+  "registration": {
+    "register": {
+      "title": "SUBSCRIBE",
+      "sub_title": "registration",
+      "username": "Username",
+      "email": "Email",
+      "address": "Address",
+      "type_user": "Type User",
+      "sexe": "Sexe",
+      "password": "Password",
+      "confirm_password": "Confirm Password",
+      "conditions": "I accept all conditions",
+      "inscription": "registration",
+      "registration": "SUBSCRIBE",
+      "resend": "Resend Email"
+    },
+    "login": {
+      "title": "LOGIN",
+      "sub_title": "connexion",
+      "email": "Email",
+      "password": "Password",
+      "connect_with": "CONNECT WITH",
+      "inscription": "registration",
+      "reset_password": "Password forgotten",
+      "connexion": "LOGIN"
+    },
+    "errors": {
+      "required_error": "Dieses Feld ist obligatorisch.",
+      "password_error": "Das passwort muss mindestens 6 zeichen lang sein",
+      "invalid_error": "Dieses feld ist ungültig.",
+      "match_password": "Passwörter müssen übereinstimmen"
+    }
+  },
+  "nav": {
+    "compte": "COMPTE",
+    "panier": "PANIER",
+    "category": "CATEGORY"
+  },
+  "home": {
+    "category": "CATEGORY V",
+    "best_sale": "BEST SALES",
+    "good_deals": "GOOD DEALS",
+    "plus": "LEARN MORE >"
+  }
 }

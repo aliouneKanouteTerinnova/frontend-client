@@ -1,7 +1,7 @@
 <app-navbar></app-navbar>
 <div class="title">
-  <h3 *ngIf="isConnection">SE CONNECTER</h3>
-  <h3 *ngIf="isInscription" translate>title</h3>
+  <h3 *ngIf="isConnection" translate>registration.login.title</h3>
+  <h3 *ngIf="isInscription" translate>registration.register.title</h3>
 </div>
 <div class="example-card">
   <div class="globe-image">
@@ -17,39 +17,45 @@
         (click)="connexion()"
         [style.background-color]="isConnection ? '#f39200' : 'white'"
         [style.color]="isConnection ? 'white' : '#29235c'"
+        translate
       >
-        connexion</button
+        registration.login.sub_title</button
       ><button
         class="inscriptionBtn"
         (click)="inscription()"
         [style.background-color]="isInscription ? '#29235c' : 'white'"
+        translate
       >
-        inscription
+        registration.register.sub_title
       </button>
     </div>
     <form [formGroup]="loginForm" (submit)="login()" *ngIf="isConnection && !resendLink">
       <mat-form-field class="example-full-width" appearance="outline">
-        <mat-label>Email</mat-label>
+        <mat-label translate>registration.login.email</mat-label>
         <input type="email" matInput placeholder="Email" formControlName="email" required />
         <mat-error *ngIf="loginForm.controls.email.touched && loginForm.controls.email.invalid">
-          <span *ngIf="loginForm.controls.email.errors.required">This field is mandatory.</span>
-          <span *ngIf="loginForm.controls.email.errors.pattern">This field is invalid.</span>
+          <span *ngIf="loginForm.controls.email.errors.required" translate>registration.errors.required_error</span>
+          <span *ngIf="loginForm.controls.email.errors.pattern" translate>registration.errors.invalid_error</span>
         </mat-error>
       </mat-form-field>
 
       <mat-form-field class="example-full-width" appearance="outline">
-        <mat-label>Password</mat-label>
+        <mat-label translate>registration.login.password</mat-label>
         <input type="password" matInput placeholder="Password" formControlName="password" />
         <mat-error *ngIf="loginForm.controls.password.touched && loginForm.controls.password.invalid">
           <mat-error *ngIf="loginForm.controls.password.touched && loginForm.controls.password.invalid">
-            <span *ngIf="loginForm.controls.password.errors.required">This field is mandatory.</span>
-            <span *ngIf="loginForm.controls.password.errors.minlength">Password must be at least 6 characters</span>
+            <span *ngIf="loginForm.controls.password.errors.required" translate
+              >registration.errors.required_error</span
+            >
+            <span *ngIf="loginForm.controls.password.errors.minlength" translate
+              >registration.errors.password_error</span
+            >
           </mat-error>
         </mat-error>
       </mat-form-field>
-      <button mat-raised-button color="primary">SE CONNECTER</button>
-      <span class="forgotPw"><a href="">Mot de passe oublié</a></span>
-      <h3 class="social-title">SE CONNECTER AVEC</h3>
+      <button mat-raised-button color="primary"><span translate>registration.login.connexion</span></button>
+      <span class="forgotPw"><a href="" translate>registration.login.reset_password</a></span>
+      <h3 class="social-title" translate>registration.login.connect_with</h3>
       <div class="social-network">
         <ul>
           <li><img class="globe" src="./../../assets/img/facebook-logo.jpg" alt="user_icon" /></li>
@@ -59,70 +65,84 @@
     </form>
     <form [formGroup]="registerForm" (submit)="register()" *ngIf="isInscription && !resendLink">
       <mat-form-field class="example-full-width" appearance="outline">
-        <mat-label>Username</mat-label>
+        <mat-label translate>registration.register.username</mat-label>
         <input type="email" matInput placeholder="Username" formControlName="username" required />
         <mat-error *ngIf="registerForm.controls.username.touched && registerForm.controls.username.invalid">
-          <span *ngIf="registerForm.controls.username.errors.required">This field is mandatory.</span>
+          <span *ngIf="registerForm.controls.username.errors.required" translate
+            >registration.errors.required_error</span
+          >
         </mat-error>
       </mat-form-field>
       <mat-form-field class="example-full-width" appearance="outline">
-        <mat-label>Email</mat-label>
+        <mat-label translate>registration.register.email</mat-label>
         <input type="email" matInput placeholder="Email" formControlName="email" required />
         <mat-error *ngIf="registerForm.controls.email.touched && registerForm.controls.email.invalid">
-          <span *ngIf="registerForm.controls.email.errors.required">This field is mandatory.</span>
-          <span *ngIf="registerForm.controls.email.errors.pattern">This field is invalid.</span>
+          <span *ngIf="registerForm.controls.email.errors.required" translate>registration.errors.required_error</span>
+          <span *ngIf="registerForm.controls.email.errors.pattern" translate>registration.errors.invalid_error</span>
         </mat-error>
       </mat-form-field>
 
       <mat-form-field class="example-full-width" appearance="outline">
-        <mat-label>Address</mat-label>
+        <mat-label translate>registration.register.address</mat-label>
         <input type="email" matInput placeholder="Address" formControlName="address" required />
         <mat-error *ngIf="registerForm.controls.address.touched && registerForm.controls.address.invalid">
-          <span *ngIf="registerForm.controls.address.errors.required">This field is mandatory.</span>
+          <span *ngIf="registerForm.controls.address.errors.required" translate
+            >registration.errors.required_error</span
+          >
         </mat-error>
       </mat-form-field>
 
       <mat-form-field class="example-full-width" appearance="outline">
-        <mat-label>Type User</mat-label>
+        <mat-label translate>registration.register.type_user</mat-label>
         <select matNativeControl formControlName="typeUser" required>
           <option *ngFor="let user of listType" [value]="user">
             {{ user }}
           </option>
         </select>
         <mat-error *ngIf="registerForm.controls.typeUser.touched && registerForm.controls.typeUser.invalid">
-          <span *ngIf="registerForm.controls.typeUser.errors.required">This field is mandatory.</span>
+          <span *ngIf="registerForm.controls.typeUser.errors.required" translate
+            >registration.errors.required_error</span
+          >
         </mat-error>
       </mat-form-field>
 
       <mat-form-field class="example-full-width" appearance="outline">
-        <mat-label>Sexe</mat-label>
+        <mat-label translate>registration.register.sexe</mat-label>
         <select matNativeControl formControlName="gender" required>
           <option *ngFor="let gender of listGender" [value]="gender">
             {{ gender }}
           </option>
         </select>
         <mat-error *ngIf="registerForm.controls.gender.touched && registerForm.controls.gender.invalid">
-          <span *ngIf="registerForm.controls.gender.errors.required">This field is mandatory.</span>
+          <span *ngIf="registerForm.controls.gender.errors.required" translate>registration.errors.required_error</span>
         </mat-error>
       </mat-form-field>
 
       <mat-form-field class="example-full-width" appearance="outline">
-        <mat-label>Password</mat-label>
+        <mat-label translate>registration.register.password</mat-label>
         <input type="password" matInput placeholder="Password" formControlName="password" />
         <mat-error *ngIf="registerForm.controls.password.touched && registerForm.controls.password.invalid">
           <mat-error *ngIf="registerForm.controls.password.touched && registerForm.controls.password.invalid">
-            <span *ngIf="registerForm.controls.password.errors.required">This field is mandatory.</span>
-            <span *ngIf="registerForm.controls.password.errors.minlength">Password must be at least 6 characters</span>
+            <span *ngIf="registerForm.controls.password.errors.required" translate
+              >registration.errors.required_error</span
+            >
+            <span *ngIf="registerForm.controls.password.errors.minlength" translate
+              >registration.errors.password_error</span
+            >
           </mat-error>
         </mat-error>
       </mat-form-field>
 
       <mat-form-field class="example-full-width" appearance="outline">
-        <mat-label>Confirm Password</mat-label>
+        <mat-label translate>registration.register.confirm_password</mat-label>
         <input type="password" matInput placeholder="Confirm your password" formControlName="password2" />
         <mat-error *ngIf="registerForm.controls.password2.touched && registerForm.controls.password2.invalid">
-          <span *ngIf="registerForm.controls.password2.errors.required">This field is mandatory.</span>
-          <span *ngIf="registerForm.controls.password2.errors.mustMatch">Passwords must match</span>
+          <span *ngIf="registerForm.controls.password2.errors.required" translate
+            >registration.errors.required_error</span
+          >
+          <span *ngIf="registerForm.controls.password2.errors.mustMatch" translate
+            >registration.errors.match_password</span
+          >
         </mat-error>
       </mat-form-field>
 
@@ -135,14 +155,16 @@
         [labelPosition]="labelPosition"
         [disabled]="disabled"
       >
-        <div class="conditions">J'accepte les conditions d'utilisations</div>
+        <div class="conditions" translate>registration.register.conditions</div>
       </mat-checkbox>
-      <button mat-raised-button color="primary">S'INSCRIRE</button>
+      <button mat-raised-button color="primary"><span translate>registration.register.registration</span></button>
     </form>
 
     <div class="errorMessage">
       <span class="errorMessage" *ngIf="errorMessage">{{ errorMessage }}</span>
     </div>
-    <div *ngIf="resendLink"><button mat-raised-button color="primary" (click)="resend()">Resend Email</button></div>
+    <div *ngIf="resendLink">
+      <button mat-raised-button color="primary" (click)="resend()" translate>registration.register.resend</button>
+    </div>
   </div>
 </div>

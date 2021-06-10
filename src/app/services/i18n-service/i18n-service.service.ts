@@ -14,6 +14,5 @@ export class I18nServiceService {
 
   changeLocale(locale: string) {
     this.translate.use(locale);
-    this.localeEvent.next(locale);
   }
 }
