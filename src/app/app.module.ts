@@ -15,14 +15,6 @@ import { RegistrationComponent } from './pages/registration/registration.compone
 import { CookieService } from 'ngx-cookie-service';
 import { UpdateProfileComponent } from './pages/update-profile/update-profile.component';
 
-export function HttpLoaderFactory(http: HttpClient) {
-  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
-}
-
-import { MatButtonModule } from '@angular/material/button';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatIconModule } from '@angular/material/icon';
-import { MatCardModule } from '@angular/material/card';
 import { NavbarComponent } from './navbar/navbar.component';
 import { ProductsComponent } from './pages/products/products.component';
 import { UpdateProductComponent } from './pages/products/update-product/update-product.component';
@@ -37,6 +29,10 @@ import { MenuComponent } from './components/shared/menu/menu.component';
 import { CheckoutComponent } from './pages/checkout/checkout.component';
 import { ProductDetailComponent } from './pages/products/product-detail/product-detail.component';
 import { CartComponent } from './pages/cart/cart.component';
+
+export function rootLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http, 'assets/i18n.', '.json');
+}
 
 @NgModule({
   declarations: [
@@ -68,7 +64,7 @@ import { CartComponent } from './pages/cart/cart.component';
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
-        useFactory: HttpLoaderFactory,
+        useFactory: rootLoaderFactory,
         deps: [HttpClient],
       },
       isolate: true,

@@ -8,7 +8,9 @@ import { TranslateService } from '@ngx-translate/core';
 export class I18nServiceService {
   localeEvent = new Subject<string>();
 
-  constructor(private translate: TranslateService) {}
+  constructor(private translate: TranslateService) {
+    this.translate.use('en');
+  }
 
   changeLocale(locale: string) {
     this.translate.use(locale);
