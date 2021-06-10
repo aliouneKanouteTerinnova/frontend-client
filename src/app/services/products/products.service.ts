@@ -17,7 +17,7 @@ export class ProductsService {
   constructor(private httpClient: HttpClient) {}
 
   getAllProducts() {
-    return this.httpClient.get<any>(`${environment.baseUrl}products`);
+    return this.httpClient.get<any>(`${environment.baseUrl}products/activated`);
   }
 
   getLatestProducts() {

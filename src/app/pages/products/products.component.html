@@ -39,11 +39,13 @@
           <div class="quantity"><b>Quantity: </b> {{ product.quantity }}</div>
         </div>
         <div class="button_group mt-3">
-          <button mat-raised-button color="accent" class="mr-3" (click)="addProducts(product.id)">Add to cart</button>
+          <button mat-raised-button color="accent" class="mr-3 mb-2" (click)="addProducts(product.id)">
+            Add to cart
+          </button>
           <button
             mat-raised-button
             color="accent"
-            class="mr-3"
+            class="mr-3 mb-2"
             routerLink="/update-product/{{ product.id }}"
             *ngIf="currentUser"
           >

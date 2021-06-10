@@ -10,7 +10,7 @@ export class StoresService {
   constructor(private http: HttpClient) {}
 
   getAllStores() {
-    return this.http.get<any>(`${environment.baseUrl}stores`);
+    return this.http.get<any>(`${environment.baseUrl}stores/activated`);
   }
 
   createStores(store: any, token: string) {

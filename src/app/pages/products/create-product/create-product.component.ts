@@ -56,21 +56,21 @@ export class CreateProductComponent implements OnInit {
   getProducts() {
     this.productsService.getAllProducts().subscribe((data) => {
       console.log('Product', data);
-      this.products = data.products;
+      this.products = data.results;
     });
   }
 
   getCategory() {
     this.categoryService.getAllCategories().subscribe((data) => {
-      console.log('Category', data.categories);
-      this.categorys = data.categories;
+      console.log('Category', data);
+      this.categorys = data.results;
     });
   }
 
   getStores() {
     this.storesService.getAllStores().subscribe((res) => {
       console.log(res);
-      this.stores = res.stores;
+      this.stores = res.results;
     });
   }
 

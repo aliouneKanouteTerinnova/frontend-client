@@ -29,7 +29,7 @@ export class StoresComponent implements OnInit {
   getStores() {
     this.storesService.getAllStores().subscribe((res) => {
       console.log(res);
-      this.stores = res.stores;
+      this.stores = res.results;
     });
   }
 
