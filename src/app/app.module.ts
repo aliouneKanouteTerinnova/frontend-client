@@ -11,9 +11,11 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 
-import { RegistrationComponent } from './pages/registration/registration.component';
+import { RegistrationComponent } from './pages/user/registration/registration.component';
 import { CookieService } from 'ngx-cookie-service';
-import { UpdateProfileComponent } from './pages/update-profile/update-profile.component';
+import { UpdateProfileComponent } from './pages/user/update-profile/update-profile.component';
+// @NgModule({
+//   declarations: [AppComponent, ],
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -33,10 +35,12 @@ import { CreateProductComponent } from './pages/products/create-product/create-p
 import { CategoriesComponent } from './pages/categories/categories.component';
 import { CreateCategoriesComponent } from './pages/categories/create-categories/create-categories.component';
 import { HomeComponent } from './pages/home/home.component';
+import { ResetPasswordComponent } from './pages/user/reset-password/reset-password.component';
 import { MenuComponent } from './components/shared/menu/menu.component';
 import { CheckoutComponent } from './pages/checkout/checkout.component';
 import { ProductDetailComponent } from './pages/products/product-detail/product-detail.component';
 import { CartComponent } from './pages/cart/cart.component';
+import { ResetPassEmailComponent } from './pages/user/reset-password/reset-pass-email/reset-pass-email.component';
 
 @NgModule({
   declarations: [
@@ -55,10 +59,12 @@ import { CartComponent } from './pages/cart/cart.component';
     CategoriesComponent,
     CreateCategoriesComponent,
     HomeComponent,
+    ResetPasswordComponent,
     MenuComponent,
     CheckoutComponent,
     ProductDetailComponent,
     CartComponent,
+    ResetPassEmailComponent,
   ],
 
   imports: [

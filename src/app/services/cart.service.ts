@@ -53,14 +53,14 @@ export class CartService {
         this.productService.getCurrentData(p.id).subscribe((actualProdInfo: Products) => {
           if (this.cartDataServer.data[0].numInCart === 0) {
             this.cartDataServer.data[0].numInCart = p.incart;
-            this.cartDataServer.data[0].product = actualProdInfo;
+            this.cartDataServer.data[0].product = actualProdInfo['product'];
             this.CalculateTotal();
             this.cartDataClient.total = this.cartDataServer.total;
             this.cookieService.set('cart', JSON.stringify(this.cartDataClient));
           } else {
             this.cartDataServer.data.push({
               numInCart: p.incart,
-              product: actualProdInfo,
+              product: actualProdInfo['product'],
             });
             this.CalculateTotal();
             this.cartDataClient.total = this.cartDataServer.total;

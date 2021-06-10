@@ -33,7 +33,7 @@ export class AuthenticationsService {
   // Authentication
 
   login(user: Auth) {
-    return this.httpClient.post<AuthResponded>(`${environment.baseUrl}/users/login`, user).pipe(
+    return this.httpClient.post<AuthResponded>(`${environment.baseUrl}users/login`, user).pipe(
       map((userResponded) => {
         // login successful if there's a jwt token in the response
         if (userResponded) {
@@ -49,7 +49,7 @@ export class AuthenticationsService {
   getUser(token: string) {
     token = 'token ' + token;
     return this.httpClient
-      .get<AuthResponded>(`${environment.baseUrl}/user`, {
+      .get<AuthResponded>(`${environment.baseUrl}user`, {
         headers: new HttpHeaders().set('Authorization', token),
         observe: 'response',
       })
@@ -60,7 +60,7 @@ export class AuthenticationsService {
 
   update(username: any, token: string) {
     token = 'token ' + token;
-    return this.httpClient.put(`${environment.baseUrl}/user`, username, {
+    return this.httpClient.put(`${environment.baseUrl}user`, username, {
       headers: new HttpHeaders().set('Authorization', token),
       observe: 'response',
     });
@@ -69,17 +69,33 @@ export class AuthenticationsService {
   // User Registration
 
   register(user: User) {
-    return this.httpClient.post<any>(`${environment.baseUrl}/users/register/`, user);
+    return this.httpClient.post<any>(`${environment.baseUrl}users/register/`, user);
   }
 
-  //Verify token
-  verifyToken(token: any) {
-    return this.httpClient.get<any>(`${environment.baseUrl}/users/verify/?token=` + token);
+  // Verify token
+
+  verifyToken(token: any, email: any) {
+    return this.httpClient.get<any>(`${environment.baseUrl}users/verify/?token=` + token + `&email=` + email);
+  }
+
+  // Resend mail
+
+  resend(email: any) {
+    return this.httpClient.post<any>(`${environment.baseUrl}users/resend/`, email);
   }
 
   // User Logout
   logOut() {
     this.cookieService.delete('currentUser');
     this.currentUserSubject.next(null);
+  }
+
+  //Password reset
+  getEmailToResetPassword(email: any) {
+    return this.httpClient.post<any>(`${environment.baseUrl}users/password/reset/`, email);
+  }
+
+  resetPassword(value: any) {
+    return this.httpClient.patch<any>(`${environment.baseUrl}users/password/reset/complete/`, value);
   }
 }

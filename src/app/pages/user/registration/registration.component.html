@@ -11,7 +11,7 @@
   </div>
   <div class="center-content">
     <span class="successMessage" *ngIf="successMessage">{{ successMessage }}</span>
-    <div class="button">
+    <div class="button" *ngIf="!resendLink">
       <button
         class="connexionBtn"
         (click)="connexion()"
@@ -27,7 +27,7 @@
         inscription
       </button>
     </div>
-    <form [formGroup]="loginForm" (submit)="login()" *ngIf="isConnection">
+    <form [formGroup]="loginForm" (submit)="login()" *ngIf="isConnection && !resendLink">
       <mat-form-field class="example-full-width" appearance="outline">
         <mat-label>Email</mat-label>
         <input type="email" matInput placeholder="Email" formControlName="email" required />
@@ -48,7 +48,7 @@
         </mat-error>
       </mat-form-field>
       <button mat-raised-button color="primary">SE CONNECTER</button>
-      <span class="forgotPw"><a href="">Mot de passe oublié</a></span>
+      <span class="forgotPw"><a routerLink="/user/reset-password">Mot de passe oublié</a></span>
       <h3 class="social-title">SE CONNECTER AVEC</h3>
       <div class="social-network">
         <ul>
@@ -57,7 +57,7 @@
         </ul>
       </div>
     </form>
-    <form [formGroup]="registerForm" (submit)="register()" *ngIf="isInscription">
+    <form [formGroup]="registerForm" (submit)="register()" *ngIf="isInscription && !resendLink">
       <mat-form-field class="example-full-width" appearance="outline">
         <mat-label>Username</mat-label>
         <input type="email" matInput placeholder="Username" formControlName="username" required />
@@ -143,5 +143,6 @@
     <div class="errorMessage">
       <span class="errorMessage" *ngIf="errorMessage">{{ errorMessage }}</span>
     </div>
+    <div *ngIf="resendLink"><button mat-raised-button color="primary" (click)="resend()">Resend Email</button></div>
   </div>
 </div>

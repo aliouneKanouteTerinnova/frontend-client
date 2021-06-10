@@ -33,7 +33,7 @@ export class RegistrationComponent implements OnInit {
   disabled = false;
   rcpassword: string;
   errorMessage: string;
-  successMessage: string = '';
+  successMessage: string;
   errorResponse: any;
   loginForm: FormGroup;
   registerForm: FormGroup;
@@ -44,6 +44,7 @@ export class RegistrationComponent implements OnInit {
   listType = ['SELLER', 'CUSTOMER'];
   listGender = ['M', 'F', 'OTHERS'];
   token: any;
+  email: any;
   isActivated = false;
   resendLink = false;
 
@@ -57,6 +58,8 @@ export class RegistrationComponent implements OnInit {
   ) {
     this.route.queryParams.subscribe((params) => {
       if (params.token) {
+        console.log(params);
+        this.email = params.email;
         this.token = params.token;
       } else {
         this.token = null;
@@ -68,15 +71,17 @@ export class RegistrationComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.token !== null) {
-      this.authService.verifyToken(this.token).subscribe(
+      this.authService.verifyToken(this.token, this.email).subscribe(
         (data) => {
           if (Number(data.code) === 200) {
             this.isActivated = true;
-            this.successMessage = 'Account activated successfully, you can now lob in';
+            this.successMessage = 'Account activated successfully, you can now log in';
           }
         },
         (error) => {
+          console.log(error);
           this.resendLink = true;
+          this.errorMessage = 'Token expired, could you register again';
         }
       );
     }
@@ -106,6 +111,31 @@ export class RegistrationComponent implements OnInit {
     this.isConnection = true;
     this.isInscription = false;
   }
+  resend() {
+    const email = {
+      email: this.email,
+    };
+    console.log(email);
+    this.authService.resend(email).subscribe(
+      (data) => {
+        if (data) {
+          this.isActivated = true;
+          Swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: 'Check your mail to activate your account!',
+            showConfirmButton: false,
+            timer: 2000,
+          });
+        }
+      },
+      (error) => {
+        console.log(error);
+        this.resendLink = true;
+        this.errorMessage = 'An error occured';
+      }
+    );
+  }
 
   inscription() {
     this.isConnection = false;
@@ -130,18 +160,29 @@ export class RegistrationComponent implements OnInit {
     if (!this.registerForm.valid) {
       return;
     }
-    this.authService.register(user).subscribe((response) => {
-      Swal.fire({
-        position: 'top-end',
-        icon: 'success',
-        title: 'Check your mail to activate your account!',
-        showConfirmButton: false,
-        timer: 2000,
-      });
-      this.rpassword = '';
-      this.rcpassword = '';
-      this.remail = '';
-    });
+    this.authService.register(user).subscribe(
+      (response) => {
+        Swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          title: 'Check your mail to activate your account!',
+          showConfirmButton: false,
+          timer: 2000,
+        });
+        this.rpassword = '';
+        this.rcpassword = '';
+        this.remail = '';
+      },
+      (error) => {
+        if (error.error.errors.email) {
+          this.errorMessage = error.error.errors.email;
+        } else {
+          if (error.error.errors.username) {
+            this.errorMessage = error.error.errors.username;
+          }
+        }
+      }
+    );
   }
   login() {
     const email = this.loginForm.get('email').value;
@@ -158,8 +199,7 @@ export class RegistrationComponent implements OnInit {
         this.errorMessage = '';
       },
       (error) => {
-        this.errorMessage = 'Username/Password not correct';
-        this.errorResponse = error;
+        this.errorMessage = error.error.errors.error;
       }
     );
   }

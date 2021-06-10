@@ -11,7 +11,7 @@
         <table class="table">
           <thead class="table">
             <tr class="text-center">
-              <th>Category</th>
+              <th>Image</th>
               <th>Title</th>
               <th>Price</th>
               <th>Quantity</th>
@@ -36,7 +36,7 @@
                 <p>{{ c.product.name }}</p>
               </td>
               <td>
-                <p>{{ c.product.price }}</p>
+                <p>{{ c.product.price | currency: 'XOF' }}</p>
               </td>
               <td>
                 <form>
@@ -70,7 +70,7 @@
                 </form>
               </td>
               <td>
-                <p>{{ cartService.CalculateSubTotal(i) }}</p>
+                <p>{{ cartService.CalculateSubTotal(i) | currency: 'XOF' }}</p>
               </td>
             </tr>
             <tr class="border-0">
@@ -78,7 +78,7 @@
               <td></td>
               <td></td>
               <td>TOTAL</td>
-              <td>{{ cartTotal }}</td>
+              <td>{{ cartTotal | currency: 'XOF' }}</td>
             </tr>
           </tbody>
         </table>
