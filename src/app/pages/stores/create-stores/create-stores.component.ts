@@ -42,17 +42,10 @@ export class CreateStoresComponent implements OnInit {
     const data = new Store();
 
     data.name = this.createStore.get('name').value;
-    // data.created_at = '';
+
     data.created_by = 1;
     data.store_address = this.createStore.get('store_address').value;
     data.is_active = true;
-
-    // const data = {
-    //   name: this.createStore.get('name').value,
-    //   // created_by: 1,
-    //   address: this.createStore.get('store_address').value,
-    //   is_active: true,
-    // };
 
     console.log(data);
     console.log(this.currentUser.user.token);
