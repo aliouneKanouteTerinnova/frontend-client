@@ -5,6 +5,7 @@ import { StoresService } from 'src/app/services/stores/stores.service';
 import { Store } from './../store';
 import Swal from 'sweetalert2';
 import { AuthenticationsService } from 'src/app/services/authentications.service';
+import { ThrowStmt } from '@angular/compiler';
 
 @Component({
   selector: 'app-edit-stores',
@@ -48,13 +49,6 @@ export class EditStoresComponent implements OnInit {
   }
 
   onSubmit() {
-    const data = new Store();
-    data.name = this.editStore.get('name').value;
-    // data.created_at = this.editStore.get('created_at').value;
-    // data.created_by = this.editStore.get('created_by').value;
-    data.store_address = this.editStore.get('store_address').value;
-
-    console.log(data);
     this.storesService.getCurrentData(this.router.snapshot.params.id).subscribe((response) => {
       console.log(response);
     });
@@ -62,12 +56,12 @@ export class EditStoresComponent implements OnInit {
     const store = {
       id: this.router.snapshot.params.id,
       name: this.editStore.get('name').value,
+      store_address: this.editStore.get('store_address').value,
       is_active: this.editStore.get('is_active').value,
     };
 
     this.storesService.upDateStores(this.router.snapshot.params.id, store, this.currentUser.user.token).subscribe(
       (res) => {
-        console.log(res);
         Swal.fire({
           position: 'top-end',
           icon: 'success',
@@ -75,14 +69,14 @@ export class EditStoresComponent implements OnInit {
           showConfirmButton: false,
           timer: 1500,
         });
-        this.route.navigate(['/create-store']);
+        this.route.navigate(['/list-store']);
       },
       (err) => {
         console.log(err);
         Swal.fire({
           icon: 'error',
           title: 'Oops...',
-          text: 'Something went wrong!',
+          text: err.error.error,
         });
       }
     );

@@ -58,7 +58,7 @@ export class UpdateCategoriesComponent implements OnInit {
           Swal.fire({
             position: 'top-end',
             icon: 'success',
-            title: 'Your work has been saved',
+            title: 'categories modified',
             showConfirmButton: false,
             timer: 1500,
           });
@@ -69,7 +69,7 @@ export class UpdateCategoriesComponent implements OnInit {
           Swal.fire({
             icon: 'error',
             title: 'Oops...',
-            text: 'Something went wrong!',
+            text: err.error.error,
           });
           console.log(err);
         }

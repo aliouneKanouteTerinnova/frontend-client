@@ -29,6 +29,7 @@
         </div>
         <div class="button">
           <button
+            [disabled]="disabledBtn"
             mat-raised-button
             color="accent"
             routerLink="/updatestore/{{ store.id }}"
@@ -37,7 +38,15 @@
           >
             Edit
           </button>
-          <button mat-raised-button color="warn" (click)="deleteStore(store.id)" *ngIf="currentUser">Delete</button>
+          <button
+            [disabled]="disabledBtn"
+            mat-raised-button
+            color="warn"
+            (click)="deleteStore(store.id)"
+            *ngIf="currentUser"
+          >
+            Delete
+          </button>
         </div>
       </div>
     </div>
