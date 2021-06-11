@@ -28,6 +28,7 @@
           <div class="card-body adresse"><b>Description:</b> {{ category.description }}</div>
         </div>
         <div class="button">
+          <!-- [disabled]="!disabledBtn" -->
           <button
             mat-raised-button
             color="accent"
@@ -37,6 +38,7 @@
           >
             Edit
           </button>
+          <!-- [disabled]="!disabledBtn" -->
           <button mat-raised-button color="warn" (click)="deleteCategory(category.id)" *ngIf="currentUser">
             Delete
           </button>

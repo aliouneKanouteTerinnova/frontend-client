@@ -11,6 +11,8 @@ import { CategoriesService } from 'src/app/services/categories/categories.servic
 export class CategoriesComponent implements OnInit {
   categories: Category;
   currentUser: any;
+  // disabledBtn = false;
+  // userToken: string;
 
   constructor(private categoryService: CategoriesService, private authService: AuthenticationsService) {}
 
@@ -18,6 +20,11 @@ export class CategoriesComponent implements OnInit {
     this.currentUser = this.authService.currentUserValue;
     this.getCategory();
     console.log(this.currentUser);
+    // this.userToken = this.currentUser.user.token;
+
+    // if (!this.userToken) {
+    //   this.disabledBtn = true;
+    // }
   }
 
   getCategory() {

@@ -43,6 +43,7 @@ export class CreateProductComponent implements OnInit {
       quantity: ['', Validators.required],
       category: '',
       store: '',
+      img: ['', Validators.required],
     });
 
     this.getProducts();
@@ -98,6 +99,7 @@ export class CreateProductComponent implements OnInit {
     products.quantity = this.createProductForm.get('quantity').value;
     products.category = this.categoryId;
     products.store = this.storeId;
+    products.image = this.createProductForm.get('img').value;
 
     this.productsService.addProduct(products, this.currentUser.user.token).subscribe(
       (res) => {
