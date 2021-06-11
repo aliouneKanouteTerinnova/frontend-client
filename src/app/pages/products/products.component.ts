@@ -24,6 +24,8 @@ export class ProductsComponent implements OnInit {
   closeResult = '';
   currentUser: any;
   cartData: CartModelServer;
+  userType: string;
+  disabledBtn = false;
 
   constructor(
     private productsService: ProductsService,
@@ -38,6 +40,13 @@ export class ProductsComponent implements OnInit {
     this.cartService.cartDataObs$.subscribe((data) => (this.cartData = data));
     this.getProducts();
     this.getCategory();
+
+    console.log(this.currentUser.user.account_type);
+    this.userType = this.currentUser.user.account_type;
+    console.log('user type: ', this.userType);
+    if (this.userType === 'CUSTOMER') {
+      this.disabledBtn = true;
+    }
   }
 
   getProducts() {
@@ -93,19 +102,6 @@ export class ProductsComponent implements OnInit {
       timer: 1500,
     });
   }
-
-  // updateProducts(product: Products) {
-  //   console.log(product);
-  //   this.productsService.updateProduct(product).subscribe(
-  //     (res) => {
-  //       console.log(res);
-  //     },
-  //     (err) => {
-  //       console.log(err);
-  //     }
-  //   );
-  //   console.log('The product has been updated!', product);
-  // }
 }
 function id(id: any) {
   throw new Error('Function not implemented.');

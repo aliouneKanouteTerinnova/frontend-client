@@ -43,6 +43,7 @@
             Add to cart
           </button>
           <button
+            [disabled]="disabledBtn"
             mat-raised-button
             color="accent"
             class="mr-3 mb-2"
@@ -52,7 +53,13 @@
             Update
           </button>
 
-          <button mat-raised-button color="warn" (click)="deleteProducts(product.id)" *ngIf="currentUser">
+          <button
+            [disabled]="disabledBtn"
+            mat-raised-button
+            color="warn"
+            (click)="deleteProducts(product.id)"
+            *ngIf="currentUser"
+          >
             Delete
           </button>
         </div>

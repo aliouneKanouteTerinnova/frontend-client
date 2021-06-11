@@ -14,6 +14,8 @@ export class StoresComponent implements OnInit {
   stores: [];
 
   currentUser: any;
+  userType: string;
+  disabledBtn = false;
 
   constructor(
     private fb: FormBuilder,
@@ -24,6 +26,13 @@ export class StoresComponent implements OnInit {
   ngOnInit(): void {
     this.currentUser = this.authService.currentUserValue;
     this.getStores();
+
+    console.log(this.currentUser.user.account_type);
+    this.userType = this.currentUser.user.account_type;
+    console.log('user type: ', this.userType);
+    if (this.userType === 'CUSTOMER') {
+      this.disabledBtn = true;
+    }
   }
 
   getStores() {
