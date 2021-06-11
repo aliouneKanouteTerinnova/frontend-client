@@ -26,7 +26,7 @@ export class CategoriesService {
     });
   }
 
-  updateCategory(id: number, category: any, token: string) {
+  updateCategory(id: string, category: any, token: string) {
     token = 'token ' + token;
     return this.httpClient.put(`${environment.baseUrl}categories/${id}`, category, {
       headers: new HttpHeaders().set('Authorization', token),
@@ -34,7 +34,11 @@ export class CategoriesService {
     });
   }
 
-  deleteCategory(id: number) {
-    return this.httpClient.delete(`${environment.baseUrl}${id}`);
+  deleteCategory(id: string, token: string) {
+    token = 'token ' + token;
+    return this.httpClient.delete(`${environment.baseUrl}categories/${id}`, {
+      headers: new HttpHeaders().set('Authorization', token),
+      observe: 'response',
+    });
   }
 }
