@@ -33,7 +33,7 @@ export class AuthenticationsService {
   // Authentication
 
   login(user: Auth) {
-    return this.httpClient.post<AuthResponded>(`${environment.baseUrl}users/login/`, user).pipe(
+    return this.httpClient.post<AuthResponded>(`${environment.baseUrl}users/login`, user).pipe(
       map((userResponded) => {
         // login successful if there's a jwt token in the response
         if (userResponded) {

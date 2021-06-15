@@ -60,6 +60,11 @@
             />
             <label for="active" class="form-check-label">Is active</label>
           </div>
+
+          <div>
+            <label for="img">Image</label>
+            <input type="text" name="img" id="img" formControlName="img" />
+          </div>
         </div>
 
         <button [disabled]="createProductForm.invalid" mat-raised-button color="accent" class="btn-block">

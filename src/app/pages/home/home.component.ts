@@ -82,7 +82,6 @@ export class HomeComponent implements OnInit {
   }
   getProducts() {
     this.productsService.getAllProducts().subscribe((data) => {
-      console.log('Product', data.results);
       this.products = data.results;
       this.products = this.products.slice(0, 15);
       this.bestSelling = this.products.slice(0, 5);

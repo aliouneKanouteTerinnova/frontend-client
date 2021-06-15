@@ -26,7 +26,7 @@
       <div class="col-md-5 col-lg-3 product" *ngFor="let product of products">
         <div class="store_name"><b>Store: </b> {{ product.store }}</div>
         <div class="img mb-2">
-          <img class="img-thumbnail" src="./../../../assets/img/vanaa_logo.svg" alt="" />
+          <img class="img-thumbnail" src="{{ product.image }}" alt="" />
         </div>
         <div class="content">
           <h3 class="name"><b>Name: </b>{{ product.name }}</h3>
@@ -39,18 +39,27 @@
           <div class="quantity"><b>Quantity: </b> {{ product.quantity }}</div>
         </div>
         <div class="button_group mt-3">
-          <button mat-raised-button color="accent" class="mr-3" (click)="addProducts(product.id)">Add to cart</button>
+          <button mat-raised-button color="accent" class="mr-3 mb-2" (click)="addProducts(product.id)">
+            Add to cart
+          </button>
           <button
+            [disabled]="disabledBtn"
             mat-raised-button
             color="accent"
-            class="mr-3"
+            class="mr-3 mb-2"
             routerLink="/update-product/{{ product.id }}"
             *ngIf="currentUser"
           >
             Update
           </button>
 
-          <button mat-raised-button color="warn" (click)="deleteProducts(product.id)" *ngIf="currentUser">
+          <button
+            [disabled]="disabledBtn"
+            mat-raised-button
+            color="warn"
+            (click)="deleteProducts(product.id)"
+            *ngIf="currentUser"
+          >
             Delete
           </button>
         </div>

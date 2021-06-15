@@ -1,3 +1,4 @@
+import { UpdateCategoriesComponent } from './pages/categories/update-categories/update-categories.component';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -65,6 +66,7 @@ import { ResetPassEmailComponent } from './pages/user/reset-password/reset-pass-
     ProductDetailComponent,
     CartComponent,
     ResetPassEmailComponent,
+    UpdateCategoriesComponent,
   ],
 
   imports: [

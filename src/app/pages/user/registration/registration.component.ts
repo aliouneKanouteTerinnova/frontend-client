@@ -200,7 +200,6 @@ export class RegistrationComponent implements OnInit {
       },
       (error) => {
         this.errorMessage = error.error.errors.error;
-
       }
     );
   }
