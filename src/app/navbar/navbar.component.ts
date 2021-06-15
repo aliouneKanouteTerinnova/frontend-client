@@ -1,5 +1,7 @@
 import { MenuItem } from './../menu-item';
 import { Component, OnInit } from '@angular/core';
+import { CartService } from '../services/cart.service';
+import { CartModelServer } from '../models/cart';
 
 @Component({
   selector: 'app-navbar',
@@ -23,7 +25,20 @@ export class NavbarComponent implements OnInit {
   //   },
   // ];
 
-  constructor() {}
+  cartData: CartModelServer;
+  cartTotal: Number;
+  subTotal: Number;
 
-  ngOnInit(): void {}
+  constructor(public cartService: CartService) {}
+
+  ngOnInit(): void {
+    this.cartService.cartDataObs$.subscribe((data: CartModelServer) => {
+      this.cartData = data;
+      console.log('first cartData', this.cartData);
+    });
+    this.cartService.cartTotal$.subscribe((total) => {
+      this.cartTotal = total;
+      console.log('first cartTotal', this.cartTotal);
+    });
+  }
 }
