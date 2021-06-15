@@ -24,7 +24,9 @@
         <a class="nav-link" routerLink="/cart">
           PANIER
           <span class="ml-1">
-            <img src="../../assets/img/Panier.svg" width="50" alt="" />
+            <img src="../../assets/img/Panier.svg" width="50" alt="" /><span class="badge">{{
+              cartData.data[0].numInCart !== 0 ? cartData.data.length : 0
+            }}</span>
           </span>
         </a>
       </li>
