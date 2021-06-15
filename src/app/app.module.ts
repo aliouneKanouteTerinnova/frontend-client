@@ -42,6 +42,8 @@ import { CheckoutComponent } from './pages/checkout/checkout.component';
 import { ProductDetailComponent } from './pages/products/product-detail/product-detail.component';
 import { CartComponent } from './pages/cart/cart.component';
 import { ResetPassEmailComponent } from './pages/user/reset-password/reset-pass-email/reset-pass-email.component';
+import { CategoryPageComponent } from './pages/category-page/category-page.component';
+import { FooterComponent } from './components/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -67,6 +69,8 @@ import { ResetPassEmailComponent } from './pages/user/reset-password/reset-pass-
     CartComponent,
     ResetPassEmailComponent,
     UpdateCategoriesComponent,
+    CategoryPageComponent,
+    FooterComponent,
   ],
 
   imports: [

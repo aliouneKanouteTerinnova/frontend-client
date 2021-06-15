@@ -8,6 +8,13 @@
             <label for="name">Name</label>
             <input type="text" class="form-control" formControlName="name" />
           </div>
+
+          <div class="form-group col-6">
+            <label for="children">Parent</label>
+            <select class="form-control" formControlName="parent" (change)="categoryEvent($event)">
+              <option *ngFor="let category of categorys" value="{{ category.name }}">{{ category.name }}</option>
+            </select>
+          </div>
         </div>
 
         <div class="row">
@@ -30,6 +37,13 @@
               (click)="checkCheckBoxvalue(ch)" -->
             <label for="active" class="form-check-label">Is active</label>
           </div>
+
+          <!-- <div class="form-group col-6">
+            <label for="children">Children</label>
+            <select class="form-control" formControlName="children" (change)="categoryEvent($event)">
+              <option *ngFor="let category of categorys" value="{{ category.id }}">{{ category.name }}</option>
+            </select>
+          </div> -->
         </div>
 
         <button [disabled]="createCategoriesForm.invalid" mat-raised-button color="accent" class="btn-block">
