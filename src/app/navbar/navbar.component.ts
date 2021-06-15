@@ -2,6 +2,8 @@ import { MenuItem } from './../menu-item';
 import { Component, OnInit } from '@angular/core';
 import { CartService } from '../services/cart.service';
 import { CartModelServer } from '../models/cart';
+import { AuthenticationsService } from '../services/authentications.service';
+import { AuthResponded } from '../models/auth';
 
 @Component({
   selector: 'app-navbar',
@@ -28,17 +30,17 @@ export class NavbarComponent implements OnInit {
   cartData: CartModelServer;
   cartTotal: Number;
   subTotal: Number;
+  currentUser: AuthResponded;
 
-  constructor(public cartService: CartService) {}
+  constructor(public cartService: CartService, private authService: AuthenticationsService) {}
 
   ngOnInit(): void {
+    this.currentUser = this.authService.currentUserValue;
     this.cartService.cartDataObs$.subscribe((data: CartModelServer) => {
       this.cartData = data;
-      console.log('first cartData', this.cartData);
     });
     this.cartService.cartTotal$.subscribe((total) => {
       this.cartTotal = total;
-      console.log('first cartTotal', this.cartTotal);
     });
   }
 }
