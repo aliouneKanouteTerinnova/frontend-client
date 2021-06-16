@@ -70,12 +70,18 @@
     <div class="ctg-img mt-5">
       <div class="img-1">
         <img src="../../../assets/img/Products/10.png" alt="" />
+        <h2>{{ listParent[0].name }}</h2>
+        <h3>{{ listParent[0].description }}</h3>
       </div>
       <div class="img-2">
         <img src="../../../assets/img/Products/11.png" alt="" />
+        <h2>{{ listParent[1].name }}</h2>
+        <h3>{{ listParent[1].description }}</h3>
       </div>
       <div class="img-3">
         <img src="../../../assets/img/Products/12.png" alt="" />
+        <h2>{{ listParent[3].name }}</h2>
+        <h3>{{ listParent[3].description }}</h3>
       </div>
     </div>
   </div>
@@ -88,7 +94,11 @@
 
     <div class="all-ctg">
       <div class="section wrapper">
-        <div class="box span_1_of_4">
+        <div class="box span_1_of_4" *ngFor="let category of listParent.slice(3, 7); let i = index">
+          <img src="../../../assets/img/Products/{{ i }}.png" alt="" width="250" />
+          <h2>{{ category.name }}</h2>
+        </div>
+        <!-- <div class="box span_1_of_4">
           <img src="../../../assets/img/Products/0.png" alt="" width="250" />
         </div>
         <div class="box span_1_of_4">
@@ -96,10 +106,7 @@
         </div>
         <div class="box span_1_of_4">
           <img src="../../../assets/img/Products/0.png" alt="" width="250" />
-        </div>
-        <div class="box span_1_of_4">
-          <img src="../../../assets/img/Products/0.png" alt="" width="250" />
-        </div>
+        </div> -->
       </div>
     </div>
   </div>
