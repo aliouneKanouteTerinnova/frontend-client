@@ -31,9 +31,7 @@ export class HomeComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    console.log(this.router.url);
     this.currentUser = this.authService.currentUserValue;
-    console.log(this.currentUser);
     this.countries = this.allCountries.slice(this.firstIndex, this.firstIndex + 3);
     this.firstIndex = this.firstIndex + 1;
     this.getProducts();
