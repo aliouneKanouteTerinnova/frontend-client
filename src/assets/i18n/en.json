@@ -26,10 +26,10 @@
       "connexion": "LOGIN"
     },
     "errors": {
-      "required_error": "Dieses Feld ist obligatorisch.",
-      "password_error": "Das passwort muss mindestens 6 zeichen lang sein",
-      "invalid_error": "Dieses feld ist ungültig.",
-      "match_password": "Passwörter müssen übereinstimmen"
+      "required_error": "This field is mandatory.",
+      "password_error": "The password must be at least 6 characters long",
+      "invalid_error": "This field is invalid.",
+      "match_password": "Passwords must match"
     }
   },
   "nav": {
