@@ -7,7 +7,7 @@ import { v4 as uuidv4 } from 'uuid';
 import Swal from 'sweetalert2';
 import { AuthenticationsService } from 'src/app/services/authentications.service';
 import { CartService } from 'src/app/services/cart.service';
-import { CartModelServer } from 'src/app/models/cart';
+import { CartModelServer } from 'src/app/models/cart/cart';
 
 uuidv4();
 
