@@ -1,11 +1,11 @@
 <app-navbar></app-navbar>
 <div *ngIf="cartData.data[0].numInCart === 0" class="text-center my-5">
-  <h4>Your Cart Is Empty</h4>
-  <button class="btn btn-primary btn-lg mt-3" routerLink="/">GO TO SHOP</button>
+  <h4 translate>basket.empty_basket</h4>
+  <button class="btn btn-primary btn-lg mt-3" routerLink="/" translate>basket.go_shop</button>
 </div>
 <div class="container" *ngIf="cartData.data[0].numInCart !== 0">
   <div class="main-product">
-    <div class="basket-title"><h3>BASKET</h3></div>
+    <div class="basket-title"><h3 translate>basket.basket</h3></div>
     <div class="basket">
       <div class="product" *ngFor="let c of cartData.data; let i = index">
         <div class="image"><img src="./../../assets/img/Products/{{ i }}.png" alt="" /></div>
@@ -16,10 +16,10 @@
           </p>
           <div class="button">
             <button>
-              <span>Unité: {{ c.product.price | currency: 'XOF' }}</span>
+              <span translate>basket.unity </span><span>{{ c.product.price | currency: 'XOF' }}</span>
             </button>
             <form>
-              <span>Qtés: </span>
+              <span translate>basket.qty </span>
               <div class="value-button" id="decrease" (click)="ChangeQuantity(i, false)">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -49,7 +49,8 @@
               </div>
             </form>
             <button>
-              <span class="totalBtn">Total: {{ cartService.CalculateSubTotal(i) | currency: 'XOF' }}</span>
+              <span class="totalBtn" translate>basket.total </span
+              ><span>{{ cartService.CalculateSubTotal(i) | currency: 'XOF' }}</span>
             </button>
           </div>
           <div class="icone">
@@ -74,25 +75,27 @@
       </div>
     </div>
     <div class="tolalPrice">
-      <h3>Total : {{ cartTotal | currency: 'XOF' }}</h3>
+      <h3 translate>
+        basket.total <span> {{ cartTotal | currency: 'XOF' }}</span>
+      </h3>
     </div>
   </div>
   <div class="checkout">
     <div class="total">
-      <h6 class="title">TOTAL</h6>
+      <h6 class="title" translate>basket.total</h6>
       <div class="subtotal">
         <div class="subtotal1">
-          <span>Total :</span> <span>{{ cartTotal | currency: 'XOF' }}</span>
+          <span translate>basket.total </span> <span>{{ cartTotal | currency: 'XOF' }}</span>
         </div>
-        <div class="subtotal2"><span>Livaison :</span> <span> CFA 0</span></div>
+        <div class="subtotal2"><span translate>basket.delivery </span> <span> CFA 0</span></div>
         <div class="subtotal1">
-          <span>Net à payé :</span> <span>{{ cartTotal | currency: 'XOF' }}</span>
+          <span translate>basket.net_to_pay </span> <span>{{ cartTotal | currency: 'XOF' }}</span>
         </div>
       </div>
-      <div class="checkouBtn"><button>CHECK OUT</button></div>
+      <div class="checkouBtn"><button translate>basket.checkout</button></div>
     </div>
     <div class="payment-method">
-      <div class="title"><span>NOUS ACCEPTONS</span></div>
+      <div class="title"><span translate>basket.accept</span></div>
       <div class="payment">
         <img id="Rectangle_199" src="./../../assets/img/Rectangle_199.png" />
       </div>
@@ -100,7 +103,7 @@
   </div>
 </div>
 <div class="followed" *ngIf="cartData.data[0].numInCart !== 0">
-  <div class="followed-title"><h3>Followed product</h3></div>
+  <div class="followed-title"><h3 translate>basket.followed_product</h3></div>
   <div class="home-main">
     <div class="home-product" *ngFor="let product of bestSelling; let i = index">
       <img src="./../../assets/img/Products/{{ i }}.png" alt="" />
@@ -112,14 +115,14 @@
           <span>{{ product.price | currency: 'XOF' }}</span>
         </div>
         <div class="addCart">
-          <button (click)="addToCart(product.id)">Add to cart</button>
+          <button (click)="addToCart(product.id)" translate>basket.add_cart</button>
         </div>
       </div>
     </div>
   </div>
 </div>
 <div class="followed" *ngIf="cartData.data[0].numInCart !== 0">
-  <div class="followed-title"><h3>Similar products</h3></div>
+  <div class="followed-title"><h3 translate>basket.similar_product</h3></div>
   <div class="home-main">
     <div class="home-product" *ngFor="let product of bestSelling; let i = index">
       <img src="./../../assets/img/Products/{{ i }}.png" alt="" />

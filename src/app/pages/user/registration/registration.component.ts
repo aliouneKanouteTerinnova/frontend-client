@@ -11,13 +11,9 @@ import Swal from 'sweetalert2';
 import { User } from 'src/app/models/user/user';
 import { AuthenticationsService } from 'src/app/services/authentications.service';
 import { TranslateService } from '@ngx-translate/core';
-import { I18nServiceService } from 'src/app/services/i18n-service/i18n-service.service';
 import { MustMatch } from 'src/app/_helpers/must-match.validator';
 import { Auth, AuthResponded } from 'src/app/models/auth/auth';
 import { Router, ActivatedRoute } from '@angular/router';
-import { AccountType } from 'src/app/enums/account-type.enum';
-import { Gender } from 'src/app/enums/gender.enum';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { Address } from 'src/app/models/address/address';
 
 @Component({
@@ -53,7 +49,6 @@ export class RegistrationComponent implements OnInit {
     private authService: AuthenticationsService,
     private formBuilder: FormBuilder,
     private translate: TranslateService,
-    private i18nService: I18nServiceService,
     private router: Router,
     private route: ActivatedRoute
   ) {
@@ -86,7 +81,6 @@ export class RegistrationComponent implements OnInit {
         }
       );
     }
-    this.i18nService.localeEvent.subscribe((locale) => this.translate.use(locale));
     this.registerForm = this.formBuilder.group(
       {
         username: [null, Validators.required],

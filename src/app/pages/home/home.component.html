@@ -2,7 +2,7 @@
 <app-header></app-header>
 <div class="scrollBar" *ngIf="products.length > 0">
   <div class="buttonEl">
-    <button mat-raised-button color="primary" class="categoryScroll"><span>CATEGORY V</span></button>
+    <button mat-raised-button color="primary" class="categoryScroll"><span translate>home.category</span></button>
   </div>
   <div class="_2KdhY">
     <div class="_2B5SH _1nF12 _3S3n_">
@@ -68,8 +68,7 @@
     </div>
   </div>
 </div>
-<div class="subtitle" *ngIf="products.length === 0"><h3>NO PRODUCT AVAILABLE</h3></div>
-<div class="subtitle" *ngIf="products.length > 0"><h3>MEILLEURES VENTES</h3></div>
+<div class="subtitle"  *ngIf="products.length > 0"><h3 translate>home.best_sale</h3></div>
 <div class="main">
   <div class="product" *ngFor="let product of bestSelling; let i = index">
     <img src="./../../assets/img/Products/{{ i }}.png" alt="" />
@@ -106,13 +105,13 @@
       Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore<br />
       magna aliqua. Ut enim ad minim veniam, quis nostrud
     </h6>
-    <button mat-button class="advertiseBtn"><span>EN SAVOIR PLUS ></span></button>
+    <button mat-button class="advertiseBtn"><span translate>home.plus </span></button>
   </div>
   <div class="imgEl">
     <img src="./../../assets/img/clothes.png" alt="advertise" />
   </div>
 </div>
-<div class="subtitle" *ngIf="goodStuff.length > 0"><h3>LES BONNES AFFAIRES</h3></div>
+<div class="subtitle" *ngIf="goodStuff.length > 0"><h3 translate>home.good_deals</h3></div>
 <div class="main">
   <div class="product" *ngFor="let product of goodStuff; let i = index">
     <img src="./../../assets/img/Products/{{ i }}.png" alt="" />

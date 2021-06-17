@@ -16,17 +16,17 @@
         <a class="nav-link" routerLink="/register">
           <span class="ml-1"> <img src="../../assets/img/USER.svg" width="50" alt="" /> </span
           ><span *ngIf="currentUser">Hello {{ currentUser['user'].username }}</span
-          ><span *ngIf="!currentUser">Log In/Register</span>
+          ><span *ngIf="!currentUser" translate>nav.compte</span>
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" routerLink="/cart">
+        <a class="nav-link" routerLink="/cart" translate>
           <span class="ml-1">
             <img src="../../assets/img/Panier.svg" width="50" alt="" /><span class="badge">{{
               cartData.data[0].numInCart !== 0 ? cartData.data.length : 0
             }}</span>
           </span>
-          &nbsp;&nbsp;Panier
+          &nbsp;&nbsp;nav.panier
         </a>
       </li>
     </ul>
@@ -66,9 +66,8 @@
 
   <div class="lang">
     <ul class="d-flex">
-      <li><strong>EN</strong>/</li>
       <li>
-        <strong>FR</strong>
+        <strong (click)="changeLang()">{{ lang }}</strong>
       </li>
     </ul>
   </div>
