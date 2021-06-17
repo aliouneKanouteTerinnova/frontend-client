@@ -33,8 +33,8 @@
     }
   },
   "nav": {
-    "compte": "KOMPTE",
-    "panier": "ANZEIGE",
+    "compte": "Einloggen/Registrieren",
+    "panier": "Anzeige",
     "category": "KATEGORIE"
   },
   "home": {
@@ -42,5 +42,20 @@
     "best_sale": "BESTE VERKÄUFE",
     "good_deals": "GUTE DEALS",
     "plus": "MEHR LERNEN >"
+  },
+  "basket": {
+    "empty_basket": "Ihr Warenkorb ist leer",
+    "go_shop": "ZUM SHOP GEHEN",
+    "basket": "ANZEIGE",
+    "unity": "Einheit",
+    "qty": "Menge",
+    "total": "Gesamt",
+    "net_to_pay": "Netto zu zahlen",
+    "delivery": "Lieferung",
+    "checkout": "AUSSCHEINEN",
+    "accept": "WIR AKZEPTIEREN",
+    "followed_product": "Verfolgtes Produkt",
+    "add_cart": "In den Warenkorb legen",
+    "similar_product": "Ähnliche Produkte"
   }
 }

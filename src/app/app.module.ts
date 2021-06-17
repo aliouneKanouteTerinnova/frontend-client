@@ -1,3 +1,4 @@
+import { UpdateCategoriesComponent } from './pages/categories/update-categories/update-categories.component';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -11,9 +12,11 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 
-import { RegistrationComponent } from './pages/registration/registration.component';
+import { RegistrationComponent } from './pages/user/registration/registration.component';
 import { CookieService } from 'ngx-cookie-service';
-import { UpdateProfileComponent } from './pages/update-profile/update-profile.component';
+import { UpdateProfileComponent } from './pages/user/update-profile/update-profile.component';
+// @NgModule({
+//   declarations: [AppComponent, ],
 
 import { NavbarComponent } from './navbar/navbar.component';
 import { ProductsComponent } from './pages/products/products.component';
@@ -25,10 +28,12 @@ import { CreateProductComponent } from './pages/products/create-product/create-p
 import { CategoriesComponent } from './pages/categories/categories.component';
 import { CreateCategoriesComponent } from './pages/categories/create-categories/create-categories.component';
 import { HomeComponent } from './pages/home/home.component';
+import { ResetPasswordComponent } from './pages/user/reset-password/reset-password.component';
 import { MenuComponent } from './components/shared/menu/menu.component';
 import { CheckoutComponent } from './pages/checkout/checkout.component';
 import { ProductDetailComponent } from './pages/products/product-detail/product-detail.component';
 import { CartComponent } from './pages/cart/cart.component';
+import { ResetPassEmailComponent } from './pages/user/reset-password/reset-pass-email/reset-pass-email.component';
 
 export function rootLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -51,10 +56,13 @@ export function rootLoaderFactory(http: HttpClient) {
     CategoriesComponent,
     CreateCategoriesComponent,
     HomeComponent,
+    ResetPasswordComponent,
     MenuComponent,
     CheckoutComponent,
     ProductDetailComponent,
     CartComponent,
+    ResetPassEmailComponent,
+    UpdateCategoriesComponent,
   ],
 
   imports: [

@@ -33,7 +33,7 @@ export class AuthenticationsService {
   // Authentication
 
   login(user: Auth) {
-    return this.httpClient.post<AuthResponded>(`${environment.baseUrl}users/login/`, user).pipe(
+    return this.httpClient.post<AuthResponded>(`${environment.baseUrl}users/login`, user).pipe(
       map((userResponded) => {
         // login successful if there's a jwt token in the response
         if (userResponded) {
@@ -88,5 +88,14 @@ export class AuthenticationsService {
   logOut() {
     this.cookieService.delete('currentUser');
     this.currentUserSubject.next(null);
+  }
+
+  //Password reset
+  getEmailToResetPassword(email: any) {
+    return this.httpClient.post<any>(`${environment.baseUrl}users/password/reset/`, email);
+  }
+
+  resetPassword(value: any) {
+    return this.httpClient.patch<any>(`${environment.baseUrl}users/password/reset/complete/`, value);
   }
 }

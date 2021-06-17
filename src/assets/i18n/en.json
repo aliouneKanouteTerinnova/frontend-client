@@ -33,8 +33,8 @@
     }
   },
   "nav": {
-    "compte": "COMPTE",
-    "panier": "PANIER",
+    "compte": "Log In/Register",
+    "panier": "Basket",
     "category": "CATEGORY"
   },
   "home": {
@@ -42,5 +42,20 @@
     "best_sale": "BEST SALES",
     "good_deals": "GOOD DEALS",
     "plus": "LEARN MORE >"
+  },
+  "basket": {
+    "empty_basket": "Your Cart Is Empty",
+    "go_shop": "GO TO SHOP",
+    "basket": "BASKET",
+    "unity": "Unity",
+    "qty": "Qty",
+    "total": "Total",
+    "net_to_pay": "Net to pay",
+    "delivery": "Delivery",
+    "checkout": "CHECK OUT",
+    "accept": "WE ACCEPT",
+    "followed_product": "Followed product",
+    "add_cart": "Add to cart",
+    "similar_product": "Similar products"
   }
 }

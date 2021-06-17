@@ -7,15 +7,13 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root',
 })
 export class StoresService {
-  // baseUrl = 'http://192.168.1.16:8000/api';
-
   constructor(private http: HttpClient) {}
 
   getAllStores() {
-    return this.http.get<any>(`${environment.baseUrl}stores`);
+    return this.http.get<any>(`${environment.baseUrl}stores/activated`);
   }
 
-  createStores(store: Store, token: string) {
+  createStores(store: any, token: string) {
     token = 'token ' + token;
     return this.http.post(`${environment.baseUrl}stores`, store, {
       headers: new HttpHeaders().set('Authorization', token),
@@ -23,7 +21,7 @@ export class StoresService {
     });
   }
 
-  upDateStores(id: number, store: any, token: string) {
+  upDateStores(id: string, store: any, token: string) {
     token = 'token ' + token;
     return this.http.put<any>(`${environment.baseUrl}stores/${id}`, store, {
       headers: new HttpHeaders().set('Authorization', token),
@@ -35,7 +33,7 @@ export class StoresService {
     return this.http.get<any>(`${environment.baseUrl}stores/${id}`);
   }
 
-  deleteStores(id: number, token: string) {
+  deleteStores(id: string, token: string) {
     token = 'token ' + token;
     return this.http.delete<any>(`${environment.baseUrl}stores/${id}`, {
       headers: new HttpHeaders().set('Authorization', token),

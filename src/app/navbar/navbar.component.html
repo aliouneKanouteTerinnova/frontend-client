@@ -13,19 +13,20 @@
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav">
       <li class="nav-item">
-        <a class="nav-link" routerLink="/register" translate>
-          nav.compte
-          <span class="ml-1">
-            <img src="../../assets/img/USER.svg" width="50" alt="" />
-          </span>
+        <a class="nav-link" routerLink="/register">
+          <span class="ml-1"> <img src="../../assets/img/USER.svg" width="50" alt="" /> </span
+          ><span *ngIf="currentUser">Hello {{ currentUser['user'].username }}</span
+          ><span *ngIf="!currentUser" translate>nav.compte</span>
         </a>
       </li>
       <li class="nav-item">
         <a class="nav-link" routerLink="/cart" translate>
-          nav.panier
           <span class="ml-1">
-            <img src="../../assets/img/Panier.svg" width="50" alt="" />
+            <img src="../../assets/img/Panier.svg" width="50" alt="" /><span class="badge">{{
+              cartData.data[0].numInCart !== 0 ? cartData.data.length : 0
+            }}</span>
           </span>
+          &nbsp;&nbsp;nav.panier
         </a>
       </li>
     </ul>
@@ -73,12 +74,12 @@
   <!-- for the test version  for the mobile -->
   <ul class="navbar-nav-block d-flex">
     <li class="nav-item">
-      <span class="ml-1">
+      <span class="ml-1" routerLink="/register">
         <img src="../../assets/img/USER.svg" width="50" alt="" />
       </span>
     </li>
     <li class="nav-item">
-      <span class="ml-1">
+      <span class="ml-1" routerLink="/cart">
         <img src="../../assets/img/Panier.svg" width="50" alt="" />
       </span>
     </li>

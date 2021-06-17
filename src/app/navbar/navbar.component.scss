@@ -45,6 +45,14 @@ nav {
     height: 360px;
   }
 }
+
+.badge {
+  color: #29235c;
+  margin-left: 0px;
+  background-color: white;
+  border-radius: 50%;
+  font-size: 0.7rem;
+}
 .nav-link {
   padding: 0.2rem !important;
 }
@@ -65,6 +73,10 @@ nav {
     background-color: transparent !important;
     height: 70px;
     // box-shadow: 0 0 20px 5px rgba(0, 0, 0, 0.1);
+
+    .ml-1 {
+      cursor: pointer;
+    }
   }
   .navbar-nav-block {
     li {
