@@ -18,17 +18,19 @@ export class UpdateProfileComponent implements OnInit {
 
   ngOnInit(): void {
     this.currentUser = this.authService.currentUserValue;
+    console.log(this.currentUser['user'].token);
     this.registerForm = this.formBuilder.group({
       username: [null, Validators.required],
       email: [null, Validators.required],
       password: [null, [Validators.required, Validators.minLength(8)]],
     });
 
-    this.authService.getUser(this.currentUser.token).subscribe((data) => {
+    this.authService.getUser(this.currentUser['user'].token).subscribe((data) => {
+      console.log(data.body);
       const user: AuthResponded = data.body;
       this.registerForm.patchValue({
-        username: user.username,
-        email: user.email,
+        username: user['user'].username,
+        email: user['user'].email,
       });
     });
   }
