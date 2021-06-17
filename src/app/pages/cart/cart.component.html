@@ -75,7 +75,9 @@
       </div>
     </div>
     <div class="tolalPrice">
-      <h3 translate>basket.total {{ cartTotal | currency: 'XOF' }}</h3>
+      <h3 translate>
+        basket.total <span> {{ cartTotal | currency: 'XOF' }}</span>
+      </h3>
     </div>
   </div>
   <div class="checkout">
