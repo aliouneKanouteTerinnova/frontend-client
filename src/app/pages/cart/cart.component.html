@@ -16,10 +16,10 @@
           </p>
           <div class="button">
             <button>
-              <span translate>basket.unity: {{ c.product.price | currency: 'XOF' }}</span>
+              <span translate>basket.unity </span><span>{{ c.product.price | currency: 'XOF' }}</span>
             </button>
             <form>
-              <span translate>basket.qty: </span>
+              <span translate>basket.qty </span>
               <div class="value-button" id="decrease" (click)="ChangeQuantity(i, false)">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -49,9 +49,8 @@
               </div>
             </form>
             <button>
-              <span class="totalBtn" translate
-                >basket.total: {{ cartService.CalculateSubTotal(i) | currency: 'XOF' }}</span
-              >
+              <span class="totalBtn" translate>basket.total </span
+              ><span>{{ cartService.CalculateSubTotal(i) | currency: 'XOF' }}</span>
             </button>
           </div>
           <div class="icone">
@@ -76,7 +75,7 @@
       </div>
     </div>
     <div class="tolalPrice">
-      <h3 translate>basket.total : {{ cartTotal | currency: 'XOF' }}</h3>
+      <h3 translate>basket.total {{ cartTotal | currency: 'XOF' }}</h3>
     </div>
   </div>
   <div class="checkout">
@@ -84,11 +83,11 @@
       <h6 class="title" translate>basket.total</h6>
       <div class="subtotal">
         <div class="subtotal1">
-          <span translate>basket.total :</span> <span>{{ cartTotal | currency: 'XOF' }}</span>
+          <span translate>basket.total </span> <span>{{ cartTotal | currency: 'XOF' }}</span>
         </div>
-        <div class="subtotal2"><span translate>basket.delivery :</span> <span> CFA 0</span></div>
+        <div class="subtotal2"><span translate>basket.delivery </span> <span> CFA 0</span></div>
         <div class="subtotal1">
-          <span translate>basket.net_to_pay :</span> <span>{{ cartTotal | currency: 'XOF' }}</span>
+          <span translate>basket.net_to_pay </span> <span>{{ cartTotal | currency: 'XOF' }}</span>
         </div>
       </div>
       <div class="checkouBtn"><button translate>basket.checkout</button></div>

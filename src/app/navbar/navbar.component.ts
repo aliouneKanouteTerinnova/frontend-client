@@ -12,7 +12,7 @@ import { AuthResponded } from '../models/auth';
   styleUrls: ['./navbar.component.scss'],
 })
 export class NavbarComponent implements OnInit {
-  lang = 'DE';
+  lang: string = '';
   changeLanguage = 'de';
   cartData: CartModelServer;
   cartTotal: Number;
@@ -26,6 +26,12 @@ export class NavbarComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    console.log(this.i18nServiceService.currentLangValue);
+    if (this.i18nServiceService.currentLangValue === null || this.i18nServiceService.currentLangValue === 'en') {
+      this.lang = 'DE';
+    } else {
+      this.lang = 'EN';
+    }
     this.currentUser = this.authService.currentUserValue;
     this.cartService.cartDataObs$.subscribe((data: CartModelServer) => {
       this.cartData = data;
@@ -36,12 +42,12 @@ export class NavbarComponent implements OnInit {
   }
 
   changeLang() {
-    if (this.lang === 'EN') {
-      this.changeLanguage = 'en';
-      this.lang = 'DE';
-    } else {
+    if (this.i18nServiceService.currentLangValue === 'en') {
       this.changeLanguage = 'de';
       this.lang = 'EN';
+    } else {
+      this.changeLanguage = 'en';
+      this.lang = 'DE';
     }
     this.i18nServiceService.changeLocale(this.changeLanguage);
   }
