@@ -93,7 +93,7 @@ export class RegistrationComponent implements OnInit {
         street: [null, Validators.required],
         password: [null, [Validators.required, Validators.minLength(8)]],
         password2: [null, Validators.required],
-        checked: [false, Validators.required],
+        checked: [true, Validators.required],
       },
       {
         validator: MustMatch('password', 'password2'),
@@ -150,6 +150,7 @@ export class RegistrationComponent implements OnInit {
     const country = this.registerForm.get('country').value;
     const street = this.registerForm.get('street').value;
     const gender = this.registerForm.get('gender').value;
+    const checked = this.registerForm.get('checked').value;
     const address: Address = {
       state: state,
       zipcode: zipcode,
@@ -167,29 +168,33 @@ export class RegistrationComponent implements OnInit {
     if (!this.registerForm.valid) {
       return;
     }
-    this.authService.register(user).subscribe(
-      (response) => {
-        Swal.fire({
-          position: 'top-end',
-          icon: 'success',
-          title: 'Check your mail to activate your account!',
-          showConfirmButton: false,
-          timer: 2000,
-        });
-        this.rpassword = '';
-        this.rcpassword = '';
-        this.remail = '';
-      },
-      (error) => {
-        if (error.error.errors.email) {
-          this.errorMessage = error.error.errors.email;
-        } else {
-          if (error.error.errors.username) {
-            this.errorMessage = error.error.errors.username;
+    if (!checked) {
+      this.errorMessage = 'Accept conditions';
+    } else {
+      this.authService.register(user).subscribe(
+        (response) => {
+          Swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: 'Check your mail to activate your account!',
+            showConfirmButton: false,
+            timer: 2000,
+          });
+          this.rpassword = '';
+          this.rcpassword = '';
+          this.remail = '';
+        },
+        (error) => {
+          if (error.error.errors.email) {
+            this.errorMessage = error.error.errors.email;
+          } else {
+            if (error.error.errors.username) {
+              this.errorMessage = error.error.errors.username;
+            }
           }
         }
-      }
-    );
+      );
+    }
   }
   login() {
     const email = this.loginForm.get('email').value;
