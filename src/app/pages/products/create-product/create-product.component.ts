@@ -1,3 +1,9 @@
+/* eslint-disable @typescript-eslint/restrict-plus-operands */
+/* eslint-disable @typescript-eslint/consistent-type-assertions */
+/* eslint-disable prefer-const */
+/* eslint-disable @typescript-eslint/no-inferrable-types */
+/* eslint-disable @typescript-eslint/member-ordering */
+/* eslint-disable @typescript-eslint/no-shadow */
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 /* eslint-disable @typescript-eslint/no-floating-promises */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
@@ -30,6 +36,11 @@ export class CreateProductComponent implements OnInit {
   currentUser: any;
   categoryId: any;
   storeId: any;
+
+  filePath = './../../assets/img/Products/';
+
+  imgSrc: File = null;
+
   constructor(
     private route: Router,
     private fb: FormBuilder,
@@ -56,6 +67,23 @@ export class CreateProductComponent implements OnInit {
     this.getCategory();
     this.getStores();
   }
+
+  selectFiles(event) {
+    this.imgSrc = <File>event.target.files[0].name;
+    // const reader = new FileReader();
+    // if (event.target.files && event.target.files.length) {
+    //   const [file] = event.target.files;
+    //   reader.readAsDataURL(file);
+    //   reader.onload = () => {
+    //     // this.imgSrc = reader.result as '';
+    //     // this.createProductForm.patchValue({
+    //     //   imgSrc: reader.result,
+    //     // });
+    //   };
+    // }
+    console.log(this.filePath + this.imgSrc);
+  }
+
   checkCheckBoxvalue(event) {
     console.log(event.checked);
   }
@@ -105,7 +133,11 @@ export class CreateProductComponent implements OnInit {
     products.quantity = this.createProductForm.get('quantity').value;
     products.category = this.categoryId;
     products.store = this.storeId;
-    products.image = this.createProductForm.get('img').value;
+    products.image = this.filePath + this.imgSrc;
+    // products.image = this.createProductForm.get('image').value;
+
+    console.log(products);
+    console.log('profilePic - ', this.imgSrc);
 
     this.productsService.addProduct(products, this.currentUser.user.token).subscribe(
       (res) => {
@@ -125,7 +157,7 @@ export class CreateProductComponent implements OnInit {
         Swal.fire({
           icon: 'error',
           title: 'Oops...',
-          text: 'Something went wrong!',
+          text: err.error.detail,
         });
         console.log(err);
       }

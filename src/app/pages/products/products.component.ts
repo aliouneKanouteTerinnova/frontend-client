@@ -1,3 +1,12 @@
+import { ActivatedRoute } from '@angular/router';
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable prefer-arrow/prefer-arrow-functions */
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-floating-promises */
+/* eslint-disable @typescript-eslint/no-shadow */
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import { StoresService } from 'src/app/services/stores/stores.service';
 import { Component, OnInit } from '@angular/core';
 import { ProductsService } from './../../services/products/products.service';
@@ -35,7 +44,8 @@ export class ProductsComponent implements OnInit {
     private categoryService: CategoriesService,
     private storesService: StoresService,
     private authService: AuthenticationsService,
-    private cartService: CartService
+    private cartService: CartService,
+    private router: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
@@ -43,6 +53,7 @@ export class ProductsComponent implements OnInit {
     this.cartService.cartDataObs$.subscribe((data) => (this.cartData = data));
     this.getProducts();
     this.getCategory();
+    this.getStore();
 
     console.log(this.currentUser.user.account_type);
     this.userType = this.currentUser.user.account_type;
@@ -52,12 +63,12 @@ export class ProductsComponent implements OnInit {
     }
   }
 
-  getStore(id: string) {
-    this.storesService.getCurrentData(id).subscribe((data) => {
+  getStore() {
+    this.storesService.getAllStores().subscribe((data) => {
       console.log('Store', data);
-      this.store = data;
+      this.stores = data.results;
     });
-    return this.store.name;
+    // return this.store.name;
   }
 
   getProducts() {
