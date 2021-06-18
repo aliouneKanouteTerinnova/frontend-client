@@ -29,8 +29,10 @@ export class CategoriesComponent implements OnInit {
 
   getCategory() {
     this.categoryService.getAllCategories().subscribe((data) => {
-      console.log('Category', data);
-      this.categories = data.results;
+      console.log('Categories', data);
+      this.categories = data.filter((category) => {
+        return category.children.length != 0;
+      });
     });
   }
 

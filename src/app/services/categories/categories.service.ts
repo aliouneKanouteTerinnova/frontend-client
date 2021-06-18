@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
@@ -11,7 +12,7 @@ export class CategoriesService {
   constructor(private httpClient: HttpClient) {}
 
   getAllCategories() {
-    return this.httpClient.get<any>(`${environment.baseUrl}categories`);
+    return this.httpClient.get<any>(`${environment.baseUrl}allcategories`);
   }
 
   getCategory(id: string) {

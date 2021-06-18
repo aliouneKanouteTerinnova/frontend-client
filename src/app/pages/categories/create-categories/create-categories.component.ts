@@ -1,3 +1,9 @@
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
+/* eslint-disable @typescript-eslint/unbound-method */
+/* eslint-disable @typescript-eslint/no-floating-promises */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
@@ -15,8 +21,9 @@ uuidv4();
 })
 export class CreateCategoriesComponent implements OnInit {
   createCategoriesForm: FormGroup;
-  categorys: Category;
+  categories: Category;
   currentUser: any;
+  categoryId: any;
   constructor(
     private route: Router,
     private fb: FormBuilder,
@@ -32,21 +39,40 @@ export class CreateCategoriesComponent implements OnInit {
       description: ['', Validators.required],
       // is_active: ['', Validators.required],
       // created_by: ['', Validators.required],
+      parent: [''],
     });
+    this.getCategory();
+  }
+
+  getCategory() {
+    this.categoryService.getAllCategories().subscribe((data) => {
+      console.log('Category', data);
+      this.categories = data;
+    });
+  }
+
+  categoryEvent(event) {
+    this.categoryId = event.target.value;
   }
 
   onSubmit() {
     const categories = new Category();
 
-    categories.id = Math.floor(Math.random() * 100);
+    // categories.id = '';
     categories.name = this.createCategoriesForm.get('name').value;
     categories.slug = this.createCategoriesForm.get('slug').value;
     categories.description = this.createCategoriesForm.get('description').value;
     categories.is_active = true;
-    categories.created_by = '';
-    categories.products = '';
+    // categories.created_by = '';
+    // categories.products = '';
+    if (this.createCategoriesForm.get('parent').value == '---') {
+      categories.parent = null;
+    } else {
+      categories.parent = this.createCategoriesForm.get('parent').value;
+    }
 
     console.log(categories);
+    console.log(categories.parent);
 
     this.categoryService.addCategory(categories, this.currentUser.user.token).subscribe(
       (res) => {
@@ -64,7 +90,7 @@ export class CreateCategoriesComponent implements OnInit {
         Swal.fire({
           icon: 'error',
           title: 'Oops...',
-          text: 'Something went wrong!',
+          text: err.error.error,
         });
         console.log(err);
       }

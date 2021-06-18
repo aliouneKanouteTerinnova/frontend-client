@@ -2,7 +2,9 @@
 <app-header></app-header>
 <div class="scrollBar" *ngIf="products.length > 0">
   <div class="buttonEl">
-    <button mat-raised-button color="primary" class="categoryScroll"><span translate>home.category</span></button>
+    <button mat-raised-button color="primary" class="categoryScroll" routerLink="/category">
+      <span translate>home.category</span>
+    </button>
   </div>
   <div class="_2KdhY">
     <div class="_2B5SH _1nF12 _3S3n_">
@@ -41,7 +43,7 @@
 
 <div class="main">
   <div class="product" *ngFor="let product of products; let i = index">
-    <img src="./../../assets/img/Products/{{ i }}.png" alt="" />
+    <img src="{{ product.image }}" alt="" />
     <div class="overview1">
       <!-- <h3>overview:</h3> -->
       <div class="product-icon">
@@ -68,10 +70,10 @@
     </div>
   </div>
 </div>
-<div class="subtitle"  *ngIf="products.length > 0"><h3 translate>home.best_sale</h3></div>
+<div class="subtitle" *ngIf="products.length > 0"><h3 translate>home.best_sale</h3></div>
 <div class="main">
   <div class="product" *ngFor="let product of bestSelling; let i = index">
-    <img src="./../../assets/img/Products/{{ i }}.png" alt="" />
+    <img src="{{ product.image }}" alt="" />
     <div class="overview1">
       <!-- <h3>overview:</h3> -->
       <div class="product-icon">
@@ -114,7 +116,7 @@
 <div class="subtitle" *ngIf="goodStuff.length > 0"><h3 translate>home.good_deals</h3></div>
 <div class="main">
   <div class="product" *ngFor="let product of goodStuff; let i = index">
-    <img src="./../../assets/img/Products/{{ i }}.png" alt="" />
+    <img src="{{ product.image }}" alt="" />
     <div class="overview1">
       <!-- <h3>overview:</h3> -->
       <div class="product-icon">
@@ -138,5 +140,3 @@
     </div>
   </div>
 </div>
-
-<footer class="container-fluid"></footer>
