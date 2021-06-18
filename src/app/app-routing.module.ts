@@ -20,6 +20,7 @@ import { AuthGuard } from './guards/auth.guard';
 import { HomeComponent } from './pages/home/home.component';
 import { ResetPasswordComponent } from './pages/user/reset-password/reset-password.component';
 import { CartComponent } from './pages/cart/cart.component';
+import { ProfileComponent } from './pages/user/profile/profile.component';
 
 const routes: Routes = [
   {
@@ -54,6 +55,10 @@ const routes: Routes = [
   {
     path: 'update',
     component: UpdateProfileComponent,
+  },
+  {
+    path: 'profile',
+    component: ProfileComponent,
   },
   { path: 'products', component: ProductsComponent },
   { path: 'addproduct', component: CreateProductComponent, canActivate: [AuthGuard] },
