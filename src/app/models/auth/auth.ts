@@ -1,7 +1,8 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 
-import { AccountType } from '../enums/account-type.enum';
-import { Gender } from '../enums/gender.enum';
+import { AccountType } from '../../enums/account-type.enum';
+import { Gender } from '../../enums/gender.enum';
+import { Address } from '../address/address';
 
 export type Token = {
   refresh: string;
@@ -19,7 +20,7 @@ export type AuthResponded = {
   token: string;
   account_type: AccountType;
   gender: Gender;
-  address: string;
+  address: Address;
 };
 
 export type RegisterResponded = {
@@ -29,6 +30,6 @@ export type RegisterResponded = {
   is_verified: boolean;
   account_type: AccountType;
   gender: Gender;
-  address: string;
+  address: Address;
   tokens: Token;
 };
