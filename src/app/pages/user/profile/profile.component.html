@@ -2,7 +2,7 @@
 <div class="container">
   <div class="main-body">
     <div class="row gutters-sm">
-      <div class="col-md-4 mb-3">
+      <div class="col-md-3 mb-3">
         <div class="card">
           <div class="card-body">
             <div class="d-flex flex-column align-items-center text-center">
@@ -19,7 +19,7 @@
           </div>
         </div>
       </div>
-      <div class="col-md-8">
+      <div class="col-md-6">
         <div class="card mb-3">
           <div class="card-body">
             <div class="row">
@@ -66,6 +66,17 @@
             </div>
           </div>
         </div>
+      </div>
+      <div class="col-md-3 dash" *ngIf="is_seller">
+        <!-- <div class="row"> -->
+        <button mat-raised-button color="primary" routerLink="/list-store">Store</button>
+        <button mat-raised-button color="primary" routerLink="/updatestore/{{ store.id }}" *ngIf="has_store">
+          Store
+        </button>
+        <!-- </div> -->
+        <!-- <div class="row"> -->
+        <button mat-raised-button color="primary" routerLink="/products">Products</button>
+        <!-- </div> -->
       </div>
     </div>
   </div>

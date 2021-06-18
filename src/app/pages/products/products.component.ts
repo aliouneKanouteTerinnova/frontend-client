@@ -1,3 +1,12 @@
+import { ActivatedRoute } from '@angular/router';
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable prefer-arrow/prefer-arrow-functions */
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-floating-promises */
+/* eslint-disable @typescript-eslint/no-shadow */
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import { StoresService } from 'src/app/services/stores/stores.service';
 import { Component, OnInit } from '@angular/core';
 import { ProductsService } from './../../services/products/products.service';
@@ -8,6 +17,7 @@ import Swal from 'sweetalert2';
 import { AuthenticationsService } from 'src/app/services/authentications.service';
 import { CartService } from 'src/app/services/cart.service';
 import { CartModelServer } from 'src/app/models/cart/cart';
+import { Store } from '../stores/store';
 
 uuidv4();
 
@@ -27,15 +37,15 @@ export class ProductsComponent implements OnInit {
   userType: string;
   disabledBtn = false;
 
-  selectedImage: any;
-  imageUrl: any;
+  store: Store;
 
   constructor(
     private productsService: ProductsService,
     private categoryService: CategoriesService,
     private storesService: StoresService,
     private authService: AuthenticationsService,
-    private cartService: CartService
+    private cartService: CartService,
+    private router: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
@@ -43,6 +53,7 @@ export class ProductsComponent implements OnInit {
     this.cartService.cartDataObs$.subscribe((data) => (this.cartData = data));
     this.getProducts();
     this.getCategory();
+    this.getStore();
 
     console.log(this.currentUser.user.account_type);
     this.userType = this.currentUser.user.account_type;
@@ -52,14 +63,12 @@ export class ProductsComponent implements OnInit {
     }
   }
 
-  onImageSelected(event) {
-    this.selectedImage = event.target.files[0];
-    let reader = new FileReader();
-
-    reader.onload = (event) => {
-      this.imageUrl = event.target.result;
-    };
-    reader.readAsDataURL(this.selectedImage);
+  getStore() {
+    this.storesService.getAllStores().subscribe((data) => {
+      console.log('Store', data);
+      this.stores = data.results;
+    });
+    // return this.store.name;
   }
 
   getProducts() {
