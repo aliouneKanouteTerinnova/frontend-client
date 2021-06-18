@@ -8,6 +8,7 @@ import Swal from 'sweetalert2';
 import { AuthenticationsService } from 'src/app/services/authentications.service';
 import { CartService } from 'src/app/services/cart.service';
 import { CartModelServer } from 'src/app/models/cart/cart';
+import { Store } from '../stores/store';
 
 uuidv4();
 
@@ -27,8 +28,7 @@ export class ProductsComponent implements OnInit {
   userType: string;
   disabledBtn = false;
 
-  selectedImage: any;
-  imageUrl: any;
+  store: Store;
 
   constructor(
     private productsService: ProductsService,
@@ -52,14 +52,12 @@ export class ProductsComponent implements OnInit {
     }
   }
 
-  onImageSelected(event) {
-    this.selectedImage = event.target.files[0];
-    let reader = new FileReader();
-
-    reader.onload = (event) => {
-      this.imageUrl = event.target.result;
-    };
-    reader.readAsDataURL(this.selectedImage);
+  getStore(id: string) {
+    this.storesService.getCurrentData(id).subscribe((data) => {
+      console.log('Store', data);
+      this.store = data;
+    });
+    return this.store.name;
   }
 
   getProducts() {
