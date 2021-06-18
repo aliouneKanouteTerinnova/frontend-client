@@ -109,7 +109,7 @@
       <img src="./../../assets/img/Products/{{ i }}.png" alt="" />
       <div class="home-product-info">
         <div class="description">
-          <span>{{ product.description }}</span>
+          <span>{{ product.description.slice(0, 17) }}...</span>
         </div>
         <div class="price">
           <span>{{ product.price | currency: 'XOF' }}</span>
@@ -128,7 +128,7 @@
       <img src="./../../assets/img/Products/{{ i }}.png" alt="" />
       <div class="home-product-info">
         <div class="description">
-          <span>{{ product.description }}</span>
+          <span>{{ product.description.slice(0, 17) }}...</span>
         </div>
         <div class="price">
           <span>{{ product.price | currency: 'XOF' }}</span>

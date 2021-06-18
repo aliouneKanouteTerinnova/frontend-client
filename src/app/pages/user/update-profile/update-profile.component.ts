@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Address } from 'src/app/models/address/address';
 import { AuthResponded } from 'src/app/models/auth/auth';
 import { AuthenticationsService } from 'src/app/services/authentications.service';
 
@@ -34,10 +35,9 @@ export class UpdateProfileComponent implements OnInit {
     this.authService.getUser(this.currentUser['user'].token).subscribe((data) => {
       console.log(data.body);
       const user: AuthResponded = data.body;
-      this.gender = user['user'].gender;
       this.registerForm.patchValue({
         username: user['user'].username,
-        sexe: user['user'].email,
+        gender: user['user'].gender,
         state: user['user'].address.state,
         zipcode: user['user'].address.zipcode,
         country: user['user'].address.country,
@@ -47,19 +47,31 @@ export class UpdateProfileComponent implements OnInit {
   }
   update() {
     const username = this.registerForm.get('username').value;
-    const email = this.registerForm.get('gender').value;
+    const sexe = this.registerForm.get('gender').value;
+    const state = this.registerForm.get('country').value;
+    const zipcode = this.registerForm.get('zipcode').value;
+    const country = this.registerForm.get('state').value;
+    const street = this.registerForm.get('street').value;
+    const address: Address = {
+      state: state,
+      zipcode: zipcode,
+      country: country,
+      street: street,
+    };
     const user = {
       username: username,
-      gender: email,
+      gender: sexe,
+      address: address,
     };
-    this.authService.update(user, this.currentUser.token).subscribe(
-      (data) => {
-        this.successMessage = 'User updated successfully ';
-        this.errorMessage = '';
-      },
-      (error) => {
-        this.errorMessage = 'Username/Password not correct';
-      }
-    );
+    console.log(user);
+    // this.authService.update(user, this.currentUser.token).subscribe(
+    //   (data) => {
+    //     this.successMessage = 'User updated successfully ';
+    //     this.errorMessage = '';
+    //   },
+    //   (error) => {
+    //     this.errorMessage = 'Username/Password not correct';
+    //   }
+    // );
   }
 }

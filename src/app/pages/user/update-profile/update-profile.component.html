@@ -30,7 +30,7 @@
           </mat-error>
         </mat-form-field>
         <mat-form-field class="example-full-width" appearance="outline">
-          <mat-label translate>registration.register.city</mat-label>
+          <mat-label translate>registration.register.country</mat-label>
           <input type="text" matInput placeholder="state" formControlName="state" required />
           <mat-error *ngIf="registerForm.controls.state.touched && registerForm.controls.state.invalid">
             <span *ngIf="registerForm.controls.state.errors.required">registration.errors.required_error</span>
@@ -46,7 +46,7 @@
         </mat-form-field>
 
         <mat-form-field class="example-full-width" appearance="outline">
-          <mat-label translate>registration.register.country</mat-label>
+          <mat-label translate>registration.register.city</mat-label>
           <input type="text" matInput placeholder="country" formControlName="country" required />
           <mat-error *ngIf="registerForm.controls.country.touched && registerForm.controls.country.invalid">
             <span *ngIf="registerForm.controls.country.errors.required">registration.errors.required_error</span>
