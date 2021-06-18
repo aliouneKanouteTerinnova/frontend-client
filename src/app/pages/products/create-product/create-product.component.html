@@ -64,7 +64,7 @@
 
           <div>
             <label for="img">Image</label>
-            <input type="text" name="img" id="img" formControlName="img" />
+            <input type="file" name="img" id="img" formControlName="img" (change)="selectFiles($event)" />
           </div>
         </div>
 
