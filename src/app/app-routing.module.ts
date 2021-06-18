@@ -1,3 +1,4 @@
+import { CategoryPageComponent } from './pages/category-page/category-page.component';
 import { UpdateCategoriesComponent } from './pages/categories/update-categories/update-categories.component';
 import { ResetPassEmailComponent } from './pages/user/reset-password/reset-pass-email/reset-pass-email.component';
 import { CheckoutComponent } from './pages/checkout/checkout.component';
@@ -64,6 +65,7 @@ const routes: Routes = [
   { path: 'updatestore/:id', component: EditStoresComponent, canActivate: [AuthGuard] },
   { path: 'create-store', component: CreateStoresComponent, canActivate: [AuthGuard] },
   { path: 'categories', component: CategoriesComponent },
+  { path: 'category', component: CategoryPageComponent },
   { path: 'update-categories/:id', component: UpdateCategoriesComponent },
   { path: 'create-categories', component: CreateCategoriesComponent, canActivate: [AuthGuard] },
 ];

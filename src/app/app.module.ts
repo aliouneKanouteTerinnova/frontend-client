@@ -34,6 +34,8 @@ import { CheckoutComponent } from './pages/checkout/checkout.component';
 import { ProductDetailComponent } from './pages/products/product-detail/product-detail.component';
 import { CartComponent } from './pages/cart/cart.component';
 import { ResetPassEmailComponent } from './pages/user/reset-password/reset-pass-email/reset-pass-email.component';
+import { CategoryPageComponent } from './pages/category-page/category-page.component';
+import { FooterComponent } from './components/footer/footer.component';
 
 export function rootLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -63,6 +65,8 @@ export function rootLoaderFactory(http: HttpClient) {
     CartComponent,
     ResetPassEmailComponent,
     UpdateCategoriesComponent,
+    CategoryPageComponent,
+    FooterComponent,
   ],
 
   imports: [
