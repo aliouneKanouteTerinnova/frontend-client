@@ -8,7 +8,6 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { Auth, AuthResponded } from '../models/auth/auth';
 import { User } from '../models/user/user';
-
 @Injectable({
   providedIn: 'root',
 })
