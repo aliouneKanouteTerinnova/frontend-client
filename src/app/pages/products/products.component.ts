@@ -7,7 +7,7 @@ import { v4 as uuidv4 } from 'uuid';
 import Swal from 'sweetalert2';
 import { AuthenticationsService } from 'src/app/services/authentications.service';
 import { CartService } from 'src/app/services/cart.service';
-import { CartModelServer } from 'src/app/models/cart';
+import { CartModelServer } from 'src/app/models/cart/cart';
 
 uuidv4();
 
@@ -24,6 +24,11 @@ export class ProductsComponent implements OnInit {
   closeResult = '';
   currentUser: any;
   cartData: CartModelServer;
+  userType: string;
+  disabledBtn = false;
+
+  selectedImage: any;
+  imageUrl: any;
 
   constructor(
     private productsService: ProductsService,
@@ -38,19 +43,36 @@ export class ProductsComponent implements OnInit {
     this.cartService.cartDataObs$.subscribe((data) => (this.cartData = data));
     this.getProducts();
     this.getCategory();
+
+    console.log(this.currentUser.user.account_type);
+    this.userType = this.currentUser.user.account_type;
+    console.log('user type: ', this.userType);
+    if (this.userType === 'CUSTOMER') {
+      this.disabledBtn = true;
+    }
+  }
+
+  onImageSelected(event) {
+    this.selectedImage = event.target.files[0];
+    let reader = new FileReader();
+
+    reader.onload = (event) => {
+      this.imageUrl = event.target.result;
+    };
+    reader.readAsDataURL(this.selectedImage);
   }
 
   getProducts() {
     this.productsService.getAllProducts().subscribe((data) => {
       console.log('Product', data);
-      this.products = data.products;
+      this.products = data.results;
     });
   }
 
   getCategory() {
     this.categoryService.getAllCategories().subscribe((data) => {
-      console.log('Category', data.categories);
-      this.categorys = data.categories;
+      console.log('Category', data);
+      this.categorys = data.results;
     });
   }
 
@@ -93,19 +115,6 @@ export class ProductsComponent implements OnInit {
       timer: 1500,
     });
   }
-
-  // updateProducts(product: Products) {
-  //   console.log(product);
-  //   this.productsService.updateProduct(product).subscribe(
-  //     (res) => {
-  //       console.log(res);
-  //     },
-  //     (err) => {
-  //       console.log(err);
-  //     }
-  //   );
-  //   console.log('The product has been updated!', product);
-  // }
 }
 function id(id: any) {
   throw new Error('Function not implemented.');

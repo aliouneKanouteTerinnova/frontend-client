@@ -1,3 +1,4 @@
+import { UpdateCategoriesComponent } from './pages/categories/update-categories/update-categories.component';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -17,14 +18,6 @@ import { UpdateProfileComponent } from './pages/user/update-profile/update-profi
 // @NgModule({
 //   declarations: [AppComponent, ],
 
-export function HttpLoaderFactory(http: HttpClient) {
-  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
-}
-
-import { MatButtonModule } from '@angular/material/button';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatIconModule } from '@angular/material/icon';
-import { MatCardModule } from '@angular/material/card';
 import { NavbarComponent } from './navbar/navbar.component';
 import { ProductsComponent } from './pages/products/products.component';
 import { UpdateProductComponent } from './pages/products/update-product/update-product.component';
@@ -41,6 +34,13 @@ import { CheckoutComponent } from './pages/checkout/checkout.component';
 import { ProductDetailComponent } from './pages/products/product-detail/product-detail.component';
 import { CartComponent } from './pages/cart/cart.component';
 import { ResetPassEmailComponent } from './pages/user/reset-password/reset-pass-email/reset-pass-email.component';
+import { CategoryPageComponent } from './pages/category-page/category-page.component';
+import { FooterComponent } from './components/footer/footer.component';
+import { ProfileComponent } from './pages/user/profile/profile.component';
+
+export function rootLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http);
+}
 
 @NgModule({
   declarations: [
@@ -65,6 +65,10 @@ import { ResetPassEmailComponent } from './pages/user/reset-password/reset-pass-
     ProductDetailComponent,
     CartComponent,
     ResetPassEmailComponent,
+    UpdateCategoriesComponent,
+    CategoryPageComponent,
+    FooterComponent,
+    ProfileComponent,
   ],
 
   imports: [
@@ -74,7 +78,7 @@ import { ResetPassEmailComponent } from './pages/user/reset-password/reset-pass-
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
-        useFactory: HttpLoaderFactory,
+        useFactory: rootLoaderFactory,
         deps: [HttpClient],
       },
       isolate: true,

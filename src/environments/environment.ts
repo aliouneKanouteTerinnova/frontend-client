@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  baseUrl: 'http://18.197.149.1:8000/api/',
+  baseUrl: 'http://192.168.1.17:8000/api/',
+  // baseUrl: 'http://18.156.60.171:8000/api/',
 };
 
 /*

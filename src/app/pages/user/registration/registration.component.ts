@@ -8,16 +8,13 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
 
-import { User } from 'src/app/models/user';
+import { User } from 'src/app/models/user/user';
 import { AuthenticationsService } from 'src/app/services/authentications.service';
 import { TranslateService } from '@ngx-translate/core';
-import { I18nServiceService } from 'src/app/services/i18n-service/i18n-service.service';
 import { MustMatch } from 'src/app/_helpers/must-match.validator';
-import { Auth, AuthResponded } from 'src/app/models/auth';
+import { Auth, AuthResponded } from 'src/app/models/auth/auth';
 import { Router, ActivatedRoute } from '@angular/router';
-import { AccountType } from 'src/app/enums/account-type.enum';
-import { Gender } from 'src/app/enums/gender.enum';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+import { Address } from 'src/app/models/address/address';
 
 @Component({
   selector: 'app-registration',
@@ -52,7 +49,6 @@ export class RegistrationComponent implements OnInit {
     private authService: AuthenticationsService,
     private formBuilder: FormBuilder,
     private translate: TranslateService,
-    private i18nService: I18nServiceService,
     private router: Router,
     private route: ActivatedRoute
   ) {
@@ -85,14 +81,16 @@ export class RegistrationComponent implements OnInit {
         }
       );
     }
-    this.i18nService.localeEvent.subscribe((locale) => this.translate.use(locale));
     this.registerForm = this.formBuilder.group(
       {
         username: [null, Validators.required],
         email: [null, [Validators.required, Validators.pattern(this.emailRegex)]],
         typeUser: [null, Validators.required],
         gender: [null, Validators.required],
-        address: [null, Validators.required],
+        state: [null, Validators.required],
+        zipcode: [null, Validators.required],
+        country: [null, Validators.required],
+        street: [null, Validators.required],
         password: [null, [Validators.required, Validators.minLength(8)]],
         password2: [null, Validators.required],
         checked: [false, Validators.required],
@@ -147,8 +145,17 @@ export class RegistrationComponent implements OnInit {
     const typeUser = this.registerForm.get('typeUser').value;
     const email = this.registerForm.get('email').value;
     const password = this.registerForm.get('password').value;
-    const address = this.registerForm.get('address').value;
+    const state = this.registerForm.get('state').value;
+    const zipcode = this.registerForm.get('zipcode').value;
+    const country = this.registerForm.get('country').value;
+    const street = this.registerForm.get('street').value;
     const gender = this.registerForm.get('gender').value;
+    const address: Address = {
+      state: state,
+      zipcode: zipcode,
+      country: country,
+      street: street,
+    };
     const user: User = {
       email: email,
       username: username,
@@ -200,7 +207,6 @@ export class RegistrationComponent implements OnInit {
       },
       (error) => {
         this.errorMessage = error.error.errors.error;
-
       }
     );
   }

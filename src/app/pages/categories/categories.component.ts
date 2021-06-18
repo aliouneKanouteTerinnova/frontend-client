@@ -11,18 +11,34 @@ import { CategoriesService } from 'src/app/services/categories/categories.servic
 export class CategoriesComponent implements OnInit {
   categories: Category;
   currentUser: any;
+  // disabledBtn = false;
+  // userToken: string;
 
   constructor(private categoryService: CategoriesService, private authService: AuthenticationsService) {}
 
   ngOnInit(): void {
     this.currentUser = this.authService.currentUserValue;
     this.getCategory();
+    console.log(this.currentUser);
+    // this.userToken = this.currentUser.user.token;
+
+    // if (!this.userToken) {
+    //   this.disabledBtn = true;
+    // }
   }
 
   getCategory() {
     this.categoryService.getAllCategories().subscribe((data) => {
-      console.log('Category', data.categories);
-      this.categories = data.categories;
+      console.log('Categories', data);
+      this.categories = data.filter((category) => {
+        return category.children.length != 0;
+      });
+    });
+  }
+
+  deleteCategory(id) {
+    this.categoryService.deleteCategory(id, this.currentUser.user.token).subscribe((res) => {
+      console.log(res);
     });
   }
 }

@@ -30,6 +30,7 @@ export class CreateStoresComponent implements OnInit {
       created_by: [''],
       store_address: ['', Validators.required],
     });
+    console.log(this.currentUser);
   }
 
   get f() {
@@ -41,13 +42,13 @@ export class CreateStoresComponent implements OnInit {
     const data = new Store();
 
     data.name = this.createStore.get('name').value;
-    data.created_at = '';
-    data.created_by = 2;
+
+    data.created_by = 1;
     data.store_address = this.createStore.get('store_address').value;
     data.is_active = true;
 
     console.log(data);
-
+    console.log(this.currentUser.user.token);
     this.storesService.createStores(data, this.currentUser.user.token).subscribe(
       (res) => {
         console.log(res);
@@ -64,7 +65,7 @@ export class CreateStoresComponent implements OnInit {
         Swal.fire({
           icon: 'error',
           title: 'Oops...',
-          text: 'Something went wrong!',
+          text: err.error.error,
         });
         console.log(err);
       }

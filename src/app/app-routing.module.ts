@@ -1,3 +1,5 @@
+import { CategoryPageComponent } from './pages/category-page/category-page.component';
+import { UpdateCategoriesComponent } from './pages/categories/update-categories/update-categories.component';
 import { ResetPassEmailComponent } from './pages/user/reset-password/reset-pass-email/reset-pass-email.component';
 import { CheckoutComponent } from './pages/checkout/checkout.component';
 import { ProductDetailComponent } from './pages/products/product-detail/product-detail.component';
@@ -15,10 +17,12 @@ import { StoresComponent } from './pages/stores/stores.component';
 import { UpdateProductComponent } from './pages/products/update-product/update-product.component';
 import { ProductsComponent } from './pages/products/products.component';
 import { CreateStoresComponent } from './pages/stores/create-stores/create-stores.component';
-import { AuthGuard } from './guards/auth.guard';
 import { HomeComponent } from './pages/home/home.component';
 import { ResetPasswordComponent } from './pages/user/reset-password/reset-password.component';
 import { CartComponent } from './pages/cart/cart.component';
+import { ProfileComponent } from './pages/user/profile/profile.component';
+import { AuthGuard } from './guards/connected/auth.guard';
+import { NotConnectedGuard } from './guards/not-connected/not-connected.guard';
 
 const routes: Routes = [
   {
@@ -45,6 +49,7 @@ const routes: Routes = [
   {
     path: 'register',
     component: RegistrationComponent,
+    canActivate: [NotConnectedGuard],
   },
   {
     path: 'email/verify',
@@ -53,6 +58,10 @@ const routes: Routes = [
   {
     path: 'update',
     component: UpdateProfileComponent,
+  },
+  {
+    path: 'profile',
+    component: ProfileComponent,
   },
   { path: 'products', component: ProductsComponent },
   { path: 'addproduct', component: CreateProductComponent, canActivate: [AuthGuard] },
@@ -63,6 +72,8 @@ const routes: Routes = [
   { path: 'updatestore/:id', component: EditStoresComponent, canActivate: [AuthGuard] },
   { path: 'create-store', component: CreateStoresComponent, canActivate: [AuthGuard] },
   { path: 'categories', component: CategoriesComponent },
+  { path: 'category', component: CategoryPageComponent },
+  { path: 'update-categories/:id', component: UpdateCategoriesComponent },
   { path: 'create-categories', component: CreateCategoriesComponent, canActivate: [AuthGuard] },
 ];
 @NgModule({

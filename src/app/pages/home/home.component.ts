@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 
-import { AuthResponded } from 'src/app/models/auth';
+import { AuthResponded } from 'src/app/models/auth/auth';
 import { AuthenticationsService } from 'src/app/services/authentications.service';
 import { CartService } from 'src/app/services/cart.service';
 import { ProductsService } from 'src/app/services/products/products.service';
@@ -31,9 +31,7 @@ export class HomeComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    console.log(this.router.url);
     this.currentUser = this.authService.currentUserValue;
-    console.log(this.currentUser);
     this.countries = this.allCountries.slice(this.firstIndex, this.firstIndex + 3);
     this.firstIndex = this.firstIndex + 1;
     this.getProducts();
@@ -82,11 +80,10 @@ export class HomeComponent implements OnInit {
   }
   getProducts() {
     this.productsService.getAllProducts().subscribe((data) => {
-      console.log('Product', data);
-      this.products = data.products;
+      this.products = data.results;
       this.products = this.products.slice(0, 15);
       this.bestSelling = this.products.slice(0, 5);
-      this.goodStuff = this.products.slice(3, 8);
+      this.goodStuff = this.products.slice(1, 8);
     });
   }
 }

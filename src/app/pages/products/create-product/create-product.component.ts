@@ -1,3 +1,9 @@
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
+/* eslint-disable @typescript-eslint/no-floating-promises */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/unbound-method */
 import { Router } from '@angular/router';
 import { ProductsService } from './../../../services/products/products.service';
 import { Products } from './../../../models/products/products';
@@ -43,6 +49,7 @@ export class CreateProductComponent implements OnInit {
       quantity: ['', Validators.required],
       category: '',
       store: '',
+      img: ['', Validators.required],
     });
 
     this.getProducts();
@@ -56,21 +63,21 @@ export class CreateProductComponent implements OnInit {
   getProducts() {
     this.productsService.getAllProducts().subscribe((data) => {
       console.log('Product', data);
-      this.products = data.products;
+      this.products = data.results;
     });
   }
 
   getCategory() {
     this.categoryService.getAllCategories().subscribe((data) => {
-      console.log('Category', data.categories);
-      this.categorys = data.categories;
+      console.log('Category', data);
+      this.categorys = data.results;
     });
   }
 
   getStores() {
     this.storesService.getAllStores().subscribe((res) => {
       console.log(res);
-      this.stores = res.stores;
+      this.stores = res.results;
     });
   }
 
@@ -98,6 +105,7 @@ export class CreateProductComponent implements OnInit {
     products.quantity = this.createProductForm.get('quantity').value;
     products.category = this.categoryId;
     products.store = this.storeId;
+    products.image = this.createProductForm.get('img').value;
 
     this.productsService.addProduct(products, this.currentUser.user.token).subscribe(
       (res) => {

@@ -61,8 +61,9 @@ export class ResetPassEmailComponent implements OnInit {
         Swal.fire({
           icon: 'error',
           title: 'Oops...',
-          text: 'Something went wrong!',
+          text: error.error,
         });
+        console.log(error);
         this.errorMessage = 'Username/Password not correct';
       }
     );

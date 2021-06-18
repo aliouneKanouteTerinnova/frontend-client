@@ -1,0 +1,78 @@
+{
+  "registration": {
+    "register": {
+      "title": "SUBSCRIBE",
+      "sub_title": "registration",
+      "username": "Username",
+      "email": "Email",
+      "address": "Address",
+      "type_user": "Type User",
+      "sexe": "Sexe",
+      "password": "Password",
+      "confirm_password": "Confirm Password",
+      "conditions": "I accept all conditions",
+      "inscription": "registration",
+      "registration": "SUBSCRIBE",
+      "resend": "Resend Email",
+      "country": "Country",
+      "street": "Street",
+      "zipcode": "Zipcode",
+      "city": "City"
+    },
+    "login": {
+      "title": "LOGIN",
+      "sub_title": "connexion",
+      "email": "Email",
+      "password": "Password",
+      "connect_with": "CONNECT WITH",
+      "inscription": "registration",
+      "reset_password": "Password forgotten",
+      "connexion": "LOGIN"
+    },
+    "errors": {
+      "required_error": "This field is mandatory.",
+      "password_error": "The password must be at least 6 characters long",
+      "invalid_error": "This field is invalid.",
+      "match_password": "Passwords must match"
+    }
+  },
+  "nav": {
+    "compte": "Log In/Register",
+    "panier": "Basket",
+    "category": "CATEGORY"
+  },
+  "update": {
+    "validate": "Validate",
+    "title": "Update Profile"
+  },
+  "profile": {
+    "username": "Username",
+    "email": "Email",
+    "address": "Address",
+    "type_user": "Type",
+    "sexe": "Sexe",
+    "edit_button": "Edit",
+    "logout_button": "Logout"
+  },
+  "home": {
+    "category": "CATEGORY V",
+    "best_sale": "BEST SALES",
+    "good_deals": "GOOD DEALS",
+    "plus": "LEARN MORE >"
+  },
+  "basket": {
+    "empty_basket": "Your Cart Is Empty",
+    "go_shop": "GO TO SHOP",
+    "basket": "BASKET",
+    "unity": "Unity: ",
+    "qty": "Qty: ",
+    "total": "Total: ",
+    "net_to_pay": "Net to pay: ",
+    "delivery": "Delivery: ",
+    "checkout": "CHECK OUT",
+    "accept": "WE ACCEPT",
+    "followed_product": "Followed product",
+    "add_cart": "Add to cart",
+    "similar_product": "Similar products"
+  }
+}
