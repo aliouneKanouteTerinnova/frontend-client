@@ -26,7 +26,6 @@ export class NavbarComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    console.log(this.i18nServiceService.currentLangValue);
     if (this.i18nServiceService.currentLangValue === null || this.i18nServiceService.currentLangValue === 'en') {
       this.lang = 'DE';
     } else {

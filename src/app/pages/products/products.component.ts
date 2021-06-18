@@ -27,6 +27,9 @@ export class ProductsComponent implements OnInit {
   userType: string;
   disabledBtn = false;
 
+  selectedImage: any;
+  imageUrl: any;
+
   constructor(
     private productsService: ProductsService,
     private categoryService: CategoriesService,
@@ -47,6 +50,16 @@ export class ProductsComponent implements OnInit {
     if (this.userType === 'CUSTOMER') {
       this.disabledBtn = true;
     }
+  }
+
+  onImageSelected(event) {
+    this.selectedImage = event.target.files[0];
+    let reader = new FileReader();
+
+    reader.onload = (event) => {
+      this.imageUrl = event.target.result;
+    };
+    reader.readAsDataURL(this.selectedImage);
   }
 
   getProducts() {

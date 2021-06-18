@@ -25,31 +25,11 @@
 
 <div class="container grid mt-5">
   <div class="section wrapper">
-    <div class="box span_1_of_4">
-      <img src="../../../assets/img/Products/0.png" alt="" width="250" />
+    <div class="box span_1_of_4" *ngFor="let product of products; let i = index">
+      <img src="{{ product.image }}" alt="" width="250" />
       <div class="box-footer">
-        <p>Lorem ipsum dolor sit amet.</p>
-        <p class="price">&euro;6</p>
-      </div>
-    </div>
-    <div class="box span_1_of_4">
-      <img src="../../../assets/img/Products/0.png" alt="" width="250" />
-      <div class="box-footer">
-        <p>Lorem ipsum dolor sit amet.</p>
-        <p class="price">&euro;6</p>
-      </div>
-    </div>
-    <div class="box span_1_of_4">
-      <img src="../../../assets/img/Products/0.png" alt="" width="250" />
-      <div class="box-footer">
-        <p>Lorem ipsum dolor sit amet.</p>
-        <p class="price">&euro;6</p>
-      </div>
-    </div>
-    <div class="box span_1_of_4">
-      <img src="../../../assets/img/Products/0.png" alt="" width="250" />
-      <div class="box-footer">
-        <p>Lorem ipsum dolor sit amet.</p>
+        <h2>{{ product.name }}</h2>
+        <p>{{ product.description }}</p>
         <p class="price">&euro;6</p>
       </div>
     </div>
@@ -59,7 +39,7 @@
 <section class="diff-ctg mt-5">
   <div class="container">
     <div class="content text-center">
-      <h1>Differents categories</h1>
+      <h1><b>Differents categories</b></h1>
       <p class="desc">
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium, dicta eaque necessitatibus, nemo nulla,
         aspernatur sit suscipit cum quas rem doloribus! Mollitia quibusdam necessitatibus sapiente quae, quos nobis
@@ -70,18 +50,15 @@
     <div class="ctg-img mt-5">
       <div class="img-1">
         <img src="../../../assets/img/Products/10.png" alt="" />
-        <h2 class="ctg-name">{{ listParent[0].name }}</h2>
-        <!-- <h3>{{ listParent[0].description }}</h3> -->
+        <h2>{{ listParent[0].name }}</h2>
       </div>
       <div class="img-2">
         <img src="../../../assets/img/Products/11.png" alt="" />
-        <h2 class="ctg-name">{{ listParent[1].name }}</h2>
-        <!-- <h3>{{ listParent[1].description }}</h3> -->
+        <h2>{{ listParent[1].name }}</h2>
       </div>
       <div class="img-3">
         <img src="../../../assets/img/Products/12.png" alt="" />
-        <h2 class="ctg-name">{{ listParent[3].name }}</h2>
-        <!-- <h3>{{ listParent[3].description }}</h3> -->
+        <h2>{{ listParent[2].name }}</h2>
       </div>
     </div>
   </div>
@@ -89,12 +66,12 @@
 
 <section class="autres-ctg mt-5">
   <div class="container text-center">
-    <h1>Autres Categories</h1>
+    <h1><b>Autres Categories</b></h1>
     <div class="divider mb-4 mt-3"></div>
 
     <div class="all-ctg">
       <div class="section wrapper">
-        <div class="box span_1_of_4" *ngFor="let category of listParent.slice(3, 13); let i = index">
+        <div class="box span_1_of_4" *ngFor="let category of categories; let i = index">
           <img src="../../../assets/img/Products/{{ i }}.png" alt="" width="250" />
           <h2>{{ category.name }}</h2>
         </div>

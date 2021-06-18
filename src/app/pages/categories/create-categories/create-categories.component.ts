@@ -21,7 +21,7 @@ uuidv4();
 })
 export class CreateCategoriesComponent implements OnInit {
   createCategoriesForm: FormGroup;
-  categorys: Category;
+  categories: Category;
   currentUser: any;
   categoryId: any;
   constructor(
@@ -39,7 +39,7 @@ export class CreateCategoriesComponent implements OnInit {
       description: ['', Validators.required],
       // is_active: ['', Validators.required],
       // created_by: ['', Validators.required],
-      parent: ['', Validators.required],
+      parent: [''],
     });
     this.getCategory();
   }
@@ -47,7 +47,7 @@ export class CreateCategoriesComponent implements OnInit {
   getCategory() {
     this.categoryService.getAllCategories().subscribe((data) => {
       console.log('Category', data);
-      this.categorys = data.results;
+      this.categories = data;
     });
   }
 
@@ -65,7 +65,11 @@ export class CreateCategoriesComponent implements OnInit {
     categories.is_active = true;
     // categories.created_by = '';
     // categories.products = '';
-    categories.parent = this.createCategoriesForm.get('parent').value;
+    if (this.createCategoriesForm.get('parent').value == '---') {
+      categories.parent = null;
+    } else {
+      categories.parent = this.createCategoriesForm.get('parent').value;
+    }
 
     console.log(categories);
     console.log(categories.parent);

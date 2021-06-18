@@ -8,7 +8,6 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { Auth, AuthResponded } from '../models/auth/auth';
 import { User } from '../models/user/user';
-
 @Injectable({
   providedIn: 'root',
 })
@@ -49,7 +48,7 @@ export class AuthenticationsService {
   getUser(token: string) {
     token = 'token ' + token;
     return this.httpClient
-      .get<AuthResponded>(`${environment.baseUrl}user`, {
+      .get<AuthResponded>(`${environment.baseUrl}users`, {
         headers: new HttpHeaders().set('Authorization', token),
         observe: 'response',
       })

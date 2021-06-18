@@ -24,8 +24,14 @@
     <div style="width: 35rem" *ngFor="let category of categories">
       <div class="store">
         <div style="display: flex">
-          <div class="card-body name" routerLink=""><b>Name:</b> {{ category.name }}</div>
-          <div class="card-body adresse"><b>Description:</b> {{ category.description }}</div>
+          <div class="card-body name" routerLink=""><b>Name :</b> {{ category.name }}</div>
+          <div class="card-body adresse"><b>Description :</b> {{ category.description }}</div>
+          <div class="card-body children" *ngIf="category.children.length > 0">
+            <b>Children :</b>
+            <div *ngFor="let child of category.children">
+              {{ child.name }}
+            </div>
+          </div>
         </div>
         <div class="button">
           <!-- [disabled]="!disabledBtn" -->

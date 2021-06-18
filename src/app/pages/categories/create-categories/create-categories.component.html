@@ -12,7 +12,8 @@
           <div class="form-group col-6">
             <label for="children">Parent</label>
             <select class="form-control" formControlName="parent" (change)="categoryEvent($event)">
-              <option *ngFor="let category of categorys" value="{{ category.name }}">{{ category.name }}</option>
+              <option selected value="---">-------</option>
+              <option *ngFor="let category of categories">{{ category.name }}</option>
             </select>
           </div>
         </div>
@@ -31,7 +32,7 @@
 
         <div class="row">
           <div class="form-check mt-4 ml-3">
-            <input type="checkbox" class="form-check-input" />
+            <input type="checkbox" checked class="form-check-input" />
             <!-- (change)="checkCheckBoxvalue($event)"
               #ch
               (click)="checkCheckBoxvalue(ch)" -->
