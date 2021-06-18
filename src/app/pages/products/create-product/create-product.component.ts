@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/member-ordering */
+/* eslint-disable @typescript-eslint/no-shadow */
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 /* eslint-disable @typescript-eslint/no-floating-promises */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
@@ -30,6 +32,19 @@ export class CreateProductComponent implements OnInit {
   currentUser: any;
   categoryId: any;
   storeId: any;
+
+  url = '';
+
+  selectFiles(event) {
+    if (event.target.files) {
+      const reader = new FileReader();
+      reader.readAsDataURL(event.target.files[0]);
+      reader.onload = (event: any) => {
+        this.url = event.target.results;
+      };
+    }
+  }
+
   constructor(
     private route: Router,
     private fb: FormBuilder,
@@ -51,6 +66,8 @@ export class CreateProductComponent implements OnInit {
       store: '',
       img: ['', Validators.required],
     });
+
+    console.log(this.url);
 
     this.getProducts();
     this.getCategory();
@@ -105,7 +122,10 @@ export class CreateProductComponent implements OnInit {
     products.quantity = this.createProductForm.get('quantity').value;
     products.category = this.categoryId;
     products.store = this.storeId;
-    products.image = this.createProductForm.get('img').value;
+    products.image = this.url;
+
+    console.log(products);
+    console.log('profilePic - ', this.url);
 
     this.productsService.addProduct(products, this.currentUser.user.token).subscribe(
       (res) => {
