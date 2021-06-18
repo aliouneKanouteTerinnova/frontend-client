@@ -98,7 +98,7 @@ export class CreateProductComponent implements OnInit {
   getCategory() {
     this.categoryService.getAllCategories().subscribe((data) => {
       console.log('Category', data);
-      this.categorys = data.results;
+      this.categorys = data;
     });
   }
 
