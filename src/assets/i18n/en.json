@@ -45,6 +45,15 @@
     "validate": "Validate",
     "title": "Update Profile"
   },
+  "profile": {
+    "username": "Username",
+    "email": "Email",
+    "address": "Address",
+    "type_user": "Type",
+    "sexe": "Sexe",
+    "edit_button": "Edit",
+    "logout_button": "Logout"
+  },
   "home": {
     "category": "CATEGORY V",
     "best_sale": "BEST SALES",

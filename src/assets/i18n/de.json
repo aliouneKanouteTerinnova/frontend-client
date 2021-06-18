@@ -45,6 +45,15 @@
     "validate": "Validieren",
     "title": "Profil aktualisieren"
   },
+  "profile": {
+    "username": "Benutzername",
+    "email": "E-Mail",
+    "address": "Anschrift",
+    "type_user": "Typ Benutzer",
+    "sexe": "Sexte",
+    "edit_button": "Bearbeiten ",
+    "logout_button": "Abmelden"
+  },
   "home": {
     "category": " KATEGORIE V",
     "best_sale": "BESTE VERKÄUFE",
