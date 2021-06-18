@@ -16,10 +16,12 @@ import { StoresComponent } from './pages/stores/stores.component';
 import { UpdateProductComponent } from './pages/products/update-product/update-product.component';
 import { ProductsComponent } from './pages/products/products.component';
 import { CreateStoresComponent } from './pages/stores/create-stores/create-stores.component';
-import { AuthGuard } from './guards/auth.guard';
 import { HomeComponent } from './pages/home/home.component';
 import { ResetPasswordComponent } from './pages/user/reset-password/reset-password.component';
 import { CartComponent } from './pages/cart/cart.component';
+import { ProfileComponent } from './pages/user/profile/profile.component';
+import { AuthGuard } from './guards/connected/auth.guard';
+import { NotConnectedGuard } from './guards/not-connected/not-connected.guard';
 
 const routes: Routes = [
   {
@@ -46,6 +48,7 @@ const routes: Routes = [
   {
     path: 'register',
     component: RegistrationComponent,
+    canActivate: [NotConnectedGuard],
   },
   {
     path: 'email/verify',
@@ -54,6 +57,10 @@ const routes: Routes = [
   {
     path: 'update',
     component: UpdateProfileComponent,
+  },
+  {
+    path: 'profile',
+    component: ProfileComponent,
   },
   { path: 'products', component: ProductsComponent },
   { path: 'addproduct', component: CreateProductComponent, canActivate: [AuthGuard] },

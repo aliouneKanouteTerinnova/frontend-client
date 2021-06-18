@@ -13,7 +13,11 @@
       "conditions": "Ich akzeptiere alle Bedingungen",
       "inscription": "Registrierung",
       "registration": "ABONNIEREN",
-      "resend": "E-Mail erneut senden"
+      "resend": "E-Mail erneut senden",
+      "country": "Land",
+      "street": "Straße",
+      "zipcode": "Postleitzahl",
+      "city": "Stadt"
     },
     "login": {
       "title": "ANMELDEN",
@@ -36,6 +40,19 @@
     "compte": "Einloggen/Registrieren",
     "panier": "Anzeige",
     "category": "KATEGORIE"
+  },
+  "update": {
+    "validate": "Validieren",
+    "title": "Profil aktualisieren"
+  },
+  "profile": {
+    "username": "Benutzername",
+    "email": "E-Mail",
+    "address": "Anschrift",
+    "type_user": "Typ Benutzer",
+    "sexe": "Sexte",
+    "edit_button": "Bearbeiten ",
+    "logout_button": "Abmelden"
   },
   "home": {
     "category": " KATEGORIE V",

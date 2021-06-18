@@ -49,7 +49,7 @@ export class AuthenticationsService {
   getUser(token: string) {
     token = 'token ' + token;
     return this.httpClient
-      .get<AuthResponded>(`${environment.baseUrl}user`, {
+      .get<AuthResponded>(`${environment.baseUrl}users`, {
         headers: new HttpHeaders().set('Authorization', token),
         observe: 'response',
       })
