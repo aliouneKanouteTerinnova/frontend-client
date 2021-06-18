@@ -71,6 +71,20 @@ export class CartService {
       });
     }
   }
+  deleteCart() {
+    this.cookieService.delete('cart');
+    this.cartDataServer = {
+      data: [
+        {
+          product: undefined,
+          numInCart: 0,
+        },
+      ],
+      total: 0,
+    };
+    this.cartDataObs$.next(this.cartDataServer);
+    this.cartTotal$.next(this.cartDataServer.total);
+  }
 
   CalculateSubTotal(index): Number {
     let subTotal = 0;
