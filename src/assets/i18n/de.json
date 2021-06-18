@@ -1,0 +1,61 @@
+{
+  "registration": {
+    "register": {
+      "title": "ABONNIEREN",
+      "sub_title": "einschreibung",
+      "username": "Benutzername",
+      "email": "E-Mail",
+      "address": "Anschrift",
+      "type_user": "Typ Benutzer",
+      "sexe": "Sexte",
+      "password": "Passwort",
+      "confirm_password": "Bestätigen Sie das Passwort",
+      "conditions": "Ich akzeptiere alle Bedingungen",
+      "inscription": "Registrierung",
+      "registration": "ABONNIEREN",
+      "resend": "E-Mail erneut senden"
+    },
+    "login": {
+      "title": "ANMELDEN",
+      "sub_title": "registrierung",
+      "email": "E-Mail",
+      "password": "Kennwort",
+      "connect_with": "VERBINDEN MIT",
+      "inscription": "registrierung",
+      "reset_password": "Passwort vergessen",
+      "connexion": "ANMELDEN"
+    },
+    "errors": {
+      "required_error": "Dieses Feld ist obligatorisch.",
+      "password_error": "Das passwort muss mindestens 6 zeichen lang sein",
+      "invalid_error": "Dieses feld ist ungültig.",
+      "match_password": "Passwörter müssen übereinstimmen"
+    }
+  },
+  "nav": {
+    "compte": "Einloggen/Registrieren",
+    "panier": "Anzeige",
+    "category": "KATEGORIE"
+  },
+  "home": {
+    "category": " KATEGORIE V",
+    "best_sale": "BESTE VERKÄUFE",
+    "good_deals": "GUTE DEALS",
+    "plus": "MEHR LERNEN >"
+  },
+  "basket": {
+    "empty_basket": "Ihr Warenkorb ist leer",
+    "go_shop": "ZUM SHOP GEHEN",
+    "basket": "ANZEIGE",
+    "unity": "Einheit: ",
+    "qty": "Menge: ",
+    "total": "Gesamt: ",
+    "net_to_pay": "Netto zu zahlen :",
+    "delivery": "Lieferung: ",
+    "checkout": "AUSSCHEINEN",
+    "accept": "WIR AKZEPTIEREN",
+    "followed_product": "Verfolgtes Produkt",
+    "add_cart": "In den Warenkorb legen",
+    "similar_product": "Ähnliche Produkte"
+  }
+}

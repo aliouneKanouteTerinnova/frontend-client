@@ -18,14 +18,6 @@ import { UpdateProfileComponent } from './pages/user/update-profile/update-profi
 // @NgModule({
 //   declarations: [AppComponent, ],
 
-export function HttpLoaderFactory(http: HttpClient) {
-  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
-}
-
-import { MatButtonModule } from '@angular/material/button';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatIconModule } from '@angular/material/icon';
-import { MatCardModule } from '@angular/material/card';
 import { NavbarComponent } from './navbar/navbar.component';
 import { ProductsComponent } from './pages/products/products.component';
 import { UpdateProductComponent } from './pages/products/update-product/update-product.component';
@@ -44,6 +36,10 @@ import { CartComponent } from './pages/cart/cart.component';
 import { ResetPassEmailComponent } from './pages/user/reset-password/reset-pass-email/reset-pass-email.component';
 import { CategoryPageComponent } from './pages/category-page/category-page.component';
 import { FooterComponent } from './components/footer/footer.component';
+
+export function rootLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http);
+}
 
 @NgModule({
   declarations: [
@@ -80,7 +76,7 @@ import { FooterComponent } from './components/footer/footer.component';
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
-        useFactory: HttpLoaderFactory,
+        useFactory: rootLoaderFactory,
         deps: [HttpClient],
       },
       isolate: true,

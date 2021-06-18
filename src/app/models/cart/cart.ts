@@ -1,4 +1,4 @@
-import { Products } from './products/products';
+import { Products } from '../products/products';
 
 export type CartModelPublic = {
   total: number;

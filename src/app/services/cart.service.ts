@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { CartModelPublic, CartModelServer } from '../models/cart';
+import { CartModelPublic, CartModelServer } from '../models/cart/cart';
 import { Products } from '../models/products/products';
 import { ProductsService } from './products/products.service';
 import { CookieService } from 'ngx-cookie-service';

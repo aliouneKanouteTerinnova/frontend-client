@@ -1,3 +1,7 @@
+/* eslint-disable @typescript-eslint/restrict-plus-operands */
+/* eslint-disable @typescript-eslint/consistent-type-assertions */
+/* eslint-disable prefer-const */
+/* eslint-disable @typescript-eslint/no-inferrable-types */
 /* eslint-disable @typescript-eslint/member-ordering */
 /* eslint-disable @typescript-eslint/no-shadow */
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
@@ -33,17 +37,9 @@ export class CreateProductComponent implements OnInit {
   categoryId: any;
   storeId: any;
 
-  url = '';
+  filePath = './../../assets/img/Products/';
 
-  selectFiles(event) {
-    if (event.target.files) {
-      const reader = new FileReader();
-      reader.readAsDataURL(event.target.files[0]);
-      reader.onload = (event: any) => {
-        this.url = event.target.results;
-      };
-    }
-  }
+  imgSrc: File = null;
 
   constructor(
     private route: Router,
@@ -67,12 +63,27 @@ export class CreateProductComponent implements OnInit {
       img: ['', Validators.required],
     });
 
-    console.log(this.url);
-
     this.getProducts();
     this.getCategory();
     this.getStores();
   }
+
+  selectFiles(event) {
+    this.imgSrc = <File>event.target.files[0].name;
+    // const reader = new FileReader();
+    // if (event.target.files && event.target.files.length) {
+    //   const [file] = event.target.files;
+    //   reader.readAsDataURL(file);
+    //   reader.onload = () => {
+    //     // this.imgSrc = reader.result as '';
+    //     // this.createProductForm.patchValue({
+    //     //   imgSrc: reader.result,
+    //     // });
+    //   };
+    // }
+    console.log(this.filePath + this.imgSrc);
+  }
+
   checkCheckBoxvalue(event) {
     console.log(event.checked);
   }
@@ -122,10 +133,11 @@ export class CreateProductComponent implements OnInit {
     products.quantity = this.createProductForm.get('quantity').value;
     products.category = this.categoryId;
     products.store = this.storeId;
-    products.image = this.url;
+    products.image = this.filePath + this.imgSrc;
+    // products.image = this.createProductForm.get('image').value;
 
     console.log(products);
-    console.log('profilePic - ', this.url);
+    console.log('profilePic - ', this.imgSrc);
 
     this.productsService.addProduct(products, this.currentUser.user.token).subscribe(
       (res) => {
@@ -145,7 +157,7 @@ export class CreateProductComponent implements OnInit {
         Swal.fire({
           icon: 'error',
           title: 'Oops...',
-          text: 'Something went wrong!',
+          text: err.error.detail,
         });
         console.log(err);
       }
