@@ -13,7 +13,11 @@
       "conditions": "I accept all conditions",
       "inscription": "registration",
       "registration": "SUBSCRIBE",
-      "resend": "Resend Email"
+      "resend": "Resend Email",
+      "country": "Country",
+      "street": "Street",
+      "zipcode": "Zipcode",
+      "city": "City"
     },
     "login": {
       "title": "LOGIN",
@@ -36,6 +40,19 @@
     "compte": "Log In/Register",
     "panier": "Basket",
     "category": "CATEGORY"
+  },
+  "update": {
+    "validate": "Validate",
+    "title": "Update Profile"
+  },
+  "profile": {
+    "username": "Username",
+    "email": "Email",
+    "address": "Address",
+    "type_user": "Type",
+    "sexe": "Sexe",
+    "edit_button": "Edit",
+    "logout_button": "Logout"
   },
   "home": {
     "category": "CATEGORY V",
