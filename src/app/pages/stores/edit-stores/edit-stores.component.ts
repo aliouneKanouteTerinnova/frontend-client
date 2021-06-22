@@ -4,8 +4,8 @@ import { Component, OnInit } from '@angular/core';
 import { StoresService } from 'src/app/services/stores/stores.service';
 import { Store } from './../store';
 import Swal from 'sweetalert2';
-import { AuthenticationsService } from 'src/app/services/authentications.service';
 import { ThrowStmt } from '@angular/compiler';
+import { AuthenticationsService } from 'src/app/services/authentications/authentications.service';
 
 @Component({
   selector: 'app-edit-stores',

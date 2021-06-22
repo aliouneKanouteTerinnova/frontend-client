@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Category } from 'src/app/models/category/category';
-import { AuthenticationsService } from 'src/app/services/authentications.service';
+import { AuthenticationsService } from 'src/app/services/authentications/authentications.service';
 import { CategoriesService } from 'src/app/services/categories/categories.service';
 
 @Component({
@@ -29,9 +29,9 @@ export class CategoriesComponent implements OnInit {
 
   getCategory() {
     this.categoryService.getAllCategories().subscribe((data) => {
-      console.log('Categories', data);
-      this.categories = data.filter((category) => {
-        return category.children.length != 0;
+      console.log('Categories', data.results);
+      this.categories = data.results.filter((category) => {
+        return category.parent === null;
       });
     });
   }

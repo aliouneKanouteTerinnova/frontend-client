@@ -9,12 +9,12 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
 
 import { User } from 'src/app/models/user/user';
-import { AuthenticationsService } from 'src/app/services/authentications.service';
 import { TranslateService } from '@ngx-translate/core';
 import { MustMatch } from 'src/app/_helpers/must-match.validator';
 import { Auth, AuthResponded } from 'src/app/models/auth/auth';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Address } from 'src/app/models/address/address';
+import { AuthenticationsService } from 'src/app/services/authentications/authentications.service';
 
 @Component({
   selector: 'app-registration',

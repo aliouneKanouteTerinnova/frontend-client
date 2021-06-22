@@ -4,7 +4,7 @@ import { StoresService } from 'src/app/services/stores/stores.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import Swal from 'sweetalert2';
-import { AuthenticationsService } from 'src/app/services/authentications.service';
+import { AuthenticationsService } from 'src/app/services/authentications/authentications.service';
 
 @Component({
   selector: 'app-create-stores',
