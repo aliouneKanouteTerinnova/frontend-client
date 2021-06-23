@@ -5,7 +5,7 @@ import { Category } from 'src/app/models/category/category';
 import { CategoriesService } from 'src/app/services/categories/categories.service';
 import Swal from 'sweetalert2';
 import { v4 as uuidv4 } from 'uuid';
-import { AuthenticationsService } from 'src/app/services/authentications.service';
+import { AuthenticationsService } from 'src/app/services/authentications/authentications.service';
 uuidv4();
 
 @Component({

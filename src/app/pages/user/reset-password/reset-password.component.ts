@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AuthenticationsService } from 'src/app/services/authentications.service';
+import { AuthenticationsService } from 'src/app/services/authentications/authentications.service';
 import { MustMatch } from 'src/app/_helpers/must-match.validator';
 import Swal from 'sweetalert2';
 @Component({

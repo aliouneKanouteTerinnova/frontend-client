@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ViewChild, OnInit } from '@angular/core';
 import { CartModelServer } from 'src/app/models/cart/cart';
-import { CartService } from 'src/app/services/cart.service';
+import { CartService } from 'src/app/services/cart/cart.service';
 import { ProductsService } from 'src/app/services/products/products.service';
 import Swal from 'sweetalert2';
+import { SwalComponent } from '@sweetalert2/ngx-sweetalert2';
 
 @Component({
   selector: 'app-cart',
@@ -10,12 +11,15 @@ import Swal from 'sweetalert2';
   styleUrls: ['./cart.component.scss'],
 })
 export class CartComponent implements OnInit {
+  @ViewChild('effacerSwal', { static: false })
+  private effacerSwal: SwalComponent;
   cartData: CartModelServer;
   cartTotal: Number;
   subTotal: Number;
   products = [];
   bestSelling = [];
   goodStuff = [];
+  idProduct: any;
 
   constructor(public cartService: CartService, private productsService: ProductsService) {}
 
@@ -52,5 +56,9 @@ export class CartComponent implements OnInit {
       showConfirmButton: false,
       timer: 2000,
     });
+  }
+  suppressionProduict(id) {
+    this.idProduct = id;
+    this.effacerSwal.fire();
   }
 }

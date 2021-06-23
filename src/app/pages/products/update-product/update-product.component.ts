@@ -5,7 +5,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { v4 as uuidv4 } from 'uuid';
 import Swal from 'sweetalert2';
-import { AuthenticationsService } from 'src/app/services/authentications.service';
+import { AuthenticationsService } from 'src/app/services/authentications/authentications.service';
 uuidv4();
 @Component({
   selector: 'app-update-product',

@@ -1,11 +1,12 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { CartModelPublic, CartModelServer } from '../models/cart/cart';
-import { Products } from '../models/products/products';
-import { ProductsService } from './products/products.service';
+import { CartModelPublic, CartModelServer } from '../../models/cart/cart';
+import { Products } from '../../models/products/products';
+import { ProductsService } from '../products/products.service';
 import { CookieService } from 'ngx-cookie-service';
 
 @Injectable({
@@ -200,38 +201,38 @@ export class CartService {
     /*    console.log(this.cartDataClient.prodData[index].prodId);
         console.log(this.cartDataServer.data[index].product.id);*/
 
-    if (window.confirm('Are you sure you want to delete the item?')) {
-      this.cartDataServer.data.splice(index, 1);
-      this.cartDataClient.prodData.splice(index, 1);
-      this.CalculateTotal();
-      this.cartDataClient.total = this.cartDataServer.total;
+    // if (window.confirm('Are you sure you want to delete the item?')) {
+    this.cartDataServer.data.splice(index, 1);
+    this.cartDataClient.prodData.splice(index, 1);
+    this.CalculateTotal();
+    this.cartDataClient.total = this.cartDataServer.total;
 
-      if (this.cartDataClient.total === 0) {
-        this.cartDataClient = { prodData: [{ incart: 0, id: 0 }], total: 0 };
-        this.cookieService.set('cart', JSON.stringify(this.cartDataClient));
-      } else {
-        this.cookieService.set('cart', JSON.stringify(this.cartDataClient));
-      }
-
-      if (this.cartDataServer.total === 0) {
-        this.cartDataServer = {
-          data: [
-            {
-              product: undefined,
-              numInCart: 0,
-            },
-          ],
-          total: 0,
-        };
-        this.cartDataObs$.next(this.cartDataServer);
-      } else {
-        this.cartDataObs$.next(this.cartDataServer);
-      }
+    if (this.cartDataClient.total === 0) {
+      this.cartDataClient = { prodData: [{ incart: 0, id: 0 }], total: 0 };
+      this.cookieService.set('cart', JSON.stringify(this.cartDataClient));
+    } else {
+      this.cookieService.set('cart', JSON.stringify(this.cartDataClient));
     }
+
+    if (this.cartDataServer.total === 0) {
+      this.cartDataServer = {
+        data: [
+          {
+            product: undefined,
+            numInCart: 0,
+          },
+        ],
+        total: 0,
+      };
+      this.cartDataObs$.next(this.cartDataServer);
+    } else {
+      this.cartDataObs$.next(this.cartDataServer);
+    }
+    // }
     // If the user doesn't want to delete the product, hits the CANCEL button
-    else {
-      return;
-    }
+    // else {
+    //   return;
+    // }
   }
 
   private CalculateTotal() {
@@ -258,5 +259,45 @@ export class CartService {
       total: 0,
     };
     this.cartDataObs$.next(this.cartDataServer);
+  }
+
+  //Initiate Cart
+  InitiateBasket(token: any) {
+    token = 'token ' + token;
+    return this.httpClient.post<any>(
+      `${environment.baseUrl}carts`,
+      {},
+      {
+        headers: new HttpHeaders().set('Authorization', token),
+        observe: 'response',
+      }
+    );
+  }
+
+  //Add item to Cart
+  addItemToCart(data: any, token: any) {
+    token = 'token ' + token;
+    return this.httpClient.post(`${environment.baseUrl}carts/items`, data, {
+      headers: new HttpHeaders().set('Authorization', token),
+      observe: 'response',
+    });
+  }
+
+  // Delete item from Cart
+  deleteItemToCart(id: any, token: any) {
+    token = 'token ' + token;
+    return this.httpClient.delete(`${environment.baseUrl}carts/items/${id}`, {
+      headers: new HttpHeaders().set('Authorization', token),
+      observe: 'response',
+    });
+  }
+
+  // get customer Cart
+  getCart(token: any) {
+    token = 'token ' + token;
+    return this.httpClient.get<any>(`${environment.baseUrl}carts`, {
+      headers: new HttpHeaders().set('Authorization', token),
+      observe: 'response',
+    });
   }
 }

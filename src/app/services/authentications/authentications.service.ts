@@ -4,10 +4,10 @@ import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http
 import { map } from 'rxjs/operators';
 import { CookieService } from 'ngx-cookie-service';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { Auth, AuthResponded } from 'src/app/models/auth/auth';
+import { environment } from 'src/environments/environment';
+import { User } from 'src/app/models/user/user';
 
-import { environment } from '../../environments/environment';
-import { Auth, AuthResponded } from '../models/auth/auth';
-import { User } from '../models/user/user';
 @Injectable({
   providedIn: 'root',
 })

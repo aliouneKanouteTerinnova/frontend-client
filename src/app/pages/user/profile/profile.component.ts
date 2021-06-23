@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AccountType } from 'src/app/enums/account-type.enum';
 import { AuthResponded } from 'src/app/models/auth/auth';
-import { AuthenticationsService } from 'src/app/services/authentications.service';
+import { AuthenticationsService } from 'src/app/services/authentications/authentications.service';
 import { StoresService } from 'src/app/services/stores/stores.service';
 import { Store } from '../../stores/store';
 

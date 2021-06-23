@@ -10,4 +10,5 @@ export class Category {
   products: string;
   parent: string;
   children: string;
+  image: string;
 }

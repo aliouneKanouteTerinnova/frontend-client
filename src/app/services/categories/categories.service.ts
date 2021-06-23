@@ -12,7 +12,7 @@ export class CategoriesService {
   constructor(private httpClient: HttpClient) {}
 
   getAllCategories() {
-    return this.httpClient.get<any>(`${environment.baseUrl}allcategories`);
+    return this.httpClient.get<any>(`${environment.baseUrl}categories`);
   }
 
   getCategory(id: string) {

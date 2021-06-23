@@ -7,12 +7,12 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { SharedModule } from './shared/shared.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 
-import { RegistrationComponent } from './pages/user/registration/registration.component';
 import { CookieService } from 'ngx-cookie-service';
 import { UpdateProfileComponent } from './pages/user/update-profile/update-profile.component';
 // @NgModule({
@@ -37,6 +37,9 @@ import { ResetPassEmailComponent } from './pages/user/reset-password/reset-pass-
 import { CategoryPageComponent } from './pages/category-page/category-page.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { ProfileComponent } from './pages/user/profile/profile.component';
+import { OrderListComponent } from './pages/order/order-list/order-list.component';
+import { OrderDetailsComponent } from './pages/order/order-details/order-details.component';
+import { RegistrationComponent } from './pages/user/registration/registration.component';
 
 export function rootLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -69,12 +72,15 @@ export function rootLoaderFactory(http: HttpClient) {
     CategoryPageComponent,
     FooterComponent,
     ProfileComponent,
+    OrderListComponent,
+    OrderDetailsComponent,
   ],
 
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
+    SweetAlert2Module.forRoot(),
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

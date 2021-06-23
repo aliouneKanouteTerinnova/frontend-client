@@ -14,10 +14,10 @@ import { CategoriesService } from './../../services/categories/categories.servic
 import { Category } from './../../models/category/category';
 import { v4 as uuidv4 } from 'uuid';
 import Swal from 'sweetalert2';
-import { AuthenticationsService } from 'src/app/services/authentications.service';
-import { CartService } from 'src/app/services/cart.service';
+import { CartService } from 'src/app/services/cart/cart.service';
 import { CartModelServer } from 'src/app/models/cart/cart';
 import { Store } from '../stores/store';
+import { AuthenticationsService } from 'src/app/services/authentications/authentications.service';
 
 uuidv4();
 

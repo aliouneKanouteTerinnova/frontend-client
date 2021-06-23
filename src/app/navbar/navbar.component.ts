@@ -1,10 +1,10 @@
 import { MenuItem } from './../menu-item';
 import { Component, OnInit } from '@angular/core';
 import { I18nServiceService } from '../services/i18n-service/i18n-service.service';
-import { CartService } from '../services/cart.service';
+import { CartService } from '../services/cart/cart.service';
 import { CartModelServer } from '../models/cart/cart';
-import { AuthenticationsService } from '../services/authentications.service';
 import { AuthResponded } from '../models/auth/auth';
+import { AuthenticationsService } from '../services/authentications/authentications.service';
 
 @Component({
   selector: 'app-navbar',

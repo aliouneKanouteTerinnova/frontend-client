@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { AuthenticationsService } from 'src/app/services/authentications.service';
+import { AuthenticationsService } from 'src/app/services/authentications/authentications.service';
 import { StoresService } from 'src/app/services/stores/stores.service';
 // import { Store } from './store';
 import Swal from 'sweetalert2';

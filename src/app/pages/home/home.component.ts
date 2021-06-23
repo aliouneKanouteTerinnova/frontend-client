@@ -3,9 +3,9 @@ import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 
 import { AuthResponded } from 'src/app/models/auth/auth';
-import { AuthenticationsService } from 'src/app/services/authentications.service';
-import { CartService } from 'src/app/services/cart.service';
+import { CartService } from 'src/app/services/cart/cart.service';
 import { ProductsService } from 'src/app/services/products/products.service';
+import { AuthenticationsService } from 'src/app/services/authentications/authentications.service';
 
 @Component({
   selector: 'app-home',
@@ -82,6 +82,7 @@ export class HomeComponent implements OnInit {
     this.productsService.getAllProducts().subscribe((data) => {
       this.products = data.results;
       this.products = this.products.slice(0, 15);
+      console.log(this.products);
       this.bestSelling = this.products.slice(0, 5);
       this.goodStuff = this.products.slice(1, 8);
     });

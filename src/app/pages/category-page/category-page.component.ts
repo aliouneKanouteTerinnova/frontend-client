@@ -23,8 +23,8 @@ export class CategoryPageComponent implements OnInit {
 
   getCategory() {
     this.categoryService.getAllCategories().subscribe((data) => {
-      console.log('categories', data);
-      this.categories = data;
+      console.log('categories', data.results);
+      this.categories = data.results;
       console.log(this.categories);
       this.listParent = this.categories.filter((category) => {
         return category.parent === null;

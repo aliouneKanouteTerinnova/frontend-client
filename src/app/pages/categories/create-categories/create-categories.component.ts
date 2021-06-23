@@ -11,7 +11,7 @@ import { Category } from 'src/app/models/category/category';
 import { CategoriesService } from 'src/app/services/categories/categories.service';
 import Swal from 'sweetalert2';
 import { v4 as uuidv4 } from 'uuid';
-import { AuthenticationsService } from 'src/app/services/authentications.service';
+import { AuthenticationsService } from 'src/app/services/authentications/authentications.service';
 uuidv4();
 
 @Component({
@@ -65,7 +65,7 @@ export class CreateCategoriesComponent implements OnInit {
     categories.is_active = true;
     // categories.created_by = '';
     // categories.products = '';
-    if (this.createCategoriesForm.get('parent').value == '---') {
+    if (this.createCategoriesForm.get('parent').value === '---') {
       categories.parent = null;
     } else {
       categories.parent = this.createCategoriesForm.get('parent').value;
