@@ -66,19 +66,25 @@
             </div>
           </div>
         </div>
-        <div class="col-md-3 dash">
-          <button mat-raised-button color="primary" routerLink="/orders">My Orders</button>
+        <div class="col-md-4 dash">
+          <button mat-raised-button color="primary" routerLink="/orders">
+            <span translate>profile.orders_button</span>
+          </button>
         </div>
       </div>
       <div class="col-md-3 dash" *ngIf="user['user'].account_type === 'Seller'">
         <!-- <div class="row"> -->
-        <button mat-raised-button color="primary" routerLink="/list-store">Store</button>
+        <button mat-raised-button color="primary" routerLink="/list-store">
+          <span translate>profile.store_button</span>
+        </button>
         <button mat-raised-button color="primary" routerLink="/updatestore/{{ store.id }}" *ngIf="has_store">
           Store
         </button>
         <!-- </div> -->
         <!-- <div class="row"> -->
-        <button mat-raised-button color="primary" routerLink="/products">Products</button>
+        <button mat-raised-button color="primary" routerLink="/products">
+          <span translate>profile.products_button</span>
+        </button>
 
         <!-- </div> -->
       </div>

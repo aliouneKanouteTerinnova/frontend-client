@@ -83,7 +83,7 @@
       </mat-form-field>
 
       <mat-form-field class="example-full-width" appearance="outline">
-        <mat-label>State</mat-label>
+        <mat-label translate>registration.register.city</mat-label>
         <input type="text" matInput placeholder="state" formControlName="state" required />
         <mat-error *ngIf="registerForm.controls.state.touched && registerForm.controls.state.invalid">
           <span *ngIf="registerForm.controls.state.errors.required">This field is mandatory.</span>
@@ -91,7 +91,7 @@
       </mat-form-field>
 
       <mat-form-field class="example-full-width" appearance="outline">
-        <mat-label>Zipcode</mat-label>
+        <mat-label translate>registration.register.zipcode</mat-label>
         <input type="text" matInput placeholder="zipcode" formControlName="zipcode" required />
         <mat-error *ngIf="registerForm.controls.zipcode.touched && registerForm.controls.zipcode.invalid">
           <span *ngIf="registerForm.controls.zipcode.errors.required">This field is mandatory.</span>
@@ -99,7 +99,7 @@
       </mat-form-field>
 
       <mat-form-field class="example-full-width" appearance="outline">
-        <mat-label>Country</mat-label>
+        <mat-label translate>registration.register.country</mat-label>
         <input type="text" matInput placeholder="country" formControlName="country" required />
         <mat-error *ngIf="registerForm.controls.country.touched && registerForm.controls.country.invalid">
           <span *ngIf="registerForm.controls.country.errors.required">This field is mandatory.</span>
@@ -107,7 +107,7 @@
       </mat-form-field>
 
       <mat-form-field class="example-full-width" appearance="outline">
-        <mat-label>Street</mat-label>
+        <mat-label translate>registration.register.street</mat-label>
         <input type="text" matInput placeholder="street" formControlName="street" required />
         <mat-error *ngIf="registerForm.controls.street.touched && registerForm.controls.street.invalid">
           <span *ngIf="registerForm.controls.street.errors.required">This field is mandatory.</span>
