@@ -26,11 +26,8 @@ export class CategoryPageComponent implements OnInit {
 
   getCategory() {
     this.categoryService.getAllCategories().subscribe((data) => {
-      console.log('categories', data.results);
       this.categories = data.results;
-      console.log(this.categories);
       this.listParent = this.categories.filter((category) => category.parent === null);
-      console.log(this.listParent);
       if (this.listParent.length >= 3) {
         this.category1 = this.listParent[0].name;
         this.category2 = this.listParent[1].name;
@@ -53,10 +50,8 @@ export class CategoryPageComponent implements OnInit {
 
   getProducts() {
     this.productsService.getAllProducts().subscribe((data) => {
-      console.log('products', data);
       this.products = data.results;
       this.products.slice(0, 15);
-      console.log(this.products);
     });
   }
 }

@@ -17,11 +17,8 @@ export class OrderListComponent implements OnInit {
     this.orderService.getAllOrders(this.currentUser['user'].token).subscribe(
       (data) => {
         this.listOrders = data.body;
-        console.log(this.listOrders);
       },
-      (error) => {
-        console.log(error);
-      }
+      (error) => {}
     );
   }
 }

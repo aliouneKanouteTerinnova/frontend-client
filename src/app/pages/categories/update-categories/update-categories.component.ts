@@ -32,7 +32,6 @@ export class UpdateCategoriesComponent implements OnInit {
 
   ngOnInit(): void {
     this.categoryService.getCategory(this.router.snapshot.params.id).subscribe((res) => {
-      console.log(res.category.name);
       this.createCategoriesForm.patchValue({
         name: res.category.name,
         slug: res.category.slug,
@@ -63,7 +62,6 @@ export class UpdateCategoriesComponent implements OnInit {
             timer: 1500,
           });
           this.route.navigate(['/categories']);
-          console.log(res);
         },
         (err) => {
           Swal.fire({
@@ -71,7 +69,6 @@ export class UpdateCategoriesComponent implements OnInit {
             title: 'Oops...',
             text: err.error.error,
           });
-          console.log(err);
         }
       );
   }

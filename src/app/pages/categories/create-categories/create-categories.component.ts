@@ -46,7 +46,6 @@ export class CreateCategoriesComponent implements OnInit {
 
   getCategory() {
     this.categoryService.getAllCategories().subscribe((data) => {
-      console.log('Category', data);
       this.categories = data;
     });
   }
@@ -71,9 +70,6 @@ export class CreateCategoriesComponent implements OnInit {
       categories.parent = this.createCategoriesForm.get('parent').value;
     }
 
-    console.log(categories);
-    console.log(categories.parent);
-
     this.categoryService.addCategory(categories, this.currentUser.user.token).subscribe(
       (res) => {
         Swal.fire({
@@ -84,7 +80,6 @@ export class CreateCategoriesComponent implements OnInit {
           timer: 1500,
         });
         this.route.navigate(['/categories']);
-        console.log(res);
       },
       (err) => {
         Swal.fire({
@@ -92,7 +87,6 @@ export class CreateCategoriesComponent implements OnInit {
           title: 'Oops...',
           text: err.error.error,
         });
-        console.log(err);
       }
     );
   }

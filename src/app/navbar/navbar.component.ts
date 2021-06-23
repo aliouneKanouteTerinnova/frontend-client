@@ -38,7 +38,6 @@ export class NavbarComponent implements OnInit {
     this.cartService.cartTotal$.subscribe((total) => {
       this.cartTotal = total;
     });
-    console.log(this.currentUser['user'].username);
   }
 
   changeLang() {
