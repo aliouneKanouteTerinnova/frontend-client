@@ -66,6 +66,9 @@
             </div>
           </div>
         </div>
+        <div class="col-md-3 dash">
+          <button mat-raised-button color="primary" routerLink="/orders">My Orders</button>
+        </div>
       </div>
       <div class="col-md-3 dash" *ngIf="user['user'].account_type === 'Seller'">
         <!-- <div class="row"> -->
@@ -76,6 +79,7 @@
         <!-- </div> -->
         <!-- <div class="row"> -->
         <button mat-raised-button color="primary" routerLink="/products">Products</button>
+
         <!-- </div> -->
       </div>
     </div>
