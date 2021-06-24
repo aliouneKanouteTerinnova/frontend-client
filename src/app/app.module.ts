@@ -42,7 +42,7 @@ import { ProfileComponent } from './pages/user/profile/profile.component';
 import { OrderListComponent } from './pages/order/order-list/order-list.component';
 import { OrderDetailsComponent } from './pages/order/order-details/order-details.component';
 import { RegistrationComponent } from './pages/user/registration/registration.component';
-import { PaymentComponent } from './pages/payment/payment.component';
+
 import { StripeModule } from 'stripe-angular';
 
 export function rootLoaderFactory(http: HttpClient) {
@@ -78,7 +78,6 @@ export function rootLoaderFactory(http: HttpClient) {
     ProfileComponent,
     OrderListComponent,
     OrderDetailsComponent,
-    PaymentComponent,
   ],
 
   imports: [

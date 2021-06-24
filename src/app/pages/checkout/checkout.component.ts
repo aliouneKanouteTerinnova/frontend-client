@@ -1,3 +1,17 @@
+/* eslint-disable @typescript-eslint/restrict-plus-operands */
+/* eslint-disable @typescript-eslint/no-shadow */
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/restrict-template-expressions */
+/* eslint-disable @typescript-eslint/indent */
+/* eslint-disable @typescript-eslint/quotes */
+/* eslint-disable @typescript-eslint/no-floating-promises */
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/dot-notation */
+/* eslint-disable @typescript-eslint/unbound-method */
+/* eslint-disable @typescript-eslint/ban-types */
+/* eslint-disable max-len */
 import { PaymentsService } from './../../services/payments.service';
 /* eslint-disable @typescript-eslint/naming-convention */
 import { Component, OnInit } from '@angular/core';
@@ -9,6 +23,7 @@ import { AuthenticationsService } from 'src/app/services/authentications/authent
 import { CartService } from 'src/app/services/cart/cart.service';
 import { OrderService } from 'src/app/services/order/order.service';
 import Swal from 'sweetalert2';
+import { Stripe } from 'stripe-angular';
 
 @Component({
   selector: 'app-checkout',
@@ -17,12 +32,19 @@ import Swal from 'sweetalert2';
 })
 export class CheckoutComponent implements OnInit {
   checkoutForm: FormGroup;
+  testForm: FormGroup;
   emailRegex = /^(([^<>+()\[\]\\.,;:\s@"-#$%&=]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,3}))$/;
   currentUser: any;
   cartData: CartModelServer;
   cartTotal: Number;
   subTotal: Number;
   idCart: any;
+  stripe: any;
+  card;
+  token;
+  pbKey;
+  orderNumber;
+  errorMessage: any;
   constructor(
     public cartService: CartService,
     private formBuilder: FormBuilder,
@@ -40,15 +62,7 @@ export class CheckoutComponent implements OnInit {
     this.cartService.cartTotal$.subscribe((total) => {
       this.cartTotal = total;
     });
-    // this.cartService.getCart(this.currentUser['user'].token).subscribe(
-    //   (data) => {
-    //     this.idCart = data.body.id;
-    //     console.log(data.body.id);
-    //   },
-    //   (error) => {
-    //     console.log(error);
-    //   }
-    // );
+
     this.checkoutForm = this.formBuilder.group({
       firstname: [null, Validators.required],
       email: [null, [Validators.required, Validators.pattern(this.emailRegex)]],
@@ -56,13 +70,14 @@ export class CheckoutComponent implements OnInit {
       city: [null, Validators.required],
       state: [null, Validators.required],
       zip: [null, Validators.required],
-      cardname: [null, Validators.required],
+      cardname: '',
       cardnumber: '',
       expmonth: '',
       expyear: '',
       cvv: '',
       sameadr: '',
     });
+    this.initForm('', '');
     if (this.currentUser) {
       this.authService.getUser(this.currentUser['user'].token).subscribe((data) => {
         const user: AuthResponded = data.body;
@@ -74,15 +89,44 @@ export class CheckoutComponent implements OnInit {
           country: user['user'].address.country,
           address: user['user'].address.street,
           city: user['user'].address.state,
-          cardname: '315',
-          cardnumber: '315',
-          expmonth: 'DHL',
-          expyear: '10000',
-          cvv: 'EURO',
         });
       });
     }
   }
+
+  initForm(amount, orderNumber) {
+    this.testForm = this.formBuilder.group({
+      amount: ['Amount : ' + amount, Validators.required],
+      orderNumber: ['Order number : ' + orderNumber, Validators.required],
+    });
+  }
+
+  initStripeForm() {
+    const elements = this.stripe.elements();
+    // eslint-disable-next-line no-var
+    const style = {
+      style: {
+        base: {
+          fontFamily: 'Arial, sans-serif',
+          fontSize: '30px',
+          color: '#C1C7CD',
+        },
+        invalid: { color: 'red' },
+      },
+    };
+    this.card = elements.create('card', style);
+
+    this.card.mount('#card-element');
+
+    this.card.addEventListener('change', (event) => {
+      if (event.error) {
+        this.errorMessage = event.error.message;
+      } else {
+        this.errorMessage = '';
+      }
+    });
+  }
+
   checkout() {
     const address = this.checkoutForm.get('address').value;
     const state = this.checkoutForm.get('state').value;
@@ -143,14 +187,23 @@ export class CheckoutComponent implements OnInit {
             };
             this.payment.payment(param, this.currentUser['user'].token).subscribe(
               (res) => {
+                this.pbKey = res.body.public_key;
+                this.token = res.body.token;
+                this.orderNumber = res.body.payment.order_number;
+                // const method = res.body.payment.method;
+                // const amount = res.body.payment.amount;
+                this.stripe = Stripe(this.pbKey);
+
+                this.initStripeForm();
+
+                this.initForm(sommes, this.orderNumber);
                 console.log(res);
               },
               (err) => {
                 console.log(err);
               }
             );
-            // data.body.number
-            // this.cartService.deleteCart();
+            this.cartService.deleteCart();
             Swal.fire({
               position: 'top-end',
               icon: 'success',
@@ -158,7 +211,6 @@ export class CheckoutComponent implements OnInit {
               showConfirmButton: false,
               timer: 5000,
             });
-            // this.router.navigate(['/orders']);
           },
           (error) => {
             console.log(error);
@@ -169,6 +221,37 @@ export class CheckoutComponent implements OnInit {
         console.log(errors);
       }
     );
-    // console.log(this.checkoutForm.value);
+  }
+
+  OnSubmit() {
+    this.stripe
+      .confirmCardPayment(`${this.token}`, {
+        payment_method: {
+          card: this.card,
+        },
+      })
+      .then((result) => {
+        console.log(result);
+        if (result.error) {
+          this.errorMessage = result.error.message;
+        } else if (result.paymentIntent.status === 'succeeded') {
+          Swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: 'payment has been made',
+            showConfirmButton: false,
+            timer: 1500,
+          });
+          const body = {
+            order_number: this.orderNumber,
+          };
+          this.payment
+            .confirmCardPayment(this.currentUser['user'].token, result.paymentIntent.id, body)
+            .subscribe((res) => {
+              this.router.navigate(['/orders']);
+              console.log(res);
+            });
+        }
+      });
   }
 }
