@@ -30,7 +30,7 @@ export class OrderService {
   /*Adding order*/
   addOrder(order: any, token: string) {
     token = 'token ' + token;
-    return this.httpClient.post(`${environment.baseUrl}orders/initiate`, order, {
+    return this.httpClient.post<any>(`${environment.baseUrl}orders/initiate`, order, {
       headers: new HttpHeaders().set('Authorization', token),
       observe: 'response',
     });
