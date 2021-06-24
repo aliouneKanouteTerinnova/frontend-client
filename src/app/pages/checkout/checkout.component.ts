@@ -1,8 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Address } from 'src/app/models/address/address';
 import { AuthResponded } from 'src/app/models/auth/auth';
 import { CartModelServer } from 'src/app/models/cart/cart';
+import { Item } from 'src/app/models/item/item';
+import { ShippingAddress } from 'src/app/models/shipping-address/shipping-address';
+import { ShippingMethod } from 'src/app/models/shipping-method/shipping-method';
 import { AuthenticationsService } from 'src/app/services/authentications/authentications.service';
 import { CartService } from 'src/app/services/cart/cart.service';
 import { OrderService } from 'src/app/services/order/order.service';
@@ -37,15 +41,6 @@ export class CheckoutComponent implements OnInit {
     this.cartService.cartTotal$.subscribe((total) => {
       this.cartTotal = total;
     });
-    // this.cartService.getCart(this.currentUser['user'].token).subscribe(
-    //   (data) => {
-    //     this.idCart = data.body.id;
-    //     console.log(data.body.id);
-    //   },
-    //   (error) => {
-    //     console.log(error);
-    //   }
-    // );
     this.checkoutForm = this.formBuilder.group({
       firstname: [null, Validators.required],
       email: [null, [Validators.required, Validators.pattern(this.emailRegex)]],
@@ -91,43 +86,40 @@ export class CheckoutComponent implements OnInit {
     this.cartService.InitiateBasket(this.currentUser['user'].token).subscribe(
       (data) => {
         this.idCart = data.body.id;
-        console.log(data);
         this.cartData.data.forEach((element) => {
-          const item = {
+          const item: Item = {
             product: element.product.id,
             quantity: element.numInCart,
           };
-          console.log(item);
           this.cartService.addItemToCart(item, this.currentUser['user'].token).subscribe(
-            (dataItem) => {
-              console.log(dataItem);
-            },
-            (error) => {
-              console.log(error);
-            }
+            (dataItem) => {},
+            (error) => {}
           );
         });
+        const addresse: Address = {
+          country: state,
+          state: city,
+          street: address,
+          zipcode: zip,
+        };
+        const shippingAddress: ShippingAddress = {
+          phone_number: '781051173',
+          notes: '',
+          address: addresse,
+        };
+        const shippingMethod: ShippingMethod = {
+          name: 'DHL',
+          price: 10000,
+          currency: 'EUR',
+        };
         const order = {
           cart: this.idCart,
           currency: 'EUR',
           total_tax: 315,
           shipping_tax: 315,
           total_prices: this.cartTotal,
-          shipping_address: {
-            phone_number: '781051173',
-            notes: '',
-            address: {
-              country: state,
-              state: city,
-              street: address,
-              zipcode: zip,
-            },
-          },
-          shipping_method: {
-            name: 'DHL',
-            price: 10000,
-            currency: 'EUR',
-          },
+          shipping_address: shippingAddress,
+          shipping_method: shippingMethod,
         };
         this.orderService.addOrder(order, this.currentUser['user'].token).subscribe(
           (data) => {
@@ -144,10 +136,7 @@ export class CheckoutComponent implements OnInit {
           (error) => {}
         );
       },
-      (errors) => {
-        console.log(errors);
-      }
+      (errors) => {}
     );
-    // console.log(this.checkoutForm.value);
   }
 }

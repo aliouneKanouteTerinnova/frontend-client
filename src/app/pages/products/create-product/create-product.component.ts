@@ -81,30 +81,24 @@ export class CreateProductComponent implements OnInit {
     //     // });
     //   };
     // }
-    console.log(this.filePath + this.imgSrc);
   }
 
-  checkCheckBoxvalue(event) {
-    console.log(event.checked);
-  }
+  checkCheckBoxvalue(event) {}
 
   getProducts() {
     this.productsService.getAllProducts().subscribe((data) => {
-      console.log('Product', data);
       this.products = data.results;
     });
   }
 
   getCategory() {
     this.categoryService.getAllCategories().subscribe((data) => {
-      console.log('Category', data);
       this.categorys = data;
     });
   }
 
   getStores() {
     this.storesService.getAllStores().subscribe((res) => {
-      console.log(res);
       this.stores = res.results;
     });
   }
@@ -118,8 +112,6 @@ export class CreateProductComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log('submited');
-
     const products = new Products();
 
     products.id = Math.floor(Math.random() * 100);
@@ -136,9 +128,6 @@ export class CreateProductComponent implements OnInit {
     products.image = this.filePath + this.imgSrc;
     // products.image = this.createProductForm.get('image').value;
 
-    console.log(products);
-    console.log('profilePic - ', this.imgSrc);
-
     this.productsService.addProduct(products, this.currentUser.user.token).subscribe(
       (res) => {
         Swal.fire({
@@ -150,8 +139,6 @@ export class CreateProductComponent implements OnInit {
         });
         this.route.navigate(['/products']);
         this.getProducts();
-
-        console.log(res);
       },
       (err) => {
         Swal.fire({
@@ -159,7 +146,6 @@ export class CreateProductComponent implements OnInit {
           title: 'Oops...',
           text: err.error.detail,
         });
-        console.log(err);
       }
     );
   }
