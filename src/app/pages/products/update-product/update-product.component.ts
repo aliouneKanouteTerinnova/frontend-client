@@ -32,9 +32,7 @@ export class UpdateProductComponent implements OnInit {
 
   ngOnInit(): void {
     this.currentUser = this.authService.currentUserValue;
-    console.log(this.router.snapshot.params.id);
     this.productsService.getCurrentData(this.router.snapshot.params.id).subscribe((res) => {
-      console.log(res);
       this.updateProducts = new FormGroup({
         name: new FormControl(res['product'].name),
         description: new FormControl(res['product'].description),
@@ -43,7 +41,6 @@ export class UpdateProductComponent implements OnInit {
         img: new FormControl(res['product'].image),
         is_active: new FormControl(res['product'].is_active),
       });
-      console.log(res['product'].image);
     });
   }
 
@@ -67,7 +64,6 @@ export class UpdateProductComponent implements OnInit {
       quantity: quantity,
       image: image,
     };
-    console.log(product, this.currentUser.user.token);
     this.productsService.updateProduct(this.router.snapshot.params.id, product, this.currentUser.user.token).subscribe(
       (res) => {
         Swal.fire({
@@ -85,9 +81,7 @@ export class UpdateProductComponent implements OnInit {
           title: 'Oops...',
           text: 'Something went wrong!',
         });
-        console.log(err);
       }
     );
-    console.log('Products updated ', this.updateProducts.value);
   }
 }

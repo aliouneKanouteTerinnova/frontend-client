@@ -27,9 +27,7 @@ export class StoresComponent implements OnInit {
     this.currentUser = this.authService.currentUserValue;
     this.getStores();
 
-    console.log(this.currentUser.user.account_type);
     this.userType = this.currentUser.user.account_type;
-    console.log('user type: ', this.userType);
     if (this.userType === 'CUSTOMER') {
       this.disabledBtn = true;
     }
@@ -37,7 +35,6 @@ export class StoresComponent implements OnInit {
 
   getStores() {
     this.storesService.getAllStores().subscribe((res) => {
-      console.log(res);
       this.stores = res.results;
     });
   }
@@ -45,7 +42,6 @@ export class StoresComponent implements OnInit {
   deleteStore(id) {
     this.storesService.deleteStores(id, this.currentUser.user.token).subscribe(
       (res) => {
-        console.log(res);
         Swal.fire({
           position: 'top-end',
           icon: 'success',
@@ -61,9 +57,7 @@ export class StoresComponent implements OnInit {
           title: 'Oops...',
           text: 'Something went wrong!',
         });
-        console.log(err);
       }
     );
-    console.log('delete clicked ', id);
   }
 }

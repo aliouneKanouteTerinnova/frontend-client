@@ -29,7 +29,7 @@
           <div class="_22XDl">
             <div class="mkUrf" *ngFor="let country of countries">
               <div class="uCURQ _3CVLp">
-                <a title="More building images" class="zVhYF xLon9 _1CBrG _1ByhS" href="/s/photos/building">{{
+                <a title="More building images" class="zVhYF xLon9 _1CBrG _1ByhS" routerLink="/category">{{
                   country
                 }}</a>
               </div>
@@ -61,13 +61,11 @@
       </div>
       <span class="price">{{ product.price | currency: 'EURO' }}</span>
     </div>
-    <div class="product-info">
-      <a routerLink="/product-detail/{{ product.id }}/{{ i }}/"
-        ><h3>{{ product.name }}</h3></a
-      >
-
-      <span class="rating"></span>
-    </div>
+    <a routerLink="/product-detail/{{ product.id }}/{{ i }}/">
+      <div class="product-info">
+        <h3>{{ product.name }}</h3>
+      </div></a
+    >
   </div>
 </div>
 <div class="subtitle" *ngIf="products.length > 0"><h3 translate>home.best_sale</h3></div>
@@ -91,10 +89,11 @@
       </div>
       <span class="price">{{ product.price | currency: 'EURO' }}</span>
     </div>
-    <div class="product-info">
-      <h3>{{ product.name }}</h3>
-      <span class="rating"></span>
-    </div>
+    <a routerLink="/product-detail/{{ product.id }}/{{ i }}/">
+      <div class="product-info">
+        <h3>{{ product.name }}</h3>
+      </div></a
+    >
   </div>
 </div>
 <div class="advertise" *ngIf="products.length > 0">
@@ -134,9 +133,10 @@
       </div>
       <span class="price">{{ product.price | currency: 'EURO' }}</span>
     </div>
-    <div class="product-info">
-      <h3>{{ product.name }}</h3>
-      <span class="rating"></span>
-    </div>
+    <a routerLink="/product-detail/{{ product.id }}/{{ i }}/">
+      <div class="product-info">
+        <h3>{{ product.name }}</h3>
+      </div></a
+    >
   </div>
 </div>

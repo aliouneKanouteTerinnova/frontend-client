@@ -19,7 +19,6 @@ export class CategoriesComponent implements OnInit {
   ngOnInit(): void {
     this.currentUser = this.authService.currentUserValue;
     this.getCategory();
-    console.log(this.currentUser);
     // this.userToken = this.currentUser.user.token;
 
     // if (!this.userToken) {
@@ -29,7 +28,6 @@ export class CategoriesComponent implements OnInit {
 
   getCategory() {
     this.categoryService.getAllCategories().subscribe((data) => {
-      console.log('Categories', data.results);
       this.categories = data.results.filter((category) => {
         return category.parent === null;
       });
@@ -37,8 +35,6 @@ export class CategoriesComponent implements OnInit {
   }
 
   deleteCategory(id) {
-    this.categoryService.deleteCategory(id, this.currentUser.user.token).subscribe((res) => {
-      console.log(res);
-    });
+    this.categoryService.deleteCategory(id, this.currentUser.user.token).subscribe((res) => {});
   }
 }

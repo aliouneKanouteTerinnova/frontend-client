@@ -46,7 +46,7 @@ export class OrderService {
 
   /*Getting single order*/
   getOrder(id: any) {
-    return this.httpClient.get(`${environment.baseUrl}orders/${id}`);
+    return this.httpClient.get<any>(`${environment.baseUrl}orders/${id}`);
   }
   /*Delete an order*/
   deleteOrder(id: number, token: string) {
