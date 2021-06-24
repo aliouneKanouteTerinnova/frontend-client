@@ -1,3 +1,5 @@
+import { PaymentsService } from './../../services/payments.service';
+/* eslint-disable @typescript-eslint/naming-convention */
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -26,7 +28,8 @@ export class CheckoutComponent implements OnInit {
     private formBuilder: FormBuilder,
     private authService: AuthenticationsService,
     private orderService: OrderService,
-    private router: Router
+    private router: Router,
+    private payment: PaymentsService
   ) {}
 
   ngOnInit(): void {
@@ -131,7 +134,23 @@ export class CheckoutComponent implements OnInit {
         };
         this.orderService.addOrder(order, this.currentUser['user'].token).subscribe(
           (data) => {
-            this.cartService.deleteCart();
+            console.log('oder created ', data);
+            const sommes = +order.total_prices + +order.total_tax + +order.shipping_method.price;
+            const param = {
+              order_number: data.body.number,
+              method: 'card',
+              amount: sommes,
+            };
+            this.payment.payment(param, this.currentUser['user'].token).subscribe(
+              (res) => {
+                console.log(res);
+              },
+              (err) => {
+                console.log(err);
+              }
+            );
+            // data.body.number
+            // this.cartService.deleteCart();
             Swal.fire({
               position: 'top-end',
               icon: 'success',
@@ -139,9 +158,11 @@ export class CheckoutComponent implements OnInit {
               showConfirmButton: false,
               timer: 5000,
             });
-            this.router.navigate(['/orders']);
+            // this.router.navigate(['/orders']);
           },
-          (error) => {}
+          (error) => {
+            console.log(error);
+          }
         );
       },
       (errors) => {

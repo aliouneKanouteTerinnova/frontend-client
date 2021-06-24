@@ -1,0 +1,20 @@
+<app-navbar></app-navbar>
+
+<div class="container">
+  <div class="uk-container mb-5 mt-5">
+    <form (ngSubmit)="OnSubmit()" [formGroup]="testForm">
+      <div class="card uk-card-default uk-width-*">
+        <div class="uk-card-header text-center">Payment</div>
+        <div class="uk-card-body">
+          <p class="text-danger">{{ errorMessage }}</p>
+
+          <input type="text" readonly id="amount" class="form-control" formControlName="amount" />
+          <input type="text" readonly id="orderNumber" class="form-control" formControlName="orderNumber" />
+          <div id="card-element" class="mt-3 mb-3"></div>
+          <div class="card-errors" role="alert"></div>
+          <button class="btn btn-dark btn-block mt-3" type="submit">Pay</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

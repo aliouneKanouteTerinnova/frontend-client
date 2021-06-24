@@ -1,3 +1,4 @@
+import { PaymentComponent } from './pages/payment/payment.component';
 import { CategoryPageComponent } from './pages/category-page/category-page.component';
 import { UpdateCategoriesComponent } from './pages/categories/update-categories/update-categories.component';
 import { ResetPassEmailComponent } from './pages/user/reset-password/reset-pass-email/reset-pass-email.component';
@@ -79,6 +80,7 @@ const routes: Routes = [
   { path: 'create-categories', component: CreateCategoriesComponent, canActivate: [AuthGuard] },
   { path: 'order-detail', component: OrderDetailsComponent },
   { path: 'orders', component: OrderListComponent },
+  { path: 'payment', component: PaymentComponent },
 ];
 @NgModule({
   declarations: [],
