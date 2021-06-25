@@ -77,14 +77,25 @@
   <!-- for the test version  for the mobile -->
   <ul class="navbar-nav-block d-flex">
     <li class="nav-item">
-      <span class="ml-1" routerLink="/register">
-        <img src="../../assets/img/USER.svg" width="50" alt="" />
-      </span>
+      <a class="nav-link">
+        <span class="ml-1"> <img src="../../assets/img/USER.svg" width="50" alt="" /> </span
+        ><span *ngIf="currentUser"
+          ><a routerLink="/profile">Hello {{ currentUser['user'].username }}</a></span
+        ><span *ngIf="!currentUser"><a class="frb" routerLink="/register" translate>nav.compte</a></span>
+      </a>
     </li>
+
     <li class="nav-item">
-      <span class="ml-1" routerLink="/cart">
-        <img src="../../assets/img/Panier.svg" width="50" alt="" />
-      </span>
+      <a class="nav-link" routerLink="/cart" translate>
+        <span class="ml-1">
+          <img src="../../assets/img/Panier.svg" width="50" alt="" /><span
+            class="badge"
+            *ngIf="cartData.data[0].numInCart !== 0"
+            >{{ cartData.data.length }}</span
+          >
+        </span>
+        <!-- &nbsp;&nbsp;<span class="frb" translate>nav.panier</span> -->
+      </a>
     </li>
   </ul>
 </nav>
