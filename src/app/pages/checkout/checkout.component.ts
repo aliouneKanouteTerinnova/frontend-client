@@ -184,6 +184,7 @@ export class CheckoutComponent implements OnInit {
               order_number: data.body.number,
               method: 'card',
               amount: sommes,
+              currency: 'EUR',
             };
             this.payment.payment(param, this.currentUser['user'].token).subscribe(
               (res) => {
