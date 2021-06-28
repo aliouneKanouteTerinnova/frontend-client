@@ -55,9 +55,7 @@ export class ProductsComponent implements OnInit {
     this.getCategory();
     this.getStore();
 
-    console.log(this.currentUser.user.account_type);
     this.userType = this.currentUser.user.account_type;
-    console.log('user type: ', this.userType);
     if (this.userType === 'CUSTOMER') {
       this.disabledBtn = true;
     }
@@ -65,7 +63,6 @@ export class ProductsComponent implements OnInit {
 
   getStore() {
     this.storesService.getAllStores().subscribe((data) => {
-      console.log('Store', data);
       this.stores = data.results;
     });
     // return this.store.name;
@@ -73,14 +70,12 @@ export class ProductsComponent implements OnInit {
 
   getProducts() {
     this.productsService.getAllProducts().subscribe((data) => {
-      console.log('Product', data);
       this.products = data.results;
     });
   }
 
   getCategory() {
     this.categoryService.getAllCategories().subscribe((data) => {
-      console.log('Category', data);
       this.categorys = data.results;
     });
   }
@@ -107,11 +102,8 @@ export class ProductsComponent implements OnInit {
           title: 'Oops...',
           text: 'Something went wrong!',
         });
-        console.log(err);
       }
     );
-
-    console.log('The product has been deleted!');
   }
 
   addProducts(id) {

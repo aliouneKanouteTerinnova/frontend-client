@@ -1,3 +1,5 @@
+/* eslint-disable prefer-arrow/prefer-arrow-functions */
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import { UpdateCategoriesComponent } from './pages/categories/update-categories/update-categories.component';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -40,6 +42,8 @@ import { ProfileComponent } from './pages/user/profile/profile.component';
 import { OrderListComponent } from './pages/order/order-list/order-list.component';
 import { OrderDetailsComponent } from './pages/order/order-details/order-details.component';
 import { RegistrationComponent } from './pages/user/registration/registration.component';
+
+import { StripeModule } from 'stripe-angular';
 
 export function rootLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -93,6 +97,9 @@ export function rootLoaderFactory(http: HttpClient) {
     SharedModule,
     FormsModule,
     ReactiveFormsModule,
+    StripeModule.forRoot(
+      'pk_test_51HQ3ZXFunRLoLWctiy0l6VVOeflU8ES2IRjTyY7LL9rEpKedBIfOfKB1BSSftQk4Qmke8HdtRcdmje7R2whuWgTz00U7HXpwjn'
+    ),
   ],
   providers: [CookieService],
 

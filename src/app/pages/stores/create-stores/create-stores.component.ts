@@ -30,7 +30,6 @@ export class CreateStoresComponent implements OnInit {
       created_by: [''],
       store_address: ['', Validators.required],
     });
-    console.log(this.currentUser);
   }
 
   get f() {
@@ -47,11 +46,8 @@ export class CreateStoresComponent implements OnInit {
     data.store_address = this.createStore.get('store_address').value;
     data.is_active = true;
 
-    console.log(data);
-    console.log(this.currentUser.user.token);
     this.storesService.createStores(data, this.currentUser.user.token).subscribe(
       (res) => {
-        console.log(res);
         Swal.fire({
           position: 'top-end',
           icon: 'success',
@@ -67,7 +63,6 @@ export class CreateStoresComponent implements OnInit {
           title: 'Oops...',
           text: err.error.error,
         });
-        console.log(err);
       }
     );
   }

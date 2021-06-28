@@ -23,11 +23,9 @@ export class ProductDetailComponent implements OnInit {
   ngOnInit(): void {
     this.idProduct = this.router.snapshot.params.id;
     this.indexPhoto = this.router.snapshot.params.indexPhoto;
-    console.log(this.idProduct);
     this.productService.getCurrentData(this.idProduct).subscribe((response) => {
       // const product = JSON.stringify(response);
       this.product = response['product'];
-      console.log(this.idProduct);
       this.fakePrice = Number(this.product.price) + 1000;
     });
   }
