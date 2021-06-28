@@ -27,9 +27,11 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.i18nServiceService.currentLangValue === null || this.i18nServiceService.currentLangValue === 'en') {
-      this.lang = 'DE';
+      this.lang = 'ENGLISH–EN';
+    } else if (this.i18nServiceService.currentLangValue === 'de') {
+      this.lang = 'DEUTSH-DE';
     } else {
-      this.lang = 'EN';
+      this.lang = 'FRANCAIS-FR';
     }
     this.currentUser = this.authService.currentUserValue;
     this.cartService.cartDataObs$.subscribe((data: CartModelServer) => {
@@ -47,6 +49,20 @@ export class NavbarComponent implements OnInit {
     } else {
       this.changeLanguage = 'en';
       this.lang = 'DE';
+    }
+    this.i18nServiceService.changeLocale(this.changeLanguage);
+  }
+
+  filterOrder(event) {
+    if (Number(event.target.value) === 1) {
+      this.changeLanguage = 'en';
+      this.lang = 'ENGLISH–EN';
+    } else if (Number(event.target.value) === 2) {
+      this.changeLanguage = 'de';
+      this.lang = 'DEUTSH-DE';
+    } else {
+      this.changeLanguage = 'fr';
+      this.lang = 'FRANCAIS-FR';
     }
     this.i18nServiceService.changeLocale(this.changeLanguage);
   }
