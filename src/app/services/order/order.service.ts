@@ -12,7 +12,7 @@ export class OrderService {
   /* Getting all customer orders */
   getAllOrders(token: string) {
     token = 'token ' + token;
-    return this.httpClient.get<any>(`${environment.baseUrl}orders`, {
+    return this.httpClient.get<any>(`${environment.baseUrl}orders/customers`, {
       headers: new HttpHeaders().set('Authorization', token),
       observe: 'response',
     });
@@ -21,7 +21,7 @@ export class OrderService {
   /* Getting all customer orders for specific seller*/
   getAllOrdersFromSeller(token: string) {
     token = 'token ' + token;
-    return this.httpClient.get<any>(`${environment.baseUrl}orders/seller`, {
+    return this.httpClient.get<any>(`${environment.baseUrl}orders/sellers`, {
       headers: new HttpHeaders().set('Authorization', token),
       observe: 'response',
     });
@@ -30,7 +30,7 @@ export class OrderService {
   /*Adding order*/
   addOrder(order: any, token: string) {
     token = 'token ' + token;
-    return this.httpClient.post(`${environment.baseUrl}orders/initiate`, order, {
+    return this.httpClient.post<any>(`${environment.baseUrl}orders/initiate`, order, {
       headers: new HttpHeaders().set('Authorization', token),
       observe: 'response',
     });
@@ -46,7 +46,7 @@ export class OrderService {
 
   /*Getting single order*/
   getOrder(id: any) {
-    return this.httpClient.get(`${environment.baseUrl}orders/${id}`);
+    return this.httpClient.get<any>(`${environment.baseUrl}orders/${id}`);
   }
   /*Delete an order*/
   deleteOrder(id: number, token: string) {

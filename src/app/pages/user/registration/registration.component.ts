@@ -179,6 +179,8 @@ export class RegistrationComponent implements OnInit {
             title: 'Check your mail to activate your account!',
             showConfirmButton: false,
             timer: 2000,
+          }).then(() => {
+            this.router.navigate(['/home']);
           });
           this.rpassword = '';
           this.rcpassword = '';

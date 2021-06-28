@@ -24,6 +24,27 @@ nav {
     }
   }
 }
+.langue {
+  width: 110px;
+  border-radius: 10px;
+  border: 3px solid #fff;
+  color: #fff;
+  background-color: #f39221;
+}
+
+.langue1:focus {
+  color: #fff;
+  background-color: #f39221;
+  font-size: 0.7rem;
+  font-weight: bold;
+}
+
+.langue1 {
+  color: #f39221;
+  background-color: #fff;
+  font-size: 0.7rem;
+  font-weight: bold;
+}
 
 .logo {
   background-color: #fff;
@@ -55,6 +76,10 @@ nav {
 }
 .nav-link {
   padding: 0.2rem !important;
+
+  .frb {
+    color: #fff !important;
+  }
 }
 .instagram {
   margin-top: 8px;
@@ -67,10 +92,10 @@ nav {
   }
 }
 
-@media screen and (max-width: 980px) {
+@media screen and (max-width: 990px) {
   nav {
     background-image: none !important;
-    background-color: transparent !important;
+    background-color: #00000040 !important;
     height: 70px;
     // box-shadow: 0 0 20px 5px rgba(0, 0, 0, 0.1);
 
@@ -86,12 +111,16 @@ nav {
   }
   .logo {
     display: block;
-    width: 150px;
-    height: 160px;
-    top: -170px;
+    width: 209px !important;
+    height: 218px !important;
+    top: -223px;
+    margin-left: -5px !important;
+    border-radius: 10%;
+    border: 1px solid #fff;
+    background-color: #ffffff;
     img {
-      width: 140px;
-      height: 245px;
+      width: 210px !important;
+      // height: 245px;
     }
   }
   .social_link svg,
@@ -101,8 +130,18 @@ nav {
   }
 }
 
-@media screen and (max-width: 1024px) {
+@media screen and (max-width: 1360px) {
   nav {
     padding: 0 !important;
+  }
+
+  .logo {
+    width: 240px;
+    height: 260px;
+
+    img {
+      width: 240px;
+      height: 365px;
+    }
   }
 }

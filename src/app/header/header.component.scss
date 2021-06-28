@@ -85,3 +85,9 @@ header {
     }
   }
 }
+
+@media screen and (max-width: 1360px) {
+  header {
+    margin-top: -330px;
+  }
+}

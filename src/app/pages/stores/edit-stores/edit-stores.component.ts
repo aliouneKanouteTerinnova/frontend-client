@@ -39,7 +39,6 @@ export class EditStoresComponent implements OnInit {
     //   store_address: ['', Validators.required],
     // });
     this.storesService.getCurrentData(this.router.snapshot.params.id).subscribe((res) => {
-      console.log(res.store[0].id);
       this.editStore.patchValue({
         name: res.store[0].name,
         store_address: res.store[0].store_address,
@@ -49,9 +48,7 @@ export class EditStoresComponent implements OnInit {
   }
 
   onSubmit() {
-    this.storesService.getCurrentData(this.router.snapshot.params.id).subscribe((response) => {
-      console.log(response);
-    });
+    this.storesService.getCurrentData(this.router.snapshot.params.id).subscribe((response) => {});
 
     const store = {
       id: this.router.snapshot.params.id,
@@ -72,7 +69,6 @@ export class EditStoresComponent implements OnInit {
         this.route.navigate(['/list-store']);
       },
       (err) => {
-        console.log(err);
         Swal.fire({
           icon: 'error',
           title: 'Oops...',
