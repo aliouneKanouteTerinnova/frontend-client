@@ -24,6 +24,27 @@ nav {
     }
   }
 }
+.langue {
+  width: 110px;
+  border-radius: 10px;
+  border: 3px solid #fff;
+  color: #fff;
+  background-color: #f39221;
+}
+
+.langue1:focus {
+  color: #fff;
+  background-color: #f39221;
+  font-size: 0.7rem;
+  font-weight: bold;
+}
+
+.langue1 {
+  color: #f39221;
+  background-color: #fff;
+  font-size: 0.7rem;
+  font-weight: bold;
+}
 
 .logo {
   background-color: #fff;

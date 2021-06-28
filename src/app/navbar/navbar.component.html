@@ -70,7 +70,15 @@
   <div class="lang">
     <ul class="d-flex">
       <li>
-        <strong (click)="changeLang()">{{ lang }}</strong>
+        <select class="form-control form-control-sm langue" (change)="filterOrder($event)">
+          <option value="" disabled selected hidden class="langue1">
+            <span>{{ lang }}</span>
+          </option>
+          <option value="1" class="langue1"><span>ENGLISH–EN</span></option>
+          <option value="2" class="langue1"><span>DEUTSH-DE</span></option>
+          <option value="3" class="langue1"><span>FRANCAIS-FR</span></option>
+        </select>
+        <!-- <strong (click)="changeLang()">{{ lang }}</strong> -->
       </li>
     </ul>
   </div>
