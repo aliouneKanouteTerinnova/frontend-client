@@ -6,32 +6,61 @@
       <form [formGroup]="checkoutForm" (submit)="checkout()">
         <div class="row">
           <div class="col-50">
-            <h3>Billing Address</h3>
-            <label for="fname"><i class="fa fa-user"></i> Full Name</label>
+            <h3 translate>checkout.billing</h3>
+            <label for="fname" translate><i class="fa fa-user"></i> checkout.billing</label>
             <input type="text" id="fname" formControlName="firstname" placeholder="John M. Doe" />
-            <label for="email"><i class="fa fa-envelope"></i> Email</label>
+            <label for="email" translate><i class="fa fa-envelope"></i> registration.register.email</label>
             <input type="text" id="email" formControlName="email" placeholder="john@example.com" />
-            <label for="adr"><i class="fa fa-address-card-o"></i> Address</label>
-            <input type="text" id="adr" formControlName="address" placeholder="542 W. 15th Street" />
-            <label for="city"><i class="fa fa-institution"></i> City</label>
-            <input type="text" id="city" formControlName="city" placeholder="New York" />
+            <label for="adr" translate><i class="fa fa-address-card-o"></i> registration.register.street</label>
+            <input type="text" id="adr" formControlName="street" placeholder="542 W. 15th Street" />
+            <label for="city" translate><i class="fa fa-institution"></i> registration.register.city</label>
+            <input type="text" id="state" formControlName="state" placeholder="New York" />
 
             <div class="row">
-              <div class="col-100">
-                <label for="state">State</label>
-                <input type="text" id="state" formControlName="state" placeholder="Etat" />
+              <div class="col-50">
+                <label for="country" translate>registration.register.country</label>
+                <input type="text" id="country" formControlName="country" placeholder="Etat" />
               </div>
               <div class="col-50">
-                <label for="zip">Zip</label>
+                <label for="zip" translate>registration.register.zipcode</label>
                 <input type="text" id="zip" formControlName="zip" placeholder="10001" />
               </div>
             </div>
           </div>
+
+          <div class="col-50">
+            <h3 translate>orders.order_details.order_payment</h3>
+            <label for="fname" translate>checkout.accepted_cards</label>
+            <div class="icon-container">
+              <i class="fa fa-cc-visa" style="color: navy"></i>
+              <i class="fa fa-cc-amex" style="color: blue"></i>
+              <i class="fa fa-cc-mastercard" style="color: red"></i>
+              <i class="fa fa-cc-discover" style="color: orange"></i>
+            </div>
+            <label for="cname" translate>checkout.total_tax</label>
+            <input type="text" id="cname" formControlName="cardname" placeholder="John More Doe" disabled />
+            <label for="ccnum" translate>checkout.ship_tax</label>
+            <input type="text" id="ccnum" formControlName="cardnumber" placeholder="1111-2222-3333-4444" disabled />
+            <label for="expmonth" translate>checkout.ship_name</label>
+            <input type="text" id="expmonth" formControlName="expmonth" placeholder="September" disabled />
+
+            <div class="row">
+              <div class="col-50">
+                <label for="expyear" translate>checkout.ship_method</label>
+                <input type="text" id="expyear" formControlName="expyear" placeholder="2018" disabled />
+              </div>
+              <div class="col-50">
+                <label for="cvv" translate>Currency</label>
+                <input type="text" id="cvv" formControlName="cvv" placeholder="352" disabled />
+              </div>
+            </div>
+          </div>
+          <<<<<<< HEAD ======= >>>>>>> f07805cdaad38d716b363c488955e0fc83aa9637
         </div>
-        <label>
-          <input type="checkbox" checked="checked" formControlName="sameadr" /> Shipping address same as billing
+        <label translate>
+          <input type="checkbox" checked="checked" formControlName="sameadr" /> checkout.ship_bill
         </label>
-        <input type="submit" value="Continue to checkout" class="btn" />
+        <button class="btn" translate>checkout.checkout_button</button>
       </form>
       <div class="row" style="padding: 25px; margin: 0">
         <div class="col-100">
@@ -60,8 +89,8 @@
 
   <div class="col-25">
     <div class="container">
-      <h4>
-        Cart
+      <h4 translate>
+        checkout.cart
         <span class="price" style="color: black">
           <i class="fa fa-shopping-cart"></i>
           <b>{{ cartData.data[0].numInCart !== 0 ? cartData.data.length : 0 }}</b>
@@ -72,8 +101,8 @@
         <span class="price">{{ cartService.CalculateSubTotal(i) | currency: 'EUR' }}</span>
       </p>
       <hr />
-      <p>
-        Total
+      <p translate>
+        orders.order_details.order_total
         <span class="price" style="color: black"
           ><b>{{ cartTotal | currency: 'EUR' }}</b></span
         >

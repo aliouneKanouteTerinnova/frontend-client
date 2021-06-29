@@ -16,7 +16,7 @@
         <a class="nav-link">
           <span class="ml-1"> <img src="../../assets/img/USER.svg" width="50" alt="" /> </span
           ><span *ngIf="currentUser"
-            ><a routerLink="/profile">Hello {{ currentUser['user'].username }}</a></span
+            ><a routerLink="/profile"><span translate>nav.hello</span> {{ currentUser['user'].username }}</a></span
           ><span *ngIf="!currentUser"><a routerLink="/register" translate>nav.compte</a></span>
         </a>
       </li>

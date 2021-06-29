@@ -1,43 +1,49 @@
 <app-navbar></app-navbar>
 <div class="container mt-5 mb-5">
   <div class="row d-flex justify-content-center">
-    <div class="col-md-8">
+    <div class="col-md-12">
       <div class="card">
         <div class="invoice p-5">
-          <h1>Orders List</h1>
+          <h1><span translate>orders.order_list.order_list</span></h1>
+          <!-- <span class="font-weight-bold d-block mt-4">Hello, Chris</span>
+          <span>You order has been confirmed and will be shipped in next two days!</span> -->
           <div class="payment border-top mt-3 mb-3 border-bottom table-responsive" *ngIf="listOrders.length > 0">
             <table class="table table-borderless">
               <thead>
                 <tr>
                   <td>
-                    <div class="py-2"><span class="d-block text-muted">Order Date</span></div>
-                  </td>
-                  <td>
-                    <div class="py-2"><span class="d-block text-muted">Order No</span></div>
-                  </td>
-                  <td *ngIf="!isSeller">
                     <div class="py-2">
-                      <span class="d-block text-muted">Amount</span>
+                      <span class="d-block text-muted" translate>orders.order_list.order_date</span>
                     </div>
                   </td>
                   <td>
                     <div class="py-2">
-                      <span class="d-block text-muted">Shiping Address</span>
+                      <span class="d-block text-muted" translate>orders.order_list.order_number</span>
                     </div>
                   </td>
                   <td *ngIf="!isSeller">
                     <div class="py-2">
-                      <span class="d-block text-muted">Tax</span>
-                    </div>
-                  </td>
-                  <td *ngIf="!isSeller">
-                    <div class="py-2">
-                      <span class="d-block text-muted">Status</span>
+                      <span class="d-block text-muted" translate>orders.order_list.order_amount</span>
                     </div>
                   </td>
                   <td>
                     <div class="py-2">
-                      <span class="d-block text-muted">Actions</span>
+                      <span class="d-block text-muted" translate>orders.order_list.order_shipping</span>
+                    </div>
+                  </td>
+                  <td *ngIf="!isSeller">
+                    <div class="py-2">
+                      <span class="d-block text-muted" translate>orders.order_list.order_tax</span>
+                    </div>
+                  </td>
+                  <td *ngIf="!isSeller">
+                    <div class="py-2">
+                      <span class="d-block text-muted" translate>orders.order_list.order_status</span>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="py-2">
+                      <span class="d-block text-muted" translate>orders.order_list.order_actions</span>
                     </div>
                   </td>
                 </tr>
@@ -79,7 +85,9 @@
                   </td>
                   <td>
                     <div class="py-2">
-                      <button mat-raised-button color="accent" routerLink="/order-detail">details</button>
+                      <button mat-raised-button color="accent" routerLink="/order-detail">
+                        <span translate>orders.order_list.detail_button</span>
+                      </button>
                     </div>
                   </td>
                 </tr>
