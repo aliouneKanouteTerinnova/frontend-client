@@ -1,0 +1,102 @@
+<app-navbar></app-navbar>
+<div class="container mt-5 mb-5">
+  <div class="row d-flex justify-content-center">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="invoice p-5">
+          <h1><span translate>orders.order_list.order_list</span></h1>
+          <!-- <span class="font-weight-bold d-block mt-4">Hello, Chris</span>
+          <span>You order has been confirmed and will be shipped in next two days!</span> -->
+          <div class="payment border-top mt-3 mb-3 border-bottom table-responsive" *ngIf="listOrders.length > 0">
+            <table class="table table-borderless">
+              <thead>
+                <tr>
+                  <td>
+                    <div class="py-2">
+                      <span class="d-block text-muted" translate>orders.order_list.order_date</span>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="py-2">
+                      <span class="d-block text-muted" translate>orders.order_list.order_number</span>
+                    </div>
+                  </td>
+                  <td *ngIf="!isSeller">
+                    <div class="py-2">
+                      <span class="d-block text-muted" translate>orders.order_list.order_amount</span>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="py-2">
+                      <span class="d-block text-muted" translate>orders.order_list.order_shipping</span>
+                    </div>
+                  </td>
+                  <td *ngIf="!isSeller">
+                    <div class="py-2">
+                      <span class="d-block text-muted" translate>orders.order_list.order_tax</span>
+                    </div>
+                  </td>
+                  <td *ngIf="!isSeller">
+                    <div class="py-2">
+                      <span class="d-block text-muted" translate>orders.order_list.order_status</span>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="py-2">
+                      <span class="d-block text-muted" translate>orders.order_list.order_actions</span>
+                    </div>
+                  </td>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let p of listOrders">
+                  <td>
+                    <div class="py-2">
+                      <span>{{ p.created_at | date: 'dd/MM/yyyy' }}</span>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="py-2">
+                      <span>{{ p.number }}</span>
+                    </div>
+                  </td>
+                  <td *ngIf="!isSeller">
+                    <div class="py-2">
+                      <span>{{ p.total_prices | currency: 'EUR' }}</span>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="py-2">
+                      <span
+                        >{{ p.shipping_address.address.country }}, {{ p.shipping_address.address.state }},
+                        {{ p.shipping_address.address.street }}</span
+                      >
+                    </div>
+                  </td>
+                  <td *ngIf="!isSeller">
+                    <div class="py-2">
+                      <span>{{ p.total_tax | currency: 'EUR' }}</span>
+                    </div>
+                  </td>
+                  <td *ngIf="!isSeller">
+                    <div class="py-2">
+                      <span>{{ p.status }}</span>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="py-2">
+                      <button mat-raised-button color="accent" routerLink="/order-detail">
+                        <span translate>orders.order_list.detail_button</span>
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <h1 *ngIf="listOrders.length === 0">No order available</h1>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

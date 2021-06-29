@@ -1,0 +1,123 @@
+{
+  "registration": {
+    "register": {
+      "title": "ABONNIEREN",
+      "sub_title": "einschreibung",
+      "username": "Benutzername",
+      "email": "E-Mail",
+      "address": "Anschrift",
+      "type_user": "Typ Benutzer",
+      "sexe": "Sexte",
+      "password": "Passwort",
+      "confirm_password": "Bestätigen Sie das Passwort",
+      "conditions": "Ich akzeptiere alle Bedingungen",
+      "inscription": "Registrierung",
+      "registration": "ABONNIEREN",
+      "resend": "E-Mail erneut senden",
+      "country": "Land",
+      "street": "Straße",
+      "zipcode": "Postleitzahl",
+      "city": "Stadt"
+    },
+    "login": {
+      "title": "ANMELDEN",
+      "sub_title": "registrierung",
+      "email": "E-Mail",
+      "password": "Kennwort",
+      "connect_with": "VERBINDEN MIT",
+      "inscription": "registrierung",
+      "reset_password": "Passwort vergessen",
+      "connexion": "ANMELDEN"
+    },
+    "errors": {
+      "required_error": "Dieses Feld ist obligatorisch.",
+      "password_error": "Das passwort muss mindestens 6 zeichen lang sein",
+      "invalid_error": "Dieses feld ist ungültig.",
+      "match_password": "Passwörter müssen übereinstimmen"
+    }
+  },
+  "nav": {
+    "hello": "Hallo",
+    "compte": "Einloggen/Registrieren",
+    "panier": "Anzeige",
+    "category": "KATEGORIE"
+  },
+  "update": {
+    "validate": "Validieren",
+    "title": "Profil aktualisieren"
+  },
+  "profile": {
+    "username": "Benutzername",
+    "email": "E-Mail",
+    "address": "Anschrift",
+    "type_user": "Typ Benutzer",
+    "sexe": "Sexte",
+    "edit_button": "Bearbeiten ",
+    "logout_button": "Abmelden",
+    "store_button": "Speichern",
+    "products_button": "Produkte",
+    "orders_button": "Meine Bestellungen"
+  },
+  "home": {
+    "category": " KATEGORIE V",
+    "best_sale": "BESTE VERKÄUFE",
+    "good_deals": "GUTE DEALS",
+    "plus": "MEHR LERNEN >"
+  },
+  "basket": {
+    "empty_basket": "Ihr Warenkorb ist leer",
+    "go_shop": "ZUM SHOP GEHEN",
+    "basket": "ANZEIGE",
+    "unity": "Einheit: ",
+    "qty": "Menge: ",
+    "total": "Gesamt: ",
+    "net_to_pay": "Netto zu zahlen :",
+    "delivery": "Lieferung: ",
+    "checkout": "AUSSCHEINEN",
+    "accept": "WIR AKZEPTIEREN",
+    "followed_product": "Verfolgtes Produkt",
+    "add_cart": "In den Warenkorb legen",
+    "similar_product": "Ähnliche Produkte"
+  },
+  "orders": {
+    "order_list": {
+      "order_list": "Auftragsliste",
+      "order_date": "Aufträge Datum",
+      "order_number": "Auftragsnummer",
+      "order_amount": "Betrag",
+      "order_shipping": "Versandadresse",
+      "order_tax": "Steuer",
+      "order_status": "Status",
+      "order_actions": "Aktionen",
+      "detail_button": "Details"
+    },
+    "order_details": {
+      "order_confirm": "Ihre Bestellung wurde bestätigt !",
+      "order_intro": "Ihre Bestellung wurde bestätigt und wird in den nächsten zwei Tagen verschickt !",
+      "order_payment": "Zahlung",
+      "color": "Farbe",
+      "quantity": "Menge",
+      "order_subtotal": "Zwischensumme",
+      "order_ship_fee": "Versand-Gebühr",
+      "order_tax_fee": "Steuerbetrag",
+      "order_discount": "Rabatt",
+      "order_total": "Gesamt",
+      "order_conclusion": " Wir werden eine Versandbestätigung per E-Mail senden, wenn der Artikel erfolgreich versendet wurde !",
+      "order_thanks": "Danke für Ihren Einkauf bei uns !",
+      "order_footer": "Brauchen Sie Hilfe ? Besuchen Sie unser",
+      "order_footer_link": " Hilfe-Center"
+    }
+  },
+  "checkout": {
+    "billing": "Rechnungsadresse",
+    "full_name": "Voller Name",
+    "accepted_cards": "Akzeptierte Karten",
+    "total_tax": "Total Steuer",
+    "ship_tax": "Versandsteuer",
+    "ship_name": "Name der Versandmethode",
+    "ship_method": "Versandart Preis",
+    "ship_bill": "Lieferadresse gleich der Rechnungsadresse",
+    "checkout_button": "Weiter zur Kasse",
+    "cart": "Wagen"
+  }
+}

@@ -1,0 +1,77 @@
+<app-navbar></app-navbar>
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <form [formGroup]="createProductForm" (ngSubmit)="onSubmit()">
+        <div class="row">
+          <div class="form-group col-6">
+            <label for="category">Category</label>
+            <select class="form-control" formControlName="category" (change)="categoryEvent($event)">
+              <option *ngFor="let category of categorys" value="{{ category.id }}">{{ category.name }}</option>
+            </select>
+          </div>
+
+          <div class="form-group col-6">
+            <label for="name">Name</label>
+            <input type="text" class="form-control" formControlName="name" />
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="form-group col-6">
+            <label for="slug">Slug</label>
+            <input type="text" class="form-control" formControlName="slug" />
+          </div>
+
+          <div class="form-group col-6">
+            <label for="description">Description</label>
+            <input type="text" class="form-control" formControlName="description" />
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="form-group col-6">
+            <label for="price">Price</label>
+            <input type="number" class="form-control" formControlName="price" />
+          </div>
+
+          <div class="form-group col-6">
+            <label for="quantity">Quantity</label>
+            <input type="number" class="form-control" formControlName="quantity" />
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="form-group col-6">
+            <label for="store">Store</label>
+            <select class="form-control" formControlName="store" (change)="storeEvent($event)">
+              <option *ngFor="let store of stores" value="{{ store.id }}">{{ store.name }}</option>
+            </select>
+            <!-- <input type="text" class="form-control" formControlName="store" /> -->
+          </div>
+
+          <div class="form-check mt-4 ml-3">
+            <input
+              type="checkbox"
+              checked
+              class="form-check-input"
+              (change)="checkCheckBoxvalue($event)"
+              #ch
+              (click)="checkCheckBoxvalue(ch)"
+            />
+            <label for="active" class="form-check-label">Is active</label>
+          </div>
+
+          <div class="form-group col-4">
+            <label for="img">Image</label>
+            <input type="file" name="img" id="img" formControlName="img" (change)="selectFiles($event)" />
+          </div>
+        </div>
+
+        <button [disabled]="createProductForm.invalid" mat-raised-button color="accent" class="btn-block">
+          Create product
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
