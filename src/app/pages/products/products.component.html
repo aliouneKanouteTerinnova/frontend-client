@@ -17,16 +17,17 @@
       Add Product
     </button>
   </div>
-  <div class="text-right">
+  <!-- <div class="text-right">
     <button mat-raised-button color="accent" routerLink="/cart">View cart</button>
-  </div>
-  <h2>Products</h2>
+  </div> -->
+  <h2 *ngIf="products.length > 0">Products</h2>
   <div class="container">
+    <h2 *ngIf="products.length === 0">No Product Available</h2>
     <div class="row">
-      <div class="col-md-5 col-lg-3 product" *ngFor="let product of products">
-        <!-- <div *ngFor="let store of stores" class="store_name"><b>Store: </b> {{ store.name }}</div> -->
+      <div class="col-md-5 col-lg-3 product" *ngFor="let product of products; let i = index">
+        <div class="store_name"><b>Store: </b> {{ product.store }}</div>
         <div class="img mb-2">
-          <img class="img-thumbnail" src="{{ product.image }}" alt="" />
+          <img class="img-thumbnail" src="./../../assets/img/Products/{{ i }}.png" alt="" />
         </div>
         <div class="content">
           <h3 class="name"><b>Name: </b>{{ product.name }}</h3>
@@ -39,9 +40,9 @@
           <div class="quantity"><b>Quantity: </b> {{ product.quantity }}</div>
         </div>
         <div class="button_group mt-3">
-          <button mat-raised-button color="accent" class="mr-3 mb-2" (click)="addProducts(product.id)">
+          <!-- <button mat-raised-button color="accent" class="mr-3 mb-2" (click)="addProducts(product.id)">
             Add to cart
-          </button>
+          </button> -->
           <button
             [disabled]="disabledBtn"
             mat-raised-button
@@ -57,7 +58,7 @@
             [disabled]="disabledBtn"
             mat-raised-button
             color="warn"
-            (click)="deleteProducts(product.id)"
+            (click)="suppressionProduct(product.id)"
             *ngIf="currentUser"
           >
             Delete
@@ -67,3 +68,14 @@
     </div>
   </div>
 </div>
+<swal
+  #effacerSwal
+  title="Deletion "
+  text="Are you sure ?  "
+  type="question"
+  confirmButtonText="Yes"
+  cancelButtonText="No"
+  [showCancelButton]="true"
+  [focusCancel]="true"
+  (confirm)="deleteProducts()"
+></swal>

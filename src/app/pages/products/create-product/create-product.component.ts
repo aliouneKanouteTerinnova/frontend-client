@@ -31,7 +31,7 @@ uuidv4();
 export class CreateProductComponent implements OnInit {
   createProductForm: FormGroup;
   categorys: Category;
-  stores: [];
+  stores = [];
   products = [];
   currentUser: any;
   categoryId: any;
@@ -93,14 +93,34 @@ export class CreateProductComponent implements OnInit {
 
   getCategory() {
     this.categoryService.getAllCategories().subscribe((data) => {
-      this.categorys = data;
+      this.categorys = data.results;
     });
   }
 
+  // getStores() {
+  //   this.storesService.getAllStores().subscribe((res) => {
+  //     this.stores = res.results;
+  //   });
+  // }
+
   getStores() {
-    this.storesService.getAllStores().subscribe((res) => {
-      this.stores = res.results;
-    });
+    this.storesService.getAllStores().subscribe(
+      (res) => {
+        const stores = res.results;
+        if (stores.length > 0) {
+          stores.forEach((element) => {
+            this.authService.getUserById(element['created_by']).subscribe((data) => {
+              if (data['user'][0].email === this.currentUser.user.email) {
+                this.stores.push(element);
+              }
+            });
+          });
+        }
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
   }
 
   categoryEvent(event) {

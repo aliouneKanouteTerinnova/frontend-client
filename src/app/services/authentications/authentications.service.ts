@@ -55,6 +55,13 @@ export class AuthenticationsService {
       .pipe(map((userResponded) => userResponded));
   }
 
+  // Get user by id
+  getUserById(id: string) {
+    return this.httpClient
+      .get<AuthResponded>(`${environment.baseUrl}users/${id}`)
+      .pipe(map((userResponded) => userResponded));
+  }
+
   // Update User Profile
 
   update(username: any, token: string) {
