@@ -40,11 +40,12 @@ export class StoresComponent implements OnInit {
         const stores = res.results;
         if (stores.length > 0) {
           stores.forEach((element) => {
-            this.authService.getUserById(element['created_by']).subscribe((data) => {
-              if (data['user'][0].email === this.currentUser.user.email) {
-                this.stores.push(element);
-              }
-            });
+            console.log(this.currentUser.user);
+            // this.authService.getUserById(element['created_by'], this.currentUser.user.token).subscribe((data) => {
+            if (element['created_by'] === this.currentUser.user.id) {
+              this.stores.push(element);
+            }
+            // });
           });
         }
       },

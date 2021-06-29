@@ -96,24 +96,15 @@ export class CreateProductComponent implements OnInit {
       this.categorys = data.results;
     });
   }
-
-  // getStores() {
-  //   this.storesService.getAllStores().subscribe((res) => {
-  //     this.stores = res.results;
-  //   });
-  // }
-
   getStores() {
     this.storesService.getAllStores().subscribe(
       (res) => {
         const stores = res.results;
         if (stores.length > 0) {
           stores.forEach((element) => {
-            this.authService.getUserById(element['created_by']).subscribe((data) => {
-              if (data['user'][0].email === this.currentUser.user.email) {
-                this.stores.push(element);
-              }
-            });
+            if (element['created_by'] === this.currentUser.user.id) {
+              this.stores.push(element);
+            }
           });
         }
       },

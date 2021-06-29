@@ -56,9 +56,13 @@ export class AuthenticationsService {
   }
 
   // Get user by id
-  getUserById(id: string) {
+  getUserById(id: string, token: string) {
+    token = 'token ' + token;
     return this.httpClient
-      .get<AuthResponded>(`${environment.baseUrl}users/${id}`)
+      .get<AuthResponded>(`${environment.baseUrl}users/${id}`, {
+        headers: new HttpHeaders().set('Authorization', token),
+        observe: 'response',
+      })
       .pipe(map((userResponded) => userResponded));
   }
 

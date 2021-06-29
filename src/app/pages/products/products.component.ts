@@ -76,23 +76,20 @@ export class ProductsComponent implements OnInit {
       const product = data.results;
       if (product.length > 0) {
         product.forEach((element) => {
-          this.authService.getUserById(element['created_by']).subscribe((data) => {
-            if (data['user'][0].email === this.currentUser.user.email) {
-              this.storesService.getCurrentData(element['store']).subscribe(
-                (data) => {
-                  element.store = data.store[0].name;
-                },
-                (error) => {
-                  console.log(error);
-                }
-              );
-              this.products.push(element);
-            }
-          });
+          if (element['created_by'] === this.currentUser.user.id) {
+            this.storesService.getCurrentData(element['store']).subscribe(
+              (data) => {
+                element.store = data.store[0].name;
+              },
+              (error) => {
+                console.log(error);
+              }
+            );
+            this.products.push(element);
+          }
         });
       }
     });
-    console.log(this.products);
   }
 
   getCategory() {
@@ -118,7 +115,6 @@ export class ProductsComponent implements OnInit {
         window.location.reload();
       },
       (err) => {
-        console.log(err);
         Swal.fire({
           icon: 'error',
           title: 'Oops...',
@@ -129,7 +125,6 @@ export class ProductsComponent implements OnInit {
   }
   suppressionProduct(id) {
     this.idProduct = id;
-    console.log(this.idProduct);
     this.effacerSwal.fire();
   }
   addProducts(id) {
