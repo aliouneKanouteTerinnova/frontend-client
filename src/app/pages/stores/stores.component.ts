@@ -25,7 +25,6 @@ export class StoresComponent implements OnInit {
 
   ngOnInit(): void {
     this.currentUser = this.authService.currentUserValue;
-    console.log(this.currentUser.user.email);
     this.getStores();
 
     this.userType = this.currentUser.user.account_type;
@@ -40,7 +39,6 @@ export class StoresComponent implements OnInit {
         const stores = res.results;
         if (stores.length > 0) {
           stores.forEach((element) => {
-            console.log(this.currentUser.user);
             // this.authService.getUserById(element['created_by'], this.currentUser.user.token).subscribe((data) => {
             if (element['created_by'] === this.currentUser.user.id) {
               this.stores.push(element);
