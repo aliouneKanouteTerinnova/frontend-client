@@ -8,12 +8,13 @@ import { ActivatedRoute } from '@angular/router';
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import { StoresService } from 'src/app/services/stores/stores.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ProductsService } from './../../services/products/products.service';
 import { CategoriesService } from './../../services/categories/categories.service';
 import { Category } from './../../models/category/category';
 import { v4 as uuidv4 } from 'uuid';
 import Swal from 'sweetalert2';
+import { SwalComponent } from '@sweetalert2/ngx-sweetalert2';
 import { CartService } from 'src/app/services/cart/cart.service';
 import { CartModelServer } from 'src/app/models/cart/cart';
 import { Store } from '../stores/store';
@@ -27,6 +28,8 @@ uuidv4();
   styleUrls: ['./products.component.scss'],
 })
 export class ProductsComponent implements OnInit {
+  @ViewChild('effacerSwal', { static: false })
+  private effacerSwal: SwalComponent;
   submited = false;
   products = [];
   stores: [];
@@ -36,7 +39,7 @@ export class ProductsComponent implements OnInit {
   cartData: CartModelServer;
   userType: string;
   disabledBtn = false;
-
+  idProduct: any;
   store: Store;
 
   constructor(
@@ -70,8 +73,26 @@ export class ProductsComponent implements OnInit {
 
   getProducts() {
     this.productsService.getAllProducts().subscribe((data) => {
-      this.products = data.results;
+      const product = data.results;
+      if (product.length > 0) {
+        product.forEach((element) => {
+          this.authService.getUserById(element['created_by']).subscribe((data) => {
+            if (data['user'][0].email === this.currentUser.user.email) {
+              this.storesService.getCurrentData(element['store']).subscribe(
+                (data) => {
+                  element.store = data.store[0].name;
+                },
+                (error) => {
+                  console.log(error);
+                }
+              );
+              this.products.push(element);
+            }
+          });
+        });
+      }
     });
+    console.log(this.products);
   }
 
   getCategory() {
@@ -84,8 +105,8 @@ export class ProductsComponent implements OnInit {
     this.submited = true;
   }
 
-  deleteProducts(id) {
-    this.productsService.deleteProduct(id, this.currentUser.user.token).subscribe(
+  deleteProducts() {
+    this.productsService.deleteProduct(this.idProduct, this.currentUser.user.token).subscribe(
       (d) => {
         Swal.fire({
           position: 'top-end',
@@ -94,9 +115,10 @@ export class ProductsComponent implements OnInit {
           showConfirmButton: false,
           timer: 1500,
         });
-        this.getProducts();
+        window.location.reload();
       },
       (err) => {
+        console.log(err);
         Swal.fire({
           icon: 'error',
           title: 'Oops...',
@@ -105,7 +127,11 @@ export class ProductsComponent implements OnInit {
       }
     );
   }
-
+  suppressionProduct(id) {
+    this.idProduct = id;
+    console.log(this.idProduct);
+    this.effacerSwal.fire();
+  }
   addProducts(id) {
     this.cartService.AddProductToCart(id);
     Swal.fire({
