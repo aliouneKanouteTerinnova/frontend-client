@@ -37,6 +37,7 @@
     }
   },
   "nav": {
+    "hello": "Bonjour",
     "compte": "Log In/Register",
     "panier": "Basket",
     "category": "CATEGORY"
