@@ -89,7 +89,6 @@ export class HomeComponent implements OnInit {
       this.products = this.products.slice(0, 15);
       this.bestSelling = this.products.slice(0, 5);
       this.goodStuff = this.products.slice(1, 8);
-      console.log(this.products);
     });
   }
 

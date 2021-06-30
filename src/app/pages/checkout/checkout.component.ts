@@ -75,6 +75,7 @@ export class CheckoutComponent implements OnInit {
       city: [null, Validators.required],
       state: [null, Validators.required],
       zip: [null, Validators.required],
+      country: [null, Validators.required],
       cardname: '',
       cardnumber: '',
       expmonth: '',
