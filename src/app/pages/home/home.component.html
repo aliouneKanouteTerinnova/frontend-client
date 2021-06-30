@@ -60,7 +60,7 @@
           /><span>ajouter</span>
         </div>
       </div>
-      <span class="price">{{ product.price | currency: 'EUR' }}</span>
+      <span class="price">{{ formatPrice(product.price | currency: 'EUR') }}</span>
     </div>
     <a routerLink="/product-detail/{{ product.id }}/{{ i }}/">
       <div class="product-info">
@@ -88,7 +88,7 @@
           /><span>ajouter</span>
         </div>
       </div>
-      <span class="price">{{ product.price | currency: 'EUR' }}</span>
+      <span class="price">{{ formatPrice(product.price | currency: 'EUR') }}</span>
     </div>
     <a routerLink="/product-detail/{{ product.id }}/{{ i }}/">
       <div class="product-info">
@@ -132,7 +132,7 @@
           /><span>ajouter</span>
         </div>
       </div>
-      <span class="price">{{ product.price | currency: 'EUR' }}</span>
+      <span class="price">{{ formatPrice(product.price | currency: 'EUR') }}</span>
     </div>
     <a routerLink="/product-detail/{{ product.id }}/{{ i }}/">
       <div class="product-info">
