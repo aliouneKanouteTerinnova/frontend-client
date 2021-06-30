@@ -23,11 +23,11 @@ export class HomeComponent implements OnInit {
   right = true;
   firstIndex = 0;
   currentUser: AuthResponded;
+  lang = false;
 
   constructor(
     private authService: AuthenticationsService,
     private productsService: ProductsService,
-
     private i18nServiceService: I18nServiceService,
     private cartService: CartService
   ) {}
@@ -36,6 +36,9 @@ export class HomeComponent implements OnInit {
     this.currentUser = this.authService.currentUserValue;
     this.countries = this.allCountries.slice(this.firstIndex, this.firstIndex + 3);
     this.firstIndex = this.firstIndex + 1;
+    if (this.i18nServiceService.currentLangValue === null || this.i18nServiceService.currentLangValue === 'en') {
+      this.lang = true;
+    }
     this.getProducts();
   }
   handleLeftClick() {
@@ -88,6 +91,7 @@ export class HomeComponent implements OnInit {
       this.goodStuff = this.products.slice(1, 8);
     });
   }
+
   formatPrice(price: any) {
     var prices = price.split('.');
     if (this.i18nServiceService.currentLangValue === null || this.i18nServiceService.currentLangValue === 'en') {
