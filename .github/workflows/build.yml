@@ -60,7 +60,7 @@ jobs:
           file: ./Dockerfile
           builder: ${{ steps.buildx.outputs.name }}
           push: true
-          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/vaana-front:latest
+          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/vaana-front:v1.0.0-snapshot
           # cache-from: type=local,src=/tmp/.buildx-cache
           # cache-to: type=local,dest=/tmp/.buildx-cache
 
