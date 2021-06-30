@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CartService } from 'src/app/services/cart/cart.service';
+import { I18nServiceService } from 'src/app/services/i18n-service/i18n-service.service';
 import { ProductsService } from 'src/app/services/products/products.service';
 import Swal from 'sweetalert2';
 
@@ -17,7 +18,8 @@ export class ProductDetailComponent implements OnInit {
   constructor(
     private productService: ProductsService,
     private router: ActivatedRoute,
-    private cartService: CartService
+    private cartService: CartService,
+    private i18nServiceService: I18nServiceService
   ) {}
 
   ngOnInit(): void {
@@ -27,6 +29,7 @@ export class ProductDetailComponent implements OnInit {
       // const product = JSON.stringify(response);
       this.product = response['product'];
       this.fakePrice = Number(this.product.price) + 1000;
+      console.log(this.fakePrice);
     });
   }
 
@@ -39,5 +42,15 @@ export class ProductDetailComponent implements OnInit {
       showConfirmButton: false,
       timer: 2000,
     });
+  }
+
+  formatPrice(price: any) {
+    var prices = price.split('.');
+    if (this.i18nServiceService.currentLangValue === null || this.i18nServiceService.currentLangValue === 'en') {
+      prices = price;
+    } else {
+      prices = prices[0] + ',' + prices[1];
+    }
+    return prices;
   }
 }
