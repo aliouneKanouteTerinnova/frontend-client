@@ -1,8 +1,8 @@
 {
   "registration": {
     "register": {
-      "title": "S'INSCRIRE'",
-      "sub_title": "inscription",
+      "title": "SUBSCRIBE",
+      "sub_title": "registration",
       "username": "Username",
       "email": "Email",
       "address": "Address",
@@ -20,11 +20,11 @@
       "city": "City"
     },
     "login": {
-      "title": "CONNEXION",
+      "title": "LOGIN",
       "sub_title": "connexion",
       "email": "Email",
       "password": "Password",
-      "connect_with": "SE CONNECTER AVEC",
+      "connect_with": "CONNECT WITH",
       "inscription": "registration",
       "reset_password": "Password forgotten",
       "connexion": "LOGIN"
@@ -53,7 +53,10 @@
     "type_user": "Type",
     "sexe": "Sexe",
     "edit_button": "Edit",
-    "logout_button": "Logout"
+    "logout_button": "Logout",
+    "store_button": "Store",
+    "products_button": "Products",
+    "orders_button": "My orders"
   },
   "home": {
     "category": "CATEGORY V",
@@ -75,5 +78,46 @@
     "followed_product": "Followed product",
     "add_cart": "Add to cart",
     "similar_product": "Similar products"
+  },
+  "orders": {
+    "order_list": {
+      "order_list": "Orders List",
+      "order_date": "Order Date",
+      "order_number": "Order No",
+      "order_amount": "Amount",
+      "order_shipping": "Shipping Address",
+      "order_tax": "Tax",
+      "order_status": "Status",
+      "order_actions": "Actions",
+      "detail_button": "Details"
+    },
+    "order_details": {
+      "order_confirm": "Your order Confirmed !",
+      "order_intro": "You order has been confirmed and will be shipped in next two days !",
+      "order_payment": "Payment",
+      "color": "Color",
+      "quantity": "Quantity",
+      "order_subtotal": "Subtotal",
+      "order_ship_fee": "Shipping Fee",
+      "order_tax_fee": "Tax Fee",
+      "order_discount": "Discount",
+      "order_total": "Total",
+      "order_conclusion": "We will be sending shipping confirmation email when the item shipped successfully !",
+      "order_thanks": "Thanks for shopping with us !",
+      "order_footer": "Need Help? visit our ",
+      "order_footer_link": " help center"
+    }
+  },
+  "checkout": {
+    "billing": "Billing Address",
+    "full_name": "Full Name",
+    "accepted_cards": "Accepted Cards",
+    "total_tax": "Total tax",
+    "ship_tax": "Shipping Tax",
+    "ship_name": "Shipping Method Name",
+    "ship_method": "Shipping Method Price",
+    "ship_bill": "Shipping address same as billing",
+    "checkout_button": "Continue to checkout",
+    "cart": "Cart"
   }
 }
