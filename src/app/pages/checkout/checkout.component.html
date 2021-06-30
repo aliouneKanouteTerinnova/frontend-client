@@ -55,7 +55,6 @@
               </div>
             </div>
           </div>
-          <<<<<<< HEAD ======= >>>>>>> f07805cdaad38d716b363c488955e0fc83aa9637
         </div>
         <label translate>
           <input type="checkbox" checked="checked" formControlName="sameadr" /> checkout.ship_bill
@@ -98,13 +97,13 @@
       </h4>
       <p *ngFor="let c of cartData.data; let i = index">
         <a href="#">{{ c.numInCart }} x {{ c.product.name }}</a>
-        <span class="price">{{ cartService.CalculateSubTotal(i) | currency: 'EUR' }}</span>
+        <span class="price">{{ formatPrice(cartService.CalculateSubTotal(i) | currency: 'EUR') }}</span>
       </p>
       <hr />
       <p translate>
         orders.order_details.order_total
         <span class="price" style="color: black"
-          ><b>{{ cartTotal | currency: 'EUR' }}</b></span
+          ><b>{{ formatPrice(cartTotal | currency: 'EUR') }}</b></span
         >
       </p>
     </div>

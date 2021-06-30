@@ -6,6 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { v4 as uuidv4 } from 'uuid';
 import Swal from 'sweetalert2';
 import { AuthenticationsService } from 'src/app/services/authentications/authentications.service';
+import { I18nServiceService } from 'src/app/services/i18n-service/i18n-service.service';
 uuidv4();
 @Component({
   selector: 'app-update-product',
@@ -36,7 +37,7 @@ export class UpdateProductComponent implements OnInit {
       this.updateProducts = new FormGroup({
         name: new FormControl(res['product'].name),
         description: new FormControl(res['product'].description),
-        price: new FormControl(res['product'].price),
+        price: new FormControl(Number(res['product'].price)),
         quantity: new FormControl(res['product'].quantity),
         img: new FormControl(res['product'].image),
         is_active: new FormControl(res['product'].is_active),

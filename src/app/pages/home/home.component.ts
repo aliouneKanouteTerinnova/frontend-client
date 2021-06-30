@@ -6,6 +6,7 @@ import { AuthResponded } from 'src/app/models/auth/auth';
 import { CartService } from 'src/app/services/cart/cart.service';
 import { ProductsService } from 'src/app/services/products/products.service';
 import { AuthenticationsService } from 'src/app/services/authentications/authentications.service';
+import { I18nServiceService } from 'src/app/services/i18n-service/i18n-service.service';
 
 @Component({
   selector: 'app-home',
@@ -22,11 +23,12 @@ export class HomeComponent implements OnInit {
   right = true;
   firstIndex = 0;
   currentUser: AuthResponded;
+  lang = false;
 
   constructor(
     private authService: AuthenticationsService,
     private productsService: ProductsService,
-    private router: Router,
+    private i18nServiceService: I18nServiceService,
     private cartService: CartService
   ) {}
 
@@ -34,6 +36,9 @@ export class HomeComponent implements OnInit {
     this.currentUser = this.authService.currentUserValue;
     this.countries = this.allCountries.slice(this.firstIndex, this.firstIndex + 3);
     this.firstIndex = this.firstIndex + 1;
+    if (this.i18nServiceService.currentLangValue === null || this.i18nServiceService.currentLangValue === 'en') {
+      this.lang = true;
+    }
     this.getProducts();
   }
   handleLeftClick() {
@@ -84,6 +89,17 @@ export class HomeComponent implements OnInit {
       this.products = this.products.slice(0, 15);
       this.bestSelling = this.products.slice(0, 5);
       this.goodStuff = this.products.slice(1, 8);
+      console.log(this.products);
     });
+  }
+
+  formatPrice(price: any) {
+    var prices = price.split('.');
+    if (this.i18nServiceService.currentLangValue === null || this.i18nServiceService.currentLangValue === 'en') {
+      prices = price;
+    } else {
+      prices = prices[0] + ',' + prices[1];
+    }
+    return prices;
   }
 }

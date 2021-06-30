@@ -1,7 +1,7 @@
 on:
   push:
     branches:
-      - develop
+      - bug/vaana-669-price-format
 
 name: CICD for Vaanah frontend-client
 jobs:

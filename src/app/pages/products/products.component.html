@@ -36,7 +36,7 @@
             <b>Description: </b>
             {{ product.description }}
           </p>
-          <div class="price"><b>Price: </b> {{ product.price }}</div>
+          <div class="price"><b>Price: </b> {{ formatPrice(product.price | currency: 'EUR') }}</div>
           <div class="quantity"><b>Quantity: </b> {{ product.quantity }}</div>
         </div>
         <div class="button_group mt-3">
