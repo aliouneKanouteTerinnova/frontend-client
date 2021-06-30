@@ -10,13 +10,13 @@
       <div class="product" *ngFor="let c of cartData.data; let i = index">
         <div class="image"><img src="./../../assets/img/Products/{{ i }}.png" alt="" /></div>
         <div class="info">
-          <span class="price">{{ c.product.price | currency: 'EUR' }}</span>
+          <span class="price">{{ formatPrice(c.product.price | currency: 'EUR') }}</span>
           <p class="description">
             {{ c.product.description }}
           </p>
           <div class="button">
             <button>
-              <span translate>basket.unity </span><span>{{ c.product.price | currency: 'EUR' }}</span>
+              <span translate>basket.unity </span><span>{{ formatPrice(c.product.price | currency: 'EUR') }}</span>
             </button>
             <form>
               <span translate>basket.qty </span>
@@ -50,7 +50,7 @@
             </form>
             <button>
               <span class="totalBtn" translate>basket.total </span
-              ><span>{{ cartService.CalculateSubTotal(i) | currency: 'EUR' }}</span>
+              ><span>{{ formatPrice(cartService.CalculateSubTotal(i) | currency: 'EUR') }}</span>
             </button>
           </div>
           <div class="icone">
@@ -73,7 +73,7 @@
     </div>
     <div class="tolalPrice">
       <h3 translate>
-        basket.total <span> {{ cartTotal | currency: 'EUR' }}</span>
+        basket.total <span> {{ formatPrice(cartTotal | currency: 'EUR') }}</span>
       </h3>
     </div>
   </div>
@@ -82,11 +82,11 @@
       <h6 class="title" translate>basket.total</h6>
       <div class="subtotal">
         <div class="subtotal1">
-          <span translate>basket.total </span> <span>{{ cartTotal | currency: 'EUR' }}</span>
+          <span translate>basket.total </span> <span>{{ formatPrice(cartTotal | currency: 'EUR') }}</span>
         </div>
         <div class="subtotal2"><span translate>basket.delivery </span> <span> &euro; 0</span></div>
         <div class="subtotal1">
-          <span translate>basket.net_to_pay </span> <span>{{ cartTotal | currency: 'EUR' }}</span>
+          <span translate>basket.net_to_pay </span> <span>{{ formatPrice(cartTotal | currency: 'EUR') }}</span>
         </div>
       </div>
       <div class="checkouBtn"><button routerLink="/checkout" translate>basket.checkout</button></div>
@@ -109,7 +109,7 @@
           <span>{{ product.description.slice(0, 17) }}...</span>
         </div>
         <div class="price">
-          <span>{{ product.price | currency: 'EUR' }}</span>
+          <span>{{ formatPrice(product.price | currency: 'EUR') }}</span>
         </div>
         <div class="addCart">
           <button (click)="addToCart(product.id)" translate>basket.add_cart</button>
@@ -128,7 +128,7 @@
           <span>{{ product.description.slice(0, 17) }}...</span>
         </div>
         <div class="price">
-          <span>{{ product.price | currency: 'EURO' }}</span>
+          <span>{{ formatPrice(product.price | currency: 'EUR') }}</span>
         </div>
       </div>
     </div>

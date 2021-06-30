@@ -19,6 +19,7 @@ import { CartService } from 'src/app/services/cart/cart.service';
 import { CartModelServer } from 'src/app/models/cart/cart';
 import { Store } from '../stores/store';
 import { AuthenticationsService } from 'src/app/services/authentications/authentications.service';
+import { I18nServiceService } from 'src/app/services/i18n-service/i18n-service.service';
 
 uuidv4();
 
@@ -48,7 +49,7 @@ export class ProductsComponent implements OnInit {
     private storesService: StoresService,
     private authService: AuthenticationsService,
     private cartService: CartService,
-    private router: ActivatedRoute
+    private i18nServiceService: I18nServiceService
   ) {}
 
   ngOnInit(): void {
@@ -136,6 +137,16 @@ export class ProductsComponent implements OnInit {
       showConfirmButton: false,
       timer: 1500,
     });
+  }
+
+  formatPrice(price: any) {
+    var prices = price.split('.');
+    if (this.i18nServiceService.currentLangValue === null || this.i18nServiceService.currentLangValue === 'en') {
+      prices = price;
+    } else {
+      prices = prices[0] + ',' + prices[1];
+    }
+    return prices;
   }
 }
 function id(id: any) {

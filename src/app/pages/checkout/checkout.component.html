@@ -12,7 +12,7 @@
             <label for="email" translate><i class="fa fa-envelope"></i> registration.register.email</label>
             <input type="text" id="email" formControlName="email" placeholder="john@example.com" />
             <label for="adr" translate><i class="fa fa-address-card-o"></i> registration.register.street</label>
-            <input type="text" id="adr" formControlName="street" placeholder="542 W. 15th Street" />
+            <input type="text" id="adr" formControlName="address" placeholder="542 W. 15th Street" />
             <label for="city" translate><i class="fa fa-institution"></i> registration.register.city</label>
             <input type="text" id="state" formControlName="state" placeholder="New York" />
 
@@ -97,13 +97,13 @@
       </h4>
       <p *ngFor="let c of cartData.data; let i = index">
         <a href="#">{{ c.numInCart }} x {{ c.product.name }}</a>
-        <span class="price">{{ cartService.CalculateSubTotal(i) | currency: 'EUR' }}</span>
+        <span class="price">{{ formatPrice(cartService.CalculateSubTotal(i) | currency: 'EUR') }}</span>
       </p>
       <hr />
       <p translate>
         orders.order_details.order_total
         <span class="price" style="color: black"
-          ><b>{{ cartTotal | currency: 'EUR' }}</b></span
+          ><b>{{ formatPrice(cartTotal | currency: 'EUR') }}</b></span
         >
       </p>
     </div>
