@@ -38,7 +38,7 @@ export class RegistrationComponent implements OnInit {
   userResponded: AuthResponded;
   isConnection = true;
   isInscription = false;
-  listType = ['SELLER', 'CUSTOMER'];
+  listType = ['Seller', 'Customer'];
   listGender = ['M', 'F', 'OTHERS'];
   token: any;
   email: any;

@@ -10,7 +10,23 @@ export class StoresService {
   constructor(private http: HttpClient) {}
 
   getAllStores() {
-    return this.http.get<any>(`${environment.baseUrl}stores/activated`);
+    return this.http.get<any>(`${environment.baseUrl}stores`);
+  }
+
+  getLatestStores() {
+    return this.http.get<any>(`${environment.baseUrl}stores/latest`);
+  }
+
+  getSellerStore(token: string) {
+    token = 'token ' + token;
+    return this.http.get<any>(`${environment.baseUrl}stores/sellers`, {
+      headers: new HttpHeaders().set('Authorization', token),
+      observe: 'response',
+    });
+  }
+
+  getStoreProducts(id: any) {
+    return this.http.get<any>(`${environment.baseUrl}stores/${id}/products`);
   }
 
   createStores(store: any, token: string) {

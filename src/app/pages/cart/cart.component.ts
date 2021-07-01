@@ -72,6 +72,9 @@ export class CartComponent implements OnInit {
       prices = price;
     } else {
       prices = prices[0] + ',' + prices[1];
+      if (prices.split(',').length > 2) {
+        prices = prices.split(',')[0] + '' + prices.split(',')[1] + ',' + prices.split(',')[2];
+      }
     }
     return prices;
   }
