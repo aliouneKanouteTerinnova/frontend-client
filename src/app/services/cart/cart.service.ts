@@ -54,14 +54,14 @@ export class CartService {
         this.productService.getCurrentData(p.id).subscribe((actualProdInfo: Products) => {
           if (this.cartDataServer.data[0].numInCart === 0) {
             this.cartDataServer.data[0].numInCart = p.incart;
-            this.cartDataServer.data[0].product = actualProdInfo['product'];
+            this.cartDataServer.data[0].product = actualProdInfo;
             this.CalculateTotal();
             this.cartDataClient.total = this.cartDataServer.total;
             this.cookieService.set('cart', JSON.stringify(this.cartDataClient));
           } else {
             this.cartDataServer.data.push({
               numInCart: p.incart,
-              product: actualProdInfo['product'],
+              product: actualProdInfo,
             });
             this.CalculateTotal();
             this.cartDataClient.total = this.cartDataServer.total;
@@ -101,11 +101,11 @@ export class CartService {
     this.productService.getCurrentData(id).subscribe((prod) => {
       // If the cart is empty
       if (this.cartDataServer.data[0].product === undefined) {
-        this.cartDataServer.data[0].product = prod['product'];
+        this.cartDataServer.data[0].product = prod;
         this.cartDataServer.data[0].numInCart = quantity !== undefined ? quantity : 1;
         this.CalculateTotal();
         this.cartDataClient.prodData[0].incart = this.cartDataServer.data[0].numInCart;
-        this.cartDataClient.prodData[0].id = prod['product'].id;
+        this.cartDataClient.prodData[0].id = prod.id;
         this.cartDataClient.total = this.cartDataServer.total;
         this.cookieService.set('cart', JSON.stringify(this.cartDataClient));
         this.cartDataObs$.next(this.cartDataServer);
@@ -118,21 +118,19 @@ export class CartService {
       } // END of IF
       // Cart is not empty
       else {
-        let index = this.cartDataServer.data.findIndex((p) => p.product.id === prod['product'].id);
+        let index = this.cartDataServer.data.findIndex((p) => p.product.id === prod.id);
 
         // 1. If chosen product is already in cart array
         if (index !== -1) {
-          if (quantity !== undefined && quantity <= prod['product'].quantity) {
+          if (quantity !== undefined && quantity <= prod.quantity) {
             // @ts-ignore
             this.cartDataServer.data[index].numInCart =
-              this.cartDataServer.data[index].numInCart < prod['product'].quantity
-                ? quantity
-                : prod['product'].quantity;
+              this.cartDataServer.data[index].numInCart < prod.quantity ? quantity : prod.quantity;
           } else {
             // @ts-ignore
-            this.cartDataServer.data[index].numInCart < prod['product'].quantity
+            this.cartDataServer.data[index].numInCart < prod.quantity
               ? this.cartDataServer.data[index].numInCart++
-              : prod['product'].quantity;
+              : prod.quantity;
           }
 
           this.cartDataClient.prodData[index].incart = this.cartDataServer.data[index].numInCart;
@@ -146,12 +144,12 @@ export class CartService {
         // 2. If chosen product is not in cart array
         else {
           this.cartDataServer.data.push({
-            product: prod['product'],
+            product: prod,
             numInCart: 1,
           });
           this.cartDataClient.prodData.push({
             incart: 1,
-            id: prod['product'].id,
+            id: prod.id,
           });
           // this.toast.success(`${prod.name} added to the cart.`, "Product Added", {
           //   timeOut: 1500,
