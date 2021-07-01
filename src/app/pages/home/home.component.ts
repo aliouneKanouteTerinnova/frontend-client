@@ -57,7 +57,7 @@ export class HomeComponent implements OnInit {
   addToCart(id: Number) {
     this.cartService.AddProductToCart(id);
     Swal.fire({
-      position: 'top-end',
+      // position: 'top-end',
       icon: 'success',
       title: 'Product added to cart!',
       showConfirmButton: false,

@@ -1,6 +1,6 @@
 .container {
   display: flex;
-  margin-top: 0px;
+  margin-top: -155px;
   margin-bottom: 50px;
 }
 
@@ -218,7 +218,7 @@ img {
 
 .value-button {
   display: inline-block;
-  border: 1px solid #ddd;
+  // border: 1px solid #ddd;
   margin: 0px;
   width: 20px;
   // height: 40px;
@@ -246,17 +246,17 @@ img {
 }
 
 form #decrease {
-  margin-right: -4px;
-  // border-radius: 8px 0 0 8px;
-  // background: #f0f0f0;
-  color: red;
+  color: #f09202;
+  position: relative;
+  bottom: -40%;
+  right: -5%;
 }
 
 form #increase {
-  margin-left: -4px;
-  // border-radius: 0 8px 8px 0;
-  // background: #f0f0f0;
-  color: green;
+  color: #f09202;
+  position: relative;
+  top: -40%;
+  left: -48%;
 }
 
 /* form #input-wrap {
@@ -269,9 +269,12 @@ input#number {
   border: none;
   background-color: #f0f0f0;
   margin: 0px;
-  width: 20px;
-  height: 20px;
-  padding: 5px;
+  width: 35px;
+  height: 22px;
+  // padding: 5px;
+  position: relative;
+  right: -15%;
+  z-index: 1;
 }
 
 input[type='number']::-webkit-inner-spin-button,
