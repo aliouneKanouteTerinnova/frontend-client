@@ -24,25 +24,27 @@
         <div *ngIf="currentUser" class="dropdown-menu" aria-labelledby="dropdownMenu2">
           <button class="dropdown-item" type="button">
             <span *ngIf="currentUser">
-              <button class="dropdown-item" routerLink="/profile">Your Account</button>
+              <button class="dropdown-item" routerLink="/profile">
+                <span translate>nav.Your_Account</span>
+              </button>
             </span>
           </button>
 
           <button class="dropdown-item" type="button">
             <span *ngIf="currentUser">
-              <button class="dropdown-item" routerLink="/orders">Commands</button>
+              <button class="dropdown-item" routerLink="/orders"><span translate>nav.Commands</span></button>
             </span>
           </button>
 
           <button class="dropdown-item" type="button">
             <span *ngIf="currentUser">
-              <button class="dropdown-item" routerLink="/wishlist">Wishlist</button>
+              <button class="dropdown-item" routerLink="/wishlist"><span translate>nav.Wishlist</span></button>
             </span>
           </button>
 
           <button class="dropdown-item" type="button">
             <span *ngIf="currentUser">
-              <button class="dropdown-item" routerLink="/securite">Securite</button>
+              <button class="dropdown-item" routerLink="/securite"><span translate>nav.Setting</span></button>
             </span>
           </button>
 
