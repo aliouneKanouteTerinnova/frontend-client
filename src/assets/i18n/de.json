@@ -133,9 +133,16 @@
     "ship_tax": "Versandsteuer",
     "ship_name": "Name der Versandmethode",
     "ship_method": "Versandart Preis",
+    "currency": "Währung",
     "ship_bill": "Lieferadresse gleich der Rechnungsadresse",
     "checkout_button": "Weiter zur Kasse",
     "cart": "Wagen"
+  },
+  "payment": {
+    "title": "Zahlung",
+    "amount ": "Betrag ",
+    "order_number": "Auftragsnummer",
+    "payment_button": "Bezahlen"
   },
   "store": {
     "name": "Name",
