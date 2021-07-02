@@ -15,11 +15,13 @@ export class ProductDetailComponent implements OnInit {
   product: any;
   fakePrice: number;
   indexPhoto: number;
+  products = [];
   constructor(
     private productService: ProductsService,
     private router: ActivatedRoute,
     private cartService: CartService,
-    private i18nServiceService: I18nServiceService
+    private i18nServiceService: I18nServiceService,
+    private productsService: ProductsService
   ) {}
 
   ngOnInit(): void {
@@ -27,10 +29,11 @@ export class ProductDetailComponent implements OnInit {
     this.indexPhoto = this.router.snapshot.params.indexPhoto;
     this.productService.getCurrentData(this.idProduct).subscribe((response) => {
       // const product = JSON.stringify(response);
-      this.product = response['product'];
+      this.product = response;
       this.fakePrice = Number(this.product.price) + 1000;
       console.log(this.fakePrice);
     });
+    this.getProducts();
   }
 
   addToCart(id: Number) {
@@ -50,7 +53,26 @@ export class ProductDetailComponent implements OnInit {
       prices = price;
     } else {
       prices = prices[0] + ',' + prices[1];
+      if (prices.split(',').length > 2) {
+        prices = prices.split(',')[0] + '' + prices.split(',')[1] + ',' + prices.split(',')[2];
+      }
     }
     return prices;
+  }
+
+  getProducts() {
+    this.productsService.getAllProducts().subscribe(
+      (data) => {
+        this.products = data.results.slice(0, 6);
+        console.log(data.results);
+      },
+      (err) => {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Something went wrong!',
+        });
+      }
+    );
   }
 }

@@ -1,4 +1,3 @@
-import { ActivatedRoute } from '@angular/router';
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable prefer-arrow/prefer-arrow-functions */
 /* eslint-disable @typescript-eslint/no-unused-vars */
@@ -73,24 +72,34 @@ export class ProductsComponent implements OnInit {
   }
 
   getProducts() {
-    this.productsService.getAllProducts().subscribe((data) => {
-      const product = data.results;
-      if (product.length > 0) {
-        product.forEach((element) => {
-          if (element['created_by'] === this.currentUser.user.id) {
-            this.storesService.getCurrentData(element['store']).subscribe(
+    this.productsService.getSellersProducts(this.currentUser.user.token).subscribe(
+      (data) => {
+        this.products = data.body.results;
+        if (this.products.length > 0) {
+          this.products.forEach((element, i) => {
+            this.storesService.getCurrentData(element.store).subscribe(
               (data) => {
-                element.store = data.store[0].name;
+                this.products[i].store = data.name;
               },
               (error) => {
-                console.log(error);
+                Swal.fire({
+                  icon: 'error',
+                  title: 'Oops...',
+                  text: 'Something went wrong!',
+                });
               }
             );
-            this.products.push(element);
-          }
+          });
+        }
+      },
+      (err) => {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Something went wrong!',
         });
       }
-    });
+    );
   }
 
   getCategory() {
@@ -145,6 +154,9 @@ export class ProductsComponent implements OnInit {
       prices = price;
     } else {
       prices = prices[0] + ',' + prices[1];
+      if (prices.split(',').length > 2) {
+        prices = prices.split(',')[0] + '' + prices.split(',')[1] + ',' + prices.split(',')[2];
+      }
     }
     return prices;
   }

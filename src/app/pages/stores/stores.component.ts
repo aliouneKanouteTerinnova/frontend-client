@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { AuthenticationsService } from 'src/app/services/authentications/authentications.service';
 import { StoresService } from 'src/app/services/stores/stores.service';
+import { SwalComponent } from '@sweetalert2/ngx-sweetalert2';
 // import { Store } from './store';
 import Swal from 'sweetalert2';
 
@@ -11,8 +12,10 @@ import Swal from 'sweetalert2';
   styleUrls: ['./stores.component.scss'],
 })
 export class StoresComponent implements OnInit {
+  @ViewChild('effacerSwal', { static: false })
+  private effacerSwal: SwalComponent;
   stores = [];
-
+  storeId: any;
   currentUser: any;
   userType: string;
   disabledBtn = false;
@@ -34,27 +37,22 @@ export class StoresComponent implements OnInit {
   }
 
   getStores() {
-    this.storesService.getAllStores().subscribe(
+    this.storesService.getSellerStore(this.currentUser.user.token).subscribe(
       (res) => {
-        const stores = res.results;
-        if (stores.length > 0) {
-          stores.forEach((element) => {
-            // this.authService.getUserById(element['created_by'], this.currentUser.user.token).subscribe((data) => {
-            if (element['created_by'] === this.currentUser.user.id) {
-              this.stores.push(element);
-            }
-            // });
-          });
-        }
+        this.stores = res.body.results;
       },
       (error) => {
         console.log(error);
       }
     );
   }
+  suppressionSrore(id) {
+    this.storeId = id;
+    this.effacerSwal.fire();
+  }
 
-  deleteStore(id) {
-    this.storesService.deleteStores(id, this.currentUser.user.token).subscribe(
+  deleteStore() {
+    this.storesService.deleteStores(this.storeId, this.currentUser.user.token).subscribe(
       (res) => {
         Swal.fire({
           position: 'top-end',

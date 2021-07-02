@@ -4,4 +4,5 @@ export class Store {
   created_by: number;
   store_address: string;
   is_active: boolean;
+  products: any;
 }
