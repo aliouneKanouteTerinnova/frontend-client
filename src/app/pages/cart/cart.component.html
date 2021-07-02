@@ -36,7 +36,13 @@
                 </svg>
               </div>
               <!-- readonly -->
-              <input type="number" id="number" [value]="c.numInCart" [max]="c.product.quantity" />
+              <input
+                type="number"
+                id="number"
+                [value]="c.numInCart"
+                [max]="c.product.quantity"
+                (change)="changeQuantity($event, c, i)"
+              />
               <div class="value-button" id="increase" (click)="ChangeQuantity(i, true)">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"

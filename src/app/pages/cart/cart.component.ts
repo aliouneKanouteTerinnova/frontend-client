@@ -21,6 +21,7 @@ export class CartComponent implements OnInit {
   bestSelling = [];
   goodStuff = [];
   idProduct: any;
+  quantity: any;
 
   constructor(
     public cartService: CartService,
@@ -57,7 +58,7 @@ export class CartComponent implements OnInit {
     Swal.fire({
       position: 'top-end',
       icon: 'success',
-      title: 'Product added to cart!',
+      title: 'Quantity not available!',
       showConfirmButton: false,
       timer: 2000,
     });
@@ -74,5 +75,29 @@ export class CartComponent implements OnInit {
       prices = prices[0] + ',' + prices[1];
     }
     return prices;
+  }
+  changeQuantity(e, c, index) {
+    const quantity = Number(e.target.value);
+    const temp = c.numInCart;
+    if (quantity > c.product.quantity) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: `${c.product.quantity} article left`,
+      });
+      c.numInCart = c.product.quantity;
+    } else if (quantity === 0) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: `You can have 0 article`,
+      });
+      c.numInCart = 1;
+    } else {
+      c.numInCart = quantity - 1;
+      this.ChangeQuantity(index, true);
+    }
+
+    console.log(quantity, c);
   }
 }
