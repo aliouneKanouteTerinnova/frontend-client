@@ -12,4 +12,5 @@ export class Products {
   quantity: number;
   is_active: boolean;
   image: string;
+  reviews: any;
 }

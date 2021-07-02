@@ -38,7 +38,7 @@ export class RegistrationComponent implements OnInit {
   userResponded: AuthResponded;
   isConnection = true;
   isInscription = false;
-  listType = ['SELLER', 'CUSTOMER'];
+  listType = ['Seller', 'Customer'];
   listGender = ['M', 'F', 'OTHERS'];
   token: any;
   email: any;
@@ -54,7 +54,6 @@ export class RegistrationComponent implements OnInit {
   ) {
     this.route.queryParams.subscribe((params) => {
       if (params.token) {
-        console.log(params);
         this.email = params.email;
         this.token = params.token;
       } else {
@@ -75,7 +74,6 @@ export class RegistrationComponent implements OnInit {
           }
         },
         (error) => {
-          console.log(error);
           this.resendLink = true;
           this.errorMessage = 'Token expired, could you register again';
         }
@@ -113,7 +111,6 @@ export class RegistrationComponent implements OnInit {
     const email = {
       email: this.email,
     };
-    console.log(email);
     this.authService.resend(email).subscribe(
       (data) => {
         if (data) {
@@ -128,7 +125,6 @@ export class RegistrationComponent implements OnInit {
         }
       },
       (error) => {
-        console.log(error);
         this.resendLink = true;
         this.errorMessage = 'An error occured';
       }
@@ -207,8 +203,13 @@ export class RegistrationComponent implements OnInit {
     };
     this.authService.login(user).subscribe(
       (data) => {
+        if (data['user'].account_type === 'Seller' || data['user'].account_type === 'SELLER') {
+          this.router.navigate(['profile']);
+        } else {
+          this.router.navigate(['home']);
+        }
         this.userResponded = data;
-        this.router.navigate(['home']);
+
         this.successMessage = 'User authenticated ';
         this.errorMessage = '';
       },

@@ -57,7 +57,7 @@ export class HomeComponent implements OnInit {
   addToCart(id: Number) {
     this.cartService.AddProductToCart(id);
     Swal.fire({
-      position: 'top-end',
+      // position: 'top-end',
       icon: 'success',
       title: 'Product added to cart!',
       showConfirmButton: false,
@@ -98,6 +98,9 @@ export class HomeComponent implements OnInit {
       prices = price;
     } else {
       prices = prices[0] + ',' + prices[1];
+      if (prices.split(',').length > 2) {
+        prices = prices.split(',')[0] + '' + prices.split(',')[1] + ',' + prices.split(',')[2];
+      }
     }
     return prices;
   }

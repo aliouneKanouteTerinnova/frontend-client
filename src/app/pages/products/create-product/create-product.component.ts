@@ -97,16 +97,9 @@ export class CreateProductComponent implements OnInit {
     });
   }
   getStores() {
-    this.storesService.getAllStores().subscribe(
+    this.storesService.getSellerStore(this.currentUser.user.token).subscribe(
       (res) => {
-        const stores = res.results;
-        if (stores.length > 0) {
-          stores.forEach((element) => {
-            if (element['created_by'] === this.currentUser.user.id) {
-              this.stores.push(element);
-            }
-          });
-        }
+        this.stores = res.body.results;
       },
       (error) => {
         console.log(error);
@@ -131,12 +124,13 @@ export class CreateProductComponent implements OnInit {
     products.description = this.createProductForm.get('description').value;
     products.price = this.createProductForm.get('price').value;
     products.date_added = '';
-    products.created_by = '';
+    // products.created_by = '';
     products.is_active = true;
     products.quantity = this.createProductForm.get('quantity').value;
     products.category = this.categoryId;
     products.store = this.storeId;
     products.image = this.filePath + this.imgSrc;
+    products.reviews = [];
     // products.image = this.createProductForm.get('image').value;
 
     this.productsService.addProduct(products, this.currentUser.user.token).subscribe(
