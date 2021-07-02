@@ -5,9 +5,11 @@
       <div class="card">
         <!-- <div class="text-left logo p-2 px-5"><img src="https://i.imgur.com/2zDU056.png" width="50" /></div> -->
         <div class="invoice p-5">
-          <h3 translate>orders.order_details.order_confirm</h3>
-          <span class="font-weight-bold d-block mt-4"><span translate>nav.hello</span>, Chris</span>
-          <span translate>orders.order_details.order_intro</span>
+          <!-- <h3 translate>orders.order_details.order_confirm</h3> -->
+          <span class="font-weight-bold d-block mt-4"
+            ><span translate>nav.hello</span>, {{ currentUser['user'].username }}</span
+          >
+          <!-- <span translate>orders.order_details.order_intro</span> -->
           <div class="payment border-top mt-3 mb-3 border-bottom table-responsive">
             <table class="table table-borderless">
               <tbody>
@@ -15,25 +17,26 @@
                   <td>
                     <div class="py-2">
                       <span class="d-block text-muted" translate>orders.order_list.order_date</span>
-                      <span>12 Jan,2018</span>
+                      <span>{{ order.created_at | date: 'dd/MM/yyyy' }}</span>
                     </div>
                   </td>
                   <td>
                     <div class="py-2">
                       <span class="d-block text-muted" translate>orders.order_list.order_number</span>
-                      <span>MT12332345</span>
+                      <span>{{ order.number }}</span>
                     </div>
                   </td>
                   <td>
                     <div class="py-2">
-                      <span class="d-block text-muted" translate>orders.order_details.order_payment</span>
-                      <span><img src="https://img.icons8.com/color/48/000000/mastercard.png" width="20" /></span>
+                      <span class="d-block text-muted" translate>orders.order_list.order_amount</span>
+                      <span>{{ formatPrice(total | currency: 'EUR') }}</span>
                     </div>
                   </td>
                   <td>
                     <div class="py-2">
                       <span class="d-block text-muted" translate>orders.order_list.order_shipping</span>
-                      <span>414 Advert Avenue, NY,USA</span>
+                      {{ order.shipping_address.address.country }}, {{ order.shipping_address.address.state }},
+                      {{ order.shipping_address.address.street }}
                     </div>
                   </td>
                 </tr>
@@ -43,20 +46,26 @@
           <div class="product border-bottom table-responsive">
             <table class="table table-borderless">
               <tbody>
-                <tr>
-                  <td width="20%"><img src="https://i.imgur.com/u11K1qd.jpg" width="90" /></td>
+                <tr *ngFor="let product of order.cart.items; let i = index">
+                  <td width="20%"><img src="./../../assets/img/Products/{{ i }}.png" alt="" width="90" /></td>
                   <td width="60%">
-                    <span class="font-weight-bold">Men's Sports cap</span>
+                    <span class="font-weight-bold">{{ product.product.name }}</span>
                     <div class="product-qty">
-                      <span class="d-block" translate>orders.order_details.quantity <span>:1</span></span>
-                      <span translate>orders.order_details.color <span>:Dark</span></span>
+                      <span class="d-block" translate
+                        >orders.order_details.quantity <span>:{{ product.quantity }}</span></span
+                      >
+                      <span translate
+                        >orders.order_details.color <span>:{{ product.product.description }}</span></span
+                      >
                     </div>
                   </td>
                   <td width="20%">
-                    <div class="text-right"><span class="font-weight-bold">$67.50</span></div>
+                    <div class="text-right">
+                      <span class="font-weight-bold">{{ formatPrice(product.product.price | currency: 'EUR') }}</span>
+                    </div>
                   </td>
                 </tr>
-                <tr>
+                <!-- <tr>
                   <td width="20%"><img src="https://i.imgur.com/SmBOua9.jpg" width="70" /></td>
                   <td width="60%">
                     <span class="font-weight-bold">Men's Collar T-shirt</span>
@@ -68,7 +77,7 @@
                   <td width="20%">
                     <div class="text-right"><span class="font-weight-bold">$77.50</span></div>
                   </td>
-                </tr>
+                </tr> -->
               </tbody>
             </table>
           </div>
@@ -83,7 +92,9 @@
                       </div>
                     </td>
                     <td>
-                      <div class="text-right"><span>$168.50</span></div>
+                      <div class="text-right">
+                        <span>{{ formatPrice(order.total_prices | currency: 'EUR') }}</span>
+                      </div>
                     </td>
                   </tr>
                   <tr>
@@ -93,7 +104,9 @@
                       </div>
                     </td>
                     <td>
-                      <div class="text-right"><span>$22</span></div>
+                      <div class="text-right">
+                        <span>{{ formatPrice(order.shipping_tax | currency: 'EUR') }} </span>
+                      </div>
                     </td>
                   </tr>
                   <tr>
@@ -103,10 +116,12 @@
                       </div>
                     </td>
                     <td>
-                      <div class="text-right"><span>$7.65</span></div>
+                      <div class="text-right">
+                        <span>{{ formatPrice(order.total_tax | currency: 'EUR') }}</span>
+                      </div>
                     </td>
                   </tr>
-                  <tr>
+                  <!-- <tr>
                     <td>
                       <div class="text-left">
                         <span class="text-muted" translate>orders.order_details.order_discount</span>
@@ -115,7 +130,7 @@
                     <td>
                       <div class="text-right"><span class="text-success">$168.50</span></div>
                     </td>
-                  </tr>
+                  </tr> -->
                   <tr class="border-top border-bottom">
                     <td>
                       <div class="text-left">
@@ -123,7 +138,9 @@
                       </div>
                     </td>
                     <td>
-                      <div class="text-right"><span class="font-weight-bold">$238.50</span></div>
+                      <div class="text-right">
+                        <span class="font-weight-bold">{{ formatPrice(total | currency: 'EUR') }} </span>
+                      </div>
                     </td>
                   </tr>
                 </tbody>
@@ -138,7 +155,6 @@
           <span translate
             >orders.order_details.order_footer <a href="#" translate>orders.order_details.order_footer_link</a></span
           >
-          <span>12 June, 2020</span>
         </div>
       </div>
     </div>

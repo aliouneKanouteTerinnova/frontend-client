@@ -67,7 +67,10 @@
           </div>
         </div>
         <div class="col-md-4 dash">
-          <button mat-raised-button color="primary" routerLink="/orders">
+          <button mat-raised-button color="primary" routerLink="/orders" *ngIf="!is_seller">
+            <span translate>profile.orders_button</span>
+          </button>
+          <button mat-raised-button color="primary" routerLink="/orders-seller" *ngIf="is_seller">
             <span translate>profile.orders_button</span>
           </button>
         </div>

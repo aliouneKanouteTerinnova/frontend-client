@@ -106,7 +106,8 @@
       "order_tax": "Taxe",
       "order_status": "Statut",
       "order_actions": "Actions",
-      "detail_button": "Détails"
+      "detail_button": "Détails",
+      "product": "Produits de la commande"
     },
     "order_details": {
       "order_confirm": "Votre commande est confirmée !",
@@ -122,7 +123,8 @@
       "order_conclusion": "Nous enverrons un courriel de confirmation d'expédition lorsque l'article aura été expédié avec succès !",
       "order_thanks": "Merci de faire vos achats chez nous !",
       "order_footer": "Besoin d'aide ? Visitez notre ",
-      "order_footer_link": " centre d'assistance"
+      "order_footer_link": " centre d'assistance",
+      "command": "Commandes"
     }
   },
   "checkout": {

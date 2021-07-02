@@ -106,7 +106,8 @@
       "order_tax": "Tax",
       "order_status": "Status",
       "order_actions": "Actions",
-      "detail_button": "Details"
+      "detail_button": "Details",
+      "product": "Order products"
     },
     "order_details": {
       "order_confirm": "Your order Confirmed !",
@@ -122,7 +123,8 @@
       "order_conclusion": "We will be sending shipping confirmation email when the item shipped successfully !",
       "order_thanks": "Thanks for shopping with us !",
       "order_footer": "Need Help? visit our ",
-      "order_footer_link": " help center"
+      "order_footer_link": " help center",
+      "command": "Orders"
     }
   },
   "checkout": {

@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Subject } from 'rxjs';
 import { Order } from 'src/app/models/order/order';
 import { environment } from 'src/environments/environment';
 
@@ -7,7 +8,13 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root',
 })
 export class OrderService {
+  sellerOrders: any[] = [];
+  sellerOrdersSubject = new Subject<any[]>();
   constructor(private httpClient: HttpClient) {}
+
+  emitSellerOrders() {
+    this.sellerOrdersSubject.next(this.sellerOrders);
+  }
 
   /* Getting all customer orders */
   getAllOrders(token: string) {
@@ -16,6 +23,28 @@ export class OrderService {
       headers: new HttpHeaders().set('Authorization', token),
       observe: 'response',
     });
+  }
+
+  getSellerOrders(token: string) {
+    token = 'token ' + token;
+    this.httpClient
+      .get<any>(`${environment.baseUrl}orders/sellers`, {
+        headers: new HttpHeaders().set('Authorization', token),
+        observe: 'response',
+      })
+      .pipe()
+      .subscribe((response) => {
+        this.sellerOrders = [];
+        let data = response.body;
+        for (let i = 0; i < data.length; i++) {
+          this.sellerOrders.push(data[i]);
+        }
+        this.emitSellerOrders();
+      });
+  }
+
+  getSellerOrderDetail(id) {
+    return this.sellerOrders[id];
   }
 
   /* Getting all customer orders for specific seller*/
@@ -45,8 +74,12 @@ export class OrderService {
   }
 
   /*Getting single order*/
-  getOrder(id: any) {
-    return this.httpClient.get<any>(`${environment.baseUrl}orders/${id}`);
+  getOrder(id: any, token: any) {
+    token = 'token ' + token;
+    return this.httpClient.get<any>(`${environment.baseUrl}orders/${id}`, {
+      headers: new HttpHeaders().set('Authorization', token),
+      observe: 'response',
+    });
   }
   /*Delete an order*/
   deleteOrder(id: number, token: string) {
