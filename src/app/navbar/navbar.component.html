@@ -12,13 +12,42 @@
   </button>
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav">
-      <li class="nav-item">
-        <a class="nav-link">
-          <span class="ml-1"> <img src="../../assets/img/USER.svg" width="50" alt="" /> </span
-          ><span *ngIf="currentUser"
-            ><a routerLink="/profile"><span translate>nav.hello</span> {{ currentUser['user'].username }}</a></span
-          ><span *ngIf="!currentUser"><a routerLink="/register" translate>nav.compte</a></span>
+      <li class="nav-item user">
+        <a class="nav-link" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <span class="ml-1"> <img src="../../assets/img/USER.svg" width="50" alt="" /></span>
+          <span *ngIf="currentUser">
+            <a><span translate>nav.hello</span> {{ currentUser['user'].username }}</a>
+          </span>
+          <span *ngIf="!currentUser"><a routerLink="/register" translate>nav.compte</a></span>
         </a>
+
+        <div *ngIf="currentUser" class="dropdown-menu" aria-labelledby="dropdownMenu2">
+          <button class="dropdown-item" type="button">
+            <span *ngIf="currentUser">
+              <button class="dropdown-item" routerLink="/profile">Your Account</button>
+            </span>
+          </button>
+
+          <button class="dropdown-item" type="button">
+            <span *ngIf="currentUser">
+              <button class="dropdown-item" routerLink="/orders">Commands</button>
+            </span>
+          </button>
+
+          <button class="dropdown-item" type="button">
+            <span *ngIf="currentUser">
+              <button class="dropdown-item" routerLink="/wishlist">Wishlist</button>
+            </span>
+          </button>
+
+          <button class="dropdown-item" type="button">
+            <span *ngIf="currentUser">
+              <button class="dropdown-item" routerLink="/securite">Securite</button>
+            </span>
+          </button>
+
+          <button class="btn btn-danger btn-block" (click)="logOut()" translate>profile.logout_button</button>
+        </div>
       </li>
       <li class="nav-item">
         <a class="nav-link" routerLink="/cart" translate>
