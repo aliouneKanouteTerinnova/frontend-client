@@ -26,6 +26,7 @@
         <div class="product_name">
           <h2>{{ product.name }}</h2>
           <p class="desc_product">{{ product.description }}</p>
+          <p class="boutique"><span translate>profile.store_button</span>: {{ store }}</p>
           <p class="price">{{ formatPrice(product.price | currency: 'EUR') }}</p>
           <span class="fake_price">{{ formatPrice(fakePrice | currency: 'EUR') }}</span>
         </div>
