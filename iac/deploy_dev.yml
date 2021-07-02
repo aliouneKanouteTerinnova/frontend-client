@@ -25,5 +25,5 @@
 
     - name: Run Image
       shell: |
-        docker run -d -p 8084:80 papeterinnova/vaana-front:v1.0.0-snapshot
+        docker run -d -p 8083:80 papeterinnova/vaana-front:v1.0.0-snapshot
       become: yes
