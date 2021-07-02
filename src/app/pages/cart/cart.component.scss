@@ -13,6 +13,18 @@
   padding: 25px;
 }
 
+.qty {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.inc {
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+}
+
 .basket-title,
 h3 {
   font-family: Helvetica Neue;
@@ -143,7 +155,7 @@ h3 {
 
 .button button {
   margin-right: 5px;
-  padding: 10px;
+  padding: 0px 5px;
   width: 130px;
   cursor: pointer;
   border: 0.1rem solid rgb(224, 221, 221);
@@ -247,22 +259,11 @@ img {
 
 form #decrease {
   color: #f09202;
-  position: relative;
-  bottom: -40%;
-  right: -5%;
 }
 
 form #increase {
   color: #f09202;
-  position: relative;
-  top: -40%;
-  left: -48%;
 }
-
-/* form #input-wrap {
-    margin: 0px;
-    padding: 0px;
-  } */
 
 input#number {
   text-align: center;
@@ -271,10 +272,6 @@ input#number {
   margin: 0px;
   width: 35px;
   height: 22px;
-  // padding: 5px;
-  position: relative;
-  right: -15%;
-  z-index: 1;
 }
 
 input[type='number']::-webkit-inner-spin-button,
