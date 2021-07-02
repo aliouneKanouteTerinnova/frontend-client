@@ -46,7 +46,12 @@
     "hello": "Hello",
     "compte": "Log In/Register",
     "panier": "Basket",
-    "category": "CATEGORY"
+    "category": "CATEGORY",
+    "Your_Account": "Your Account",
+    "Commands": "Commands",
+    "Wishlist": "Wishlist",
+    "Setting": "Setting",
+    "Disconnection": "Disconnection"
   },
   "update": {
     "validate": "Validate",

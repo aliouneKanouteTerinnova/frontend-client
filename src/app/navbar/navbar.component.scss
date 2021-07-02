@@ -67,6 +67,24 @@ nav {
   }
 }
 
+.dropdown-menu {
+  display: none;
+}
+.user:hover {
+  .dropdown-menu {
+    display: block;
+    top: 70%;
+    padding: 0;
+    left: 7%;
+  }
+
+  @media screen and (max-width: 1360px) {
+    .dropdown-menu {
+      left: 0 !important;
+    }
+  }
+}
+
 .badge {
   color: #29235c;
   margin-left: 0px;
