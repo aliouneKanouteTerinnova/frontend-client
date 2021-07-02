@@ -26,6 +26,7 @@ import { NotConnectedGuard } from './guards/not-connected/not-connected.guard';
 import { OrderDetailsComponent } from './pages/order/order-details/order-details.component';
 import { OrderListComponent } from './pages/order/order-list/order-list.component';
 import { ConditionUsedComponent } from './pages/user/condition-used/condition-used.component';
+import { SellerOrderComponent } from './pages/order/seller-order/seller-order.component';
 
 const routes: Routes = [
   {
@@ -78,8 +79,9 @@ const routes: Routes = [
   { path: 'category', component: CategoryPageComponent },
   { path: 'update-categories/:id', component: UpdateCategoriesComponent },
   { path: 'create-categories', component: CreateCategoriesComponent, canActivate: [AuthGuard] },
-  { path: 'order-detail', component: OrderDetailsComponent },
+  { path: 'orders/:id', component: OrderDetailsComponent },
   { path: 'orders', component: OrderListComponent },
+  { path: 'orders-seller', component: SellerOrderComponent },
   { path: 'conditions', component: ConditionUsedComponent },
 ];
 @NgModule({

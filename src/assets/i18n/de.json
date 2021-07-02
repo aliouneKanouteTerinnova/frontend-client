@@ -101,7 +101,8 @@
       "order_tax": "Steuer",
       "order_status": "Status",
       "order_actions": "Aktionen",
-      "detail_button": "Details"
+      "detail_button": "Details",
+      "product": "Produkte bestellen"
     },
     "order_details": {
       "order_confirm": "Ihre Bestellung wurde bestätigt !",
@@ -117,7 +118,8 @@
       "order_conclusion": " Wir werden eine Versandbestätigung per E-Mail senden, wenn der Artikel erfolgreich versendet wurde !",
       "order_thanks": "Danke für Ihren Einkauf bei uns !",
       "order_footer": "Brauchen Sie Hilfe ? Besuchen Sie unser",
-      "order_footer_link": " Hilfe-Center"
+      "order_footer_link": " Hilfe-Center",
+      "command": "Bestellung"
     }
   },
   "checkout": {

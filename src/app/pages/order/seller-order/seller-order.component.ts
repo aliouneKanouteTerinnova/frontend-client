@@ -5,17 +5,18 @@ import { I18nServiceService } from 'src/app/services/i18n-service/i18n-service.s
 import { OrderService } from 'src/app/services/order/order.service';
 
 @Component({
-  selector: 'app-order-list',
-  templateUrl: './order-list.component.html',
-  styleUrls: ['./order-list.component.scss'],
+  selector: 'app-seller-order',
+  templateUrl: './seller-order.component.html',
+  styleUrls: ['./seller-order.component.css'],
 })
-export class OrderListComponent implements OnInit {
+export class SellerOrderComponent implements OnInit {
   listOrders = [];
   currentUser: any;
   token: any;
   typeUser: any;
   isSeller = false;
   sellerOrderSubscription: Subscription;
+
   constructor(
     private orderService: OrderService,
     private i18nServiceService: I18nServiceService,
@@ -26,27 +27,15 @@ export class OrderListComponent implements OnInit {
     this.currentUser = this.authService.currentUserValue;
     this.token = this.currentUser['user'].token;
     this.typeUser = this.currentUser['user'].account_type;
-    if (this.typeUser === 'Seller') {
-      this.isSeller = true;
-      this.getSellerOrders();
-    } else {
-      this.getCustomerOrders();
-    }
-  }
-
-  getCustomerOrders() {
-    this.orderService.getAllOrders(this.token).subscribe(
-      (data) => {
-        this.listOrders = data.body;
-      },
-      (error) => {}
-    );
+    this.getSellerOrders();
+    console.log(this.token);
   }
 
   getSellerOrders() {
     this.orderService.getSellerOrders(this.token);
     this.sellerOrderSubscription = this.orderService.sellerOrdersSubject.subscribe((data) => {
       this.listOrders = data;
+      console.log(this.listOrders);
     });
     this.orderService.emitSellerOrders();
     // this.orderService.getAllOrdersFromSeller(this.token).subscribe(
