@@ -19,6 +19,12 @@
       "zipcode": "Zipcode",
       "city": "City"
     },
+    "conditions": {
+      "condition_use": "CONDITIONS OF USE",
+      "text_use": "Please read these terms carefully before using the Vaana Services. By using the Vaana Services, you agree to be bound by these terms. We offer a wide range of Vaana Services and additional terms may apply. When you use a Vaana Service (for example, Your Profile, Gift Certificates or Vaana Mobile Apps), you are also subject to the terms, guidelines and conditions applicable to that Vaana Service (Service Terms). If these Terms of Service conflict with these Terms of Service, the Terms of Service will govern.",
+      "condition_general": "GENERAL CONDITIONS OF SALE",
+      "text_general": "Welcome to Vaana.\n Vaana EU SARL and/or its affiliates (Vaana) provide website functionality and other products and services to you when you visit or purchase from the Vaana.\n website (the Website), use Vaana products and services, use Vaana mobile applications, or use software provided by Vaana in connection with any of the foregoing (together, the Vaana Services). Vaana provides the Vaana Services on the terms and conditions set forth on this page.These Terms and Conditions govern the sale of products between Vaana EU LLC and you. For terms and conditions relating to the sale between you and third party vendors on the Vaana.com website, please refer to the Vaana Services Europe Business Solutions Agreement. We offer a wide range of Vaana Services and additional terms may apply. In addition, when you use a Vaana Service (e.g., your Profile, Gift Certificates, mobile applications or Communication Manager), you are also subject to the terms, guidelines and conditions applicable to that Vaana Service (the Service Terms). If these Terms of Service conflict with the Terms of Service, the Terms of Service shall prevail. Please read these terms carefully before placing an order with Vaana EU SARL. By placing an order with Vaana EU SARL, you signify your agreement to be bound by these terms.\n Translated with www.DeepL.com/Translator (free version)"
+    },
     "login": {
       "title": "LOGIN",
       "sub_title": "connexion",

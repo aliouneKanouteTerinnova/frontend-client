@@ -25,6 +25,7 @@ import { AuthGuard } from './guards/connected/auth.guard';
 import { NotConnectedGuard } from './guards/not-connected/not-connected.guard';
 import { OrderDetailsComponent } from './pages/order/order-details/order-details.component';
 import { OrderListComponent } from './pages/order/order-list/order-list.component';
+import { ConditionUsedComponent } from './pages/user/condition-used/condition-used.component';
 
 const routes: Routes = [
   {
@@ -79,6 +80,7 @@ const routes: Routes = [
   { path: 'create-categories', component: CreateCategoriesComponent, canActivate: [AuthGuard] },
   { path: 'order-detail', component: OrderDetailsComponent },
   { path: 'orders', component: OrderListComponent },
+  { path: 'conditions', component: ConditionUsedComponent },
 ];
 @NgModule({
   declarations: [],
