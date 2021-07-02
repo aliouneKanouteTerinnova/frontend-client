@@ -40,9 +40,9 @@ export class EditStoresComponent implements OnInit {
     // });
     this.storesService.getCurrentData(this.router.snapshot.params.id).subscribe((res) => {
       this.editStore.patchValue({
-        name: res.store[0].name,
-        store_address: res.store[0].store_address,
-        is_active: res.store[0].is_active,
+        name: res.name,
+        store_address: res.store_address,
+        is_active: res.is_active,
       });
     });
   }

@@ -46,7 +46,7 @@
             [disabled]="disabledBtn"
             mat-raised-button
             color="warn"
-            (click)="deleteStore(store.id)"
+            (click)="suppressionSrore(store.id)"
             *ngIf="currentUser"
           >
             <span translate>store.delete_store</span>
@@ -56,3 +56,14 @@
     </div>
   </div>
 </div>
+<swal
+  #effacerSwal
+  title="Deletion "
+  text="Are you sure ?  "
+  type="question"
+  confirmButtonText="Yes"
+  cancelButtonText="No"
+  [showCancelButton]="true"
+  [focusCancel]="true"
+  (confirm)="deleteStore()"
+></swal>

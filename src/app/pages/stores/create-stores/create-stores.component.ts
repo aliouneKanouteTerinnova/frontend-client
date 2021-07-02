@@ -42,9 +42,10 @@ export class CreateStoresComponent implements OnInit {
 
     data.name = this.createStore.get('name').value;
 
-    data.created_by = 1;
+    // data.created_by = this.currentUser.user.id;
     data.store_address = this.createStore.get('store_address').value;
     data.is_active = true;
+    data.products = [];
 
     this.storesService.createStores(data, this.currentUser.user.token).subscribe(
       (res) => {
