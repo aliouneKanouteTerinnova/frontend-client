@@ -14,7 +14,7 @@
           d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"
         />
       </svg>
-      Create Category
+      <span translate>category.create_category</span>
     </button>
   </div>
 </div>
@@ -24,10 +24,14 @@
     <div style="width: 35rem" *ngFor="let category of categories">
       <div class="store">
         <div style="display: flex">
-          <div class="card-body name" routerLink=""><b>Name :</b> {{ category.name }}</div>
-          <div class="card-body adresse"><b>Description :</b> {{ category.description }}</div>
+          <div class="card-body name" routerLink="">
+            <b><span translate>category.name</span> :</b> {{ category.name }}
+          </div>
+          <div class="card-body adresse">
+            <b><span translate>category.description</span> :</b> {{ category.description }}
+          </div>
           <div class="card-body children" *ngIf="category.children.length > 0">
-            <b>Children :</b>
+            <b><span translate>category.children</span> :</b>
             <div *ngFor="let child of category.children">
               {{ child.name }}
             </div>
@@ -42,11 +46,11 @@
             class="mr-3"
             *ngIf="currentUser"
           >
-            Edit
+            <span translate>category.update_category</span>
           </button>
           <!-- [disabled]="!disabledBtn" -->
           <button mat-raised-button color="warn" (click)="deleteCategory(category.id)" *ngIf="currentUser">
-            Delete
+            <span translate>category.delete_category</span>
           </button>
         </div>
       </div>

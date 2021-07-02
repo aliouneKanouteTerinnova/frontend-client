@@ -14,7 +14,7 @@
           d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"
         />
       </svg>
-      Create store
+      <span translate>store.create_store</span>
     </button>
   </div>
 </div>
@@ -24,8 +24,12 @@
     <div style="width: 35rem" *ngFor="let store of stores">
       <div class="store">
         <div style="display: flex">
-          <div class="card-body name" routerLink=""><b>Name:</b> {{ store.name }}</div>
-          <div class="card-body adresse"><b>Adresse:</b> {{ store.store_address }}</div>
+          <div class="card-body name" routerLink="">
+            <b><span translate>store.name</span> :</b> {{ store.name }}
+          </div>
+          <div class="card-body adresse">
+            <b><span translate>store.address</span> :</b> {{ store.store_address }}
+          </div>
         </div>
         <div class="button">
           <button
@@ -36,7 +40,7 @@
             class="mr-3"
             *ngIf="currentUser"
           >
-            Edit
+            <span translate>store.update_store</span>
           </button>
           <button
             [disabled]="disabledBtn"
@@ -45,7 +49,7 @@
             (click)="deleteStore(store.id)"
             *ngIf="currentUser"
           >
-            Delete
+            <span translate>store.delete_store</span>
           </button>
         </div>
       </div>
