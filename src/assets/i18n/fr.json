@@ -46,7 +46,12 @@
     "hello": "Bonjour",
     "compte": "Connexion/Inscription",
     "panier": "Panier",
-    "category": "CATÉGORIE"
+    "category": "CATÉGORIE",
+    "Your_Account": "Votre Compte",
+    "Commands": "Commandes",
+    "Wishlist": "Liste de souhaits",
+    "Setting": "Securite",
+    "Disconnection": "Deconnexion"
   },
   "update": {
     "validate": "Valider",
@@ -130,9 +135,16 @@
     "ship_tax": "Taxe d'expédition",
     "ship_name": "Nom du mode de livraison",
     "ship_method": "Coût de la méthode d'expédition",
+    "currency": "Monnaie",
     "ship_bill": "Adresse de livraison identique à celle de la facturation",
     "checkout_button": "Continuer à payer",
     "cart": "Panier"
+  },
+  "payment": {
+    "title": "Paiement",
+    "amount ": "Montant ",
+    "order_number": "Numéro de commande",
+    "payment_button": "Payer"
   },
   "store": {
     "name": "Nom",

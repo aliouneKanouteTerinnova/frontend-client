@@ -46,7 +46,12 @@
     "hello": "Hello",
     "compte": "Log In/Register",
     "panier": "Basket",
-    "category": "CATEGORY"
+    "category": "CATEGORY",
+    "Your_Account": "Your Account",
+    "Commands": "Commands",
+    "Wishlist": "Wishlist",
+    "Setting": "Setting",
+    "Disconnection": "Disconnection"
   },
   "update": {
     "validate": "Validate",
@@ -130,9 +135,16 @@
     "ship_tax": "Shipping Tax",
     "ship_name": "Shipping Method Name",
     "ship_method": "Shipping Method Price",
+    "currency": "Currency",
     "ship_bill": "Shipping address same as billing",
     "checkout_button": "Continue to checkout",
     "cart": "Cart"
+  },
+  "payment": {
+    "title": "Payment",
+    "amount ": "Amount ",
+    "order_number": "Auftragsnummer",
+    "payment_button": "Pay"
   },
   "store": {
     "name": "Name",

@@ -46,7 +46,12 @@
     "hello": "Hallo",
     "compte": "Einloggen/Registrieren",
     "panier": "Anzeige",
-    "category": "KATEGORIE"
+    "category": "KATEGORIE",
+    "Your_Account": "Ihr Konto",
+    "Commands": "Befehle",
+    "Wishlist": "Wunschzettel",
+    "Setting": "Einstellung",
+    "Disconnection": "Unterbrechung"
   },
   "update": {
     "validate": "Validieren",
@@ -130,9 +135,16 @@
     "ship_tax": "Versandsteuer",
     "ship_name": "Name der Versandmethode",
     "ship_method": "Versandart Preis",
+    "currency": "Währung",
     "ship_bill": "Lieferadresse gleich der Rechnungsadresse",
     "checkout_button": "Weiter zur Kasse",
     "cart": "Wagen"
+  },
+  "payment": {
+    "title": "Zahlung",
+    "amount ": "Betrag ",
+    "order_number": "Auftragsnummer",
+    "payment_button": "Bezahlen"
   },
   "store": {
     "name": "Name",
