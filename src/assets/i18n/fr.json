@@ -1,78 +1,201 @@
 {
   "registration": {
     "register": {
-      "title": "S'INSCRIRE'",
+      "title": "S'INSCRIRE",
       "sub_title": "inscription",
-      "username": "Username",
+      "username": "Nom d'utilisateur",
       "email": "Email",
-      "address": "Address",
-      "type_user": "Type User",
+      "address": "Adresse",
+      "type_user": "Type de compte",
       "sexe": "Sexe",
-      "password": "Password",
-      "confirm_password": "Confirm Password",
-      "conditions": "I accept all conditions",
-      "inscription": "registration",
-      "registration": "SUBSCRIBE",
-      "resend": "Resend Email",
-      "country": "Country",
-      "street": "Street",
-      "zipcode": "Zipcode",
-      "city": "City"
+      "password": "Mot de passe",
+      "confirm_password": "Confirmer le mot de passe",
+      "conditions": "J'accepte toutes les conditions",
+      "inscription": "inscription",
+      "registration": "S'INSCRIRE",
+      "resend": "Renvoyer l'email",
+      "country": "Pays",
+      "street": "Rue",
+      "zipcode": "Code postal",
+      "city": "Ville"
+    },
+    "conditions": {
+      "condition_use": "CONDITIONS D'UTILISATION",
+      "text_use": "Merci de lire ces conditions attentivement avant d'utiliser les Services Vaana. En utilisant les Services Vaana, vous acceptez d'être soumis aux présentes conditions. Nous offrons un large panel de Services Vaana et il se peut que des conditions additionnelles s'appliquent. Quand vous utilisez un Service Vaana (par exemple, Votre Profil, les Chèques-Cadeaux ou les Applications Vaana pour mobile), vous êtes aussi soumis aux termes, lignes directrices et conditions applicables à ce Service Vaana (« Conditions du Service »). Si ces Conditions d'Utilisation entrent en contradiction avec ces Conditions du Service, les Conditions du Service prévaudront.",
+      "condition_general": "CONDITIONS GENERALES DE VENTE",
+      "text_general": "Bienvenue sur le site de Vaana.\n Vaana EU SARL et/ou ses sociétés affiliées (« Vaana ») vous fournissent des fonctionnalités de site internet et d'autres produits et services quand vous visitez ou achetez sur le site internet Vaana.fr (le « Site Internet »), utilisez des produits et services d'Vaana, utilisez des applications Vaana pour mobile, ou utilisez des logiciels fournis par Vaana dans le cadre de tout ce qui précède (ensemble ci-après, les « Services Vaana »). Vaana fournit les Services Vaana selon les conditions définies dans cette page.\n Ces Conditions Générales de Vente régissent la vente de produits entre Vaana EU SARL et vous. Pour les conditions relatives à la vente entre vous et des vendeurs tiers sur le Site Internet Vaana.fr, veuillez prendre connaissance du Contrat Vaana Services Europe Business Solutions. Nous offrons un large panel de Services Vaana et il se peut que des conditions additionnelles s'appliquent. Par ailleurs, lorsque vous utilisez un Service Vaana (par exemple votre Profil, les Chèques-Cadeaux, les applications pour mobile ou le Gestionnaire de communication), vous êtes également soumis aux termes, lignes directrices et conditions applicables à ce Service Vaana (les « Conditions du Service »). Si ces Conditions Générales de Ventes entrent en contradiction avec les Conditions du Service, les Conditions du Service prévaudront.\n Merci de lire ces conditions attentivement avant d'effectuer une commande avec Vaana EU SARL. En commandant avec Vaana EU SARL, vous nous notifiez votre accord d'être soumis aux présentes conditions."
     },
     "login": {
-      "title": "CONNEXION",
+      "title": "SE CONNECTER",
       "sub_title": "connexion",
       "email": "Email",
-      "password": "Password",
+      "password": "Mot de passe",
       "connect_with": "SE CONNECTER AVEC",
-      "inscription": "registration",
-      "reset_password": "Password forgotten",
-      "connexion": "LOGIN"
+      "inscription": "inscription",
+      "reset_password": "Mot de passe oublié ?",
+      "connexion": "CONNEXION"
     },
     "errors": {
-      "required_error": "This field is mandatory.",
-      "password_error": "The password must be at least 6 characters long",
-      "invalid_error": "This field is invalid.",
-      "match_password": "Passwords must match"
+      "required_error": "Ce champ est obligatoire !",
+      "password_error": "Le mot de passe doit comporter au moins 6 caractères !",
+      "invalid_error": "Ce champ n'est pas valide !",
+      "match_password": "Les mots de passe doivent correspondre !"
     }
   },
   "nav": {
-    "compte": "Log In/Register",
-    "panier": "Basket",
-    "category": "CATEGORY"
+    "hello": "Bonjour",
+    "compte": "Connexion/Inscription",
+    "panier": "Panier",
+    "category": "CATÉGORIE",
+    "Your_Account": "Votre Compte",
+    "Commands": "Commandes",
+    "Wishlist": "Liste de souhaits",
+    "Setting": "Securite",
+    "Disconnection": "Deconnexion"
   },
   "update": {
-    "validate": "Validate",
-    "title": "Update Profile"
+    "validate": "Valider",
+    "title": "Mettre à jour le profil"
   },
   "profile": {
-    "username": "Username",
+    "username": "Nom d'utilisateur",
     "email": "Email",
-    "address": "Address",
-    "type_user": "Type",
+    "address": "Adresse",
+    "type_user": "Type de compte",
     "sexe": "Sexe",
-    "edit_button": "Edit",
-    "logout_button": "Logout"
+    "edit_button": "Modifier",
+    "logout_button": "Déconnexion",
+    "store_button": "Boutique",
+    "products_button": "Produits",
+    "orders_button": "Mes commandes"
   },
   "home": {
-    "category": "CATEGORY V",
-    "best_sale": "BEST SALES",
-    "good_deals": "GOOD DEALS",
-    "plus": "LEARN MORE >"
+    "acquerir": "Acquerir",
+    "recherche": "Rechercher",
+    "next": "Suivant",
+    "previous": "Précédent",
+    "aimer": "Aimer",
+    "ajouter": "Ajouter",
+    "category": "CATÉGORIE V",
+    "best_sale": "MEILLEURES VENTES",
+    "good_deals": "BONNES AFFAIRES",
+    "plus": "EN SAVOIR PLUS >"
   },
   "basket": {
-    "empty_basket": "Your Cart Is Empty",
-    "go_shop": "GO TO SHOP",
-    "basket": "BASKET",
-    "unity": "Unity: ",
-    "qty": "Qty: ",
-    "total": "Total: ",
-    "net_to_pay": "Net to pay: ",
-    "delivery": "Delivery: ",
-    "checkout": "CHECK OUT",
-    "accept": "WE ACCEPT",
-    "followed_product": "Followed product",
-    "add_cart": "Add to cart",
-    "similar_product": "Similar products"
+    "empty_basket": "Votre panier est vide",
+    "go_shop": "ALLER A LA BOUTIQUE",
+    "basket": "PANIER",
+    "unity": "Unité : ",
+    "qty": "Qté : ",
+    "total": "Total : ",
+    "net_to_pay": "Net à payer : ",
+    "delivery": "Livraison: ",
+    "checkout": "PASSER LA COMMANDE",
+    "accept": "NOUS ACCEPTONS",
+    "followed_product": "Produits vus récemment",
+    "add_cart": "Ajouter au panier",
+    "similar_product": "Produits similaires"
+  },
+  "orders": {
+    "order_list": {
+      "order_list": "Liste des commandes",
+      "order_date": "Date de la commande",
+      "order_number": "N° de commande",
+      "order_amount": "Montant",
+      "order_shipping": "Adresse de livraison",
+      "order_tax": "Taxe",
+      "order_status": "Statut",
+      "order_actions": "Actions",
+      "detail_button": "Détails",
+      "product": "Produits de la commande"
+    },
+    "order_details": {
+      "order_confirm": "Votre commande est confirmée !",
+      "order_intro": "Votre commande a été confirmée et sera expédiée dans les deux prochains jours !",
+      "order_payment": "Paiement",
+      "color": "Couleur",
+      "quantity": "Quantité",
+      "order_subtotal": "Sous-total",
+      "order_ship_fee": "Frais d'expédition",
+      "order_tax_fee": "Taxe d'impôt",
+      "order_discount": "Remise",
+      "order_total": "Total",
+      "order_conclusion": "Nous enverrons un courriel de confirmation d'expédition lorsque l'article aura été expédié avec succès !",
+      "order_thanks": "Merci de faire vos achats chez nous !",
+      "order_footer": "Besoin d'aide ? Visitez notre ",
+      "order_footer_link": " centre d'assistance",
+      "command": "Commandes"
+    }
+  },
+  "checkout": {
+    "billing": "Adresse de facturation",
+    "full_name": "Nom complet",
+    "accepted_cards": "Cartes acceptées",
+    "total_tax": "Total des taxes",
+    "ship_tax": "Taxe d'expédition",
+    "ship_name": "Nom du mode de livraison",
+    "ship_method": "Coût de la méthode d'expédition",
+    "currency": "Monnaie",
+    "ship_bill": "Adresse de livraison identique à celle de la facturation",
+    "checkout_button": "Continuer à payer",
+    "cart": "Panier"
+  },
+  "payment": {
+    "title": "Paiement",
+    "amount ": "Montant ",
+    "order_number": "Numéro de commande",
+    "payment_button": "Payer"
+  },
+  "store": {
+    "name": "Nom",
+    "address": "Adresse",
+    "is_active": "Est actif",
+    "update_store": "Modifier",
+    "delete_store": "Supprimer",
+    "create_store": "Créer une boutique",
+    "create_button": "Valider"
+  },
+  "product": {
+    "products": "Produits",
+    "no_products": "Pas de produits",
+    "name": "Nom",
+    "store": "Boutique",
+    "category": "Catégorie",
+    "slug": "Slug",
+    "description": "Description",
+    "price": "Prix",
+    "quantity": "Quantité",
+    "image": "Charger une image",
+    "is_active": "Est actif",
+    "update_product": "Modifier",
+    "delete_product": "Supprimer",
+    "create_product": "Créer un produit",
+    "create_button": "Valider",
+    "cancel_button": "Annuler"
+  },
+  "product_detail": {
+    "share": "PARTAGER LE PRODUIT AVEC VOS PROCHES",
+    "description": "DESCRIPTION",
+    "livraison": "LIVRAISON",
+    "order_button": "Commander",
+    "store": "Boutique",
+    "desc_product": "DESCRIPTION DU PRODUIT",
+    "similar_product": "AUTRE PRODUITS SIMILAIRES",
+    "banniere": "Banniere de pub"
+  },
+  "category": {
+    "name": "Nom",
+    "description": "Description",
+    "slug": "Slug",
+    "parent": "Parent",
+    "children": "Sous-catégories",
+    "is_active": "Est actif",
+    "update_category": "Modifier",
+    "delete_category": "Supprimer",
+    "create_category": "Créer une catégorie",
+    "create_button": "Valider",
+    "reduction": "Jusqu'à -75%",
+    "diff_categorie": "Différentes catégories",
+    "autre_categorie": "AUTRES CATÉGORIES"
   }
 }

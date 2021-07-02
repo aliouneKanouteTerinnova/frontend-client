@@ -10,47 +10,60 @@
       <div class="product" *ngFor="let c of cartData.data; let i = index">
         <div class="image"><img src="./../../assets/img/Products/{{ i }}.png" alt="" /></div>
         <div class="info">
-          <span class="price">{{ c.product.price | currency: 'EUR' }}</span>
+          <span class="price">{{ formatPrice(c.product.price | currency: 'EUR') }}</span>
           <p class="description">
             {{ c.product.description }}
           </p>
           <div class="button">
             <button>
-              <span translate>basket.unity </span><span>{{ c.product.price | currency: 'EUR' }}</span>
+              <span translate>basket.unity </span><span>{{ formatPrice(c.product.price | currency: 'EUR') }}</span>
             </button>
-            <form>
+            <form class="qty">
               <span translate>basket.qty </span>
-              <div class="value-button" id="decrease" (click)="ChangeQuantity(i, false)">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="16"
-                  height="16"
-                  fill="currentColor"
-                  class="bi bi-minus"
-                  viewBox="0 0 16 16"
-                >
-                  <path d="M5.5 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H6a.5.5 0 0 1-.5-.5z" />
-                </svg>
+              <div class="inc">
+                <div class="value-button" id="decrease" (click)="ChangeQuantity(i, false)">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    fill="currentColor"
+                    class="bi bi-chevron-down"
+                    viewBox="0 0 16 16"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"
+                    />
+                  </svg>
+                </div>
+                <!-- readonly -->
+                <div class="value-button" id="increase" (click)="ChangeQuantity(i, true)">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    fill="currentColor"
+                    class="bi bi-chevron-up"
+                    viewBox="0 0 16 16"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      d="M7.646 4.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 5.707l-5.646 5.647a.5.5 0 0 1-.708-.708l6-6z"
+                    />
+                  </svg>
+                </div>
               </div>
-              <input type="number" id="number" [value]="c.numInCart" readonly [max]="c.product.quantity" />
-              <div class="value-button" id="increase" (click)="ChangeQuantity(i, true)">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="20"
-                  height="20"
-                  fill="currentColor"
-                  class="bi bi-plus"
-                  viewBox="0 0 16 16"
-                >
-                  <path
-                    d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"
-                  />
-                </svg>
-              </div>
+              <input
+                type="number"
+                id="number"
+                [value]="c.numInCart"
+                [max]="c.product.quantity"
+                (change)="changeQuantity($event, c, i)"
+              />
             </form>
             <button>
               <span class="totalBtn" translate>basket.total </span
-              ><span>{{ cartService.CalculateSubTotal(i) | currency: 'EUR' }}</span>
+              ><span>{{ formatPrice(cartService.CalculateSubTotal(i) | currency: 'EUR') }}</span>
             </button>
           </div>
           <div class="icone">
@@ -73,7 +86,7 @@
     </div>
     <div class="tolalPrice">
       <h3 translate>
-        basket.total <span> {{ cartTotal | currency: 'EUR' }}</span>
+        basket.total <span> {{ formatPrice(cartTotal | currency: 'EUR') }}</span>
       </h3>
     </div>
   </div>
@@ -82,11 +95,11 @@
       <h6 class="title" translate>basket.total</h6>
       <div class="subtotal">
         <div class="subtotal1">
-          <span translate>basket.total </span> <span>{{ cartTotal | currency: 'EUR' }}</span>
+          <span translate>basket.total </span> <span>{{ formatPrice(cartTotal | currency: 'EUR') }}</span>
         </div>
         <div class="subtotal2"><span translate>basket.delivery </span> <span> &euro; 0</span></div>
         <div class="subtotal1">
-          <span translate>basket.net_to_pay </span> <span>{{ cartTotal | currency: 'EUR' }}</span>
+          <span translate>basket.net_to_pay </span> <span>{{ formatPrice(cartTotal | currency: 'EUR') }}</span>
         </div>
       </div>
       <div class="checkouBtn"><button routerLink="/checkout" translate>basket.checkout</button></div>
@@ -109,7 +122,7 @@
           <span>{{ product.description.slice(0, 17) }}...</span>
         </div>
         <div class="price">
-          <span>{{ product.price | currency: 'EUR' }}</span>
+          <span>{{ formatPrice(product.price | currency: 'EUR') }}</span>
         </div>
         <div class="addCart">
           <button (click)="addToCart(product.id)" translate>basket.add_cart</button>
@@ -128,7 +141,7 @@
           <span>{{ product.description.slice(0, 17) }}...</span>
         </div>
         <div class="price">
-          <span>{{ product.price | currency: 'EURO' }}</span>
+          <span>{{ formatPrice(product.price | currency: 'EUR') }}</span>
         </div>
       </div>
     </div>

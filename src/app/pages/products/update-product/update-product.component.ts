@@ -6,6 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { v4 as uuidv4 } from 'uuid';
 import Swal from 'sweetalert2';
 import { AuthenticationsService } from 'src/app/services/authentications/authentications.service';
+import { I18nServiceService } from 'src/app/services/i18n-service/i18n-service.service';
 uuidv4();
 @Component({
   selector: 'app-update-product',
@@ -33,13 +34,14 @@ export class UpdateProductComponent implements OnInit {
   ngOnInit(): void {
     this.currentUser = this.authService.currentUserValue;
     this.productsService.getCurrentData(this.router.snapshot.params.id).subscribe((res) => {
+      console.log(res);
       this.updateProducts = new FormGroup({
-        name: new FormControl(res['product'].name),
-        description: new FormControl(res['product'].description),
-        price: new FormControl(res['product'].price),
-        quantity: new FormControl(res['product'].quantity),
-        img: new FormControl(res['product'].image),
-        is_active: new FormControl(res['product'].is_active),
+        name: new FormControl(res.name),
+        description: new FormControl(res.description),
+        price: new FormControl(Number(res.price)),
+        quantity: new FormControl(res.quantity),
+        img: new FormControl(res.image),
+        is_active: new FormControl(res.is_active),
       });
     });
   }

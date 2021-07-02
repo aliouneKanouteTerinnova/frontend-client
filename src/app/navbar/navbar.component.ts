@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { MenuItem } from './../menu-item';
 import { Component, OnInit } from '@angular/core';
 import { I18nServiceService } from '../services/i18n-service/i18n-service.service';
@@ -22,7 +23,8 @@ export class NavbarComponent implements OnInit {
   constructor(
     public cartService: CartService,
     private authService: AuthenticationsService,
-    private i18nServiceService: I18nServiceService
+    private i18nServiceService: I18nServiceService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -65,5 +67,10 @@ export class NavbarComponent implements OnInit {
       this.lang = 'FRANCAIS-FR';
     }
     this.i18nServiceService.changeLocale(this.changeLanguage);
+  }
+
+  logOut() {
+    this.authService.logOut();
+    this.router.navigate(['/home']);
   }
 }

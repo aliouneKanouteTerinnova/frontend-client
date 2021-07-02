@@ -5,12 +5,12 @@
       <form [formGroup]="createCategoriesForm" (ngSubmit)="onSubmit()">
         <div class="row">
           <div class="form-group col-6">
-            <label for="name">Name</label>
+            <label for="name"><span translate>category.name</span></label>
             <input type="text" class="form-control" formControlName="name" />
           </div>
 
           <div class="form-group col-6">
-            <label for="children">Parent</label>
+            <label for="children"><span translate>category.parent</span></label>
             <select class="form-control" formControlName="parent" (change)="categoryEvent($event)">
               <option selected value="---">-------</option>
               <option *ngFor="let category of categories">{{ category.name }}</option>
@@ -20,12 +20,12 @@
 
         <div class="row">
           <div class="form-group col-6">
-            <label for="slug">Slug</label>
+            <label for="slug"><span translate>category.slug</span></label>
             <input type="text" class="form-control" formControlName="slug" />
           </div>
 
           <div class="form-group col-6">
-            <label for="description">Description</label>
+            <label for="description"><span translate>category.description</span></label>
             <input type="text" class="form-control" formControlName="description" />
           </div>
         </div>
@@ -36,7 +36,7 @@
             <!-- (change)="checkCheckBoxvalue($event)"
               #ch
               (click)="checkCheckBoxvalue(ch)" -->
-            <label for="active" class="form-check-label">Is active</label>
+            <label for="active" class="form-check-label"><span translate>category.is_active</span></label>
           </div>
 
           <!-- <div class="form-group col-6">
@@ -48,7 +48,7 @@
         </div>
 
         <button [disabled]="createCategoriesForm.invalid" mat-raised-button color="accent" class="btn-block">
-          Create
+          <span translate>category.create_button</span>
         </button>
       </form>
     </div>

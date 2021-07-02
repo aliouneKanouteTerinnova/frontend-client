@@ -1,7 +1,7 @@
 <app-navbar></app-navbar>
 
 <div class="container">
-  <div class="row">
+  <div class="row" style="margin-top: -155px">
     <div class="col-8">
       <div class="img_content">
         <div class="img">
@@ -20,37 +20,31 @@
           <img src="../../../../assets/img/TWIT.svg" width="40" alt="" />
           <img src="../../../../assets/img/linkedin.svg" width="40" alt="" />
 
-          <p>partager le produit avec vos proches</p>
+          <p><span translate>product_detail.share</span></p>
         </div>
 
         <div class="product_name">
           <h2>{{ product.name }}</h2>
           <p class="desc_product">{{ product.description }}</p>
-          <p class="price">{{ product.price }} FCFA</p>
-          <span class="fake_price">{{ fakePrice }} FCFA</span>
+          <p class="boutique"><span translate>profile.store_button</span>: {{ store }}</p>
+          <p class="price">{{ formatPrice(product.price | currency: 'EUR') }}</p>
+          <span class="fake_price">{{ formatPrice(fakePrice | currency: 'EUR') }}</span>
         </div>
 
         <div class="button">
-          <button (click)="addToCart(product.id)">commandez</button>
+          <button (click)="addToCart(product.id)"><span translate>product_detail.order_button</span></button>
         </div>
       </div>
     </div>
 
     <div class="col-3">
-      <p>description</p>
-      <p>livraison</p>
+      <p><span translate>product_detail.description</span></p>
+      <p><span translate>product_detail.livraison</span></p>
     </div>
-  </div>
-
-  <div class="text_content">
-    <h1>Description du Produit</h1>
-    <p>
-      {{ product.description }}
-    </p>
   </div>
 
   <div class="similar_products container-fluid">
-    <h1>Autre Produits similaires</h1>
+    <h1><span translate>product_detail.similar_product</span></h1>
 
     <div class="row">
       <div class="col-lg-2 col-md-5 col-sm-6 mb-4 mr-1">
@@ -60,8 +54,8 @@
           </div>
           <div class="card-footer">
             <p>Lorem ipsum dolor sit amet.</p>
-            <p class="prix">7 569 FCFA</p>
-            <span>15 000 FCFA</span>
+            <p class="prix">{{ formatPrice(7569.0 | currency: 'EUR') }}</p>
+            <span>{{ formatPrice(15000.0 | currency: 'EUR') }}</span>
           </div>
         </div>
       </div>
@@ -73,8 +67,8 @@
           </div>
           <div class="card-footer">
             <p>Lorem ipsum dolor sit amet.</p>
-            <p class="prix">7 569 FCFA</p>
-            <span>15 000 FCFA</span>
+            <p class="prix">{{ formatPrice(7569.0 | currency: 'EUR') }}</p>
+            <span>{{ formatPrice(15000.0 | currency: 'EUR') }}</span>
           </div>
         </div>
       </div>
@@ -86,8 +80,8 @@
           </div>
           <div class="card-footer">
             <p>Lorem ipsum dolor sit amet.</p>
-            <p class="prix">7 569 FCFA</p>
-            <span>15 000 FCFA</span>
+            <p class="prix">{{ formatPrice(7569.0 | currency: 'EUR') }}</p>
+            <span>{{ formatPrice(15000.0 | currency: 'EUR') }}</span>
           </div>
         </div>
       </div>
@@ -99,8 +93,8 @@
           </div>
           <div class="card-footer">
             <p>Lorem ipsum dolor sit amet.</p>
-            <p class="prix">7 569 FCFA</p>
-            <span>15 000 FCFA</span>
+            <p class="prix">{{ formatPrice(7569.0 | currency: 'EUR') }}</p>
+            <span>{{ formatPrice(15000.0 | currency: 'EUR') }}</span>
           </div>
         </div>
       </div>
@@ -114,8 +108,8 @@
           </div>
           <div class="card-footer">
             <p>Lorem ipsum dolor sit amet.</p>
-            <p class="prix">7 569 FCFA</p>
-            <span>15 000 FCFA</span>
+            <p class="prix">{{ formatPrice(7569.0 | currency: 'EUR') }}</p>
+            <span>{{ formatPrice(15000.0 | currency: 'EUR') }}</span>
           </div>
         </div>
       </div>
@@ -127,8 +121,8 @@
           </div>
           <div class="card-footer">
             <p>Lorem ipsum dolor sit amet.</p>
-            <p class="prix">7 569 FCFA</p>
-            <span>15 000 FCFA</span>
+            <p class="prix">{{ formatPrice(7569.0 | currency: 'EUR') }}</p>
+            <span>{{ formatPrice(15000.0 | currency: 'EUR') }}</span>
           </div>
         </div>
       </div>
@@ -140,8 +134,8 @@
           </div>
           <div class="card-footer">
             <p>Lorem ipsum dolor sit amet.</p>
-            <p class="prix">7 569 FCFA</p>
-            <span>15 000 FCFA</span>
+            <p class="prix">{{ formatPrice(7569.0 | currency: 'EUR') }}</p>
+            <span>{{ formatPrice(15000.0 | currency: 'EUR') }}</span>
           </div>
         </div>
       </div>
@@ -153,8 +147,8 @@
           </div>
           <div class="card-footer">
             <p>Lorem ipsum dolor sit amet.</p>
-            <p class="prix">7 569 FCFA</p>
-            <span>15 000 FCFA</span>
+            <p class="prix">{{ formatPrice(7569.0 | currency: 'EUR') }}</p>
+            <span>{{ formatPrice(15000.0 | currency: 'EUR') }}</span>
           </div>
         </div>
       </div>
@@ -165,7 +159,7 @@
 <div class="container banniere">
   <div class="row">
     <div class="col offset-1">
-      <h1>Banniere de pub</h1>
+      <h1><span translate>product_detail.banniere</span></h1>
       <p>
         Lorem ipsum dolor sit amet consectetur, adipisicing elit. Impedit in eum itaque possimus. Veniam delectus
         numquam vitae! Quibusdam, pariatur,
@@ -187,8 +181,8 @@
           </div>
           <div class="card-footer">
             <p>Lorem ipsum dolor sit amet.</p>
-            <p class="prix">7 569 FCFA</p>
-            <span>15 000 FCFA</span>
+            <p class="prix">{{ 7569.0 | currency: 'EUR' }}</p>
+            <span>{{ formatPrice(15000.0 | currency: 'EUR') }}</span>
           </div>
         </div>
       </div>
@@ -200,8 +194,8 @@
           </div>
           <div class="card-footer">
             <p>Lorem ipsum dolor sit amet.</p>
-            <p class="prix">7 569 FCFA</p>
-            <span>15 000 FCFA</span>
+            <p class="prix">{{ 7569.0 | currency: 'EUR' }}</p>
+            <span>{{ formatPrice(15000.0 | currency: 'EUR') }}</span>
           </div>
         </div>
       </div>
@@ -213,8 +207,8 @@
           </div>
           <div class="card-footer">
             <p>Lorem ipsum dolor sit amet.</p>
-            <p class="prix">7 569 FCFA</p>
-            <span>15 000 FCFA</span>
+            <p class="prix">{{ 7569.0 | currency: 'EUR' }}</p>
+            <span>{{ formatPrice(15000.0 | currency: 'EUR') }}</span>
           </div>
         </div>
       </div>
@@ -226,13 +220,11 @@
           </div>
           <div class="card-footer">
             <p>Lorem ipsum dolor sit amet.</p>
-            <p class="prix">7 569 FCFA</p>
-            <span>15 000 FCFA</span>
+            <p class="prix">{{ 7569.0 | currency: 'EUR' }}</p>
+            <span>{{ formatPrice(15000.0 | currency: 'EUR') }}</span>
           </div>
         </div>
       </div>
     </div>
   </div>
 </div>
-
-<app-footer></app-footer>

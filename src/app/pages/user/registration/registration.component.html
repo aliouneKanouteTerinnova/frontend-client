@@ -54,12 +54,20 @@
         </mat-error>
       </mat-form-field>
       <button mat-raised-button color="primary"><span translate>registration.login.connexion</span></button>
-      <span class="forgotPw"><a href="" translate>registration.login.reset_password</a></span>
+      <span class="forgotPw"><a routerLink="/user/reset-password" translate>registration.login.reset_password</a></span>
       <h3 class="social-title" translate>registration.login.connect_with</h3>
       <div class="social-network">
         <ul>
-          <li><img class="globe" src="./../../assets/img/facebook-logo.jpg" alt="user_icon" /></li>
-          <li><img class="globe" src="./../../assets/img/courriel.png" alt="user_icon" /></li>
+          <li>
+            <a href="https://www.facebook.com/" target="_blank">
+              <img class="globe" src="./../../assets/img/facebook-logo.jpg" alt="user_icon" />
+            </a>
+          </li>
+          <li>
+            <a href="https://www.google.com/intl/fr/gmail/about/" target="_blank">
+              <img class="globe" src="./../../assets/img/courriel.png" alt="user_icon" />
+            </a>
+          </li>
         </ul>
       </div>
     </form>
@@ -177,7 +185,7 @@
         [labelPosition]="labelPosition"
         [disabled]="disabled"
       >
-        <div class="conditions" translate>registration.register.conditions</div>
+        <div class="conditions" routerLink="/conditions" translate>registration.register.conditions</div>
       </mat-checkbox>
       <button mat-raised-button color="primary"><span translate>registration.register.registration</span></button>
     </form>

@@ -16,6 +16,12 @@
   justify-content: center;
 }
 
+.icon-heart {
+  width: 45px !important;
+  margin-top: 30px;
+  margin-bottom: 15px;
+}
+
 .product {
   background-color: rgba(244, 245, 240, 0.959);
   border-radius: 3px;
@@ -563,10 +569,6 @@
 
   .icon {
     font-size: 1.5rem;
-  }
-  .icon-heart {
-    width: 10px;
-    // font-size: 1.5rem;
   }
 
   .product-info span {

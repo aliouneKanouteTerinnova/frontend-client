@@ -28,6 +28,7 @@ import { CartService } from 'src/app/services/cart/cart.service';
 import { OrderService } from 'src/app/services/order/order.service';
 import Swal from 'sweetalert2';
 import { Stripe } from 'stripe-angular';
+import { I18nServiceService } from 'src/app/services/i18n-service/i18n-service.service';
 
 @Component({
   selector: 'app-checkout',
@@ -55,7 +56,8 @@ export class CheckoutComponent implements OnInit {
     private authService: AuthenticationsService,
     private orderService: OrderService,
     private router: Router,
-    private payment: PaymentsService
+    private payment: PaymentsService,
+    private i18nServiceService: I18nServiceService
   ) {}
 
   ngOnInit(): void {
@@ -73,6 +75,7 @@ export class CheckoutComponent implements OnInit {
       city: [null, Validators.required],
       state: [null, Validators.required],
       zip: [null, Validators.required],
+      country: [null, Validators.required],
       cardname: '',
       cardnumber: '',
       expmonth: '',
@@ -252,5 +255,18 @@ export class CheckoutComponent implements OnInit {
             });
         }
       });
+  }
+
+  formatPrice(price: any) {
+    var prices = price.split('.');
+    if (this.i18nServiceService.currentLangValue === null || this.i18nServiceService.currentLangValue === 'en') {
+      prices = price;
+    } else {
+      prices = prices[0] + ',' + prices[1];
+      if (prices.split(',').length > 2) {
+        prices = prices.split(',')[0] + '' + prices.split(',')[1] + ',' + prices.split(',')[2];
+      }
+    }
+    return prices;
   }
 }

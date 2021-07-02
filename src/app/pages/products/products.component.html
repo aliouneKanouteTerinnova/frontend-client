@@ -14,30 +14,40 @@
           d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"
         />
       </svg>
-      Add Product
+      <span translate>product.create_product</span>
     </button>
   </div>
   <!-- <div class="text-right">
     <button mat-raised-button color="accent" routerLink="/cart">View cart</button>
   </div> -->
-  <h2 *ngIf="products.length > 0">Products</h2>
+  <h2 *ngIf="products.length > 0"><span translate>product.products</span></h2>
   <div class="container">
-    <h2 *ngIf="products.length === 0">No Product Available</h2>
+    <h2 *ngIf="products.length === 0"><span translate>product.no_products</span></h2>
     <div class="row">
       <div class="col-md-5 col-lg-3 product" *ngFor="let product of products; let i = index">
-        <div class="store_name"><b>Store: </b> {{ product.store }}</div>
+        <div class="store_name">
+          <b><span translate>product.store</span> : </b> {{ product.store }}
+        </div>
         <div class="img mb-2">
           <img class="img-thumbnail" src="./../../assets/img/Products/{{ i }}.png" alt="" />
         </div>
         <div class="content">
-          <h3 class="name"><b>Name: </b>{{ product.name }}</h3>
-          <span class="slug"><b>Slug: </b>{{ product.slug }}</span>
+          <h3 class="name">
+            <b><span translate>product.name</span> : </b>{{ product.name }}
+          </h3>
+          <span class="slug"
+            ><b><span translate>product.slug</span> : </b>{{ product.slug }}</span
+          >
           <p class="description">
-            <b>Description: </b>
+            <b><span translate>product.description</span> : </b>
             {{ product.description }}
           </p>
-          <div class="price"><b>Price: </b> {{ product.price }}</div>
-          <div class="quantity"><b>Quantity: </b> {{ product.quantity }}</div>
+          <div class="price">
+            <b><span translate>product.price</span> : </b> {{ formatPrice(product.price | currency: 'EUR') }}
+          </div>
+          <div class="quantity">
+            <b><span translate>product.quantity</span> : </b> {{ product.quantity }}
+          </div>
         </div>
         <div class="button_group mt-3">
           <!-- <button mat-raised-button color="accent" class="mr-3 mb-2" (click)="addProducts(product.id)">
@@ -51,7 +61,7 @@
             routerLink="/update-product/{{ product.id }}"
             *ngIf="currentUser"
           >
-            Update
+            <span translate>product.update_product</span>
           </button>
 
           <button
@@ -61,7 +71,7 @@
             (click)="suppressionProduct(product.id)"
             *ngIf="currentUser"
           >
-            Delete
+            <span translate>product.delete_product</span>
           </button>
         </div>
       </div>

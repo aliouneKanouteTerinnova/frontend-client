@@ -4,6 +4,7 @@ import { CartService } from 'src/app/services/cart/cart.service';
 import { ProductsService } from 'src/app/services/products/products.service';
 import Swal from 'sweetalert2';
 import { SwalComponent } from '@sweetalert2/ngx-sweetalert2';
+import { I18nServiceService } from 'src/app/services/i18n-service/i18n-service.service';
 
 @Component({
   selector: 'app-cart',
@@ -20,8 +21,13 @@ export class CartComponent implements OnInit {
   bestSelling = [];
   goodStuff = [];
   idProduct: any;
+  quantity: any;
 
-  constructor(public cartService: CartService, private productsService: ProductsService) {}
+  constructor(
+    public cartService: CartService,
+    private productsService: ProductsService,
+    private i18nServiceService: I18nServiceService
+  ) {}
 
   ngOnInit() {
     this.cartService.cartDataObs$.subscribe((data: CartModelServer) => {
@@ -52,7 +58,7 @@ export class CartComponent implements OnInit {
     Swal.fire({
       position: 'top-end',
       icon: 'success',
-      title: 'Product added to cart!',
+      title: 'Quantity not available!',
       showConfirmButton: false,
       timer: 2000,
     });
@@ -60,5 +66,41 @@ export class CartComponent implements OnInit {
   suppressionProduict(id) {
     this.idProduct = id;
     this.effacerSwal.fire();
+  }
+  formatPrice(price: any) {
+    var prices = price.split('.');
+    if (this.i18nServiceService.currentLangValue === null || this.i18nServiceService.currentLangValue === 'en') {
+      prices = price;
+    } else {
+      prices = prices[0] + ',' + prices[1];
+      if (prices.split(',').length > 2) {
+        prices = prices.split(',')[0] + '' + prices.split(',')[1] + ',' + prices.split(',')[2];
+      }
+    }
+    return prices;
+  }
+  changeQuantity(e, c, index) {
+    const quantity = Number(e.target.value);
+    const temp = c.numInCart;
+    if (quantity > c.product.quantity) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: `${c.product.quantity} article left`,
+      });
+      c.numInCart = c.product.quantity;
+    } else if (quantity === 0) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: `You can have 0 article`,
+      });
+      c.numInCart = 1;
+    } else {
+      c.numInCart = quantity - 1;
+      this.ChangeQuantity(index, true);
+    }
+
+    console.log(quantity, c);
   }
 }

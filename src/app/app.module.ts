@@ -44,6 +44,8 @@ import { OrderDetailsComponent } from './pages/order/order-details/order-details
 import { RegistrationComponent } from './pages/user/registration/registration.component';
 
 import { StripeModule } from 'stripe-angular';
+import { ConditionUsedComponent } from './pages/user/condition-used/condition-used.component';
+import { SellerOrderComponent } from './pages/order/seller-order/seller-order.component';
 
 export function rootLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -78,6 +80,8 @@ export function rootLoaderFactory(http: HttpClient) {
     ProfileComponent,
     OrderListComponent,
     OrderDetailsComponent,
+    ConditionUsedComponent,
+    SellerOrderComponent,
   ],
 
   imports: [
