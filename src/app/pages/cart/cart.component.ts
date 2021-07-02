@@ -89,11 +89,11 @@ export class CartComponent implements OnInit {
         text: `${c.product.quantity} article left`,
       });
       c.numInCart = c.product.quantity;
-    } else if (quantity === 0) {
+    } else if (quantity <= 0) {
       Swal.fire({
         icon: 'error',
         title: 'Oops...',
-        text: `You can have 0 article`,
+        text: `You cannot have 0 article`,
       });
       c.numInCart = 1;
     } else {
