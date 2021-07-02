@@ -59,6 +59,12 @@
     "orders_button": "Meine Bestellungen"
   },
   "home": {
+    "acquerir": "Kaufen",
+    "recherche": "Suche",
+    "next": "Weiter",
+    "previous": "Vorherige",
+    "aimer": "Liebe",
+    "ajouter": "Hinzufügen",
     "category": " KATEGORIE V",
     "best_sale": "BESTE VERKÄUFE",
     "good_deals": "GUTE DEALS",
@@ -119,5 +125,57 @@
     "ship_bill": "Lieferadresse gleich der Rechnungsadresse",
     "checkout_button": "Weiter zur Kasse",
     "cart": "Wagen"
+  },
+  "store": {
+    "name": "Name",
+    "address": "Adresse",
+    "is_active": "Ist aktiv",
+    "update_store": "Bearbeiten",
+    "delete_store": "Löschen",
+    "create_store": "Einen Shop erstellen",
+    "create_button": "Validieren"
+  },
+  "product": {
+    "products": "Produkte",
+    "no_products": "Keine Produkte",
+    "name": "Name",
+    "store": "Geschäft",
+    "category": "Kategorie",
+    "slug": "Schnecke",
+    "description": "Beschreibung",
+    "price": "Preis",
+    "quantity": "Menge",
+    "image": "Ein Bild hochladen",
+    "is_active": "Ist aktiv",
+    "update_product": "Bearbeiten",
+    "delete_product": "Löschen",
+    "create_product": "Ein Produkt erstellen",
+    "create_button": "Validieren",
+    "cancel_button": "Abbrechen"
+  },
+  "product_detail": {
+    "share": "TEILEN SIE DAS PRODUKT MIT IHREN FREUNDEN UND IHRER FAMILIE",
+    "description": "BESCHREIBUNG",
+    "livraison": "LIEFERUNG",
+    "order_button": "Bestellung",
+    "store": "Geschäft",
+    "desc_product": "PRODUKTBEZEICHNUNG",
+    "similar_product": "ANDERE ÄHNLICHE PRODUKTE",
+    "banniere": "Werbebanner"
+  },
+  "category": {
+    "name": "Name",
+    "description": "Beschreibung",
+    "slug": "Schnecke",
+    "parent": "Elternteil",
+    "children": "Unterkategorien",
+    "is_active": "Ist aktiv",
+    "update_category": "Bearbeiten",
+    "delete_category": "Löschen",
+    "create_category": "Eine Kategorie erstellen",
+    "create_button": "Validieren",
+    "reduction": " Bis zu 75% Rabatt",
+    "diff_categorie": "Verschiedene Kategorien",
+    "autre_categorie": "ANDERE KATEGORIEN"
   }
 }
