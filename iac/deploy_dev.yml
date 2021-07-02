@@ -20,7 +20,7 @@
 
     - name: Pull Frontend app locally
       shell: |
-        docker pull papeterinnova/vaana-front:v1.0.0-snapshot
+        docker pull papeterinnova/vaana-front:v1.1.0-snapshot
       become: yes
 
     - name: Run Image
