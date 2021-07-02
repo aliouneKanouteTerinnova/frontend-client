@@ -46,7 +46,12 @@
     "hello": "Hallo",
     "compte": "Einloggen/Registrieren",
     "panier": "Anzeige",
-    "category": "KATEGORIE"
+    "category": "KATEGORIE",
+    "Your_Account": "Ihr Konto",
+    "Commands": "Befehle",
+    "Wishlist": "Wunschzettel",
+    "Setting": "Einstellung",
+    "Disconnection": "Unterbrechung"
   },
   "update": {
     "validate": "Validieren",

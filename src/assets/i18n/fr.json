@@ -46,7 +46,12 @@
     "hello": "Bonjour",
     "compte": "Connexion/Inscription",
     "panier": "Panier",
-    "category": "CATÉGORIE"
+    "category": "CATÉGORIE",
+    "Your_Account": "Votre Compte",
+    "Commands": "Commandes",
+    "Wishlist": "Liste de souhaits",
+    "Setting": "Securite",
+    "Disconnection": "Deconnexion"
   },
   "update": {
     "validate": "Valider",
