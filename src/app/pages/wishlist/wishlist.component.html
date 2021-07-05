@@ -1,1 +1,74 @@
-<p>wishlist works!</p>
+<app-navbar></app-navbar>
+<div class="container">
+  <h1 class="text-center mb-5">Wishlist</h1>
+
+  <div class="row">
+    <div class="col" *ngFor="let wishlist of wishlists; let i = index">
+      <div class="card-content">
+        <img src="../../../assets/img/Products/{{ i }}.png" alt="" width="250" />
+
+        <div class="card-text">
+          <h3 class="product-name">{{ wishlist.name }}</h3>
+          <p class="product-desc">{{ wishlist.description }}</p>
+          <p class="product-price">{{ wishlist.price }}</p>
+        </div>
+
+        <div class="card-footer">
+          <button class="card-btn">Add to basket</button
+          ><button (click)="removeWishlist(wishlist.id)" class="card-btn">Remove</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SIMILARY PRODUCTS -->
+<div class="container grid mt-5">
+  <h1 class="text-center p-5">Similary products</h1>
+  <div class="section wrapper">
+    <div class="box span_1_of_4">
+      <img src="./../../assets/img/Products/1.png" alt="" width="250" />
+      <div class="box-footer">
+        <!-- <h2>name</h2> -->
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+        <p class="price">&euro;6</p>
+      </div>
+    </div>
+
+    <div class="box span_1_of_4">
+      <img src="./../../assets/img/Products/1.png" alt="" width="250" />
+      <div class="box-footer">
+        <!-- <h2>name</h2> -->
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+        <p class="price">&euro;6</p>
+      </div>
+    </div>
+
+    <div class="box span_1_of_4">
+      <img src="./../../assets/img/Products/1.png" alt="" width="250" />
+      <div class="box-footer">
+        <!-- <h2>name</h2> -->
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+        <p class="price">&euro;6</p>
+      </div>
+    </div>
+
+    <div class="box span_1_of_4">
+      <img src="./../../assets/img/Products/1.png" alt="" width="250" />
+      <div class="box-footer">
+        <!-- <h2>name</h2> -->
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+        <p class="price">&euro;6</p>
+      </div>
+    </div>
+
+    <div class="box span_1_of_4">
+      <img src="./../../assets/img/Products/1.png" alt="" width="250" />
+      <div class="box-footer">
+        <!-- <h2>name</h2> -->
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+        <p class="price">&euro;6</p>
+      </div>
+    </div>
+  </div>
+</div>
