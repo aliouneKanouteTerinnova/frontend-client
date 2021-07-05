@@ -35,7 +35,7 @@ export class WishlistService {
 
   deletWishlist(id: any, token: any) {
     token = 'token ' + token;
-    return this.http.put<any>(`${environment.baseUrl}wishlist/items/${id}`, {
+    return this.http.delete<any>(`${environment.baseUrl}wishlist/items/${id}`, {
       headers: new HttpHeaders().set('Authorization', token),
       observe: 'response',
     });

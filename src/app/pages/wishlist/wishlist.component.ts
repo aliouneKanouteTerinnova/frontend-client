@@ -9,6 +9,8 @@ import { AuthenticationsService } from 'src/app/services/authentications/authent
 import { Component, OnInit } from '@angular/core';
 import { AuthResponded } from 'src/app/models/auth/auth';
 import { WishlistService } from 'src/app/services/wishlist/wishlist.service';
+import Swal from 'sweetalert2';
+import { CartService } from 'src/app/services/cart/cart.service';
 
 @Component({
   selector: 'app-wishlist',
@@ -24,7 +26,8 @@ export class WishlistComponent implements OnInit {
   constructor(
     private productsService: ProductsService,
     private authService: AuthenticationsService,
-    private wishlistService: WishlistService
+    private wishlistService: WishlistService,
+    private cartService: CartService
   ) {}
 
   ngOnInit(): void {
@@ -39,18 +42,38 @@ export class WishlistComponent implements OnInit {
       this.items = data.body.items;
       this.items.forEach((element) => {
         this.productsService.getCurrentData(element.product).subscribe((res) => {
-          console.log(res);
-          this.wishlists.push(res);
+          const item = {
+            item: element.id,
+            product: res,
+          };
+          this.wishlists.push(item);
         });
       });
-      console.log(data);
+    });
+  }
+
+  addToCart(id: Number) {
+    this.cartService.AddProductToCart(id);
+    Swal.fire({
+      // position: 'top-end',
+      icon: 'success',
+      title: 'Product added to cart!',
+      showConfirmButton: false,
+      timer: 2000,
     });
   }
 
   removeWishlist(id: any) {
     this.wishlistService.deletWishlist(id, this.token).subscribe(
       (res) => {
-        console.log(res);
+        Swal.fire({
+          // position: 'top-end',
+          icon: 'success',
+          title: 'Items removed to your Wishlist!',
+          showConfirmButton: false,
+          timer: 2000,
+        });
+        this.wishlists = res.body.items;
       },
       (error) => {
         console.log(error);

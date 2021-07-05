@@ -8,14 +8,14 @@
         <img src="../../../assets/img/Products/{{ i }}.png" alt="" width="250" />
 
         <div class="card-text">
-          <h3 class="product-name">{{ wishlist.name }}</h3>
-          <p class="product-desc">{{ wishlist.description }}</p>
-          <p class="product-price">{{ wishlist.price }}</p>
+          <h3 class="product-name">{{ wishlist.product.name }}</h3>
+          <p class="product-desc">{{ wishlist.product.description }}</p>
+          <p class="product-price">{{ wishlist.product.price }}</p>
         </div>
 
         <div class="card-footer">
-          <button class="card-btn">Add to basket</button
-          ><button (click)="removeWishlist(wishlist.id)" class="card-btn">Remove</button>
+          <button class="card-btn" (click)="addToCart(wishlist.product.id)">Add to basket</button>
+          <button (click)="removeWishlist(wishlist.item)" class="card-btn">Remove</button>
         </div>
       </div>
     </div>
