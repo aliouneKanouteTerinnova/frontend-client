@@ -79,7 +79,9 @@
     "category": "CATEGORY V",
     "best_sale": "BEST SALES",
     "good_deals": "GOOD DEALS",
-    "plus": "LEARN MORE >"
+    "plus": "LEARN MORE >",
+    "search": "Search",
+    "result": "No product found"
   },
   "basket": {
     "empty_basket": "Your Cart Is Empty",

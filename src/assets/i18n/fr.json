@@ -79,7 +79,9 @@
     "category": "CATÉGORIE V",
     "best_sale": "MEILLEURES VENTES",
     "good_deals": "BONNES AFFAIRES",
-    "plus": "EN SAVOIR PLUS >"
+    "plus": "EN SAVOIR PLUS >",
+    "search": "Chercher",
+    "result": "Aucun produit trouvé"
   },
   "basket": {
     "empty_basket": "Votre panier est vide",

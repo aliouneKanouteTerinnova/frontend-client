@@ -1,0 +1,27 @@
+<app-navbar></app-navbar>
+
+<search-bar (login)="searchProduct($event)"></search-bar>
+<div class="main" *ngIf="products.length > 0">
+  <div class="product" *ngFor="let product of products; let i = index">
+    <img src="./../../assets/img/Products/{{ i }}.png" alt="" />
+    <div class="overview1">
+      <!-- <h3>overview:</h3> -->
+      <div class="product-icon">
+        <div class="icon-element">
+          <img class="icon-heart" src="./../../assets/img/icons/Contour.svg" alt="user_icon" />
+          <span translate>home.aimer</span>
+        </div>
+        <div class="icon-element">
+          <img class="icon" src="./../../assets/img/icons/panier.svg" alt="user_icon" (click)="addToCart(product.id)" />
+          <span translate>home.ajouter</span>
+        </div>
+      </div>
+      <span class="price">{{ formatPrice(product.price | currency: 'EUR') }}</span>
+    </div>
+    <a routerLink="/product-detail/{{ product.id }}/{{ i }}/">
+      <div class="product-info">
+        <h3>{{ product.name }}</h3>
+      </div></a
+    >
+  </div>
+</div>

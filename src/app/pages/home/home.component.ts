@@ -29,7 +29,8 @@ export class HomeComponent implements OnInit {
     private authService: AuthenticationsService,
     private productsService: ProductsService,
     private i18nServiceService: I18nServiceService,
-    private cartService: CartService
+    private cartService: CartService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -90,6 +91,14 @@ export class HomeComponent implements OnInit {
       this.bestSelling = this.products.slice(0, 5);
       this.goodStuff = this.products.slice(1, 8);
     });
+  }
+
+  searchProducts(keyWord: string) {
+    if (keyWord) {
+      this.router.navigate([`product/${keyWord}`]);
+    } else {
+      return;
+    }
   }
 
   formatPrice(price: any) {

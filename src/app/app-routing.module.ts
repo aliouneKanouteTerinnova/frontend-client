@@ -27,6 +27,7 @@ import { OrderDetailsComponent } from './pages/order/order-details/order-details
 import { OrderListComponent } from './pages/order/order-list/order-list.component';
 import { ConditionUsedComponent } from './pages/user/condition-used/condition-used.component';
 import { SellerOrderComponent } from './pages/order/seller-order/seller-order.component';
+import { ProductResultComponent } from './pages/products/product-result/product-result.component';
 
 const routes: Routes = [
   {
@@ -83,6 +84,7 @@ const routes: Routes = [
   { path: 'orders', component: OrderListComponent },
   { path: 'orders-seller', component: SellerOrderComponent },
   { path: 'conditions', component: ConditionUsedComponent },
+  { path: 'product/:keyword', component: ProductResultComponent },
 ];
 @NgModule({
   declarations: [],

@@ -59,4 +59,7 @@ export class ProductsService {
       observe: 'response',
     });
   }
+  searchProducts(keyword: any) {
+    return this.httpClient.get<any>(`${environment.baseUrl}products/?search=${keyword}`);
+  }
 }
