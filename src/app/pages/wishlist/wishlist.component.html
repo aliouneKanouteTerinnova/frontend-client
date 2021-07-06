@@ -10,7 +10,7 @@
         <div class="card-text">
           <h3 class="product-name">{{ wishlist.product.name }}</h3>
           <p class="product-desc">{{ wishlist.product.description }}</p>
-          <p class="product-price">{{ wishlist.product.price }}</p>
+          <p class="product-price">{{ formatPrice(wishlist.product.price | currency: 'EUR') }}</p>
         </div>
 
         <div class="card-footer">

@@ -116,15 +116,21 @@ export class HomeComponent implements OnInit {
     this.wishlistService.AddToWishlist(products, this.token).subscribe(
       (res) => {
         Swal.fire({
-          // position: 'top-end',
           icon: 'success',
           title: 'Product added to your Wishlist!',
           showConfirmButton: false,
           timer: 2000,
         });
+
         console.log(res);
       },
       (error) => {
+        Swal.fire({
+          icon: 'error',
+          title: error.error.error,
+          showConfirmButton: false,
+          timer: 2000,
+        });
         console.log(error);
       }
     );
