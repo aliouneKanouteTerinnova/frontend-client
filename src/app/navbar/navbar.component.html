@@ -78,7 +78,11 @@
       <li class="nav-item">
         <a class="nav-link" routerLink="/cart" translate>
           <span class="ml-1">
-            <img src="../../assets/img/Panier.svg" width="50" alt="" /><span class="badge">{{ totalProduct }}</span>
+            <img src="../../assets/img/Panier.svg" width="50" alt="" /><span
+              class="badge"
+              *ngIf="cartData.data[0].numInCart !== 0"
+              >{{ totalProduct }}</span
+            >
           </span>
           &nbsp;&nbsp;<span translate>nav.panier</span>
         </a>
