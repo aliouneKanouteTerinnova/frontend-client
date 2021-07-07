@@ -30,6 +30,7 @@ export class CartService {
   info: CartModelPublic;
 
   cartTotal$ = new BehaviorSubject<Number>(0);
+  productTotal$ = new BehaviorSubject<Number>(0);
   // Data variable to store the cart information on the client's local storage
 
   cartDataObs$ = new BehaviorSubject<CartModelServer>(this.cartDataServer);
@@ -44,6 +45,11 @@ export class CartService {
       this.info = JSON.parse(this.cookieService.get('cart'));
       this.cartTotal$.next(this.cartDataServer.total);
       this.cartDataObs$.next(this.cartDataServer);
+      let total = 0;
+      this.cartDataServer.data.forEach((element) => {
+        total += element.numInCart;
+      });
+      this.productTotal$.next(total);
     }
 
     if (this.info !== null && this.info !== undefined && this.info.prodData[0].incart !== 0) {
@@ -85,6 +91,11 @@ export class CartService {
     };
     this.cartDataObs$.next(this.cartDataServer);
     this.cartTotal$.next(this.cartDataServer.total);
+    let total = 0;
+    this.cartDataServer.data.forEach((element) => {
+      total += element.numInCart;
+    });
+    this.productTotal$.next(total);
   }
 
   CalculateSubTotal(index): Number {
@@ -244,6 +255,11 @@ export class CartService {
     });
     this.cartDataServer.total = Total;
     this.cartTotal$.next(this.cartDataServer.total);
+    let total = 0;
+    this.cartDataServer.data.forEach((element) => {
+      total += element.numInCart;
+    });
+    this.productTotal$.next(total);
   }
 
   private resetServerData() {
