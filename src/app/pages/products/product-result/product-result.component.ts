@@ -12,6 +12,8 @@ import Swal from 'sweetalert2';
 export class ProductResultComponent implements OnInit {
   products = [];
   product: any;
+  keyWord: any;
+  isClicked = false;
   constructor(
     private productsService: ProductsService,
     private i18nServiceService: I18nServiceService,
@@ -25,8 +27,8 @@ export class ProductResultComponent implements OnInit {
   searchProducts(keyWord: string) {
     this.productsService.searchProducts(keyWord).subscribe(
       (data) => {
+        this.isClicked = false;
         this.products = data.results;
-        console.log(data);
       },
       (error) => {
         Swal.fire({
@@ -40,6 +42,8 @@ export class ProductResultComponent implements OnInit {
 
   searchProduct(keyWord: string) {
     this.searchProducts(keyWord);
+    this.keyWord = keyWord;
+    this.isClicked = true;
   }
 
   formatPrice(price: any) {

@@ -48,6 +48,7 @@ import { ConditionUsedComponent } from './pages/user/condition-used/condition-us
 import { SellerOrderComponent } from './pages/order/seller-order/seller-order.component';
 import { SearchBarComponent } from './components/shared/search-bar/search-bar.component';
 import { ProductResultComponent } from './pages/products/product-result/product-result.component';
+import { SearchComponent } from './components/shared/search/search.component';
 
 export function rootLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -86,6 +87,7 @@ export function rootLoaderFactory(http: HttpClient) {
     SellerOrderComponent,
     SearchBarComponent,
     ProductResultComponent,
+    SearchComponent,
   ],
 
   imports: [
