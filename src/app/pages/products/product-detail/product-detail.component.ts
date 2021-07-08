@@ -31,18 +31,18 @@ export class ProductDetailComponent implements OnInit {
     this.idProduct = this.router.snapshot.params.id;
     this.indexPhoto = this.router.snapshot.params.indexPhoto;
     this.productService.getCurrentData(this.idProduct).subscribe((response) => {
-      this.storesService.getCurrentData(response.store).subscribe(
-        (data) => {
-          this.store = data.name;
-        },
-        (error) => {
-          Swal.fire({
-            icon: 'error',
-            title: 'Oops...',
-            text: 'Something went wrong!',
-          });
-        }
-      );
+      // this.storesService.getCurrentData(response.store).subscribe(
+      //   (data) => {
+      //     this.store = data.name;
+      //   },
+      //   (error) => {
+      //     Swal.fire({
+      //       icon: 'error',
+      //       title: 'Oops...',
+      //       text: 'Something went wrong!',
+      //     });
+      //   }
+      // );
       this.product = response;
       this.fakePrice = Number(this.product.price) + 1000;
       console.log(this.fakePrice);

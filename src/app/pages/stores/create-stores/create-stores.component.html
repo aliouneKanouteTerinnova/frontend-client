@@ -26,6 +26,19 @@
           (click)="checkCheckBoxvalue(ch)" -->
         <label for="active" class="form-check-label"><span translate>store.is_active</span></label>
       </div>
+      <div class="form-check mt-4 ml-3">
+        <input
+          formControlName="image"
+          class="form-control"
+          id="file"
+          type="file"
+          (change)="handleFileInput($event)"
+          accept="image/jpg,image/jpeg,image/png,application/pdf"
+          maxFileSize="1000000"
+          multiple
+          required
+        />
+      </div>
     </div>
   </div>
   <button mat-raised-button color="primary" [disabled]="createStore.invalid" class="btn-block mt-3">

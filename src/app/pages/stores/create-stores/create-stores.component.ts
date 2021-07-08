@@ -5,6 +5,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import Swal from 'sweetalert2';
 import { AuthenticationsService } from 'src/app/services/authentications/authentications.service';
+import { ProductsService } from 'src/app/services/products/products.service';
 
 @Component({
   selector: 'app-create-stores',
@@ -15,10 +16,13 @@ export class CreateStoresComponent implements OnInit {
   createStore: FormGroup;
   submited = false;
   currentUser: any;
+
+  image: any;
   constructor(
     private fb: FormBuilder,
     private storesService: StoresService,
     private route: Router,
+    private productsService: ProductsService,
     private authService: AuthenticationsService
   ) {}
 
@@ -29,6 +33,7 @@ export class CreateStoresComponent implements OnInit {
       created_at: [''],
       created_by: [''],
       store_address: ['', Validators.required],
+      image: ['', Validators.required],
     });
   }
 
@@ -46,6 +51,7 @@ export class CreateStoresComponent implements OnInit {
     data.store_address = this.createStore.get('store_address').value;
     data.is_active = true;
     data.products = [];
+    data.image = this.image;
 
     this.storesService.createStores(data, this.currentUser.user.token).subscribe(
       (res) => {
@@ -64,6 +70,31 @@ export class CreateStoresComponent implements OnInit {
           title: 'Oops...',
           text: err.error.error,
         });
+      }
+    );
+  }
+
+  handleFileInput(event) {
+    const file = <File>event.target.files[0];
+    // for (let file of files) {
+    let fileName = file.name;
+    if (file.size > 10485760) {
+      return false;
+    }
+    if (fileName) {
+      fileName = fileName.replace(/[^a-zA-Z0-9\.\-]/g, '_');
+    }
+
+    let fd = new FormData();
+    fd.append('file', file);
+    console.log(fd);
+    this.productsService.uploadFile(fd, this.currentUser.user.token).subscribe(
+      (data) => {
+        this.image = data.body.file;
+        console.log(data.body.file);
+      },
+      (error) => {
+        console.log(error);
       }
     );
   }

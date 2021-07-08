@@ -74,29 +74,11 @@ export class CreateProductComponent implements OnInit {
     // for (let file of files) {
     let fileName = file.name;
     if (file.size > 10485760) {
-      console.log('error');
-      // this.notificationsService.info(
-      //   'Attention !',
-      //   'La taille du fichier ne peut être supérieur à 10M !!!',
-      //   {
-      //     timeOut: 3000,
-      //     showProgressBar: true,
-      //     pauseOnHover: true,
-      //     clickToClose: false,
-      //     clickIconToClose: true
-      //   });
-
       return false;
     }
     if (fileName) {
       fileName = fileName.replace(/[^a-zA-Z0-9\.\-]/g, '_');
     }
-    // const parseFile = new File(fileName, file);
-    // console.log(parseFile);
-
-    // this.uploadedFiles.push(parseFile);
-    // this.enrolementFiles.push(parseFile);
-    // }
 
     let fd = new FormData();
     fd.append('file', file);
@@ -109,7 +91,6 @@ export class CreateProductComponent implements OnInit {
         console.log(error);
       }
     );
-    // this.contratForm.patchValue({ files: this.uploadedFiles });
   }
 
   checkCheckBoxvalue(event) {}
