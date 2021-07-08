@@ -16,7 +16,7 @@ import Swal from 'sweetalert2';
 import { SwalComponent } from '@sweetalert2/ngx-sweetalert2';
 import { CartService } from 'src/app/services/cart/cart.service';
 import { CartModelServer } from 'src/app/models/cart/cart';
-import { Store } from '../stores/store';
+import { Store } from '../../models/store/store';
 import { AuthenticationsService } from 'src/app/services/authentications/authentications.service';
 import { I18nServiceService } from 'src/app/services/i18n-service/i18n-service.service';
 

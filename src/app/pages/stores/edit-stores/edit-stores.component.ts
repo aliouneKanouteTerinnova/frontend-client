@@ -2,7 +2,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup, FormControl } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { StoresService } from 'src/app/services/stores/stores.service';
-import { Store } from './../store';
+import { Store } from '../../../models/store/store';
 import Swal from 'sweetalert2';
 import { ThrowStmt } from '@angular/compiler';
 import { AuthenticationsService } from 'src/app/services/authentications/authentications.service';
