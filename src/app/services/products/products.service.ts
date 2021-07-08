@@ -59,4 +59,12 @@ export class ProductsService {
       observe: 'response',
     });
   }
+  uploadFile(file: any, token: string) {
+    token = 'token ' + token;
+    // const image = { file: file };
+    return this.httpClient.post<any>(`${environment.baseUrl}files`, file, {
+      headers: new HttpHeaders().set('Authorization', token),
+      observe: 'response',
+    });
+  }
 }

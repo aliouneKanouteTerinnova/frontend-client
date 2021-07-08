@@ -65,7 +65,16 @@
           <div class="form-group col-4">
             <label for="img"><span translate>product.image</span></label
             ><br />
-            <input type="file" name="img" id="img" formControlName="img" (change)="selectFiles($event)" />
+            <input
+              class="form-control"
+              id="file"
+              type="file"
+              (change)="handleFileInput($event)"
+              accept="image/jpg,image/jpeg,image/png,application/pdf"
+              maxFileSize="1000000"
+              multiple
+              required
+            />
           </div>
         </div>
 

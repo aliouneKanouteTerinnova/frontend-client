@@ -36,6 +36,7 @@ export class CreateProductComponent implements OnInit {
   currentUser: any;
   categoryId: any;
   storeId: any;
+  images = [];
 
   filePath = './../../assets/img/Products/';
 
@@ -68,19 +69,47 @@ export class CreateProductComponent implements OnInit {
     this.getStores();
   }
 
-  selectFiles(event) {
-    this.imgSrc = <File>event.target.files[0].name;
-    // const reader = new FileReader();
-    // if (event.target.files && event.target.files.length) {
-    //   const [file] = event.target.files;
-    //   reader.readAsDataURL(file);
-    //   reader.onload = () => {
-    //     // this.imgSrc = reader.result as '';
-    //     // this.createProductForm.patchValue({
-    //     //   imgSrc: reader.result,
-    //     // });
-    //   };
+  handleFileInput(event) {
+    const file = <File>event.target.files[0];
+    // for (let file of files) {
+    let fileName = file.name;
+    if (file.size > 10485760) {
+      console.log('error');
+      // this.notificationsService.info(
+      //   'Attention !',
+      //   'La taille du fichier ne peut être supérieur à 10M !!!',
+      //   {
+      //     timeOut: 3000,
+      //     showProgressBar: true,
+      //     pauseOnHover: true,
+      //     clickToClose: false,
+      //     clickIconToClose: true
+      //   });
+
+      return false;
+    }
+    if (fileName) {
+      fileName = fileName.replace(/[^a-zA-Z0-9\.\-]/g, '_');
+    }
+    // const parseFile = new File(fileName, file);
+    // console.log(parseFile);
+
+    // this.uploadedFiles.push(parseFile);
+    // this.enrolementFiles.push(parseFile);
     // }
+
+    let fd = new FormData();
+    fd.append('file', file);
+    console.log(fd);
+    this.productsService.uploadFile(fd, this.currentUser.user.token).subscribe(
+      (data) => {
+        this.images.push(data.body.id);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+    // this.contratForm.patchValue({ files: this.uploadedFiles });
   }
 
   checkCheckBoxvalue(event) {}
@@ -129,7 +158,7 @@ export class CreateProductComponent implements OnInit {
     products.quantity = this.createProductForm.get('quantity').value;
     products.category = this.categoryId;
     products.store = this.storeId;
-    products.image = this.filePath + this.imgSrc;
+    products.images = this.images;
     products.reviews = [];
     // products.image = this.createProductForm.get('image').value;
 
