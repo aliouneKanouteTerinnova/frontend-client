@@ -5,5 +5,4 @@ export class Store {
   store_address: string;
   is_active: boolean;
   products: any;
-  image: string;
 }
