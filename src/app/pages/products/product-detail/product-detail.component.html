@@ -5,12 +5,10 @@
     <div class="col-8">
       <div class="img_content">
         <div class="img">
-          <img src="./../../assets/img/Products/{{ indexPhoto }}.png" width="300" alt="" />
+          <img src="{{ product.images[0].file }}" width="300" alt="" />
         </div>
-        <div class="thumbnail_img">
-          <img src="./../../assets/img/Products/{{ indexPhoto }}.png" width="80" alt="" />
-          <img src="./../../assets/img/Products/{{ indexPhoto }}.png" width="80" alt="" />
-          <img src="./../../assets/img/Products/{{ indexPhoto }}.png" width="80" alt="" />
+        <div class="thumbnail_img" *ngFor="let image of product.images">
+          <img src="{{ image }}" width="80" alt="" />
         </div>
       </div>
 

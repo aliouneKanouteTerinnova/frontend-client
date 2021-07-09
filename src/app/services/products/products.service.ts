@@ -62,4 +62,12 @@ export class ProductsService {
   searchProducts(keyword: any) {
     return this.httpClient.get<any>(`${environment.baseUrl}products/?search=${keyword}`);
   }
+  uploadFile(file: any, token: string) {
+    token = 'token ' + token;
+    // const image = { file: file };
+    return this.httpClient.post<any>(`${environment.baseUrl}files`, file, {
+      headers: new HttpHeaders().set('Authorization', token),
+      observe: 'response',
+    });
+  }
 }

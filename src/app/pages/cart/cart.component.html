@@ -8,7 +8,7 @@
     <div class="basket-title"><h3 translate>basket.basket</h3></div>
     <div class="basket">
       <div class="product" *ngFor="let c of cartData.data; let i = index">
-        <div class="image"><img src="./../../assets/img/Products/{{ i }}.png" alt="" /></div>
+        <div class="image"><img src="{{ c.product.images[0].file }}" alt="" /></div>
         <div class="info">
           <span class="price">{{ formatPrice(c.product.price | currency: 'EUR') }}</span>
           <p class="description">
@@ -116,7 +116,7 @@
   <div class="followed-title"><h3 translate>basket.followed_product</h3></div>
   <div class="home-main">
     <div class="home-product" *ngFor="let product of bestSelling; let i = index">
-      <img src="./../../assets/img/Products/{{ i }}.png" alt="" />
+      <img src="{{ product.images[0].file }}" alt="" />
       <div class="home-product-info">
         <div class="description">
           <span>{{ product.description.slice(0, 17) }}...</span>
@@ -135,7 +135,7 @@
   <div class="followed-title"><h3 translate>basket.similar_product</h3></div>
   <div class="home-main">
     <div class="home-product" *ngFor="let product of bestSelling; let i = index">
-      <img src="./../../assets/img/Products/{{ i }}.png" alt="" />
+      <img src="{{ product.images[0].file }}" alt="" />
       <div class="home-product-info">
         <div class="description">
           <span>{{ product.description.slice(0, 17) }}...</span>
