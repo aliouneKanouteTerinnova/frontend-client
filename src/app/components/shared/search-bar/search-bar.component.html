@@ -18,7 +18,7 @@
     <ul class="search">
       <li *ngFor="let result of results; let i = index" class="filter-select-list">
         <div (click)="selectedProduct(result.name)">
-          <img src="./../../assets/img/Products/{{ i }}.png" alt="" width="50" height="50" />
+          <img src="{{ result.images[0].file }}" alt="" width="50" height="50" />
           <p class="artist-name">
             {{ result.name }}
           </p>
