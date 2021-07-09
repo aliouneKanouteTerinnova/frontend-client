@@ -1,10 +1,10 @@
 <app-navbar></app-navbar>
 <div class="container">
-  <h1 class="text-center mb-5">Wishlist</h1>
+  <h1 class="text-center mb-5"><span translate>wishlist.title</span></h1>
 
   <div class="text-center" *ngIf="wishlists.length === 0">
-    <h4>Your wishlists is empty</h4>
-    <button routerLink="/" class="wishlist-btn">Back to shop</button>
+    <h4><span translate>wishlist.no_list</span></h4>
+    <button routerLink="/" class="wishlist-btn"><span translate>wishlist.back_button</span></button>
   </div>
   <div class="row">
     <div class="col-md-4" *ngFor="let wishlist of wishlists; let i = index">
@@ -18,8 +18,12 @@
         </div>
 
         <div class="card-footer">
-          <button class="card-btn" (click)="addToCart(wishlist.product.id)">Add to basket</button>
-          <button (click)="removeWishlist(wishlist.item)" class="card-btn">Remove</button>
+          <button class="card-btn" (click)="addToCart(wishlist.product.id)">
+            <span translate>wishlist.add_button</span>
+          </button>
+          <button (click)="removeWishlist(wishlist.item)" class="card-btn">
+            <span translate>wishlist.remove_button</span>
+          </button>
         </div>
       </div>
     </div>
@@ -28,7 +32,7 @@
 
 <!-- SIMILARY PRODUCTS -->
 <div class="container grid mt-5">
-  <h1 class="text-center p-5">Similary products</h1>
+  <h1 class="text-center p-5"><span translate>wishlist.similar_product</span></h1>
   <div class="section wrapper">
     <div class="box span_1_of_4">
       <img src="./../../assets/img/Products/1.png" alt="" width="250" />

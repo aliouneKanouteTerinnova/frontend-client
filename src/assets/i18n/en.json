@@ -225,5 +225,13 @@
     "vote": "votes",
     "see_all": "see all",
     "add_wishlist": "Add to whishlist"
+  },
+  "wishlist": {
+    "title": "Wishlist",
+    "no_list": "Your wishlist is empty",
+    "back_button": "Back to shop",
+    "add_button": "Add to basket",
+    "remove_button": "Remove",
+    "similar_product": "Similary products"
   }
 }

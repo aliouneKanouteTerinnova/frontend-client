@@ -225,5 +225,13 @@
     "vote": "stimmen",
     "see_all": "siehe alle",
     "add_wishlist": "Zur Whishliste hinzufügen"
+  },
+  "wishlist": {
+    "title": "Wunschzettel",
+    "no_list": "Ihr Wunschzettel ist leer",
+    "back_button": "Zurück zum Shop",
+    "add_button": "In den Warenkorb legen",
+    "remove_button": "Entfernen",
+    "similar_product": "Gleichartige produkte"
   }
 }
