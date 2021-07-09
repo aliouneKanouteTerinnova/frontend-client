@@ -181,9 +181,9 @@
 .icon-element {
   display: flex;
   flex-direction: column;
-  // justify-content: space-between;
+  justify-content: center;
   align-items: center;
-  margin: auto;
+  height: 100px;
 }
 
 .advertise {
@@ -207,7 +207,7 @@
   font-weight: bolder;
   padding-top: 5px;
   font-size: 1rem;
-  margin: auto;
+  margin-top: 12px;
 }
 
 .icon-element {
