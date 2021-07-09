@@ -49,6 +49,7 @@ import { SellerOrderComponent } from './pages/order/seller-order/seller-order.co
 import { SearchBarComponent } from './components/shared/search-bar/search-bar.component';
 import { ProductResultComponent } from './pages/products/product-result/product-result.component';
 import { SearchComponent } from './components/shared/search/search.component';
+import { WishlistComponent } from './pages/wishlist/wishlist.component';
 
 export function rootLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -88,6 +89,7 @@ export function rootLoaderFactory(http: HttpClient) {
     SearchBarComponent,
     ProductResultComponent,
     SearchComponent,
+    WishlistComponent,
   ],
 
   imports: [

@@ -1,3 +1,4 @@
+import { WishlistComponent } from './pages/wishlist/wishlist.component';
 import { CategoryPageComponent } from './pages/category-page/category-page.component';
 import { UpdateCategoriesComponent } from './pages/categories/update-categories/update-categories.component';
 import { ResetPassEmailComponent } from './pages/user/reset-password/reset-pass-email/reset-pass-email.component';
@@ -37,6 +38,10 @@ const routes: Routes = [
   {
     path: 'home',
     component: HomeComponent,
+  },
+  {
+    path: 'wishlist',
+    component: WishlistComponent,
   },
   {
     path: 'user/reset-password',

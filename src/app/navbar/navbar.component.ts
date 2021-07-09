@@ -19,7 +19,8 @@ export class NavbarComponent implements OnInit {
   cartTotal: Number;
   subTotal: Number;
   currentUser: AuthResponded;
-  total = 0;
+
+  totalProduct: Number;
 
   constructor(
     public cartService: CartService,
@@ -46,6 +47,11 @@ export class NavbarComponent implements OnInit {
     });
     this.cartService.cartTotal$.subscribe((total) => {
       this.cartTotal = total;
+    });
+
+    this.cartService.productTotal$.subscribe((totalProduct) => {
+      this.totalProduct = totalProduct;
+      console.log('this is total quantity', this.totalProduct);
     });
   }
 
