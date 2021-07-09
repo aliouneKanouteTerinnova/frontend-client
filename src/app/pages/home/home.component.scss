@@ -35,7 +35,11 @@
 }
 
 .product img {
-  width: 100%;
+  width: 200px;
+  height: 200px;
+}
+.icon-element .icon {
+  width: 95px;
 }
 
 .product-info {
@@ -63,6 +67,7 @@
 }
 
 .overview1 {
+  margin-top: 1px;
   padding: 2rem;
   position: absolute;
   max-height: 100%;
@@ -180,9 +185,9 @@
 .icon-element {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
-  margin: auto;
+  height: 100px;
 }
 
 .advertise {
@@ -206,7 +211,7 @@
   font-weight: bolder;
   padding-top: 5px;
   font-size: 1rem;
-  margin: auto;
+  margin-top: 12px;
 }
 
 .icon-element {
@@ -571,8 +576,8 @@
     color: #29235c;
   }
 
-  .icon {
-    font-size: 1.5rem;
+  .icon-element .icon {
+    width: 65px;
   }
 
   .product-info span {

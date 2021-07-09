@@ -44,7 +44,7 @@
 </div>
 <div class="main" *ngIf="products.length > 0">
   <div class="product" *ngFor="let product of products; let i = index">
-    <img src="./../../assets/img/Products/{{ i }}.png" alt="" />
+    <img src="{{ product.images[0].file }}" alt="" />
     <div class="overview1">
       <!-- <h3>overview:</h3> -->
       <div class="product-icon">
@@ -64,7 +64,7 @@
       </div>
       <span class="price">{{ formatPrice(product.price | currency: 'EUR') }}</span>
     </div>
-    <a routerLink="/product-detail/{{ product.id }}/{{ i }}/">
+    <a (click)="redirectProduct(product.id, i)">
       <div class="product-info">
         <h3>{{ product.name }}</h3>
       </div></a
@@ -77,7 +77,7 @@
 <div class="subtitle" *ngIf="products.length > 0"><h3 translate>home.best_sale</h3></div>
 <div class="main">
   <div class="product" *ngFor="let product of bestSelling; let i = index">
-    <img src="./../../assets/img/Products/{{ i }}.png" alt="" />
+    <img src="{{ product.images[0].file }}" alt="" />
     <div class="overview1">
       <!-- <h3>overview:</h3> -->
       <div class="product-icon">
@@ -123,7 +123,7 @@
 <div class="subtitle" *ngIf="goodStuff.length > 0"><h3 translate>home.good_deals</h3></div>
 <div class="main">
   <div class="product" *ngFor="let product of goodStuff; let i = index">
-    <img src="./../../assets/img/Products/{{ i }}.png" alt="" />
+    <img src="{{ product.images[0].file }}" alt="" />
     <div class="overview1">
       <!-- <h3>overview:</h3> -->
       <div class="product-icon">

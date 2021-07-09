@@ -53,7 +53,7 @@
                 <table class="table table-borderless">
                   <tbody>
                     <tr>
-                      <td width="20%"><img src="./../../assets/img/Products/{{ i }}.png" alt="" width="90" /></td>
+                      <td width="20%"><img src="{{ product.images[0].file }}" alt="" width="90" /></td>
                       <td width="60%">
                         <span class="font-weight-bold">{{ product.name }}</span>
                         <div class="product-qty">
@@ -61,7 +61,7 @@
                                     >orders.order_details.quantity <span>:{{ product.quantity }}</span></span
                                 > -->
                           <span translate
-                            >orders.order_details.color <span>:{{ product.description }}</span></span
+                            >orders.order_details.description <span>:{{ product.description }}</span></span
                           >
                         </div>
                       </td>
