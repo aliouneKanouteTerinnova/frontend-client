@@ -20,7 +20,7 @@ export class UpdateProductComponent implements OnInit {
     description: new FormControl(''),
     price: new FormControl(''),
     quantity: new FormControl(''),
-    img: new FormControl(''),
+    // img: new FormControl(''),
     // is_active;
   });
 
@@ -40,7 +40,7 @@ export class UpdateProductComponent implements OnInit {
         description: new FormControl(res.description),
         price: new FormControl(Number(res.price)),
         quantity: new FormControl(res.quantity),
-        img: new FormControl(res.image),
+        // img: new FormControl(res.image),
         is_active: new FormControl(res.is_active),
       });
     });
@@ -56,7 +56,7 @@ export class UpdateProductComponent implements OnInit {
     const price = this.updateProducts.get('price').value;
     const is_active = this.updateProducts.get('is_active').value;
     const quantity = this.updateProducts.get('quantity').value;
-    const image = this.updateProducts.get('img').value;
+    // const image = this.updateProducts.get('img').value;
     const product = {
       id: this.router.snapshot.params.id,
       name: name,
@@ -64,7 +64,7 @@ export class UpdateProductComponent implements OnInit {
       price: price,
       is_active: is_active,
       quantity: quantity,
-      image: image,
+      // image: image,
     };
     this.productsService.updateProduct(this.router.snapshot.params.id, product, this.currentUser.user.token).subscribe(
       (res) => {
