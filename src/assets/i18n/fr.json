@@ -225,5 +225,13 @@
     "vote": "votes",
     "see_all": "voir tout",
     "add_wishlist": "Ajouter à la liste de souhaits"
+  },
+  "wishlist": {
+    "title": "Liste de souhaits",
+    "no_list": "Votre liste de souhaits est vide",
+    "back_button": "Retourner à la boutique",
+    "add_button": "Ajouter au panier",
+    "remove_button": "Supprimer",
+    "similar_product": "Produits similaires"
   }
 }
