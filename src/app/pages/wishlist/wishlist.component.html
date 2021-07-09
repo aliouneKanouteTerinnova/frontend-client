@@ -2,6 +2,10 @@
 <div class="container">
   <h1 class="text-center mb-5">Wishlist</h1>
 
+  <div class="text-center" *ngIf="wishlists.length === 0">
+    <h4>Your wishlists is empty</h4>
+    <button routerLink="/" class="wishlist-btn">Back to shop</button>
+  </div>
   <div class="row">
     <div class="col-md-4" *ngFor="let wishlist of wishlists; let i = index">
       <div class="card-content">

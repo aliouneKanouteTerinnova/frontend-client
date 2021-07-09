@@ -32,7 +32,8 @@ export class HomeComponent implements OnInit {
     private productsService: ProductsService,
     private i18nServiceService: I18nServiceService,
     private cartService: CartService,
-    private wishlistService: WishlistService
+    private wishlistService: WishlistService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -109,6 +110,9 @@ export class HomeComponent implements OnInit {
   }
 
   AddWishlist(id: any) {
+    if (!this.currentUser) {
+      this.router.navigate(['/register']);
+    }
     this.token = this.currentUser['user'].token;
     const products = {
       product: id,
