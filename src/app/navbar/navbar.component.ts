@@ -21,6 +21,7 @@ export class NavbarComponent implements OnInit {
   currentUser: AuthResponded;
 
   totalProduct: Number;
+  total = 0;
 
   constructor(
     public cartService: CartService,
