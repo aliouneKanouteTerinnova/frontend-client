@@ -76,24 +76,24 @@ export class ProductsComponent implements OnInit {
       (data) => {
         this.products = data.body.results;
         console.log(this.products);
-        // if (this.products.length > 0) {
-        //   this.products.forEach((element, i) => {
-        //     console.log(element);
-        //     this.storesService.getCurrentData(element.store).subscribe(
-        //       (data) => {
-        //         console.log(data);
-        //         // this.products[i].store = data.name;
-        //       },
-        //       (error) => {
-        //         Swal.fire({
-        //           icon: 'error',
-        //           title: 'Oops...',
-        //           text: 'Something went wrong!',
-        //         });
-        //       }
-        //     );
-        //   });
-        // }
+        if (this.products.length > 0) {
+          this.products.forEach((element, i) => {
+            console.log(element);
+            this.storesService.getCurrentData(element.store).subscribe(
+              (data) => {
+                console.log(data);
+                this.products[i].store = data.name;
+              },
+              (error) => {
+                Swal.fire({
+                  icon: 'error',
+                  title: 'Oops...',
+                  text: 'Something went wrong!',
+                });
+              }
+            );
+          });
+        }
       },
       (err) => {
         Swal.fire({

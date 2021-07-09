@@ -37,6 +37,7 @@ export class CreateProductComponent implements OnInit {
   categoryId: any;
   storeId: any;
   images = [];
+  fd = new FormData();
 
   filePath = './../../assets/img/Products/';
 
@@ -80,17 +81,7 @@ export class CreateProductComponent implements OnInit {
       fileName = fileName.replace(/[^a-zA-Z0-9\.\-]/g, '_');
     }
 
-    let fd = new FormData();
-    fd.append('file', file);
-    console.log(fd);
-    this.productsService.uploadFile(fd, this.currentUser.user.token).subscribe(
-      (data) => {
-        this.images.push(data.body.id);
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
+    this.fd.append('file', file);
   }
 
   checkCheckBoxvalue(event) {}
@@ -126,41 +117,49 @@ export class CreateProductComponent implements OnInit {
   }
 
   onSubmit() {
-    const products = new Products();
-
-    products.id = Math.floor(Math.random() * 100);
-    products.name = this.createProductForm.get('name').value;
-    products.slug = this.createProductForm.get('slug').value;
-    products.description = this.createProductForm.get('description').value;
-    products.price = this.createProductForm.get('price').value;
-    products.date_added = '';
-    // products.created_by = '';
-    products.is_active = true;
-    products.quantity = this.createProductForm.get('quantity').value;
-    products.category = this.categoryId;
-    products.store = this.storeId;
-    products.images = this.images;
-    products.reviews = [];
     // products.image = this.createProductForm.get('image').value;
 
-    this.productsService.addProduct(products, this.currentUser.user.token).subscribe(
-      (res) => {
-        Swal.fire({
-          position: 'top-end',
-          icon: 'success',
-          title: 'Product Created',
-          showConfirmButton: false,
-          timer: 1500,
-        });
-        this.route.navigate(['/products']);
-        this.getProducts();
+    this.productsService.uploadFile(this.fd, this.currentUser.user.token).subscribe(
+      (data) => {
+        this.images.push(data.body.id);
+        const products = new Products();
+
+        products.id = Math.floor(Math.random() * 100);
+        products.name = this.createProductForm.get('name').value;
+        products.slug = this.createProductForm.get('slug').value;
+        products.description = this.createProductForm.get('description').value;
+        products.price = this.createProductForm.get('price').value;
+        products.date_added = '';
+        // products.created_by = '';
+        products.is_active = true;
+        products.quantity = this.createProductForm.get('quantity').value;
+        products.category = this.categoryId;
+        products.store = this.storeId;
+        products.images = this.images;
+        products.reviews = [];
+        this.productsService.addProduct(products, this.currentUser.user.token).subscribe(
+          (res) => {
+            Swal.fire({
+              position: 'top-end',
+              icon: 'success',
+              title: 'Product Created',
+              showConfirmButton: false,
+              timer: 1500,
+            });
+            this.route.navigate(['/products']);
+            this.getProducts();
+          },
+          (err) => {
+            Swal.fire({
+              icon: 'error',
+              title: 'Oops...',
+              text: err.error.detail,
+            });
+          }
+        );
       },
-      (err) => {
-        Swal.fire({
-          icon: 'error',
-          title: 'Oops...',
-          text: err.error.detail,
-        });
+      (error) => {
+        console.log(error);
       }
     );
   }

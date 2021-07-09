@@ -32,7 +32,8 @@ export class HomeComponent implements OnInit {
     private productsService: ProductsService,
     private i18nServiceService: I18nServiceService,
     private cartService: CartService,
-    private wishlistService: WishlistService
+    private wishlistService: WishlistService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -85,6 +86,10 @@ export class HomeComponent implements OnInit {
         this.right = false;
       }
     }
+  }
+
+  redirectProduct(id, index) {
+    this.router.navigate([`/product-detail/${id}/${index}/`]);
   }
   getProducts() {
     this.productsService.getAllProducts().subscribe((data) => {

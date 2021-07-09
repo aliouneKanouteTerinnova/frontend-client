@@ -63,7 +63,7 @@
       </div>
       <span class="price">{{ formatPrice(product.price | currency: 'EUR') }}</span>
     </div>
-    <a routerLink="/product-detail/{{ product.id }}/{{ i }}/">
+    <a (click)="redirectProduct(product.id, i)">
       <div class="product-info">
         <h3>{{ product.name }}</h3>
       </div></a

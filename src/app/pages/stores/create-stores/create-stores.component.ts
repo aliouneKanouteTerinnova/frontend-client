@@ -16,6 +16,7 @@ export class CreateStoresComponent implements OnInit {
   createStore: FormGroup;
   submited = false;
   currentUser: any;
+  fd = new FormData();
 
   image: any;
   constructor(
@@ -43,33 +44,42 @@ export class CreateStoresComponent implements OnInit {
 
   onSubmit() {
     this.submited = true;
-    const data = new Store();
 
-    data.name = this.createStore.get('name').value;
+    this.productsService.uploadFile(this.fd, this.currentUser.user.token).subscribe(
+      (data) => {
+        this.image = data.body.file;
+        const store = new Store();
 
-    // data.created_by = this.currentUser.user.id;
-    data.store_address = this.createStore.get('store_address').value;
-    data.is_active = true;
-    data.products = [];
-    data.image = this.image;
+        store.name = this.createStore.get('name').value;
 
-    this.storesService.createStores(data, this.currentUser.user.token).subscribe(
-      (res) => {
-        Swal.fire({
-          position: 'top-end',
-          icon: 'success',
-          title: 'Store created',
-          showConfirmButton: false,
-          timer: 1500,
-        });
-        this.route.navigate(['/list-store']);
+        // data.created_by = this.currentUser.user.id;
+        store.store_address = this.createStore.get('store_address').value;
+        store.is_active = true;
+        store.products = [];
+        store.image = this.image;
+
+        this.storesService.createStores(store, this.currentUser.user.token).subscribe(
+          (res) => {
+            Swal.fire({
+              position: 'top-end',
+              icon: 'success',
+              title: 'Store created',
+              showConfirmButton: false,
+              timer: 1500,
+            });
+            this.route.navigate(['/list-store']);
+          },
+          (err) => {
+            Swal.fire({
+              icon: 'error',
+              title: 'Oops...',
+              text: err.error.error,
+            });
+          }
+        );
       },
-      (err) => {
-        Swal.fire({
-          icon: 'error',
-          title: 'Oops...',
-          text: err.error.error,
-        });
+      (error) => {
+        console.log(error);
       }
     );
   }
@@ -85,17 +95,6 @@ export class CreateStoresComponent implements OnInit {
       fileName = fileName.replace(/[^a-zA-Z0-9\.\-]/g, '_');
     }
 
-    let fd = new FormData();
-    fd.append('file', file);
-    console.log(fd);
-    this.productsService.uploadFile(fd, this.currentUser.user.token).subscribe(
-      (data) => {
-        this.image = data.body.file;
-        console.log(data.body.file);
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
+    this.fd.append('file', file);
   }
 }

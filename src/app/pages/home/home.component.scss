@@ -35,7 +35,11 @@
 }
 
 .product img {
-  width: 100%;
+  width: 200px;
+  height: 200px;
+}
+.icon-element .icon {
+  width: 95px;
 }
 
 .product-info {
@@ -63,6 +67,7 @@
 }
 
 .overview1 {
+  margin-top: 1px;
   padding: 2rem;
   position: absolute;
   max-height: 100%;
@@ -176,7 +181,7 @@
 .icon-element {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  // justify-content: space-between;
   align-items: center;
   margin: auto;
 }
