@@ -113,7 +113,7 @@
       "order_confirm": "Your order Confirmed !",
       "order_intro": "You order has been confirmed and will be shipped in next two days !",
       "order_payment": "Payment",
-      "color": "Color",
+      "description": "Description",
       "quantity": "Quantity",
       "order_subtotal": "Subtotal",
       "order_ship_fee": "Shipping Fee",

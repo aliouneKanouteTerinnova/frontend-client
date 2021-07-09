@@ -28,6 +28,7 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit(): void {
     this.currentUser = this.authService.currentUserValue;
+    console.log(this.currentUser['user'].token);
     this.authService.getUser(this.currentUser['user'].token).subscribe((data) => {
       this.user = data.body;
       if (this.currentUser['user'].account_type === 'SELLER' || this.currentUser['user'].account_type === 'Seller') {

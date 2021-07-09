@@ -113,7 +113,7 @@
       "order_confirm": "Ihre Bestellung wurde bestätigt !",
       "order_intro": "Ihre Bestellung wurde bestätigt und wird in den nächsten zwei Tagen verschickt !",
       "order_payment": "Zahlung",
-      "color": "Farbe",
+      "description": "Beschreibung",
       "quantity": "Menge",
       "order_subtotal": "Zwischensumme",
       "order_ship_fee": "Versand-Gebühr",

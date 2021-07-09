@@ -87,6 +87,10 @@ export class HomeComponent implements OnInit {
       }
     }
   }
+
+  redirectProduct(id, index) {
+    this.router.navigate([`/product-detail/${id}/${index}/`]);
+  }
   getProducts() {
     this.productsService.getAllProducts().subscribe((data) => {
       this.products = data.results;

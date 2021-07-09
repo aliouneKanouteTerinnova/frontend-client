@@ -36,6 +36,8 @@ export class CreateProductComponent implements OnInit {
   currentUser: any;
   categoryId: any;
   storeId: any;
+  images = [];
+  fd = new FormData();
 
   filePath = './../../assets/img/Products/';
 
@@ -68,19 +70,18 @@ export class CreateProductComponent implements OnInit {
     this.getStores();
   }
 
-  selectFiles(event) {
-    this.imgSrc = <File>event.target.files[0].name;
-    // const reader = new FileReader();
-    // if (event.target.files && event.target.files.length) {
-    //   const [file] = event.target.files;
-    //   reader.readAsDataURL(file);
-    //   reader.onload = () => {
-    //     // this.imgSrc = reader.result as '';
-    //     // this.createProductForm.patchValue({
-    //     //   imgSrc: reader.result,
-    //     // });
-    //   };
-    // }
+  handleFileInput(event) {
+    const file = <File>event.target.files[0];
+    // for (let file of files) {
+    let fileName = file.name;
+    if (file.size > 10485760) {
+      return false;
+    }
+    if (fileName) {
+      fileName = fileName.replace(/[^a-zA-Z0-9\.\-]/g, '_');
+    }
+
+    this.fd.append('file', file);
   }
 
   checkCheckBoxvalue(event) {}
@@ -116,41 +117,49 @@ export class CreateProductComponent implements OnInit {
   }
 
   onSubmit() {
-    const products = new Products();
-
-    products.id = Math.floor(Math.random() * 100);
-    products.name = this.createProductForm.get('name').value;
-    products.slug = this.createProductForm.get('slug').value;
-    products.description = this.createProductForm.get('description').value;
-    products.price = this.createProductForm.get('price').value;
-    products.date_added = '';
-    // products.created_by = '';
-    products.is_active = true;
-    products.quantity = this.createProductForm.get('quantity').value;
-    products.category = this.categoryId;
-    products.store = this.storeId;
-    products.image = this.filePath + this.imgSrc;
-    products.reviews = [];
     // products.image = this.createProductForm.get('image').value;
 
-    this.productsService.addProduct(products, this.currentUser.user.token).subscribe(
-      (res) => {
-        Swal.fire({
-          position: 'top-end',
-          icon: 'success',
-          title: 'Product Created',
-          showConfirmButton: false,
-          timer: 1500,
-        });
-        this.route.navigate(['/products']);
-        this.getProducts();
+    this.productsService.uploadFile(this.fd, this.currentUser.user.token).subscribe(
+      (data) => {
+        this.images.push(data.body.id);
+        const products = new Products();
+
+        products.id = Math.floor(Math.random() * 100);
+        products.name = this.createProductForm.get('name').value;
+        products.slug = this.createProductForm.get('slug').value;
+        products.description = this.createProductForm.get('description').value;
+        products.price = this.createProductForm.get('price').value;
+        products.date_added = '';
+        // products.created_by = '';
+        products.is_active = true;
+        products.quantity = this.createProductForm.get('quantity').value;
+        products.category = this.categoryId;
+        products.store = this.storeId;
+        products.images = this.images;
+        products.reviews = [];
+        this.productsService.addProduct(products, this.currentUser.user.token).subscribe(
+          (res) => {
+            Swal.fire({
+              position: 'top-end',
+              icon: 'success',
+              title: 'Product Created',
+              showConfirmButton: false,
+              timer: 1500,
+            });
+            this.route.navigate(['/products']);
+            this.getProducts();
+          },
+          (err) => {
+            Swal.fire({
+              icon: 'error',
+              title: 'Oops...',
+              text: err.error.detail,
+            });
+          }
+        );
       },
-      (err) => {
-        Swal.fire({
-          icon: 'error',
-          title: 'Oops...',
-          text: err.error.detail,
-        });
+      (error) => {
+        console.log(error);
       }
     );
   }
