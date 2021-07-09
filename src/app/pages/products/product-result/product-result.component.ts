@@ -39,11 +39,14 @@ export class ProductResultComponent implements OnInit {
       }
     );
   }
-
   searchProduct(keyWord: string) {
     this.searchProducts(keyWord);
     this.keyWord = keyWord;
     this.isClicked = true;
+  }
+
+  hey(keyWord: string) {
+    console.log(keyWord);
   }
 
   formatPrice(price: any) {
