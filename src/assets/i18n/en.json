@@ -79,7 +79,9 @@
     "category": "CATEGORY V",
     "best_sale": "BEST SALES",
     "good_deals": "GOOD DEALS",
-    "plus": "LEARN MORE >"
+    "plus": "LEARN MORE >",
+    "search": "Search",
+    "result": "No product found"
   },
   "basket": {
     "empty_basket": "Your Cart Is Empty",
@@ -99,6 +101,7 @@
   "orders": {
     "order_list": {
       "order_list": "Orders List",
+      "result": "No orders found",
       "order_date": "Order Date",
       "order_number": "Order No",
       "order_amount": "Amount",
@@ -153,7 +156,8 @@
     "update_store": "Edit",
     "delete_store": "Delete",
     "create_store": "Create store",
-    "create_button": "Submit"
+    "create_button": "Submit",
+    "result": "No store found"
   },
   "product": {
     "products": "Products",
@@ -197,5 +201,29 @@
     "reduction": " Up to 75% off",
     "diff_categorie": "Different categories",
     "autre_categorie": "OTHER CATEGORIES"
+  },
+  "search": {
+    "result": "Items found",
+    "sort": "Sort by :",
+    "latest": "Latest items",
+    "trending": "Trending",
+    "most_popular": "Most Popular",
+    "cheapest": "Cheapest",
+    "show": "Show :",
+    "page": "Page :",
+    "previous": "Previous",
+    "next": "Next",
+    "filter_by": "Filter by",
+    "clear": "clear all",
+    "price": "Price",
+    "min": "Min",
+    "max": "Max",
+    "apply": "Apply",
+    "size": "Size",
+    "brand": "Brand",
+    "color": "Color",
+    "vote": "votes",
+    "see_all": "see all",
+    "add_wishlist": "Add to whishlist"
   }
 }

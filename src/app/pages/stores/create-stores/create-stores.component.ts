@@ -1,5 +1,5 @@
 import { Router } from '@angular/router';
-import { Store } from './../store';
+import { Store } from '../../../models/store/store';
 import { StoresService } from 'src/app/services/stores/stores.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';

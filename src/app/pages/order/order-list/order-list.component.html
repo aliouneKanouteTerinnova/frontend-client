@@ -57,7 +57,7 @@
                 <tr *ngFor="let p of listOrders; let i = index">
                   <td>
                     <div class="py-2">
-                      <span>{{ p.created_at | date: 'dd/MM/yyyy' }}</span>
+                      <span>{{ p.created_at | date: 'dd/MM/yyyy hh:mm:ss' }}</span>
                     </div>
                   </td>
                   <td>
@@ -107,7 +107,9 @@
               </tbody>
             </table>
           </div>
-          <h1 *ngIf="listOrders.length === 0">No order available</h1>
+          <div class="main" *ngIf="listOrders.length === 0">
+            <span class="not-found" translate>orders.order_list.result</span>
+          </div>
         </div>
       </div>
     </div>

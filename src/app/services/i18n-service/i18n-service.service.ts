@@ -16,7 +16,6 @@ export class I18nServiceService {
     } else {
       this.currentLangSubject = new BehaviorSubject<null>(null);
     }
-    console.log(this.currentLangSubject.value);
     if (this.currentLangSubject.value === null) {
       this.translate.use('en');
     } else {

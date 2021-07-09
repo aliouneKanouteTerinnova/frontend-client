@@ -100,6 +100,14 @@ export class HomeComponent implements OnInit {
     });
   }
 
+  searchProducts(keyWord: string) {
+    if (keyWord) {
+      this.router.navigate([`product/${keyWord}`]);
+    } else {
+      return;
+    }
+  }
+
   formatPrice(price: any) {
     var prices = price.split('.');
     if (this.i18nServiceService.currentLangValue === null || this.i18nServiceService.currentLangValue === 'en') {

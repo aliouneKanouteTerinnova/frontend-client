@@ -28,14 +28,12 @@ export class SellerOrderComponent implements OnInit {
     this.token = this.currentUser['user'].token;
     this.typeUser = this.currentUser['user'].account_type;
     this.getSellerOrders();
-    console.log(this.token);
   }
 
   getSellerOrders() {
     this.orderService.getSellerOrders(this.token);
     this.sellerOrderSubscription = this.orderService.sellerOrdersSubject.subscribe((data) => {
       this.listOrders = data;
-      console.log(this.listOrders);
     });
     this.orderService.emitSellerOrders();
     // this.orderService.getAllOrdersFromSeller(this.token).subscribe(

@@ -59,6 +59,9 @@ export class ProductsService {
       observe: 'response',
     });
   }
+  searchProducts(keyword: any) {
+    return this.httpClient.get<any>(`${environment.baseUrl}products/?search=${keyword}`);
+  }
   uploadFile(file: any, token: string) {
     token = 'token ' + token;
     // const image = { file: file };
