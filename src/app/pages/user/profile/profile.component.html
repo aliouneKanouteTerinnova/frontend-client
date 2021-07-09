@@ -66,13 +66,20 @@
             </div> -->
           </div>
         </div>
-        <div class="col-md-4 dash">
-          <button mat-raised-button color="primary" routerLink="/orders" *ngIf="!is_seller">
-            <span translate>profile.orders_button</span>
-          </button>
-          <button mat-raised-button color="primary" routerLink="/orders-seller" *ngIf="is_seller">
-            <span translate>profile.orders_button</span>
-          </button>
+        <div class="row">
+          <div class="col-md-4 dash">
+            <button mat-raised-button color="primary" routerLink="/orders" *ngIf="!is_seller">
+              <span translate>profile.orders_button</span>
+            </button>
+            <button mat-raised-button color="primary" routerLink="/orders-seller" *ngIf="is_seller">
+              <span translate>profile.orders_button</span>
+            </button>
+          </div>
+          <div class="col-md-7 dash">
+            <button mat-raised-button color="primary" routerLink="/wishlist" *ngIf="!is_seller">
+              <span translate>wishlist.no_list</span>
+            </button>
+          </div>
         </div>
       </div>
       <div class="col-md-3 dash" *ngIf="is_seller">
