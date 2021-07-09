@@ -11,6 +11,6 @@ export class Products {
   last_updated: string;
   quantity: number;
   is_active: boolean;
-  image: string;
+  images: string[];
   reviews: any;
 }

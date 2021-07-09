@@ -7,6 +7,7 @@ import { CartService } from 'src/app/services/cart/cart.service';
 import { ProductsService } from 'src/app/services/products/products.service';
 import { AuthenticationsService } from 'src/app/services/authentications/authentications.service';
 import { I18nServiceService } from 'src/app/services/i18n-service/i18n-service.service';
+import { WishlistService } from 'src/app/services/wishlist/wishlist.service';
 
 @Component({
   selector: 'app-home',
@@ -24,12 +25,15 @@ export class HomeComponent implements OnInit {
   firstIndex = 0;
   currentUser: AuthResponded;
   lang = false;
+  token;
 
   constructor(
     private authService: AuthenticationsService,
     private productsService: ProductsService,
     private i18nServiceService: I18nServiceService,
-    private cartService: CartService
+    private cartService: CartService,
+    private wishlistService: WishlistService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -83,6 +87,10 @@ export class HomeComponent implements OnInit {
       }
     }
   }
+
+  redirectProduct(id, index) {
+    this.router.navigate([`/product-detail/${id}/${index}/`]);
+  }
   getProducts() {
     this.productsService.getAllProducts().subscribe((data) => {
       this.products = data.results;
@@ -90,6 +98,14 @@ export class HomeComponent implements OnInit {
       this.bestSelling = this.products.slice(0, 5);
       this.goodStuff = this.products.slice(1, 8);
     });
+  }
+
+  searchProducts(keyWord: string) {
+    if (keyWord) {
+      this.router.navigate([`product/${keyWord}`]);
+    } else {
+      return;
+    }
   }
 
   formatPrice(price: any) {
@@ -103,5 +119,37 @@ export class HomeComponent implements OnInit {
       }
     }
     return prices;
+  }
+
+  AddWishlist(id: any) {
+    if (!this.currentUser) {
+      this.router.navigate(['/register']);
+    }
+    this.token = this.currentUser['user'].token;
+    const products = {
+      product: id,
+    };
+    this.wishlistService.AddToWishlist(products, this.token).subscribe(
+      (res) => {
+        Swal.fire({
+          icon: 'success',
+          title: 'Product added to your Wishlist!',
+          showConfirmButton: false,
+          timer: 2000,
+        });
+
+        console.log(res);
+      },
+      (error) => {
+        Swal.fire({
+          icon: 'error',
+          title: error.error.error,
+          showConfirmButton: false,
+          timer: 2000,
+        });
+        console.log(error);
+      }
+    );
+    console.log('wishlist added');
   }
 }

@@ -16,7 +16,7 @@ import Swal from 'sweetalert2';
 import { SwalComponent } from '@sweetalert2/ngx-sweetalert2';
 import { CartService } from 'src/app/services/cart/cart.service';
 import { CartModelServer } from 'src/app/models/cart/cart';
-import { Store } from '../stores/store';
+import { Store } from '../../models/store/store';
 import { AuthenticationsService } from 'src/app/services/authentications/authentications.service';
 import { I18nServiceService } from 'src/app/services/i18n-service/i18n-service.service';
 
@@ -75,10 +75,13 @@ export class ProductsComponent implements OnInit {
     this.productsService.getSellersProducts(this.currentUser.user.token).subscribe(
       (data) => {
         this.products = data.body.results;
+        console.log(this.products);
         if (this.products.length > 0) {
           this.products.forEach((element, i) => {
+            console.log(element);
             this.storesService.getCurrentData(element.store).subscribe(
               (data) => {
+                console.log(data);
                 this.products[i].store = data.name;
               },
               (error) => {

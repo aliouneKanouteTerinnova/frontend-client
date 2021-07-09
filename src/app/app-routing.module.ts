@@ -1,3 +1,4 @@
+import { WishlistComponent } from './pages/wishlist/wishlist.component';
 import { CategoryPageComponent } from './pages/category-page/category-page.component';
 import { UpdateCategoriesComponent } from './pages/categories/update-categories/update-categories.component';
 import { ResetPassEmailComponent } from './pages/user/reset-password/reset-pass-email/reset-pass-email.component';
@@ -27,6 +28,7 @@ import { OrderDetailsComponent } from './pages/order/order-details/order-details
 import { OrderListComponent } from './pages/order/order-list/order-list.component';
 import { ConditionUsedComponent } from './pages/user/condition-used/condition-used.component';
 import { SellerOrderComponent } from './pages/order/seller-order/seller-order.component';
+import { ProductResultComponent } from './pages/products/product-result/product-result.component';
 
 const routes: Routes = [
   {
@@ -36,6 +38,10 @@ const routes: Routes = [
   {
     path: 'home',
     component: HomeComponent,
+  },
+  {
+    path: 'wishlist',
+    component: WishlistComponent,
   },
   {
     path: 'user/reset-password',
@@ -83,6 +89,7 @@ const routes: Routes = [
   { path: 'orders', component: OrderListComponent },
   { path: 'orders-seller', component: SellerOrderComponent },
   { path: 'conditions', component: ConditionUsedComponent },
+  { path: 'product/:keyword', component: ProductResultComponent },
 ];
 @NgModule({
   declarations: [],

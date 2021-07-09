@@ -20,6 +20,9 @@ export class NavbarComponent implements OnInit {
   subTotal: Number;
   currentUser: AuthResponded;
 
+  totalProduct: Number;
+  total = 0;
+
   constructor(
     public cartService: CartService,
     private authService: AuthenticationsService,
@@ -38,9 +41,18 @@ export class NavbarComponent implements OnInit {
     this.currentUser = this.authService.currentUserValue;
     this.cartService.cartDataObs$.subscribe((data: CartModelServer) => {
       this.cartData = data;
+      for (let inded of this.cartData.data) {
+        console.log(inded);
+        this.total += inded.numInCart;
+      }
     });
     this.cartService.cartTotal$.subscribe((total) => {
       this.cartTotal = total;
+    });
+
+    this.cartService.productTotal$.subscribe((totalProduct) => {
+      this.totalProduct = totalProduct;
+      console.log('this is total quantity', this.totalProduct);
     });
   }
 

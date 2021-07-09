@@ -40,6 +40,7 @@ export class StoresComponent implements OnInit {
     this.storesService.getSellerStore(this.currentUser.user.token).subscribe(
       (res) => {
         this.stores = res.body.results;
+        console.log(this.stores);
       },
       (error) => {
         console.log(error);

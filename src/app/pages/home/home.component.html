@@ -1,5 +1,7 @@
 <app-navbar></app-navbar>
 <app-header></app-header>
+<search-bar (login)="searchProducts($event)"></search-bar>
+
 <div class="scrollBar" *ngIf="products.length > 0">
   <div class="buttonEl">
     <button mat-raised-button color="primary" class="categoryScroll" routerLink="/category">
@@ -40,15 +42,19 @@
     </div>
   </div>
 </div>
-
-<div class="main">
+<div class="main" *ngIf="products.length > 0">
   <div class="product" *ngFor="let product of products; let i = index">
-    <img src="./../../assets/img/Products/{{ i }}.png" alt="" />
+    <img src="{{ product.images[0].file }}" alt="" />
     <div class="overview1">
       <!-- <h3>overview:</h3> -->
       <div class="product-icon">
         <div class="icon-element">
-          <img class="icon-heart" src="./../../assets/img/icons/Contour.svg" alt="user_icon" />
+          <img
+            class="icon-heart"
+            src="./../../assets/img/icons/Contour.svg"
+            alt="user_icon"
+            (click)="AddWishlist(product.id)"
+          />
           <span translate>home.aimer</span>
         </div>
         <div class="icon-element">
@@ -58,22 +64,30 @@
       </div>
       <span class="price">{{ formatPrice(product.price | currency: 'EUR') }}</span>
     </div>
-    <a routerLink="/product-detail/{{ product.id }}/{{ i }}/">
+    <a (click)="redirectProduct(product.id, i)">
       <div class="product-info">
         <h3>{{ product.name }}</h3>
       </div></a
     >
   </div>
 </div>
+<div class="main" *ngIf="products.length === 0">
+  <span class="not-found" translate>home.result</span>
+</div>
 <div class="subtitle" *ngIf="products.length > 0"><h3 translate>home.best_sale</h3></div>
 <div class="main">
   <div class="product" *ngFor="let product of bestSelling; let i = index">
-    <img src="./../../assets/img/Products/{{ i }}.png" alt="" />
+    <img src="{{ product.images[0].file }}" alt="" />
     <div class="overview1">
       <!-- <h3>overview:</h3> -->
       <div class="product-icon">
         <div class="icon-element">
-          <img class="icon-heart" src="./../../assets/img/icons/Contour.svg" alt="user_icon" />
+          <img
+            class="icon-heart"
+            src="./../../assets/img/icons/Contour.svg"
+            alt="user_icon"
+            (click)="AddWishlist(product.id)"
+          />
           <span translate>home.aimer</span>
         </div>
         <div class="icon-element">
@@ -109,12 +123,17 @@
 <div class="subtitle" *ngIf="goodStuff.length > 0"><h3 translate>home.good_deals</h3></div>
 <div class="main">
   <div class="product" *ngFor="let product of goodStuff; let i = index">
-    <img src="./../../assets/img/Products/{{ i }}.png" alt="" />
+    <img src="{{ product.images[0].file }}" alt="" />
     <div class="overview1">
       <!-- <h3>overview:</h3> -->
       <div class="product-icon">
         <div class="icon-element">
-          <img class="icon-heart" src="./../../assets/img/icons/Contour.svg" alt="user_icon" />
+          <img
+            class="icon-heart"
+            src="./../../assets/img/icons/Contour.svg"
+            alt="user_icon"
+            (click)="AddWishlist(product.id)"
+          />
           <span translate>home.aimer</span>
         </div>
         <div class="icon-element">

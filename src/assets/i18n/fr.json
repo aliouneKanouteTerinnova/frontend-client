@@ -79,7 +79,9 @@
     "category": "CATÉGORIE V",
     "best_sale": "MEILLEURES VENTES",
     "good_deals": "BONNES AFFAIRES",
-    "plus": "EN SAVOIR PLUS >"
+    "plus": "EN SAVOIR PLUS >",
+    "search": "Chercher",
+    "result": "Aucun produit trouvé"
   },
   "basket": {
     "empty_basket": "Votre panier est vide",
@@ -99,6 +101,7 @@
   "orders": {
     "order_list": {
       "order_list": "Liste des commandes",
+      "result": "Aucune commande trouvée",
       "order_date": "Date de la commande",
       "order_number": "N° de commande",
       "order_amount": "Montant",
@@ -113,7 +116,7 @@
       "order_confirm": "Votre commande est confirmée !",
       "order_intro": "Votre commande a été confirmée et sera expédiée dans les deux prochains jours !",
       "order_payment": "Paiement",
-      "color": "Couleur",
+      "description": "Description",
       "quantity": "Quantité",
       "order_subtotal": "Sous-total",
       "order_ship_fee": "Frais d'expédition",
@@ -153,7 +156,8 @@
     "update_store": "Modifier",
     "delete_store": "Supprimer",
     "create_store": "Créer une boutique",
-    "create_button": "Valider"
+    "create_button": "Valider",
+    "result": "Aucune boutique trouvée"
   },
   "product": {
     "products": "Produits",
@@ -197,5 +201,37 @@
     "reduction": "Jusqu'à -75%",
     "diff_categorie": "Différentes catégories",
     "autre_categorie": "AUTRES CATÉGORIES"
+  },
+  "search": {
+    "result": "Articles trouvés",
+    "sort": "Trier par :",
+    "latest": "Derniers articles",
+    "trending": "Tendance",
+    "most_popular": "Les plus populaires",
+    "cheapest": "Les moins chers",
+    "show": "Afficher :",
+    "page": "Page :",
+    "previous": "Précédent",
+    "next": "Suivant",
+    "filter_by": "Filtrer par",
+    "clear": "tout effacer",
+    "price": "Prix",
+    "min": "Min",
+    "max": "Max",
+    "apply": "Appliquer",
+    "size": "Taille",
+    "brand": "Marque",
+    "color": "Couleur",
+    "vote": "votes",
+    "see_all": "voir tout",
+    "add_wishlist": "Ajouter à la liste de souhaits"
+  },
+  "wishlist": {
+    "title": "Liste de souhaits",
+    "no_list": "Votre liste de souhaits est vide",
+    "back_button": "Retourner à la boutique",
+    "add_button": "Ajouter au panier",
+    "remove_button": "Supprimer",
+    "similar_product": "Produits similaires"
   }
 }

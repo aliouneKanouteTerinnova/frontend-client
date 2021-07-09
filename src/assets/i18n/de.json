@@ -79,7 +79,9 @@
     "category": " KATEGORIE V",
     "best_sale": "BESTE VERKÄUFE",
     "good_deals": "GUTE DEALS",
-    "plus": "MEHR LERNEN >"
+    "plus": "MEHR LERNEN >",
+    "search": "Suche",
+    "result": "Kein Produkt gefunden"
   },
   "basket": {
     "empty_basket": "Ihr Warenkorb ist leer",
@@ -99,6 +101,7 @@
   "orders": {
     "order_list": {
       "order_list": "Auftragsliste",
+      "result": "Keine Aufträge gefunden",
       "order_date": "Aufträge Datum",
       "order_number": "Auftragsnummer",
       "order_amount": "Betrag",
@@ -113,7 +116,7 @@
       "order_confirm": "Ihre Bestellung wurde bestätigt !",
       "order_intro": "Ihre Bestellung wurde bestätigt und wird in den nächsten zwei Tagen verschickt !",
       "order_payment": "Zahlung",
-      "color": "Farbe",
+      "description": "Beschreibung",
       "quantity": "Menge",
       "order_subtotal": "Zwischensumme",
       "order_ship_fee": "Versand-Gebühr",
@@ -153,7 +156,8 @@
     "update_store": "Bearbeiten",
     "delete_store": "Löschen",
     "create_store": "Einen Shop erstellen",
-    "create_button": "Validieren"
+    "create_button": "Validieren",
+    "result": "Keine Geschäfte gefunden"
   },
   "product": {
     "products": "Produkte",
@@ -197,5 +201,37 @@
     "reduction": " Bis zu 75% Rabatt",
     "diff_categorie": "Verschiedene Kategorien",
     "autre_categorie": "ANDERE KATEGORIEN"
+  },
+  "search": {
+    "result": "Gefundene Artikel",
+    "sort": "Sortieren nach :",
+    "latest": "Neueste Artikel",
+    "trending": "Tendenz",
+    "most_popular": "Am beliebtesten",
+    "cheapest": "Billigste",
+    "show": "Anzeigen :",
+    "page": "Seite :",
+    "previous": "Vorherige",
+    "next": "Weiter",
+    "filter_by": "Filtern nach",
+    "clear": "alle löschen",
+    "price": "Preis",
+    "min": "Min",
+    "max": "Max",
+    "apply": "Anwenden",
+    "size": "Größe",
+    "brand": "Marke",
+    "color": "Farbe",
+    "vote": "stimmen",
+    "see_all": "siehe alle",
+    "add_wishlist": "Zur Whishliste hinzufügen"
+  },
+  "wishlist": {
+    "title": "Wunschzettel",
+    "no_list": "Ihr Wunschzettel ist leer",
+    "back_button": "Zurück zum Shop",
+    "add_button": "In den Warenkorb legen",
+    "remove_button": "Entfernen",
+    "similar_product": "Gleichartige produkte"
   }
 }

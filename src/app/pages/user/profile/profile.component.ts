@@ -8,7 +8,7 @@ import { AccountType } from 'src/app/enums/account-type.enum';
 import { AuthResponded } from 'src/app/models/auth/auth';
 import { AuthenticationsService } from 'src/app/services/authentications/authentications.service';
 import { StoresService } from 'src/app/services/stores/stores.service';
-import { Store } from '../../stores/store';
+import { Store } from '../../../models/store/store';
 
 @Component({
   selector: 'app-profile',
@@ -28,6 +28,7 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit(): void {
     this.currentUser = this.authService.currentUserValue;
+    console.log(this.currentUser['user'].token);
     this.authService.getUser(this.currentUser['user'].token).subscribe((data) => {
       this.user = data.body;
       if (this.currentUser['user'].account_type === 'SELLER' || this.currentUser['user'].account_type === 'Seller') {

@@ -26,7 +26,7 @@
 <div class="container grid mt-5">
   <div class="section wrapper">
     <div class="box span_1_of_4" *ngFor="let product of products; let i = index">
-      <img src="./../../assets/img/Products/{{ i }}.png" alt="" width="250" />
+      <img src="{{ product.images[0].file }}" alt="" width="250" />
       <div class="box-footer">
         <h2>{{ product.name }}</h2>
         <p>{{ product.description }}</p>
