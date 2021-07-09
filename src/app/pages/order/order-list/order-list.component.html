@@ -107,7 +107,9 @@
               </tbody>
             </table>
           </div>
-          <h1 *ngIf="listOrders.length === 0">No order available</h1>
+          <div class="main" *ngIf="listOrders.length === 0">
+            <span class="not-found" translate>orders.order_list.result</span>
+          </div>
         </div>
       </div>
     </div>

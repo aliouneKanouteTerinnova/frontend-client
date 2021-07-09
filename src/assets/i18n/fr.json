@@ -101,6 +101,7 @@
   "orders": {
     "order_list": {
       "order_list": "Liste des commandes",
+      "result": "Aucune commande trouvée",
       "order_date": "Date de la commande",
       "order_number": "N° de commande",
       "order_amount": "Montant",
@@ -155,7 +156,8 @@
     "update_store": "Modifier",
     "delete_store": "Supprimer",
     "create_store": "Créer une boutique",
-    "create_button": "Valider"
+    "create_button": "Valider",
+    "result": "Aucune boutique trouvée"
   },
   "product": {
     "products": "Produits",
@@ -199,5 +201,29 @@
     "reduction": "Jusqu'à -75%",
     "diff_categorie": "Différentes catégories",
     "autre_categorie": "AUTRES CATÉGORIES"
+  },
+  "search": {
+    "result": "Articles trouvés",
+    "sort": "Trier par :",
+    "latest": "Derniers articles",
+    "trending": "Tendance",
+    "most_popular": "Les plus populaires",
+    "cheapest": "Les moins chers",
+    "show": "Afficher :",
+    "page": "Page :",
+    "previous": "Précédent",
+    "next": "Suivant",
+    "filter_by": "Filtrer par",
+    "clear": "tout effacer",
+    "price": "Prix",
+    "min": "Min",
+    "max": "Max",
+    "apply": "Appliquer",
+    "size": "Taille",
+    "brand": "Marque",
+    "color": "Couleur",
+    "vote": "votes",
+    "see_all": "voir tout",
+    "add_wishlist": "Ajouter à la liste de souhaits"
   }
 }
