@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { AuthResponded } from 'src/app/models/auth/auth';
+import { AuthenticationsService } from 'src/app/services/authentications/authentications.service';
 import { I18nServiceService } from 'src/app/services/i18n-service/i18n-service.service';
 import { ProductsService } from 'src/app/services/products/products.service';
+import { WishlistService } from 'src/app/services/wishlist/wishlist.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -14,13 +17,19 @@ export class ProductResultComponent implements OnInit {
   product: any;
   keyWord: any;
   isClicked = false;
+  currentUser: AuthResponded;
+  token: any;
   constructor(
+    private authService: AuthenticationsService,
     private productsService: ProductsService,
     private i18nServiceService: I18nServiceService,
-    private router: ActivatedRoute
+    private wishlistService: WishlistService,
+    private router: ActivatedRoute,
+    private route: Router
   ) {}
 
   ngOnInit(): void {
+    this.currentUser = this.authService.currentUserValue;
     this.product = this.router.snapshot.params.keyword;
     this.searchProducts(this.product);
   }
@@ -60,5 +69,36 @@ export class ProductResultComponent implements OnInit {
       }
     }
     return prices;
+  }
+  AddWishlist(id: any) {
+    if (!this.currentUser) {
+      this.route.navigate(['/register']);
+    }
+    this.token = this.currentUser['user'].token;
+    const products = {
+      product: id,
+    };
+    this.wishlistService.AddToWishlist(products, this.token).subscribe(
+      (res) => {
+        Swal.fire({
+          icon: 'success',
+          title: 'Product added to your Wishlist!',
+          showConfirmButton: false,
+          timer: 2000,
+        });
+
+        console.log(res);
+      },
+      (error) => {
+        Swal.fire({
+          icon: 'error',
+          title: error.error.error,
+          showConfirmButton: false,
+          timer: 2000,
+        });
+        console.log(error);
+      }
+    );
+    console.log('wishlist added');
   }
 }
