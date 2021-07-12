@@ -42,9 +42,10 @@ export class SearchComponent implements OnInit {
   }
 
   selectedProduct(result) {
-    this.keyWord = result;
-    this.results = [];
-    this.login.emit(this.keyWord);
+    this.login.emit(result);
+    // this.keyWord = result;
+    // this.results = [];
+    // this.login.emit(this.keyWord);
     this.router.navigate([`product/${result}`]);
   }
 }

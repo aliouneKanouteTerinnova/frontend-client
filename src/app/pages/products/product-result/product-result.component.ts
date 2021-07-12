@@ -2,18 +2,22 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthResponded } from 'src/app/models/auth/auth';
 import { AuthenticationsService } from 'src/app/services/authentications/authentications.service';
+import { CategoriesService } from 'src/app/services/categories/categories.service';
 import { I18nServiceService } from 'src/app/services/i18n-service/i18n-service.service';
 import { ProductsService } from 'src/app/services/products/products.service';
+import { StoresService } from 'src/app/services/stores/stores.service';
 import { WishlistService } from 'src/app/services/wishlist/wishlist.service';
 import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-product-result',
   templateUrl: './product-result.component.html',
-  styleUrls: ['./product-result.component.css'],
+  styleUrls: ['./product-result.component.scss'],
 })
 export class ProductResultComponent implements OnInit {
   products = [];
+  stores = [];
+  categories = [];
   product: any;
   keyWord: any;
   isClicked = false;
@@ -25,13 +29,17 @@ export class ProductResultComponent implements OnInit {
     private i18nServiceService: I18nServiceService,
     private wishlistService: WishlistService,
     private router: ActivatedRoute,
-    private route: Router
+    private route: Router,
+    private categoryService: CategoriesService,
+    private storeService: StoresService
   ) {}
 
   ngOnInit(): void {
     this.currentUser = this.authService.currentUserValue;
     this.product = this.router.snapshot.params.keyword;
     this.searchProducts(this.product);
+    this.getCategory();
+    this.getStores();
   }
   searchProducts(keyWord: string) {
     this.productsService.searchProducts(keyWord).subscribe(
@@ -54,8 +62,21 @@ export class ProductResultComponent implements OnInit {
     this.isClicked = true;
   }
 
-  hey(keyWord: string) {
-    console.log(keyWord);
+  getCategory() {
+    this.categoryService.getAllCategories().subscribe((data) => {
+      this.categories = data.results.slice(0, 5);
+    });
+  }
+  getStores() {
+    this.storeService.getAllStores().subscribe(
+      (res) => {
+        this.stores = res.results.slice(0, 5);
+        console.log(this.stores);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
   }
 
   formatPrice(price: any) {
