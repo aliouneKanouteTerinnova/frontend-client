@@ -5,6 +5,10 @@ import { ProductsService } from 'src/app/services/products/products.service';
 import Swal from 'sweetalert2';
 import { SwalComponent } from '@sweetalert2/ngx-sweetalert2';
 import { I18nServiceService } from 'src/app/services/i18n-service/i18n-service.service';
+import { Router } from '@angular/router';
+import { WishlistService } from 'src/app/services/wishlist/wishlist.service';
+import { AuthResponded } from 'src/app/models/auth/auth';
+import { AuthenticationsService } from 'src/app/services/authentications/authentications.service';
 
 @Component({
   selector: 'app-cart',
@@ -22,14 +26,20 @@ export class CartComponent implements OnInit {
   goodStuff = [];
   idProduct: any;
   quantity: any;
+  currentUser: AuthResponded;
+  token;
 
   constructor(
     public cartService: CartService,
     private productsService: ProductsService,
-    private i18nServiceService: I18nServiceService
+    private i18nServiceService: I18nServiceService,
+    private wishlistService: WishlistService,
+    private router: Router,
+    private authService: AuthenticationsService
   ) {}
 
   ngOnInit() {
+    this.currentUser = this.authService.currentUserValue;
     this.cartService.cartDataObs$.subscribe((data: CartModelServer) => {
       this.cartData = data;
     });
@@ -102,5 +112,37 @@ export class CartComponent implements OnInit {
     }
 
     console.log(quantity, c);
+  }
+
+  AddWishlist(id: any) {
+    if (!this.currentUser) {
+      this.router.navigate(['/register']);
+    }
+    this.token = this.currentUser['user'].token;
+    const products = {
+      product: id,
+    };
+    this.wishlistService.AddToWishlist(products, this.token).subscribe(
+      (res) => {
+        Swal.fire({
+          icon: 'success',
+          title: 'Product added to your Wishlist!',
+          showConfirmButton: false,
+          timer: 2000,
+        });
+
+        console.log(res);
+      },
+      (error) => {
+        Swal.fire({
+          icon: 'error',
+          title: error.error.error,
+          showConfirmButton: false,
+          timer: 2000,
+        });
+        console.log(error);
+      }
+    );
+    console.log('wishlist added');
   }
 }

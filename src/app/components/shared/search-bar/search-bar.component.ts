@@ -38,6 +38,10 @@ export class SearchBarComponent implements OnInit {
     this.login.emit(this.keyWord);
   }
 
+  enterProduct(event) {
+    this.login.emit(this.keyWord);
+  }
+
   selectedProduct(result) {
     this.keyWord = result;
     this.login.emit(this.keyWord);

@@ -37,6 +37,7 @@ export class ProductResultComponent implements OnInit {
   ngOnInit(): void {
     this.currentUser = this.authService.currentUserValue;
     this.product = this.router.snapshot.params.keyword;
+    this.keyWord = this.product ? this.product : '';
     this.searchProducts(this.product);
     this.getCategory();
     this.getStores();

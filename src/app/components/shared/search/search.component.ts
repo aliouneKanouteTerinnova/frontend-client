@@ -11,6 +11,7 @@ import { ProductsService } from 'src/app/services/products/products.service';
 export class SearchComponent implements OnInit {
   keyWord: any;
   @Input() isClicked: boolean = false;
+  @Input() searchWord: string = '';
   @Output() login = new EventEmitter<string>();
   results: any[] = [];
   queryField: FormControl = new FormControl();
@@ -39,10 +40,16 @@ export class SearchComponent implements OnInit {
 
   submit() {
     this.login.emit(this.keyWord);
+    this.searchWord = this.keyWord;
+  }
+  enterProduct(event) {
+    this.login.emit(this.keyWord);
+    this.searchWord = this.keyWord;
   }
 
   selectedProduct(result) {
     this.login.emit(result);
+    this.searchWord = result;
     // this.keyWord = result;
     // this.results = [];
     // this.login.emit(this.keyWord);

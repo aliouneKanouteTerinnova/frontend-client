@@ -8,12 +8,13 @@
         placeholder="{{ keyWord }}"
         [formControl]="queryField"
         [(ngModel)]="keyWord"
+        (keyup.enter)="enterProduct($event)"
       />
       <button class="btn btn-primary" (click)="submit()" translate>home.search</button>
     </div>
   </div>
 </div>
-<section class="row height d-flex justify-content-end align-items-end">
+<section class="row height d-flex justify-content-end align-items-end result">
   <div class="col-md-8 col-xs-6 col-lg-6 col-sm-10 result-list" *ngIf="results.length > 0">
     <ul class="search">
       <li *ngFor="let result of results; let i = index" class="filter-select-list">
