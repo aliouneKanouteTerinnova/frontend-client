@@ -38,4 +38,32 @@ footer {
       margin: 0.4rem 0;
     }
   }
+
+  .payment-items {
+    display: flex;
+    flex-wrap: wrap;
+    .item {
+      margin: 0.4rem 0.8rem;
+      align-self: flex-start;
+      img {
+        width: 60px;
+        height: 40px;
+      }
+    }
+  }
+
+  .delivery-items {
+    text-align: center;
+  }
+
+  .item-social {
+    display: flex;
+    .item {
+      margin: 0 0.4rem;
+      img {
+        width: 30px;
+        height: 30px;
+      }
+    }
+  }
 }
