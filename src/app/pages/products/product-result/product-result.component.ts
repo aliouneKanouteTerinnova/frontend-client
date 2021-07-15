@@ -76,7 +76,7 @@ export class ProductResultComponent implements OnInit {
   getStores() {
     this.storeService.getAllStores().subscribe(
       (res) => {
-        this.stores = res.results.slice(0, 5);
+        this.stores = res.results;
       },
       (error) => {
         console.log(error);
@@ -143,6 +143,7 @@ export class ProductResultComponent implements OnInit {
     this.productsService.searchProducts(this.product).subscribe(
       (data) => {
         let firstTab = [];
+        let secondTab = [];
         this.isClicked = false;
 
         if (this.categoryTxt.length > 0) {
@@ -152,6 +153,20 @@ export class ProductResultComponent implements OnInit {
             });
             firstTab = [...firstTab, ...table];
           });
+
+          if (this.storeTxt.length > 0) {
+            this.storeTxt.forEach((el) => {
+              const table = firstTab.filter(function (item) {
+                return JSON.stringify(item).toLowerCase().includes(el);
+              });
+              secondTab = [...secondTab, ...table];
+            });
+            firstTab = secondTab;
+          } else {
+            firstTab = firstTab;
+          }
+        } else if (this.storeTxt.length > 0) {
+          this.filterShop(e, category);
         } else {
           firstTab = data.results;
         }
@@ -183,6 +198,7 @@ export class ProductResultComponent implements OnInit {
     this.productsService.searchProducts(this.product).subscribe(
       (data) => {
         let firstTab = [];
+        let secondTab = [];
         this.isClicked = false;
 
         if (this.storeTxt.length > 0) {
@@ -192,6 +208,19 @@ export class ProductResultComponent implements OnInit {
             });
             firstTab = [...firstTab, ...table];
           });
+          if (this.categoryTxt.length > 0) {
+            this.categoryTxt.forEach((el) => {
+              const table = firstTab.filter(function (item) {
+                return JSON.stringify(item).toLowerCase().includes(el);
+              });
+              secondTab = [...secondTab, ...table];
+            });
+            firstTab = secondTab;
+          } else {
+            firstTab = firstTab;
+          }
+        } else if (this.categoryTxt.length > 0) {
+          this.filterCategory(e, store);
         } else {
           firstTab = data.results;
         }
