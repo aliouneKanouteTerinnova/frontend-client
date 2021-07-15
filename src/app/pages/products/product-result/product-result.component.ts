@@ -23,6 +23,8 @@ export class ProductResultComponent implements OnInit {
   isClicked = false;
   currentUser: AuthResponded;
   token: any;
+  categoryTxt = [];
+  isChecked = false;
   constructor(
     private authService: AuthenticationsService,
     private productsService: ProductsService,
@@ -47,6 +49,8 @@ export class ProductResultComponent implements OnInit {
       (data) => {
         this.isClicked = false;
         this.products = data.results;
+        this.isChecked = this.products.length > 0 ? true : false;
+        this.product = keyWord;
       },
       (error) => {
         Swal.fire({
@@ -65,14 +69,13 @@ export class ProductResultComponent implements OnInit {
 
   getCategory() {
     this.categoryService.getAllCategories().subscribe((data) => {
-      this.categories = data.results.slice(0, 5);
+      this.categories = data.results;
     });
   }
   getStores() {
     this.storeService.getAllStores().subscribe(
       (res) => {
         this.stores = res.results.slice(0, 5);
-        console.log(this.stores);
       },
       (error) => {
         console.log(error);
@@ -121,6 +124,45 @@ export class ProductResultComponent implements OnInit {
         console.log(error);
       }
     );
-    console.log('wishlist added');
+  }
+
+  filterCategory(e, category) {
+    this.isChecked = true;
+    let idCategory = e.target.value;
+    let checked = e.target.checked;
+    if (checked) {
+      this.categoryTxt.push(category.id);
+    } else {
+      for (let i = 0; this.categoryTxt.length > i; i++) {
+        if (this.categoryTxt[i] === idCategory) {
+          this.categoryTxt.splice(i, 1);
+        }
+      }
+    }
+    this.productsService.searchProducts(this.product).subscribe(
+      (data) => {
+        let firstTab = [];
+        this.isClicked = false;
+
+        if (this.categoryTxt.length > 0) {
+          this.categoryTxt.forEach((el) => {
+            const table = data.results.filter(function (item) {
+              return JSON.stringify(item).toLowerCase().includes(el);
+            });
+            firstTab = [...firstTab, ...table];
+          });
+        } else {
+          firstTab = data.results;
+        }
+        this.products = firstTab;
+      },
+      (error) => {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: `An error occured`,
+        });
+      }
+    );
   }
 }

@@ -12,7 +12,7 @@
         <p class="text-center text-uppercase mt-10" translate>home.result</p>
       </div>
 
-      <div class="col-12 mt-1" *ngIf="products.length > 0">
+      <div class="col-12 mt-1" *ngIf="isChecked">
         <h3 class="query">{{ keyWord }}</h3>
         <header class="border-bottom mb-4 pb-3">
           <div class="form-inline">
@@ -49,7 +49,7 @@
         </header>
         <!-- sect-heading -->
       </div>
-      <div class="row" *ngIf="products.length > 0">
+      <div class="row" *ngIf="isChecked">
         <aside class="col-md-3">
           <div class="card">
             <div class="card-header filter-header">
@@ -66,12 +66,18 @@
                   <h3 class="title">Brands</h3>
                 </a>
               </header> -->
-              <div class="filter-content collapse show" id="collapse_2" style="">
+              <div class="filter-content collapse show" id="collapse_2">
                 <div class="card-body">
                   <label class="custom-control custom-checkbox" *ngFor="let category of categories">
-                    <input type="checkbox" class="custom-control-input" />
+                    <input
+                      type="checkbox"
+                      class="custom-control-input"
+                      [value]="category.id"
+                      (change)="filterCategory($event, category)"
+                    />
                     <div class="custom-control-label">
-                      {{ category.name }} <b class="badge badge-pill badge-light float-right">35</b>
+                      {{ category.name }}
+                      <!-- <b class="badge badge-pill badge-light float-right">35</b> -->
                     </div>
                   </label>
                   <!-- <label class="custom-control custom-checkbox">
