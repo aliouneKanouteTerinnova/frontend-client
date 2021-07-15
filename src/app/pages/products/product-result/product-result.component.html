@@ -159,15 +159,21 @@
               <header class="card-header">
                 <a href="#" data-toggle="collapse" data-target="#collapse_5" aria-expanded="false" class="">
                   <i class="icon-control fa fa-chevron-down"></i>
-                  <h3 class="label"><span translate>search.brand</span></h3>
+                  <h3 class="label"><span translate>profile.store_button</span></h3>
                 </a>
               </header>
               <div class="filter-content collapse show" id="collapse_5" style="">
                 <div class="card-body">
                   <label class="custom-control custom-checkbox" *ngFor="let store of stores">
-                    <input type="checkbox" class="custom-control-input checkboxBtn" />
+                    <input
+                      type="checkbox"
+                      class="custom-control-input checkboxBtn"
+                      [value]="store.id"
+                      (change)="filterShop($event, store)"
+                    />
                     <div class="custom-control-label">
-                      {{ store.name }} <b class="badge badge-pill badge-light float-right">120</b>
+                      {{ store.name }}
+                      <!-- <b class="badge badge-pill badge-light float-right">120</b> -->
                     </div>
                   </label>
                   <!-- <label class="custom-control custom-checkbox">

@@ -24,6 +24,7 @@ export class ProductResultComponent implements OnInit {
   currentUser: AuthResponded;
   token: any;
   categoryTxt = [];
+  storeTxt = [];
   isChecked = false;
   constructor(
     private authService: AuthenticationsService,
@@ -146,6 +147,46 @@ export class ProductResultComponent implements OnInit {
 
         if (this.categoryTxt.length > 0) {
           this.categoryTxt.forEach((el) => {
+            const table = data.results.filter(function (item) {
+              return JSON.stringify(item).toLowerCase().includes(el);
+            });
+            firstTab = [...firstTab, ...table];
+          });
+        } else {
+          firstTab = data.results;
+        }
+        this.products = firstTab;
+      },
+      (error) => {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: `An error occured`,
+        });
+      }
+    );
+  }
+
+  filterShop(e, store) {
+    this.isChecked = true;
+    let idStore = e.target.value;
+    let checked = e.target.checked;
+    if (checked) {
+      this.storeTxt.push(store.id);
+    } else {
+      for (let i = 0; this.storeTxt.length > i; i++) {
+        if (this.storeTxt[i] === idStore) {
+          this.storeTxt.splice(i, 1);
+        }
+      }
+    }
+    this.productsService.searchProducts(this.product).subscribe(
+      (data) => {
+        let firstTab = [];
+        this.isClicked = false;
+
+        if (this.storeTxt.length > 0) {
+          this.storeTxt.forEach((el) => {
             const table = data.results.filter(function (item) {
               return JSON.stringify(item).toLowerCase().includes(el);
             });
