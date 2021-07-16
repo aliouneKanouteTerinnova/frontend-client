@@ -50,7 +50,8 @@ import { SearchBarComponent } from './components/shared/search-bar/search-bar.co
 import { ProductResultComponent } from './pages/products/product-result/product-result.component';
 import { SearchComponent } from './components/shared/search/search.component';
 import { WishlistComponent } from './pages/wishlist/wishlist.component';
-import { FilterCategoryPipe } from './pipes/filter-category.pipe';
+import { FilterPricePipe } from './pipes/filter-price.pipe';
+import { FilterMinMaxPricePipe } from './pipes/filter-min-max-price.pipe';
 
 export function rootLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -91,7 +92,8 @@ export function rootLoaderFactory(http: HttpClient) {
     ProductResultComponent,
     SearchComponent,
     WishlistComponent,
-    FilterCategoryPipe,
+    FilterPricePipe,
+    FilterMinMaxPricePipe,
   ],
 
   imports: [
