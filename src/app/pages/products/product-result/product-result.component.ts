@@ -26,6 +26,10 @@ export class ProductResultComponent implements OnInit {
   categoryTxt = [];
   storeTxt = [];
   isChecked = false;
+  priceFilter: any;
+  minPrice: any;
+  maxPrice: any;
+  filterPriceTable = [];
   constructor(
     private authService: AuthenticationsService,
     private productsService: ProductsService,
@@ -44,6 +48,7 @@ export class ProductResultComponent implements OnInit {
     this.searchProducts(this.product);
     this.getCategory();
     this.getStores();
+    this.priceFilter = null;
   }
   searchProducts(keyWord: string) {
     this.productsService.searchProducts(keyWord).subscribe(
@@ -234,5 +239,15 @@ export class ProductResultComponent implements OnInit {
         });
       }
     );
+  }
+
+  priceFiltering(e) {
+    let price = e.target.value;
+    price = Number(price);
+    this.priceFilter = price;
+  }
+  filterMinMaxPrice() {
+    this.filterPriceTable = [this.minPrice, this.maxPrice];
+    console.log(this.minPrice, this.maxPrice);
   }
 }
