@@ -25,5 +25,5 @@
 
     - name: Run Image
       shell: |
-        docker run -d -p 8083:80 papeterinnova/vaana-front:v1.3.3-stable
+        docker run -d -p 8083:80 --name vaana_front papeterinnova/vaana-front:v1.3.3-stable
       become: yes
