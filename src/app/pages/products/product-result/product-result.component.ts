@@ -242,11 +242,14 @@ export class ProductResultComponent implements OnInit {
   }
 
   priceFiltering(e) {
+    this.filterPriceTable = [];
+
     let price = e.target.value;
     price = Number(price);
     this.priceFilter = price;
   }
   filterMinMaxPrice() {
+    this.priceFilter = null;
     this.filterPriceTable = [this.minPrice, this.maxPrice];
     console.log(this.minPrice, this.maxPrice);
   }
