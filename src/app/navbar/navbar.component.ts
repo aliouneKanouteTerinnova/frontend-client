@@ -42,7 +42,6 @@ export class NavbarComponent implements OnInit {
     this.cartService.cartDataObs$.subscribe((data: CartModelServer) => {
       this.cartData = data;
       for (let inded of this.cartData.data) {
-        console.log(inded);
         this.total += inded.numInCart;
       }
     });
@@ -52,7 +51,6 @@ export class NavbarComponent implements OnInit {
 
     this.cartService.productTotal$.subscribe((totalProduct) => {
       this.totalProduct = totalProduct;
-      console.log('this is total quantity', this.totalProduct);
     });
   }
 

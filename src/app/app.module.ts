@@ -52,6 +52,7 @@ import { SearchComponent } from './components/shared/search/search.component';
 import { WishlistComponent } from './pages/wishlist/wishlist.component';
 import { FilterPricePipe } from './pipes/filter-price.pipe';
 import { FilterMinMaxPricePipe } from './pipes/filter-min-max-price.pipe';
+import { StoreProductsComponent } from './pages/stores/store-products/store-products.component';
 
 export function rootLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -94,6 +95,7 @@ export function rootLoaderFactory(http: HttpClient) {
     WishlistComponent,
     FilterPricePipe,
     FilterMinMaxPricePipe,
+    StoreProductsComponent,
   ],
 
   imports: [
