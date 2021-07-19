@@ -14,7 +14,7 @@ import { RegistrationComponent } from './pages/user/registration/registration.co
 import { UpdateProfileComponent } from './pages/user/update-profile/update-profile.component';
 import { Routes, RouterModule } from '@angular/router';
 
-import { StoresComponent } from './pages/stores/stores.component';
+import { StoresComponent } from './pages/stores/list-store/stores.component';
 import { UpdateProductComponent } from './pages/products/update-product/update-product.component';
 import { ProductsComponent } from './pages/products/products.component';
 import { CreateStoresComponent } from './pages/stores/create-stores/create-stores.component';
