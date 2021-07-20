@@ -79,7 +79,7 @@
 <div class="main">
   <div class="product" *ngFor="let product of bestSelling; let i = index">
     <img src="{{ product.images[0].file }}" alt="" />
-    <div class="overview1">
+    <div class="overview1" (click)="imageClicked(product.id, i)">
       <!-- <h3>overview:</h3> -->
       <div class="product-icon">
         <div class="icon-element">
@@ -126,7 +126,7 @@
 <div class="main">
   <div class="product" *ngFor="let product of goodStuff; let i = index">
     <img src="{{ product.images[0].file }}" alt="" />
-    <div class="overview1">
+    <div class="overview1" (click)="imageClicked(product.id, i)">
       <!-- <h3>overview:</h3> -->
       <div class="product-icon">
         <div class="icon-element">
