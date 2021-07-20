@@ -44,8 +44,8 @@
 </div>
 <div class="main" *ngIf="products.length > 0">
   <div class="product" *ngFor="let product of products; let i = index">
-    <img src="{{ product.images[0].file }}" alt="" />
-    <div class="overview1">
+    <img src="{{ product.images[0].file }}" alt="" (click)="imageClicked()" />
+    <div class="overview1" (click)="imageClicked(product.id, i)">
       <!-- <h3>overview:</h3> -->
       <div class="product-icon">
         <div class="icon-element">
@@ -66,7 +66,8 @@
     </div>
     <a (click)="redirectProduct(product.id, i)">
       <div class="product-info">
-        <h3>{{ product.name }}</h3>
+        <h3 *ngIf="product.name.length > 17">{{ product.name.slice(0, 20) }}...</h3>
+        <h3 *ngIf="product.name.length <= 17">{{ product.name }}</h3>
       </div></a
     >
   </div>
@@ -78,7 +79,7 @@
 <div class="main">
   <div class="product" *ngFor="let product of bestSelling; let i = index">
     <img src="{{ product.images[0].file }}" alt="" />
-    <div class="overview1">
+    <div class="overview1" (click)="imageClicked(product.id, i)">
       <!-- <h3>overview:</h3> -->
       <div class="product-icon">
         <div class="icon-element">
@@ -99,7 +100,8 @@
     </div>
     <a routerLink="/product-detail/{{ product.id }}/{{ i }}/">
       <div class="product-info">
-        <h3>{{ product.name }}</h3>
+        <h3 *ngIf="product.name.length > 17">{{ product.name.slice(0, 20) }}...</h3>
+        <h3 *ngIf="product.name.length <= 17">{{ product.name }}</h3>
       </div></a
     >
   </div>
@@ -124,7 +126,7 @@
 <div class="main">
   <div class="product" *ngFor="let product of goodStuff; let i = index">
     <img src="{{ product.images[0].file }}" alt="" />
-    <div class="overview1">
+    <div class="overview1" (click)="imageClicked(product.id, i)">
       <!-- <h3>overview:</h3> -->
       <div class="product-icon">
         <div class="icon-element">
@@ -145,7 +147,8 @@
     </div>
     <a routerLink="/product-detail/{{ product.id }}/{{ i }}/">
       <div class="product-info">
-        <h3>{{ product.name }}</h3>
+        <h3 *ngIf="product.name.length > 17">{{ product.name.slice(0, 20) }}...</h3>
+        <h3 *ngIf="product.name.length <= 17">{{ product.name }}</h3>
       </div></a
     >
   </div>
