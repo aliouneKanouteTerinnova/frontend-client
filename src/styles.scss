@@ -11,3 +11,7 @@ body {
 body {
   font-family: Roboto, 'Helvetica Neue', sans-serif;
 }
+.ngx-pagination .current {
+  background: #29235c !important;
+  border-radius: 50% !important;
+}
