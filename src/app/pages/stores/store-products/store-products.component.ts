@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-floating-promises */
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CartService } from 'src/app/services/cart/cart.service';
@@ -12,6 +13,8 @@ import Swal from 'sweetalert2';
 })
 export class StoreProductsComponent implements OnInit {
   products = [];
+  produits1 = [];
+  produits2 = [];
   idStore: any;
   constructor(
     private storesService: StoresService,
@@ -25,11 +28,12 @@ export class StoreProductsComponent implements OnInit {
     this.storesService.getCurrentData(this.idStore).subscribe(
       (data) => {
         this.products = data.products;
+        this.produits1 = this.products.slice(0, 2);
       },
       (error) => {
         Swal.fire({
           icon: 'error',
-          title: 'Oops...',
+          title: error.error,
           text: 'Something went wrong!',
         });
       }

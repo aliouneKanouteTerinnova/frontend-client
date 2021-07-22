@@ -4,26 +4,14 @@
 <div class="container">
   <h1 class="text-center my-5 deal">Deals</h1>
   <div class="row">
-    <div class="col">
-      <div class="deals mb-5">
-        <h1>Jordan Air Max</h1>
-        <img src="./../../../../assets/img/téléchargement (1).png" alt="" />
-        <div class="reduction">
-          <h1>Up to -75%</h1>
-          <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Perspiciatis, iusto!</p>
-          <button>lear more</button>
-        </div>
-      </div>
-    </div>
-
-    <div class="col">
+    <div class="col" *ngFor="let produit1 of produits1; let i = index">
       <div class="deals">
-        <h1>Jordan Air Max</h1>
-        <img src="./../../../../assets/img/téléchargement.png" alt="" />
+        <h1>{{ produit1.name }}</h1>
+        <img src="{{ produit1.images[0].file }}" alt="" />
         <div class="reduction">
           <h1>Up to -75%</h1>
-          <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Perspiciatis, iusto!</p>
-          <button>lear more</button>
+          <p>{{ produit1.description }}</p>
+          <button routerLink="/product-detail/{{ produit1.id }}/{{ i }}/">lear more</button>
         </div>
       </div>
     </div>
