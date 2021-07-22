@@ -30,6 +30,7 @@ export class ProductResultComponent implements OnInit {
   minPrice: any;
   maxPrice: any;
   filterPriceTable = [];
+  page: Number = 1;
   constructor(
     private authService: AuthenticationsService,
     private productsService: ProductsService,
