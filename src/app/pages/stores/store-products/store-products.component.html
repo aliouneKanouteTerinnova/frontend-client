@@ -11,6 +11,7 @@
         <div class="reduction">
           <h1>Up to -75%</h1>
           <p *ngIf="produit1.description.length > 10">{{ produit1.description.slice(0, 30) }}</p>
+          <p *ngIf="produit1.description.length <= 10">{{ produit1.description }}</p>
           <button routerLink="/product-detail/{{ produit1.id }}/{{ i }}/">lear more</button>
         </div>
       </div>
