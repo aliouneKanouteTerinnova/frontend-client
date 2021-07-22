@@ -14,6 +14,8 @@ import Swal from 'sweetalert2';
 export class ProductDetailComponent implements OnInit {
   idProduct: string;
   product: any;
+  productImage: any;
+  images = [];
   fakePrice: number;
   indexPhoto: number;
   store: any;
@@ -23,8 +25,7 @@ export class ProductDetailComponent implements OnInit {
     private router: ActivatedRoute,
     private cartService: CartService,
     private storesService: StoresService,
-    private i18nServiceService: I18nServiceService,
-    private productsService: ProductsService
+    private i18nServiceService: I18nServiceService
   ) {}
 
   ngOnInit(): void {
@@ -33,7 +34,7 @@ export class ProductDetailComponent implements OnInit {
     this.productService.getCurrentData(this.idProduct).subscribe((response) => {
       this.storesService.getCurrentData(response.store).subscribe(
         (data) => {
-          this.store = data.name;
+          this.store = data;
         },
         (error) => {
           Swal.fire({
@@ -44,6 +45,8 @@ export class ProductDetailComponent implements OnInit {
         }
       );
       this.product = response;
+      this.productImage = response.images[0].file;
+      this.images = response.images;
       this.fakePrice = Number(this.product.price) + 1000;
       console.log(this.fakePrice);
     });

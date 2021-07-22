@@ -23,7 +23,7 @@ import { UpdateProfileComponent } from './pages/user/update-profile/update-profi
 import { NavbarComponent } from './navbar/navbar.component';
 import { ProductsComponent } from './pages/products/products.component';
 import { UpdateProductComponent } from './pages/products/update-product/update-product.component';
-import { StoresComponent } from './pages/stores/stores.component';
+import { StoresComponent } from './pages/stores/list-store/stores.component';
 import { EditStoresComponent } from './pages/stores/edit-stores/edit-stores.component';
 import { CreateStoresComponent } from './pages/stores/create-stores/create-stores.component';
 import { CreateProductComponent } from './pages/products/create-product/create-product.component';
@@ -52,6 +52,7 @@ import { SearchComponent } from './components/shared/search/search.component';
 import { WishlistComponent } from './pages/wishlist/wishlist.component';
 import { FilterPricePipe } from './pipes/filter-price.pipe';
 import { FilterMinMaxPricePipe } from './pipes/filter-min-max-price.pipe';
+import { StoreProductsComponent } from './pages/stores/store-products/store-products.component';
 
 export function rootLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -94,6 +95,7 @@ export function rootLoaderFactory(http: HttpClient) {
     WishlistComponent,
     FilterPricePipe,
     FilterMinMaxPricePipe,
+    StoreProductsComponent,
   ],
 
   imports: [
