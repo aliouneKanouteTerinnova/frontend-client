@@ -14,7 +14,6 @@ import Swal from 'sweetalert2';
 export class StoreProductsComponent implements OnInit {
   products = [];
   produits1 = [];
-  produits2 = [];
   idStore: any;
   constructor(
     private storesService: StoresService,
