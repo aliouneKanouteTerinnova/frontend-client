@@ -224,7 +224,8 @@
     "color": "Farbe",
     "vote": "stimmen",
     "see_all": "siehe alle",
-    "add_wishlist": "Zur Whishliste hinzufügen"
+    "add_wishlist": "Zur Whishliste hinzufügen",
+    "category": "KATEGORIE"
   },
   "wishlist": {
     "title": "Wunschzettel",

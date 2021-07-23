@@ -224,7 +224,8 @@
     "color": "Color",
     "vote": "votes",
     "see_all": "see all",
-    "add_wishlist": "Add to whishlist"
+    "add_wishlist": "Add to whishlist",
+    "category": "Category"
   },
   "wishlist": {
     "title": "Wishlist",
