@@ -17,9 +17,18 @@
           </mat-error>
         </mat-form-field>
         <mat-form-field class="example-full-width" appearance="outline">
+          <mat-label translate>registration.register.email</mat-label>
+          <input type="email" matInput placeholder="Email" formControlName="email" required />
+          <mat-error *ngIf="registerForm.controls.email.touched && registerForm.controls.email.invalid">
+            <span *ngIf="registerForm.controls.email.errors.required" translate
+              >registration.errors.required_error</span
+            >
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field class="example-full-width" appearance="outline">
           <mat-label translate>gender</mat-label>
           <select matNativeControl formControlName="gender" required>
-            <option *ngFor="let genders of listGender" value="genders">
+            <option *ngFor="let genders of listGender">
               {{ genders }}
             </option>
           </select>
@@ -31,7 +40,7 @@
         </mat-form-field>
         <mat-form-field class="example-full-width" appearance="outline">
           <mat-label translate>registration.register.country</mat-label>
-          <input type="text" matInput placeholder="state" formControlName="state" required />
+          <input type="text" matInput placeholder="state" formControlName="state" [disabled]="true" />
           <mat-error *ngIf="registerForm.controls.state.touched && registerForm.controls.state.invalid">
             <span *ngIf="registerForm.controls.state.errors.required">registration.errors.required_error</span>
           </mat-error>
