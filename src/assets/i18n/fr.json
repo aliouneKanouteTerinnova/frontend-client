@@ -224,7 +224,8 @@
     "color": "Couleur",
     "vote": "votes",
     "see_all": "voir tout",
-    "add_wishlist": "Ajouter à la liste de souhaits"
+    "add_wishlist": "Ajouter à la liste de souhaits",
+    "category": "Catégorie"
   },
   "wishlist": {
     "title": "Liste de souhaits",

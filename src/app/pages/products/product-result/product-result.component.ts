@@ -56,6 +56,7 @@ export class ProductResultComponent implements OnInit {
       (data) => {
         this.isClicked = false;
         this.products = data.results;
+        this.parseProduts();
         this.isChecked = this.products.length > 0 ? true : false;
         this.product = keyWord;
       },
@@ -177,6 +178,7 @@ export class ProductResultComponent implements OnInit {
           firstTab = data.results;
         }
         this.products = firstTab;
+        this.parseProduts();
       },
       (error) => {
         Swal.fire({
@@ -186,6 +188,25 @@ export class ProductResultComponent implements OnInit {
         });
       }
     );
+  }
+
+  parseProduts() {
+    if (this.products.length > 0) {
+      this.products.forEach((element, i) => {
+        this.categoryService.getCategory(element.category).subscribe(
+          (data) => {
+            this.products[i].category = data.name;
+          },
+          (error) => {
+            Swal.fire({
+              icon: 'error',
+              title: 'Oops...',
+              text: 'Something went wrong!',
+            });
+          }
+        );
+      });
+    }
   }
 
   filterShop(e, store) {
@@ -231,6 +252,7 @@ export class ProductResultComponent implements OnInit {
           firstTab = data.results;
         }
         this.products = firstTab;
+        this.parseProduts();
       },
       (error) => {
         Swal.fire({
