@@ -78,10 +78,8 @@ export class ProductsComponent implements OnInit {
         console.log(this.products);
         if (this.products.length > 0) {
           this.products.forEach((element, i) => {
-            console.log(element);
             this.storesService.getCurrentData(element.store).subscribe(
               (data) => {
-                console.log(data);
                 this.products[i].store = data.name;
               },
               (error) => {

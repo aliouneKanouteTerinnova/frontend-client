@@ -9,7 +9,7 @@
       <form [formGroup]="registerForm" (submit)="update()">
         <mat-form-field class="example-full-width" appearance="outline">
           <mat-label translate>registration.register.username</mat-label>
-          <input type="email" matInput placeholder="Username" formControlName="username" required />
+          <input type="text" matInput placeholder="Username" formControlName="username" required />
           <mat-error *ngIf="registerForm.controls.username.touched && registerForm.controls.username.invalid">
             <span *ngIf="registerForm.controls.username.errors.required" translate
               >registration.errors.required_error</span
@@ -17,9 +17,27 @@
           </mat-error>
         </mat-form-field>
         <mat-form-field class="example-full-width" appearance="outline">
+          <mat-label translate>registration.register.email</mat-label>
+          <input type="email" matInput placeholder="Email" formControlName="email" required />
+          <mat-error *ngIf="registerForm.controls.email.touched && registerForm.controls.email.invalid">
+            <span *ngIf="registerForm.controls.email.errors.required" translate
+              >registration.errors.required_error</span
+            >
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field class="example-full-width" appearance="outline">
+          <mat-label translate>registration.register.type_user</mat-label>
+          <input type="text" matInput placeholder="Account type" formControlName="account_type" required />
+          <mat-error *ngIf="registerForm.controls.account_type.touched && registerForm.controls.account_type.invalid">
+            <span *ngIf="registerForm.controls.account_type.errors.required" translate
+              >registration.errors.required_error</span
+            >
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field class="example-full-width" appearance="outline">
           <mat-label translate>gender</mat-label>
           <select matNativeControl formControlName="gender" required>
-            <option *ngFor="let genders of listGender" value="genders">
+            <option *ngFor="let genders of listGender">
               {{ genders }}
             </option>
           </select>
@@ -31,7 +49,7 @@
         </mat-form-field>
         <mat-form-field class="example-full-width" appearance="outline">
           <mat-label translate>registration.register.country</mat-label>
-          <input type="text" matInput placeholder="state" formControlName="state" required />
+          <input type="text" matInput placeholder="state" formControlName="state" [disabled]="true" />
           <mat-error *ngIf="registerForm.controls.state.touched && registerForm.controls.state.invalid">
             <span *ngIf="registerForm.controls.state.errors.required">registration.errors.required_error</span>
           </mat-error>

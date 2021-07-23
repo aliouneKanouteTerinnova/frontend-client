@@ -26,7 +26,7 @@
     <div style="width: 35rem" *ngFor="let store of stores">
       <div class="store">
         <div style="display: flex">
-          <div class="card-body name" routerLink="">
+          <div class="card-body name" routerLink="/store-products/{{ store.id }}">
             <div class="img mb-2">
               <img class="img-thumbnail" src="{{ store.image }}" alt="" />
             </div>

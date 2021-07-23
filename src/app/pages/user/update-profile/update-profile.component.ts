@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Address } from 'src/app/models/address/address';
 import { AuthResponded } from 'src/app/models/auth/auth';
 import { AuthenticationsService } from 'src/app/services/authentications/authentications.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-update-profile',
@@ -17,19 +19,20 @@ export class UpdateProfileComponent implements OnInit {
   listGender = ['M', 'F', 'OTHERS'];
   gender = '';
 
-  constructor(private authService: AuthenticationsService, private formBuilder: FormBuilder) {}
+  constructor(private authService: AuthenticationsService, private router: Router, private formBuilder: FormBuilder) {}
 
   ngOnInit(): void {
     this.currentUser = this.authService.currentUserValue;
     console.log(this.currentUser['user'].token);
     this.registerForm = this.formBuilder.group({
       username: [null, Validators.required],
-      email: [null, Validators.required],
+      email: new FormControl({ value: '', disabled: true }),
       gender: [null, Validators.required],
-      state: [null, Validators.required],
-      zipcode: [null, Validators.required],
-      country: [null, Validators.required],
-      street: [null, Validators.required],
+      state: new FormControl({ value: '', disabled: true }),
+      zipcode: new FormControl({ value: '', disabled: true }),
+      country: new FormControl({ value: '', disabled: true }),
+      street: new FormControl({ value: '', disabled: true }),
+      account_type: new FormControl({ value: '', disabled: true }),
     });
 
     this.authService.getUser(this.currentUser['user'].token).subscribe((data) => {
@@ -37,11 +40,13 @@ export class UpdateProfileComponent implements OnInit {
       const user: AuthResponded = data.body;
       this.registerForm.patchValue({
         username: user['user'].username,
+        email: user['user'].email,
         gender: user['user'].gender,
         state: user['user'].address.state,
         zipcode: user['user'].address.zipcode,
         country: user['user'].address.country,
         street: user['user'].address.street,
+        account_type: user['user'].account_type,
       });
     });
   }
@@ -63,15 +68,21 @@ export class UpdateProfileComponent implements OnInit {
       gender: sexe,
       address: address,
     };
-    console.log(user);
-    // this.authService.update(user, this.currentUser.token).subscribe(
-    //   (data) => {
-    //     this.successMessage = 'User updated successfully ';
-    //     this.errorMessage = '';
-    //   },
-    //   (error) => {
-    //     this.errorMessage = 'Username/Password not correct';
-    //   }
-    // );
+    this.authService.update(user, this.currentUser.user.token).subscribe(
+      (data) => {
+        Swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          title: 'Your profile has been successfully updated!',
+          showConfirmButton: false,
+          timer: 2000,
+        }).then(() => {
+          this.router.navigate(['/profile']);
+        });
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
   }
 }

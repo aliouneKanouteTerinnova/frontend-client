@@ -33,7 +33,15 @@
             </select>
             <label class="form-control-label mr-2 label" for=""><span translate>search.page</span> </label>
             <nav aria-label="Page navigation sample">
-              <ul class="pagination mt-3">
+              <pagination-controls
+                class="pagination mt-3"
+                id="listing_pagination"
+                maxSize="10"
+                directionLinks="true"
+                (pageChange)="page = $event"
+              >
+              </pagination-controls>
+              <!-- <ul class="pagination mt-3">
                 <li class="page-item disabled">
                   <a class="page-link" href="#"><span translate>search.previous</span></a>
                 </li>
@@ -43,7 +51,7 @@
                 <li class="page-item">
                   <a class="page-link"><span translate>search.next</span></a>
                 </li>
-              </ul>
+              </ul> -->
             </nav>
           </div>
         </header>
@@ -252,7 +260,11 @@
           <article
             class="card bg-black card-product-list"
             *ngFor="
-              let product of products | filterPrice: priceFilter | filterMinMaxPrice: filterPriceTable;
+              let product of products
+                | filterPrice: priceFilter
+                | filterMinMaxPrice: filterPriceTable
+                | paginate
+                  : { id: 'listing_pagination', itemsPerPage: 20, currentPage: page, totalItems: products.length };
               let i = index
             "
           >
@@ -297,9 +309,11 @@
                       </div>
                     </div>
                     <div class="col">
-                      <h3>
-                        Health &amp; lifestyle:
-                        <span style="color: #f39200; font-size: 1 rem"><span translate>search.see_all</span></span>
+                      <h3 translate>
+                        <span translate> search.category</span>:
+                        <span style="color: #f39200; font-size: 1 rem"
+                          ><span>{{ product.category }}</span></span
+                        >
                       </h3>
                     </div>
                   </div>
@@ -317,7 +331,9 @@
           </article>
           <!-- card-product .// -->
 
-          <nav aria-label="Page navigation sample">
+          <pagination-controls id="listing_pagination" maxSize="2" directionLinks="true" (pageChange)="page = $event">
+          </pagination-controls>
+          <!-- <nav aria-label="Page navigation sample">
             <ul class="pagination">
               <li class="page-item disabled">
                 <a class="page-link" href="#"><span translate>search.previous</span></a>
@@ -329,7 +345,7 @@
                 <a class="page-link"><span translate>search.previous</span></a>
               </li>
             </ul>
-          </nav>
+          </nav> -->
         </main>
       </div>
       <!-- col.// -->

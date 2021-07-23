@@ -4,11 +4,9 @@
     <div class="col-md-4 col-lg-2">
       <h2>SHOPS</h2>
       <div class="shops-items">
-        <li class="item">ALI</li>
-        <li class="item">MAGIC STORE</li>
-        <li class="item">INDIA WORLD</li>
-        <li class="item">ALL IN ONE</li>
-        <li class="item">KAMER SHOP</li>
+        <li class="item" *ngFor="let store of stores">
+          <span routerLink="/store-products/{{ store.id }}">{{ store.name }}</span>
+        </li>
       </div>
     </div>
     <div class="col-md-4 col-lg-2">

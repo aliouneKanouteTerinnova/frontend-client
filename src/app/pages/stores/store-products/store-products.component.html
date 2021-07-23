@@ -1,0 +1,35 @@
+<app-navbar></app-navbar>
+<app-header></app-header>
+
+<div class="container">
+  <h1 class="text-center my-5 deal" *ngIf="produits1.length > 0">Deals</h1>
+  <div class="row">
+    <div class="col" *ngFor="let produit1 of produits1; let i = index">
+      <div class="deals">
+        <h1>{{ produit1.name }}</h1>
+        <img src="{{ produit1.images[0].file }}" alt="" />
+        <div class="reduction">
+          <h1>Up to -75%</h1>
+          <p *ngIf="produit1.description.length > 10">{{ produit1.description.slice(0, 30) }}</p>
+          <p *ngIf="produit1.description.length <= 10">{{ produit1.description }}</p>
+          <button routerLink="/product-detail/{{ produit1.id }}/{{ i }}/">lear more</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <h1 class="text-center my-5">Shop Catalog</h1>
+
+  <div class="text-center" *ngIf="products.length === 0">
+    <h4>
+      this store has no products
+      <!-- <span translate>wishlist.no_list</span> -->
+    </h4>
+    <button routerLink="/" class="shop-btn"><span translate>wishlist.back_button</span></button>
+  </div>
+  <div class="divider mb-4 mt-3"></div>
+
+  <app-product [products]="products"> </app-product>
+</div>
