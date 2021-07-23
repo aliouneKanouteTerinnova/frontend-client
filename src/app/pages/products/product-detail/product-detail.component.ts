@@ -20,8 +20,10 @@ export class ProductDetailComponent implements OnInit {
   indexPhoto: number;
   store: any;
   products = [];
+  otherProducts = [];
+  similarProducts = [];
   constructor(
-    private productService: ProductsService,
+    private productsService: ProductsService,
     private router: ActivatedRoute,
     private cartService: CartService,
     private storesService: StoresService,
@@ -31,7 +33,9 @@ export class ProductDetailComponent implements OnInit {
   ngOnInit(): void {
     this.idProduct = this.router.snapshot.params.id;
     this.indexPhoto = this.router.snapshot.params.indexPhoto;
-    this.productService.getCurrentData(this.idProduct).subscribe((response) => {
+
+    this.getProducts();
+    this.productsService.getCurrentData(this.idProduct).subscribe((response) => {
       this.storesService.getCurrentData(response.store).subscribe(
         (data) => {
           this.store = data;
@@ -48,7 +52,6 @@ export class ProductDetailComponent implements OnInit {
       this.productImage = response.images[0].file;
       this.images = response.images;
       this.fakePrice = Number(this.product.price) + 1000;
-      console.log(this.fakePrice);
     });
   }
 
@@ -60,6 +63,12 @@ export class ProductDetailComponent implements OnInit {
       title: 'Product added to cart!',
       showConfirmButton: false,
       timer: 2000,
+    });
+  }
+  getProducts() {
+    this.productsService.getAllProducts().subscribe((data) => {
+      this.similarProducts = data.results.slice(0, 4);
+      this.otherProducts = data.results.slice(4, 8);
     });
   }
 

@@ -23,6 +23,7 @@ export class WishlistComponent implements OnInit {
   token;
   wishlists = [];
   items;
+  similarProducts = [];
 
   constructor(
     private productsService: ProductsService,
@@ -35,7 +36,7 @@ export class WishlistComponent implements OnInit {
   ngOnInit(): void {
     this.currentUser = this.authService.currentUserValue;
     this.token = this.currentUser['user'].token;
-
+    this.getProducts();
     this.getWishlist();
   }
 
@@ -51,6 +52,12 @@ export class WishlistComponent implements OnInit {
           this.wishlists.push(item);
         });
       });
+    });
+  }
+
+  getProducts() {
+    this.productsService.getAllProducts().subscribe((data) => {
+      this.similarProducts = data.results.slice(0, 4);
     });
   }
 
