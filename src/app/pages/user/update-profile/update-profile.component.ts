@@ -32,6 +32,7 @@ export class UpdateProfileComponent implements OnInit {
       zipcode: new FormControl({ value: '', disabled: true }),
       country: new FormControl({ value: '', disabled: true }),
       street: new FormControl({ value: '', disabled: true }),
+      account_type: new FormControl({ value: '', disabled: true }),
     });
 
     this.authService.getUser(this.currentUser['user'].token).subscribe((data) => {
@@ -45,6 +46,7 @@ export class UpdateProfileComponent implements OnInit {
         zipcode: user['user'].address.zipcode,
         country: user['user'].address.country,
         street: user['user'].address.street,
+        account_type: user['user'].account_type,
       });
     });
   }
