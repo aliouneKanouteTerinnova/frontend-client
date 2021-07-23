@@ -17,7 +17,6 @@ export class FooterComponent implements OnInit {
     this.storesService.getAllStores().subscribe(
       (res) => {
         this.stores = res.results;
-        console.log(res);
       },
       (error) => {
         console.log(error);
