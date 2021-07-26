@@ -1,13 +1,13 @@
 <app-navbar></app-navbar>
 
-<div class="container">
-  <div class="row" style="margin-top: -155px">
+<div class="container" style="margin-top: -155px">
+  <div class="row">
     <div class="col-8">
       <div class="img_content">
         <div class="img">
-          <img src="{{ product.images[0].file }}" width="300" alt="" />
+          <img src="{{ productImage }}" width="300" alt="" />
         </div>
-        <div class="thumbnail_img" *ngFor="let image of product.images">
+        <div class="thumbnail_img" *ngFor="let image of images">
           <img src="{{ image }}" width="80" alt="" />
         </div>
       </div>
@@ -24,7 +24,10 @@
         <div class="product_name">
           <h2>{{ product.name }}</h2>
           <p class="desc_product">{{ product.description }}</p>
-          <p class="boutique"><span translate>profile.store_button</span>: {{ store }}</p>
+          <p class="boutique">
+            <span translate>profile.store_button</span>:
+            <a routerLink="/store-products/{{ store.id }}">{{ store.name }}</a>
+          </p>
           <p class="price">{{ formatPrice(product.price | currency: 'EUR') }}</p>
           <span class="fake_price">{{ formatPrice(fakePrice | currency: 'EUR') }}</span>
         </div>
@@ -43,114 +46,7 @@
 
   <div class="similar_products container-fluid">
     <h1><span translate>product_detail.similar_product</span></h1>
-
-    <div class="row">
-      <div class="col-lg-2 col-md-5 col-sm-6 mb-4 mr-1">
-        <div class="card" style="width: 15rem">
-          <div class="card-body">
-            <img src="../../../../assets/img/Rectangle_35@2x.png" alt="" />
-          </div>
-          <div class="card-footer">
-            <p>Lorem ipsum dolor sit amet.</p>
-            <p class="prix">{{ formatPrice(7569.0 | currency: 'EUR') }}</p>
-            <span>{{ formatPrice(15000.0 | currency: 'EUR') }}</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-lg-2 col-md-5 col-sm-6 mb-4 mr-1">
-        <div class="card" style="width: 15rem">
-          <div class="card-body">
-            <img src="../../../../assets/img/Rectangle_35@2x.png" alt="" />
-          </div>
-          <div class="card-footer">
-            <p>Lorem ipsum dolor sit amet.</p>
-            <p class="prix">{{ formatPrice(7569.0 | currency: 'EUR') }}</p>
-            <span>{{ formatPrice(15000.0 | currency: 'EUR') }}</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-lg-2 col-md-5 col-sm-6 mb-4 mr-1">
-        <div class="card" style="width: 15rem">
-          <div class="card-body">
-            <img src="../../../../assets/img/Rectangle_35@2x.png" alt="" />
-          </div>
-          <div class="card-footer">
-            <p>Lorem ipsum dolor sit amet.</p>
-            <p class="prix">{{ formatPrice(7569.0 | currency: 'EUR') }}</p>
-            <span>{{ formatPrice(15000.0 | currency: 'EUR') }}</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-lg-2 col-md-5 col-sm-6 mb-4 mr-1">
-        <div class="card" style="width: 15rem">
-          <div class="card-body">
-            <img src="../../../../assets/img/Rectangle_35@2x.png" alt="" />
-          </div>
-          <div class="card-footer">
-            <p>Lorem ipsum dolor sit amet.</p>
-            <p class="prix">{{ formatPrice(7569.0 | currency: 'EUR') }}</p>
-            <span>{{ formatPrice(15000.0 | currency: 'EUR') }}</span>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col-lg-2 col-md-5 col-sm-6 mb-4 mr-1">
-        <div class="card" style="width: 15rem">
-          <div class="card-body">
-            <img src="../../../../assets/img/Rectangle_35@2x.png" alt="" />
-          </div>
-          <div class="card-footer">
-            <p>Lorem ipsum dolor sit amet.</p>
-            <p class="prix">{{ formatPrice(7569.0 | currency: 'EUR') }}</p>
-            <span>{{ formatPrice(15000.0 | currency: 'EUR') }}</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-lg-2 col-md-5 col-sm-6 mb-4 mr-1">
-        <div class="card" style="width: 15rem">
-          <div class="card-body">
-            <img src="../../../../assets/img/Rectangle_35@2x.png" alt="" />
-          </div>
-          <div class="card-footer">
-            <p>Lorem ipsum dolor sit amet.</p>
-            <p class="prix">{{ formatPrice(7569.0 | currency: 'EUR') }}</p>
-            <span>{{ formatPrice(15000.0 | currency: 'EUR') }}</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-lg-2 col-md-5 col-sm-6 mb-4 mr-1">
-        <div class="card" style="width: 15rem">
-          <div class="card-body">
-            <img src="../../../../assets/img/Rectangle_35@2x.png" alt="" />
-          </div>
-          <div class="card-footer">
-            <p>Lorem ipsum dolor sit amet.</p>
-            <p class="prix">{{ formatPrice(7569.0 | currency: 'EUR') }}</p>
-            <span>{{ formatPrice(15000.0 | currency: 'EUR') }}</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-lg-2 col-md-5 col-sm-6 mb-4 mr-1">
-        <div class="card" style="width: 15rem">
-          <div class="card-body">
-            <img src="../../../../assets/img/Rectangle_35@2x.png" alt="" />
-          </div>
-          <div class="card-footer">
-            <p>Lorem ipsum dolor sit amet.</p>
-            <p class="prix">{{ formatPrice(7569.0 | currency: 'EUR') }}</p>
-            <span>{{ formatPrice(15000.0 | currency: 'EUR') }}</span>
-          </div>
-        </div>
-      </div>
-    </div>
+    <app-product [products]="similarProducts"> </app-product>
   </div>
 </div>
 
@@ -172,57 +68,7 @@
 <div class="container my-5">
   <div class="similar_products container-fluid">
     <div class="row">
-      <div class="col-lg-2 col-md-5 col-sm-6 mb-4 mr-1">
-        <div class="card" style="width: 15rem">
-          <div class="card-body">
-            <img src="../../../../assets/img/Rectangle_35@2x.png" alt="" />
-          </div>
-          <div class="card-footer">
-            <p>Lorem ipsum dolor sit amet.</p>
-            <p class="prix">{{ 7569.0 | currency: 'EUR' }}</p>
-            <span>{{ formatPrice(15000.0 | currency: 'EUR') }}</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-lg-2 col-md-5 col-sm-6 mb-4 mr-1">
-        <div class="card" style="width: 15rem">
-          <div class="card-body">
-            <img src="../../../../assets/img/Rectangle_35@2x.png" alt="" />
-          </div>
-          <div class="card-footer">
-            <p>Lorem ipsum dolor sit amet.</p>
-            <p class="prix">{{ 7569.0 | currency: 'EUR' }}</p>
-            <span>{{ formatPrice(15000.0 | currency: 'EUR') }}</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-lg-2 col-md-5 col-sm-6 mb-4 mr-1">
-        <div class="card" style="width: 15rem">
-          <div class="card-body">
-            <img src="../../../../assets/img/Rectangle_35@2x.png" alt="" />
-          </div>
-          <div class="card-footer">
-            <p>Lorem ipsum dolor sit amet.</p>
-            <p class="prix">{{ 7569.0 | currency: 'EUR' }}</p>
-            <span>{{ formatPrice(15000.0 | currency: 'EUR') }}</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-lg-2 col-md-5 col-sm-6 mb-4 mr-1">
-        <div class="card" style="width: 15rem">
-          <div class="card-body">
-            <img src="../../../../assets/img/Rectangle_35@2x.png" alt="" />
-          </div>
-          <div class="card-footer">
-            <p>Lorem ipsum dolor sit amet.</p>
-            <p class="prix">{{ 7569.0 | currency: 'EUR' }}</p>
-            <span>{{ formatPrice(15000.0 | currency: 'EUR') }}</span>
-          </div>
-        </div>
-      </div>
+      <app-product [products]="otherProducts"> </app-product>
     </div>
   </div>
 </div>

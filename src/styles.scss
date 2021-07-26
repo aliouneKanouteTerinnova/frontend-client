@@ -1,21 +1,17 @@
 /* You can add global styles to this file, and also import other style files */
-
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 html,
 body {
-  height: 100%;
+  overflow-x: hidden;
 }
 body {
-  margin: 0;
   font-family: Roboto, 'Helvetica Neue', sans-serif;
-  /* for test */
-  /* background-color: aqua; */
 }
-
-html,
-body {
-  height: 100%;
-}
-body {
-  margin: 0;
-  font-family: Roboto, 'Helvetica Neue', sans-serif;
+.ngx-pagination .current {
+  background: #29235c !important;
+  border-radius: 50% !important;
 }

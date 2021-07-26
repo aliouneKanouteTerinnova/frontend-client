@@ -1,1 +1,76 @@
-<footer class="container-fluid"></footer>
+<footer class="container-fluid text-center p-5">
+  <!-- <div class="container"> -->
+  <div class="row">
+    <div class="col-md-4 col-lg-2">
+      <h2 translate>footer.shops</h2>
+      <div class="shops-items">
+        <li class="item" *ngFor="let store of stores">
+          <span routerLink="/store-products/{{ store.id }}">{{ store.name }}</span>
+        </li>
+      </div>
+    </div>
+    <div class="col-md-4 col-lg-2">
+      <h2 translate>footer.payment_mode</h2>
+      <div class="payment-items">
+        <li class="item">
+          <img src="./../../../assets/img/icons/Icon awesome-cc-visa.png" alt="" />
+        </li>
+        <li class="item">
+          <img src="./../../../assets/img/icons/Icon awesome-cc-mastercard.png" alt="" />
+        </li>
+        <li class="item">
+          <img src="./../../../assets/img/icons/Icon ionic-md-cash.png" alt="" />
+        </li>
+        <li class="item">
+          <img src="./../../../assets/img/icons/Icon awesome-cc-stripe.png" alt="" />
+        </li>
+        <li class="item">
+          <img src="./../../../assets/img/icons/Icon awesome-cc-paypal.png" alt="" />
+        </li>
+      </div>
+    </div>
+    <div class="col-md-4 col-lg-2">
+      <h2 translate>footer.delivery_partners</h2>
+      <div class="delivery-items">
+        <li class="item">
+          <img src="./../../../assets/img/icons/hermes-logo.png" alt="" />
+        </li>
+        <li class="item">
+          <img src="./../../../assets/img/icons/DHL-Logo.png" alt="" />
+        </li>
+      </div>
+    </div>
+    <div class="col-md-4 col-lg-2">
+      <h2 translate>footer.legal_matters</h2>
+      <div class="legal-items">
+        <li class="item">AGB</li>
+        <li class="item" translate>footer.return_policy</li>
+        <li class="item" translate>footer.impressum</li>
+      </div>
+    </div>
+    <div class="col-md-4 col-lg-2">
+      <h2 translate>footer.customer_service</h2>
+      <div class="customer-items">
+        <li class="item">FAQ</li>
+        <li class="item" translate>footer.privacy_policy</li>
+      </div>
+      <div class="service-contact">
+        <h2 class="mt-3" translate>footer.contact</h2>
+        <li class="item">xx xxx xxx xxxx</li>
+
+        <div class="item-social">
+          <li class="item">
+            <img src="./../../../assets/img/icons/Whatsapp.png" alt="" />
+          </li>
+          <li class="item">
+            <img src="./../../../assets/img/icons/Facebook.png" alt="" />
+          </li>
+          <li class="item">
+            <img src="./../../../assets/img/icons/Instagram.png" alt="" />
+          </li>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- </div> -->
+</footer>

@@ -12,7 +12,7 @@
         <p class="text-center text-uppercase mt-10" translate>home.result</p>
       </div>
 
-      <div class="col-12 mt-1" *ngIf="products.length > 0">
+      <div class="col-12 mt-1" *ngIf="isChecked">
         <h3 class="query">{{ keyWord }}</h3>
         <header class="border-bottom mb-4 pb-3">
           <div class="form-inline">
@@ -33,23 +33,31 @@
             </select>
             <label class="form-control-label mr-2 label" for=""><span translate>search.page</span> </label>
             <nav aria-label="Page navigation sample">
-              <ul class="pagination mt-3">
+              <pagination-controls
+                class="pagination mt-3"
+                id="listing_pagination"
+                maxSize="10"
+                directionLinks="true"
+                (pageChange)="page = $event"
+              >
+              </pagination-controls>
+              <!-- <ul class="pagination mt-3">
                 <li class="page-item disabled">
                   <a class="page-link" href="#"><span translate>search.previous</span></a>
                 </li>
-                <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item active"><a class="page-link">1</a></li>
+                <li class="page-item"><a class="page-link">2</a></li>
+                <li class="page-item"><a class="page-link">3</a></li>
                 <li class="page-item">
-                  <a class="page-link" href="#"><span translate>search.next</span></a>
+                  <a class="page-link"><span translate>search.next</span></a>
                 </li>
-              </ul>
+              </ul> -->
             </nav>
           </div>
         </header>
         <!-- sect-heading -->
       </div>
-      <div class="row" *ngIf="products.length > 0">
+      <div class="row" *ngIf="isChecked">
         <aside class="col-md-3">
           <div class="card">
             <div class="card-header filter-header">
@@ -66,12 +74,18 @@
                   <h3 class="title">Brands</h3>
                 </a>
               </header> -->
-              <div class="filter-content collapse show" id="collapse_2" style="">
+              <div class="filter-content collapse show" id="collapse_2">
                 <div class="card-body">
                   <label class="custom-control custom-checkbox" *ngFor="let category of categories">
-                    <input type="checkbox" class="custom-control-input" />
+                    <input
+                      type="checkbox"
+                      class="custom-control-input"
+                      [value]="category.id"
+                      (change)="filterCategory($event, category)"
+                    />
                     <div class="custom-control-label">
-                      {{ category.name }} <b class="badge badge-pill badge-light float-right">35</b>
+                      {{ category.name }}
+                      <!-- <b class="badge badge-pill badge-light float-right">35</b> -->
                     </div>
                   </label>
                   <!-- <label class="custom-control custom-checkbox">
@@ -94,19 +108,28 @@
               </header>
               <div class="filter-content collapse show" id="collapse_3" style="">
                 <div class="card-body">
-                  <input type="range" class="custom-range" min="0" max="100" name="" />
+                  <input
+                    type="range"
+                    class="custom-range"
+                    min="0"
+                    max="15000"
+                    name=""
+                    (change)="priceFiltering($event)"
+                  />
                   <div class="form-row">
                     <div class="form-group col-md-6">
                       <label><span translate>search.min</span></label>
-                      <input class="form-control" placeholder="$0" type="number" />
+                      <input class="form-control" placeholder="" type="number" [(ngModel)]="minPrice" />
                     </div>
                     <div class="form-group text-right col-md-6">
                       <label><span translate>search.max</span></label>
-                      <input class="form-control" placeholder="$1,0000" type="number" />
+                      <input class="form-control" placeholder="" type="number" [(ngModel)]="maxPrice" />
                     </div>
                   </div>
                   <!-- form-row.// -->
-                  <button class="btn btn-block applyBtn"><span translate>search.apply</span></button>
+                  <button class="btn btn-block applyBtn" (click)="filterMinMaxPrice()">
+                    <span translate>search.apply</span>
+                  </button>
                 </div>
                 <!-- card-body.// -->
               </div>
@@ -153,15 +176,21 @@
               <header class="card-header">
                 <a href="#" data-toggle="collapse" data-target="#collapse_5" aria-expanded="false" class="">
                   <i class="icon-control fa fa-chevron-down"></i>
-                  <h3 class="label"><span translate>search.brand</span></h3>
+                  <h3 class="label"><span translate>profile.store_button</span></h3>
                 </a>
               </header>
               <div class="filter-content collapse show" id="collapse_5" style="">
                 <div class="card-body">
                   <label class="custom-control custom-checkbox" *ngFor="let store of stores">
-                    <input type="checkbox" class="custom-control-input checkboxBtn" />
+                    <input
+                      type="checkbox"
+                      class="custom-control-input checkboxBtn"
+                      [value]="store.id"
+                      (change)="filterShop($event, store)"
+                    />
                     <div class="custom-control-label">
-                      {{ store.name }} <b class="badge badge-pill badge-light float-right">120</b>
+                      {{ store.name }}
+                      <!-- <b class="badge badge-pill badge-light float-right">120</b> -->
                     </div>
                   </label>
                   <!-- <label class="custom-control custom-checkbox">
@@ -228,10 +257,22 @@
         <main class="col-md-9">
           <!-- card-product .// -->
 
-          <article class="card bg-black card-product-list" *ngFor="let product of products; let i = index">
+          <article
+            class="card bg-black card-product-list"
+            *ngFor="
+              let product of products
+                | filterPrice: priceFilter
+                | filterMinMaxPrice: filterPriceTable
+                | paginate
+                  : { id: 'listing_pagination', itemsPerPage: 20, currentPage: page, totalItems: products.length };
+              let i = index
+            "
+          >
             <div class="row no-gutters">
               <aside class="col-md-3">
-                <a href="#" class="img-wrap"><img src="{{ product.images[0].file }}" /></a>
+                <a routerLink="/product-detail/{{ product.id }}/{{ i }}/" class="img-wrap"
+                  ><img src="{{ product.images[0].file }}"
+                /></a>
               </aside>
               <!-- col.// -->
               <div class="col-md-9">
@@ -268,9 +309,11 @@
                       </div>
                     </div>
                     <div class="col">
-                      <h3>
-                        Health &amp; lifestyle:
-                        <span style="color: #f39200; font-size: 1 rem"><span translate>search.see_all</span></span>
+                      <h3 translate>
+                        <span translate> search.category</span>:
+                        <span style="color: #f39200; font-size: 1 rem"
+                          ><span>{{ product.category }}</span></span
+                        >
                       </h3>
                     </div>
                   </div>
@@ -288,19 +331,21 @@
           </article>
           <!-- card-product .// -->
 
-          <nav aria-label="Page navigation sample">
+          <pagination-controls id="listing_pagination" maxSize="2" directionLinks="true" (pageChange)="page = $event">
+          </pagination-controls>
+          <!-- <nav aria-label="Page navigation sample">
             <ul class="pagination">
               <li class="page-item disabled">
                 <a class="page-link" href="#"><span translate>search.previous</span></a>
               </li>
-              <li class="page-item active"><a class="page-link" href="#">1</a></li>
-              <li class="page-item"><a class="page-link" href="#">2</a></li>
-              <li class="page-item"><a class="page-link" href="#">3</a></li>
+              <li class="page-item active"><a class="page-link">1</a></li>
+              <li class="page-item"><a class="page-link">2</a></li>
+              <li class="page-item"><a class="page-link">3</a></li>
               <li class="page-item">
-                <a class="page-link" href="#"><span translate>search.next</span></a>
+                <a class="page-link"><span translate>search.previous</span></a>
               </li>
             </ul>
-          </nav>
+          </nav> -->
         </main>
       </div>
       <!-- col.// -->

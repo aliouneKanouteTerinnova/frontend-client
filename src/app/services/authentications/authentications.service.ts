@@ -70,7 +70,7 @@ export class AuthenticationsService {
 
   update(username: any, token: string) {
     token = 'token ' + token;
-    return this.httpClient.put(`${environment.baseUrl}user`, username, {
+    return this.httpClient.put(`${environment.baseUrl}users`, username, {
       headers: new HttpHeaders().set('Authorization', token),
       observe: 'response',
     });

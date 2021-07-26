@@ -53,6 +53,17 @@
     "Setting": "Securite",
     "Disconnection": "Deconnexion"
   },
+  "footer": {
+    "shops": "BOUTIQUES",
+    "payment_mode": "MODE DE PAIEMENT",
+    "delivery_partners": "PARTENAIRES DE LIVRAISON",
+    "legal_matters": "QUESTIONS LÉGALES",
+    "customer_service": "SERVICE CLIENT",
+    "contact": "CONTACT",
+    "return_policy": "POLITIQUE DE RETOUR",
+    "privacy_policy": "POLITIQUE DE CONFIDENTIALITÉ",
+    "impressum": "IMPRESSION"
+  },
   "update": {
     "validate": "Valider",
     "title": "Mettre à jour le profil"
@@ -224,7 +235,8 @@
     "color": "Couleur",
     "vote": "votes",
     "see_all": "voir tout",
-    "add_wishlist": "Ajouter à la liste de souhaits"
+    "add_wishlist": "Ajouter à la liste de souhaits",
+    "category": "Catégorie"
   },
   "wishlist": {
     "title": "Liste de souhaits",
@@ -233,5 +245,12 @@
     "add_button": "Ajouter au panier",
     "remove_button": "Supprimer",
     "similar_product": "Produits similaires"
+  },
+  "store-product": {
+    "deals": "Offres",
+    "up_to": "Jusqu'à -75%.",
+    "more_button": "En savoir plus",
+    "shop_catalog": "Catalogue de la boutique",
+    "no_products": "Cette boutique n'a pas de produits"
   }
 }

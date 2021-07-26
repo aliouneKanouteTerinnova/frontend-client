@@ -1,0 +1,16 @@
+<div class="home-main mb-5">
+  <div class="home-product" *ngFor="let product of products; let i = index">
+    <img routerLink="/product-detail/{{ product.id }}/{{ i }}/" src="{{ product.images[0].file }}" alt="" />
+    <div class="home-product-info">
+      <div class="description">
+        <span>{{ product.description.slice(0, 17) }}...</span>
+      </div>
+      <div class="price">
+        <span>{{ formatPrice(product.price | currency: 'EUR') }}</span>
+      </div>
+      <div class="addCart">
+        <button (click)="addToCart(product.id)" translate>basket.add_cart</button>
+      </div>
+    </div>
+  </div>
+</div>
