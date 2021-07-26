@@ -55,13 +55,13 @@
   },
   "footer": {
     "shops": "SHOPS",
-    "payment_mode": "PAYMENT MODE",
-    "delivery_partners": "DELIVERY PARTENERS",
-    "legal_matters": "LEGAL MATTERS",
-    "customer_service": "CUSTOMER SERVICE",
+    "paymentMode": "PAYMENT MODE",
+    "deliveryPartners": "DELIVERY PARTENERS",
+    "legalMatters": "LEGAL MATTERS",
+    "customerService": "CUSTOMER SERVICE",
     "contact": "CONTACT",
-    "return_policy": "RETURN POLICY",
-    "privacy_policy": "PRIVACY POLICY",
+    "returnPolicy": "RETURN POLICY",
+    "privacyPolicy": "PRIVACY POLICY",
     "impressum": "IMPRESSUM"
   },
   "update": {
@@ -246,11 +246,11 @@
     "remove_button": "Remove",
     "similar_product": "Similary products"
   },
-  "store-product": {
+  "storeProduct": {
     "deals": "Deals",
-    "up_to": "Up to -75%",
-    "more_button": "Learn more",
-    "shop_catalog": "Shop Catalog",
-    "no_products": "This store has no products"
+    "upTo": "Up to -75%",
+    "moreButton": "Learn more",
+    "shopCatalog": "Shop Catalog",
+    "noProducts": "This store has no products"
   }
 }
