@@ -60,9 +60,11 @@ export class CreateProductComponent implements OnInit {
       description: ['', Validators.required],
       price: ['', Validators.required],
       quantity: ['', Validators.required],
-      category: '',
-      store: '',
-      pictures: this.fb.array([]),
+
+      category: ['', Validators.required],
+      store: ['', Validators.required],
+      img: ['', Validators.required],
+
     });
 
     this.getProducts();
@@ -137,6 +139,7 @@ export class CreateProductComponent implements OnInit {
 
   onSubmit() {
     // products.image = this.createProductForm.get('image').value;
+
     const products = new Products();
     let itemsProcessed = 0;
     this.imagesTable.forEach((item, index, array) => {
@@ -178,6 +181,7 @@ export class CreateProductComponent implements OnInit {
                 });
               }
             );
+
           }
         },
         (error) => {

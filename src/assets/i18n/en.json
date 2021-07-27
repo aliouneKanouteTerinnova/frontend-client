@@ -53,6 +53,18 @@
     "Setting": "Setting",
     "Disconnection": "Disconnection"
   },
+  "footer": {
+    "shops": "SHOPS",
+    "moreShop": "View more shops",
+    "paymentMode": "PAYMENT MODE",
+    "deliveryPartners": "DELIVERY PARTENERS",
+    "legalMatters": "LEGAL MATTERS",
+    "customerService": "CUSTOMER SERVICE",
+    "contact": "CONTACT",
+    "returnPolicy": "RETURN POLICY",
+    "privacyPolicy": "PRIVACY POLICY",
+    "impressum": "IMPRESSUM"
+  },
   "update": {
     "validate": "Validate",
     "title": "Update Profile"
@@ -235,7 +247,11 @@
     "remove_button": "Remove",
     "similar_product": "Similary products"
   },
-  "footer": {
-    "shop": "View more shops"
+  "storeProduct": {
+    "deals": "Deals",
+    "upTo": "Up to -75%",
+    "moreButton": "Learn more",
+    "shopCatalog": "Shop Catalog",
+    "noProducts": "This store has no products"
   }
 }

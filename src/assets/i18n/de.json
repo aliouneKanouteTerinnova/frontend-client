@@ -53,6 +53,18 @@
     "Setting": "Einstellung",
     "Disconnection": "Unterbrechung"
   },
+  "footer": {
+    "shops": "GESCHÄFTE",
+    "moreShop": "Mehr Shops anzeigen",
+    "paymentMode": "ZAHLUNGSWEISE",
+    "deliveryPartners": "LIEFERPARTNER",
+    "legalMatters": "RECHTSANGELEGENHEITEN",
+    "customerService": "KUNDENBETREUUNG",
+    "contact": "KONTAKT",
+    "returnPolicy": "RÜCKGABEPOLITIK",
+    "privacyPolicy": "PRIVACY-POLITIK",
+    "impressum": "IMPRESSUM"
+  },
   "update": {
     "validate": "Validieren",
     "title": "Profil aktualisieren"
@@ -235,7 +247,11 @@
     "remove_button": "Entfernen",
     "similar_product": "Gleichartige produkte"
   },
-  "footer": {
-    "shop": "Mehr Shops anzeigen"
+  "storeProduct": {
+    "deals": "Deals",
+    "upTo": "Bis zu -75%",
+    "moreButton": "Mehr erfahren",
+    "shopCatalog": "Shop-Katalog",
+    "noProducts": "Dieser shop hat keine produkte"
   }
 }
