@@ -234,5 +234,8 @@
     "add_button": "Ajouter au panier",
     "remove_button": "Supprimer",
     "similar_product": "Produits similaires"
+  },
+  "footer": {
+    "shop": "Voir Plus de Boutique"
   }
 }
