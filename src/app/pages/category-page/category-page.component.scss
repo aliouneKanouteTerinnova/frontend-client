@@ -147,6 +147,7 @@ hr {
   left: 4%;
   color: #fff;
   cursor: pointer;
+  margin-bottom: 0px;
 }
 
 .ctg-img {
@@ -154,14 +155,15 @@ hr {
   grid-template-columns: repeat(4, 1fr);
   grid-gap: 25px;
   grid-auto-rows: minmax(100px, auto);
-  // margin: 50px 100px;
+  margin-bottom: -220px;
 
   .img-1 {
     grid-column: span 3;
+    margin-bottom: -290px;
 
     img {
       width: 100%;
-      height: max-content;
+      height: 50%;
       opacity: 0.4;
     }
   }
@@ -172,7 +174,8 @@ hr {
 
     img {
       width: 100%;
-      height: max-content;
+      height: 50%;
+      margin-top: -30px;
       opacity: 0.6;
     }
   }
@@ -182,7 +185,7 @@ hr {
 
     img {
       width: 500px;
-      height: 93%;
+      height: 66%;
       opacity: 0.8;
     }
   }
@@ -200,6 +203,24 @@ hr {
         width: 600px;
       }
     }
+    .img-2 {
+      img {
+        margin-top: 92px;
+      }
+    }
+    .img-3 {
+      margin-top: -92px;
+    }
+  }
+}
+@media (max-width: 768px) {
+  .img-2 {
+    img {
+      // margin-top: 0px !important;
+    }
+  }
+  .img-3 {
+    margin-top: -260px;
   }
 }
 
@@ -211,6 +232,22 @@ hr {
       img {
         width: 250px;
       }
+    }
+  }
+}
+
+@media (max-width: 1024px) {
+  .img-3 {
+    img {
+      height: 72% !important;
+    }
+  }
+  .ctg-img {
+    margin-bottom: -175px;
+  }
+  .img-2 {
+    img {
+      margin-top: 65px;
     }
   }
 }
