@@ -151,7 +151,9 @@ export class CheckoutComponent implements OnInit {
           };
           this.cartService.addItemToCart(item, this.currentUser['user'].token).subscribe(
             (dataItem) => {},
-            (error) => {}
+            (error) => {
+              console.log(error);
+            }
           );
         });
         const addresse: Address = {
@@ -221,7 +223,16 @@ export class CheckoutComponent implements OnInit {
           }
         );
       },
-      (errors) => {}
+      (errors) => {
+        Swal.fire({
+          position: 'top-end',
+          icon: 'error',
+          title: `${errors.error.error}`,
+          showConfirmButton: true,
+          timer: 5000,
+        });
+        console.log(errors);
+      }
     );
   }
 

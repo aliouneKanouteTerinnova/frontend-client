@@ -26,6 +26,7 @@ export class HomeComponent implements OnInit {
   currentUser: AuthResponded;
   lang = false;
   token;
+  isIconClicked = false;
 
   constructor(
     private authService: AuthenticationsService,
@@ -59,6 +60,7 @@ export class HomeComponent implements OnInit {
     }
   }
   addToCart(id: Number) {
+    this.isIconClicked = true;
     this.cartService.AddProductToCart(id);
     Swal.fire({
       // position: 'top-end',
@@ -66,6 +68,8 @@ export class HomeComponent implements OnInit {
       title: 'Product added to cart!',
       showConfirmButton: false,
       timer: 2000,
+    }).then(() => {
+      this.isIconClicked = false;
     });
   }
   handleRightClick() {
@@ -94,9 +98,9 @@ export class HomeComponent implements OnInit {
   getProducts() {
     this.productsService.getAllProducts().subscribe((data) => {
       this.products = data.results;
-      this.products = this.products.slice(0, 15);
-      this.bestSelling = this.products.slice(0, 5);
-      this.goodStuff = this.products.slice(1, 8);
+      this.products = this.products.slice(0, 25);
+      this.bestSelling = this.products.slice(0, 10);
+      this.goodStuff = this.products.slice(1, 11);
     });
   }
 
@@ -122,6 +126,7 @@ export class HomeComponent implements OnInit {
   }
 
   AddWishlist(id: any) {
+    this.isIconClicked = true;
     if (!this.currentUser) {
       this.router.navigate(['/register']);
     }
@@ -137,8 +142,7 @@ export class HomeComponent implements OnInit {
           showConfirmButton: false,
           timer: 2000,
         });
-
-        console.log(res);
+        this.isIconClicked = false;
       },
       (error) => {
         Swal.fire({
@@ -147,9 +151,14 @@ export class HomeComponent implements OnInit {
           showConfirmButton: false,
           timer: 2000,
         });
-        console.log(error);
+        this.isIconClicked = false;
       }
     );
-    console.log('wishlist added');
+  }
+
+  imageClicked(id, index) {
+    if (!this.isIconClicked) {
+      this.redirectProduct(id, index);
+    }
   }
 }

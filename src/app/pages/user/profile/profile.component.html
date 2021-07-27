@@ -13,7 +13,7 @@
                 <p class="text-muted font-size-sm">
                   {{ user['user'].address.street }}, {{ user['user'].address.state }}
                 </p>
-                <button class="btn btn-danger" (click)="logOut()" translate>profile.logout_button</button>
+                <button class="btn btn-primary" routerLink="/update" translate>profile.edit_button</button>
               </div>
             </div>
           </div>

@@ -16,16 +16,19 @@ export class CategoryPageComponent implements OnInit {
   category1: any;
   category2: any;
   category3: any;
+  id = 'f36c9778-722b-48e0-85df-cfc1a12e95fc';
 
   constructor(private categoryService: CategoriesService, private productsService: ProductsService) {}
 
   ngOnInit(): void {
     this.getCategory();
     this.getProducts();
+    this.getCategoryById();
   }
 
   getCategory() {
     this.categoryService.getAllCategories().subscribe((data) => {
+      console.log(data);
       this.categories = data.results;
       this.listParent = this.categories.filter((category) => category.parent === null);
       if (this.listParent.length >= 3) {
@@ -45,6 +48,12 @@ export class CategoryPageComponent implements OnInit {
         this.category2 = null;
         this.category3 = null;
       }
+    });
+  }
+
+  getCategoryById() {
+    this.categoryService.getCategory(this.id).subscribe((res) => {
+      console.log(res);
     });
   }
 

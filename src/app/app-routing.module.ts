@@ -14,7 +14,7 @@ import { RegistrationComponent } from './pages/user/registration/registration.co
 import { UpdateProfileComponent } from './pages/user/update-profile/update-profile.component';
 import { Routes, RouterModule } from '@angular/router';
 
-import { StoresComponent } from './pages/stores/stores.component';
+import { StoresComponent } from './pages/stores/list-store/stores.component';
 import { UpdateProductComponent } from './pages/products/update-product/update-product.component';
 import { ProductsComponent } from './pages/products/products.component';
 import { CreateStoresComponent } from './pages/stores/create-stores/create-stores.component';
@@ -29,6 +29,7 @@ import { OrderListComponent } from './pages/order/order-list/order-list.componen
 import { ConditionUsedComponent } from './pages/user/condition-used/condition-used.component';
 import { SellerOrderComponent } from './pages/order/seller-order/seller-order.component';
 import { ProductResultComponent } from './pages/products/product-result/product-result.component';
+import { StoreProductsComponent } from './pages/stores/store-products/store-products.component';
 
 const routes: Routes = [
   {
@@ -79,6 +80,8 @@ const routes: Routes = [
   { path: 'update-product/:id', component: UpdateProductComponent, canActivate: [AuthGuard] },
   { path: 'product-detail/:id/:indexPhoto', component: ProductDetailComponent },
   { path: 'list-store', component: StoresComponent },
+  { path: 'all-stores', component: StoresComponent },
+  { path: 'store-products/:id', component: StoreProductsComponent },
   { path: 'updatestore/:id', component: EditStoresComponent, canActivate: [AuthGuard] },
   { path: 'create-store', component: CreateStoresComponent, canActivate: [AuthGuard] },
   { path: 'categories', component: CategoriesComponent },
@@ -93,7 +96,7 @@ const routes: Routes = [
 ];
 @NgModule({
   declarations: [],
-  imports: [CommonModule, RouterModule.forRoot(routes)],
+  imports: [CommonModule, RouterModule.forRoot(routes, { scrollPositionRestoration: 'enabled' })],
   exports: [RouterModule],
 })
 export class AppRoutingModule {}

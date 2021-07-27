@@ -23,6 +23,14 @@ export class ProductResultComponent implements OnInit {
   isClicked = false;
   currentUser: AuthResponded;
   token: any;
+  categoryTxt = [];
+  storeTxt = [];
+  isChecked = false;
+  priceFilter: any;
+  minPrice: any;
+  maxPrice: any;
+  filterPriceTable = [];
+  page: Number = 1;
   constructor(
     private authService: AuthenticationsService,
     private productsService: ProductsService,
@@ -41,12 +49,16 @@ export class ProductResultComponent implements OnInit {
     this.searchProducts(this.product);
     this.getCategory();
     this.getStores();
+    this.priceFilter = null;
   }
   searchProducts(keyWord: string) {
     this.productsService.searchProducts(keyWord).subscribe(
       (data) => {
         this.isClicked = false;
         this.products = data.results;
+        this.parseProduts();
+        this.isChecked = this.products.length > 0 ? true : false;
+        this.product = keyWord;
       },
       (error) => {
         Swal.fire({
@@ -65,14 +77,13 @@ export class ProductResultComponent implements OnInit {
 
   getCategory() {
     this.categoryService.getAllCategories().subscribe((data) => {
-      this.categories = data.results.slice(0, 5);
+      this.categories = data.results;
     });
   }
   getStores() {
     this.storeService.getAllStores().subscribe(
       (res) => {
-        this.stores = res.results.slice(0, 5);
-        console.log(this.stores);
+        this.stores = res.results;
       },
       (error) => {
         console.log(error);
@@ -121,6 +132,148 @@ export class ProductResultComponent implements OnInit {
         console.log(error);
       }
     );
-    console.log('wishlist added');
+  }
+
+  filterCategory(e, category) {
+    this.isChecked = true;
+    let idCategory = e.target.value;
+    let checked = e.target.checked;
+    if (checked) {
+      this.categoryTxt.push(category.id);
+    } else {
+      for (let i = 0; this.categoryTxt.length > i; i++) {
+        if (this.categoryTxt[i] === idCategory) {
+          this.categoryTxt.splice(i, 1);
+        }
+      }
+    }
+    this.productsService.searchProducts(this.product).subscribe(
+      (data) => {
+        let firstTab = [];
+        let secondTab = [];
+        this.isClicked = false;
+
+        if (this.categoryTxt.length > 0) {
+          this.categoryTxt.forEach((el) => {
+            const table = data.results.filter(function (item) {
+              return JSON.stringify(item).toLowerCase().includes(el);
+            });
+            firstTab = [...firstTab, ...table];
+          });
+
+          if (this.storeTxt.length > 0) {
+            this.storeTxt.forEach((el) => {
+              const table = firstTab.filter(function (item) {
+                return JSON.stringify(item).toLowerCase().includes(el);
+              });
+              secondTab = [...secondTab, ...table];
+            });
+            firstTab = secondTab;
+          } else {
+            firstTab = firstTab;
+          }
+        } else if (this.storeTxt.length > 0) {
+          this.filterShop(e, category);
+        } else {
+          firstTab = data.results;
+        }
+        this.products = firstTab;
+        this.parseProduts();
+      },
+      (error) => {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: `An error occured`,
+        });
+      }
+    );
+  }
+
+  parseProduts() {
+    if (this.products.length > 0) {
+      this.products.forEach((element, i) => {
+        this.categoryService.getCategory(element.category).subscribe(
+          (data) => {
+            this.products[i].category = data.name;
+          },
+          (error) => {
+            Swal.fire({
+              icon: 'error',
+              title: 'Oops...',
+              text: 'Something went wrong!',
+            });
+          }
+        );
+      });
+    }
+  }
+
+  filterShop(e, store) {
+    this.isChecked = true;
+    let idStore = e.target.value;
+    let checked = e.target.checked;
+    if (checked) {
+      this.storeTxt.push(store.id);
+    } else {
+      for (let i = 0; this.storeTxt.length > i; i++) {
+        if (this.storeTxt[i] === idStore) {
+          this.storeTxt.splice(i, 1);
+        }
+      }
+    }
+    this.productsService.searchProducts(this.product).subscribe(
+      (data) => {
+        let firstTab = [];
+        let secondTab = [];
+        this.isClicked = false;
+
+        if (this.storeTxt.length > 0) {
+          this.storeTxt.forEach((el) => {
+            const table = data.results.filter(function (item) {
+              return JSON.stringify(item).toLowerCase().includes(el);
+            });
+            firstTab = [...firstTab, ...table];
+          });
+          if (this.categoryTxt.length > 0) {
+            this.categoryTxt.forEach((el) => {
+              const table = firstTab.filter(function (item) {
+                return JSON.stringify(item).toLowerCase().includes(el);
+              });
+              secondTab = [...secondTab, ...table];
+            });
+            firstTab = secondTab;
+          } else {
+            firstTab = firstTab;
+          }
+        } else if (this.categoryTxt.length > 0) {
+          this.filterCategory(e, store);
+        } else {
+          firstTab = data.results;
+        }
+        this.products = firstTab;
+        this.parseProduts();
+      },
+      (error) => {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: `An error occured`,
+        });
+      }
+    );
+  }
+
+  priceFiltering(e) {
+    this.filterPriceTable = [];
+
+    let price = e.target.value;
+    price = Number(price);
+    this.priceFilter = price;
+  }
+  filterMinMaxPrice() {
+    this.priceFilter = null;
+    this.filterPriceTable = [this.minPrice, this.maxPrice];
+    console.log(this.minPrice, this.maxPrice);
   }
 }
