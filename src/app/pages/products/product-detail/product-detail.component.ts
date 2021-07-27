@@ -49,14 +49,15 @@ export class ProductDetailComponent implements OnInit {
         }
       );
       this.product = response;
-      console.log(this.product);
       this.productImage = response.images[0].file;
-      this.images = response.images;
-      console.log(this.images);
+      this.images = response.images.slice(0, 4);
       this.fakePrice = Number(this.product.price) + 1000;
     });
   }
 
+  changeImage(i: number) {
+    this.productImage = this.images[i].file;
+  }
   addToCart(id: Number) {
     this.cartService.AddProductToCart(id);
     Swal.fire({

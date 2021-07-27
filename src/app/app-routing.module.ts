@@ -80,6 +80,7 @@ const routes: Routes = [
   { path: 'update-product/:id', component: UpdateProductComponent, canActivate: [AuthGuard] },
   { path: 'product-detail/:id/:indexPhoto', component: ProductDetailComponent },
   { path: 'list-store', component: StoresComponent },
+  { path: 'all-stores', component: StoresComponent },
   { path: 'store-products/:id', component: StoreProductsComponent },
   { path: 'updatestore/:id', component: EditStoresComponent, canActivate: [AuthGuard] },
   { path: 'create-store', component: CreateStoresComponent, canActivate: [AuthGuard] },

@@ -91,7 +91,6 @@ export class CreateProductComponent implements OnInit {
 
   handleFileInput(event) {
     const file = <File>event.target.files[0];
-    console.log(file);
     // for (let file of files) {
     let fileName = file.name;
     if (file.size > 10485760) {
@@ -139,52 +138,54 @@ export class CreateProductComponent implements OnInit {
   onSubmit() {
     // products.image = this.createProductForm.get('image').value;
     const products = new Products();
-
-    for (let i = 0; i < this.imagesTable.length; i++) {
+    let itemsProcessed = 0;
+    this.imagesTable.forEach((item, index, array) => {
       let fd = new FormData();
-      fd.append('file', this.imagesTable[i]);
+      fd.append('file', item);
+      itemsProcessed++;
       this.productsService.uploadFile(fd, this.currentUser.user.token).subscribe(
         (data) => {
           this.images.push(data.body.id);
+          if (this.images.length === this.imagesTable.length) {
+            products.name = this.createProductForm.get('name').value;
+            products.slug = this.createProductForm.get('slug').value;
+            products.description = this.createProductForm.get('description').value;
+            products.price = this.createProductForm.get('price').value;
+            products.date_added = '';
+            products.is_active = true;
+            products.quantity = this.createProductForm.get('quantity').value;
+            products.category = this.categoryId;
+            products.store = this.storeId;
+            products.images = this.images;
+            products.reviews = [];
+            this.productsService.addProduct(products, this.currentUser.user.token).subscribe(
+              (res) => {
+                Swal.fire({
+                  position: 'top-end',
+                  icon: 'success',
+                  title: 'Product Created',
+                  showConfirmButton: false,
+                  timer: 1500,
+                });
+                this.route.navigate(['/products']);
+                this.getProducts();
+              },
+              (err) => {
+                Swal.fire({
+                  icon: 'error',
+                  title: 'Oops...',
+                  text: err.error.detail,
+                });
+              }
+            );
+          }
         },
         (error) => {
           console.log(error);
         }
       );
-    }
+    });
 
     // products.id = Math.floor(Math.random() * 100);
-    products.name = this.createProductForm.get('name').value;
-    products.slug = this.createProductForm.get('slug').value;
-    products.description = this.createProductForm.get('description').value;
-    products.price = this.createProductForm.get('price').value;
-    products.date_added = '';
-    products.is_active = true;
-    products.quantity = this.createProductForm.get('quantity').value;
-    products.category = this.categoryId;
-    products.store = this.storeId;
-    products.images = this.images;
-    products.reviews = [];
-    console.log(this.images);
-    this.productsService.addProduct(products, this.currentUser.user.token).subscribe(
-      (res) => {
-        Swal.fire({
-          position: 'top-end',
-          icon: 'success',
-          title: 'Product Created',
-          showConfirmButton: false,
-          timer: 1500,
-        });
-        // this.route.navigate(['/products']);
-        // this.getProducts();
-      },
-      (err) => {
-        Swal.fire({
-          icon: 'error',
-          title: 'Oops...',
-          text: err.error.detail,
-        });
-      }
-    );
   }
 }
