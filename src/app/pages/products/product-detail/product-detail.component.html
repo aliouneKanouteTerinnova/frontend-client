@@ -7,8 +7,10 @@
         <div class="img">
           <img src="{{ productImage }}" width="300" alt="" />
         </div>
-        <div class="thumbnail_img" *ngFor="let image of images">
-          <img src="{{ image }}" width="80" alt="" />
+        <div class="thumbnail_img">
+          <ul class="image-list" *ngFor="let image of images; let i = index">
+            <li><img src="{{ image.file }}" width="80" alt="" (click)="changeImage(i)" /></li>
+          </ul>
         </div>
       </div>
 
@@ -29,7 +31,7 @@
             <a routerLink="/store-products/{{ store.id }}">{{ store.name }}</a>
           </p>
           <p class="price">{{ formatPrice(product.price | currency: 'EUR') }}</p>
-          <span class="fake_price">{{ formatPrice(fakePrice | currency: 'EUR') }}</span>
+          <!-- <span class="fake_price">{{ formatPrice(fakePrice | currency: 'EUR') }}</span> -->
         </div>
 
         <div class="button">

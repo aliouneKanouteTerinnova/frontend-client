@@ -75,7 +75,6 @@ export class ProductsComponent implements OnInit {
     this.productsService.getSellersProducts(this.currentUser.user.token).subscribe(
       (data) => {
         this.products = data.body.results;
-        console.log(this.products);
         if (this.products.length > 0) {
           this.products.forEach((element, i) => {
             this.storesService.getCurrentData(element.store).subscribe(

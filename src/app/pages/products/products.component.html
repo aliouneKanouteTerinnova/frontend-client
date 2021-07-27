@@ -28,11 +28,17 @@
         <div class="store_name">
           <b><span translate>product.store</span> : </b> {{ product.store }}
         </div>
-        <div class="img mb-2">
+        <div class="img mb-2" *ngIf="product.images.length === 0">
+          <img class="img-thumbnail" src="" alt="" />
+        </div>
+        <div class="img mb-2" *ngIf="product.images.length > 0">
           <img class="img-thumbnail" src="{{ product.images[0].file }}" alt="" />
         </div>
         <div class="content">
-          <h3 class="name">
+          <h3 class="name" *ngIf="product.name.length > 20">
+            <b><span translate>product.name</span> : </b>{{ product.name.slice(0, 20) }}...
+          </h3>
+          <h3 class="name" *ngIf="product.name.length <= 20">
             <b><span translate>product.name</span> : </b>{{ product.name }}
           </h3>
           <span class="slug"
