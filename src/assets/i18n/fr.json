@@ -53,6 +53,18 @@
     "Setting": "Securite",
     "Disconnection": "Deconnexion"
   },
+  "footer": {
+    "shops": "BOUTIQUES",
+    "moreShop": "Voir plus de Boutique",
+    "paymentMode": "MODE DE PAIEMENT",
+    "deliveryPartners": "PARTENAIRES DE LIVRAISON",
+    "legalMatters": "QUESTIONS LÉGALES",
+    "customerService": "SERVICE CLIENT",
+    "contact": "CONTACT",
+    "returnPolicy": "POLITIQUE DE RETOUR",
+    "privacyPolicy": "POLITIQUE DE CONFIDENTIALITÉ",
+    "impressum": "IMPRESSION"
+  },
   "update": {
     "validate": "Valider",
     "title": "Mettre à jour le profil"
@@ -235,7 +247,11 @@
     "remove_button": "Supprimer",
     "similar_product": "Produits similaires"
   },
-  "footer": {
-    "shop": "Voir Plus de Boutique"
+  "storeProduct": {
+    "deals": "Offres",
+    "upTo": "Jusqu'à -75%.",
+    "moreButton": "En savoir plus",
+    "shopCatalog": "Catalogue de la boutique",
+    "noProducts": "Cette boutique n'a pas de produits"
   }
 }
