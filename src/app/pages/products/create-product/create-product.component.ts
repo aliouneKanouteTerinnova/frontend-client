@@ -60,8 +60,8 @@ export class CreateProductComponent implements OnInit {
       description: ['', Validators.required],
       price: ['', Validators.required],
       quantity: ['', Validators.required],
-      category: '',
-      store: '',
+      category: ['', Validators.required],
+      store: ['', Validators.required],
       img: ['', Validators.required],
     });
 
@@ -150,10 +150,11 @@ export class CreateProductComponent implements OnInit {
             this.getProducts();
           },
           (err) => {
+            console.log(err.error.errors.slug);
             Swal.fire({
               icon: 'error',
               title: 'Oops...',
-              text: err.error.detail,
+              text: `${err.error.errors.slug}`,
             });
           }
         );
