@@ -98,9 +98,9 @@ export class HomeComponent implements OnInit {
   getProducts() {
     this.productsService.getAllProducts().subscribe((data) => {
       this.products = data.results;
-      this.products = this.products.slice(0, 15);
-      this.bestSelling = this.products.slice(0, 5);
-      this.goodStuff = this.products.slice(1, 8);
+      this.products = this.products.slice(0, 25);
+      this.bestSelling = this.products.slice(0, 10);
+      this.goodStuff = this.products.slice(1, 11);
     });
   }
 
