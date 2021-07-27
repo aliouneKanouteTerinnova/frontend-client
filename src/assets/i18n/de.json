@@ -234,5 +234,8 @@
     "add_button": "In den Warenkorb legen",
     "remove_button": "Entfernen",
     "similar_product": "Gleichartige produkte"
+  },
+  "footer": {
+    "shop": "Mehr Shops anzeigen"
   }
 }

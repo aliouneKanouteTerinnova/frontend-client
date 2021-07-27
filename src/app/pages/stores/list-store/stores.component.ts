@@ -5,6 +5,7 @@ import { StoresService } from 'src/app/services/stores/stores.service';
 import { SwalComponent } from '@sweetalert2/ngx-sweetalert2';
 // import { Store } from './store';
 import Swal from 'sweetalert2';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-stores',
@@ -21,14 +22,18 @@ export class StoresComponent implements OnInit {
   disabledBtn = false;
 
   constructor(
-    private fb: FormBuilder,
     private storesService: StoresService,
-    private authService: AuthenticationsService
+    private authService: AuthenticationsService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
     this.currentUser = this.authService.currentUserValue;
-    this.getStores();
+    if (this.router.url === '/all-stores') {
+      this.getAllStores();
+    } else {
+      this.getStores();
+    }
 
     this.userType = this.currentUser.user.account_type;
     if (this.userType === 'CUSTOMER') {
@@ -40,7 +45,16 @@ export class StoresComponent implements OnInit {
     this.storesService.getSellerStore(this.currentUser.user.token).subscribe(
       (res) => {
         this.stores = res.body.results;
-        console.log(this.stores);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
+  getAllStores() {
+    this.storesService.getAllStores().subscribe(
+      (res) => {
+        this.stores = res.results;
       },
       (error) => {
         console.log(error);
