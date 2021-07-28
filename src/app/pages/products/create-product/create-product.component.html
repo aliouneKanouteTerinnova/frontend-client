@@ -62,20 +62,40 @@
             <label for="active" class="form-check-label"><span translate>product.is_active</span></label>
           </div>
 
-          <div class="form-group col-4">
-            <label for="img"><span translate>product.image</span></label
+          <div class="form-group col-8">
+            <label for="pictures"><span translate>product.image</span></label
             ><br />
-            <input
-              class="form-control"
-              id="file"
-              type="file"
-              (change)="handleFileInput($event)"
-              accept="image/jpg,image/jpeg,image/png,application/pdf"
-              maxFileSize="1000000"
-              multiple
-              required
-              formControlName="img"
-            />
+            <table class="table" formArrayName="pictures">
+              <tr>
+                <th colspan="2">Add Multiple Image:</th>
+                <th width="150px">
+                  <button type="button" (click)="addImage()" class="btn btn-primary">Add Picture</button>
+                </th>
+              </tr>
+              <tr *ngFor="let image of pictures().controls; let i = index" [formGroupName]="i">
+                <td>
+                  Image :
+                  <input
+                    class="form-control"
+                    id="file"
+                    type="file"
+                    (change)="handleFileInput($event)"
+                    accept="image/jpg,image/jpeg,image/png,application/pdf"
+                    maxFileSize="1000000"
+                    multiple
+                    required
+                    formControlName="img"
+                  />
+                </td>
+                <!-- <td>
+                    Price:
+                    <input type="text" formControlName="price" class="form-control">
+                </td> -->
+                <td>
+                  <button (click)="removeImage(i)" class="btn btn-danger">Remove</button>
+                </td>
+              </tr>
+            </table>
           </div>
         </div>
 

@@ -10,6 +10,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatInputModule } from '@angular/material/input';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatCarouselModule } from '@ngmodule/material-carousel';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [],
@@ -27,6 +28,7 @@ import { MatCarouselModule } from '@ngmodule/material-carousel';
     MatCarouselModule,
     FormsModule,
     ReactiveFormsModule,
+    MatDialogModule,
   ],
 })
 export class SharedModule {}
