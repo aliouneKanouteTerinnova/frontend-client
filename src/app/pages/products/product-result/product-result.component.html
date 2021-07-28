@@ -293,19 +293,14 @@
                     </div>
                     <div class="col">
                       <div class="rating-wrap">
-                        <ul class="rating-stars">
-                          <li style="width: 80%" class="stars-active">
-                            <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                          </li>
-                          <li>
-                            <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                          </li>
-                        </ul>
-                        <div class="label-rating">(7 <span translate>search.vote</span>)</div>
+                        <span
+                          *ngFor="let rat of getCheckedRatingArray(product.rating)"
+                          class="fa fa-star checked"
+                        ></span>
+                        <span class="fa fa-star" *ngFor="let rat of getRatingArray(product.rating)"></span>
+                        <div class="label-rating">
+                          ({{ parseRating(product.rating) }} <span translate>search.vote</span>)
+                        </div>
                       </div>
                     </div>
                     <div class="col">
