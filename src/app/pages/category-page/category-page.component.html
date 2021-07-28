@@ -1,31 +1,9 @@
 <app-navbar></app-navbar>
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-sm-10 col-md-6 col-lg-8">
-      <h1 class="mb-5"><span translate>nav.category</span></h1>
-      <p class="mb-5">
-        Lorem, ipsum dolor sit amet consectetur adipisicing elit. In, eveniet. Sint voluptatum eos, placeat,<br />
-        illo nostrum quos iusto autem totam facilis aut itaque molestiae cumque veritatis quaerat,
-      </p>
-      <div class="reduction"><span translate>category.reduction</span></div>
-    </div>
+<app-header></app-header>
 
-    <div class="col-sm-10 col-md-6 col-lg-4">
-      <img src="../../../assets/img/header2.png" alt="" />
-    </div>
-  </div>
-</div>
-
-<div class="container d-flex mt-5">
-  <div class="col mr-4 mb-2"><span translate>nav.category</span></div>
-  <div class="col mr-2 mb-2">Afrique</div>
-  <div class="col mr-2 mb-2">Europe</div>
-  <div class="col mr-2 mb-2">Asie</div>
-</div>
-
-<div class="container grid mt-5">
+<!-- <div class="container grid mt-5">
   <app-product [products]="products"> </app-product>
-</div>
+</div> -->
 
 <section class="diff-ctg mt-5">
   <div class="container">
@@ -56,6 +34,7 @@
     </div>
   </div>
 </section>
+<hr />
 
 <section class="autres-ctg mt-5">
   <div class="container text-center">
@@ -68,33 +47,9 @@
       <div class="section wrapper">
         <div class="box span_1_of_4" *ngFor="let category of categories; let i = index">
           <img src="../../../assets/img/Products/{{ i }}.png" alt="" width="250" />
-          <h2>{{ category.name }}</h2>
+          <h2 routerLink="/categories-detail/{{ category.id }}">{{ category.name }}</h2>
         </div>
-        <!-- <div class="box span_1_of_4">
-          <img src="../../../assets/img/Products/0.png" alt="" width="250" />
-        </div>
-        <div class="box span_1_of_4">
-          <img src="../../../assets/img/Products/0.png" alt="" width="250" />
-        </div>
-        <div class="box span_1_of_4">
-          <img src="../../../assets/img/Products/0.png" alt="" width="250" />
-        </div> -->
       </div>
     </div>
   </div>
 </section>
-
-<div class="container-fluid mt-5 banniere">
-  <div class="row">
-    <div class="col offset-1">
-      <h1><span translate>product_detail.banniere</span></h1>
-      <p>
-        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Impedit in eum itaque possimus. Veniam delectus
-        numquam vitae! Quibusdam, pariatur,
-      </p>
-    </div>
-    <div class="col offset-1 img">
-      <img src="../../../../assets/img/Ellipse_9@2x.png" alt="" />
-    </div>
-  </div>
-</div>
