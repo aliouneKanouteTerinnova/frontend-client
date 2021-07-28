@@ -63,8 +63,7 @@ export class CreateProductComponent implements OnInit {
 
       category: ['', Validators.required],
       store: ['', Validators.required],
-      img: ['', Validators.required],
-
+      pictures: this.fb.array([]),
     });
 
     this.getProducts();
@@ -181,7 +180,6 @@ export class CreateProductComponent implements OnInit {
                 });
               }
             );
-
           }
         },
         (error) => {
