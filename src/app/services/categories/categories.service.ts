@@ -19,10 +19,6 @@ export class CategoriesService {
     return this.httpClient.get<any>(`${environment.baseUrl}categories/${id}`);
   }
 
-  getProductCategory(id: string) {
-    return this.httpClient.get<any>(`${environment.baseUrl}categories/${id}/products`);
-  }
-
   addCategory(category: Category, token: string) {
     token = 'token ' + token;
     return this.httpClient.post(`${environment.baseUrl}categories`, category, {

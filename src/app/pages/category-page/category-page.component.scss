@@ -274,6 +274,10 @@ hr {
         margin: 1rem 0;
         background-color: #29235c;
         height: 260px;
+
+        h2 {
+          cursor: pointer;
+        }
       }
     }
   }

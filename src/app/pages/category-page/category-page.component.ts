@@ -3,6 +3,7 @@ import { Products } from 'src/app/models/products/products';
 import { Category } from 'src/app/models/category/category';
 import { CategoriesService } from 'src/app/services/categories/categories.service';
 import { ProductsService } from 'src/app/services/products/products.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-category-page',
@@ -16,14 +17,19 @@ export class CategoryPageComponent implements OnInit {
   category1: any;
   category2: any;
   category3: any;
-  id = 'f36c9778-722b-48e0-85df-cfc1a12e95fc';
+  categoryId: string;
 
-  constructor(private categoryService: CategoriesService, private productsService: ProductsService) {}
+  constructor(
+    private categoryService: CategoriesService,
+    private productsService: ProductsService,
+    private router: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
+    this.categoryId = this.router.snapshot.params.id;
     this.getCategory();
     this.getProducts();
-    this.getCategoryById();
+    // this.getCategoryById();
   }
 
   getCategory() {
@@ -51,11 +57,11 @@ export class CategoryPageComponent implements OnInit {
     });
   }
 
-  getCategoryById() {
-    this.categoryService.getCategory(this.id).subscribe((res) => {
-      console.log(res);
-    });
-  }
+  // getCategoryById() {
+  //   this.categoryService.getCategory(this.categoryId).subscribe((res) => {
+  //     console.log(res);
+  //   });
+  // }
 
   getProducts() {
     this.productsService.getAllProducts().subscribe((data) => {
