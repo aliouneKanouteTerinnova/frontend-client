@@ -7,6 +7,8 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { Auth, AuthResponded } from 'src/app/models/auth/auth';
 import { environment } from 'src/environments/environment';
 import { User } from 'src/app/models/user/user';
+import { CartService } from '../cart/cart.service';
+import { CartModelServer } from 'src/app/models/cart/cart';
 
 @Injectable({
   providedIn: 'root',
@@ -14,8 +16,12 @@ import { User } from 'src/app/models/user/user';
 export class AuthenticationsService {
   private currentUserSubject: BehaviorSubject<AuthResponded>;
   public currentUser: Observable<AuthResponded>;
+  order = [];
+  orderProducts = [];
+  currentUserC: any;
+  cartData: CartModelServer;
 
-  constructor(private httpClient: HttpClient, private cookieService: CookieService) {
+  constructor(private httpClient: HttpClient, public cartService: CartService, private cookieService: CookieService) {
     if (cookieService.check('currentUser')) {
       this.currentUserSubject = new BehaviorSubject<AuthResponded>(JSON.parse(this.cookieService.get('currentUser')));
     } else {
@@ -38,6 +44,27 @@ export class AuthenticationsService {
         if (userResponded) {
           this.cookieService.set('currentUser', JSON.stringify(userResponded));
           this.currentUserSubject.next(userResponded);
+          this.currentUserC = this.currentUserValue;
+          this.cartService.getCart(this.currentUserC['user'].token).subscribe(
+            (data) => {
+              if (data.body && data.body.status === 'Open') {
+                this.orderProducts = data.body.items;
+                if (this.orderProducts.length > 0) {
+                  this.orderProducts.forEach((element) => {
+                    // console.log(element.product, element.quantity);
+                    if (element.quantity === 1) {
+                      this.cartService.AddProductToCart(element.product.id);
+                    } else {
+                      this.cartService.AddProductToCart(element.product.id, element.quantity);
+                    }
+                  });
+                }
+              }
+            },
+            (error) => {
+              console.log(error);
+            }
+          );
         }
         return userResponded;
       })
@@ -96,8 +123,26 @@ export class AuthenticationsService {
 
   // User Logout
   logOut() {
+    // this.cartService.cartDataObs$.subscribe((data: CartModelServer) => {
+    //   this.cartData = data;
+    //   this.cartData.data.forEach((element) => {
+    //     const item: Item = {
+    //       product: element.product.id,
+    //       quantity: element.numInCart,
+    //     };
+    //     this.cartService.addItemToCart(item, this.currentUserC['user'].token).subscribe(
+    //       (dataItem) => {},
+    //       (error) => {
+    //         console.log(error);
+    //       }
+    //     );
+    //   });
+    // });
+    // this.currentUserC = this.currentUserValue;
+
     this.cookieService.delete('currentUser');
     this.currentUserSubject.next(null);
+    this.cartService.deleteCart();
   }
 
   //Password reset

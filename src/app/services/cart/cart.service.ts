@@ -8,13 +8,12 @@ import { CartModelPublic, CartModelServer } from '../../models/cart/cart';
 import { Products } from '../../models/products/products';
 import { ProductsService } from '../products/products.service';
 import { CookieService } from 'ngx-cookie-service';
+import { Item } from 'src/app/models/item/item';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CartService {
-  ServerURL = environment.baseUrl;
-
   private cartDataClient: CartModelPublic = { prodData: [{ incart: 0, id: 0 }], total: 0 };
   // This will be sent to the backend Server as post data
   // Cart Data variable to store the cart information on the server
@@ -34,13 +33,19 @@ export class CartService {
   // Data variable to store the cart information on the client's local storage
 
   cartDataObs$ = new BehaviorSubject<CartModelServer>(this.cartDataServer);
+  currentUser: any;
 
   constructor(
     private productService: ProductsService,
     private httpClient: HttpClient,
-    private router: Router,
     private cookieService: CookieService
   ) {
+    if (this.cookieService.get('currentUser')) {
+      this.currentUser = JSON.parse(this.cookieService.get('currentUser'));
+    } else {
+      this.currentUser = null;
+    }
+
     if (cookieService.check('cart')) {
       this.info = JSON.parse(this.cookieService.get('cart'));
       this.cartTotal$.next(this.cartDataServer.total);
@@ -109,6 +114,18 @@ export class CartService {
   }
 
   AddProductToCart(id: Number, quantity?: number) {
+    if (this.currentUser) {
+      const item: Item = {
+        product: id,
+        quantity: quantity > 1 ? quantity : 1,
+      };
+      this.addItemToCart(item, this.currentUser['user'].token).subscribe(
+        (dataItem) => {},
+        (error) => {
+          console.log(error);
+        }
+      );
+    }
     this.productService.getCurrentData(id).subscribe((prod) => {
       // If the cart is empty
       if (this.cartDataServer.data[0].product === undefined) {
@@ -120,12 +137,6 @@ export class CartService {
         this.cartDataClient.total = this.cartDataServer.total;
         this.cookieService.set('cart', JSON.stringify(this.cartDataClient));
         this.cartDataObs$.next(this.cartDataServer);
-        // this.toast.success(`${prod.name} added to the cart.`, "Product Added", {
-        //   timeOut: 1500,
-        //   progressBar: true,
-        //   progressAnimation: 'increasing',
-        //   positionClass: 'toast-top-right'
-        // })
       } // END of IF
       // Cart is not empty
       else {
@@ -207,8 +218,18 @@ export class CartService {
   }
 
   DeleteProductFromCart(index) {
-    /*    console.log(this.cartDataClient.prodData[index].prodId);
-        console.log(this.cartDataServer.data[index].product.id);*/
+    const idProd = this.cartDataServer.data[index].product.id;
+    if (this.currentUser) {
+      console.log(idProd);
+      this.deleteItemToCart(idProd, this.currentUser['user'].token).subscribe(
+        (data) => {
+          console.log(data);
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+    }
 
     // if (window.confirm('Are you sure you want to delete the item?')) {
     this.cartDataServer.data.splice(index, 1);

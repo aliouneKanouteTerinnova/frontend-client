@@ -110,8 +110,6 @@ export class CartComponent implements OnInit {
       c.numInCart = quantity - 1;
       this.ChangeQuantity(index, true);
     }
-
-    console.log(quantity, c);
   }
 
   AddWishlist(id: any) {
