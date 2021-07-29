@@ -30,6 +30,7 @@ import { ConditionUsedComponent } from './pages/user/condition-used/condition-us
 import { SellerOrderComponent } from './pages/order/seller-order/seller-order.component';
 import { ProductResultComponent } from './pages/products/product-result/product-result.component';
 import { StoreProductsComponent } from './pages/stores/store-products/store-products.component';
+import { CategoyDetailComponent } from './pages/category-page/categoy-detail/categoy-detail.component';
 
 const routes: Routes = [
   {
@@ -80,10 +81,12 @@ const routes: Routes = [
   { path: 'update-product/:id', component: UpdateProductComponent, canActivate: [AuthGuard] },
   { path: 'product-detail/:id/:indexPhoto', component: ProductDetailComponent },
   { path: 'list-store', component: StoresComponent },
+  { path: 'all-stores', component: StoresComponent },
   { path: 'store-products/:id', component: StoreProductsComponent },
   { path: 'updatestore/:id', component: EditStoresComponent, canActivate: [AuthGuard] },
   { path: 'create-store', component: CreateStoresComponent, canActivate: [AuthGuard] },
   { path: 'categories', component: CategoriesComponent },
+  { path: 'categories-detail/:id', component: CategoyDetailComponent },
   { path: 'category', component: CategoryPageComponent },
   { path: 'update-categories/:id', component: UpdateCategoriesComponent },
   { path: 'create-categories', component: CreateCategoriesComponent, canActivate: [AuthGuard] },

@@ -14,7 +14,7 @@ import { Router } from '@angular/router';
 import { ProductsService } from './../../../services/products/products.service';
 import { Products } from './../../../models/products/products';
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { Category } from 'src/app/models/category/category';
 import { CategoriesService } from 'src/app/services/categories/categories.service';
 import { StoresService } from 'src/app/services/stores/stores.service';
@@ -37,7 +37,7 @@ export class CreateProductComponent implements OnInit {
   categoryId: any;
   storeId: any;
   images = [];
-  fd = new FormData();
+  imagesTable = [];
 
   filePath = './../../assets/img/Products/';
 
@@ -60,14 +60,34 @@ export class CreateProductComponent implements OnInit {
       description: ['', Validators.required],
       price: ['', Validators.required],
       quantity: ['', Validators.required],
-      category: '',
-      store: '',
-      img: ['', Validators.required],
+
+      category: ['', Validators.required],
+      store: ['', Validators.required],
+      pictures: this.fb.array([]),
     });
 
     this.getProducts();
     this.getCategory();
     this.getStores();
+  }
+
+  pictures(): FormArray {
+    return this.createProductForm.get('pictures') as FormArray;
+  }
+
+  newImage(): FormGroup {
+    return this.fb.group({
+      img: '',
+    });
+  }
+
+  addImage() {
+    this.pictures().push(this.newImage());
+  }
+
+  removeImage(i: number) {
+    this.pictures().removeAt(i);
+    this.imagesTable.splice(i, 1);
   }
 
   handleFileInput(event) {
@@ -81,7 +101,7 @@ export class CreateProductComponent implements OnInit {
       fileName = fileName.replace(/[^a-zA-Z0-9\.\-]/g, '_');
     }
 
-    this.fd.append('file', file);
+    this.imagesTable.push(file);
   }
 
   checkCheckBoxvalue(event) {}
@@ -119,48 +139,55 @@ export class CreateProductComponent implements OnInit {
   onSubmit() {
     // products.image = this.createProductForm.get('image').value;
 
-    this.productsService.uploadFile(this.fd, this.currentUser.user.token).subscribe(
-      (data) => {
-        this.images.push(data.body.id);
-        const products = new Products();
-
-        products.id = Math.floor(Math.random() * 100);
-        products.name = this.createProductForm.get('name').value;
-        products.slug = this.createProductForm.get('slug').value;
-        products.description = this.createProductForm.get('description').value;
-        products.price = this.createProductForm.get('price').value;
-        products.date_added = '';
-        // products.created_by = '';
-        products.is_active = true;
-        products.quantity = this.createProductForm.get('quantity').value;
-        products.category = this.categoryId;
-        products.store = this.storeId;
-        products.images = this.images;
-        products.reviews = [];
-        this.productsService.addProduct(products, this.currentUser.user.token).subscribe(
-          (res) => {
-            Swal.fire({
-              position: 'top-end',
-              icon: 'success',
-              title: 'Product Created',
-              showConfirmButton: false,
-              timer: 1500,
-            });
-            this.route.navigate(['/products']);
-            this.getProducts();
-          },
-          (err) => {
-            Swal.fire({
-              icon: 'error',
-              title: 'Oops...',
-              text: err.error.detail,
-            });
+    const products = new Products();
+    let itemsProcessed = 0;
+    this.imagesTable.forEach((item, index, array) => {
+      let fd = new FormData();
+      fd.append('file', item);
+      itemsProcessed++;
+      this.productsService.uploadFile(fd, this.currentUser.user.token).subscribe(
+        (data) => {
+          this.images.push(data.body.id);
+          if (this.images.length === this.imagesTable.length) {
+            products.name = this.createProductForm.get('name').value;
+            products.slug = this.createProductForm.get('slug').value;
+            products.description = this.createProductForm.get('description').value;
+            products.price = this.createProductForm.get('price').value;
+            products.date_added = '';
+            products.is_active = true;
+            products.quantity = this.createProductForm.get('quantity').value;
+            products.category = this.categoryId;
+            products.store = this.storeId;
+            products.images = this.images;
+            products.reviews = [];
+            this.productsService.addProduct(products, this.currentUser.user.token).subscribe(
+              (res) => {
+                Swal.fire({
+                  position: 'top-end',
+                  icon: 'success',
+                  title: 'Product Created',
+                  showConfirmButton: false,
+                  timer: 1500,
+                });
+                this.route.navigate(['/products']);
+                this.getProducts();
+              },
+              (err) => {
+                Swal.fire({
+                  icon: 'error',
+                  title: 'Oops...',
+                  text: err.error.detail,
+                });
+              }
+            );
           }
-        );
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+    });
+
+    // products.id = Math.floor(Math.random() * 100);
   }
 }

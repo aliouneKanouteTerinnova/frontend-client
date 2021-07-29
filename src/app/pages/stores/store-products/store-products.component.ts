@@ -17,6 +17,7 @@ export class StoreProductsComponent implements OnInit {
   constructor(private storesService: StoresService, public cartService: CartService, private router: ActivatedRoute) {}
 
   ngOnInit(): void {
+    this.idStore = '';
     this.idStore = this.router.snapshot.params.id;
     this.storesService.getCurrentData(this.idStore).subscribe(
       (data) => {

@@ -7,16 +7,25 @@
         <div class="img">
           <img src="{{ productImage }}" width="300" alt="" />
         </div>
-        <div class="thumbnail_img" *ngFor="let image of images">
-          <img src="{{ image }}" width="80" alt="" />
+        <div class="thumbnail_img">
+          <ul class="image-list" *ngFor="let image of images; let i = index">
+            <li><img src="{{ image.file }}" width="80" alt="" (click)="changeImage(i)" /></li>
+          </ul>
         </div>
       </div>
 
       <div class="content">
         <div class="social_network">
-          <img src="../../../../assets/img/Facebook.svg" width="40" alt="" />
-          <img src="../../../../assets/img/TWIT.svg" width="40" alt="" />
-          <img src="../../../../assets/img/linkedin.svg" width="40" alt="" />
+          <a href="https://www.facebook.com/" target="_blank"
+            ><img src="../../../../assets/img/Facebook.svg" width="40" alt=""
+          /></a>
+          <a href="https://twitter.com/" target="_blank"
+            ><img src="../../../../assets/img/TWIT.svg" width="40" alt=""
+          /></a>
+
+          <a href="https://www.instagram.com/" target="_blank"
+            ><img src="../../../../assets/img/linkedin.svg" width="40" alt=""
+          /></a>
 
           <p><span translate>product_detail.share</span></p>
         </div>
@@ -29,7 +38,7 @@
             <a routerLink="/store-products/{{ store.id }}">{{ store.name }}</a>
           </p>
           <p class="price">{{ formatPrice(product.price | currency: 'EUR') }}</p>
-          <span class="fake_price">{{ formatPrice(fakePrice | currency: 'EUR') }}</span>
+          <!-- <span class="fake_price">{{ formatPrice(fakePrice | currency: 'EUR') }}</span> -->
         </div>
 
         <div class="button">

@@ -185,7 +185,7 @@
         [labelPosition]="labelPosition"
         [disabled]="disabled"
       >
-        <div class="conditions" routerLink="/conditions" translate>registration.register.conditions</div>
+        <div class="conditions" (click)="openDialog()" translate>registration.register.conditions</div>
       </mat-checkbox>
       <button mat-raised-button color="primary"><span translate>registration.register.registration</span></button>
     </form>

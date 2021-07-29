@@ -2,15 +2,20 @@
   <!-- <div class="container"> -->
   <div class="row">
     <div class="col-md-4 col-lg-2">
-      <h2>SHOPS</h2>
+      <h2 translate>footer.shops</h2>
       <div class="shops-items">
         <li class="item" *ngFor="let store of stores">
           <span routerLink="/store-products/{{ store.id }}">{{ store.name }}</span>
         </li>
+        <li>
+          <button mat-raised-button color="primary" class="categoryScroll" routerLink="/all-stores">
+            <span translate>footer.moreShop</span>
+          </button>
+        </li>
       </div>
     </div>
     <div class="col-md-4 col-lg-2">
-      <h2>PAYMENT MODE</h2>
+      <h2 translate>footer.paymentMode</h2>
       <div class="payment-items">
         <li class="item">
           <img src="./../../../assets/img/icons/Icon awesome-cc-visa.png" alt="" />
@@ -30,7 +35,7 @@
       </div>
     </div>
     <div class="col-md-4 col-lg-2">
-      <h2>DELIVERY PARTENERS</h2>
+      <h2 translate>footer.deliveryPartners</h2>
       <div class="delivery-items">
         <li class="item">
           <img src="./../../../assets/img/icons/hermes-logo.png" alt="" />
@@ -41,21 +46,21 @@
       </div>
     </div>
     <div class="col-md-4 col-lg-2">
-      <h2>LEGAL MATTERS</h2>
+      <h2 translate>footer.legalMatters</h2>
       <div class="legal-items">
         <li class="item">AGB</li>
-        <li class="item">PRIVACY POLICY</li>
-        <li class="item">IMPRESSUM</li>
+        <li class="item" translate>footer.returnPolicy</li>
+        <li class="item" translate>footer.impressum</li>
       </div>
     </div>
     <div class="col-md-4 col-lg-2">
-      <h2>CUSTOMER SERVICE</h2>
+      <h2 translate>footer.customerService</h2>
       <div class="customer-items">
         <li class="item">FAQ</li>
-        <li class="item">RETURN POLICY</li>
+        <li class="item" translate>footer.privacyPolicy</li>
       </div>
       <div class="service-contact">
-        <h2 class="mt-3">CONTACT</h2>
+        <h2 class="mt-3" translate>footer.contact</h2>
         <li class="item">xx xxx xxx xxxx</li>
 
         <div class="item-social">

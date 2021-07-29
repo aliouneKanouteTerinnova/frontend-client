@@ -91,6 +91,17 @@ export class ProductResultComponent implements OnInit {
     );
   }
 
+  getRatingArray(rating: any) {
+    return [...Array(5 - Math.floor(Number(rating))).keys()];
+  }
+
+  getCheckedRatingArray(rating: any) {
+    return [...Array(Math.floor(Number(rating))).keys()];
+  }
+  parseRating(rating: any) {
+    return Math.floor(rating);
+  }
+
   formatPrice(price: any) {
     var prices = price.split('.');
     if (this.i18nServiceService.currentLangValue === null || this.i18nServiceService.currentLangValue === 'en') {

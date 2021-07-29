@@ -7,6 +7,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
+import { MatDialog } from '@angular/material/dialog';
 
 import { User } from 'src/app/models/user/user';
 import { TranslateService } from '@ngx-translate/core';
@@ -15,6 +16,7 @@ import { Auth, AuthResponded } from 'src/app/models/auth/auth';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Address } from 'src/app/models/address/address';
 import { AuthenticationsService } from 'src/app/services/authentications/authentications.service';
+import { ConditionUsedComponent } from '../condition-used/condition-used.component';
 
 @Component({
   selector: 'app-registration',
@@ -50,7 +52,8 @@ export class RegistrationComponent implements OnInit {
     private formBuilder: FormBuilder,
     private translate: TranslateService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    public dialog: MatDialog
   ) {
     this.route.queryParams.subscribe((params) => {
       if (params.token) {
@@ -103,6 +106,13 @@ export class RegistrationComponent implements OnInit {
     });
   }
 
+  openDialog() {
+    const dialogRef = this.dialog.open(ConditionUsedComponent);
+
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log(`Dialog result: ${result}`);
+    });
+  }
   connexion() {
     this.isConnection = true;
     this.isInscription = false;
