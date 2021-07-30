@@ -38,6 +38,14 @@ body {
   padding: 1rem;
 }
 
+.card-footer {
+  padding: 1rem;
+}
+.card-footer p {
+  font-weight: bold;
+  font-size: 1.3rem;
+}
+
 .gutters-sm {
   margin-right: -8px;
   margin-left: -8px;

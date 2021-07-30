@@ -80,7 +80,8 @@
     "logout_button": "Logout",
     "store_button": "Store",
     "products_button": "Products",
-    "orders_button": "My orders"
+    "orders_button": "My orders",
+    "balance": "Wallet"
   },
   "home": {
     "acquerir": "Buy",

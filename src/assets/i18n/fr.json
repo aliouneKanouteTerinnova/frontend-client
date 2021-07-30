@@ -80,7 +80,8 @@
     "logout_button": "Déconnexion",
     "store_button": "Boutique",
     "products_button": "Produits",
-    "orders_button": "Mes commandes"
+    "orders_button": "Mes commandes",
+    "balance": "Portefeuille"
   },
   "home": {
     "acquerir": "Acquerir",
