@@ -56,6 +56,7 @@ import { StoreProductsComponent } from './pages/stores/store-products/store-prod
 import { NgxPaginationModule } from 'ngx-pagination';
 import { ProductComponent } from './components/products/products.component';
 import { CategoyDetailComponent } from './pages/category-page/categoy-detail/categoy-detail.component';
+import { LoaderComponent } from './components/loader/loader.component';
 
 export function rootLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -101,6 +102,7 @@ export function rootLoaderFactory(http: HttpClient) {
     FilterMinMaxPricePipe,
     StoreProductsComponent,
     CategoyDetailComponent,
+    LoaderComponent,
   ],
 
   imports: [
