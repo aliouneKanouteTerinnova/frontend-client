@@ -8,6 +8,7 @@ import { StoresService } from 'src/app/services/stores/stores.service';
 })
 export class FooterComponent implements OnInit {
   stores = [];
+  // hideBtn;
   constructor(private storesService: StoresService) {}
 
   ngOnInit(): void {
@@ -22,5 +23,12 @@ export class FooterComponent implements OnInit {
         console.log(error);
       }
     );
+  }
+  hideBtn() {
+    if (this.stores && 0) {
+      return false;
+    } else {
+      return true;
+    }
   }
 }
