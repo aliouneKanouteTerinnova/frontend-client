@@ -9,6 +9,7 @@ import { environment } from 'src/environments/environment';
 import { User } from 'src/app/models/user/user';
 import { CartService } from '../cart/cart.service';
 import { CartModelServer } from 'src/app/models/cart/cart';
+import { Item } from 'src/app/models/item/item';
 
 @Injectable({
   providedIn: 'root',
@@ -22,6 +23,9 @@ export class AuthenticationsService {
   cartData: CartModelServer;
 
   constructor(private httpClient: HttpClient, public cartService: CartService, private cookieService: CookieService) {
+    this.cartService.cartDataObs$.subscribe((data: CartModelServer) => {
+      this.cartData = data;
+    });
     if (cookieService.check('currentUser')) {
       this.currentUserSubject = new BehaviorSubject<AuthResponded>(JSON.parse(this.cookieService.get('currentUser')));
     } else {
@@ -45,27 +49,71 @@ export class AuthenticationsService {
           this.cookieService.set('currentUser', JSON.stringify(userResponded));
           this.currentUserSubject.next(userResponded);
           this.currentUserC = this.currentUserValue;
-          this.cartService.getCart(this.currentUserC['user'].token).subscribe(
-            (data) => {
-              if (data.body && data.body.status === 'Open') {
-                this.orderProducts = data.body.items;
-                if (this.orderProducts.length > 0) {
-                  this.orderProducts.forEach((element) => {
-                    // console.log(element.product, element.quantity);
-                    if (element.quantity === 1) {
-                      this.cartService.AddProductToCart(element.product.id);
-                    } else {
-                      this.cartService.AddProductToCart(element.product.id, element.quantity);
-                    }
-                  });
+
+          if (this.cartData.data[0].numInCart !== 0) {
+            const cart = this.cartData.data;
+            // this.cartService.deleteCart();
+            cart.forEach((element) => {
+              const item: Item = {
+                product: element.product.id,
+                quantity: element.numInCart,
+              };
+              this.cartService.addItemToCart(item, this.currentUserC['user'].token).subscribe(
+                (dataItem) => {
+                  console.log(dataItem);
+                },
+                (error) => {
+                  console.log(error);
                 }
+              );
+            });
+
+            this.cartService.getCart(this.currentUserC['user'].token).subscribe(
+              (data) => {
+                if (data.body && data.body.status === 'Open') {
+                  this.orderProducts = data.body.items;
+                  if (this.orderProducts.length > 0) {
+                    this.orderProducts.forEach((element) => {
+                      // console.log(element.product, element.quantity);
+                      if (element.quantity === 1) {
+                        this.cartService.addProductToBasket(element.product.id);
+                      } else if (element.quantity > 1) {
+                        for (let i = 0; i < element.quantity; i++) {
+                          this.cartService.addProductToBasket(element.product.id);
+                        }
+                      }
+                    });
+                  }
+                }
+              },
+              (error) => {
+                console.log(error);
               }
-            },
-            (error) => {
-              console.log(error);
-            }
-          );
+            );
+          } else {
+            this.cartService.getCart(this.currentUserC['user'].token).subscribe(
+              (data) => {
+                if (data.body && data.body.status === 'Open') {
+                  this.orderProducts = data.body.items;
+                  if (this.orderProducts.length > 0) {
+                    this.orderProducts.forEach((element) => {
+                      // console.log(element.product, element.quantity);
+                      if (element.quantity === 1) {
+                        this.cartService.addProductToBasket(element.product.id);
+                      } else {
+                        this.cartService.addProductToBasket(element.product.id, element.quantity);
+                      }
+                    });
+                  }
+                }
+              },
+              (error) => {
+                console.log(error);
+              }
+            );
+          }
         }
+
         return userResponded;
       })
     );
@@ -123,26 +171,9 @@ export class AuthenticationsService {
 
   // User Logout
   logOut() {
-    // this.cartService.cartDataObs$.subscribe((data: CartModelServer) => {
-    //   this.cartData = data;
-    //   this.cartData.data.forEach((element) => {
-    //     const item: Item = {
-    //       product: element.product.id,
-    //       quantity: element.numInCart,
-    //     };
-    //     this.cartService.addItemToCart(item, this.currentUserC['user'].token).subscribe(
-    //       (dataItem) => {},
-    //       (error) => {
-    //         console.log(error);
-    //       }
-    //     );
-    //   });
-    // });
-    // this.currentUserC = this.currentUserValue;
-
+    this.cartService.deleteCart();
     this.cookieService.delete('currentUser');
     this.currentUserSubject.next(null);
-    this.cartService.deleteCart();
   }
 
   //Password reset

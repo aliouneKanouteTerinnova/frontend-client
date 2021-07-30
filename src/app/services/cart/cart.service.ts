@@ -34,6 +34,7 @@ export class CartService {
 
   cartDataObs$ = new BehaviorSubject<CartModelServer>(this.cartDataServer);
   currentUser: any;
+  orderProducts = [];
 
   constructor(
     private productService: ProductsService,
@@ -42,45 +43,66 @@ export class CartService {
   ) {
     if (this.cookieService.get('currentUser')) {
       this.currentUser = JSON.parse(this.cookieService.get('currentUser'));
+
+      this.getCart(this.currentUser['user'].token).subscribe(
+        (data) => {
+          if (data.body && data.body.status === 'Open') {
+            this.orderProducts = data.body.items;
+            if (this.orderProducts.length > 0) {
+              this.orderProducts.forEach((element) => {
+                // console.log(element.product, element.quantity);
+                if (element.quantity === 1) {
+                  this.addProductToBasket(element.product.id);
+                } else {
+                  this.addProductToBasket(element.product.id, element.quantity);
+                }
+              });
+            }
+          }
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
     } else {
       this.currentUser = null;
-    }
 
-    if (cookieService.check('cart')) {
-      this.info = JSON.parse(this.cookieService.get('cart'));
-      this.cartTotal$.next(this.cartDataServer.total);
-      this.cartDataObs$.next(this.cartDataServer);
-      let total = 0;
-      this.cartDataServer.data.forEach((element) => {
-        total += element.numInCart;
-      });
-      this.productTotal$.next(total);
-    }
-
-    if (this.info !== null && this.info !== undefined && this.info.prodData[0].incart !== 0) {
-      // assign the value to our data variable which corresponds to the this.cookieService data format
-      this.cartDataClient = this.info;
-      // Loop through each entry and put it in the cartDataServer object
-      this.cartDataClient.prodData.forEach((p) => {
-        this.productService.getCurrentData(p.id).subscribe((actualProdInfo: Products) => {
-          if (this.cartDataServer.data[0].numInCart === 0) {
-            this.cartDataServer.data[0].numInCart = p.incart;
-            this.cartDataServer.data[0].product = actualProdInfo;
-            this.CalculateTotal();
-            this.cartDataClient.total = this.cartDataServer.total;
-            this.cookieService.set('cart', JSON.stringify(this.cartDataClient));
-          } else {
-            this.cartDataServer.data.push({
-              numInCart: p.incart,
-              product: actualProdInfo,
-            });
-            this.CalculateTotal();
-            this.cartDataClient.total = this.cartDataServer.total;
-            this.cookieService.set('cart', JSON.stringify(this.cartDataClient));
-          }
-          this.cartDataObs$.next(this.cartDataServer);
+      if (cookieService.check('cart')) {
+        this.info = JSON.parse(this.cookieService.get('cart'));
+        this.cartTotal$.next(this.cartDataServer.total);
+        this.cartDataObs$.next(this.cartDataServer);
+        let total = 0;
+        this.cartDataServer.data.forEach((element) => {
+          total += element.numInCart;
         });
-      });
+        this.productTotal$.next(total);
+      }
+
+      if (this.info !== null && this.info !== undefined && this.info.prodData[0].incart !== 0) {
+        // assign the value to our data variable which corresponds to the this.cookieService data format
+        this.cartDataClient = this.info;
+        // Loop through each entry and put it in the cartDataServer object
+        this.cartDataClient.prodData.forEach((p) => {
+          this.productService.getCurrentData(p.id).subscribe((actualProdInfo: Products) => {
+            if (this.cartDataServer.data[0].numInCart === 0) {
+              this.cartDataServer.data[0].numInCart = p.incart;
+              this.cartDataServer.data[0].product = actualProdInfo;
+              this.CalculateTotal();
+              this.cartDataClient.total = this.cartDataServer.total;
+              this.cookieService.set('cart', JSON.stringify(this.cartDataClient));
+            } else {
+              this.cartDataServer.data.push({
+                numInCart: p.incart,
+                product: actualProdInfo,
+              });
+              this.CalculateTotal();
+              this.cartDataClient.total = this.cartDataServer.total;
+              this.cookieService.set('cart', JSON.stringify(this.cartDataClient));
+            }
+            this.cartDataObs$.next(this.cartDataServer);
+          });
+        });
+      }
     }
   }
   deleteCart() {
@@ -114,18 +136,29 @@ export class CartService {
   }
 
   AddProductToCart(id: Number, quantity?: number) {
+    if (this.cookieService.get('currentUser')) {
+      this.currentUser = JSON.parse(this.cookieService.get('currentUser'));
+    } else {
+      this.currentUser = null;
+    }
     if (this.currentUser) {
       const item: Item = {
         product: id,
         quantity: quantity > 1 ? quantity : 1,
       };
       this.addItemToCart(item, this.currentUser['user'].token).subscribe(
-        (dataItem) => {},
+        (dataItem) => {
+          console.log(dataItem);
+        },
         (error) => {
           console.log(error);
         }
       );
     }
+    this.addProductToBasket(id, quantity);
+  }
+
+  addProductToBasket(id: Number, quantity?: number) {
     this.productService.getCurrentData(id).subscribe((prod) => {
       // If the cart is empty
       if (this.cartDataServer.data[0].product === undefined) {
@@ -189,8 +222,27 @@ export class CartService {
   }
 
   UpdateCartData(index, increase: Boolean) {
+    if (this.cookieService.get('currentUser')) {
+      this.currentUser = JSON.parse(this.cookieService.get('currentUser'));
+    } else {
+      this.currentUser = null;
+    }
     let data = this.cartDataServer.data[index];
     if (increase) {
+      if (this.currentUser) {
+        const item: Item = {
+          product: data.product.id,
+          quantity: 1,
+        };
+        this.addItemToCart(item, this.currentUser['user'].token).subscribe(
+          (dataItem) => {
+            console.log(dataItem);
+          },
+          (error) => {
+            console.log(error);
+          }
+        );
+      }
       // @ts-ignore
       data.numInCart < data.product.quantity ? data.numInCart++ : data.product.quantity;
       this.cartDataClient.prodData[index].incart = data.numInCart;
@@ -199,6 +251,32 @@ export class CartService {
       this.cartDataObs$.next(this.cartDataServer);
       this.cookieService.set('cart', JSON.stringify(this.cartDataClient));
     } else {
+      if (this.currentUser) {
+        const idProd = this.cartDataServer.data[index].product.id;
+        this.getCart(this.currentUser['user'].token).subscribe(
+          (data) => {
+            const product = data.body.items.filter((item) => {
+              return item.product.id === idProd;
+            });
+            if (product.length > 0) {
+              // product.forEach((element) => {
+              this.deleteItemToCart(product[0].id, this.currentUser['user'].token).subscribe(
+                (datas) => {
+                  console.log(datas);
+                },
+                (error) => {
+                  console.log(error);
+                }
+              );
+              // });
+            }
+            // }
+          },
+          (error) => {
+            console.log(error);
+          }
+        );
+      }
       // @ts-ignore
       data.numInCart--;
 
@@ -218,12 +296,32 @@ export class CartService {
   }
 
   DeleteProductFromCart(index) {
+    if (this.cookieService.get('currentUser')) {
+      this.currentUser = JSON.parse(this.cookieService.get('currentUser'));
+    } else {
+      this.currentUser = null;
+    }
     const idProd = this.cartDataServer.data[index].product.id;
+    console.log(this.currentUser);
     if (this.currentUser) {
-      console.log(idProd);
-      this.deleteItemToCart(idProd, this.currentUser['user'].token).subscribe(
+      this.getCart(this.currentUser['user'].token).subscribe(
         (data) => {
-          console.log(data);
+          const product = data.body.items.filter((item) => {
+            return item.product.id === idProd;
+          });
+          if (product.length > 0) {
+            product.forEach((element) => {
+              this.deleteItemToCart(element.id, this.currentUser['user'].token).subscribe(
+                (datas) => {
+                  console.log(datas);
+                },
+                (error) => {
+                  console.log(error);
+                }
+              );
+            });
+          }
+          // }
         },
         (error) => {
           console.log(error);

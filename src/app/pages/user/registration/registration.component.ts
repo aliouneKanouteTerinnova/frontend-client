@@ -224,7 +224,7 @@ export class RegistrationComponent implements OnInit {
         this.errorMessage = '';
       },
       (error) => {
-        this.errorMessage = error.error.errors.error;
+        console.log(error);
       }
     );
   }
