@@ -4,11 +4,11 @@
     <div class="col-md-4 col-lg-2">
       <h2 translate>footer.shops</h2>
       <div class="shops-items">
-        <li class="item" *ngFor="let store of stores">
+        <li class="item" *ngFor="let store of storesTemp">
           <span routerLink="/store-products/{{ store.id }}">{{ store.name }}</span>
         </li>
-        <li>
-          <button *ngIf="hideBtn()" mat-raised-button color="primary" class="categoryScroll" routerLink="/all-stores">
+        <li *ngIf="stores.length > 5">
+          <button mat-raised-button color="primary" class="categoryScroll" routerLink="/all-stores">
             <span translate>footer.moreShop</span>
           </button>
         </li>

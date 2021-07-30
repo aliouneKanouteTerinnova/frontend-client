@@ -8,6 +8,8 @@ import { StoresService } from 'src/app/services/stores/stores.service';
 })
 export class FooterComponent implements OnInit {
   stores = [];
+  storesTemp = [];
+  currentUser: any;
   // hideBtn;
   constructor(private storesService: StoresService) {}
 
@@ -17,7 +19,8 @@ export class FooterComponent implements OnInit {
   getStores() {
     this.storesService.getAllStores().subscribe(
       (res) => {
-        this.stores = res.results.slice(0, 5);
+        this.stores = res.results;
+        this.storesTemp = this.stores.slice(0, 5);
       },
       (error) => {
         console.log(error);
