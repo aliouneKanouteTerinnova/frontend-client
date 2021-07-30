@@ -80,7 +80,8 @@
     "logout_button": "Abmelden",
     "store_button": "Speichern",
     "products_button": "Produkte",
-    "orders_button": "Meine Bestellungen"
+    "orders_button": "Meine Bestellungen",
+    "balance": "Portfolio"
   },
   "home": {
     "acquerir": "Kaufen",
