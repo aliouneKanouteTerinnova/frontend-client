@@ -1,3 +1,5 @@
+import { InterceptorInterceptor } from './../interceptor/interceptor.interceptor';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -11,7 +13,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatCarouselModule } from '@ngmodule/material-carousel';
 import { MatDialogModule } from '@angular/material/dialog';
-
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 @NgModule({
   declarations: [],
   imports: [],
@@ -29,6 +31,14 @@ import { MatDialogModule } from '@angular/material/dialog';
     FormsModule,
     ReactiveFormsModule,
     MatDialogModule,
+    MatProgressSpinnerModule,
+  ],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: InterceptorInterceptor,
+      multi: true,
+    },
   ],
 })
 export class SharedModule {}
