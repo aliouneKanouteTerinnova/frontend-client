@@ -20,6 +20,7 @@ export class StoresComponent implements OnInit {
   currentUser: any;
   userType: string;
   disabledBtn = false;
+  hideActionBtn = true;
 
   constructor(
     private storesService: StoresService,
@@ -30,6 +31,7 @@ export class StoresComponent implements OnInit {
   ngOnInit(): void {
     this.currentUser = this.authService.currentUserValue;
     if (this.router.url === '/all-stores') {
+      this.hideActionBtn = false;
       this.getAllStores();
     } else {
       this.getStores();
