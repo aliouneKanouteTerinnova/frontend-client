@@ -54,7 +54,9 @@ export class CartService {
                 if (element.quantity === 1) {
                   this.addProductToBasket(element.product.id);
                 } else {
-                  this.addProductToBasket(element.product.id, element.quantity);
+                  for (let index = 0; index < element.quantity; index++) {
+                    this.addProductToBasket(element.product.id);
+                  }
                 }
               });
             }

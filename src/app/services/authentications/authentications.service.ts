@@ -44,52 +44,61 @@ export class AuthenticationsService {
   login(user: Auth) {
     return this.httpClient.post<AuthResponded>(`${environment.baseUrl}users/login`, user).pipe(
       map((userResponded) => {
-        // login successful if there's a jwt token in the response
         if (userResponded) {
           this.cookieService.set('currentUser', JSON.stringify(userResponded));
           this.currentUserSubject.next(userResponded);
           this.currentUserC = this.currentUserValue;
+          let count = 0;
 
           if (this.cartData.data[0].numInCart !== 0) {
-            const cart = this.cartData.data;
-            // this.cartService.deleteCart();
-            cart.forEach((element) => {
+            this.cartData.data.forEach((element) => {
+              count++;
               const item: Item = {
                 product: element.product.id,
-                quantity: element.numInCart,
+                quantity: 1,
               };
-              this.cartService.addItemToCart(item, this.currentUserC['user'].token).subscribe(
-                (dataItem) => {
-                  console.log(dataItem);
-                },
-                (error) => {
-                  console.log(error);
-                }
-              );
-            });
-
-            this.cartService.getCart(this.currentUserC['user'].token).subscribe(
-              (data) => {
-                if (data.body && data.body.status === 'Open') {
-                  this.orderProducts = data.body.items;
-                  if (this.orderProducts.length > 0) {
-                    this.orderProducts.forEach((element) => {
-                      // console.log(element.product, element.quantity);
-                      if (element.quantity === 1) {
-                        this.cartService.addProductToBasket(element.product.id);
-                      } else if (element.quantity > 1) {
-                        for (let i = 0; i < element.quantity; i++) {
-                          this.cartService.addProductToBasket(element.product.id);
-                        }
-                      }
-                    });
+              if (element.numInCart === 1) {
+                this.cartService.addItemToCart(item, this.currentUserC['user'].token).subscribe(
+                  (dataItem) => {},
+                  (error) => {
+                    console.log(error);
                   }
+                );
+              } else {
+                for (let index = 0; index < element.numInCart; index++) {
+                  this.cartService.addItemToCart(item, this.currentUserC['user'].token).subscribe(
+                    (dataItem) => {},
+                    (error) => {
+                      console.log(error);
+                    }
+                  );
                 }
-              },
-              (error) => {
-                console.log(error);
               }
-            );
+              if (count === this.cartData.data.length) {
+                this.cartService.deleteCart();
+                this.cartService.getCart(this.currentUserC['user'].token).subscribe(
+                  (data) => {
+                    if (data.body && data.body.status === 'Open') {
+                      this.orderProducts = data.body.items;
+                      if (this.orderProducts.length > 0) {
+                        this.orderProducts.forEach((element) => {
+                          if (element.quantity === 1) {
+                            this.cartService.addProductToBasket(element.product.id);
+                          } else {
+                            for (let index = 0; index < element.quantity; index++) {
+                              this.cartService.addProductToBasket(element.product.id);
+                            }
+                          }
+                        });
+                      }
+                    }
+                  },
+                  (error) => {
+                    console.log(error);
+                  }
+                );
+              }
+            });
           } else {
             this.cartService.getCart(this.currentUserC['user'].token).subscribe(
               (data) => {
@@ -97,11 +106,12 @@ export class AuthenticationsService {
                   this.orderProducts = data.body.items;
                   if (this.orderProducts.length > 0) {
                     this.orderProducts.forEach((element) => {
-                      // console.log(element.product, element.quantity);
                       if (element.quantity === 1) {
                         this.cartService.addProductToBasket(element.product.id);
                       } else {
-                        this.cartService.addProductToBasket(element.product.id, element.quantity);
+                        for (let index = 0; index < element.quantity; index++) {
+                          this.cartService.addProductToBasket(element.product.id);
+                        }
                       }
                     });
                   }
@@ -171,9 +181,9 @@ export class AuthenticationsService {
 
   // User Logout
   logOut() {
-    this.cartService.deleteCart();
     this.cookieService.delete('currentUser');
     this.currentUserSubject.next(null);
+    this.cartService.deleteCart();
   }
 
   //Password reset

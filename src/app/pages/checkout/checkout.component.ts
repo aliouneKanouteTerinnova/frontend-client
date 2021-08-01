@@ -56,6 +56,7 @@ export class CheckoutComponent implements OnInit {
     private authService: AuthenticationsService,
     private router: Router,
     private payment: PaymentsService,
+    private orderService: OrderService,
     private i18nServiceService: I18nServiceService
   ) {}
 
@@ -133,114 +134,114 @@ export class CheckoutComponent implements OnInit {
   }
 
   checkout() {
-    this.cartService.getCart(this.currentUser['user'].token).subscribe(
-      (data) => {
-        console.log(data.body);
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
-    // const address = this.checkoutForm.get('address').value;
-    // const state = this.checkoutForm.get('state').value;
-    // const city = this.checkoutForm.get('city').value;
-    // const zip = this.checkoutForm.get('zip').value;
-    // if (!this.checkoutForm.valid) {
-    //   return;
-    // }
-    // this.cartService.InitiateBasket(this.currentUser['user'].token).subscribe(
+    // this.cartService.getCart(this.currentUser['user'].token).subscribe(
     //   (data) => {
-    //     this.idCart = data.body.id;
-    //     this.cartData.data.forEach((element) => {
-    //       const item: Item = {
-    //         product: element.product.id,
-    //         quantity: element.numInCart,
-    //       };
-    //       this.cartService.addItemToCart(item, this.currentUser['user'].token).subscribe(
-    //         (dataItem) => {},
-    //         (error) => {
-    //           console.log(error);
-    //         }
-    //       );
-    //     });
-    //     const addresse: Address = {
-    //       country: state,
-    //       state: city,
-    //       street: address,
-    //       zipcode: zip,
-    //     };
-    //     const shippingAddress: ShippingAddress = {
-    //       phone_number: '781051173',
-    //       notes: '',
-    //       address: addresse,
-    //     };
-    //     const shippingMethod: ShippingMethod = {
-    //       name: 'DHL',
-    //       price: 10000,
-    //       currency: 'EUR',
-    //     };
-    //     const order = {
-    //       cart: this.idCart,
-    //       currency: 'EUR',
-    //       total_tax: 315,
-    //       shipping_tax: 315,
-    //       total_prices: this.cartTotal,
-    //       shipping_address: shippingAddress,
-    //       shipping_method: shippingMethod,
-    //     };
-    //     this.orderService.addOrder(order, this.currentUser['user'].token).subscribe(
-    //       (data) => {
-    //         console.log('oder created ', data);
-    //         const sommes = +order.total_prices + +order.total_tax + +order.shipping_method.price;
-    //         const param = {
-    //           order_number: data.body.number,
-    //           method: 'card',
-    //           amount: sommes,
-    //           currency: 'EUR',
-    //         };
-    //         this.payment.payment(param, this.currentUser['user'].token).subscribe(
-    //           (res) => {
-    //             this.pbKey = res.body.public_key;
-    //             this.token = res.body.token;
-    //             this.orderNumber = res.body.payment.order_number;
-    // const method = res.body.payment.method;
-    // const amount = res.body.payment.amount;
-    //             this.stripe = Stripe(this.pbKey);
-
-    //             this.initStripeForm();
-
-    //             this.initForm(sommes, this.orderNumber);
-    //             console.log(res);
-    //           },
-    //           (err) => {
-    //             console.log(err);
-    //           }
-    //         );
-    //         this.cartService.deleteCart();
-    //         Swal.fire({
-    //           position: 'top-end',
-    //           icon: 'success',
-    //           title: `Order has been successfully registrered, check your my to see confirmation`,
-    //           showConfirmButton: false,
-    //           timer: 5000,
-    //         });
-    //       },
-    //       (error) => {
-    //         console.log(error);
-    //       }
-    //     );
+    //     console.log(data.body);
     //   },
-    //   (errors) => {
-    //     Swal.fire({
-    //       position: 'top-end',
-    //       icon: 'error',
-    //       title: `${errors.error.error}`,
-    //       showConfirmButton: true,
-    //       timer: 5000,
-    //     });
-    //     console.log(errors);
+    //   (error) => {
+    //     console.log(error);
     //   }
     // );
+    const address = this.checkoutForm.get('address').value;
+    const state = this.checkoutForm.get('state').value;
+    const city = this.checkoutForm.get('city').value;
+    const zip = this.checkoutForm.get('zip').value;
+    if (!this.checkoutForm.valid) {
+      return;
+    }
+    this.cartService.getCart(this.currentUser['user'].token).subscribe(
+      (data) => {
+        this.idCart = data.body.id;
+        this.cartData.data.forEach((element) => {
+          const item: Item = {
+            product: element.product.id,
+            quantity: element.numInCart,
+          };
+          this.cartService.addItemToCart(item, this.currentUser['user'].token).subscribe(
+            (dataItem) => {},
+            (error) => {
+              console.log(error);
+            }
+          );
+        });
+        const addresse: Address = {
+          country: state,
+          state: city,
+          street: address,
+          zipcode: zip,
+        };
+        const shippingAddress: ShippingAddress = {
+          phone_number: '781051173',
+          notes: '',
+          address: addresse,
+        };
+        const shippingMethod: ShippingMethod = {
+          name: 'DHL',
+          price: 10000,
+          currency: 'EUR',
+        };
+        const order = {
+          cart: this.idCart,
+          currency: 'EUR',
+          total_tax: 315,
+          shipping_tax: 315,
+          total_prices: this.cartTotal,
+          shipping_address: shippingAddress,
+          shipping_method: shippingMethod,
+        };
+        this.orderService.addOrder(order, this.currentUser['user'].token).subscribe(
+          (data) => {
+            console.log('oder created ', data);
+            const sommes = +order.total_prices + +order.total_tax + +order.shipping_method.price;
+            const param = {
+              order_number: data.body.number,
+              method: 'card',
+              amount: sommes,
+              currency: 'EUR',
+            };
+            this.payment.payment(param, this.currentUser['user'].token).subscribe(
+              (res) => {
+                this.pbKey = res.body.public_key;
+                this.token = res.body.token;
+                this.orderNumber = res.body.payment.order_number;
+                const method = res.body.payment.method;
+                const amount = res.body.payment.amount;
+                this.stripe = Stripe(this.pbKey);
+
+                this.initStripeForm();
+
+                this.initForm(sommes, this.orderNumber);
+                console.log(res);
+              },
+              (err) => {
+                console.log(err);
+              }
+            );
+            this.cartService.deleteCart();
+            Swal.fire({
+              position: 'top-end',
+              icon: 'success',
+              title: `Order has been successfully registrered, check your my to see confirmation`,
+              showConfirmButton: false,
+              timer: 5000,
+            });
+          },
+          (error) => {
+            console.log(error);
+          }
+        );
+      },
+      (errors) => {
+        Swal.fire({
+          position: 'top-end',
+          icon: 'error',
+          title: `${errors.error.error}`,
+          showConfirmButton: true,
+          timer: 5000,
+        });
+        console.log(errors);
+      }
+    );
   }
 
   OnSubmit() {
