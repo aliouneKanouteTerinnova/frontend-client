@@ -16,7 +16,7 @@
         <a class="nav-link" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <span class="ml-1"> <img src="../../assets/img/USER.svg" width="50" alt="" /></span>
           <span *ngIf="currentUser">
-            <a><span translate>nav.hello</span> {{ currentUser['user'].username }}</a>
+            <a><span translate>nav.hello</span> {{ user }}</a>
           </span>
           <span *ngIf="!currentUser"><a routerLink="/register" translate>nav.compte</a></span>
         </a>
