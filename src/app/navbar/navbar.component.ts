@@ -19,7 +19,7 @@ export class NavbarComponent implements OnInit {
   cartTotal: Number;
   subTotal: Number;
   currentUser: AuthResponded;
-
+  user: any;
   totalProduct: Number;
   total = 0;
 
@@ -51,6 +51,16 @@ export class NavbarComponent implements OnInit {
 
     this.cartService.productTotal$.subscribe((totalProduct) => {
       this.totalProduct = totalProduct;
+    });
+
+    this.getUser();
+  }
+
+  getUser() {
+    this.authService.getUser(this.currentUser['user'].token).subscribe((data) => {
+      this.user = data.body['user'].username;
+      console.log(data.body['user'].username);
+      console.log(this.user);
     });
   }
 
