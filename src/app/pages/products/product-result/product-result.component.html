@@ -13,7 +13,10 @@
       </div>
 
       <div class="col-12 mt-1" *ngIf="isChecked">
-        <h3 class="query">{{ keyWord }}</h3>
+        <h3 class="query" *ngIf="similarities === false">{{ keyWord }}</h3>
+        <h3 class="query-similar" *ngIf="similarities === true">
+          No products name <span class="query">{{ keyWord }}</span> found. Similar name :
+        </h3>
         <header class="border-bottom mb-4 pb-3">
           <div class="form-inline">
             <span class="mr-md-auto items">{{ products.length }} <span translate>search.result</span> </span>
