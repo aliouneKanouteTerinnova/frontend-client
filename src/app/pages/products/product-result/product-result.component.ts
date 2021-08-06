@@ -21,6 +21,7 @@ export class ProductResultComponent implements OnInit {
   product: any;
   keyWord: any;
   isClicked = false;
+  similarities = false;
   currentUser: AuthResponded;
   token: any;
   categoryTxt = [];
@@ -59,6 +60,12 @@ export class ProductResultComponent implements OnInit {
         this.parseProduts();
         this.isChecked = this.products.length > 0 ? true : false;
         this.product = keyWord;
+        if (data.similarities === true) {
+          this.similarities = true;
+        } else {
+          this.similarities = false;
+        }
+        console.log(this.similarities);
       },
       (error) => {
         Swal.fire({
