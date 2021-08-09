@@ -1,3 +1,5 @@
+import { Review } from '../review/review';
+
 export class Products {
   id: number;
   store: number;
@@ -12,5 +14,5 @@ export class Products {
   quantity: number;
   is_active: boolean;
   images: string[];
-  reviews: any;
+  reviews: Review[];
 }
