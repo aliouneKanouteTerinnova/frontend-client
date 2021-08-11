@@ -59,7 +59,8 @@ export class ReviewComponent implements OnInit {
           showConfirmButton: false,
           timer: 1500,
         });
-        this.route.navigate(['/review']);
+
+        window.location.reload();
       },
       (err) => {
         Swal.fire({
