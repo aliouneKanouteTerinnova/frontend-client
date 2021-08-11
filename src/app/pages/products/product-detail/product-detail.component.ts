@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthResponded } from 'src/app/models/auth/auth';
 import { AuthenticationsService } from 'src/app/services/authentications/authentications.service';
@@ -7,6 +9,7 @@ import { I18nServiceService } from 'src/app/services/i18n-service/i18n-service.s
 import { ProductsService } from 'src/app/services/products/products.service';
 import { StoresService } from 'src/app/services/stores/stores.service';
 import Swal from 'sweetalert2';
+import { ReviewComponent } from '../review/review.component';
 
 @Component({
   selector: 'app-product-detail',
@@ -29,7 +32,8 @@ export class ProductDetailComponent implements OnInit {
     private router: ActivatedRoute,
     private cartService: CartService,
     private storesService: StoresService,
-    private i18nServiceService: I18nServiceService
+    private i18nServiceService: I18nServiceService,
+    public dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -54,6 +58,14 @@ export class ProductDetailComponent implements OnInit {
       this.productImage = response.images[0].file;
       this.images = response.images.slice(0, 4);
       this.fakePrice = Number(this.product.price) + 1000;
+    });
+  }
+
+  openDialog(id: any) {
+    const dialogRef = this.dialog.open(ReviewComponent, { width: '600px', data: id });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log(`Dialog result: ${id}`);
     });
   }
 
