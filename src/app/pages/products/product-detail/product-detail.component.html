@@ -41,6 +41,12 @@
           <!-- <span class="fake_price">{{ formatPrice(fakePrice | currency: 'EUR') }}</span> -->
         </div>
 
+        <div class="rating-wrap">
+          <span *ngFor="let rat of getCheckedRatingArray(product.rating)" class="fa fa-star checked"></span>
+          <span class="fa fa-star" *ngFor="let rat of getRatingArray(product.rating)"></span>
+          <div class="label-rating">({{ parseRating(product.rating) }} <span translate>search.vote</span>)</div>
+        </div>
+
         <div class="button">
           <button (click)="addToCart(product.id)"><span translate>product_detail.order_button</span></button>
         </div>
@@ -56,6 +62,28 @@
   <div class="similar_products container-fluid">
     <h1><span translate>product_detail.similar_product</span></h1>
     <app-product [products]="similarProducts"> </app-product>
+  </div>
+
+  <div class="similar_products container-fluid">
+    <h1>Reviews</h1>
+    <div class="button col-3" style="float: right">
+      <button (click)="addToCart(product.id)">Write a review</button>
+    </div>
+    <br />
+    <div *ngFor="let review of product.reviews">
+      <h2>
+        <b>{{ review.user.username }}</b>
+      </h2>
+      <h2>{{ review.title }}</h2>
+      <span>{{ review.created_at | date: 'dd/MM/yyyy hh:mm' }}</span>
+      <div class="rating-wrap">
+        <span *ngFor="let rat of getCheckedRatingArray(review.rating)" class="fa fa-star checked"> </span>
+        <span class="fa fa-star" *ngFor="let rat of getRatingArray(review.rating)"></span>
+        <div class="label-rating">({{ parseRating(review.rating) }} votes)</div>
+      </div>
+      <h4>{{ review.comment }}</h4>
+      <hr />
+    </div>
   </div>
 </div>
 

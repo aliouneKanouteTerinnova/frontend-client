@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AuthResponded } from 'src/app/models/auth/auth';
+import { AuthenticationsService } from 'src/app/services/authentications/authentications.service';
 import { CartService } from 'src/app/services/cart/cart.service';
 import { I18nServiceService } from 'src/app/services/i18n-service/i18n-service.service';
 import { ProductsService } from 'src/app/services/products/products.service';
@@ -86,5 +88,16 @@ export class ProductDetailComponent implements OnInit {
       }
     }
     return prices;
+  }
+
+  getRatingArray(rating: any) {
+    return [...Array(5 - Math.floor(Number(rating))).keys()];
+  }
+
+  getCheckedRatingArray(rating: any) {
+    return [...Array(Math.floor(Number(rating))).keys()];
+  }
+  parseRating(rating: any) {
+    return Math.floor(rating);
   }
 }
