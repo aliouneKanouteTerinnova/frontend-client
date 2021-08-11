@@ -1,28 +1,32 @@
 import { Component, Inject, OnInit, Optional } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Review } from 'src/app/models/review/review';
 import { AuthenticationsService } from 'src/app/services/authentications/authentications.service';
 import { ReviewService } from 'src/app/services/review/review.service';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-review',
-  templateUrl: './review.component.html',
-  styleUrls: ['./review.component.css'],
+  selector: 'app-update-review',
+  templateUrl: './update-review.component.html',
+  styleUrls: ['./update-review.component.css'],
 })
-export class ReviewComponent implements OnInit {
-  createReviewForm: FormGroup;
-  currentUser: any;
+export class UpdateReviewComponent implements OnInit {
   id: any;
 
+  updateReviewForm = new FormGroup({
+    title: new FormControl(''),
+    comment: new FormControl(''),
+    rating: new FormControl(''),
+  });
+
+  review: Review;
+  currentUser: any;
   constructor(
-    private formBuilder: FormBuilder,
     private reviewService: ReviewService,
-    private route: Router,
     private authService: AuthenticationsService,
-    public dialogRef: MatDialogRef<ReviewComponent>,
+    public dialogRef: MatDialogRef<UpdateReviewComponent>,
     @Optional()
     @Inject(MAT_DIALOG_DATA)
     public data: any
@@ -31,31 +35,32 @@ export class ReviewComponent implements OnInit {
   ngOnInit(): void {
     this.id = this.data;
     this.currentUser = this.authService.currentUserValue;
-    this.createReviewForm = this.formBuilder.group({
-      title: [null, [Validators.required]],
-      comment: [null, Validators.required],
-      rating: [null, Validators.required],
+    this.reviewService.getCurrentData(this.id).subscribe((res) => {
+      this.updateReviewForm.patchValue({
+        title: res.title,
+        comment: res.comment,
+        rating: res.rating,
+      });
     });
   }
 
   onSubmit() {
-    const review = new Review();
+    const review = {
+      id: this.id,
+      title: this.updateReviewForm.get('title').value,
+      comment: this.updateReviewForm.get('comment').value,
+      rating: this.updateReviewForm.get('rating').value,
+    };
 
-    review.title = this.createReviewForm.get('title').value;
-    review.comment = this.createReviewForm.get('comment').value;
-    review.rating = this.createReviewForm.get('rating').value;
-    review.product = this.id;
-
-    this.reviewService.addReview(review, this.currentUser.user.token).subscribe(
+    this.reviewService.updateReview(this.id, review, this.currentUser.user.token).subscribe(
       (res) => {
         Swal.fire({
           position: 'top-end',
           icon: 'success',
-          title: 'Your review has been added',
+          title: 'Review modified',
           showConfirmButton: false,
           timer: 1500,
         });
-
         window.location.reload();
       },
       (err) => {

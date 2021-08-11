@@ -58,6 +58,7 @@ import { ProductComponent } from './components/products/products.component';
 import { CategoyDetailComponent } from './pages/category-page/categoy-detail/categoy-detail.component';
 import { LoaderComponent } from './components/loader/loader.component';
 import { ReviewComponent } from './pages/products/review/review.component';
+import { UpdateReviewComponent } from './pages/products/review/update-review/update-review.component';
 
 export function rootLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -105,6 +106,7 @@ export function rootLoaderFactory(http: HttpClient) {
     CategoyDetailComponent,
     LoaderComponent,
     ReviewComponent,
+    UpdateReviewComponent,
   ],
 
   imports: [
