@@ -36,6 +36,7 @@ export class ProfileComponent implements OnInit {
     this.currentUser = this.authService.currentUserValue;
     this.authService.getUser(this.currentUser['user'].token).subscribe((data) => {
       this.user = data.body;
+      console.log(data);
       if (this.currentUser['user'].account_type === 'SELLER' || this.currentUser['user'].account_type === 'Seller') {
         this.is_seller = true;
       }

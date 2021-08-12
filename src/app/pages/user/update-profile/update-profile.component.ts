@@ -28,10 +28,10 @@ export class UpdateProfileComponent implements OnInit {
       username: [null, Validators.required],
       email: new FormControl({ value: '', disabled: true }),
       gender: [null, Validators.required],
-      state: new FormControl({ value: '', disabled: true }),
-      zipcode: new FormControl({ value: '', disabled: true }),
-      country: new FormControl({ value: '', disabled: true }),
-      street: new FormControl({ value: '', disabled: true }),
+      state: [null, Validators.required],
+      zipcode: [null, Validators.required],
+      country: [null, Validators.required],
+      street: [null, Validators.required],
       account_type: new FormControl({ value: '', disabled: true }),
     });
 
@@ -68,8 +68,10 @@ export class UpdateProfileComponent implements OnInit {
       gender: sexe,
       address: address,
     };
+    console.log(user);
     this.authService.update(user, this.currentUser.user.token).subscribe(
       (data) => {
+        console.log('update ', data);
         Swal.fire({
           position: 'top-end',
           icon: 'success',
