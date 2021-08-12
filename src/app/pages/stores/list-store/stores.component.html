@@ -32,9 +32,9 @@
             </div>
             <b><span translate>store.name</span> :</b> {{ store.name }}
           </div>
-          <div class="card-body adresse">
-            <b><span translate>store.address</span> :</b> {{ store.store_address }}
-          </div>
+        </div>
+        <div class="card-body adresse">
+          <b><span translate>store.address</span> :</b> {{ store.store_address }}
         </div>
         <div class="button" *ngIf="hideActionBtn">
           <button
@@ -56,6 +56,12 @@
           >
             <span translate>store.delete_store</span>
           </button>
+        </div>
+        <br />
+        <div class="rating-wrap">
+          <span *ngFor="let rat of getCheckedRatingArray(store.rating)" class="fa fa-star checked"></span>
+          <span class="fa fa-star" *ngFor="let rat of getRatingArray(store.rating)"></span>
+          <div class="label-rating">({{ parseRating(store.rating) }} <span translate>search.vote</span>)</div>
         </div>
       </div>
     </div>
