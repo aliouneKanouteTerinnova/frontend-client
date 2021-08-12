@@ -79,14 +79,6 @@
           </h2>
         </div>
         <div class="col-6">
-          <div class="row" style="float: right" *ngIf="currentUser.user.username === review.user.username">
-            <button color="accent" (click)="updateReview(review.id)" *ngIf="currentUser" mat-button>
-              <mat-icon>edit</mat-icon>
-            </button>
-            <button (click)="deleteReview(review.id)" *ngIf="currentUser" mat-button color="accent">
-              <mat-icon>delete</mat-icon>
-            </button>
-          </div>
           <div class="row">
             <h2>{{ review.created_at | date: 'dd/MM/yyyy hh:mm' }}</h2>
           </div>
@@ -99,7 +91,18 @@
         <div class="label-rating">({{ parseRating(review.rating) }} votes)</div>
       </div>
       <h4>{{ review.comment }}</h4>
-
+      <div class="row">
+        <div class="col-6">
+          <div class="row" style="float: right" *ngIf="currentUser.user.username === review.user.username">
+            <button color="accent" (click)="updateReview(review.id)" *ngIf="currentUser" mat-button>
+              <mat-icon>edit</mat-icon>
+            </button>
+            <button (click)="deleteReview(review.id)" *ngIf="currentUser" mat-button color="accent">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
+        </div>
+      </div>
       <hr />
     </div>
   </div>
