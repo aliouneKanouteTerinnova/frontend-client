@@ -2,6 +2,14 @@
 <app-header></app-header>
 
 <div class="container">
+  <h1 class="text-center my-5 deal">
+    <b>{{ storeName }}</b>
+  </h1>
+  <div class="rating-wrap">
+    <span *ngFor="let rat of getCheckedRatingArray(rating)" class="fa fa-star checked"></span>
+    <span class="fa fa-star" *ngFor="let rat of getRatingArray(rating)"></span>
+    <div class="label-rating">({{ parseRating(rating) }} <span translate>search.vote</span>)</div>
+  </div>
   <h1 class="text-center my-5 deal" *ngIf="produits1.length > 0" translate>storeProduct.deals</h1>
   <div class="row">
     <div class="col" *ngFor="let produit1 of produits1; let i = index">
@@ -29,4 +37,39 @@
   <div class="divider mb-4 mt-3"></div>
 
   <app-product [products]="products"> </app-product>
+</div>
+
+<div *ngFor="let review of reviews">
+  <div class="row">
+    <div class="col-6" style="float: left">
+      <h2>
+        <b>{{ review.user.username }}</b>
+      </h2>
+    </div>
+    <div class="col-6">
+      <div class="row">
+        <h2>{{ review.created_at | date: 'dd/MM/yyyy hh:mm' }}</h2>
+      </div>
+    </div>
+  </div>
+  <h2>{{ review.title }}</h2>
+  <div class="rating-wrap">
+    <span *ngFor="let rat of getCheckedRatingArray(review.rating)" class="fa fa-star checked"> </span>
+    <span class="fa fa-star" *ngFor="let rat of getRatingArray(review.rating)"></span>
+    <div class="label-rating">({{ parseRating(review.rating) }} votes)</div>
+  </div>
+  <h4>{{ review.comment }}</h4>
+  <div class="row">
+    <div class="col-6">
+      <div class="row" style="float: right" *ngIf="currentUser.user.username === review.user.username">
+        <button color="accent" (click)="updateReview(review.id)" *ngIf="currentUser" mat-button>
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button (click)="deleteReview(review.id)" *ngIf="currentUser" mat-button color="accent">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </div>
+    </div>
+  </div>
+  <hr />
 </div>

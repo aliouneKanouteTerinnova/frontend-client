@@ -14,6 +14,9 @@ export class StoreProductsComponent implements OnInit {
   products = [];
   produits1 = [];
   idStore: any;
+  storeName: any;
+  rating: any;
+  reviews: any;
   constructor(private storesService: StoresService, public cartService: CartService, private router: ActivatedRoute) {}
 
   ngOnInit(): void {
@@ -21,7 +24,10 @@ export class StoreProductsComponent implements OnInit {
     this.idStore = this.router.snapshot.params.id;
     this.storesService.getCurrentData(this.idStore).subscribe(
       (data) => {
+        this.storeName = data.name;
+        this.rating = data.rating;
         this.products = data.products;
+        this.reviews = data.reviews;
         this.produits1 = this.products.slice(0, 2);
       },
       (error) => {
@@ -43,5 +49,16 @@ export class StoreProductsComponent implements OnInit {
       showConfirmButton: false,
       timer: 2000,
     });
+  }
+
+  getRatingArray(rating: any) {
+    return [...Array(5 - Math.floor(Number(rating))).keys()];
+  }
+
+  getCheckedRatingArray(rating: any) {
+    return [...Array(Math.floor(Number(rating))).keys()];
+  }
+  parseRating(rating: any) {
+    return Math.floor(rating);
   }
 }

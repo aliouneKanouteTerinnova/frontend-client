@@ -89,4 +89,15 @@ export class StoresComponent implements OnInit {
       }
     );
   }
+
+  getRatingArray(rating: any) {
+    return [...Array(5 - Math.floor(Number(rating))).keys()];
+  }
+
+  getCheckedRatingArray(rating: any) {
+    return [...Array(Math.floor(Number(rating))).keys()];
+  }
+  parseRating(rating: any) {
+    return Math.floor(rating);
+  }
 }
