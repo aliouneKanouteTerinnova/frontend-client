@@ -8,6 +8,7 @@ import { CartModelPublic, CartModelServer } from '../../models/cart/cart';
 import { Products } from '../../models/products/products';
 import { ProductsService } from '../products/products.service';
 import { CookieService } from 'ngx-cookie-service';
+import { CartItem } from 'src/app/dtos/cart-item/cart-item';
 
 @Injectable({
   providedIn: 'root',
@@ -314,4 +315,53 @@ export class CartService {
       observe: 'response',
     });
   }
+
+  store(token: any) {
+    token = 'token ' + token;
+    return this.httpClient.post<any>(`${environment.baseUrl}carts`, {
+      headers: new HttpHeaders().set('Authorization', token),
+      observe: 'response',
+    });
+  }
+
+  get(token: any) {
+    token = 'token ' + token;
+    return this.httpClient.get<any>(`${environment.baseUrl}carts`, {
+      headers: new HttpHeaders().set('Authorization', token),
+      observe: 'response',
+    });
+  }
+
+  update(token: any, items: CartItem[], id: any){
+    token = 'token ' + token;
+    return this.httpClient.put<any>(`${environment.baseUrl}carts/${id}`, items, {
+      headers: new HttpHeaders().set('Authorization', token),
+      observe: 'response',
+    });
+  }
+
+  addItem(token: any, item: CartItem){
+    token = 'token ' + token;
+    return this.httpClient.post(`${environment.baseUrl}carts/items`, item, {
+      headers: new HttpHeaders().set('Authorization', token),
+      observe: 'response',
+    });
+  }
+
+  updateItem(token: any, item: CartItem, id: any) {
+    token = 'token ' + token;
+    return this.httpClient.put<any>(`${environment.baseUrl}carts/items/${id}`, item, {
+      headers: new HttpHeaders().set('Authorization', token),
+      observe: 'response',
+    });
+  }
+
+  removeItem(token: any, id: any) {
+    token = 'token ' + token;
+    return this.httpClient.delete(`${environment.baseUrl}carts/items/${id}`, {
+      headers: new HttpHeaders().set('Authorization', token),
+      observe: 'response',
+    });
+  }
+
 }
