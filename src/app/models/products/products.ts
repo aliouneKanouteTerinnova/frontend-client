@@ -1,4 +1,4 @@
-import { Review } from '../review/review';
+import { ProductReview } from '../product-review/product-review';
 
 export class Products {
   id: number;
@@ -14,5 +14,5 @@ export class Products {
   quantity: number;
   is_active: boolean;
   images: string[];
-  reviews: Review[];
+  reviews: ProductReview[];
 }
