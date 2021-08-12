@@ -68,12 +68,13 @@ export class CreateStoresComponent implements OnInit {
               timer: 1500,
             });
             this.route.navigate(['/list-store']);
+            window.location.reload();
           },
           (err) => {
             Swal.fire({
               icon: 'error',
               title: 'Oops...',
-              text: err.error.error,
+              text: err.error.errors.name[0],
             });
           }
         );
