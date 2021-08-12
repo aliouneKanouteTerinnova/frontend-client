@@ -1,17 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AuthResponded } from 'src/app/models/auth/auth';
 import { AuthenticationsService } from 'src/app/services/authentications/authentications.service';
 import { CartService } from 'src/app/services/cart/cart.service';
 import { I18nServiceService } from 'src/app/services/i18n-service/i18n-service.service';
+import { ProductReviewService } from 'src/app/services/product-review/product-review.service';
 import { ProductsService } from 'src/app/services/products/products.service';
-import { ReviewService } from 'src/app/services/review/review.service';
 import { StoresService } from 'src/app/services/stores/stores.service';
 import Swal from 'sweetalert2';
-import { ReviewComponent } from '../review/review.component';
-import { UpdateReviewComponent } from '../review/update-review/update-review.component';
+import { ProductReviewComponent } from '../product-review/product-review.component';
+import { UpdateProductReviewComponent } from '../product-review/update-product-review/update-product-review.component';
 
 @Component({
   selector: 'app-product-detail',
@@ -37,7 +35,7 @@ export class ProductDetailComponent implements OnInit {
     private cartService: CartService,
     private storesService: StoresService,
     private i18nServiceService: I18nServiceService,
-    private reviewService: ReviewService,
+    private productReviewService: ProductReviewService,
     private authService: AuthenticationsService,
     public dialog: MatDialog
   ) {}
@@ -69,7 +67,7 @@ export class ProductDetailComponent implements OnInit {
   }
 
   updateReview(id) {
-    const dialogRef = this.dialog.open(UpdateReviewComponent, { width: '600px', data: id });
+    const dialogRef = this.dialog.open(UpdateProductReviewComponent, { width: '600px', data: id });
 
     dialogRef.afterClosed().subscribe((result) => {
       console.log(`Dialog result: ${id}`);
@@ -77,12 +75,12 @@ export class ProductDetailComponent implements OnInit {
   }
 
   deleteReview(id) {
-    this.reviewService.deleteReview(id, this.currentUser.user.token).subscribe((res) => {});
+    this.productReviewService.deleteReview(id, this.currentUser.user.token).subscribe((res) => {});
     window.location.reload();
   }
 
-  openDialog(id: any) {
-    const dialogRef = this.dialog.open(ReviewComponent, { width: '600px', data: id });
+  addReview(id: any) {
+    const dialogRef = this.dialog.open(ProductReviewComponent, { width: '600px', data: id });
 
     dialogRef.afterClosed().subscribe((result) => {
       console.log(`Dialog result: ${id}`);

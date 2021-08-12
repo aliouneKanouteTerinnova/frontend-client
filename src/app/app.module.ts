@@ -57,8 +57,8 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { ProductComponent } from './components/products/products.component';
 import { CategoyDetailComponent } from './pages/category-page/categoy-detail/categoy-detail.component';
 import { LoaderComponent } from './components/loader/loader.component';
-import { ReviewComponent } from './pages/products/review/review.component';
-import { UpdateReviewComponent } from './pages/products/review/update-review/update-review.component';
+import { UpdateProductReviewComponent } from './pages/products/product-review/update-product-review/update-product-review.component';
+import { ProductReviewComponent } from './pages/products/product-review/product-review.component';
 
 export function rootLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -105,8 +105,8 @@ export function rootLoaderFactory(http: HttpClient) {
     StoreProductsComponent,
     CategoyDetailComponent,
     LoaderComponent,
-    ReviewComponent,
-    UpdateReviewComponent,
+    ProductReviewComponent,
+    UpdateProductReviewComponent,
   ],
 
   imports: [

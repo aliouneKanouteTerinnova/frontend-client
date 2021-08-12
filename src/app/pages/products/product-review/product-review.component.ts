@@ -2,27 +2,27 @@ import { Component, Inject, OnInit, Optional } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { Review } from 'src/app/models/review/review';
+import { ProductReview } from 'src/app/models/product-review/product-review';
 import { AuthenticationsService } from 'src/app/services/authentications/authentications.service';
-import { ReviewService } from 'src/app/services/review/review.service';
+import { ProductReviewService } from 'src/app/services/product-review/product-review.service';
 import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-review',
-  templateUrl: './review.component.html',
-  styleUrls: ['./review.component.css'],
+  templateUrl: './product-review.component.html',
+  styleUrls: ['./product-review.component.css'],
 })
-export class ReviewComponent implements OnInit {
+export class ProductReviewComponent implements OnInit {
   createReviewForm: FormGroup;
   currentUser: any;
   id: any;
 
   constructor(
     private formBuilder: FormBuilder,
-    private reviewService: ReviewService,
+    private productReviewService: ProductReviewService,
     private route: Router,
     private authService: AuthenticationsService,
-    public dialogRef: MatDialogRef<ReviewComponent>,
+    public dialogRef: MatDialogRef<ProductReviewComponent>,
     @Optional()
     @Inject(MAT_DIALOG_DATA)
     public data: any
@@ -39,14 +39,14 @@ export class ReviewComponent implements OnInit {
   }
 
   onSubmit() {
-    const review = new Review();
+    const review = new ProductReview();
 
     review.title = this.createReviewForm.get('title').value;
     review.comment = this.createReviewForm.get('comment').value;
     review.rating = this.createReviewForm.get('rating').value;
     review.product = this.id;
 
-    this.reviewService.addReview(review, this.currentUser.user.token).subscribe(
+    this.productReviewService.addReview(review, this.currentUser.user.token).subscribe(
       (res) => {
         Swal.fire({
           position: 'top-end',

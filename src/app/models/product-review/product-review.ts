@@ -1,4 +1,4 @@
-export class Review {
+export class ProductReview {
   id: number;
   created_by: string;
   title: string;

@@ -2,8 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { environment } from '../../../environments/environment';
-import { Observable } from 'rxjs';
-import { Review } from 'src/app/models/review/review';
+import { ProductReview } from 'src/app/models/product-review/product-review';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -13,12 +12,12 @@ const httpOptions = {
 @Injectable({
   providedIn: 'root',
 })
-export class ReviewService {
+export class ProductReviewService {
   constructor(private httpClient: HttpClient) {}
 
-  addReview(review: Review, token: string) {
+  addReview(productReview: ProductReview, token: string) {
     token = 'token ' + token;
-    return this.httpClient.post(`${environment.baseUrl}products/reviews`, review, {
+    return this.httpClient.post(`${environment.baseUrl}products/reviews`, productReview, {
       headers: new HttpHeaders().set('Authorization', token),
       observe: 'response',
     });

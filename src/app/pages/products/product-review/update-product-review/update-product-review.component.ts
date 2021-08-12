@@ -1,18 +1,17 @@
 import { Component, Inject, OnInit, Optional } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { Router, ActivatedRoute } from '@angular/router';
-import { Review } from 'src/app/models/review/review';
+import { ProductReview } from 'src/app/models/product-review/product-review';
 import { AuthenticationsService } from 'src/app/services/authentications/authentications.service';
-import { ReviewService } from 'src/app/services/review/review.service';
+import { ProductReviewService } from 'src/app/services/product-review/product-review.service';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-update-review',
-  templateUrl: './update-review.component.html',
-  styleUrls: ['./update-review.component.css'],
+  selector: 'app-update-product-review',
+  templateUrl: './update-product-review.component.html',
+  styleUrls: ['./update-product-review.component.css'],
 })
-export class UpdateReviewComponent implements OnInit {
+export class UpdateProductReviewComponent implements OnInit {
   id: any;
 
   updateReviewForm = new FormGroup({
@@ -21,12 +20,12 @@ export class UpdateReviewComponent implements OnInit {
     rating: new FormControl(''),
   });
 
-  review: Review;
+  productReview: ProductReview;
   currentUser: any;
   constructor(
-    private reviewService: ReviewService,
+    private productReviewService: ProductReviewService,
     private authService: AuthenticationsService,
-    public dialogRef: MatDialogRef<UpdateReviewComponent>,
+    public dialogRef: MatDialogRef<UpdateProductReviewComponent>,
     @Optional()
     @Inject(MAT_DIALOG_DATA)
     public data: any
@@ -35,7 +34,7 @@ export class UpdateReviewComponent implements OnInit {
   ngOnInit(): void {
     this.id = this.data;
     this.currentUser = this.authService.currentUserValue;
-    this.reviewService.getCurrentData(this.id).subscribe((res) => {
+    this.productReviewService.getCurrentData(this.id).subscribe((res) => {
       this.updateReviewForm.patchValue({
         title: res.title,
         comment: res.comment,
@@ -45,14 +44,14 @@ export class UpdateReviewComponent implements OnInit {
   }
 
   onSubmit() {
-    const review = {
+    const productReview = {
       id: this.id,
       title: this.updateReviewForm.get('title').value,
       comment: this.updateReviewForm.get('comment').value,
       rating: this.updateReviewForm.get('rating').value,
     };
 
-    this.reviewService.updateReview(this.id, review, this.currentUser.user.token).subscribe(
+    this.productReviewService.updateReview(this.id, productReview, this.currentUser.user.token).subscribe(
       (res) => {
         Swal.fire({
           position: 'top-end',
