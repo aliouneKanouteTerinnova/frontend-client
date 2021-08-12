@@ -4,7 +4,7 @@ export class Review {
   title: string;
   comment: string;
   rating: number;
-  prie: number;
+  product: number;
   date_added: string;
   last_updated: string;
 }
