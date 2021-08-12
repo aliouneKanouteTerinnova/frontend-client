@@ -9,8 +9,8 @@ import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-review',
-  templateUrl: './review.component.html',
-  styleUrls: ['./review.component.css'],
+  templateUrl: './product-review.component.html',
+  styleUrls: ['./product-review.component.css'],
 })
 export class ProductReviewComponent implements OnInit {
   createReviewForm: FormGroup;

@@ -7,9 +7,9 @@ import { ProductReviewService } from 'src/app/services/product-review/product-re
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-update-review',
-  templateUrl: './update-review.component.html',
-  styleUrls: ['./update-review.component.css'],
+  selector: 'app-update-product-review',
+  templateUrl: './update-product-review.component.html',
+  styleUrls: ['./update-product-review.component.css'],
 })
 export class UpdateProductReviewComponent implements OnInit {
   id: any;
