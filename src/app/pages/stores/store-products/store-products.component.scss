@@ -99,6 +99,19 @@
   letter-spacing: 0.5px;
 }
 
+.label-rating {
+  margin-left: 7px;
+  display: inline-block;
+  vertical-align: middle;
+  color: #29235c;
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.checked {
+  color: #f39200;
+}
+
 .home-product-info h3 {
   margin: 0;
   font-size: 0.9rem;

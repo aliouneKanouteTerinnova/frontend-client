@@ -1,10 +1,15 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AuthenticationsService } from 'src/app/services/authentications/authentications.service';
 import { CartService } from 'src/app/services/cart/cart.service';
 import { I18nServiceService } from 'src/app/services/i18n-service/i18n-service.service';
+import { ProductReviewService } from 'src/app/services/product-review/product-review.service';
 import { ProductsService } from 'src/app/services/products/products.service';
 import { StoresService } from 'src/app/services/stores/stores.service';
 import Swal from 'sweetalert2';
+import { ProductReviewComponent } from '../product-review/product-review.component';
+import { UpdateProductReviewComponent } from '../product-review/update-product-review/update-product-review.component';
 
 @Component({
   selector: 'app-product-detail',
@@ -22,17 +27,23 @@ export class ProductDetailComponent implements OnInit {
   products = [];
   otherProducts = [];
   similarProducts = [];
+  currentUser: any;
+  isOwner: any;
   constructor(
     private productsService: ProductsService,
     private router: ActivatedRoute,
     private cartService: CartService,
     private storesService: StoresService,
-    private i18nServiceService: I18nServiceService
+    private i18nServiceService: I18nServiceService,
+    private productReviewService: ProductReviewService,
+    private authService: AuthenticationsService,
+    public dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
     this.idProduct = this.router.snapshot.params.id;
     this.indexPhoto = this.router.snapshot.params.indexPhoto;
+    this.currentUser = this.authService.currentUserValue;
 
     this.getProducts();
     this.productsService.getCurrentData(this.idProduct).subscribe((response) => {
@@ -52,6 +63,27 @@ export class ProductDetailComponent implements OnInit {
       this.productImage = response.images[0].file;
       this.images = response.images.slice(0, 4);
       this.fakePrice = Number(this.product.price) + 1000;
+    });
+  }
+
+  updateReview(id) {
+    const dialogRef = this.dialog.open(UpdateProductReviewComponent, { width: '600px', data: id });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log(`Dialog result: ${id}`);
+    });
+  }
+
+  deleteReview(id) {
+    this.productReviewService.deleteReview(id, this.currentUser.user.token).subscribe((res) => {});
+    window.location.reload();
+  }
+
+  addReview(id: any) {
+    const dialogRef = this.dialog.open(ProductReviewComponent, { width: '600px', data: id });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log(`Dialog result: ${id}`);
     });
   }
 
@@ -86,5 +118,16 @@ export class ProductDetailComponent implements OnInit {
       }
     }
     return prices;
+  }
+
+  getRatingArray(rating: any) {
+    return [...Array(5 - Math.floor(Number(rating))).keys()];
+  }
+
+  getCheckedRatingArray(rating: any) {
+    return [...Array(Math.floor(Number(rating))).keys()];
+  }
+  parseRating(rating: any) {
+    return Math.floor(rating);
   }
 }

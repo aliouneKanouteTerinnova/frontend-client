@@ -68,6 +68,13 @@ export class RegistrationComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    if (!localStorage.getItem('foo')) {
+      localStorage.setItem('foo', 'no reload');
+      location.reload();
+    } else {
+      localStorage.removeItem('foo');
+    }
+
     if (this.token !== null) {
       this.authService.verifyToken(this.token, this.email).subscribe(
         (data) => {
