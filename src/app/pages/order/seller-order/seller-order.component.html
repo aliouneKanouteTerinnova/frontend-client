@@ -30,14 +30,21 @@
                     <td>
                       <div class="py-2">
                         <span class="d-block text-muted" translate>orders.order_list.order_amount</span>
-                        <span>{{ formatPrice(order.total_prices | currency: 'EUR') }}</span>
+                        <span>{{ formatPrice(order.amount | currency: 'EUR') }}</span>
                       </div>
                     </td>
                     <td>
                       <div class="py-2">
                         <span class="d-block text-muted" translate>orders.order_list.order_shipping</span>
-                        {{ order.shipping_address.address.country }}, {{ order.shipping_address.address.state }},
-                        {{ order.shipping_address.address.street }}
+                        {{ order.order.shipping_address.address.country }},
+                        {{ order.order.shipping_address.address.state }},
+                        {{ order.order.shipping_address.address.street }}
+                      </div>
+                    </td>
+                    <td>
+                      <div class="py-2">
+                        <span class="d-block text-muted" translate>orders.order_list.order_status</span>
+                        {{ order.status }}
                       </div>
                     </td>
                   </tr>
@@ -48,32 +55,33 @@
 
             <!-- List order products -->
             <div class="text-center alert alert-info" translate>orders.order_list.product</div>
-            <div *ngFor="let product of order.products; let i = index">
-              <div class="product border-bottom table-responsive">
-                <table class="table table-borderless">
-                  <tbody>
-                    <tr>
-                      <td width="20%"><img src="{{ product.images[0].file }}" alt="" width="90" /></td>
-                      <td width="60%">
-                        <span class="font-weight-bold">{{ product.name }}</span>
-                        <div class="product-qty">
-                          <!-- <span class="d-block" translate
-                                    >orders.order_details.quantity <span>:{{ product.quantity }}</span></span
-                                > -->
-                          <span translate
-                            >orders.order_details.description <span>:{{ product.description }}</span></span
-                          >
-                        </div>
-                      </td>
-                      <td width="20%">
-                        <div class="text-right">
-                          <span class="font-weight-bold">{{ formatPrice(product.price | currency: 'EUR') }}</span>
-                        </div>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
+            <div class="product border-bottom table-responsive">
+              <table class="table table-borderless">
+                <tbody>
+                  <tr>
+                    <td width="20%"><img src="{{ order.cart_item.product.images[0].file }}" alt="" width="90" /></td>
+                    <td width="60%">
+                      <span class="font-weight-bold">{{ order.cart_item.product.name }}</span>
+                      <div class="product-qty">
+                        <span class="d-block" translate
+                          >orders.order_details.quantity <span>:{{ order.cart_item.quantity }}</span></span
+                        >
+                        <span translate
+                          >orders.order_details.description
+                          <span>:{{ order.cart_item.product.description }}</span></span
+                        >
+                      </div>
+                    </td>
+                    <td width="20%">
+                      <div class="text-right">
+                        <span class="font-weight-bold">{{
+                          formatPrice(order.cart_item.product.price * order.cart_item.quantity | currency: 'EUR')
+                        }}</span>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
             <!-- End order products -->
 

@@ -78,7 +78,7 @@
     "sexe": "Sexe",
     "edit_button": "Edit",
     "logout_button": "Logout",
-    "store_button": "Store",
+    "store_button": "Stores",
     "products_button": "Products",
     "orders_button": "My orders",
     "balance": "Wallet"
@@ -256,5 +256,14 @@
     "moreButton": "Learn more",
     "shopCatalog": "Shop Catalog",
     "noProducts": "This store has no products"
+  },
+  "review": {
+    "reviews": "REVIEWS",
+    "addReview": "Write a review",
+    "title": "Title",
+    "comment": "Comment",
+    "rate": "Rate",
+    "commentButton": "Comment",
+    "updateButton": "Validate"
   }
 }
