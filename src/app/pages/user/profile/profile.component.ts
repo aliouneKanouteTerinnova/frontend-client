@@ -50,7 +50,9 @@ export class ProfileComponent implements OnInit {
       console.log(res);
       this.wallets = res.body.funds;
       this.wallets.forEach((data) => {
-        this.balance += +data.amount;
+        if (data.status === 'collected') {
+          this.balance += +data.amount;
+        }
       });
     });
   }

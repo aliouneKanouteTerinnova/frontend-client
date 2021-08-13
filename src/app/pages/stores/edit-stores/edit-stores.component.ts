@@ -62,7 +62,7 @@ export class EditStoresComponent implements OnInit {
         Swal.fire({
           position: 'top-end',
           icon: 'success',
-          title: 'Product modified',
+          title: 'Store modified',
           showConfirmButton: false,
           timer: 1500,
         });

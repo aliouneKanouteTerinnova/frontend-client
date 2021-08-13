@@ -68,7 +68,7 @@ export class CreateStoresComponent implements OnInit {
               timer: 1500,
             });
             this.route.navigate(['/list-store']);
-            window.location.reload();
+            // window.location.reload();
           },
           (err) => {
             Swal.fire({

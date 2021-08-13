@@ -8,9 +8,9 @@
       <div class="col-12 mb-0">
         <app-search (login)="searchProduct($event)" [isClicked]="isClicked" [searchWord]="keyWord"></app-search>
       </div>
-      <div class="col-12" *ngIf="products.length === 0">
+      <!-- <div class="col-12" *ngIf="products.length === 0">
         <p class="text-center text-uppercase mt-10" translate>home.result</p>
-      </div>
+      </div> -->
 
       <div class="col-12 mt-1" *ngIf="isChecked">
         <h3 class="query" *ngIf="similarities === false">{{ keyWord }}</h3>

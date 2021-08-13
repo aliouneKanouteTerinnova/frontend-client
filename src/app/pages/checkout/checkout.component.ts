@@ -230,8 +230,8 @@ export class CheckoutComponent implements OnInit {
         const order = {
           cart: this.idCart,
           currency: 'EUR',
-          total_tax: 315,
-          shipping_tax: 315,
+          total_tax: 20,
+          shipping_tax: 20,
           total_prices: this.cartTotal,
           shipping_address: shippingAddress,
           shipping_method: shippingMethod,
@@ -243,7 +243,7 @@ export class CheckoutComponent implements OnInit {
             const param = {
               order_number: data.body.number,
               method: 'card',
-              amount: sommes,
+              amount: Math.round(sommes),
               currency: 'EUR',
             };
             this.payment.payment(param, this.currentUser['user'].token).subscribe(

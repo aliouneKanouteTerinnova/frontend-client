@@ -32,7 +32,12 @@
 
           <button class="dropdown-item" type="button">
             <span *ngIf="currentUser">
-              <button class="dropdown-item" routerLink="/orders"><span translate>nav.Commands</span></button>
+              <button *ngIf="is_seller" class="dropdown-item" routerLink="/orders-seller">
+                <span translate>nav.Commands</span>
+              </button>
+              <button *ngIf="!is_seller" class="dropdown-item" routerLink="/orders">
+                <span translate>nav.Commands</span>
+              </button>
             </span>
           </button>
 
