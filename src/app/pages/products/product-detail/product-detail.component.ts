@@ -90,6 +90,7 @@ export class ProductDetailComponent implements OnInit {
   changeImage(i: number) {
     this.productImage = this.images[i].file;
   }
+
   addToCart(id: Number) {
     this.cartService.AddProductToCart(id);
     Swal.fire({
@@ -100,6 +101,7 @@ export class ProductDetailComponent implements OnInit {
       timer: 2000,
     });
   }
+
   getProducts() {
     this.productsService.getAllProducts().subscribe((data) => {
       this.similarProducts = data.results.slice(0, 4);
