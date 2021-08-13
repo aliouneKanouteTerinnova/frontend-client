@@ -5,6 +5,7 @@
       <div class="card">
         <div class="invoice p-5">
           <h1><span translate>orders.order_list.order_list</span></h1>
+          <h3 *ngIf="listOrders.length === 0"><span translate>orders.order_list.no_order</span></h3>
           <!-- <span class="font-weight-bold d-block mt-4">Hello, Chris</span>
           <span>You order has been confirmed and will be shipped in next two days!</span> -->
           <div class="payment border-top mt-3 mb-3 border-bottom table-responsive" *ngIf="listOrders.length > 0">

@@ -115,6 +115,7 @@
   },
   "orders": {
     "order_list": {
+      "no_order": "No orders",
       "order_list": "Orders List",
       "result": "No orders found",
       "order_date": "Order Date",

@@ -115,6 +115,7 @@
   },
   "orders": {
     "order_list": {
+      "no_order": "Keine Aufträge",
       "order_list": "Auftragsliste",
       "result": "Keine Aufträge gefunden",
       "order_date": "Aufträge Datum",
