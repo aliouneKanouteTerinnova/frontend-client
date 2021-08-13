@@ -78,7 +78,7 @@
     "sexe": "Sexe",
     "edit_button": "Modifier",
     "logout_button": "Déconnexion",
-    "store_button": "Boutique",
+    "store_button": "Boutiques",
     "products_button": "Produits",
     "orders_button": "Mes commandes",
     "balance": "Portefeuille"
@@ -256,5 +256,14 @@
     "moreButton": "En savoir plus",
     "shopCatalog": "Catalogue de la boutique",
     "noProducts": "Cette boutique n'a pas de produits"
+  },
+  "review": {
+    "reviews": "REVUES",
+    "addReview": "Écrire un commentaire",
+    "title": "Titre",
+    "comment": "Commentaire",
+    "rate": "Note",
+    "commentButton": "Commenter",
+    "updateButton": "Valider"
   }
 }
