@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AuthenticationsService } from 'src/app/services/authentications/authentications.service';
 import { I18nServiceService } from 'src/app/services/i18n-service/i18n-service.service';
 import { OrderService } from 'src/app/services/order/order.service';
+import Swal from 'sweetalert2';
+import { SwalComponent } from '@sweetalert2/ngx-sweetalert2';
 
 @Component({
   selector: 'app-order-details',
@@ -10,11 +12,14 @@ import { OrderService } from 'src/app/services/order/order.service';
   styleUrls: ['./order-details.component.scss'],
 })
 export class OrderDetailsComponent implements OnInit {
+  @ViewChild('effacerSwal', { static: false })
+  private effacerSwal: SwalComponent;
   idOrder: any;
   currentUser: any;
   order: any;
   token: any;
   total = 0;
+  id: any;
   constructor(
     private router: ActivatedRoute,
     private orderService: OrderService,
@@ -38,6 +43,37 @@ export class OrderDetailsComponent implements OnInit {
       },
       (error) => {}
     );
+  }
+
+  onCancel() {
+    console.log(this.id);
+    this.orderService.deleteOrder(this.id, this.currentUser['user'].token).subscribe(
+      (res) => {
+        Swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          title: `Order has been canceled`,
+          showConfirmButton: false,
+          timer: 3000,
+        });
+
+        window.location.reload();
+      },
+      (error) => {
+        Swal.fire({
+          position: 'top-end',
+          icon: 'error',
+          title: error.error,
+          showConfirmButton: false,
+          timer: 3000,
+        });
+      }
+    );
+  }
+
+  CancelBtn(id) {
+    this.effacerSwal.fire();
+    this.id = id;
   }
 
   formatPrice(price: any) {
