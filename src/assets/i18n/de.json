@@ -256,5 +256,14 @@
     "moreButton": "Mehr erfahren",
     "shopCatalog": "Shop-Katalog",
     "noProducts": "Dieser shop hat keine produkte"
+  },
+  "review": {
+    "reviews": "REVIENTS",
+    "addReview": "Eine Bewertung schreiben",
+    "title": "Titel",
+    "comment": "Kommentar",
+    "rate": "Bewertung",
+    "commentButton": "Kommentar",
+    "updateButton": "Validieren"
   }
 }
