@@ -22,6 +22,7 @@ export class NavbarComponent implements OnInit {
   user: any;
   totalProduct: Number;
   total = 0;
+  is_seller = false;
 
   constructor(
     public cartService: CartService,
@@ -39,6 +40,15 @@ export class NavbarComponent implements OnInit {
       this.lang = 'FRANCAIS-FR';
     }
     this.currentUser = this.authService.currentUserValue;
+    if (this.currentUser != null) {
+      this.authService.getUser(this.currentUser['user'].token).subscribe((data) => {
+        this.user = data.body;
+        console.log(data);
+        if (this.currentUser['user'].account_type === 'SELLER' || this.currentUser['user'].account_type === 'Seller') {
+          this.is_seller = true;
+        }
+      });
+    }
     this.cartService.cartDataObs$.subscribe((data: CartModelServer) => {
       this.cartData = data;
       for (let inded of this.cartData.data) {
