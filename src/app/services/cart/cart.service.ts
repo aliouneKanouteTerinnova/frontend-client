@@ -1,3 +1,14 @@
+/* eslint-disable prefer-const */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/ban-types */
+/* eslint-disable @typescript-eslint/no-unused-expressions */
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+/* eslint-disable @typescript-eslint/naming-convention */
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
+/* eslint-disable @typescript-eslint/member-ordering */
+/* eslint-disable @typescript-eslint/restrict-plus-operands */
+/* eslint-disable @typescript-eslint/restrict-template-expressions */
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { Injectable } from '@angular/core';
@@ -8,6 +19,7 @@ import { CartModelPublic, CartModelServer } from '../../models/cart/cart';
 import { Products } from '../../models/products/products';
 import { ProductsService } from '../products/products.service';
 import { CookieService } from 'ngx-cookie-service';
+import { CartItem } from 'src/app/dtos/cart-item/cart-item';
 
 @Injectable({
   providedIn: 'root',
@@ -178,7 +190,7 @@ export class CartService {
   }
 
   UpdateCartData(index, increase: Boolean) {
-    let data = this.cartDataServer.data[index];
+    const data = this.cartDataServer.data[index];
     if (increase) {
       // @ts-ignore
       data.numInCart < data.product.quantity ? data.numInCart++ : data.product.quantity;
@@ -275,7 +287,7 @@ export class CartService {
     this.cartDataObs$.next(this.cartDataServer);
   }
 
-  //Initiate Cart
+  // Initiate Cart
   InitiateBasket(token: any) {
     token = 'token ' + token;
     return this.httpClient.post<any>(
@@ -288,7 +300,8 @@ export class CartService {
     );
   }
 
-  //Add item to Cart
+  // eslint-disable-next-line spaced-comment
+  // Add item to Cart
   addItemToCart(data: any, token: any) {
     token = 'token ' + token;
     return this.httpClient.post(`${environment.baseUrl}carts/items`, data, {
@@ -310,6 +323,55 @@ export class CartService {
   getCart(token: any) {
     token = 'token ' + token;
     return this.httpClient.get<any>(`${environment.baseUrl}carts`, {
+      headers: new HttpHeaders().set('Authorization', token),
+      observe: 'response',
+    });
+  }
+
+  store(token: any) {
+    token = 'token ' + token;
+    return this.httpClient.post<any>(`${environment.baseUrl}carts`, {
+      headers: new HttpHeaders().set('Authorization', token),
+      observe: 'response',
+    });
+  }
+
+  get(token: any) {
+    token = 'token ' + token;
+    return this.httpClient.get<any>(`${environment.baseUrl}carts`, {
+      headers: new HttpHeaders().set('Authorization', token),
+      observe: 'response',
+    });
+  }
+
+  update(token: any, items: CartItem[], id: any) {
+    token = 'token ' + token;
+    return this.httpClient.put<any>(`${environment.baseUrl}carts/${id}`, items, {
+      headers: new HttpHeaders().set('Authorization', token),
+      observe: 'response',
+    });
+  }
+
+  addItem(token: any, item: CartItem) {
+    token = 'token ' + token;
+    return this.httpClient.post(`${environment.baseUrl}carts/items`, item, {
+      headers: new HttpHeaders().set('Authorization', token),
+      observe: 'response',
+    });
+  }
+
+  updateItem(token: any, item: CartItem, id: any) {
+    token = 'token ' + token;
+    return this.httpClient.put<any>(`${environment.baseUrl}carts/items/${id}`, item, {
+      headers: new HttpHeaders().set('Authorization', token),
+      observe: 'response',
+    });
+  }
+
+  // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
+  removeItem(token: any, id: any) {
+    token = 'token ' + token;
+    return this.httpClient.delete(`${environment.baseUrl}carts/items/${id}`, {
       headers: new HttpHeaders().set('Authorization', token),
       observe: 'response',
     });

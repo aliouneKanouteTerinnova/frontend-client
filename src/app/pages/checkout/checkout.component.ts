@@ -1,3 +1,6 @@
+/* eslint-disable prefer-const */
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-unsafe-return */
 /* eslint-disable @typescript-eslint/restrict-plus-operands */
 /* eslint-disable @typescript-eslint/no-shadow */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
@@ -29,6 +32,9 @@ import { OrderService } from 'src/app/services/order/order.service';
 import Swal from 'sweetalert2';
 import { Stripe } from 'stripe-angular';
 import { I18nServiceService } from 'src/app/services/i18n-service/i18n-service.service';
+import { CartItem } from 'src/app/dtos/cart-item/cart-item';
+import { CartModel } from 'src/app/models/cart/cart-model';
+import { CartItemModel } from 'src/app/models/cart/cart-item-model';
 
 @Component({
   selector: 'app-checkout',
@@ -49,6 +55,8 @@ export class CheckoutComponent implements OnInit {
   token;
   pbKey;
   orderNumber;
+  items: CartItem[] = [];
+  cart: CartModel;
   errorMessage: any;
   constructor(
     public cartService: CartService,
@@ -62,6 +70,7 @@ export class CheckoutComponent implements OnInit {
 
   ngOnInit(): void {
     this.currentUser = this.authService.currentUserValue;
+    this.token = this.currentUser['user'].token;
     this.cartService.cartDataObs$.subscribe((data: CartModelServer) => {
       this.cartData = data;
     });
@@ -98,6 +107,52 @@ export class CheckoutComponent implements OnInit {
         });
       });
     }
+
+    this.updateCartOnServer();
+  }
+
+  getCartDto() {
+    let items: CartItem[] = [];
+    this.cartData.data.forEach((element) => {
+      const item: CartItem = {
+        product: element.product.id.toString(),
+        quantity: element.numInCart,
+      };
+      items.push(item);
+    });
+
+    return items;
+  }
+
+  updateCart(data) {
+    let cart = new CartModel();
+    cart.id = data.id;
+    cart.items = [];
+    data.items.forEach((element) => {
+      let item = new CartItemModel();
+      item.id = element.id;
+      item.product = element.product;
+      item.quantity = element.quantity;
+      cart.items.push(item);
+    });
+
+    return cart;
+  }
+
+  updateCartOnServer() {
+    this.items = this.getCartDto();
+    this.cartService.get(this.token).subscribe((res) => {
+      this.cart = this.updateCart(res.body);
+      this.cartService.update(this.token, this.items, this.cart.id).subscribe(
+        (response) => {
+          this.cart = response.body;
+          console.log(this.cart);
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+    });
   }
 
   initForm(amount, orderNumber) {
@@ -141,10 +196,10 @@ export class CheckoutComponent implements OnInit {
     if (!this.checkoutForm.valid) {
       return;
     }
-    this.cartService.InitiateBasket(this.currentUser['user'].token).subscribe(
+    this.cartService.get(this.currentUser['user'].token).subscribe(
       (data) => {
         this.idCart = data.body.id;
-        this.cartData.data.forEach((element) => {
+        /* this.cartData.data.forEach((element) => {
           const item: Item = {
             product: element.product.id,
             quantity: element.numInCart,
@@ -155,7 +210,7 @@ export class CheckoutComponent implements OnInit {
               console.log(error);
             }
           );
-        });
+        }); */
         const addresse: Address = {
           country: state,
           state: city,
@@ -269,7 +324,7 @@ export class CheckoutComponent implements OnInit {
   }
 
   formatPrice(price: any) {
-    var prices = price.split('.');
+    let prices = price.split('.');
     if (this.i18nServiceService.currentLangValue === null || this.i18nServiceService.currentLangValue === 'en') {
       prices = price;
     } else {
