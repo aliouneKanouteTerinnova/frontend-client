@@ -112,6 +112,29 @@
   color: #f39200;
 }
 
+.button {
+  margin-bottom: 25px;
+  button {
+    width: 100%;
+    background-color: #ef7c02;
+    color: #fff;
+    padding: 1rem 1.4rem;
+    border: none;
+    border-radius: 26px;
+    font-size: 1.2rem;
+  }
+}
+
+.similar_products {
+  h1 {
+    text-transform: uppercase;
+    font-size: 1.7rem;
+    font-weight: bold;
+    text-align: center;
+    margin: 3rem 0;
+  }
+}
+
 .home-product-info h3 {
   margin: 0;
   font-size: 0.9rem;

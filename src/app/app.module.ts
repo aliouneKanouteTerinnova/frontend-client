@@ -59,6 +59,8 @@ import { CategoyDetailComponent } from './pages/category-page/categoy-detail/cat
 import { LoaderComponent } from './components/loader/loader.component';
 import { UpdateProductReviewComponent } from './pages/products/product-review/update-product-review/update-product-review.component';
 import { ProductReviewComponent } from './pages/products/product-review/product-review.component';
+import { StoreReviewComponent } from './pages/stores/store-review/store-review/store-review.component';
+import { UpdateStoreReviewComponent } from './pages/stores/store-review/update-store-review/update-store-review.component';
 
 export function rootLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -107,6 +109,8 @@ export function rootLoaderFactory(http: HttpClient) {
     LoaderComponent,
     ProductReviewComponent,
     UpdateProductReviewComponent,
+    StoreReviewComponent,
+    UpdateStoreReviewComponent,
   ],
 
   imports: [
