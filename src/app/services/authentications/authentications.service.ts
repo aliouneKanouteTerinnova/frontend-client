@@ -1,3 +1,8 @@
+/* eslint-disable @typescript-eslint/indent */
+/* eslint-disable @typescript-eslint/member-ordering */
+/* eslint-disable @typescript-eslint/quotes */
+/* eslint-disable @typescript-eslint/restrict-plus-operands */
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 /* eslint-disable @typescript-eslint/no-unsafe-return */
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
@@ -100,7 +105,7 @@ export class AuthenticationsService {
     this.currentUserSubject.next(null);
   }
 
-  //Password reset
+  // Password reset
   getEmailToResetPassword(email: any) {
     return this.httpClient.post<any>(`${environment.baseUrl}users/password/reset/`, email);
   }

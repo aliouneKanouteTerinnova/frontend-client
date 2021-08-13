@@ -1,3 +1,16 @@
+/* eslint-disable @typescript-eslint/ban-types */
+/* eslint-disable no-var */
+/* eslint-disable @typescript-eslint/restrict-plus-operands */
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-unsafe-return */
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/restrict-template-expressions */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/dot-notation */
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
+/* eslint-disable @typescript-eslint/no-floating-promises */
+/* eslint-disable @typescript-eslint/naming-convention */
 import { Component, ViewChild, OnInit } from '@angular/core';
 import { CartModelServer } from 'src/app/models/cart/cart';
 import { CartService } from 'src/app/services/cart/cart.service';
@@ -103,7 +116,7 @@ export class CartComponent implements OnInit {
       Swal.fire({
         icon: 'error',
         title: 'Oops...',
-        text: `You cannot have 0 article`,
+        text: 'You cannot have 0 article',
       });
       c.numInCart = 1;
     } else {
