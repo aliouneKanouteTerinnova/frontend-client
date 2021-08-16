@@ -83,6 +83,13 @@
     "orders_button": "Meine Bestellungen",
     "balance": "Portfolio"
   },
+  "reset_password": {
+    "email": "E-Mail",
+    "send_button": "ENVOYER",
+    "password": "Passwort",
+    "confirm_password": "Bestätigen Sie das Passwort",
+    "validate": "Validieren"
+  },
   "home": {
     "acquerir": "Kaufen",
     "recherche": "Suche",

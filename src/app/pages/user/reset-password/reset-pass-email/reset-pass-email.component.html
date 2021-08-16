@@ -2,13 +2,15 @@
 <div class="example-card container">
   <form [formGroup]="resetForm" (submit)="reset()" *ngIf="!isReset">
     <mat-form-field class="example-full-width" appearance="outline">
-      <mat-label>Email</mat-label>
+      <mat-label><span translate>reset_password.email</span></mat-label>
       <input type="email" matInput placeholder="Email" formControlName="email" required />
       <mat-error *ngIf="resetForm.controls.email.touched && resetForm.controls.email.invalid">
-        <span *ngIf="resetForm.controls.email.errors.required">This field is mandatory.</span>
-        <span *ngIf="resetForm.controls.email.errors.pattern">This field is invalid.</span>
+        <span *ngIf="resetForm.controls.email.errors.required" translate>registration.errors.required_error</span>
+        <span *ngIf="resetForm.controls.email.errors.pattern">translate>registration.errors.invalid_error</span>
       </mat-error>
     </mat-form-field>
-    <button [disabled]="resetForm.invalid" mat-raised-button color="primary" class="btn-block">SEND</button>
+    <button [disabled]="resetForm.invalid" mat-raised-button color="primary" class="btn-block">
+      <span translate>reset_password.send_button</span>
+    </button>
   </form>
 </div>
