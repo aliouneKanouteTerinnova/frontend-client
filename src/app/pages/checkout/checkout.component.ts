@@ -90,7 +90,7 @@ export class CheckoutComponent implements OnInit {
       expmonth: '',
       expyear: '',
       cvv: '',
-      sameadr: '',
+      // sameadr: '',
     });
     this.initForm('', '');
     if (this.currentUser) {
