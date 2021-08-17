@@ -83,6 +83,13 @@
     "orders_button": "Mes commandes",
     "balance": "Portefeuille"
   },
+  "reset_password": {
+    "email": "Email",
+    "send_button": "ENVOYER",
+    "password": "Mot de passe",
+    "confirm_password": "Confirmer le mot de passe",
+    "validate": "Valider"
+  },
   "home": {
     "acquerir": "Acquerir",
     "recherche": "Rechercher",
