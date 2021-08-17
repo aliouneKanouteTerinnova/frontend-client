@@ -6,6 +6,7 @@ import { CategoriesService } from 'src/app/services/categories/categories.servic
 import Swal from 'sweetalert2';
 import { v4 as uuidv4 } from 'uuid';
 import { AuthenticationsService } from 'src/app/services/authentications/authentications.service';
+import { window } from 'rxjs/operators';
 uuidv4();
 
 @Component({
@@ -33,10 +34,10 @@ export class UpdateCategoriesComponent implements OnInit {
   ngOnInit(): void {
     this.categoryService.getCategory(this.router.snapshot.params.id).subscribe((res) => {
       this.createCategoriesForm.patchValue({
-        name: res.category.name,
-        slug: res.category.slug,
-        description: res.category.description,
-        is_active: res.category.is_active,
+        name: res.name,
+        slug: res.slug,
+        description: res.description,
+        is_active: res.is_active,
       });
     });
     this.currentUser = this.authService.currentUserValue;
@@ -57,7 +58,7 @@ export class UpdateCategoriesComponent implements OnInit {
           Swal.fire({
             position: 'top-end',
             icon: 'success',
-            title: 'categories modified',
+            title: 'Category modified',
             showConfirmButton: false,
             timer: 1500,
           });

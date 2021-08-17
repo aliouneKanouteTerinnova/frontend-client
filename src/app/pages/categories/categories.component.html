@@ -24,11 +24,17 @@
     <div style="width: 35rem" *ngFor="let category of categories">
       <div class="store">
         <div style="display: flex">
+          <div class="img mb-2">
+            <img class="img-thumbnail" src="{{ category.image }}" alt="" />
+          </div>
           <div class="card-body name" routerLink="">
             <b><span translate>category.name</span> :</b> {{ category.name }}
           </div>
           <div class="card-body adresse">
             <b><span translate>category.description</span> :</b> {{ category.description }}
+          </div>
+          <div class="card-body adresse">
+            <b><span translate>category.is_active</span> :</b> {{ category.is_active }}
           </div>
           <div class="card-body children" *ngIf="category.children.length > 0">
             <b><span translate>category.children</span> :</b>
