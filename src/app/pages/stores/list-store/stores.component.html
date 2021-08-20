@@ -36,6 +36,9 @@
         <div class="card-body adresse">
           <b><span translate>store.address</span> :</b> {{ store.store_address }}
         </div>
+        <div class="card-body adresse">
+          <b><span translate>store.is_active</span> :</b> {{ store.is_active }}
+        </div>
         <div class="button" *ngIf="hideActionBtn">
           <button
             [disabled]="disabledBtn"

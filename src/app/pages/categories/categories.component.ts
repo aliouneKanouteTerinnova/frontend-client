@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Category } from 'src/app/models/category/category';
 import { AuthenticationsService } from 'src/app/services/authentications/authentications.service';
 import { CategoriesService } from 'src/app/services/categories/categories.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-categories',
@@ -35,6 +36,24 @@ export class CategoriesComponent implements OnInit {
   }
 
   deleteCategory(id) {
-    this.categoryService.deleteCategory(id, this.currentUser.user.token).subscribe((res) => {});
+    this.categoryService.deleteCategory(id, this.currentUser.user.token).subscribe(
+      (res) => {
+        Swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          title: 'The category has been deleted !',
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        window.location.reload();
+      },
+      (err) => {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Something went wrong !',
+        });
+      }
+    );
   }
 }

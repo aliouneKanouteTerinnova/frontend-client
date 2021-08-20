@@ -83,6 +83,13 @@
     "orders_button": "Meine Bestellungen",
     "balance": "Portfolio"
   },
+  "reset_password": {
+    "email": "E-Mail",
+    "send_button": "ENVOYER",
+    "password": "Passwort",
+    "confirm_password": "Bestätigen Sie das Passwort",
+    "validate": "Validieren"
+  },
   "home": {
     "acquerir": "Kaufen",
     "recherche": "Suche",
@@ -134,6 +141,7 @@
       "order_payment": "Zahlung",
       "description": "Beschreibung",
       "quantity": "Menge",
+      "cancel": "Abbrechen",
       "order_subtotal": "Zwischensumme",
       "order_ship_fee": "Versand-Gebühr",
       "order_tax_fee": "Steuerbetrag",

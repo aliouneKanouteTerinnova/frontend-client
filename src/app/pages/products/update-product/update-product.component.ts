@@ -21,7 +21,7 @@ export class UpdateProductComponent implements OnInit {
     price: new FormControl(''),
     quantity: new FormControl(''),
     // img: new FormControl(''),
-    // is_active;
+    is_active: new FormControl(''),
   });
 
   constructor(

@@ -83,6 +83,13 @@
     "orders_button": "My orders",
     "balance": "Wallet"
   },
+  "reset_password": {
+    "email": "Email",
+    "send_button": "ENVOYER",
+    "password": "Password",
+    "confirm_password": "Confirm Password",
+    "validate": "Validate"
+  },
   "home": {
     "acquerir": "Buy",
     "recherche": "Search",
@@ -134,6 +141,7 @@
       "order_payment": "Payment",
       "description": "Description",
       "quantity": "Quantity",
+      "cancel": "Cancel",
       "order_subtotal": "Subtotal",
       "order_ship_fee": "Shipping Fee",
       "order_tax_fee": "Tax Fee",
