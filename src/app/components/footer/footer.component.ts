@@ -10,6 +10,22 @@ export class FooterComponent implements OnInit {
   stores = [];
   storesTemp = [];
   currentUser: any;
+  vaana = [
+    { title: 'Accueil', link: '/' },
+    { title: 'A propos', link: '/apropos' },
+    { title: 'Vision', link: '/vision' },
+    { title: 'Mission', link: '/mission' },
+    { title: 'Blog', link: '/blog' },
+    { title: 'Contact', link: '/contact' },
+  ];
+  compte = [
+    { title: 'Sidentifier', link: '/register' },
+    { title: 'Achats', link: '/' },
+    { title: 'Panier', link: '/cart' },
+    { title: 'Commande', link: '/order' },
+    { title: 'Remises', link: '/' },
+    { title: 'Questions', link: '/' },
+  ];
   // hideBtn;
   constructor(private storesService: StoresService) {}
 
