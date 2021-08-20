@@ -76,11 +76,11 @@
                         class="cancel mt-5"
                         (click)="CancelBtn(order_items.id)"
                       >
-                        Cancel
+                        <span translate>orders.order_details.description </span>
                       </button>
                       <swal
                         #effacerSwal
-                        title="Effacer "
+                        title="Deletion "
                         text="Are you sure ?  "
                         type="question"
                         confirmButtonText="Yes"

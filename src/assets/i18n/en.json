@@ -141,6 +141,7 @@
       "order_payment": "Payment",
       "description": "Description",
       "quantity": "Quantity",
+      "cancel": "Cancel",
       "order_subtotal": "Subtotal",
       "order_ship_fee": "Shipping Fee",
       "order_tax_fee": "Tax Fee",

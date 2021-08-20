@@ -2,7 +2,7 @@
   <div class="home-product" *ngFor="let product of products; let i = index">
     <img routerLink="/product-detail/{{ product.id }}/{{ i }}/" src="{{ product.images[0].file }}" alt="" />
     <div class="home-product-info">
-      <div class="description">
+      <div class="description" routerLink="/product-detail/{{ product.id }}/{{ i }}/">
         <span>{{ product.name.slice(0, 20) }}</span>
       </div>
       <div class="price">
