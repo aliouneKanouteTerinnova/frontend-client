@@ -12,6 +12,7 @@ import { CategoriesService } from 'src/app/services/categories/categories.servic
 import Swal from 'sweetalert2';
 import { v4 as uuidv4 } from 'uuid';
 import { AuthenticationsService } from 'src/app/services/authentications/authentications.service';
+import { ProductsService } from 'src/app/services/products/products.service';
 uuidv4();
 
 @Component({
@@ -24,11 +25,16 @@ export class CreateCategoriesComponent implements OnInit {
   categories: Category;
   currentUser: any;
   categoryId: any;
+  submited = false;
+  fd = new FormData();
+  image: any;
+
   constructor(
     private route: Router,
     private fb: FormBuilder,
     private categoryService: CategoriesService,
-    private authService: AuthenticationsService
+    private authService: AuthenticationsService,
+    private productsService: ProductsService
   ) {}
 
   ngOnInit(): void {
@@ -39,6 +45,7 @@ export class CreateCategoriesComponent implements OnInit {
       description: ['', Validators.required],
       // is_active: ['', Validators.required],
       // created_by: ['', Validators.required],
+      image: ['', Validators.required],
       parent: [''],
     });
     this.getCategory();
@@ -54,40 +61,64 @@ export class CreateCategoriesComponent implements OnInit {
     this.categoryId = event.target.value;
   }
 
-  onSubmit() {
-    const categories = new Category();
+  get f() {
+    return this.createCategoriesForm.controls;
+  }
 
-    // categories.id = '';
-    categories.name = this.createCategoriesForm.get('name').value;
-    categories.slug = this.createCategoriesForm.get('slug').value;
-    categories.description = this.createCategoriesForm.get('description').value;
-    categories.is_active = true;
-    // categories.created_by = '';
-    // categories.products = '';
-    if (this.createCategoriesForm.get('parent').value === '---') {
-      categories.parent = null;
-    } else {
-      categories.parent = this.createCategoriesForm.get('parent').value;
+  onSubmit() {
+    this.submited = true;
+
+    this.productsService.uploadFile(this.fd, this.currentUser.user.token).subscribe((data) => {
+      this.image = data.body.file;
+      const categories = new Category();
+
+      categories.name = this.createCategoriesForm.get('name').value;
+      categories.slug = this.createCategoriesForm.get('slug').value;
+      categories.description = this.createCategoriesForm.get('description').value;
+      categories.is_active = true;
+      // categories.created_by = '';
+      // categories.products = '';
+      categories.image = this.image;
+
+      if (this.createCategoriesForm.get('parent').value === '---') {
+        categories.parent = null;
+      } else {
+        categories.parent = this.createCategoriesForm.get('parent').value;
+      }
+
+      this.categoryService.addCategory(categories, this.currentUser.user.token).subscribe(
+        (res) => {
+          Swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: 'Your category has been saved',
+            showConfirmButton: false,
+            timer: 1500,
+          });
+          this.route.navigate(['/categories']);
+        },
+        (err) => {
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: err.error.error,
+          });
+        }
+      );
+    });
+  }
+
+  handleFileInput(event) {
+    const file = <File>event.target.files[0];
+    // for (let file of files) {
+    let fileName = file.name;
+    if (file.size > 10485760) {
+      return false;
+    }
+    if (fileName) {
+      fileName = fileName.replace(/[^a-zA-Z0-9\.\-]/g, '_');
     }
 
-    this.categoryService.addCategory(categories, this.currentUser.user.token).subscribe(
-      (res) => {
-        Swal.fire({
-          position: 'top-end',
-          icon: 'success',
-          title: 'Your work has been saved',
-          showConfirmButton: false,
-          timer: 1500,
-        });
-        this.route.navigate(['/categories']);
-      },
-      (err) => {
-        Swal.fire({
-          icon: 'error',
-          title: 'Oops...',
-          text: err.error.error,
-        });
-      }
-    );
+    this.fd.append('file', file);
   }
 }
