@@ -141,6 +141,7 @@
       "order_payment": "Zahlung",
       "description": "Beschreibung",
       "quantity": "Menge",
+      "cancel": "Abbrechen",
       "order_subtotal": "Zwischensumme",
       "order_ship_fee": "Versand-Gebühr",
       "order_tax_fee": "Steuerbetrag",
