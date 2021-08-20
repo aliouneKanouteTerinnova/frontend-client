@@ -1,0 +1,28 @@
+nav {
+  background-image: url('../../../assets/img/bg-navbar.svg') !important;
+  background-color: #f39221 !important;
+  height: 90px;
+  z-index: 1;
+  padding: 0 8rem;
+  margin-bottom: 150px;
+
+  .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    a {
+      width: 200px;
+      height: 200px;
+      background: #fff;
+      border-radius: 50%;
+      margin-top: -70px;
+
+      img {
+        width: 200px;
+        height: 200px;
+        margin-top: 20px;
+      }
+    }
+  }
+}
