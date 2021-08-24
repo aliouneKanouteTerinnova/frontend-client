@@ -1,7 +1,7 @@
 on:
   push:
     branches:
-      - main
+      - feature/new-ui-buyer-navbar
 
 name: CICD for Vaanah frontend-client
 jobs:
@@ -60,7 +60,7 @@ jobs:
           file: ./Dockerfile
           builder: ${{ steps.buildx.outputs.name }}
           push: true
-          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/vaana-front:v1.3.5-stable
+          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/vaana-front:v0.1-new-ui
           # cache-from: type=local,src=/tmp/.buildx-cache
           # cache-to: type=local,dest=/tmp/.buildx-cache
 
