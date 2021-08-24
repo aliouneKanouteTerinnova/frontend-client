@@ -25,5 +25,5 @@
 
     - name: Run Image
       shell: |
-        docker run -d -p 8084:80 --name vaana_front papeterinnova/vaana-new-ui:v0.1
+        docker run -d -p 8084:80 --name new_ui papeterinnova/vaana-new-ui:v0.1
       become: yes
