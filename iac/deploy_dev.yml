@@ -12,6 +12,12 @@
         name: docker.io
       become: yes
 
+    # - name: Install Python Docker
+    #   apt:
+    #     update_cache: yes
+    #     name: python-docker
+    #   become: yes
+
     - name: Start Docker
       shell: |
         systemctl start docker
@@ -25,7 +31,7 @@
 
     # - name: Kill Previous container
     #   shell: |
-    #     docker kill new_ui
+    #     docker kill new_ui2
     #   become: yes
 
     # - name: Prune container
