@@ -11,7 +11,7 @@
     </div>
 
     <div class="col-md-4 col-lg-2">
-      <h2 translate>Mon compte</h2>
+      <h2 translate>footer.myAccount</h2>
       <div class="shops-items">
         <li class="item" *ngFor="let item of compte">
           <a routerLink="{{ item.link }}">{{ item.title }}</a>
@@ -34,10 +34,10 @@
     </div>
 
     <div class="col-md-4 col-lg-2">
-      <h2 translate>Newsletter</h2>
+      <h2 translate>footer.newsletter</h2>
       <p>
-        Rejiognez des milliers d'autre personnes <br />
-        abonnez-vous a nos actualites
+        <span translate>footer.descriptionNewsletter</span> <br />
+        <span translate>footer.descriptionNewsletter2</span>
       </p>
       <div class="d-flex mb-4">
         <input type="email" class="form-control" id="email" placeholder="ENTER YOUR EMAIL" />
@@ -61,7 +61,7 @@
     </div>
 
     <div class="col-md-4 col-lg-2">
-      <h2 translate>A propos de Vaana</h2>
+      <h2 translate>footer.about</h2>
       <p>
         Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolorum quo sit nobis eligendi assumenda quos
         temporibus maxime adipisci aliquam saepe aliquid obcaecati tenetur, magnam ex possimus non tempora, quas
@@ -85,7 +85,7 @@
 </footer>
 <div class="container-fluid footer-bottom-container">
   <div class="footer-bottom container">
-    <p>2021 Vaana Allrights reserved - Designed by Sawa</p>
+    <p><span translate>footer.designBy</span></p>
     <p class="info">infos@vaanah.com 33 000 00 00</p>
   </div>
 </div>

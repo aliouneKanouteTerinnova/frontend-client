@@ -48,13 +48,30 @@
     "compte": "Einloggen/Registrieren",
     "panier": "Anzeige",
     "category": "KATEGORIE",
-    "Your_Account": "Ihr Konto",
+    "account": "Konto",
     "Commands": "Befehle",
     "Wishlist": "Wunschzettel",
     "Setting": "Einstellung",
-    "Disconnection": "Unterbrechung"
+    "Disconnection": "Unterbrechung",
+    "BecomeSeller": "Verkäufer werden",
+    "Shops": "Geschäfte",
+    "ClickHere": "HIER KLICKEN"
+  },
+  "region": {
+    "title": "REGIONEN",
+    "description": "Klicken Sie auf eine Karte, um nur Produkte aus der jeweiligen Region anzuzeigen.",
+    "africa": "Afrika",
+    "america": "America",
+    "asia": "Asien",
+    "europe": "Europa"
   },
   "footer": {
+    "myAccount": "Mein Konto",
+    "newsletter": "Rundschreiben",
+    "descriptionNewsletter": "Schließen Sie sich Tausenden von anderen an",
+    "descriptionNewsletter2": "abonnieren Sie unsere Nachrichten",
+    "about": "Über Vaanah",
+    "designBy": "2021 Vaana Alle Rechte vorbehalten - Entworfen von Sawa",
     "shops": "GESCHÄFTE",
     "moreShop": "Mehr Shops anzeigen",
     "paymentMode": "ZAHLUNGSWEISE",
