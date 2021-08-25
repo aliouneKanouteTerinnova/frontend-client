@@ -1,0 +1,40 @@
+.carousel-item {
+  position: relative;
+  height: 450px;
+
+  h1 {
+    position: absolute;
+    top: 47%;
+    font-size: 45px;
+    right: 21%;
+    font-weight: 700;
+    font-family: 'Raleway';
+    color: #29235c;
+    letter-spacing: 2px;
+  }
+
+  .click-here {
+    @extend h1;
+    top: 67.5%;
+    right: 32.5%;
+    font-size: 27px;
+    color: #fff;
+    border: none;
+    background: none;
+  }
+}
+
+.carousel-indicators {
+  bottom: -70px;
+  margin-bottom: 20px;
+
+  li {
+    &.active {
+      background-color: #29235c;
+    }
+    width: 12px;
+    background-color: #607d8bd4;
+    height: 12px;
+    border-radius: 50%;
+  }
+}
