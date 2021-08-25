@@ -63,6 +63,7 @@ import { StoreReviewComponent } from './pages/stores/store-review/store-review/s
 import { UpdateStoreReviewComponent } from './pages/stores/store-review/update-store-review/update-store-review.component';
 import { BuyerNavbarComponent } from './components/buyer/buyer-navbar/buyer-navbar.component';
 import { NavLogoComponent } from './components/nav-logo/nav-logo.component';
+import { HeadersComponent } from './components/headers/headers.component';
 
 export function rootLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -115,6 +116,7 @@ export function rootLoaderFactory(http: HttpClient) {
     UpdateStoreReviewComponent,
     BuyerNavbarComponent,
     NavLogoComponent,
+    HeadersComponent,
   ],
 
   imports: [
