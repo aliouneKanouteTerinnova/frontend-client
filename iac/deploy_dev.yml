@@ -39,7 +39,6 @@
         responses:
           Question:
             - Are you sure you want to continue? [y/N]: y
-        timeout: 15
 
     - name: Run Image
       shell: |
