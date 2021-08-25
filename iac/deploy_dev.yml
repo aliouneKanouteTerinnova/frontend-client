@@ -38,7 +38,7 @@
         command: sudo docker container prune
         responses:
           Question:
-            - Are you sure you want to continue? [y/N]: y
+            - 'Are you sure you': 'y'
 
     - name: Run Image
       shell: |
