@@ -30,9 +30,6 @@
 
     - name: Prune container
       yes 'y' | docker container prune
-      # shell: |
-      #   docker container prune
-      # become: yes
 
     - name: Run Image
       shell: |
