@@ -5,46 +5,8 @@
 <app-headers></app-headers>
 <!-- <search-bar (login)="searchProducts($event)"></search-bar> -->
 
-<div class="scrollBar" *ngIf="products.length > 0">
-  <div class="buttonEl">
-    <button mat-raised-button color="primary" class="categoryScroll" routerLink="/category">
-      <span translate>home.category</span>
-    </button>
-  </div>
-  <div class="_2KdhY">
-    <div class="_2B5SH _1nF12 _3S3n_">
-      <div class="_1Fn_q _2e6WW" *ngIf="left">
-        <button type="button" title="scroll" class="_1Abnl _3d86A hvMNc _1mizB" (click)="handleLeftClick()">
-          <svg width="24" height="24" class="_1A-eG" version="1.1" viewBox="0 0 32 32" aria-hidden="false">
-            <path d="M20.6667 24.6666l-2 2L8 16 18.6667 5.3333l2 2L12 16l8.6667 8.6666z"></path>
-          </svg>
-        </button>
-      </div>
-      <div class="_1czme _2e6WW" *ngIf="right">
-        <button type="button" title="scroll" class="_1Abnl _3d86A y6Io2 _2wD_J" (click)="handleRightClick()">
-          <svg width="150" height="150" class="_1A-eG" version="1.1" viewBox="0 0 32 32" aria-hidden="false">
-            <path d="M11.3333 7.3333l2-2L24 16 13.3333 26.6666l-2-2L20 16l-8.6667-8.6667z"></path>
-          </svg>
-        </button>
-      </div>
+<app-regions></app-regions>
 
-      <div class="_1RBDA">
-        <div></div>
-        <div class="_2QwuK">
-          <div class="_22XDl">
-            <div class="mkUrf" *ngFor="let country of countries">
-              <div class="uCURQ _3CVLp">
-                <a title="More building images" class="zVhYF xLon9 _1CBrG _1ByhS" routerLink="/category">{{
-                  country
-                }}</a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
 <div class="main" *ngIf="products.length > 0">
   <div class="product" *ngFor="let product of products; let i = index">
     <img src="{{ product.images[0].file }}" alt="" (click)="imageClicked()" />
