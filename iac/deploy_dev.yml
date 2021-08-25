@@ -1,7 +1,7 @@
 ---
 - hosts: webservers
   vars:
-    ansible_user: ansible
+    ansible_user: ubuntu
 
   tasks:
     ##### provision brand new ubuntu 18.04 server
