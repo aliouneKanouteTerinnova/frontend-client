@@ -23,6 +23,16 @@
         docker pull papeterinnova/vaana-new-ui:v0.1
       become: yes
 
+    - name: Kill Previous conatiner
+      shell: |
+        docker kill new_ui
+      become: yes
+
+    - name: Kill Previous conatiner
+      shell: |
+        docker container prune
+      become: yes
+
     - name: Run Image
       shell: |
         docker run -d -p 8084:80 --name new_ui papeterinnova/vaana-new-ui:v0.1
