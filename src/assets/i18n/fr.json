@@ -48,13 +48,30 @@
     "compte": "Connexion/Inscription",
     "panier": "Panier",
     "category": "CATÉGORIE",
-    "Your_Account": "Votre Compte",
+    "account": "Compte",
     "Commands": "Commandes",
     "Wishlist": "Liste de souhaits",
     "Setting": "Securite",
-    "Disconnection": "Deconnexion"
+    "Disconnection": "Deconnexion",
+    "BecomeSeller": "Devenir vendeur",
+    "Shops": "Boutiques",
+    "ClickHere": "CLIQUEZ ICI"
+  },
+  "region": {
+    "title": "RÉGIONS",
+    "description": "Cliquez sur une carte pour afficher uniquement les produits liés à cette région spécifique.",
+    "africa": "Afrique",
+    "america": "Amérique",
+    "asia": "Asie",
+    "europe": "Europe"
   },
   "footer": {
+    "myAccount": "Mon compte",
+    "newsletter": "Newsletter",
+    "descriptionNewsletter": "Rejoignez des milliers d'autre personnes",
+    "descriptionNewsletter2": "abonnez-vous a nos actualites",
+    "about": "A propos de Vaanah",
+    "designBy": "2021 Vaanah Tous droits réservés - Conçu par Sawa",
     "shops": "BOUTIQUES",
     "moreShop": "Voir plus de Boutique",
     "paymentMode": "MODE DE PAIEMENT",

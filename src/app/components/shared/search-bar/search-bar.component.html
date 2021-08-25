@@ -5,7 +5,7 @@
       <input
         type="text"
         class="form-control me-2"
-        placeholder="{{ 'Search a products' || keyWord }}"
+        placeholder="{{ 'Search a product' || keyWord }}"
         [formControl]="queryField"
         [(ngModel)]="keyWord"
         (keyup.enter)="enterProduct($event)"
