@@ -23,7 +23,7 @@
         groups: docker
         append: true
 
-    - meta: reset_connection                # <--- must do this if using pipelining
+#    - meta: reset_connection                # <--- must do this if using pipelining
 
     ##### setup docker
 
@@ -85,10 +85,9 @@
         docker kill new_ui2
       become: yes
 
-    - name: Prune everything
+    - name: Prune container everything
       docker_prune:
         containers: yes
-        volumes: yes
 
     - name: Run Image
       shell: |
