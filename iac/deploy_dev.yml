@@ -77,12 +77,12 @@
 
     - name: Pull Frontend app locally
       shell: |
-        docker pull papeterinnova/vaana-new-ui:v0.2
+        docker pull papeterinnova/vaana-new-ui:v0.1
       become: yes
 
     - name: Kill Previous container
       shell: |
-        docker kill new_ui2
+        docker kill new_ui
       become: yes
 
     - name: Prune container everything
@@ -91,5 +91,5 @@
 
     - name: Run Image
       shell: |
-        docker run -d -p 8085:80 --name new_ui2 papeterinnova/vaana-new-ui:v0.2
+        docker run -d -p 8084:80 --name new_ui papeterinnova/vaana-new-ui:v0.1
       become: yes
