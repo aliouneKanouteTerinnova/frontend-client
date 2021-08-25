@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { CategoriesService } from 'src/app/services/categories/categories.service';
 import { AuthenticationsService } from 'src/app/services/authentications/authentications.service';
 import { Component, OnInit } from '@angular/core';
+import { I18nServiceService } from 'src/app/services/i18n-service/i18n-service.service';
 
 @Component({
   selector: 'app-buyer-navbar',
@@ -12,6 +13,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./buyer-navbar.component.scss'],
 })
 export class BuyerNavbarComponent implements OnInit {
+  lang: string = '';
+  changeLanguage = 'de';
   category = [];
   subCategory: string;
   categoryProdact: [] = [];
@@ -28,10 +31,19 @@ export class BuyerNavbarComponent implements OnInit {
     private authService: AuthenticationsService,
     private categoriesService: CategoriesService,
     private router: Router,
-    public cartService: CartService
+    public cartService: CartService,
+    private i18nServiceService: I18nServiceService
   ) {}
 
   ngOnInit(): void {
+    if (this.i18nServiceService.currentLangValue === null || this.i18nServiceService.currentLangValue === 'en') {
+      this.lang = 'ENGLISH–EN';
+    } else if (this.i18nServiceService.currentLangValue === 'de') {
+      this.lang = 'DEUTSH-DE';
+    } else {
+      this.lang = 'FRANCAIS-FR';
+    }
+
     this.currentUser = this.authService.currentUserValue;
     if (this.currentUser != null) {
       this.authService.getUser(this.currentUser['user'].token).subscribe((data) => {
@@ -95,5 +107,19 @@ export class BuyerNavbarComponent implements OnInit {
   logout(): void {
     this.authService.logOut();
     window.location.reload();
+  }
+
+  filterOrder(event) {
+    if (Number(event.target.value) === 1) {
+      this.changeLanguage = 'en';
+      this.lang = 'ENGLISH–EN';
+    } else if (Number(event.target.value) === 2) {
+      this.changeLanguage = 'de';
+      this.lang = 'DEUTSH-DE';
+    } else {
+      this.changeLanguage = 'fr';
+      this.lang = 'FRANCAIS-FR';
+    }
+    this.i18nServiceService.changeLocale(this.changeLanguage);
   }
 }
