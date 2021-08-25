@@ -23,22 +23,22 @@
         docker pull papeterinnova/vaana-new-ui:v0.1
       become: yes
 
-    - name: Kill Previous container
-      shell: |
-        docker kill new_ui
-      become: yes
+    # - name: Kill Previous container
+    #   shell: |
+    #     docker kill new_ui
+    #   become: yes
 
     # - name: Prune container
     #   yes: 'y' |
     #     docker container prune
     #   become: yes
 
-    - name: Prune container
-      expect:
-        command: sudo docker container prune
-        responses:
-          Question:
-            - 'Are you sure you': 'y'
+    # - name: Prune container
+    #   expect:
+    #     command: sudo docker container prune
+    #     responses:
+    #       Question:
+    #         - 'Are you sure you': 'yes'
 
     - name: Run Image
       shell: |
