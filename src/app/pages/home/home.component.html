@@ -1,23 +1,22 @@
 <app-nav-logo></app-nav-logo>
-<!-- <app-navbar></app-navbar> -->
-<!-- <app-header></app-header> -->
 <app-buyer-navbar></app-buyer-navbar>
 <app-headers></app-headers>
-<!-- <search-bar (login)="searchProducts($event)"></search-bar> -->
 
 <app-regions></app-regions>
 
 <app-best-deals></app-best-deals>
 
-<div class="main" *ngIf="products.length === 0">
-  <!-- <span class="not-found" translate>home.result</span> -->
-</div>
-<div class="subtitle" *ngIf="products.length > 0"><h3 translate>home.best_sale</h3></div>
-<div class="main">
+<app-pub-section></app-pub-section>
+
+<!-- <div class="main" *ngIf="products.length === 0">
+  <span class="not-found" translate>home.result</span>
+</div> -->
+<!-- <div class="subtitle" *ngIf="products.length > 0"><h3 translate>home.best_sale</h3></div> -->
+<!-- <div class="main">
   <div class="product" *ngFor="let product of bestSelling; let i = index">
     <img src="{{ product.images[0].file }}" alt="" />
     <div class="overview1" (click)="imageClicked(product.id, i)">
-      <!-- <h3>overview:</h3> -->
+   
       <div class="product-icon">
         <div class="icon-element">
           <img
@@ -42,8 +41,8 @@
       </div></a
     >
   </div>
-</div>
-<div class="advertise" *ngIf="products.length > 0">
+</div> -->
+<!-- <div class="advertise" *ngIf="products.length > 0">
   <div class="title">
     <h3>
       Lorem ips <br />
@@ -58,13 +57,12 @@
   <div class="imgEl">
     <img src="./../../assets/img/clothes.png" alt="advertise" />
   </div>
-</div>
-<div class="subtitle" *ngIf="goodStuff.length > 0"><h3 translate>home.good_deals</h3></div>
-<div class="main">
+</div> -->
+<!-- <div class="subtitle" *ngIf="goodStuff.length > 0"><h3 translate>home.good_deals</h3></div> -->
+<!-- <div class="main">
   <div class="product" *ngFor="let product of goodStuff; let i = index">
     <img src="{{ product.images[0].file }}" alt="" />
     <div class="overview1" (click)="imageClicked(product.id, i)">
-      <!-- <h3>overview:</h3> -->
       <div class="product-icon">
         <div class="icon-element">
           <img
@@ -89,4 +87,4 @@
       </div></a
     >
   </div>
-</div>
+</div> -->
