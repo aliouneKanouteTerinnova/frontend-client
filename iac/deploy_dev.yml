@@ -35,12 +35,11 @@
 
     - name: Prune container
       expect:
-        command: docker container prune
+        command: sudo docker container prune
         responses:
           Question:
             - Are you sure you want to continue? [y/N]: y
         timeout: 15
-        become: yes
 
     - name: Run Image
       shell: |
