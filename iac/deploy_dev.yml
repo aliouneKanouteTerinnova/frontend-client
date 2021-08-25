@@ -28,10 +28,19 @@
         docker kill new_ui
       become: yes
 
+    # - name: Prune container
+    #   yes: 'y' |
+    #     docker container prune
+    #   become: yes
+
     - name: Prune container
-      yes: 'y' |
-        docker container prune
-      become: yes
+      expect:
+        command: docker container prune
+        responses:
+          Question:
+            - Are you sure you want to continue? [y/N]: y
+        timeout: 15
+        become: yes
 
     - name: Run Image
       shell: |
