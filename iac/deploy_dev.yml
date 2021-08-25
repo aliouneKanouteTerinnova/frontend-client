@@ -29,7 +29,9 @@
       become: yes
 
     - name: Prune container
-      yes 'y' | docker container prune
+      yes: 'y' |
+        docker container prune
+      become: yes
 
     - name: Run Image
       shell: |
