@@ -1,3 +1,4 @@
+import { I18nServiceService } from './../../../services/i18n-service/i18n-service.service';
 import { AuthResponded } from './../../../models/auth/auth';
 import { CartService } from './../../../services/cart/cart.service';
 import { CartModelServer } from './../../../models/cart/cart';
@@ -23,15 +24,24 @@ export class BuyerNavbarComponent implements OnInit {
   cartTotal: Number;
   isSeller = false;
   currentUser: AuthResponded;
-  countries = [{ icon: '/assets/img/lang/United_Kingdom.svg' }, { icon: '/assets/img/lang/United_Kingdom.svg' }];
+  lang = '';
+  changeLanguage = 'de';
   constructor(
     private authService: AuthenticationsService,
     private categoriesService: CategoriesService,
     private router: Router,
+    private i18nServiceService: I18nServiceService,
     public cartService: CartService
   ) {}
 
   ngOnInit(): void {
+    if (this.i18nServiceService.currentLangValue === null || this.i18nServiceService.currentLangValue === 'en') {
+      this.lang = 'ENGLISH–EN';
+    } else if (this.i18nServiceService.currentLangValue === 'de') {
+      this.lang = 'DEUTSH-DE';
+    } else {
+      this.lang = 'FRANCAIS-FR';
+    }
     this.currentUser = this.authService.currentUserValue;
     if (this.currentUser != null) {
       this.authService.getUser(this.currentUser['user'].token).subscribe((data) => {
@@ -90,6 +100,31 @@ export class BuyerNavbarComponent implements OnInit {
     } else {
       return;
     }
+  }
+
+  changeLang() {
+    if (this.i18nServiceService.currentLangValue === 'en') {
+      this.changeLanguage = 'de';
+      this.lang = 'EN';
+    } else {
+      this.changeLanguage = 'en';
+      this.lang = 'DE';
+    }
+    this.i18nServiceService.changeLocale(this.changeLanguage);
+  }
+
+  filterOrder(event) {
+    if (Number(event.target.value) === 1) {
+      this.changeLanguage = 'en';
+      this.lang = 'ENGLISH–EN';
+    } else if (Number(event.target.value) === 2) {
+      this.changeLanguage = 'de';
+      this.lang = 'DEUTSH-DE';
+    } else {
+      this.changeLanguage = 'fr';
+      this.lang = 'FRANCAIS-FR';
+    }
+    this.i18nServiceService.changeLocale(this.changeLanguage);
   }
 
   logout(): void {

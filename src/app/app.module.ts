@@ -66,6 +66,7 @@ import { NavLogoComponent } from './components/nav-logo/nav-logo.component';
 import { HeadersComponent } from './components/headers/headers.component';
 import { RegionsComponent } from './pages/components/regions/regions.component';
 import { BestDealsComponent } from './pages/components/best-deals/best-deals.component';
+import { PubSectionComponent } from './pages/components/pub-section/pub-section.component';
 
 export function rootLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -121,6 +122,7 @@ export function rootLoaderFactory(http: HttpClient) {
     HeadersComponent,
     RegionsComponent,
     BestDealsComponent,
+    PubSectionComponent,
   ],
 
   imports: [

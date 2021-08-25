@@ -160,7 +160,7 @@
     </div>
 
     <div class="lang">
-      <div class="dropdown" style="display: inline-block">
+      <!-- <div class="dropdown" style="display: inline-block">
         <a
           class="nav-link dropdown-toggle"
           href="#"
@@ -181,17 +181,13 @@
             ><img src="./../../../../assets/img/lang/Germany.svg" width="30" height="20" alt=""
           /></a>
         </div>
-      </div>
+      </div> -->
 
-      <!-- <select class="custom-select" style="width: 150px">
-        <option *ngFor="let item of countries">{{ item.icon }}</option>
-        <option>Ice Cream</option>
-        <option>
-          Fried Potatoes
-
-          <img src="./../../../../assets/img/lang/Germany.svg" width="30" height="20" alt="" />
-        </option>
-      </select> -->
+      <select class="custom-select" style="width: 80px" (change)="filterOrder($event)">
+        <option value="1">en</option>
+        <option value="2">de</option>
+        <option value="3">fr</option>
+      </select>
     </div>
   </div>
 </nav>
