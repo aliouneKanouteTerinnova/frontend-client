@@ -12,11 +12,11 @@
         name: docker.io
       become: yes
 
-    # - name: Install Python Docker
-    #   apt:
-    #     update_cache: yes
-    #     name: python-docker
-    #   become: yes
+    - name: Install Python Docker
+      apt:
+        update_cache: yes
+        name: python-docker
+      become: yes
 
     - name: Start Docker
       shell: |
@@ -26,25 +26,20 @@
 
     - name: Pull Frontend app locally
       shell: |
-        docker pull papeterinnova/vaana-new-ui:v0.1
+        docker pull papeterinnova/vaana-new-ui:v0.2
       become: yes
 
-    # - name: Kill Previous container
-    #   shell: |
-    #     docker kill new_ui2
-    #   become: yes
+    - name: Kill Previous container
+      shell: |
+        docker kill new_ui2
+      become: yes
 
-    # - name: Prune container
-    #   yes: 'y' |
-    #     docker container prune
-    #   become: yes
-
-    # - name: Prune everything
-    #   docker_prune:
-    #     containers: yes
-    #     volumes: yes
+    - name: Prune everything
+      docker_prune:
+        containers: yes
+        volumes: yes
 
     - name: Run Image
       shell: |
-        docker run -d -p 8084:80 --name new_ui papeterinnova/vaana-new-ui:v0.1
+        docker run -d -p 8085:80 --name new_ui2 papeterinnova/vaana-new-ui:v0.2
       become: yes
