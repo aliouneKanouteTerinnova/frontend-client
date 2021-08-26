@@ -119,7 +119,7 @@
           <span translate>profile.logout_button</span>
         </a>
       </div>
-      <a class="nav-item nav-link active" *ngIf="!isSeller" routerLink="/register">
+      <a class="nav-item nav-link active" *ngIf="!isSeller" (click)="openDialog()">
         <span translate>nav.BecomeSeller</span>
       </a>
       <a class="nav-item nav-link active" routerLink="/all-stores">

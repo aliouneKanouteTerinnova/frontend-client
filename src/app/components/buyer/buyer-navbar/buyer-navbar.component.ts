@@ -6,6 +6,8 @@ import { Router } from '@angular/router';
 import { CategoriesService } from 'src/app/services/categories/categories.service';
 import { AuthenticationsService } from 'src/app/services/authentications/authentications.service';
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { SigninComponent } from 'src/app/pages/components/signin/signin.component';
 
 @Component({
   selector: 'app-buyer-navbar',
@@ -31,7 +33,8 @@ export class BuyerNavbarComponent implements OnInit {
     private categoriesService: CategoriesService,
     private router: Router,
     private i18nServiceService: I18nServiceService,
-    public cartService: CartService
+    public cartService: CartService,
+    public signinDialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -69,6 +72,11 @@ export class BuyerNavbarComponent implements OnInit {
     });
 
     this.getCategory();
+  }
+
+  openDialog() {
+    const dialogRef = this.signinDialog.open(SigninComponent);
+    dialogRef.afterClosed().subscribe((result) => console.log('dialog closed |' + result.toString()));
   }
 
   getCategory(): void {
