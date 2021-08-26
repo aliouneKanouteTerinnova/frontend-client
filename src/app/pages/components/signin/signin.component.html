@@ -1,1 +1,43 @@
-<p>signin works!</p>
+<div class="signin-dialog">
+  <h1 mat-dialog-title align="center">Register</h1>
+  <h2 mat-dialog-title align="center">with your social network</h2>
+  <div class="row" mat-dialog-title>
+    <img class="offset-4" src="assets/img/icons/facebook-circular.png" alt="vaanah facebook signin" />
+    <img class="offset-1" src="assets/img/icons/google.png" alt="vaanah facebook signin" />
+  </div>
+  <span class="my-2 row">
+    <div class="col-5"><hr /></div>
+    <div class="col-2"><h3 align="center">or</h3></div>
+    <div class="col-5"><hr /></div>
+  </span>
+  <mat-dialog-content mat-typography>
+    <div class="dialog-form">
+      <form method="post">
+        <p>
+          <mat-form-field appearance="outline">
+            <mat-label>Email</mat-label>
+            <input matInput placeholder="Email" type="email" name="email" id="email" />
+          </mat-form-field>
+        </p>
+        <p>
+          <mat-form-field appearance="outline">
+            <mat-label>Password</mat-label>
+            <input matInput placeholder="Password" type="password" name="password" id="password" />
+          </mat-form-field>
+        </p>
+        <p>
+          <mat-form-field appearance="outline">
+            <mat-label>Confirm password</mat-label>
+            <input matInput placeholder="Confirm password" type="password" name="password" id="password" />
+          </mat-form-field>
+        </p>
+        <p>
+          <mat-checkbox>I accept the terms and conditions and the confidentiality conditions</mat-checkbox>
+        </p>
+        <p>
+          <button mat-flat-button color="primary">Create an account</button>
+        </p>
+      </form>
+    </div>
+  </mat-dialog-content>
+</div>
