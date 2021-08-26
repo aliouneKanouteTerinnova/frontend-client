@@ -67,7 +67,7 @@ import { HeadersComponent } from './components/headers/headers.component';
 import { RegionsComponent } from './pages/components/regions/regions.component';
 import { BestDealsComponent } from './pages/components/best-deals/best-deals.component';
 import { PubSectionComponent } from './pages/components/pub-section/pub-section.component';
-import { SigninComponent } from './pages/components/signin/signin.component';
+import { SignupComponent } from './pages/components/signup/signup.component';
 
 export function rootLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -124,7 +124,7 @@ export function rootLoaderFactory(http: HttpClient) {
     RegionsComponent,
     BestDealsComponent,
     PubSectionComponent,
-    SigninComponent,
+    SignupComponent,
   ],
 
   imports: [

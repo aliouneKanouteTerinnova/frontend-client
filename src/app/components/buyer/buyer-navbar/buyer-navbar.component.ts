@@ -7,7 +7,7 @@ import { CategoriesService } from 'src/app/services/categories/categories.servic
 import { AuthenticationsService } from 'src/app/services/authentications/authentications.service';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { SigninComponent } from 'src/app/pages/components/signin/signin.component';
+import { SignupComponent } from 'src/app/pages/components/signup/signup.component';
 
 @Component({
   selector: 'app-buyer-navbar',
@@ -75,7 +75,7 @@ export class BuyerNavbarComponent implements OnInit {
   }
 
   openDialog() {
-    const dialogRef = this.signinDialog.open(SigninComponent);
+    const dialogRef = this.signinDialog.open(SignupComponent);
     dialogRef.afterClosed().subscribe((result) => console.log('dialog closed |' + result.toString()));
   }
 
