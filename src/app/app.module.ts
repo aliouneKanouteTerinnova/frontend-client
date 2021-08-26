@@ -69,6 +69,7 @@ import { BestDealsComponent } from './pages/components/best-deals/best-deals.com
 import { PubSectionComponent } from './pages/components/pub-section/pub-section.component';
 import { SignupComponent } from './pages/components/signup/signup.component';
 import { ReviewsComponent } from './components/reviews/reviews.component';
+import { ReviewStarsComponent } from './components/review-stars/review-stars.component';
 
 export function rootLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -127,6 +128,7 @@ export function rootLoaderFactory(http: HttpClient) {
     PubSectionComponent,
     SignupComponent,
     ReviewsComponent,
+    ReviewStarsComponent,
   ],
 
   imports: [
