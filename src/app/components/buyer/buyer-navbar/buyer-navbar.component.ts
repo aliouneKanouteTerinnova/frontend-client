@@ -73,15 +73,15 @@ export class BuyerNavbarComponent implements OnInit {
 
   getCategory(): void {
     this.categoriesService.getAllCategories().subscribe((res) => {
-      console.log(res.results);
-      console.log(res.results[0].children);
+      // console.log(res.results);
+      // console.log(res.results[0].children);
       this.category = res.results;
     });
   }
 
   showCategory(data, id: number): void {
     this.subCategory = this.category[id].children;
-    console.log(this.subCategory);
+    // console.log(this.subCategory);
     this.imageSource = data.image;
     this.showImage = true;
   }
@@ -91,7 +91,7 @@ export class BuyerNavbarComponent implements OnInit {
   }
 
   oNCategoryDetails(data): void {
-    console.log(data.id);
+    // console.log(data.id);
   }
 
   searchProducts(keyWord: string) {
