@@ -1,16 +1,18 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
+import { CategoriesService } from './../../services/categories/categories.service';
 import { ActivatedRoute } from '@angular/router';
-import { Component, OnInit } from '@angular/core';
-import { CategoriesService } from 'src/app/services/categories/categories.service';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-categoy-detail',
-  templateUrl: './categoy-detail.component.html',
-  styleUrls: ['./categoy-detail.component.scss'],
+  selector: 'app-breadcrumb',
+  templateUrl: './breadcrumb.component.html',
+  styleUrls: ['./breadcrumb.component.scss'],
 })
-export class CategoyDetailComponent implements OnInit {
-  products = [];
+export class BreadcrumbComponent implements OnInit {
+  @Input() home: string;
+  @Input() categoryName: string;
+  name: string;
   categoyId: string;
   constructor(private router: ActivatedRoute, private categoryService: CategoriesService) {}
 
@@ -18,7 +20,7 @@ export class CategoyDetailComponent implements OnInit {
     this.categoyId = this.router.snapshot.params.id;
 
     this.categoryService.getCategory(this.categoyId).subscribe((res) => {
-      this.products = res.products;
+      this.name = res.name;
     });
   }
 }
