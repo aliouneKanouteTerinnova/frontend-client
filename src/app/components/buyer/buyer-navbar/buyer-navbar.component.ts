@@ -39,11 +39,11 @@ export class BuyerNavbarComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.i18nServiceService.currentLangValue === null || this.i18nServiceService.currentLangValue === 'en') {
-      this.lang = 'ENGLISH–EN';
+      this.lang = 'en';
     } else if (this.i18nServiceService.currentLangValue === 'de') {
-      this.lang = 'DEUTSH-DE';
+      this.lang = 'de';
     } else {
-      this.lang = 'FRANCAIS-FR';
+      this.lang = 'fr';
     }
     this.currentUser = this.authService.currentUserValue;
     if (this.currentUser != null) {
@@ -74,22 +74,22 @@ export class BuyerNavbarComponent implements OnInit {
     this.getCategory();
   }
 
-  openDialog() {
+  openDialog(): void {
     const dialogRef = this.signinDialog.open(SignupComponent);
     dialogRef.afterClosed().subscribe((result) => console.log('dialog closed |' + result.toString()));
   }
 
   getCategory(): void {
     this.categoriesService.getAllCategories().subscribe((res) => {
-      console.log(res.results);
-      console.log(res.results[0].children);
+      // console.log(res.results);
+      // console.log(res.results[0].children);
       this.category = res.results;
     });
   }
 
   showCategory(data, id: number): void {
     this.subCategory = this.category[id].children;
-    console.log(this.subCategory);
+    // console.log(this.subCategory);
     this.imageSource = data.image;
     this.showImage = true;
   }
@@ -99,7 +99,7 @@ export class BuyerNavbarComponent implements OnInit {
   }
 
   oNCategoryDetails(data): void {
-    console.log(data.id);
+    // console.log(data.id);
   }
 
   searchProducts(keyWord: string) {
@@ -124,13 +124,13 @@ export class BuyerNavbarComponent implements OnInit {
   filterOrder(event) {
     if (Number(event.target.value) === 1) {
       this.changeLanguage = 'en';
-      this.lang = 'ENGLISH–EN';
+      this.lang = 'en';
     } else if (Number(event.target.value) === 2) {
       this.changeLanguage = 'de';
-      this.lang = 'DEUTSH-DE';
+      this.lang = 'de';
     } else {
       this.changeLanguage = 'fr';
-      this.lang = 'FRANCAIS-FR';
+      this.lang = 'fr';
     }
     this.i18nServiceService.changeLocale(this.changeLanguage);
   }

@@ -1,0 +1,18 @@
+.breadcrumb- {
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  padding: 0.75rem 1rem;
+  margin-bottom: 1rem;
+  list-style: none;
+  border-radius: 0.25rem;
+  background-color: none;
+  font-size: 18px;
+  margin: 160px 0 0 0;
+  a {
+    color: #000;
+  }
+  .name {
+    color: #f39200;
+  }
+}

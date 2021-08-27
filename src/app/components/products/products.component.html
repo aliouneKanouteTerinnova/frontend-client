@@ -1,4 +1,4 @@
-<div class="home-main mb-5">
+<!-- <div class="home-main mb-5">
   <div class="home-product" *ngFor="let product of products; let i = index">
     <img routerLink="/product-detail/{{ product.id }}/{{ i }}/" src="{{ product.images[0].file }}" alt="" />
     <div class="home-product-info">
@@ -13,4 +13,46 @@
       </div>
     </div>
   </div>
-</div>
+</div> -->
+
+<app-best-deals title="Best Men Clothing" carouselId="carouselExampleIndicators5"></app-best-deals>
+
+<app-pub-section></app-pub-section>
+
+<section class="pt-5 pb-5">
+  <div class="container">
+    <div class="row">
+      <div class="col-12 text-center mb-5"><h1>All Men Clothing</h1></div>
+
+      <div class="col-12">
+        <div class="row mt-3">
+          <div class="col-md-3 mb-5" *ngFor="let product of products; let i = index">
+            <div class="card card-product-hover">
+              <img src="{{ product.images[0].file }}" height="300" alt="" />
+
+              <div class="card-product-hover-icons">
+                <a (click)="addToCart(product.id)"
+                  ><img src="./../../../../assets/img/hover-icon/icon cart.png" width="25" height="25" alt=""
+                /></a>
+                <a (click)="AddWishlist(product.id)" class="mt-2"
+                  ><img src="./../../../../assets/img/hover-icon/Heart.png" width="25" height="25" alt=""
+                /></a>
+                <a class="price">{{ formatPrice(product.price | currency: 'EUR') }}</a>
+                <a class="details" (click)="redirectProduct(product.id, i)"
+                  ><img src="./../../../../assets/img/hover-icon/Plus.png" width="35" height="35" alt=""
+                /></a>
+              </div>
+              <div class="card-product-hover-details">
+                <h3 class="card-product-hover-title" *ngIf="product.name.length > 17">
+                  {{ product.name.slice(0, 15) }}...
+                </h3>
+                <h3 class="card-product-hover-title" *ngIf="product.name.length <= 17">{{ product.name }}</h3>
+                <span class="card-product-hover-price">Legacy Foundation Tee</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,9 +1,10 @@
-<app-navbar></app-navbar>
-<app-header></app-header>
+<app-nav-logo></app-nav-logo>
+<app-buyer-navbar></app-buyer-navbar>
+<app-headers></app-headers>
 
-<div class="container">
-  <h1 class="text-center my-5 deal">
-    <b>{{ storeName }}</b>
+<div class="container mt-5">
+  <h1 class="text-center my-5 deal mt-5">
+    <b class="mt-5">{{ storeName }}</b>
   </h1>
   <h1 class="text-center my-5 deal" *ngIf="produits1.length > 0" translate>storeProduct.deals</h1>
   <div class="row">

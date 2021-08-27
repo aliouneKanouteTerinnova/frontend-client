@@ -27,15 +27,15 @@ export class ReviewsComponent implements OnInit {
     this.currentUser = this.authService.currentUserValue;
   }
 
-  onReviewAdd() {
+  onReviewAdd(): void {
     this.reviewAdd.emit();
   }
 
-  onReviewEdit(id) {
+  onReviewEdit(id): void {
     this.reviewEdit.emit(id);
   }
 
-  onReviewDelete(id) {
+  onReviewDelete(id): void {
     this.reviewDelete.emit(id);
   }
 }

@@ -72,6 +72,9 @@ import { ReviewsComponent } from './components/reviews/reviews.component';
 import { ReviewStarsComponent } from './components/review-stars/review-stars.component';
 import { ReviewItemComponent } from './components/review-item/review-item.component';
 import { ReviewsStatsComponent } from './components/reviews-stats/reviews-stats.component';
+import { TopCategoriesComponent } from './pages/components/top-categories/top-categories.component';
+import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.component';
+import { PaginationComponent } from './components/pagination/pagination.component';
 
 export function rootLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -133,6 +136,9 @@ export function rootLoaderFactory(http: HttpClient) {
     ReviewStarsComponent,
     ReviewItemComponent,
     ReviewsStatsComponent,
+    TopCategoriesComponent,
+    BreadcrumbComponent,
+    PaginationComponent,
   ],
 
   imports: [
