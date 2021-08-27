@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-reviews-stats',
@@ -6,7 +6,19 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./reviews-stats.component.scss'],
 })
 export class ReviewsStatsComponent implements OnInit {
+  @Input() reviews: any;
+  ratings: number[] = [0, 0, 0, 0, 0];
+  @Output() btnAddReviewClick = new EventEmitter();
+
   constructor() {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.reviews.map((review) => {
+      this.ratings[review.rating - 1]++;
+    });
+  }
+
+  onClick() {
+    this.btnAddReviewClick.emit();
+  }
 }
