@@ -29,6 +29,8 @@ export class WishlistComponent implements OnInit {
   wishlists = [];
   items;
   similarProducts = [];
+  home = '/';
+  categoryName = 'wishlists';
 
   constructor(
     private productsService: ProductsService,
