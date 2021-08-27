@@ -1,4 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { AuthenticationsService } from 'src/app/services/authentications/authentications.service';
 
 @Component({
   selector: 'app-review-item',
@@ -7,8 +8,21 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class ReviewItemComponent implements OnInit {
   @Input() review: any;
+  currentUser: any;
+  @Output() btnDeleteReviewClick = new EventEmitter();
+  @Output() btnUpdateReviewClick = new EventEmitter();
 
-  constructor() {}
+  constructor(private authService: AuthenticationsService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.currentUser = this.authService.currentUserValue;
+  }
+
+  onReviewUpdate() {
+    this.btnUpdateReviewClick.emit();
+  }
+
+  onReviewDelete() {
+    this.btnDeleteReviewClick.emit();
+  }
 }

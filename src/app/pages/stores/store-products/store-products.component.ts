@@ -28,9 +28,10 @@ export class StoreProductsComponent implements OnInit {
     private storesService: StoresService,
     public cartService: CartService,
     private router: ActivatedRoute,
-    public dialog: MatDialog,
+    public editDialog: MatDialog,
+    private authService: AuthenticationsService,
     private storeReviewService: StoreReviewService,
-    private authService: AuthenticationsService
+    public addDialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -67,20 +68,19 @@ export class StoreProductsComponent implements OnInit {
   }
 
   updateReview(id) {
-    const dialogRef = this.dialog.open(UpdateStoreReviewComponent, { width: '600px', data: id });
+    const dialogRef = this.editDialog.open(UpdateStoreReviewComponent, { width: '600px', data: id });
 
     dialogRef.afterClosed().subscribe((result) => {
       console.log(`Dialog result: ${id}`);
     });
   }
-
   deleteReview(id) {
     this.storeReviewService.deleteReview(id, this.currentUser.user.token).subscribe((res) => {});
     window.location.reload();
   }
 
   addReview(id: any) {
-    const dialogRef = this.dialog.open(StoreReviewComponent, { width: '600px', data: id });
+    const dialogRef = this.addDialog.open(StoreReviewComponent, { width: '600px', data: id });
 
     dialogRef.afterClosed().subscribe((result) => {
       console.log(`Dialog result: ${id}`);

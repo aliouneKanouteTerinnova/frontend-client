@@ -35,11 +35,11 @@
 </div>
 
 <div class="similar_products container" *ngIf="products.length !== 0">
-  <div class="button col-3" style="float: right">
-    <button (click)="addReview(idStore)"><span translate>review.addReview</span></button>
-  </div>
-  <br /><br /><br />
-  <br />
+  <app-reviews
+    (reviewEdit)="updateReview($event)"
+    (reviewAdd)="addReview(idStore)"
+    (reviewDelete)="deleteReview($event)"
+    [reviews]="reviews"
+    [rating]="rating"
+  ></app-reviews>
 </div>
-
-<app-reviews [reviews]="reviews" [rating]="rating"></app-reviews>

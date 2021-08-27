@@ -1,7 +1,7 @@
 <div class="reviews container">
   <h1 align="center">Reviews</h1>
   <hr />
-  <div class="row mt-1">
+  <div class="row mt-1" *ngIf="reviews">
     <div class="col-12 col-lg-3 container" id="review-stars">
       <ul class="list-unstyled">
         <li>
@@ -11,12 +11,19 @@
         <li>0 Questions / 0 Reponses</li>
       </ul>
     </div>
-    <div class="col-12 col-lg-9">
-      <div class="row" id="review-stats"></div>
-      <div class="row">
+    <div class="col-12 col-lg-9 row">
+      <div class="col-12" id="review-stats">
+        <app-reviews-stats (btnAddReviewClick)="onReviewAdd()" [reviews]="reviews"></app-reviews-stats>
+      </div>
+      <div class="col-12">
         <mat-tab-group class="col-12">
           <mat-tab label="Reviews">
-            <app-review-item *ngFor="let review of reviews" [review]="review"></app-review-item>
+            <app-review-item
+              *ngFor="let review of reviews"
+              (btnDeleteReviewClick)="onReviewDelete(review.id)"
+              (btnUpdateReviewClick)="onReviewEdit(review.id)"
+              [review]="review"
+            ></app-review-item>
           </mat-tab>
           <mat-tab label="Questions"> </mat-tab>
         </mat-tab-group>

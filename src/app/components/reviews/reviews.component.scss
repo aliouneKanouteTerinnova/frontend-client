@@ -2,6 +2,7 @@
   app-review-stars {
     font-size: xx-large !important;
   }
+
   ul {
     text-align: center;
     line-height: 2em;
@@ -15,6 +16,9 @@
   @media screen and (min-width: 992px) {
     border-left: 1px solid grey;
   }
+}
+app-reviews-stats {
+  padding-left: 1%;
 }
 
 * {
