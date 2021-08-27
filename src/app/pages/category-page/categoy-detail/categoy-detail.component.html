@@ -3,9 +3,8 @@
 <app-buyer-navbar></app-buyer-navbar>
 <app-headers></app-headers>
 
-<div class="container">
-  <app-breadcrumb home="/" categoryName="/categories-detail"></app-breadcrumb>
-</div>
+<app-breadcrumb home="/" categoryName="/categories-detail"></app-breadcrumb>
+
 <div class="container">
   <app-product [products]="products"></app-product>
   <div class="no-products" *ngIf="products.length === 0">
