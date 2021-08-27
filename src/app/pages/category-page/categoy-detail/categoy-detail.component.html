@@ -3,9 +3,13 @@
 <app-buyer-navbar></app-buyer-navbar>
 <app-headers></app-headers>
 
+<app-breadcrumb home="/" categoryName="/categories-detail"></app-breadcrumb>
+
 <div class="container">
   <app-product [products]="products"></app-product>
   <div class="no-products" *ngIf="products.length === 0">
     <span class="not-found" translate>home.result</span>
   </div>
 </div>
+
+<app-pagination [products]="products"></app-pagination>
