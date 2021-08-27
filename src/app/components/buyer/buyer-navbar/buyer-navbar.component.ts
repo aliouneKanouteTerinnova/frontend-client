@@ -1,3 +1,11 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-floating-promises */
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable prefer-const */
+/* eslint-disable @typescript-eslint/dot-notation */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/ban-types */
 import { I18nServiceService } from './../../../services/i18n-service/i18n-service.service';
 import { AuthResponded } from './../../../models/auth/auth';
 import { CartService } from './../../../services/cart/cart.service';

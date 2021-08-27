@@ -1,3 +1,12 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable prefer-const */
+/* eslint-disable @typescript-eslint/no-floating-promises */
+/* eslint-disable @typescript-eslint/dot-notation */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/naming-convention */
+/* eslint-disable @typescript-eslint/ban-types */
 import { Router } from '@angular/router';
 import { MenuItem } from './../menu-item';
 import { Component, OnInit } from '@angular/core';
@@ -13,7 +22,7 @@ import { AuthenticationsService } from '../services/authentications/authenticati
   styleUrls: ['./navbar.component.scss'],
 })
 export class NavbarComponent implements OnInit {
-  lang: string = '';
+  lang = '';
   changeLanguage = 'de';
   cartData: CartModelServer;
   cartTotal: Number;

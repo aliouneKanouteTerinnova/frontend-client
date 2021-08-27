@@ -1,3 +1,23 @@
+.breadcrumb {
+  background-color: #fff;
+
+  li.active {
+    color: #f39200 !important;
+  }
+
+  li.breadcrumb-item a {
+    color: rgba(22, 27, 75, 1);
+  }
+
+  li {
+    font-weight: 600;
+  }
+}
+
+.nav-item {
+  font-size: 0.6rem;
+}
+
 .container {
   display: flex;
   margin-top: 55px;
@@ -5,12 +25,50 @@
 }
 
 .main-product {
-  background-color: #f0f0f0;
+  border-radius: 15px;
+  box-shadow: 4px 4px 2px rgb(0 0 0 / 10%);
+  background: #f8f8f8;
   display: flex;
   flex-direction: column;
   width: 70%;
+  padding-top: 0 !important;
   margin-right: 25px;
   padding: 25px;
+
+  .head {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 0;
+
+    .basket-title {
+      font-size: 80%;
+      color: #29235c;
+
+      h3 {
+        font-family: 'Raleway' !important;
+      }
+    }
+
+    .tolalPrice {
+      color: #29235c;
+      font-family: 'Raleway';
+      background-color: #fff !important;
+      border-radius: 8px;
+      height: 80%;
+      margin-top: 0;
+      padding: 0 40px;
+      margin-bottom: 0;
+
+      h3 {
+        font-size: 80%;
+        font-family: 'Raleway';
+      }
+
+      span {
+        color: #f39200;
+      }
+    }
+  }
 }
 
 .qty {
@@ -82,37 +140,44 @@ h3 {
   font-size: 0.9rem;
 }
 .total {
-  background-color: #29235c;
-  padding: 45px;
+  background-color: #f8f8f8;
+  padding: 20px;
+  box-shadow: 4px 4px 2px rgb(0 0 0 / 10%);
   margin-bottom: 25px;
+  border-radius: 15px;
+  font-weight: 600;
 }
 
 .total .title {
-  font-size: 1.5rem;
+  font-size: 1.4rem;
   font-weight: bolder;
-  padding: 5px;
   margin-bottom: 5px;
-  color: white;
-  border-bottom: 0.01rem solid white;
+  text-transform: uppercase;
+  font-family: 'Raleway';
+  color: #f39200;
+  padding-bottom: 20px;
 }
 
 .total .subtotal {
   font-size: 1.5rem;
   padding: 5px;
   margin-bottom: 5px;
+  .devic {
+    color: #676766;
+  }
 }
 
 .subtotal .subtotal2 {
-  font-size: 0.9rem;
-  color: white;
+  font-size: 1rem;
+  color: #29235c;
   display: flex;
   justify-content: space-between;
-  margin-bottom: 15px;
+  margin-bottom: 45px;
 }
 
 .subtotal .subtotal1 {
   font-size: 1.2rem;
-  color: #f39200;
+  color: #29235c;
   display: flex;
   justify-content: space-between;
   margin-bottom: 5px;
@@ -127,17 +192,23 @@ h3 {
 
 .checkouBtn button {
   padding: 10px;
-  width: 200px;
+  width: 400px;
+  font-size: 1.4rem;
   border: none;
   background-color: #f39200;
   color: white;
+  font-weight: 600;
+  border-radius: 5px;
 }
 
 .product {
   display: flex;
   margin-top: 20px;
   border-bottom: 1.9px solid #ddd;
-  padding: 10px;
+  .image img {
+    height: 220px !important;
+    width: 200px !important;
+  }
 }
 .product:last-child {
   border-bottom: none;
@@ -146,10 +217,28 @@ h3 {
   padding: 10px;
   display: flex;
   flex-direction: column;
+  span.price {
+    font-size: 1.2rem;
+    font-family: 'Raleway';
+  }
+
+  p.description {
+    font-family: 'Raleway';
+    color: #676766;
+  }
+
+  .button button,
+  form {
+    background-color: #fff;
+    box-shadow: 2px 2px 2px #ddd;
+    border: none !important;
+    height: 40px;
+  }
 }
 
 .button {
   display: flex;
+  justify-content: space-between;
   padding: 5px;
   margin-bottom: 0px;
 }
@@ -170,8 +259,11 @@ h3 {
 }
 
 .payment-method {
-  background-color: #f0f0f0;
-  padding: 25px;
+  background-color: #f8f8f8;
+  padding: 15px 10px;
+  box-shadow: 4px 4px 2px rgb(0 0 0 / 10%);
+  margin-bottom: 25px;
+  border-radius: 15px;
 }
 
 .payment-method .title {
@@ -181,17 +273,36 @@ h3 {
 }
 
 .payment-method .title span {
-  font-family: Helvetica Neue;
   font-style: normal;
   font-weight: bold;
-  font-size: 15px;
-  color: rgba(22, 27, 75, 1);
+  font-size: 0.9rem;
+  font-family: 'Raleway';
+  color: #f39200;
   text-transform: uppercase;
 }
 .payment {
+  padding: 20px;
+  img {
+    height: 30px !important;
+    width: 40px !important;
+  }
+
+  .img-payment {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 25px;
+  }
+}
+
+.coupn {
   display: flex;
-  align-items: center;
-  justify-content: center;
+  justify-content: space-between;
+
+  .cpn {
+    color: #29235c;
+    font-weight: 600;
+  }
 }
 
 #Rectangle_199 {
@@ -201,6 +312,10 @@ h3 {
 }
 
 .totalBtn {
+  color: #29235c;
+}
+
+.amount {
   color: #f39200;
 }
 
@@ -211,6 +326,8 @@ img {
 
 .icone {
   display: flex;
+  justify-content: center;
+  align-items: center;
   padding: 10px;
   margin-left: 30px;
 }
@@ -269,7 +386,7 @@ form #increase {
 input#number {
   text-align: center;
   border: none;
-  background-color: #f0f0f0;
+  background-color: #f8f9fa;
   margin: 0px;
   width: 35px;
   height: 22px;
@@ -643,6 +760,7 @@ h3 {
     cursor: pointer;
     border: 0.1rem solid rgb(224, 221, 221);
   }
+
   .main-product {
     width: 100%;
     margin: auto;
