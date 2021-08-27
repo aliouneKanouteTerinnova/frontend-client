@@ -70,6 +70,7 @@ import { PubSectionComponent } from './pages/components/pub-section/pub-section.
 import { SignupComponent } from './pages/components/signup/signup.component';
 import { ReviewsComponent } from './components/reviews/reviews.component';
 import { ReviewStarsComponent } from './components/review-stars/review-stars.component';
+import { ReviewItemComponent } from './components/review-item/review-item.component';
 
 export function rootLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -129,6 +130,7 @@ export function rootLoaderFactory(http: HttpClient) {
     SignupComponent,
     ReviewsComponent,
     ReviewStarsComponent,
+    ReviewItemComponent,
   ],
 
   imports: [
