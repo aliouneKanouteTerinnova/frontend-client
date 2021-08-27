@@ -37,7 +37,8 @@ export class ProductDetailComponent implements OnInit {
     private i18nServiceService: I18nServiceService,
     private productReviewService: ProductReviewService,
     private authService: AuthenticationsService,
-    public dialog: MatDialog
+    public addDialog: MatDialog,
+    public editDialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -67,7 +68,7 @@ export class ProductDetailComponent implements OnInit {
   }
 
   updateReview(id) {
-    const dialogRef = this.dialog.open(UpdateProductReviewComponent, { width: '600px', data: id });
+    const dialogRef = this.editDialog.open(UpdateProductReviewComponent, { width: '600px', data: id });
 
     dialogRef.afterClosed().subscribe((result) => {
       console.log(`Dialog result: ${id}`);
@@ -80,7 +81,7 @@ export class ProductDetailComponent implements OnInit {
   }
 
   addReview(id: any) {
-    const dialogRef = this.dialog.open(ProductReviewComponent, { width: '600px', data: id });
+    const dialogRef = this.addDialog.open(ProductReviewComponent, { width: '600px', data: id });
 
     dialogRef.afterClosed().subscribe((result) => {
       console.log(`Dialog result: ${id}`);
@@ -110,7 +111,7 @@ export class ProductDetailComponent implements OnInit {
   }
 
   formatPrice(price: any) {
-    var prices = price.split('.');
+    var prices = price?.split('.');
     if (this.i18nServiceService.currentLangValue === null || this.i18nServiceService.currentLangValue === 'en') {
       prices = price;
     } else {
@@ -120,16 +121,5 @@ export class ProductDetailComponent implements OnInit {
       }
     }
     return prices;
-  }
-
-  getRatingArray(rating: any) {
-    return [...Array(5 - Math.floor(Number(rating))).keys()];
-  }
-
-  getCheckedRatingArray(rating: any) {
-    return [...Array(Math.floor(Number(rating))).keys()];
-  }
-  parseRating(rating: any) {
-    return Math.floor(rating);
   }
 }
