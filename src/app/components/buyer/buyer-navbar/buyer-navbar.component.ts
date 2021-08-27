@@ -1,3 +1,4 @@
+import { I18nServiceService } from './../../../services/i18n-service/i18n-service.service';
 import { AuthResponded } from './../../../models/auth/auth';
 import { CartService } from './../../../services/cart/cart.service';
 import { CartModelServer } from './../../../models/cart/cart';
@@ -5,7 +6,6 @@ import { Router } from '@angular/router';
 import { CategoriesService } from 'src/app/services/categories/categories.service';
 import { AuthenticationsService } from 'src/app/services/authentications/authentications.service';
 import { Component, OnInit } from '@angular/core';
-import { I18nServiceService } from 'src/app/services/i18n-service/i18n-service.service';
 
 @Component({
   selector: 'app-buyer-navbar',
@@ -13,8 +13,6 @@ import { I18nServiceService } from 'src/app/services/i18n-service/i18n-service.s
   styleUrls: ['./buyer-navbar.component.scss'],
 })
 export class BuyerNavbarComponent implements OnInit {
-  lang: string = '';
-  changeLanguage = 'de';
   category = [];
   subCategory: string;
   categoryProdact: [] = [];
@@ -26,13 +24,14 @@ export class BuyerNavbarComponent implements OnInit {
   cartTotal: Number;
   isSeller = false;
   currentUser: AuthResponded;
-  countries = [{ icon: '/assets/img/lang/United_Kingdom.svg' }, { icon: '/assets/img/lang/United_Kingdom.svg' }];
+  lang = '';
+  changeLanguage = 'de';
   constructor(
     private authService: AuthenticationsService,
     private categoriesService: CategoriesService,
     private router: Router,
-    public cartService: CartService,
-    private i18nServiceService: I18nServiceService
+    private i18nServiceService: I18nServiceService,
+    public cartService: CartService
   ) {}
 
   ngOnInit(): void {
@@ -43,7 +42,6 @@ export class BuyerNavbarComponent implements OnInit {
     } else {
       this.lang = 'FRANCAIS-FR';
     }
-
     this.currentUser = this.authService.currentUserValue;
     if (this.currentUser != null) {
       this.authService.getUser(this.currentUser['user'].token).subscribe((data) => {
@@ -104,9 +102,15 @@ export class BuyerNavbarComponent implements OnInit {
     }
   }
 
-  logout(): void {
-    this.authService.logOut();
-    window.location.reload();
+  changeLang() {
+    if (this.i18nServiceService.currentLangValue === 'en') {
+      this.changeLanguage = 'de';
+      this.lang = 'EN';
+    } else {
+      this.changeLanguage = 'en';
+      this.lang = 'DE';
+    }
+    this.i18nServiceService.changeLocale(this.changeLanguage);
   }
 
   filterOrder(event) {
@@ -121,5 +125,10 @@ export class BuyerNavbarComponent implements OnInit {
       this.lang = 'FRANCAIS-FR';
     }
     this.i18nServiceService.changeLocale(this.changeLanguage);
+  }
+
+  logout(): void {
+    this.authService.logOut();
+    window.location.reload();
   }
 }
