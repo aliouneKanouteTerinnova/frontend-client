@@ -12,7 +12,7 @@ import { Component, Input, OnInit } from '@angular/core';
 export class BreadcrumbComponent implements OnInit {
   @Input() home: string;
   @Input() categoryName: string;
-  name: string;
+  @Input() name: string;
   categoyId: string;
   constructor(private router: ActivatedRoute, private categoryService: CategoriesService) {}
 
