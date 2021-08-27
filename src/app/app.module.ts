@@ -71,6 +71,7 @@ import { SignupComponent } from './pages/components/signup/signup.component';
 import { ReviewsComponent } from './components/reviews/reviews.component';
 import { ReviewStarsComponent } from './components/review-stars/review-stars.component';
 import { ReviewItemComponent } from './components/review-item/review-item.component';
+import { ReviewsStatsComponent } from './components/reviews-stats/reviews-stats.component';
 
 export function rootLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -131,6 +132,7 @@ export function rootLoaderFactory(http: HttpClient) {
     ReviewsComponent,
     ReviewStarsComponent,
     ReviewItemComponent,
+    ReviewsStatsComponent,
   ],
 
   imports: [
