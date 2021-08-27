@@ -1,3 +1,4 @@
+import { Input } from '@angular/core';
 /* eslint-disable @typescript-eslint/ban-types */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/dot-notation */
@@ -26,6 +27,8 @@ import Swal from 'sweetalert2';
   styleUrls: ['./best-deals.component.scss'],
 })
 export class BestDealsComponent implements OnInit {
+  @Input() title: string;
+  @Input() carouselId: string;
   products = [];
   bestSelling = [];
   goodStuff = [];
