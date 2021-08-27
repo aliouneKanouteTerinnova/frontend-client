@@ -1,1 +1,33 @@
-<p>review-item works!</p>
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>{{ review.user.username }}</mat-card-title>
+    <mat-card-subtitle>
+      <ul class="list-unstyled">
+        <li>
+          <app-review-stars [rating]="review.rating"></app-review-stars>
+        </li>
+        <li>
+          {{ review.title }}
+        </li>
+      </ul>
+    </mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <p>
+      <b>{{ review.comment }}</b>
+    </p>
+  </mat-card-content>
+  <mat-card-actions>
+    <div class="row">
+      <div class="col-2">
+        <button mat-button><span class="fa fa-share-square"></span> Share</button>
+      </div>
+      <div class="offset-6 col-1">
+        <button mat-button><span class="fa fa-thumbs-up"></span></button>
+      </div>
+      <div class="col-1">
+        <button mat-button><span class="fa fa-thumbs-down"></span></button>
+      </div>
+    </div>
+  </mat-card-actions>
+</mat-card>
