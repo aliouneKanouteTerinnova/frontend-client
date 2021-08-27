@@ -74,7 +74,7 @@ export class BuyerNavbarComponent implements OnInit {
     this.getCategory();
   }
 
-  openDialog() {
+  openDialog(): void {
     const dialogRef = this.signinDialog.open(SignupComponent);
     dialogRef.afterClosed().subscribe((result) => console.log('dialog closed |' + result.toString()));
   }
