@@ -1,3 +1,8 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/ban-types */
+/* eslint-disable @typescript-eslint/no-unsafe-return */
+/* eslint-disable @typescript-eslint/restrict-plus-operands */
+/* eslint-disable @typescript-eslint/no-floating-promises */
 import { I18nServiceService } from 'src/app/services/i18n-service/i18n-service.service';
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 /* eslint-disable @typescript-eslint/indent */
@@ -61,7 +66,7 @@ export class WishlistComponent implements OnInit {
     });
   }
 
-  addToCart(id: Number) {
+  addToCart(id: Number): void {
     this.cartService.AddProductToCart(id);
     Swal.fire({
       // position: 'top-end',
@@ -73,7 +78,7 @@ export class WishlistComponent implements OnInit {
   }
 
   formatPrice(price: any) {
-    var prices = price.split('.');
+    let prices = price.split('.');
     if (this.i18nServiceService.currentLangValue === null || this.i18nServiceService.currentLangValue === 'en') {
       prices = price;
     } else {
@@ -94,9 +99,10 @@ export class WishlistComponent implements OnInit {
           title: 'Items removed to your Wishlist!',
           showConfirmButton: false,
           timer: 2000,
+        }).then(() => {
+          // this.getWishlist();
+          window.location.reload();
         });
-        this.getWishlist();
-        window.location.reload();
       },
       (error) => {
         console.log(error);

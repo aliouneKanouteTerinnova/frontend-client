@@ -1,4 +1,7 @@
-<app-navbar></app-navbar>
+<app-nav-logo></app-nav-logo>
+<app-buyer-navbar></app-buyer-navbar>
+<app-headers></app-headers>
+
 <div *ngIf="cartData.data[0].numInCart === 0" class="text-center my-5">
   <h4 translate>basket.empty_basket</h4>
   <button class="btn btn-primary btn-lg mt-3" routerLink="/" translate>basket.go_shop</button>
