@@ -1,6 +1,8 @@
-<app-navbar></app-navbar>
+<app-nav-logo></app-nav-logo>
+<app-buyer-navbar></app-buyer-navbar>
+<!-- <app-headers></app-headers> -->
 
-<div class="container" style="margin-top: -155px">
+<div class="container" style="margin-top: 50px">
   <div class="row">
     <div class="col-8">
       <div class="img_content">
@@ -31,24 +33,24 @@
         </div>
 
         <div class="product_name">
-          <h2>{{ product.name }}</h2>
-          <p class="desc_product">{{ product.description }}</p>
+          <h2>{{ product?.name }}</h2>
+          <p class="desc_product">{{ product?.description }}</p>
           <p class="boutique">
             <span translate>profile.store_button</span>:
-            <a routerLink="/store-products/{{ store.id }}">{{ store.name }}</a>
+            <a routerLink="/store-products/{{ store?.id }}">{{ store?.name }}</a>
           </p>
-          <p class="price">{{ formatPrice(product.price | currency: 'EUR') }}</p>
+          <p class="price">{{ formatPrice(product?.price | currency: 'EUR') }}</p>
           <!-- <span class="fake_price">{{ formatPrice(fakePrice | currency: 'EUR') }}</span> -->
         </div>
 
-        <div class="rating-wrap">
-          <span *ngFor="let rat of getCheckedRatingArray(product.rating)" class="fa fa-star checked"></span>
-          <span class="fa fa-star" *ngFor="let rat of getRatingArray(product.rating)"></span>
-          <div class="label-rating">({{ parseRating(product.rating) }} <span translate>search.vote</span>)</div>
-        </div>
-
+        <!-- <div class="rating-wrap">
+          <span *ngFor="let rat of getCheckedRatingArray(product?.rating)" class="fa fa-star checked"></span>
+          <span class="fa fa-star" *ngFor="let rat of getRatingArray(product?.rating)"></span>
+          <div class="label-rating">({{ parseRating(product?.rating) }} <span translate>search.vote</span>)</div>
+        </div> -->
+        <app-review-stars [rating]="product?.rating"></app-review-stars>
         <div class="button">
-          <button (click)="addToCart(product.id)"><span translate>product_detail.order_button</span></button>
+          <button (click)="addToCart(product?.id)"><span translate>product_detail.order_button</span></button>
         </div>
       </div>
     </div>
@@ -63,47 +65,13 @@
     <h1><span translate>product_detail.similar_product</span></h1>
     <app-product [products]="similarProducts"> </app-product>
   </div>
-
-  <div class="similar_products container-fluid">
-    <h1 translate>review.reviews</h1>
-    <div class="button col-3" style="float: right">
-      <button (click)="addReview(product.id)"><span translate="">review.addReview</span></button>
-    </div>
-    <br /><br /><br />
-    <br />
-    <div *ngFor="let review of product.reviews">
-      <div class="row">
-        <div class="col-6" style="float: left">
-          <h2>
-            <b>{{ review.user.username }}</b>
-          </h2>
-        </div>
-        <div class="col-6">
-          <div class="row">
-            <h2>{{ review.created_at | date: 'dd/MM/yyyy hh:mm' }}</h2>
-          </div>
-        </div>
-      </div>
-      <h2>{{ review.title }}</h2>
-      <div class="rating-wrap">
-        <span *ngFor="let rat of getCheckedRatingArray(review.rating)" class="fa fa-star checked"> </span>
-        <span class="fa fa-star" *ngFor="let rat of getRatingArray(review.rating)"></span>
-        <div class="label-rating">({{ parseRating(review.rating) }} votes)</div>
-      </div>
-      <h4>{{ review.comment }}</h4>
-
-      <div class="row" style="float: right; margin-top: -3%" *ngIf="currentUser.user.username === review.user.username">
-        <button color="accent" (click)="updateReview(review.id)" *ngIf="currentUser" mat-button>
-          <mat-icon>edit</mat-icon>
-        </button>
-        <button (click)="deleteReview(review.id)" *ngIf="currentUser" mat-button color="accent">
-          <mat-icon>delete</mat-icon>
-        </button>
-      </div>
-
-      <hr />
-    </div>
-  </div>
+  <app-reviews
+    (reviewEdit)="updateReview($event)"
+    (reviewAdd)="addReview(product?.id)"
+    (reviewDelete)="deleteReview($event)"
+    [reviews]="product?.reviews"
+    [rating]="product?.rating"
+  ></app-reviews>
 </div>
 
 <div class="container banniere">
