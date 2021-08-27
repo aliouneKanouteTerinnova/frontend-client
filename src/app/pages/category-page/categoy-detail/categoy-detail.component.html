@@ -1,4 +1,9 @@
-<app-navbar></app-navbar>
+<!-- <app-navbar></app-navbar> -->
+<app-nav-logo></app-nav-logo>
+<app-buyer-navbar></app-buyer-navbar>
+<app-headers></app-headers>
+
+<app-breadcrumb home="/" categoryName="/categories-detail"></app-breadcrumb>
 
 <div class="container">
   <app-product [products]="products"></app-product>
@@ -6,3 +11,5 @@
     <span class="not-found" translate>home.result</span>
   </div>
 </div>
+
+<app-pagination [products]="products"></app-pagination>
