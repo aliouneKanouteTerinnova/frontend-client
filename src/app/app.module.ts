@@ -67,6 +67,7 @@ import { HeadersComponent } from './components/headers/headers.component';
 import { RegionsComponent } from './pages/components/regions/regions.component';
 import { BestDealsComponent } from './pages/components/best-deals/best-deals.component';
 import { PubSectionComponent } from './pages/components/pub-section/pub-section.component';
+import { SignupComponent } from './pages/components/signup/signup.component';
 import { TopCategoriesComponent } from './pages/components/top-categories/top-categories.component';
 import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.component';
 import { PaginationComponent } from './components/pagination/pagination.component';
@@ -126,6 +127,7 @@ export function rootLoaderFactory(http: HttpClient) {
     RegionsComponent,
     BestDealsComponent,
     PubSectionComponent,
+    SignupComponent,
     TopCategoriesComponent,
     BreadcrumbComponent,
     PaginationComponent,
