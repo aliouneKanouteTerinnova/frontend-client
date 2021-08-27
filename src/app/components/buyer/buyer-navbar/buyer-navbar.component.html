@@ -119,7 +119,7 @@
           <span translate>profile.logout_button</span>
         </a>
       </div>
-      <a class="nav-item nav-link active" *ngIf="!isSeller" routerLink="/register">
+      <a class="nav-item nav-link active" *ngIf="!isSeller" (click)="openDialog()">
         <span translate>nav.BecomeSeller</span>
       </a>
       <a class="nav-item nav-link active" routerLink="/all-stores">
@@ -188,6 +188,9 @@
       </div> -->
 
       <select class="custom-select" style="width: 80px" (change)="filterOrder($event)">
+        <option value="" disabled selected hidden class="langue1">
+          <span>{{ lang }}</span>
+        </option>
         <option value="1">en</option>
         <option value="2">de</option>
         <option value="3">fr</option>

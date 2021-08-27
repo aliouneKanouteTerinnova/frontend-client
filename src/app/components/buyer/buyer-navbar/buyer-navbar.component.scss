@@ -39,7 +39,8 @@
   }
 }
 
-svg {
+svg,
+.nav-item {
   cursor: pointer;
 }
 
@@ -78,8 +79,11 @@ svg {
   color: #fff;
 }
 
-.navbar {
-}
+// .navbar {
+//   div.collapse {
+//     width: 100%;
+//   }
+// }
 
 div.nav-right {
   padding-right: 0;
