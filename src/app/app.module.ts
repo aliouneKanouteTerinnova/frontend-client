@@ -76,6 +76,7 @@ import { TopCategoriesComponent } from './pages/components/top-categories/top-ca
 import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.component';
 import { PaginationComponent } from './components/pagination/pagination.component';
 import { OrderItemComponent } from './components/order-item/order-item.component';
+import { OrderStatusComponent } from './components/order-status/order-status.component';
 
 export function rootLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -141,6 +142,7 @@ export function rootLoaderFactory(http: HttpClient) {
     BreadcrumbComponent,
     PaginationComponent,
     OrderItemComponent,
+    OrderStatusComponent,
   ],
 
   imports: [
