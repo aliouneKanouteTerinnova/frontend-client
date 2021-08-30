@@ -29,7 +29,7 @@ import Swal from 'sweetalert2';
 export class BestDealsComponent implements OnInit {
   @Input() title: string;
   @Input() carouselId: string;
-  products = [];
+  @Input() products = [];
   bestSelling = [];
   goodStuff = [];
   allCountries = ['EUROPE', 'AFRIQUE', 'ASIE', 'AMERIQUE', 'OCEANIE', 'OTHERS'];
@@ -58,7 +58,14 @@ export class BestDealsComponent implements OnInit {
     if (this.i18nServiceService.currentLangValue === null || this.i18nServiceService.currentLangValue === 'en') {
       this.lang = true;
     }
-    this.getProducts();
+
+    // this.productsService.mostPopular().subscribe((res) => {
+    //   this.products = res.results;
+    //   this.showSpinner = false;
+    //   console.log('Most popular ', res);
+    // });
+
+    // this.getProducts();
   }
   handleLeftClick() {
     if (this.firstIndex > 0) {
@@ -108,14 +115,14 @@ export class BestDealsComponent implements OnInit {
   redirectProduct(id, index): void {
     this.router.navigate([`/product-detail/${id}/${index}/`]);
   }
-  getProducts() {
-    this.productsService.getAllProducts().subscribe((data) => {
-      this.products = data.results;
-      this.products = this.products.slice(0, 25);
-      this.bestSelling = this.products.slice(0, 10);
-      this.goodStuff = this.products.slice(1, 11);
-    });
-  }
+  // getProducts() {
+  //   this.productsService.getAllProducts().subscribe((data) => {
+  //     // this.products = data.results;
+  //     // this.products = this.products.slice(0, 25);
+  //     // this.bestSelling = this.products.slice(0, 10);
+  //     // this.goodStuff = this.products.slice(1, 11);
+  //   });
+  // }
 
   searchProducts(keyWord: string) {
     if (keyWord) {

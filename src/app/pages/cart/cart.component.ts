@@ -41,6 +41,7 @@ export class CartComponent implements OnInit {
   quantity: any;
   currentUser: AuthResponded;
   token;
+  title = 'Cart';
 
   constructor(
     public cartService: CartService,
