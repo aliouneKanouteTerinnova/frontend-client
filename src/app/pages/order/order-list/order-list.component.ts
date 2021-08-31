@@ -38,6 +38,7 @@ export class OrderListComponent implements OnInit {
     this.orderService.getAllOrders(this.token).subscribe(
       (data) => {
         this.listOrders = data.body;
+        console.log(this.listOrders);
       },
       (error) => {}
     );
