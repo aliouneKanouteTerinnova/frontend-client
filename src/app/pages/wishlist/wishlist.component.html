@@ -53,10 +53,10 @@
     </div>
 
     <div class="col-5 wishlist-data d-flex justify-content-between align-items-center">
-      <div>stock</div>
+      <div>{{ inStock }}</div>
 
       <div class="d-flex flex-column">
-        <span> date added </span>
+        <!-- <span> date added </span> -->
         <button class="wishlist-btn" (click)="addToCart(wishlist.product.id)" translate>wishlist.add_button</button>
       </div>
     </div>
