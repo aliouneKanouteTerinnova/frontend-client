@@ -295,8 +295,14 @@
     "noProducts": "Dieser shop hat keine produkte"
   },
   "review": {
-    "reviews": "REVIENTS",
+    "reviews": "Revients",
     "addReview": "Eine Bewertung schreiben",
+    "votes": "stimmen",
+    "no_reviews": "Seien Sie der Erste, der eine Bewertung abgibt",
+    "no_questions": "Sei der Erste, der eine Frage stellt",
+    "ask_questions": "Stellen Sie eine Frage",
+    "questions": "Fragen",
+    "answers": "Antworten",
     "title": "Titel",
     "comment": "Kommentar",
     "rate": "Bewertung",

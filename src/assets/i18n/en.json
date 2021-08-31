@@ -294,8 +294,14 @@
     "noProducts": "This store has no products"
   },
   "review": {
-    "reviews": "REVIEWS",
+    "reviews": "Reviews",
+    "votes": "votes",
+    "no_reviews": "Be the first to write a review",
+    "no_questions": "Be the first to ask a question",
     "addReview": "Write a review",
+    "questions": "Questions",
+    "ask_questions": "Ask a question",
+    "answers": "Answers",
     "title": "Title",
     "comment": "Comment",
     "rate": "Rate",

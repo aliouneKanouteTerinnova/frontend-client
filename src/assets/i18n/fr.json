@@ -296,7 +296,13 @@
     "noProducts": "Cette boutique n'a pas de produits"
   },
   "review": {
-    "reviews": "REVUES",
+    "reviews": "Avis",
+    "no_reviews": "Soyez le premier à donner un avis",
+    "no_questions": "Soyez le premier à poser une question",
+    "votes": "votes",
+    "questions": "Questions",
+    "answers": "Réponses",
+    "ask_questions": "Poser une question",
     "addReview": "Écrire un commentaire",
     "title": "Titre",
     "comment": "Commentaire",

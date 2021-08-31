@@ -50,6 +50,7 @@
       </div>
     </div>
     <div class="col-12 col-lg-9">
+      <h3 align="center" class="mt-5" *ngIf="listOrders.length === 0" translate>orders.order_list.no_order</h3>
       <app-order-item *ngFor="let order of listOrders" [order]="order"></app-order-item>
     </div>
   </div>
