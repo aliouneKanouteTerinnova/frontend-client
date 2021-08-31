@@ -36,6 +36,7 @@ export class BuyerNavbarComponent implements OnInit {
   currentUser: AuthResponded;
   lang = '';
   changeLanguage = 'de';
+  user: any;
   constructor(
     private authService: AuthenticationsService,
     private categoriesService: CategoriesService,
@@ -56,7 +57,8 @@ export class BuyerNavbarComponent implements OnInit {
     this.currentUser = this.authService.currentUserValue;
     if (this.currentUser != null) {
       this.authService.getUser(this.currentUser['user'].token).subscribe((data) => {
-        // this.user = data.body;
+        console.log(data);
+        this.user = data.body['user'].username;
 
         if (this.currentUser['user'].account_type === 'SELLER' || this.currentUser['user'].account_type === 'Seller') {
           this.isSeller = true;

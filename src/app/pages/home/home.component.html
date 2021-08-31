@@ -4,10 +4,22 @@
 
 <app-regions></app-regions>
 
-<app-best-deals title="Best deals" carouselId="carouselExampleIndicators3"></app-best-deals>
+<div class="container">
+  <app-best-deals title="Best deals" [products]="bestDeals" carouselId="carouselExampleIndicators3"></app-best-deals>
+
+  <app-loading-spinner *ngIf="showSpinner"></app-loading-spinner>
+</div>
 
 <app-pub-section></app-pub-section>
 
 <app-top-categories></app-top-categories>
 
-<app-best-deals title="Most popular" carouselId="carouselExampleIndicators4"></app-best-deals>
+<div class="container">
+  <app-best-deals
+    title="Most popular"
+    [products]="mostPopular"
+    carouselId="carouselExampleIndicators4"
+  ></app-best-deals>
+
+  <app-loading-spinner *ngIf="showSpinner"></app-loading-spinner>
+</div>
