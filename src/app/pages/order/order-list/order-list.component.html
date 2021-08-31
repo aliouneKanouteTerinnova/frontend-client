@@ -1,14 +1,16 @@
 <app-nav-logo></app-nav-logo>
 <app-buyer-navbar></app-buyer-navbar>
 <main class="container mt-5">
-  <h1 align="center">Orders</h1>
-  <button class="ml-auto col-lg-2 d-none d-lg-block" mat-flat-button color="primary">Continue Shopping</button>
+  <h1 align="center" translate>orders.order_details.command</h1>
+  <button class="ml-auto col-lg-2 d-none d-lg-block" mat-flat-button color="primary">
+    <span translate>orders.order_list.shopping_button</span>
+  </button>
   <div class="row mt-2">
     <div class="col-12 col-lg-3 p-0">
       <div id="order-menu">
-        <h1 align="center">Orders</h1>
+        <h1 align="center" translate>orders.order_details.command</h1>
         <ul class="list-unstyled">
-          <li>
+          <li translate>
             <svg
               aria-hidden="true"
               focusable="false"
@@ -22,10 +24,10 @@
                 class=""
               ></path>
             </svg>
-            Security
+            orders.order_list.order_menu_security
           </li>
-          <li><img src="assets/img/icons/security.svg" alt="" /> Payment</li>
-          <li>
+          <li translate><img src="assets/img/icons/security.svg" alt="" />orders.order_list.order_menu_payment</li>
+          <li translate>
             <svg
               aria-hidden="true"
               focusable="false"
@@ -41,9 +43,9 @@
                 class=""
               ></path>
             </svg>
-            Settings
+            orders.order_list.order_menu_settings
           </li>
-          <li><img src="assets/img/icons/logout.svg" alt="" /> Sign Out</li>
+          <li translate><img src="assets/img/icons/logout.svg" alt="" /> nav.Disconnection</li>
         </ul>
       </div>
     </div>
