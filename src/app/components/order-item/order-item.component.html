@@ -27,9 +27,9 @@
         </button>
       </span>
       <h2 class="col-10">
-        <a [routerLink]="['/product-detail/' + product.id + '/1']" routerLinkActive="router-link-active">{{
-          product.name
-        }}</a>
+        <a [routerLink]="['/product-detail/' + product.id + '/1']" routerLinkActive="router-link-active">
+          {{ product.name }}</a
+        >
       </h2>
       <span class="col-1">
         <button mat-button (click)="next()" [disabled]="order.order_items[index + 1] === undefined">
@@ -49,7 +49,9 @@
         </button>
       </span>
     </span>
-    <span class="col-3 offset-2">Details</span>
+    <span class="col-3 offset-2">
+      <a routerLink="/orders/{{ order.id }}" routerLinkActive="router-link-active">Details</a>
+    </span>
     <span class="col-4">Shipping Info</span>
     <span class="col-3">Package Status</span>
   </div>
