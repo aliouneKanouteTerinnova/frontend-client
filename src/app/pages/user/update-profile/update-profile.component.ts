@@ -83,7 +83,11 @@ export class UpdateProfileComponent implements OnInit {
         });
       },
       (error) => {
-        console.log(error);
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: error.error.errors.username[0],
+        });
       }
     );
   }
