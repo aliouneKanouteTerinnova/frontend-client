@@ -47,10 +47,12 @@
         <div class="card-body d-flex flex-row">
           <div class="d-flex flex-column category">
             <a
-              *ngFor="let item of categoryParents.slice(0, 5); let i = index"
+              *ngFor="let item of categoryParents.slice(0, 7); let i = index"
               class="category-item"
               (mouseenter)="showCategory(item, i)"
-              >{{ item.name }}
+            >
+              <img src="{{ item.image }}" alt="" />
+              {{ item.name }}
             </a>
           </div>
 
