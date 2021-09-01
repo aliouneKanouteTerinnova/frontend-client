@@ -58,6 +58,14 @@ svg,
     font-weight: 500;
     text-decoration: none;
     margin: 8px 30px 8px 30px;
+    display: block;
+    width: 100%;
+    // padding: 0.25rem 1.5rem;
+    clear: both;
+    text-align: inherit;
+    white-space: nowrap;
+    background-color: transparent;
+    border: 0;
 
     &:hover {
       color: #29235c;
@@ -84,6 +92,12 @@ svg,
 //     width: 100%;
 //   }
 // }
+
+.dropdown-menu.show {
+  display: block;
+  margin-left: -87px;
+  margin-top: 27px;
+}
 
 div.nav-right {
   padding-right: 0;

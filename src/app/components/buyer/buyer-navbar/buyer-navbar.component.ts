@@ -23,6 +23,7 @@ import { SignupComponent } from 'src/app/pages/components/signup/signup.componen
   styleUrls: ['./buyer-navbar.component.scss'],
 })
 export class BuyerNavbarComponent implements OnInit {
+  categoryParents = [];
   category = [];
   subCategory: string;
   categoryProdact: [] = [];
@@ -91,21 +92,23 @@ export class BuyerNavbarComponent implements OnInit {
 
   getCategory(): void {
     this.categoriesService.getAllCategories().subscribe((res) => {
-      // console.log(res.results);
-      // console.log(res.results[0].children);
       this.category = res.results;
+
+      this.categoryParents = this.category.filter((category) => category.parent === null);
+
+      console.log(this.categoryParents);
     });
   }
 
   showCategory(data, id: number): void {
-    this.subCategory = this.category[id].children;
-    // console.log(this.subCategory);
-    this.imageSource = data.image;
-    this.showImage = true;
+    this.subCategory = this.categoryParents[id].children;
+    // this.imageSource = data.image;
+    // this.showImage = true;
   }
 
   changeImageCategory(data): void {
     this.imageSource = data.image;
+    this.showImage = true;
   }
 
   oNCategoryDetails(data): void {
