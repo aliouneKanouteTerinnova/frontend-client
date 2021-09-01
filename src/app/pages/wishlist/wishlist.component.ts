@@ -1,3 +1,4 @@
+import { SwalComponent } from '@sweetalert2/ngx-sweetalert2';
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/ban-types */
 /* eslint-disable @typescript-eslint/no-unsafe-return */
@@ -12,7 +13,7 @@ import { I18nServiceService } from 'src/app/services/i18n-service/i18n-service.s
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import { ProductsService } from 'src/app/services/products/products.service';
 import { AuthenticationsService } from 'src/app/services/authentications/authentications.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { AuthResponded } from 'src/app/models/auth/auth';
 import { WishlistService } from 'src/app/services/wishlist/wishlist.service';
 import Swal from 'sweetalert2';
@@ -24,6 +25,8 @@ import { CartService } from 'src/app/services/cart/cart.service';
   styleUrls: ['./wishlist.component.scss'],
 })
 export class WishlistComponent implements OnInit {
+  @ViewChild('effacerSwal', { static: false })
+  private effacerSwal: SwalComponent;
   currentUser: AuthResponded;
   token;
   wishlists = [];
@@ -32,7 +35,7 @@ export class WishlistComponent implements OnInit {
   home = '/';
   categoryName = 'wishlists';
   showSpinner = true;
-  inStock = '';
+  productId: any;
 
   constructor(
     private productsService: ProductsService,
@@ -55,12 +58,6 @@ export class WishlistComponent implements OnInit {
       this.showSpinner = false;
       this.items.forEach((element) => {
         this.productsService.getCurrentData(element.product).subscribe((res) => {
-          if (res.quantity > 10) {
-            this.inStock = 'In stock';
-          }
-          if (res.quantity <= 10) {
-            this.inStock = 'Low stock';
-          }
           const item = {
             item: element.id,
             product: res,
@@ -101,8 +98,8 @@ export class WishlistComponent implements OnInit {
     return prices;
   }
 
-  removeWishlist(id: any) {
-    this.wishlistService.deletWishlist(id, this.token).subscribe(
+  deleteProducts() {
+    this.wishlistService.deletWishlist(this.productId, this.token).subscribe(
       (res) => {
         Swal.fire({
           // position: 'top-end',
@@ -119,5 +116,10 @@ export class WishlistComponent implements OnInit {
         console.log(error);
       }
     );
+  }
+
+  removeWishlist(id: any) {
+    this.productId = id;
+    this.effacerSwal.fire();
   }
 }
