@@ -2,15 +2,44 @@
   position: relative;
   height: 450px;
 
+  background-image: url(./../../../assets/img/background.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+
+  .carousel-caption {
+    position: unset !important;
+    button {
+      display: flex;
+      padding: 12px 30px;
+      background: #f39200;
+      font-size: 1.2rem;
+      font-weight: 600;
+      border-radius: 40px;
+      font-family: 'Raleway';
+    }
+
+    // button span {
+    //   padding: 8px;
+    // }
+
+    // button.click-here::before {
+    //   content: url('./../../../assets/img/icons/hermes-logo.png');
+    // }
+  }
+
   h1 {
-    position: absolute;
-    top: 47%;
-    font-size: 45px;
+    padding-bottom: 2rem;
+    font-size: 3.5rem;
     right: 21%;
-    font-weight: 700;
+    font-weight: 800;
+    display: flex;
     font-family: 'Raleway';
     color: #29235c;
-    letter-spacing: 2px;
+    letter-spacing: 0.1rem;
+    text-transform: uppercase;
   }
 
   .click-here {
