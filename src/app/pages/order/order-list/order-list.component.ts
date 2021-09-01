@@ -1,3 +1,9 @@
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/dot-notation */
+/* eslint-disable @typescript-eslint/no-floating-promises */
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { AuthenticationsService } from 'src/app/services/authentications/authentications.service';
@@ -11,15 +17,20 @@ import { OrderService } from 'src/app/services/order/order.service';
 })
 export class OrderListComponent implements OnInit {
   listOrders = [];
+  listOrder: any;
   currentUser: any;
   token: any;
   typeUser: any;
   isSeller = false;
   sellerOrderSubscription: Subscription;
+  showSpinner = true;
+  showMor = true;
+
   constructor(
     private orderService: OrderService,
     private i18nServiceService: I18nServiceService,
-    private authService: AuthenticationsService
+    private authService: AuthenticationsService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -38,10 +49,18 @@ export class OrderListComponent implements OnInit {
     this.orderService.getAllOrders(this.token).subscribe(
       (data) => {
         this.listOrders = data.body;
-        console.log(this.listOrders);
+        this.listOrder = this.listOrders.slice(0, 3);
+        this.showSpinner = false;
       },
-      (error) => {}
+      (error) => {
+        console.log(error);
+      }
     );
+  }
+
+  viewMor() {
+    this.listOrder = this.listOrders;
+    this.showMor = false;
   }
 
   getSellerOrders() {
@@ -57,5 +76,11 @@ export class OrderListComponent implements OnInit {
     //   },
     //   (error) => {}
     // );
+  }
+
+  logout(): void {
+    this.authService.logOut();
+    // window.location.reload();
+    this.router.navigate(['/']);
   }
 }

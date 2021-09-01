@@ -77,6 +77,7 @@ import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.componen
 import { PaginationComponent } from './components/pagination/pagination.component';
 import { OrderItemComponent } from './components/order-item/order-item.component';
 import { OrderStatusComponent } from './components/order-status/order-status.component';
+import { LoadingSpinnerComponent } from './components/loading-spinner/loading-spinner.component';
 
 export function rootLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -143,6 +144,7 @@ export function rootLoaderFactory(http: HttpClient) {
     PaginationComponent,
     OrderItemComponent,
     OrderStatusComponent,
+    LoadingSpinnerComponent,
   ],
 
   imports: [

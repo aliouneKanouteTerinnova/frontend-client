@@ -31,6 +31,8 @@ export class WishlistComponent implements OnInit {
   similarProducts = [];
   home = '/';
   categoryName = 'wishlists';
+  showSpinner = true;
+  inStock = '';
 
   constructor(
     private productsService: ProductsService,
@@ -50,8 +52,15 @@ export class WishlistComponent implements OnInit {
   getWishlist(): void {
     this.wishlistService.getAllWishlist(this.token).subscribe((data) => {
       this.items = data.body.items;
+      this.showSpinner = false;
       this.items.forEach((element) => {
         this.productsService.getCurrentData(element.product).subscribe((res) => {
+          if (res.quantity > 10) {
+            this.inStock = 'In stock';
+          }
+          if (res.quantity <= 10) {
+            this.inStock = 'Low stock';
+          }
           const item = {
             item: element.id,
             product: res,

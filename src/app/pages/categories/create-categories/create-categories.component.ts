@@ -53,7 +53,7 @@ export class CreateCategoriesComponent implements OnInit {
 
   getCategory() {
     this.categoryService.getAllCategories().subscribe((data) => {
-      this.categories = data;
+      this.categories = data.results;
     });
   }
 

@@ -15,7 +15,8 @@ import { WishlistService } from 'src/app/services/wishlist/wishlist.service';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
-  products = [];
+  mostPopular = [];
+  bestDeals = [];
   bestSelling = [];
   goodStuff = [];
   allCountries = ['EUROPE', 'AFRIQUE', 'ASIE', 'AMERIQUE', 'OCEANIE', 'OTHERS'];
@@ -27,6 +28,7 @@ export class HomeComponent implements OnInit {
   lang = false;
   token;
   isIconClicked = false;
+  showSpinner = true;
 
   constructor(
     private authService: AuthenticationsService,
@@ -44,7 +46,18 @@ export class HomeComponent implements OnInit {
     if (this.i18nServiceService.currentLangValue === null || this.i18nServiceService.currentLangValue === 'en') {
       this.lang = true;
     }
-    this.getProducts();
+
+    this.productsService.mostPopular().subscribe((res) => {
+      this.mostPopular = res.results;
+      this.showSpinner = false;
+    });
+
+    this.productsService.bestDeals().subscribe((res) => {
+      this.bestDeals = res.results;
+      this.showSpinner = false;
+      // console.log('bestDeals ', res);
+    });
+    // this.getProducts();
   }
   handleLeftClick() {
     if (this.firstIndex > 0) {
@@ -95,14 +108,14 @@ export class HomeComponent implements OnInit {
   redirectProduct(id, index) {
     this.router.navigate([`/product-detail/${id}/${index}/`]);
   }
-  getProducts() {
-    this.productsService.getAllProducts().subscribe((data) => {
-      this.products = data.results;
-      this.products = this.products.slice(0, 25);
-      this.bestSelling = this.products.slice(0, 10);
-      this.goodStuff = this.products.slice(1, 11);
-    });
-  }
+  // getProducts() {
+  //   this.productsService.getAllProducts().subscribe((data) => {
+  //     this.products = data.results;
+  //     this.products = this.products.slice(0, 25);
+  //     this.bestSelling = this.products.slice(0, 10);
+  //     this.goodStuff = this.products.slice(1, 11);
+  //   });
+  // }
 
   searchProducts(keyWord: string) {
     if (keyWord) {

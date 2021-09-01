@@ -1,11 +1,20 @@
 <!-- <app-navbar></app-navbar> -->
 <app-nav-logo></app-nav-logo>
 <app-buyer-navbar></app-buyer-navbar>
-<app-headers></app-headers>
+<!-- <app-headers></app-headers> -->
 
 <app-breadcrumb home="/" categoryName="/categories-detail"></app-breadcrumb>
 
+<app-best-deals
+  title="Best Men Clothing"
+  [products]="products"
+  carouselId="carouselExampleIndicators5"
+></app-best-deals>
+
+<app-pub-section></app-pub-section>
+
 <div class="container">
+  <div class="col-12 text-center mb-5"><h1>All Men Clothing</h1></div>
   <app-product [products]="products"></app-product>
   <div class="no-products" *ngIf="products.length === 0">
     <span class="not-found" translate>home.result</span>

@@ -23,6 +23,7 @@ import { SignupComponent } from 'src/app/pages/components/signup/signup.componen
   styleUrls: ['./buyer-navbar.component.scss'],
 })
 export class BuyerNavbarComponent implements OnInit {
+  categoryParents = [];
   category = [];
   subCategory: string;
   categoryProdact: [] = [];
@@ -36,6 +37,7 @@ export class BuyerNavbarComponent implements OnInit {
   currentUser: AuthResponded;
   lang = '';
   changeLanguage = 'de';
+  user: any;
   constructor(
     private authService: AuthenticationsService,
     private categoriesService: CategoriesService,
@@ -56,7 +58,8 @@ export class BuyerNavbarComponent implements OnInit {
     this.currentUser = this.authService.currentUserValue;
     if (this.currentUser != null) {
       this.authService.getUser(this.currentUser['user'].token).subscribe((data) => {
-        // this.user = data.body;
+        console.log(data);
+        this.user = data.body['user'].username;
 
         if (this.currentUser['user'].account_type === 'SELLER' || this.currentUser['user'].account_type === 'Seller') {
           this.isSeller = true;
@@ -89,21 +92,23 @@ export class BuyerNavbarComponent implements OnInit {
 
   getCategory(): void {
     this.categoriesService.getAllCategories().subscribe((res) => {
-      // console.log(res.results);
-      // console.log(res.results[0].children);
       this.category = res.results;
+
+      this.categoryParents = this.category.filter((category) => category.parent === null);
+
+      console.log(this.categoryParents);
     });
   }
 
   showCategory(data, id: number): void {
-    this.subCategory = this.category[id].children;
-    // console.log(this.subCategory);
-    this.imageSource = data.image;
-    this.showImage = true;
+    this.subCategory = this.categoryParents[id].children;
+    // this.imageSource = data.image;
+    // this.showImage = true;
   }
 
   changeImageCategory(data): void {
     this.imageSource = data.image;
+    this.showImage = true;
   }
 
   oNCategoryDetails(data): void {
