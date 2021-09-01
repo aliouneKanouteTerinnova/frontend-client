@@ -52,7 +52,7 @@
     "Commands": "Commands",
     "Wishlist": "Wishlist",
     "Setting": "Setting",
-    "Disconnection": "Disconnection",
+    "Disconnection": "logout",
     "BecomeSeller": "Become a seller",
     "Shops": "Shops",
     "ClickHere": "CLICK HERE"
@@ -139,9 +139,18 @@
   },
   "orders": {
     "order_list": {
-      "no_order": "No orders",
-      "order_list": "Orders List",
-      "result": "No orders found",
+      "order_menu_security": "Security",
+      "order_menu_payment": "Payments",
+      "order_menu_settings": "Settings",
+      "shopping_button": "Continue shopping",
+      "no_order": "No orders yet",
+      "order_items": "Items",
+      "result": "No order found",
+      "manage_order": "Manage order",
+      "order_shipping_info": "Shipping Info",
+      "order_package_status": "Package Info",
+      "order_tracking": "Track Package",
+      "order_buy_again": "Buy again",
       "order_date": "Order Date",
       "order_number": "Order No",
       "order_amount": "Amount",
@@ -153,6 +162,7 @@
       "product": "Order products"
     },
     "order_details": {
+      "order": "Order",
       "order_confirm": "Your order Confirmed !",
       "order_intro": "You order has been confirmed and will be shipped in next two days !",
       "order_payment": "Payment",
@@ -284,8 +294,14 @@
     "noProducts": "This store has no products"
   },
   "review": {
-    "reviews": "REVIEWS",
+    "reviews": "Reviews",
+    "votes": "votes",
+    "no_reviews": "Be the first to write a review",
+    "no_questions": "Be the first to ask a question",
     "addReview": "Write a review",
+    "questions": "Questions",
+    "ask_questions": "Ask a question",
+    "answers": "Answers",
     "title": "Title",
     "comment": "Comment",
     "rate": "Rate",

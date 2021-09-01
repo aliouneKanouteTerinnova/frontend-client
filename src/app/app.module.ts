@@ -75,6 +75,8 @@ import { ReviewsStatsComponent } from './components/reviews-stats/reviews-stats.
 import { TopCategoriesComponent } from './pages/components/top-categories/top-categories.component';
 import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.component';
 import { PaginationComponent } from './components/pagination/pagination.component';
+import { OrderItemComponent } from './components/order-item/order-item.component';
+import { OrderStatusComponent } from './components/order-status/order-status.component';
 import { LoadingSpinnerComponent } from './components/loading-spinner/loading-spinner.component';
 
 export function rootLoaderFactory(http: HttpClient) {
@@ -140,6 +142,8 @@ export function rootLoaderFactory(http: HttpClient) {
     TopCategoriesComponent,
     BreadcrumbComponent,
     PaginationComponent,
+    OrderItemComponent,
+    OrderStatusComponent,
     LoadingSpinnerComponent,
   ],
 

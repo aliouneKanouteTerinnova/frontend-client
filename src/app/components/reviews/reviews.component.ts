@@ -5,6 +5,7 @@ import { UpdateStoreReviewComponent } from '../../pages/stores/store-review/upda
 import { StoreReviewService } from 'src/app/services/store-review/store-review.service';
 import { ActivatedRoute } from '@angular/router';
 import { AuthenticationsService } from 'src/app/services/authentications/authentications.service';
+import { I18nServiceService } from 'src/app/services/i18n-service/i18n-service.service';
 
 @Component({
   selector: 'app-reviews',
@@ -21,7 +22,7 @@ export class ReviewsComponent implements OnInit {
 
   currentUser: any;
   idStore: any;
-  constructor(private authService: AuthenticationsService) {}
+  constructor(private i18nServiceService: I18nServiceService, private authService: AuthenticationsService) {}
 
   ngOnInit(): void {
     this.currentUser = this.authService.currentUserValue;
