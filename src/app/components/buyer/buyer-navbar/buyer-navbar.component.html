@@ -82,7 +82,7 @@
           </svg>
           <span translate>nav.Setting</span>
         </a>
-        <a class="dropdown-item" routerLink="/orders">
+        <a class="dropdown-item" *ngIf="!isSeller" routerLink="/orders">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="16"
