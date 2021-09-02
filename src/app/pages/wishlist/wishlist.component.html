@@ -45,7 +45,7 @@
         <img src="{{ wishlist.product.images[0].file }}" width="100" height="100" alt="" />
       </div>
 
-      <div>{{ wishlist.product.name.slice(0, 8) }}</div>
+      <div style="position: relative; left: -15%">{{ wishlist.product.name.slice(0, 9) }}</div>
     </div>
 
     <div class="col-3 wishlist-data d-flex justify-content-between align-items-center">
@@ -53,11 +53,19 @@
     </div>
 
     <div class="col-5 wishlist-data d-flex justify-content-between align-items-center">
-      <div>{{ inStock }}</div>
+      <div *ngIf="wishlist.product.quantity > 10">In stock</div>
+      <div *ngIf="wishlist.product.quantity < 10" class="text-danger">Low stock</div>
 
       <div class="d-flex flex-column">
         <!-- <span> date added </span> -->
-        <button class="wishlist-btn" (click)="addToCart(wishlist.product.id)" translate>wishlist.add_button</button>
+        <button
+          [disabled]="wishlist.product.quantity < 10"
+          class="wishlist-btn"
+          (click)="addToCart(wishlist.product.id)"
+          translate
+        >
+          wishlist.add_button
+        </button>
       </div>
     </div>
   </div>
@@ -70,3 +78,15 @@
     <app-product [products]="similarProducts"> </app-product>
   </div>
 </div>
+
+<swal
+  #effacerSwal
+  title="Deletion "
+  text="Are you sure ?  "
+  type="question"
+  confirmButtonText="Yes"
+  cancelButtonText="No"
+  [showCancelButton]="true"
+  [focusCancel]="true"
+  (confirm)="deleteProducts()"
+></swal>

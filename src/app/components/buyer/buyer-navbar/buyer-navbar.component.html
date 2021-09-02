@@ -1,5 +1,6 @@
-<nav class="navbar navbar-expand-lg navbar-light px-5">
-  <!-- <button
+<!-- class="navbar navbar-expand-lg navbar-light px-5" -->
+<nav class="navbar navbar-expand-lg navbar-light">
+  <button
     class="navbar-toggler"
     type="button"
     data-toggle="collapse"
@@ -9,7 +10,7 @@
     aria-label="Toggle navigation"
   >
     <span class="navbar-toggler-icon"></span>
-  </button> -->
+  </button>
   <a class="navbar-brand" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
     <svg
       data-toggle="collapse"
@@ -85,7 +86,7 @@
   </div>
 
   <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
-    <div class="navbar-nav pr-3">
+    <div class="navbar-nav">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="25"
@@ -119,7 +120,7 @@
       >
         <span translate>nav.compte</span>
       </a>
-      <div *ngIf="currentUser" class="dropdown-menu" aria-labelledby="dropdownMenuLink" style="left: 170px; top: 40px">
+      <div *ngIf="currentUser" class="dropdown-menu" aria-labelledby="dropdownMenuLink" style="left: 270px; top: 30px">
         <a class="dropdown-item" routerLink="/profile">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -135,7 +136,7 @@
           </svg>
           <span translate>nav.Setting</span>
         </a>
-        <a class="dropdown-item" routerLink="/orders">
+        <a class="dropdown-item" *ngIf="!isSeller" routerLink="/orders">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="16"
@@ -180,12 +181,13 @@
       </a>
     </div>
   </div>
+
   <div class="nav-right">
-    <form class="d-flex mr-5">
+    <form class="d-flex">
       <search-bar (login)="searchProducts($event)"></search-bar>
     </form>
 
-    <div class="cart-heart">
+    <div class="cart-heart d-flex align-items-center">
       <svg
         routerLink="/wishlist"
         xmlns="http://www.w3.org/2000/svg"
@@ -251,25 +253,3 @@
     </div>
   </div>
 </nav>
-<!-- <div class="collapse sub-menu" id="collapseExample">
-  <div class="card card-body d-flex flex-row">
-    <div class="d-flex flex-column category">
-      <a *ngFor="let item of category.slice(0, 5); let i = index" class="category-item" (click)="showCategory(item, i)"
-        >{{ item.name }} | {{ i }}
-      </a>
-    </div>
-    <div class="category-item d-flex" *ngFor="let item of subCategory" (click)="changeImageCategory(item)">
-      <p>{{ item.name }}</p>
-      <img
-        *ngIf="showImage"
-        class="image-category flex-end"
-        width="150"
-        height="150"
-        src="{{ imageSource }}"
-        alt=""
-        routerLink="/categories-detail/{{ item.id }}"
-        (click)="oNCategoryDetails(item)"
-      />
-    </div>
-  </div>
-</div> -->

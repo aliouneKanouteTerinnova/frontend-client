@@ -139,9 +139,20 @@
   },
   "orders": {
     "order_list": {
+      "order": "Commande",
+      "order_menu_security": "Sécurité",
+      "order_menu_payment": "Paiements",
+      "order_menu_settings": "Paramètres",
+
+      "shopping_button": "Continuer mes achats",
       "no_order": "Aucune commande",
-      "order_list": "Liste des commandes",
+      "order_items": "Elements",
       "result": "Aucune commande trouvée",
+      "manage_order": "Gérer la commande",
+      "order_shipping_info": "Infos de Livraison",
+      "order_package_status": "Status du Colis",
+      "order_buy_again": "Acheter encore",
+      "order_tracking": "Traquer le colis",
       "order_date": "Date de la commande",
       "order_number": "N° de commande",
       "order_amount": "Montant",
@@ -153,6 +164,7 @@
       "product": "Produits de la commande"
     },
     "order_details": {
+      "order": "Commande",
       "order_confirm": "Votre commande est confirmée !",
       "order_intro": "Votre commande a été confirmée et sera expédiée dans les deux prochains jours !",
       "order_payment": "Paiement",
@@ -163,7 +175,7 @@
       "order_ship_fee": "Frais d'expédition",
       "order_tax_fee": "Taxe d'impôt",
       "order_discount": "Remise",
-      "order_total": "Total",
+      "order_total": "Order Total",
       "order_conclusion": "Nous enverrons un courriel de confirmation d'expédition lorsque l'article aura été expédié avec succès !",
       "order_thanks": "Merci de faire vos achats chez nous !",
       "order_footer": "Besoin d'aide ? Visitez notre ",
@@ -284,7 +296,13 @@
     "noProducts": "Cette boutique n'a pas de produits"
   },
   "review": {
-    "reviews": "REVUES",
+    "reviews": "Avis",
+    "no_reviews": "Soyez le premier à donner un avis",
+    "no_questions": "Soyez le premier à poser une question",
+    "votes": "votes",
+    "questions": "Questions",
+    "answers": "Réponses",
+    "ask_questions": "Poser une question",
     "addReview": "Écrire un commentaire",
     "title": "Titre",
     "comment": "Commentaire",
