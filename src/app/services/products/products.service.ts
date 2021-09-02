@@ -74,10 +74,10 @@ export class ProductsService {
   }
 
   bestDeals() {
-    return this.httpClient.get<any>(`http://192.168.1.17:8000/api/products/latest`);
+    return this.httpClient.get<any>(`${environment.baseUrl}products/latest`);
   }
 
   mostPopular() {
-    return this.httpClient.get<any>(`http://192.168.1.17:8000/api/products/most-viewed`);
+    return this.httpClient.get<any>(`${environment.baseUrl}products/most-viewed`);
   }
 }
