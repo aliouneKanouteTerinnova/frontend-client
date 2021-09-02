@@ -167,7 +167,7 @@ export function rootLoaderFactory(http: HttpClient) {
       'pk_test_51HQ3ZXFunRLoLWctiy0l6VVOeflU8ES2IRjTyY7LL9rEpKedBIfOfKB1BSSftQk4Qmke8HdtRcdmje7R2whuWgTz00U7HXpwjn'
     ),
   ],
-  providers: [CookieService],
+  providers: [CookieService, HttpClientModule],
 
   bootstrap: [AppComponent],
 })
