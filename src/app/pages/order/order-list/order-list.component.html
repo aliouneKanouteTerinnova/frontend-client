@@ -1,11 +1,13 @@
 <app-nav-logo></app-nav-logo>
 <app-buyer-navbar></app-buyer-navbar>
+
 <main class="container mt-5">
   <h1 align="center" translate>orders.order_details.command</h1>
-  <button class="ml-auto col-lg-2 d-none px-2 d-lg-block" mat-flat-button color="primary">
+  <app-loading-spinner *ngIf="showSpinner"></app-loading-spinner>
+  <button *ngIf="!showSpinner" class="ml-auto col-lg-2 d-none px-2 d-lg-block" mat-flat-button color="primary">
     <span translate>orders.order_list.shopping_button</span>
   </button>
-  <div class="row mt-2">
+  <div class="row mt-2" *ngIf="!showSpinner">
     <div class="col-12 col-lg-3 p-0">
       <div id="order-menu">
         <h1 align="center" translate>orders.order_details.command</h1>
@@ -45,13 +47,37 @@
             </svg>
             orders.order_list.order_menu_settings
           </li>
-          <li translate><img src="assets/img/icons/logout.svg" alt="" /> nav.Disconnection</li>
+          <li translate class="disconecte" (click)="logout()">
+            <img src="assets/img/icons/logout.svg" alt="" /> nav.Disconnection
+          </li>
         </ul>
       </div>
     </div>
     <div class="col-12 col-lg-9">
-      <h3 align="center" class="mt-5" *ngIf="listOrders.length === 0" translate>orders.order_list.no_order</h3>
-      <app-order-item *ngFor="let order of listOrders" [order]="order"></app-order-item>
+      <h3 align="center" class="mt-5" *ngIf="listOrders.length === null" translate>orders.order_list.no_order</h3>
+      <app-order-item *ngFor="let order of listOrder" [order]="order"></app-order-item>
+
+      <div *ngIf="listOrders.length >= 3">
+        <svg
+          *ngIf="showMor"
+          (click)="viewMor()"
+          xmlns="http://www.w3.org/2000/svg"
+          width="30"
+          height="30"
+          fill="currentColor"
+          class="bi bi-chevron-double-down view-more col-12"
+          viewBox="0 0 16 16"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M1.646 6.646a.5.5 0 0 1 .708 0L8 12.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"
+          />
+          <path
+            fill-rule="evenodd"
+            d="M1.646 2.646a.5.5 0 0 1 .708 0L8 8.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"
+          />
+        </svg>
+      </div>
     </div>
   </div>
 </main>

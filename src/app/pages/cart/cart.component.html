@@ -1,13 +1,7 @@
 <app-nav-logo></app-nav-logo>
 <app-buyer-navbar></app-buyer-navbar>
 
-<nav aria-label="breadcrumb">
-  <ol class="breadcrumb container">
-    <li class="breadcrumb-item"><a href="#">Home</a></li>
-    <li class="breadcrumb-item active" aria-current="page" translate>Cart</li>
-  </ol>
-</nav>
-<!-- <app-headers></app-headers> -->
+<app-breadcrumb [name]="title"></app-breadcrumb>
 
 <div *ngIf="cartData.data[0].numInCart === 0" class="text-center my-5">
   <h4 translate>basket.empty_basket</h4>
@@ -29,7 +23,9 @@
           <img routerLink="/product-detail/{{ c.product.id }}/{{ i }}/" src="{{ c.product.images[0].file }}" alt="" />
         </div>
         <div class="info">
-          <span class="price" routerLink="/product-detail/{{ c.product.id }}/{{ i }}/">{{ c.product.name }}</span>
+          <span class="product-name" routerLink="/product-detail/{{ c.product.id }}/{{ i }}/">{{
+            c.product.name
+          }}</span>
           <p class="description">
             {{ c.product.description }}
           </p>
@@ -142,7 +138,46 @@
     </div>
   </div>
 </div>
-<div class="followed" *ngIf="cartData.data[0].numInCart !== 0">
+
+<section class="pt-5 pb-5">
+  <div class="container">
+    <div class="row">
+      <div class="col-12 text-center mb-5"><h1 translate>basket.followed_product</h1></div>
+
+      <div class="col-12">
+        <div class="row mt-3">
+          <div class="col-md-3 mb-5" *ngFor="let product of bestSelling; let i = index">
+            <div class="card card-product-hover">
+              <img src="{{ product.images[0].file }}" height="300" alt="" />
+
+              <div class="card-product-hover-icons">
+                <a (click)="addToCart(product.id)"
+                  ><img src="./../../../../assets/img/hover-icon/icon cart.png" width="25" height="25" alt=""
+                /></a>
+                <a (click)="AddWishlist(product.id)" class="mt-2"
+                  ><img src="./../../../../assets/img/hover-icon/Heart.png" width="25" height="25" alt=""
+                /></a>
+                <a class="price">{{ formatPrice(product.price | currency: 'EUR') }}</a>
+                <a class="details" (click)="redirectProduct(product.id, i)"
+                  ><img src="./../../../../assets/img/hover-icon/Plus.png" width="35" height="35" alt=""
+                /></a>
+              </div>
+              <div class="card-product-hover-details">
+                <h3 class="card-product-hover-title" *ngIf="product.name.length > 17">
+                  {{ product.name.slice(0, 15) }}...
+                </h3>
+                <h3 class="card-product-hover-title" *ngIf="product.name.length <= 17">{{ product.name }}</h3>
+                <span class="card-product-hover-price">Legacy Foundation Tee</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- <div class="followed" *ngIf="cartData.data[0].numInCart !== 0">
   <div class="followed-title"><h3 translate>basket.followed_product</h3></div>
   <div class="home-main">
     <div class="home-product" *ngFor="let product of bestSelling; let i = index">
@@ -160,8 +195,8 @@
       </div>
     </div>
   </div>
-</div>
-<div class="followed" *ngIf="cartData.data[0].numInCart !== 0">
+</div> -->
+<!-- <div class="followed" *ngIf="cartData.data[0].numInCart !== 0">
   <div class="followed-title"><h3 translate>basket.similar_product</h3></div>
   <div class="home-main">
     <div class="home-product" *ngFor="let product of bestSelling; let i = index">
@@ -176,7 +211,44 @@
       </div>
     </div>
   </div>
-</div>
+</div> -->
+<section class="pt-5 pb-5">
+  <div class="container">
+    <div class="row">
+      <div class="col-12 text-center mb-5"><h1 translate>basket.similar_product</h1></div>
+
+      <div class="col-12">
+        <div class="row mt-3">
+          <div class="col-md-3 mb-5" *ngFor="let product of bestSelling; let i = index">
+            <div class="card card-product-hover">
+              <img src="{{ product.images[0].file }}" height="300" alt="" />
+
+              <div class="card-product-hover-icons">
+                <a (click)="addToCart(product.id)"
+                  ><img src="./../../../../assets/img/hover-icon/icon cart.png" width="25" height="25" alt=""
+                /></a>
+                <a (click)="AddWishlist(product.id)" class="mt-2"
+                  ><img src="./../../../../assets/img/hover-icon/Heart.png" width="25" height="25" alt=""
+                /></a>
+                <a class="price">{{ formatPrice(product.price | currency: 'EUR') }}</a>
+                <a class="details" (click)="redirectProduct(product.id, i)"
+                  ><img src="./../../../../assets/img/hover-icon/Plus.png" width="35" height="35" alt=""
+                /></a>
+              </div>
+              <div class="card-product-hover-details">
+                <h3 class="card-product-hover-title" *ngIf="product.name.length > 17">
+                  {{ product.name.slice(0, 15) }}...
+                </h3>
+                <h3 class="card-product-hover-title" *ngIf="product.name.length <= 17">{{ product.name }}</h3>
+                <span class="card-product-hover-price">Legacy Foundation Tee</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 <swal
   #effacerSwal
   title="Deletion"

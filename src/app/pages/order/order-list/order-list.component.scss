@@ -27,5 +27,31 @@ button {
     color: #adadad;
     border-top: 1px solid #29235c;
     padding: 0.5em 1em;
+    cursor: pointer;
+
+    &:hover {
+      color: #29235c;
+    }
+  }
+
+  .disconecte:hover {
+    color: #df2f2f;
+  }
+}
+
+.view-more {
+  cursor: pointer;
+  animation: bounce 0.7s ease infinite;
+}
+
+@keyframes bounce {
+  from {
+    top: 20px;
+  }
+  50% {
+    top: 10px;
+  }
+  to {
+    top: 20px;
   }
 }

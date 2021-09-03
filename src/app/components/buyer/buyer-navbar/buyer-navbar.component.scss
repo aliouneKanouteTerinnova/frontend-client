@@ -1,3 +1,10 @@
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 10rem;
+}
+
 .navbar-brand {
   svg {
     background-color: #f39221;
@@ -20,7 +27,7 @@
 #navbarTogglerDemo03 {
   a {
     font-size: 1.2em;
-    font-weight: 500;
+    font-weight: 600;
     font-family: 'Raleway', sans-serif;
   }
 }
@@ -58,6 +65,14 @@ svg,
     font-weight: 500;
     text-decoration: none;
     margin: 8px 30px 8px 30px;
+    display: block;
+    width: 100%;
+    // padding: 0.25rem 1.5rem;
+    clear: both;
+    text-align: inherit;
+    white-space: nowrap;
+    background-color: transparent;
+    border: 0;
 
     &:hover {
       color: #29235c;
@@ -85,6 +100,38 @@ svg,
 //   }
 // }
 
+.dropdown-menu.show {
+  display: block;
+  margin-left: -87px;
+  margin-top: 27px;
+}
+
 div.nav-right {
   padding-right: 0;
+}
+
+@media (max-width: 1024px) {
+  nav {
+    padding: 0 2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  // nav {
+  //   padding: 0 2rem;
+  // }
+  .navbar-brand {
+    display: none;
+  }
+}
+
+@media (max-width: 566px) {
+  nav {
+    padding: 0.5rem 1rem;
+  }
+  .lang {
+    position: relative;
+    top: -50px;
+    left: -80px;
+  }
 }
