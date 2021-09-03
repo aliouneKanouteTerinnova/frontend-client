@@ -5,7 +5,7 @@
 
 <div *ngIf="cartData.data[0].numInCart === 0" class="text-center my-5">
   <h4 translate>basket.empty_basket</h4>
-  <button class="btn btn-primary btn-lg mt-3" routerLink="/" translate>basket.go_shop</button>
+  <button class="go-home mt-3" routerLink="/" translate>basket.go_shop</button>
 </div>
 <div class="container" *ngIf="cartData.data[0].numInCart !== 0">
   <div class="main-product">
