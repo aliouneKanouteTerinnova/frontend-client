@@ -123,29 +123,29 @@ export class SignupComponent implements OnInit {
 
     console.log(user);
 
-    // this.authService.register(user).subscribe(
-    //   (response) => {
-    //     console.log(response);
-    //     Swal.fire({
-    //       position: 'top-end',
-    //       icon: 'success',
-    //       title: 'Check your mail to activate your account!',
-    //       showConfirmButton: false,
-    //       timer: 2000,
-    //     }).then(() => {
-    //       // this.router.navigate(['/home']);
-    //     });
-    //   },
-    //   (error) => {
-    //     Swal.fire({
-    //       position: 'top-end',
-    //       icon: 'error',
-    //       title: error.error,
-    //       showConfirmButton: false,
-    //       timer: 2000,
-    //     });
-    //     console.log(error);
-    //   }
-    // );
+    this.authService.register(user).subscribe(
+      (response) => {
+        console.log(response);
+        Swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          title: 'Check your mail to activate your account!',
+          showConfirmButton: false,
+          timer: 2000,
+        }).then(() => {
+          // this.router.navigate(['/home']);
+        });
+      },
+      (error) => {
+        Swal.fire({
+          position: 'top-end',
+          icon: 'error',
+          title: error.error,
+          showConfirmButton: false,
+          timer: 2000,
+        });
+        console.log(error);
+      }
+    );
   }
 }
