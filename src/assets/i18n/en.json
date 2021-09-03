@@ -117,7 +117,8 @@
     "ajouter": "Add",
     "category": "CATEGORY V",
     "best_sale": "BEST SALES",
-    "good_deals": "GOOD DEALS",
+    "top_categories": "TOP CATEGORIES",
+    "top_categories_desc": "Click on a map to show only products related to that specific region",
     "plus": "LEARN MORE >",
     "search": "Search",
     "result": "No product found"
@@ -284,7 +285,11 @@
     "back_button": "Back to shop",
     "add_button": "Add to basket",
     "remove_button": "Remove",
-    "similar_product": "Similary products"
+    "similar_product": "Similary products",
+    "unit_price": "Unit price",
+    "stock_status": "Stock status",
+    "low_stock": "Low stock",
+    "in_stock": "In stock"
   },
   "storeProduct": {
     "deals": "Deals",

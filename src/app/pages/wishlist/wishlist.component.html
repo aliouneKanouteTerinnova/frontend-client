@@ -17,12 +17,12 @@
 
     <div class="col-3">
       <div>
-        <h2>Unit price</h2>
+        <h2 translate>wishlist.unit_price</h2>
       </div>
     </div>
 
     <div class="col-5">
-      <h2>Stock status</h2>
+      <h2 translate>wishlist.stock_status</h2>
     </div>
   </div>
 
@@ -53,8 +53,8 @@
     </div>
 
     <div class="col-5 wishlist-data d-flex justify-content-between align-items-center">
-      <div *ngIf="wishlist.product.quantity > 10">In stock</div>
-      <div *ngIf="wishlist.product.quantity < 10" class="text-danger">Low stock</div>
+      <div *ngIf="wishlist.product.quantity > 10"><span translate>wishlist.in_stock</span></div>
+      <div *ngIf="wishlist.product.quantity <= 10" class="text-danger"><span translate>wishlist.low_stock</span></div>
 
       <div class="d-flex flex-column">
         <!-- <span> date added </span> -->

@@ -21,7 +21,7 @@
             <ng-template mat-tab-label>
               <span translate>review.reviews</span>
             </ng-template>
-            <h3 align="center" class="mt-5" *ngIf="reviews.length === 0" translate>review.no_review</h3>
+            <h3 align="center" class="mt-5" *ngIf="reviews.length === 0" translate>review.no_reviews</h3>
             <app-review-item
               *ngFor="let review of reviews"
               (btnDeleteReviewClick)="onReviewDelete(review.id)"
