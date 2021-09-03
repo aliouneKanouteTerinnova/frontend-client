@@ -31,6 +31,8 @@ export class ProductResultComponent implements OnInit {
   minPrice: any;
   maxPrice: any;
   filterPriceTable = [];
+  home = '/';
+  categoryName = 'search result';
   page: Number = 1;
   constructor(
     private authService: AuthenticationsService,
