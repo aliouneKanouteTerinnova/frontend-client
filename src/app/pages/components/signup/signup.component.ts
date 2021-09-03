@@ -63,6 +63,7 @@ export class SignupComponent implements OnInit {
     }
 
     this.signinForm = this.fb.group({
+      username: ['', Validators.required],
       email: ['', [Validators.required, Validators.pattern(this.emailRegex)]],
       password: ['', [Validators.required, Validators.minLength(8)]],
       password2: ['', Validators.required],
@@ -95,7 +96,7 @@ export class SignupComponent implements OnInit {
   }
 
   signin(): void {
-    const username = 'Test';
+    const username = this.signinForm.get('username').value;
     const typeUser = 1;
     const email = this.signinForm.get('email').value;
     const password = this.signinForm.get('password').value;
@@ -120,29 +121,31 @@ export class SignupComponent implements OnInit {
       password: password,
     };
 
-    this.authService.register(user).subscribe(
-      (response) => {
-        console.log(response);
-        Swal.fire({
-          position: 'top-end',
-          icon: 'success',
-          title: 'Check your mail to activate your account!',
-          showConfirmButton: false,
-          timer: 2000,
-        }).then(() => {
-          // this.router.navigate(['/home']);
-        });
-      },
-      (error) => {
-        Swal.fire({
-          position: 'top-end',
-          icon: 'error',
-          title: error.error,
-          showConfirmButton: false,
-          timer: 2000,
-        });
-        console.log(error);
-      }
-    );
+    console.log(user);
+
+    // this.authService.register(user).subscribe(
+    //   (response) => {
+    //     console.log(response);
+    //     Swal.fire({
+    //       position: 'top-end',
+    //       icon: 'success',
+    //       title: 'Check your mail to activate your account!',
+    //       showConfirmButton: false,
+    //       timer: 2000,
+    //     }).then(() => {
+    //       // this.router.navigate(['/home']);
+    //     });
+    //   },
+    //   (error) => {
+    //     Swal.fire({
+    //       position: 'top-end',
+    //       icon: 'error',
+    //       title: error.error,
+    //       showConfirmButton: false,
+    //       timer: 2000,
+    //     });
+    //     console.log(error);
+    //   }
+    // );
   }
 }
