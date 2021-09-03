@@ -19,10 +19,10 @@ export class ReviewItemComponent implements OnInit {
   }
 
   onReviewUpdate() {
-    this.btnUpdateReviewClick.emit();
+    this.btnUpdateReviewClick.emit('update review');
   }
 
   onReviewDelete() {
-    this.btnDeleteReviewClick.emit();
+    this.btnDeleteReviewClick.emit('delete review');
   }
 }
