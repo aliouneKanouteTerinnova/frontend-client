@@ -15,6 +15,20 @@
       <form [formGroup]="signinForm" (submit)="signin()">
         <p>
           <mat-form-field appearance="outline">
+            <mat-label>Username</mat-label>
+            <input
+              matInput
+              placeholder="Email"
+              type="text"
+              name="username"
+              id="username"
+              formControlName="username"
+              required
+            />
+          </mat-form-field>
+        </p>
+        <p>
+          <mat-form-field appearance="outline">
             <mat-label>Email</mat-label>
             <input matInput placeholder="Email" type="email" name="email" id="email" formControlName="email" required />
           </mat-form-field>

@@ -1,3 +1,4 @@
+import { SellersRegisterService } from './../../../services/sellers-register/sellers-register.service';
 import { ActivatedRoute } from '@angular/router';
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/naming-convention */
@@ -14,6 +15,7 @@ import { Address } from 'src/app/models/address/address';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import Swal from 'sweetalert2';
+import { MustMatch } from 'src/app/_helpers/must-match.validator';
 
 @Component({
   selector: 'app-signup',
@@ -32,6 +34,7 @@ export class SignupComponent implements OnInit {
 
   constructor(
     private authService: AuthenticationsService,
+    private sellersRegisterService: SellersRegisterService,
     private router: Router,
     private route: ActivatedRoute,
     private fb: FormBuilder
@@ -62,12 +65,18 @@ export class SignupComponent implements OnInit {
       );
     }
 
-    this.signinForm = this.fb.group({
-      email: ['', [Validators.required, Validators.pattern(this.emailRegex)]],
-      password: ['', [Validators.required, Validators.minLength(8)]],
-      password2: ['', Validators.required],
-      checked: [true, Validators.required],
-    });
+    this.signinForm = this.fb.group(
+      {
+        username: ['', [Validators.required]],
+        email: ['', [Validators.required, Validators.pattern(this.emailRegex)]],
+        password: ['', [Validators.required, Validators.minLength(8)]],
+        password2: ['', Validators.required],
+        checked: [true, Validators.required],
+      },
+      {
+        validator: MustMatch('password', 'password2'),
+      }
+    );
   }
 
   resend(): void {
@@ -95,32 +104,32 @@ export class SignupComponent implements OnInit {
   }
 
   signin(): void {
-    const username = 'Test';
+    const username = this.signinForm.get('username').value;
     const typeUser = 1;
     const email = this.signinForm.get('email').value;
     const password = this.signinForm.get('password').value;
-    const state = 'Test';
-    const zipcode = 'Test';
-    const country = 'Test';
-    const street = 'Test';
+    const state = '';
+    const zipcode = '';
+    const country = '';
+    const street = '';
     const gender = 2;
     const checked = this.signinForm.get('checked').value;
-    const address: Address = {
-      state: state,
-      zipcode: zipcode,
-      country: country,
-      street: street,
-    };
+    // const address: Address = {
+    //   state: state,
+    //   zipcode: zipcode,
+    //   country: country,
+    //   street: street,
+    // };
     const user: User = {
       email: email,
       username: username,
       account_type: typeUser,
       gender: gender,
-      address: address,
+      address: null,
       password: password,
     };
 
-    this.authService.register(user).subscribe(
+    this.sellersRegisterService.register(user).subscribe(
       (response) => {
         console.log(response);
         Swal.fire({
@@ -130,7 +139,7 @@ export class SignupComponent implements OnInit {
           showConfirmButton: false,
           timer: 2000,
         }).then(() => {
-          // this.router.navigate(['/home']);
+          this.router.navigate(['/profile']);
         });
       },
       (error) => {

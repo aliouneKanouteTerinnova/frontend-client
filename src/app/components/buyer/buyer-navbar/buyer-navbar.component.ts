@@ -1,3 +1,12 @@
+/* eslint-disable object-shorthand */
+import { Address } from './../../../dtos/order/address';
+/* eslint-disable @typescript-eslint/naming-convention */
+import { FormGroup } from '@angular/forms';
+import { AccountType } from './../../../enums/account-type.enum';
+/* eslint-disable @typescript-eslint/restrict-plus-operands */
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+import { SellersRegisterService } from './../../../services/sellers-register/sellers-register.service';
+import { SwalComponent } from '@sweetalert2/ngx-sweetalert2';
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-floating-promises */
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
@@ -13,9 +22,10 @@ import { CartModelServer } from './../../../models/cart/cart';
 import { Router } from '@angular/router';
 import { CategoriesService } from 'src/app/services/categories/categories.service';
 import { AuthenticationsService } from 'src/app/services/authentications/authentications.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { SignupComponent } from 'src/app/pages/components/signup/signup.component';
+import { User } from 'src/app/models/user/user';
 
 @Component({
   selector: 'app-buyer-navbar',
@@ -23,6 +33,8 @@ import { SignupComponent } from 'src/app/pages/components/signup/signup.componen
   styleUrls: ['./buyer-navbar.component.scss'],
 })
 export class BuyerNavbarComponent implements OnInit {
+  @ViewChild('effacerSwal', { static: false })
+  private effacerSwal: SwalComponent;
   categoryParents = [];
   category = [];
   subCategory: string;
@@ -38,8 +50,12 @@ export class BuyerNavbarComponent implements OnInit {
   lang = '';
   changeLanguage = 'de';
   user: any;
+  users: AuthResponded;
+  updateForm: FormGroup;
+  // userAccountType = 'Seller';
   constructor(
     private authService: AuthenticationsService,
+    private sellersRegisterService: SellersRegisterService,
     private categoriesService: CategoriesService,
     private router: Router,
     private i18nServiceService: I18nServiceService,
@@ -83,6 +99,84 @@ export class BuyerNavbarComponent implements OnInit {
     });
 
     this.getCategory();
+
+    this.onUpdateUser();
+
+    this.authService.getUser(this.currentUser['user'].token).subscribe((data) => {
+      console.log(data.body);
+      const user: AuthResponded = data.body;
+      this.updateForm.patchValue({
+        username: user['user'].username,
+        email: user['user'].email,
+        gender: user['user'].gender,
+        state: user['user'].address.state,
+        zipcode: user['user'].address.zipcode,
+        country: user['user'].address.country,
+        street: user['user'].address.street,
+        account_type: user['user'].account_type,
+      });
+    });
+  }
+
+  toOpenDialog() {
+    if (this.currentUser) {
+      this.oldBuyerNewSeller();
+    }
+
+    if (!this.currentUser) {
+      this.openDialog();
+    }
+  }
+
+  oldBuyerNewSeller(): void {
+    this.effacerSwal.fire();
+  }
+
+  onUpdateUser() {
+    // this.authService.getUser(this.currentUser['user'].token).subscribe((data) => {
+    //   // console.log(data);
+    //   this.users = data.body;
+    // });
+    // console.log(this.users);
+
+    const username = this.updateForm.get('username').value;
+    const sexe = this.updateForm.get('gender').value;
+    const state = this.updateForm.get('country').value;
+    const zipcode = this.updateForm.get('zipcode').value;
+    const country = this.updateForm.get('state').value;
+    const street = this.updateForm.get('street').value;
+    const accountType = 0;
+    const address: Address = {
+      state: state,
+      zipcode: zipcode,
+      country: country,
+      street: street,
+    };
+    const user = {
+      username: username,
+      gender: sexe,
+      address: address,
+      account_type: accountType,
+    };
+    console.log('user test ', user);
+
+    // const newUserSeller = {
+    //   username: this.currentUser['user'].username,
+    //   email: this.currentUser['user'].email,
+    //   accountType: 'Seller',
+    //   // adress: this.currentUser['user'].adress,
+    //   gender: this.currentUser['user'].gender,
+    //   // token: this.users.token,
+    // };
+    // console.log(newUserSeller);
+    // this.sellersRegisterService.updateUserType(newUserSeller, this.currentUser['user'].token).subscribe(
+    //   (res) => {
+    //     console.log(res);
+    //   },
+    //   (error) => {
+    //     console.log(error);
+    //   }
+    // );
   }
 
   openDialog(): void {
