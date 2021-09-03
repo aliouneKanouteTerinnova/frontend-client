@@ -49,11 +49,11 @@ export class BuyerNavbarComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.i18nServiceService.currentLangValue === null || this.i18nServiceService.currentLangValue === 'en') {
-      this.lang = 'en';
+      this.lang = '🇺🇸';
     } else if (this.i18nServiceService.currentLangValue === 'de') {
-      this.lang = 'de';
+      this.lang = '🇩🇪';
     } else {
-      this.lang = 'fr';
+      this.lang = '🇫🇷';
     }
     this.currentUser = this.authService.currentUserValue;
     if (this.currentUser != null) {

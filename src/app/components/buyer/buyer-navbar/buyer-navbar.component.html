@@ -59,7 +59,12 @@
 
           <div class="child d-flex">
             <div class="d-flex flex-column">
-              <p class="category-item" *ngFor="let item of subCategory" (mouseenter)="changeImageCategory(item)">
+              <p
+                class="category-item"
+                *ngFor="let item of subCategory"
+                (mouseenter)="changeImageCategory(item)"
+                routerLink="/categories-detail/{{ item.id }}"
+              >
                 {{ item.name }}
               </p>
             </div>
@@ -71,7 +76,6 @@
                 height="150"
                 src="{{ imageSource }}"
                 alt=""
-                routerLink="/categories-detail/{{ item.id }}"
                 (click)="oNCategoryDetails(item)"
               />
             </div>
@@ -219,36 +223,14 @@
     </div>
 
     <div class="lang">
-      <!-- <div class="dropdown" style="display: inline-block">
-        <a
-          class="nav-link dropdown-toggle"
-          href="#"
-          id="navbarDropdownMenuLink78"
-          data-toggle="dropdown"
-          aria-haspopup="true"
-          aria-expanded="false"
-          ><img src="./../../../../assets/img/lang/United_Kingdom.svg" width="30" height="30" alt=""
-        /></a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink78" style="width: 75px; min-width: 0rem">
-          <a class="dropdown-item" href="#"
-            ><img src="./../../../../assets/img/lang/United_Kingdom.svg" width="30" height="30" alt=""
-          /></a>
-          <a class="dropdown-item" href="#"
-            ><img src="./../../../../assets/img/lang/France.svg" width="30" height="20" alt=""
-          /></a>
-          <a class="dropdown-item" href="#"
-            ><img src="./../../../../assets/img/lang/Germany.svg" width="30" height="20" alt=""
-          /></a>
-        </div>
-      </div> -->
-
       <select class="custom-select" style="width: 80px" (change)="filterOrder($event)">
         <option value="" disabled selected hidden class="langue1">
           <span>{{ lang }}</span>
         </option>
-        <option value="1">en</option>
-        <option value="2">de</option>
-        <option value="3">fr</option>
+        <!-- U+1F1E6 U+1F1F9	&#127462  -->
+        <option value="1">🇺🇸</option>
+        <option value="2">🇩🇪</option>
+        <option value="3">🇫🇷</option>
       </select>
     </div>
   </div>
