@@ -19,11 +19,11 @@
     - name: add user to group
       become: true
       user:
-        name: "{{ansible_user}}"
+        name: '{{ansible_user}}'
         groups: docker
         append: true
 
-#    - meta: reset_connection                # <--- must do this if using pipelining
+    #    - meta: reset_connection                # <--- must do this if using pipelining
 
     ##### setup docker
 
@@ -33,11 +33,11 @@
         update_cache: yes
         state: latest
         name:
-        - apt-transport-https
-        - ca-certificates
-        - curl
-        - gpg-agent
-        - software-properties-common
+          - apt-transport-https
+          - ca-certificates
+          - curl
+          - gpg-agent
+          - software-properties-common
 
     - name: Add docker GPG key
       become: true
@@ -57,9 +57,9 @@
         update_cache: yes
         state: latest
         name:
-        - docker-ce
-        - docker-ce-cli
-        - containerd.io
+          - docker-ce
+          - docker-ce-cli
+          - containerd.io
 
     ##### setup ansible <---> docker
 
@@ -80,19 +80,19 @@
         docker pull papeterinnova/vaana-new-ui:v0.1
       become: yes
 
-    - name: Kill Previous container
-      shell: |
-        docker kill new_ui
-      become: yes
+    # - name: Kill Previous container
+    #   shell: |
+    #     docker kill new_ui
+    #   become: yes
 
-    - name: Prune container
-      docker_prune:
-        containers: yes
-        images: yes
-        images_filters:
-          dangling: false
-        volumes: yes
-        builder_cache: yes
+    # - name: Prune container
+    #   docker_prune:
+    #     containers: yes
+    #     images: yes
+    #     images_filters:
+    #       dangling: false
+    #     volumes: yes
+    #     builder_cache: yes
 
     - name: Run Image
       shell: |
