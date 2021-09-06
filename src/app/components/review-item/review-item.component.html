@@ -42,3 +42,14 @@
     </div>
   </mat-card-actions>
 </mat-card>
+<swal
+  #effacerSwal
+  title="Deletion "
+  text="Are you sure ?  "
+  type="question"
+  confirmButtonText="Yes"
+  cancelButtonText="No"
+  [showCancelButton]="true"
+  [focusCancel]="true"
+  (confirm)="deleteReview()"
+></swal>

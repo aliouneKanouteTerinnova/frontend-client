@@ -74,7 +74,8 @@ export class WishlistComponent implements OnInit {
     });
   }
 
-  addToCart(id: Number): void {
+  addToCart(data): void {
+    const id = data.product.id;
     this.cartService.AddProductToCart(id);
     Swal.fire({
       // position: 'top-end',
@@ -82,6 +83,16 @@ export class WishlistComponent implements OnInit {
       title: 'Product added to cart!',
       showConfirmButton: false,
       timer: 2000,
+    }).then(() => {
+      console.log(data);
+      this.wishlistService.deletWishlist(data.item, this.token).subscribe(
+        (res) => {
+          window.location.reload();
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
     });
   }
 

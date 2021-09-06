@@ -1,5 +1,10 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+/* eslint-disable @typescript-eslint/no-floating-promises */
+import { SwalComponent } from '@sweetalert2/ngx-sweetalert2';
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
+/* eslint-disable @typescript-eslint/member-ordering */
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { AuthenticationsService } from 'src/app/services/authentications/authentications.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-review-item',
@@ -7,6 +12,8 @@ import { AuthenticationsService } from 'src/app/services/authentications/authent
   styleUrls: ['./review-item.component.scss'],
 })
 export class ReviewItemComponent implements OnInit {
+  @ViewChild('effacerSwal', { static: false })
+  private effacerSwal: SwalComponent;
   @Input() review: any;
   currentUser: any;
   @Output() btnDeleteReviewClick = new EventEmitter();
@@ -23,6 +30,10 @@ export class ReviewItemComponent implements OnInit {
   }
 
   onReviewDelete() {
+    this.effacerSwal.fire();
+  }
+
+  deleteReview() {
     this.btnDeleteReviewClick.emit('delete review');
   }
 }
