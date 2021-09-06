@@ -80,6 +80,7 @@ import { OrderItemComponent } from './components/order-item/order-item.component
 import { OrderStatusComponent } from './components/order-status/order-status.component';
 import { LoadingSpinnerComponent } from './components/loading-spinner/loading-spinner.component';
 import { RouteReuseStrategy } from '@angular/router';
+import { FloatingShareButtonComponent } from './components/floating-share-button/floating-share-button.component';
 
 export function rootLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -147,6 +148,7 @@ export function rootLoaderFactory(http: HttpClient) {
     OrderItemComponent,
     OrderStatusComponent,
     LoadingSpinnerComponent,
+    FloatingShareButtonComponent,
   ],
 
   imports: [
