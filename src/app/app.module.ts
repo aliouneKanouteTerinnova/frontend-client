@@ -1,3 +1,4 @@
+import { ReloadRouteComponent } from './components/reload-route/reload-route.component';
 /* eslint-disable prefer-arrow/prefer-arrow-functions */
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import { UpdateCategoriesComponent } from './pages/categories/update-categories/update-categories.component';
@@ -78,6 +79,7 @@ import { PaginationComponent } from './components/pagination/pagination.componen
 import { OrderItemComponent } from './components/order-item/order-item.component';
 import { OrderStatusComponent } from './components/order-status/order-status.component';
 import { LoadingSpinnerComponent } from './components/loading-spinner/loading-spinner.component';
+import { RouteReuseStrategy } from '@angular/router';
 
 export function rootLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -169,7 +171,14 @@ export function rootLoaderFactory(http: HttpClient) {
       'pk_test_51HQ3ZXFunRLoLWctiy0l6VVOeflU8ES2IRjTyY7LL9rEpKedBIfOfKB1BSSftQk4Qmke8HdtRcdmje7R2whuWgTz00U7HXpwjn'
     ),
   ],
-  providers: [CookieService, HttpClientModule],
+  providers: [
+    CookieService,
+    HttpClientModule,
+    {
+      provide: RouteReuseStrategy,
+      useClass: ReloadRouteComponent,
+    },
+  ],
 
   bootstrap: [AppComponent],
 })
