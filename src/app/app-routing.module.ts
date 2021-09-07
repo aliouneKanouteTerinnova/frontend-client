@@ -44,6 +44,7 @@ const routes: Routes = [
   {
     path: 'wishlist',
     component: WishlistComponent,
+    canActivate: [AuthGuard],
   },
   {
     path: 'user/reset-password',
@@ -57,6 +58,7 @@ const routes: Routes = [
   {
     path: 'cart',
     component: CartComponent,
+    canActivate: [AuthGuard],
   },
   {
     path: 'register',
@@ -85,13 +87,13 @@ const routes: Routes = [
   { path: 'store-products/:id', component: StoreProductsComponent },
   { path: 'updatestore/:id', component: EditStoresComponent, canActivate: [AuthGuard] },
   { path: 'create-store', component: CreateStoresComponent, canActivate: [AuthGuard] },
-  { path: 'categories', component: CategoriesComponent },
+  { path: 'categories', component: CategoriesComponent, canActivate: [AuthGuard] },
   { path: 'categories-detail/:id', component: CategoyDetailComponent },
   { path: 'category', component: CategoryPageComponent },
   { path: 'update-categories/:id', component: UpdateCategoriesComponent },
   { path: 'create-categories', component: CreateCategoriesComponent, canActivate: [AuthGuard] },
   { path: 'orders/:id', component: OrderDetailsComponent },
-  { path: 'orders', component: OrderListComponent },
+  { path: 'orders', component: OrderListComponent, canActivate: [AuthGuard] },
   { path: 'orders-seller', component: SellerOrderComponent },
   { path: 'conditions', component: ConditionUsedComponent },
   { path: 'product/:keyword', component: ProductResultComponent },

@@ -21,7 +21,7 @@ export class CategoriesService {
 
   addCategory(category: Category, token: string) {
     token = 'token ' + token;
-    return this.httpClient.post(`${environment.baseUrl}categories`, category, {
+    return this.httpClient.post(`${environment.baseUrlTestFromFatma}categories`, category, {
       headers: new HttpHeaders().set('Authorization', token),
       observe: 'response',
     });
