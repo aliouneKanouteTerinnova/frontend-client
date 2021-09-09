@@ -5,6 +5,7 @@
 export const environment = {
   production: false,
   baseUrl: 'http://3.126.109.165:8081/api/',
+  baseUrlTestFromFatma: 'http://192.168.1.17:8000/api/',
 };
 /*
  * For easier debugging in development mode, you can import the following file
