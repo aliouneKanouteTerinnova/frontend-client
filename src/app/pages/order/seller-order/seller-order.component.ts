@@ -25,8 +25,8 @@ export class SellerOrderComponent implements OnInit {
 
   ngOnInit(): void {
     this.currentUser = this.authService.currentUserValue;
-    this.token = this.currentUser['user'].token;
-    this.typeUser = this.currentUser['user'].account_type;
+    this.token = this.currentUser.token;
+    this.typeUser = this.currentUser.account_type;
     this.getSellerOrders();
   }
 

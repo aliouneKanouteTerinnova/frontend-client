@@ -34,7 +34,7 @@ export class BuyerNavbarComponent implements OnInit {
   total = 0;
   cartTotal: Number;
   isSeller = false;
-  currentUser: AuthResponded;
+  currentUser: any;
   lang = '';
   changeLanguage = 'de';
   user: any;
@@ -57,11 +57,11 @@ export class BuyerNavbarComponent implements OnInit {
     }
     this.currentUser = this.authService.currentUserValue;
     if (this.currentUser != null) {
-      this.authService.getUser(this.currentUser['user'].token).subscribe((data) => {
-        console.log(data);
+      this.authService.getUser(this.currentUser.token).subscribe((data) => {
         this.user = data.body['user'].username;
+        localStorage.setItem('currentUser', JSON.stringify(data.body['user']));
 
-        if (this.currentUser['user'].account_type === 'SELLER' || this.currentUser['user'].account_type === 'Seller') {
+        if (this.currentUser.account_type === 'SELLER' || this.currentUser.account_type === 'Seller') {
           this.isSeller = true;
         }
       });

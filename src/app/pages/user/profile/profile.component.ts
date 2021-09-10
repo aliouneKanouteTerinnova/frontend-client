@@ -34,10 +34,11 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit(): void {
     this.currentUser = this.authService.currentUserValue;
-    this.authService.getUser(this.currentUser['user'].token).subscribe((data) => {
+
+    this.authService.getUser(this.currentUser.token).subscribe((data) => {
       this.user = data.body['user'];
-      console.log(this.user);
-      if (this.currentUser['user'].account_type === 'SELLER' || this.currentUser['user'].account_type === 'Seller') {
+
+      if (this.currentUser.account_type === 'SELLER' || this.currentUser.account_type === 'Seller') {
         this.is_seller = true;
       }
     });
@@ -46,8 +47,7 @@ export class ProfileComponent implements OnInit {
   }
 
   wallet() {
-    this.walletService.getWallet(this.currentUser['user'].token).subscribe((res) => {
-      // console.log(res);
+    this.walletService.getWallet(this.currentUser.token).subscribe((res) => {
       this.wallets = res.body.funds;
       this.wallets.forEach((data) => {
         if (data.status === 'collected') {

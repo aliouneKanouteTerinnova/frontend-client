@@ -29,7 +29,7 @@ export class OrderDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     this.currentUser = this.authService.currentUserValue;
-    this.token = this.currentUser['user'].token;
+    this.token = this.currentUser.token;
     this.idOrder = this.router.snapshot.params.id;
     this.getOrder();
   }
@@ -47,7 +47,7 @@ export class OrderDetailsComponent implements OnInit {
 
   onCancel() {
     console.log(this.id);
-    this.orderService.deleteOrder(this.id, this.currentUser['user'].token).subscribe(
+    this.orderService.deleteOrder(this.id, this.currentUser.token).subscribe(
       (res) => {
         Swal.fire({
           position: 'top-end',

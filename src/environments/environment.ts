@@ -4,8 +4,14 @@
 
 export const environment = {
   production: false,
-  baseUrl: 'http://3.126.109.165:8081/api/',
-  baseUrlTestFromFatma: 'http://192.168.1.17:8000/api/',
+  // baseUrl: 'http://3.126.109.165:8081/api/',
+
+  // from fatma
+  baseUrl: 'http://192.168.1.17:8000/api/',
+  clientId: '362829290794-91601oi5pvqjoclq9u6eu7lvp04m620u.apps.googleusercontent.com',
+
+  // from my account test
+  secretClient: 'nAFzDLUeFLAH93AAhcmte1JW',
 };
 /*
  * For easier debugging in development mode, you can import the following file

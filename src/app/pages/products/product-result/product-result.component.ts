@@ -1,3 +1,8 @@
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/naming-convention */
+/* eslint-disable @typescript-eslint/no-floating-promises */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthResponded } from 'src/app/models/auth/auth';
@@ -22,7 +27,7 @@ export class ProductResultComponent implements OnInit {
   keyWord: any;
   isClicked = false;
   similarities = false;
-  currentUser: AuthResponded;
+  currentUser: any;
   token: any;
   categoryTxt = [];
   storeTxt = [];
@@ -127,7 +132,7 @@ export class ProductResultComponent implements OnInit {
     if (!this.currentUser) {
       this.route.navigate(['/register']);
     }
-    this.token = this.currentUser['user'].token;
+    this.token = this.currentUser.token;
     const products = {
       product: id,
     };

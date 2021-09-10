@@ -27,7 +27,7 @@ import { CartService } from 'src/app/services/cart/cart.service';
 export class WishlistComponent implements OnInit {
   @ViewChild('effacerSwal', { static: false })
   private effacerSwal: SwalComponent;
-  currentUser: AuthResponded;
+  currentUser: any;
   token;
   wishlists = [];
   items;
@@ -47,7 +47,7 @@ export class WishlistComponent implements OnInit {
 
   ngOnInit(): void {
     this.currentUser = this.authService.currentUserValue;
-    this.token = this.currentUser['user'].token;
+    this.token = this.currentUser.token;
     this.getProducts();
     this.getWishlist();
   }

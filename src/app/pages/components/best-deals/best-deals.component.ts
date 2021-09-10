@@ -37,7 +37,7 @@ export class BestDealsComponent implements OnInit {
   left = false;
   right = true;
   firstIndex = 0;
-  currentUser: AuthResponded;
+  currentUser: any;
   lang = false;
   token;
   isIconClicked = false;
@@ -150,7 +150,7 @@ export class BestDealsComponent implements OnInit {
     if (!this.currentUser) {
       this.router.navigate(['/register']);
     }
-    this.token = this.currentUser['user'].token;
+    this.token = this.currentUser.token;
     const products = {
       product: id,
     };

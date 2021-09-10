@@ -1,3 +1,8 @@
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import { HttpClient } from '@angular/common/http';
+/* eslint-disable @typescript-eslint/dot-notation */
+/* eslint-disable @typescript-eslint/no-floating-promises */
 /* eslint-disable @typescript-eslint/naming-convention */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
@@ -18,12 +23,19 @@ import { Address } from 'src/app/models/address/address';
 import { AuthenticationsService } from 'src/app/services/authentications/authentications.service';
 import { ConditionUsedComponent } from '../condition-used/condition-used.component';
 
+import { SocialAuthService } from 'angularx-social-login';
+import { SocialUser } from 'angularx-social-login';
+import { GoogleLoginProvider } from 'angularx-social-login';
+import { environment } from 'src/environments/environment';
+
 @Component({
   selector: 'app-registration',
   templateUrl: './registration.component.html',
   styleUrls: ['./registration.component.scss'],
 })
 export class RegistrationComponent implements OnInit {
+  public user: SocialUser = new SocialUser();
+
   remail: string;
   rpassword: string;
   checked = false;
@@ -46,14 +58,15 @@ export class RegistrationComponent implements OnInit {
   email: any;
   isActivated = false;
   resendLink = false;
-
   constructor(
     private authService: AuthenticationsService,
+    private googleAuthService: SocialAuthService,
     private formBuilder: FormBuilder,
     private translate: TranslateService,
     private router: Router,
     private route: ActivatedRoute,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private http: HttpClient
   ) {
     this.route.queryParams.subscribe((params) => {
       if (params.token) {
@@ -68,6 +81,11 @@ export class RegistrationComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    // from google auth
+    this.googleAuthService.authState.subscribe((user) => {
+      this.user = user;
+    });
+
     if (!localStorage.getItem('foo')) {
       localStorage.setItem('foo', 'no reload');
       location.reload();
@@ -89,6 +107,7 @@ export class RegistrationComponent implements OnInit {
         }
       );
     }
+
     this.registerForm = this.formBuilder.group(
       {
         username: [null, Validators.required],
@@ -211,6 +230,7 @@ export class RegistrationComponent implements OnInit {
       );
     }
   }
+
   login() {
     const email = this.loginForm.get('email').value;
     const password = this.loginForm.get('password').value;
@@ -234,5 +254,25 @@ export class RegistrationComponent implements OnInit {
         this.errorMessage = error.error.errors.error;
       }
     );
+  }
+
+  loginWithGoogle(): void {
+    console.log('worked !!!');
+    this.googleAuthService.signIn(GoogleLoginProvider.PROVIDER_ID).then((res) => {
+      console.log(res);
+      const tokenId = res.idToken;
+
+      this.http
+        .post<any>(`${environment.baseUrl}social_auth/google/`, { auth_token: tokenId })
+        .subscribe((data) => {
+          console.log(data);
+          localStorage.setItem('currentUser', JSON.stringify(data));
+          this.router.navigate(['/home']);
+        });
+    });
+  }
+
+  signOut(): void {
+    this.googleAuthService.signOut();
   }
 }
