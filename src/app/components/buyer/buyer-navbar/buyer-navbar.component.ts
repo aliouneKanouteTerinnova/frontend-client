@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/restrict-plus-operands */
+/* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-floating-promises */
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
@@ -34,7 +36,7 @@ export class BuyerNavbarComponent implements OnInit {
   total = 0;
   cartTotal: Number;
   isSeller = false;
-  currentUser: AuthResponded;
+  currentUser: any;
   lang = '';
   changeLanguage = 'de';
   user: any;
@@ -47,7 +49,7 @@ export class BuyerNavbarComponent implements OnInit {
     public signinDialog: MatDialog
   ) {}
 
-  ngOnInit(): void {
+  async ngOnInit() {
     if (this.i18nServiceService.currentLangValue === null || this.i18nServiceService.currentLangValue === 'en') {
       this.lang = '🇺🇸';
     } else if (this.i18nServiceService.currentLangValue === 'de') {
@@ -55,16 +57,20 @@ export class BuyerNavbarComponent implements OnInit {
     } else {
       this.lang = '🇫🇷';
     }
-    this.currentUser = this.authService.currentUserValue;
-    if (this.currentUser != null) {
-      this.authService.getUser(this.currentUser['user'].token).subscribe((data) => {
-        console.log(data);
-        this.user = data.body['user'].username;
 
-        if (this.currentUser['user'].account_type === 'SELLER' || this.currentUser['user'].account_type === 'Seller') {
-          this.isSeller = true;
-        }
-      });
+    this.currentUser = await this.authService.currentUserValue;
+    console.log(this.currentUser);
+    if (this.currentUser) {
+      const res: any = await this.authService
+        .getUser(this.currentUser.token || this.currentUser['user'].token)
+        .toPromise();
+      console.log(res);
+      this.user = res.body['user'].username;
+      // localStorage.setItem('currentUser', JSON.stringify(res.body['user']));
+
+      if (this.currentUser.account_type === 'SELLER' || this.currentUser.account_type === 'Seller') {
+        this.isSeller = true;
+      }
     }
 
     this.cartService.cartDataObs$.subscribe((data: CartModelServer) => {
@@ -95,8 +101,6 @@ export class BuyerNavbarComponent implements OnInit {
       this.category = res.results;
 
       this.categoryParents = this.category.filter((category) => category.parent === null);
-
-      console.log(this.categoryParents);
     });
   }
 
@@ -150,6 +154,7 @@ export class BuyerNavbarComponent implements OnInit {
 
   logout(): void {
     this.authService.logOut();
+    this.router.navigate(['/home']);
     window.location.reload();
   }
 }

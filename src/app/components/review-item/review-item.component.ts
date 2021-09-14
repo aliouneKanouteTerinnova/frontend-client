@@ -22,7 +22,10 @@ export class ReviewItemComponent implements OnInit {
   constructor(private authService: AuthenticationsService) {}
 
   ngOnInit(): void {
-    this.currentUser = this.authService.currentUserValue;
+    // this.currentUser = this.authService.currentUserValue;
+    this.currentUser = localStorage.getItem('currentUser');
+    const obj = this.currentUser;
+    const users = JSON.parse(obj);
   }
 
   onReviewUpdate() {

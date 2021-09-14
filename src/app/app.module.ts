@@ -80,10 +80,15 @@ import { OrderItemComponent } from './components/order-item/order-item.component
 import { OrderStatusComponent } from './components/order-status/order-status.component';
 import { LoadingSpinnerComponent } from './components/loading-spinner/loading-spinner.component';
 import { RouteReuseStrategy } from '@angular/router';
+import { SocialLoginModule, SocialAuthServiceConfig } from 'angularx-social-login';
+import { GoogleLoginProvider, FacebookLoginProvider } from 'angularx-social-login';
+import { environment } from 'src/environments/environment';
 
 export function rootLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
 }
+
+const CLIENT_ID = environment.clientId;
 
 @NgModule({
   declarations: [
@@ -166,12 +171,29 @@ export function rootLoaderFactory(http: HttpClient) {
     HttpClientModule,
     SharedModule,
     FormsModule,
+    SocialLoginModule,
     ReactiveFormsModule,
     StripeModule.forRoot(
       'pk_test_51HQ3ZXFunRLoLWctiy0l6VVOeflU8ES2IRjTyY7LL9rEpKedBIfOfKB1BSSftQk4Qmke8HdtRcdmje7R2whuWgTz00U7HXpwjn'
     ),
   ],
   providers: [
+    {
+      provide: 'SocialAuthServiceConfig',
+      useValue: {
+        autoLogin: true,
+        providers: [
+          {
+            id: GoogleLoginProvider.PROVIDER_ID,
+            provider: new GoogleLoginProvider(CLIENT_ID),
+          },
+          {
+            id: FacebookLoginProvider.PROVIDER_ID,
+            provider: new FacebookLoginProvider('3096271000691862'),
+          },
+        ],
+      } as SocialAuthServiceConfig,
+    },
     CookieService,
     HttpClientModule,
     {

@@ -1,3 +1,11 @@
+/* eslint-disable no-var */
+/* eslint-disable @typescript-eslint/no-unsafe-return */
+/* eslint-disable @typescript-eslint/naming-convention */
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/restrict-plus-operands */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-floating-promises */
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
@@ -24,7 +32,7 @@ export class HomeComponent implements OnInit {
   left = false;
   right = true;
   firstIndex = 0;
-  currentUser: AuthResponded;
+  currentUser: any;
   lang = false;
   token;
   isIconClicked = false;
@@ -143,7 +151,7 @@ export class HomeComponent implements OnInit {
     if (!this.currentUser) {
       this.router.navigate(['/register']);
     }
-    this.token = this.currentUser['user'].token;
+    this.token = this.currentUser.token || this.currentUser['user'].token;
     const products = {
       product: id,
     };
