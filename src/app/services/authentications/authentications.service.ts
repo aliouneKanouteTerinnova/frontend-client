@@ -18,8 +18,8 @@ import { User } from 'src/app/models/user/user';
   providedIn: 'root',
 })
 export class AuthenticationsService {
-  private currentUserSubject = localStorage.getItem('currentUser');
-  // public currentUser: Observable<AuthResponded>;
+  // private currentUserSubject = localStorage.getItem('currentUser');
+  // public currentUserWithNormalLogin: Observable<AuthResponded>;
 
   public currentUser = localStorage.getItem('currentUser');
   obj = this.currentUser;
@@ -45,7 +45,8 @@ export class AuthenticationsService {
       map((userResponded) => {
         // login successful if there's a jwt token in the response
         if (userResponded) {
-          this.cookieService.set('currentUser', JSON.stringify(userResponded));
+          // this.cookieService.set('currentUser', JSON.stringify(userResponded));
+          localStorage.setItem('currentUser', JSON.stringify(userResponded));
           // this.currentUserSubject.next(userResponded);
         }
         return userResponded;

@@ -35,7 +35,7 @@ export class OrderListComponent implements OnInit {
 
   ngOnInit(): void {
     this.currentUser = this.authService.currentUserValue;
-    this.token = this.currentUser.token;
+    this.token = this.currentUser.token || this.currentUser['user'].token;
     this.typeUser = this.currentUser.account_type;
     if (this.typeUser === 'Seller') {
       this.isSeller = true;

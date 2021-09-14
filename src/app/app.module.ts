@@ -80,7 +80,8 @@ import { OrderItemComponent } from './components/order-item/order-item.component
 import { OrderStatusComponent } from './components/order-status/order-status.component';
 import { LoadingSpinnerComponent } from './components/loading-spinner/loading-spinner.component';
 import { RouteReuseStrategy } from '@angular/router';
-import { SocialLoginModule, SocialAuthServiceConfig, GoogleLoginProvider } from 'angularx-social-login';
+import { SocialLoginModule, SocialAuthServiceConfig } from 'angularx-social-login';
+import { GoogleLoginProvider, FacebookLoginProvider } from 'angularx-social-login';
 import { environment } from 'src/environments/environment';
 
 export function rootLoaderFactory(http: HttpClient) {
@@ -185,6 +186,10 @@ const CLIENT_ID = environment.clientId;
           {
             id: GoogleLoginProvider.PROVIDER_ID,
             provider: new GoogleLoginProvider(CLIENT_ID),
+          },
+          {
+            id: FacebookLoginProvider.PROVIDER_ID,
+            provider: new FacebookLoginProvider('1048708189277682'),
           },
         ],
       } as SocialAuthServiceConfig,

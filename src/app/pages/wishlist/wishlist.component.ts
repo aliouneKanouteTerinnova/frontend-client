@@ -47,7 +47,7 @@ export class WishlistComponent implements OnInit {
 
   ngOnInit(): void {
     this.currentUser = this.authService.currentUserValue;
-    this.token = this.currentUser.token;
+    this.token = this.currentUser.token || this.currentUser['user'].token;
     this.getProducts();
     this.getWishlist();
   }

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/restrict-template-expressions */
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { HttpClient } from '@angular/common/http';
@@ -27,6 +28,9 @@ import { SocialAuthService } from 'angularx-social-login';
 import { SocialUser } from 'angularx-social-login';
 import { GoogleLoginProvider } from 'angularx-social-login';
 import { environment } from 'src/environments/environment';
+
+// import { AuthService } from "angularx-social-login";
+import { FacebookLoginProvider } from 'angularx-social-login';
 
 @Component({
   selector: 'app-registration',
@@ -240,10 +244,13 @@ export class RegistrationComponent implements OnInit {
     };
     this.authService.login(user).subscribe(
       (data) => {
+        // console.log(data);
+        localStorage.setItem('currentUser', JSON.stringify(data));
         if (data['user'].account_type === 'Seller' || data['user'].account_type === 'SELLER') {
           this.router.navigate(['profile']);
         } else {
           this.router.navigate(['home']);
+          window.location.reload();
         }
         this.userResponded = data;
 
@@ -258,18 +265,32 @@ export class RegistrationComponent implements OnInit {
 
   loginWithGoogle(): void {
     console.log('worked !!!');
-    this.googleAuthService.signIn(GoogleLoginProvider.PROVIDER_ID).then((res) => {
-      console.log(res);
-      const tokenId = res.idToken;
+    this.googleAuthService.signIn(GoogleLoginProvider.PROVIDER_ID).then(
+      (res) => {
+        // console.log(res);
+        const tokenId = res.idToken;
 
-      this.http
-        .post<any>(`${environment.baseUrl}social_auth/google/`, { auth_token: tokenId })
-        .subscribe((data) => {
-          console.log(data);
-          localStorage.setItem('currentUser', JSON.stringify(data));
-          this.router.navigate(['/home']);
-        });
-    });
+        this.http
+          .post<any>(`${environment.baseUrl}social_auth/google/`, { auth_token: tokenId })
+          .subscribe(
+            (data) => {
+              // console.log(data);
+              localStorage.setItem('currentUser', JSON.stringify(data));
+              this.router.navigate(['/profile']);
+            },
+            (error) => {
+              console.log(error);
+            }
+          );
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
+
+  signInWithFB() {
+    this.googleAuthService.signIn(FacebookLoginProvider.PROVIDER_ID).then((res) => console.log(res));
   }
 
   signOut(): void {

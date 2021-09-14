@@ -35,7 +35,7 @@ export class UpdateProfileComponent implements OnInit {
       account_type: new FormControl({ value: '', disabled: true }),
     });
 
-    this.authService.getUser(this.currentUser.token).subscribe((data) => {
+    this.authService.getUser(this.currentUser.token || this.currentUser['user'].token).subscribe((data) => {
       console.log(data.body);
       const user: AuthResponded = data.body;
       this.registerForm.patchValue({
@@ -69,7 +69,7 @@ export class UpdateProfileComponent implements OnInit {
       address: address,
     };
     console.log(user);
-    this.authService.update(user, this.currentUser.user.token).subscribe(
+    this.authService.update(user, this.currentUser.token || this.currentUser['user'].token).subscribe(
       (data) => {
         console.log('update ', data);
         Swal.fire({
