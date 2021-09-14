@@ -288,10 +288,10 @@ export class RegistrationComponent implements OnInit {
             (error) => {
               Swal.fire({
                 position: 'top-end',
-                icon: 'success',
-                title: error.detail,
+                icon: 'error',
+                title: error.error.detail,
                 showConfirmButton: false,
-                timer: 2000,
+                timer: 4000,
               });
             }
           );
@@ -299,10 +299,10 @@ export class RegistrationComponent implements OnInit {
       (error) => {
         Swal.fire({
           position: 'top-end',
-          icon: 'success',
-          title: error.detail,
+          icon: 'error',
+          title: error.error.detail,
           showConfirmButton: false,
-          timer: 2000,
+          timer: 4000,
         });
       }
     );
@@ -324,10 +324,10 @@ export class RegistrationComponent implements OnInit {
             (error) => {
               Swal.fire({
                 position: 'top-end',
-                icon: 'success',
-                title: error.detail,
+                icon: 'error',
+                title: error.error.detail,
                 showConfirmButton: false,
-                timer: 2000,
+                timer: 4000,
               });
             }
           );
@@ -335,10 +335,10 @@ export class RegistrationComponent implements OnInit {
       (error) => {
         Swal.fire({
           position: 'top-end',
-          icon: 'success',
-          title: error.detail,
+          icon: 'error',
+          title: error.error.detail,
           showConfirmButton: false,
-          timer: 2000,
+          timer: 4000,
         });
       }
     );
