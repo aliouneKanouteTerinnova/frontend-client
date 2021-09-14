@@ -10,7 +10,7 @@ export const environment = {
   // baseUrlP: 'http://3.126.109.165:8082/api/',
 
   // from fatma
-  baseUrlF: 'http://192.168.1.17:8000/api/',
+  // baseUrl: 'http://192.168.1.17:8000/api/',
   clientId: '362829290794-91601oi5pvqjoclq9u6eu7lvp04m620u.apps.googleusercontent.com',
 
   // from my account test

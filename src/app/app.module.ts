@@ -189,7 +189,7 @@ const CLIENT_ID = environment.clientId;
           },
           {
             id: FacebookLoginProvider.PROVIDER_ID,
-            provider: new FacebookLoginProvider('1048708189277682'),
+            provider: new FacebookLoginProvider('3096271000691862'),
           },
         ],
       } as SocialAuthServiceConfig,

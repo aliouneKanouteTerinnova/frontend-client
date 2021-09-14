@@ -259,6 +259,13 @@ export class RegistrationComponent implements OnInit {
       },
       (error) => {
         this.errorMessage = error.error.errors.error;
+        Swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          title: error.detail,
+          showConfirmButton: false,
+          timer: 2000,
+        });
       }
     );
   }
@@ -279,18 +286,62 @@ export class RegistrationComponent implements OnInit {
               this.router.navigate(['/profile']);
             },
             (error) => {
-              console.log(error);
+              Swal.fire({
+                position: 'top-end',
+                icon: 'success',
+                title: error.detail,
+                showConfirmButton: false,
+                timer: 2000,
+              });
             }
           );
       },
       (error) => {
-        console.log(error);
+        Swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          title: error.detail,
+          showConfirmButton: false,
+          timer: 2000,
+        });
       }
     );
   }
 
   signInWithFB() {
-    this.googleAuthService.signIn(FacebookLoginProvider.PROVIDER_ID).then((res) => console.log(res));
+    this.googleAuthService.signIn(FacebookLoginProvider.PROVIDER_ID).then(
+      (res) => {
+        const authToken = res.authToken;
+
+        this.http
+          .post<any>(`${environment.baseUrl}social_auth/facebook/`, { auth_token: authToken })
+          .subscribe(
+            (data) => {
+              console.log(data);
+              localStorage.setItem('currentUser', JSON.stringify(data));
+              this.router.navigate(['/profile']);
+            },
+            (error) => {
+              Swal.fire({
+                position: 'top-end',
+                icon: 'success',
+                title: error.detail,
+                showConfirmButton: false,
+                timer: 2000,
+              });
+            }
+          );
+      },
+      (error) => {
+        Swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          title: error.detail,
+          showConfirmButton: false,
+          timer: 2000,
+        });
+      }
+    );
   }
 
   signOut(): void {

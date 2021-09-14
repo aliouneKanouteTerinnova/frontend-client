@@ -52,12 +52,7 @@ export class ProfileComponent implements OnInit {
         // window.location.reload();
       }
 
-      if (
-        this.currentUser.account_type ||
-        this.currentUser['user'].account_type === 'SELLER' ||
-        this.currentUser.account_type ||
-        this.currentUser['user'].account_type === 'Seller'
-      ) {
+      if (this.currentUser.account_type === 'SELLER' || this.currentUser.account_type === 'Seller') {
         this.is_seller = true;
       }
     } else {

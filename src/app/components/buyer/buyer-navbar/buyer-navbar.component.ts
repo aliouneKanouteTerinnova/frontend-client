@@ -68,12 +68,7 @@ export class BuyerNavbarComponent implements OnInit {
       this.user = res.body['user'].username;
       // localStorage.setItem('currentUser', JSON.stringify(res.body['user']));
 
-      if (
-        this.currentUser.account_type ||
-        this.currentUser['user'].account_type === 'SELLER' ||
-        this.currentUser.account_type ||
-        this.currentUser['user'].account_type === 'Seller'
-      ) {
+      if (this.currentUser.account_type === 'SELLER' || this.currentUser.account_type === 'Seller') {
         this.isSeller = true;
       }
     }
