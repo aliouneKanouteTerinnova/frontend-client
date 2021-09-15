@@ -322,13 +322,14 @@ export class RegistrationComponent implements OnInit {
               this.router.navigate(['/profile']);
             },
             (error) => {
-              Swal.fire({
-                position: 'top-end',
-                icon: 'success',
-                title: error.detail,
-                showConfirmButton: false,
-                timer: 2000,
-              });
+              console.log(error);
+              // Swal.fire({
+              //   position: 'top-end',
+              //   icon: 'success',
+              //   title: error.detail,
+              //   showConfirmButton: false,
+              //   timer: 2000,
+              // });
             }
           );
       },
