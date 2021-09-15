@@ -255,7 +255,7 @@ export class RegistrationComponent implements OnInit {
         this.userResponded = data;
         Swal.fire({
           position: 'top-end',
-          icon: 'error',
+          icon: 'success',
           title: 'User authenticated ',
           showConfirmButton: false,
           timer: 2000,
