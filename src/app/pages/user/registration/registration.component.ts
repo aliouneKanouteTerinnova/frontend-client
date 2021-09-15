@@ -253,18 +253,25 @@ export class RegistrationComponent implements OnInit {
           window.location.reload();
         }
         this.userResponded = data;
-
-        this.successMessage = 'User authenticated ';
-        this.errorMessage = '';
-      },
-      (error) => {
-        this.errorMessage = error.error.errors.error;
         Swal.fire({
           position: 'top-end',
           icon: 'success',
-          title: error.detail,
+          title: 'User authenticated ',
           showConfirmButton: false,
           timer: 2000,
+        });
+
+        // this.successMessage = 'User authenticated ';
+        this.errorMessage = '';
+      },
+      (error) => {
+        // this.errorMessage = error.error.errors.error;
+        Swal.fire({
+          position: 'top-end',
+          icon: 'error',
+          title: error.error.errors.error,
+          showConfirmButton: false,
+          timer: 4000,
         });
       }
     );
@@ -289,21 +296,22 @@ export class RegistrationComponent implements OnInit {
               Swal.fire({
                 position: 'top-end',
                 icon: 'error',
-                title: error.error.detail,
+                title: error.detail,
                 showConfirmButton: false,
-                timer: 4000,
+                timer: 2000,
               });
             }
           );
       },
       (error) => {
-        Swal.fire({
-          position: 'top-end',
-          icon: 'error',
-          title: error.error.detail,
-          showConfirmButton: false,
-          timer: 4000,
-        });
+        console.log(error);
+        // Swal.fire({
+        //   position: 'top-end',
+        //   icon: 'success',
+        //   title: error.detail,
+        //   showConfirmButton: false,
+        //   timer: 2000,
+        // });
       }
     );
   }
@@ -317,7 +325,6 @@ export class RegistrationComponent implements OnInit {
           .post<any>(`${environment.baseUrl}social_auth/facebook/`, { auth_token: authToken })
           .subscribe(
             (data) => {
-              console.log(data);
               localStorage.setItem('currentUser', JSON.stringify(data));
               this.router.navigate(['/profile']);
             },
@@ -325,21 +332,22 @@ export class RegistrationComponent implements OnInit {
               Swal.fire({
                 position: 'top-end',
                 icon: 'error',
-                title: error.error.detail,
+                title: error.detail,
                 showConfirmButton: false,
-                timer: 4000,
+                timer: 2000,
               });
             }
           );
       },
       (error) => {
-        Swal.fire({
-          position: 'top-end',
-          icon: 'error',
-          title: error.error.detail,
-          showConfirmButton: false,
-          timer: 4000,
-        });
+        console.log(error);
+        // Swal.fire({
+        //   position: 'top-end',
+        //   icon: 'error',
+        //   title: error.detail,
+        //   showConfirmButton: false,
+        //   timer: 2000,
+        // });
       }
     );
   }
