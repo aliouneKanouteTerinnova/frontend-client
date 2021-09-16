@@ -5,6 +5,16 @@
 export const environment = {
   production: false,
   baseUrl: 'http://af0c05818326248cfb304153367460b2-1279355103.eu-central-1.elb.amazonaws.com/api/',
+
+  // test new port
+  // baseUrlP: 'http://3.126.109.165:8082/api/',
+
+  // from fatma
+  // baseUrl: 'http://192.168.1.17:8000/api/',
+  clientId: '362829290794-91601oi5pvqjoclq9u6eu7lvp04m620u.apps.googleusercontent.com',
+
+  // from my account test
+  secretClient: 'nAFzDLUeFLAH93AAhcmte1JW',
 };
 /*
  * For easier debugging in development mode, you can import the following file

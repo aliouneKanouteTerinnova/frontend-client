@@ -15,3 +15,9 @@ button {
   font-weight: bolder;
   color: white;
 }
+
+@media (max-width: 768px) {
+  .d-md-none {
+    display: none;
+  }
+}

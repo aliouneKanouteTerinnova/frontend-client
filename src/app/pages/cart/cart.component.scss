@@ -6,6 +6,17 @@ h1 {
   font-weight: 600;
 }
 
+.go-home {
+  background: #ff9800 !important;
+  color: #fff;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  font-size: 1.1rem;
+  margin-top: 6px;
+  box-shadow: 0px 5px 10px -3px #00000080;
+}
+
 .card-product-hover-title {
   font-size: 1.2rem;
   font-weight: 400;
@@ -150,6 +161,10 @@ h1 {
 
 .nav-item {
   font-size: 0.6rem;
+}
+
+svg {
+  cursor: pointer;
 }
 
 .container {
@@ -342,6 +357,7 @@ h3 {
   .image img {
     height: 220px !important;
     width: 200px !important;
+    cursor: pointer;
   }
 }
 .product:last-child {
@@ -376,6 +392,7 @@ h3 {
     color: #f39200;
     margin-bottom: 5px;
     padding-left: 5px;
+    cursor: pointer;
   }
 }
 

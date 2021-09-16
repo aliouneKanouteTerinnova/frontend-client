@@ -19,6 +19,6 @@ export class ReviewsStatsComponent implements OnInit {
   }
 
   onClick() {
-    this.btnAddReviewClick.emit();
+    this.btnAddReviewClick.emit('add review');
   }
 }

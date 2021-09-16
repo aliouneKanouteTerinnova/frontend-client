@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+import { window } from 'rxjs/operators';
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { WalletService } from './../../../services/wallet/wallet.service';
 /* eslint-disable @typescript-eslint/no-floating-promises */
 /* eslint-disable @typescript-eslint/naming-convention */
@@ -11,6 +14,7 @@ import { AuthenticationsService } from 'src/app/services/authentications/authent
 import { StoresService } from 'src/app/services/stores/stores.service';
 import { Store } from '../../../models/store/store';
 import { I18nServiceService } from 'src/app/services/i18n-service/i18n-service.service';
+import { timer } from 'rxjs';
 
 @Component({
   selector: 'app-profile',
@@ -23,6 +27,7 @@ export class ProfileComponent implements OnInit {
   is_seller = false;
   wallets = [];
   balance = 0;
+  showSpinner = true;
 
   constructor(
     private authService: AuthenticationsService,
@@ -32,22 +37,33 @@ export class ProfileComponent implements OnInit {
     private i18nServiceService: I18nServiceService
   ) {}
 
-  ngOnInit(): void {
-    this.currentUser = this.authService.currentUserValue;
-    this.authService.getUser(this.currentUser['user'].token).subscribe((data) => {
-      this.user = data.body['user'];
-      console.log(this.user);
-      if (this.currentUser['user'].account_type === 'SELLER' || this.currentUser['user'].account_type === 'Seller') {
+  async ngOnInit() {
+    this.currentUser = await this.authService.currentUserValue;
+
+    if (this.currentUser) {
+      const res: any = await this.authService
+        .getUser(this.currentUser.token || this.currentUser['user'].token)
+        .toPromise();
+      console.log(res);
+      this.user = res.body['user'];
+      this.router.navigate(['/profile']);
+      if (res) {
+        this.showSpinner = false;
+        // window.location.reload();
+      }
+
+      if (this.currentUser.account_type === 'SELLER' || this.currentUser.account_type === 'Seller') {
         this.is_seller = true;
       }
-    });
+    } else {
+      this.router.navigate(['/register']);
+    }
 
     this.wallet();
   }
 
   wallet() {
-    this.walletService.getWallet(this.currentUser['user'].token).subscribe((res) => {
-      // console.log(res);
+    this.walletService.getWallet(this.currentUser.token || this.currentUser['user'].token).subscribe((res) => {
       this.wallets = res.body.funds;
       this.wallets.forEach((data) => {
         if (data.status === 'collected') {

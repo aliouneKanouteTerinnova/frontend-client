@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/indent */
 /* eslint-disable @typescript-eslint/member-ordering */
 /* eslint-disable @typescript-eslint/quotes */
@@ -17,21 +18,24 @@ import { User } from 'src/app/models/user/user';
   providedIn: 'root',
 })
 export class AuthenticationsService {
-  private currentUserSubject: BehaviorSubject<AuthResponded>;
-  public currentUser: Observable<AuthResponded>;
+  // private currentUserSubject = localStorage.getItem('currentUser');
+  // public currentUserWithNormalLogin: Observable<AuthResponded>;
+
+  public currentUser = localStorage.getItem('currentUser');
+  obj = this.currentUser;
+  users = JSON.parse(this.obj);
 
   constructor(private httpClient: HttpClient, private cookieService: CookieService) {
-    if (cookieService.check('currentUser')) {
-      this.currentUserSubject = new BehaviorSubject<AuthResponded>(JSON.parse(this.cookieService.get('currentUser')));
-    } else {
-      this.currentUserSubject = new BehaviorSubject<null>(null);
-    }
-
-    this.currentUser = this.currentUserSubject.asObservable();
+    // if (cookieService.check('currentUser')) {
+    //   this.currentUserSubject = new BehaviorSubject<AuthResponded>(JSON.parse(this.cookieService.get('currentUser')));
+    // } else {
+    //   this.currentUserSubject = new BehaviorSubject<null>(null);
+    // }
+    // this.currentUser = this.currentUserSubject.asObservable();
   }
 
-  public get currentUserValue(): AuthResponded {
-    return this.currentUserSubject.value;
+  public get currentUserValue() {
+    return this.users;
   }
 
   // Authentication
@@ -41,8 +45,9 @@ export class AuthenticationsService {
       map((userResponded) => {
         // login successful if there's a jwt token in the response
         if (userResponded) {
-          this.cookieService.set('currentUser', JSON.stringify(userResponded));
-          this.currentUserSubject.next(userResponded);
+          // this.cookieService.set('currentUser', JSON.stringify(userResponded));
+          localStorage.setItem('currentUser', JSON.stringify(userResponded));
+          // this.currentUserSubject.next(userResponded);
         }
         return userResponded;
       })
@@ -102,7 +107,8 @@ export class AuthenticationsService {
   // User Logout
   logOut() {
     this.cookieService.delete('currentUser');
-    this.currentUserSubject.next(null);
+    localStorage.removeItem('currentUser');
+    // this.currentUserSubject.next(null);
   }
 
   // Password reset

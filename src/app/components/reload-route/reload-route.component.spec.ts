@@ -1,19 +1,19 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SignupComponent } from './signup.component';
+import { ReloadRouteComponent } from './reload-route.component';
 
-describe('SigninComponent', () => {
-  let component: SignupComponent;
-  let fixture: ComponentFixture<SignupComponent>;
+describe('ReloadRouteComponent', () => {
+  let component: ReloadRouteComponent;
+  let fixture: ComponentFixture<ReloadRouteComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [SignupComponent],
+      declarations: [ReloadRouteComponent],
     }).compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(SignupComponent);
+    fixture = TestBed.createComponent(ReloadRouteComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
