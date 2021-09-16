@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  baseUrl: 'http://3.126.109.165:8081/api/',
+  baseUrl: 'http://af0c05818326248cfb304153367460b2-1279355103.eu-central-1.elb.amazonaws.com/api/',
 };
 /*
  * For easier debugging in development mode, you can import the following file
