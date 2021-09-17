@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  baseUrl: 'http://af0c05818326248cfb304153367460b2-1279355103.eu-central-1.elb.amazonaws.com/api/',
+  baseUrl: 'http://3.126.109.165:8081/api/',
 
   // test new port
   // baseUrlP: 'http://3.126.109.165:8082/api/',
