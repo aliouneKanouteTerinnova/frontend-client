@@ -37,11 +37,14 @@
       <h2 translate>footer.newsletter</h2>
       <p>
         <span translate>footer.descriptionNewsletter</span> <br />
+        <br />
         <span translate>footer.descriptionNewsletter2</span>
       </p>
       <div class="d-flex mb-4">
-        <input type="email" class="form-control" id="email" placeholder="ENTER YOUR EMAIL" />
-        <input type="button" class="btn btn-dark" value="OK" />
+        <form [formGroup]="newsletterForm">
+          <input type="email" class="form-control" formControlName="email" id="email" placeholder="ENTER YOUR EMAIL" />
+          <input type="submit" class="btn btn-dark" value="OK" (click)="onSubmit()" />
+        </form>
       </div>
       <div class="payment-items">
         <li class="item">
