@@ -80,6 +80,7 @@ import { OrderItemComponent } from './components/order-item/order-item.component
 import { OrderStatusComponent } from './components/order-status/order-status.component';
 import { LoadingSpinnerComponent } from './components/loading-spinner/loading-spinner.component';
 import { RouteReuseStrategy } from '@angular/router';
+import { FloatingShareButtonComponent } from './components/floating-share-button/floating-share-button.component';
 import { SocialLoginModule, SocialAuthServiceConfig } from 'angularx-social-login';
 import { GoogleLoginProvider, FacebookLoginProvider } from 'angularx-social-login';
 import { environment } from 'src/environments/environment';
@@ -154,6 +155,8 @@ const CLIENT_ID = environment.clientId;
     OrderItemComponent,
     OrderStatusComponent,
     LoadingSpinnerComponent,
+    FloatingShareButtonComponent,
+
     StoresViewComponent,
     LayoutsComponent,
   ],
