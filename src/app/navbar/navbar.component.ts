@@ -27,7 +27,7 @@ export class NavbarComponent implements OnInit {
   cartData: CartModelServer;
   cartTotal: Number;
   subTotal: Number;
-  currentUser: AuthResponded;
+  currentUser: any;
   user: any;
   totalProduct: Number;
   total = 0;
@@ -50,10 +50,15 @@ export class NavbarComponent implements OnInit {
     }
     this.currentUser = this.authService.currentUserValue;
     if (this.currentUser != null) {
-      this.authService.getUser(this.currentUser['user'].token).subscribe((data) => {
+      this.authService.getUser(this.currentUser.token || this.currentUser['user'].token).subscribe((data) => {
         this.user = data.body;
-        console.log(data);
-        if (this.currentUser['user'].account_type === 'SELLER' || this.currentUser['user'].account_type === 'Seller') {
+
+        if (
+          this.currentUser.account_type ||
+          this.currentUser['user'].account_type === 'SELLER' ||
+          this.currentUser.account_type ||
+          this.currentUser['user'].account_type === 'Seller'
+        ) {
           this.is_seller = true;
         }
       });
@@ -76,7 +81,7 @@ export class NavbarComponent implements OnInit {
   }
 
   getUser() {
-    this.authService.getUser(this.currentUser['user'].token).subscribe((data) => {
+    this.authService.getUser(this.currentUser.token || this.currentUser['user'].token).subscribe((data) => {
       this.user = data.body['user'].username;
     });
   }

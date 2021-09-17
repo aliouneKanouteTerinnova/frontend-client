@@ -177,7 +177,7 @@
           <span translate>profile.logout_button</span>
         </a>
       </div>
-      <a class="nav-item nav-link active" *ngIf="!isSeller" (click)="openDialog()">
+      <a class="nav-item nav-link active" *ngIf="!isSeller" (click)="toOpenDialog()">
         <span translate>nav.BecomeSeller</span>
       </a>
       <a class="nav-item nav-link active" routerLink="/all-stores">
@@ -235,3 +235,15 @@
     </div>
   </div>
 </nav>
+
+<swal
+  #effacerSwal
+  title="Comfirmation "
+  text="Are you sure ?  "
+  type="question"
+  confirmButtonText="Yes"
+  cancelButtonText="No"
+  [showCancelButton]="true"
+  [focusCancel]="true"
+  (confirm)="onUpdateUser()"
+></swal>

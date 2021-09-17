@@ -4,7 +4,7 @@
   align-items: center;
   justify-content: center;
   margin-right: 25px;
-  margin-top: 5px;
+  margin-top: 1.5%;
   flex-wrap: nowrap;
 }
 
@@ -15,9 +15,16 @@
   background-size: cover;
 }
 
-.globe {
-  height: 1050px;
-  width: 700px;
+.globe-login {
+  height: 60vh;
+  width: 60vh;
+  border-bottom-left-radius: 75px;
+  border-top-left-radius: 75px;
+}
+
+.globe-login {
+  height: 60vh;
+  width: 60vh;
   border-bottom-left-radius: 75px;
   border-top-left-radius: 75px;
 }
@@ -77,9 +84,10 @@
   margin: auto;
   align-items: center;
   justify-content: center;
-  margin-top: -135px;
-  margin-bottom: 2px;
+  margin-bottom: 40px;
+  margin-top: 8px;
 }
+
 .title h3 {
   font-size: 1.8rem;
   font-weight: bolder;
@@ -152,6 +160,10 @@ a {
   padding: 5px;
 }
 
+a {
+  cursor: pointer;
+}
+
 .errorMessage span {
   color: rgb(165, 27, 27);
   font-size: 1rem;
@@ -160,5 +172,9 @@ a {
 @media only screen and (max-width: 900px) {
   .globe-image {
     display: none;
+  }
+
+  .title {
+    margin-top: 15%;
   }
 }

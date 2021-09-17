@@ -39,7 +39,7 @@ export class CartComponent implements OnInit {
   goodStuff = [];
   idProduct: any;
   quantity: any;
-  currentUser: AuthResponded;
+  currentUser: any;
   token;
   title = 'Cart';
 
@@ -132,7 +132,7 @@ export class CartComponent implements OnInit {
     if (!this.currentUser) {
       this.router.navigate(['/register']);
     }
-    this.token = this.currentUser['user'].token;
+    this.token = this.currentUser.token || this.currentUser['user'].token;
     const products = {
       product: id,
     };

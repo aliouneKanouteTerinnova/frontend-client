@@ -18,3 +18,17 @@ body {
   background: #29235c !important;
   border-radius: 50% !important;
 }
+
+.mat-tab-body-content {
+  overflow: hidden !important;
+}
+
+.mat-form-field-appearance-outline .mat-form-field-wrapper {
+  margin: 0 !important;
+}
+
+/* Styles for the active tab label */
+.mat-tab-label.mat-tab-label-active {
+  background-color: rgba(243, 146, 0, 0.3) !important;
+  color: #000 !important;
+}

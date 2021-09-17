@@ -70,7 +70,7 @@ export class CheckoutComponent implements OnInit {
 
   ngOnInit(): void {
     this.currentUser = this.authService.currentUserValue;
-    this.token = this.currentUser['user'].token;
+    this.token = this.currentUser.token || this.currentUser['user'].token;
     this.cartService.cartDataObs$.subscribe((data: CartModelServer) => {
       this.cartData = data;
     });
@@ -94,7 +94,7 @@ export class CheckoutComponent implements OnInit {
     });
     this.initForm('', '');
     if (this.currentUser) {
-      this.authService.getUser(this.currentUser['user'].token).subscribe((data) => {
+      this.authService.getUser(this.currentUser.token || this.currentUser['user'].token).subscribe((data) => {
         const user: AuthResponded = data.body;
         this.checkoutForm.patchValue({
           firstname: user['user'].username,
@@ -196,7 +196,7 @@ export class CheckoutComponent implements OnInit {
     if (!this.checkoutForm.valid) {
       return;
     }
-    this.cartService.get(this.currentUser['user'].token).subscribe(
+    this.cartService.get(this.currentUser.token || this.currentUser['user'].token).subscribe(
       (data) => {
         this.idCart = data.body.id;
         /* this.cartData.data.forEach((element) => {
@@ -204,7 +204,7 @@ export class CheckoutComponent implements OnInit {
             product: element.product.id,
             quantity: element.numInCart,
           };
-          this.cartService.addItemToCart(item, this.currentUser['user'].token).subscribe(
+          this.cartService.addItemToCart(item, this.currentUser.token).subscribe(
             (dataItem) => {},
             (error) => {
               console.log(error);
@@ -236,7 +236,7 @@ export class CheckoutComponent implements OnInit {
           shipping_address: shippingAddress,
           shipping_method: shippingMethod,
         };
-        this.orderService.addOrder(order, this.currentUser['user'].token).subscribe(
+        this.orderService.addOrder(order, this.currentUser.token || this.currentUser['user'].token).subscribe(
           (data) => {
             console.log('oder created ', data);
             const sommes = +order.total_prices + +order.total_tax + +order.shipping_method.price;
@@ -246,7 +246,7 @@ export class CheckoutComponent implements OnInit {
               amount: Math.round(sommes),
               currency: 'EUR',
             };
-            this.payment.payment(param, this.currentUser['user'].token).subscribe(
+            this.payment.payment(param, this.currentUser.token || this.currentUser['user'].token).subscribe(
               (res) => {
                 this.pbKey = res.body.public_key;
                 this.token = res.body.token;
@@ -314,7 +314,7 @@ export class CheckoutComponent implements OnInit {
             order_number: this.orderNumber,
           };
           this.payment
-            .confirmCardPayment(this.currentUser['user'].token, result.paymentIntent.id, body)
+            .confirmCardPayment(this.currentUser.token || this.currentUser['user'].token, result.paymentIntent.id, body)
             .subscribe((res) => {
               this.router.navigate(['/orders']);
               console.log(res);
