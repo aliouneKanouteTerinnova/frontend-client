@@ -1,3 +1,4 @@
+import { MustMatch } from 'src/app/_helpers/must-match.validator';
 import { ActivatedRoute } from '@angular/router';
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/naming-convention */
@@ -62,13 +63,18 @@ export class SignupComponent implements OnInit {
       );
     }
 
-    this.signinForm = this.fb.group({
-      username: ['', Validators.required],
-      email: ['', [Validators.required, Validators.pattern(this.emailRegex)]],
-      password: ['', [Validators.required, Validators.minLength(8)]],
-      password2: ['', Validators.required],
-      checked: [true, Validators.required],
-    });
+    this.signinForm = this.fb.group(
+      {
+        username: ['', Validators.required],
+        email: ['', [Validators.required, Validators.pattern(this.emailRegex)]],
+        password: ['', [Validators.required, Validators.minLength(8)]],
+        password2: ['', Validators.required],
+        checked: [true, Validators.required],
+      },
+      {
+        validator: MustMatch('password', 'password2'),
+      }
+    );
   }
 
   resend(): void {

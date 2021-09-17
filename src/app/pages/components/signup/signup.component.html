@@ -166,6 +166,9 @@
                   />
                 </mat-form-field>
               </p>
+              <h4 style="color: red !important" *ngIf="signinForm.controls.password2.errors.mustMatch" translate>
+                registration.errors.match_password
+              </h4>
               <p>
                 <mat-checkbox formControlName="checked">I have read and accept the Privacy Policy.</mat-checkbox>
               </p>

@@ -1,1 +1,13 @@
-<p>stores-view works!</p>
+<div class="container">
+  <app-layouts title="Best shops" [stores]="bestShop" carouselId="carouselExampleIndicators3"></app-layouts>
+
+  <app-loading-spinner *ngIf="showSpinner"></app-loading-spinner>
+</div>
+
+<div class="container">
+  <app-layouts title="All shops" [stores]="bestShop" carouselId=""></app-layouts>
+
+  <app-loading-spinner *ngIf="showSpinner"></app-loading-spinner>
+
+  <app-pagination [products]="bestShop"></app-pagination>
+</div>
