@@ -1,10 +1,13 @@
-<app-nav-logo></app-nav-logo>
-<app-buyer-navbar></app-buyer-navbar>
-
 <main class="container mt-5">
   <h1 align="center" translate>orders.order_details.command</h1>
   <app-loading-spinner *ngIf="showSpinner"></app-loading-spinner>
-  <button *ngIf="!showSpinner" class="ml-auto col-lg-2 d-none px-2 d-lg-block" mat-flat-button color="primary">
+  <button
+    routerLink="/"
+    *ngIf="!showSpinner"
+    class="ml-auto col-lg-2 d-none px-2 d-lg-block"
+    mat-flat-button
+    color="primary"
+  >
     <span translate>orders.order_list.shopping_button</span>
   </button>
   <div class="row mt-2" *ngIf="!showSpinner">

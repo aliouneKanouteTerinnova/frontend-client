@@ -84,6 +84,8 @@ import { FloatingShareButtonComponent } from './components/floating-share-button
 import { SocialLoginModule, SocialAuthServiceConfig } from 'angularx-social-login';
 import { GoogleLoginProvider, FacebookLoginProvider } from 'angularx-social-login';
 import { environment } from 'src/environments/environment';
+import { StoresViewComponent } from './pages/components/stores-view/stores-view.component';
+import { LayoutsComponent } from './pages/components/stores-view/layouts/layouts.component';
 
 export function rootLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -154,6 +156,9 @@ const CLIENT_ID = environment.clientId;
     OrderStatusComponent,
     LoadingSpinnerComponent,
     FloatingShareButtonComponent,
+
+    StoresViewComponent,
+    LayoutsComponent,
   ],
 
   imports: [

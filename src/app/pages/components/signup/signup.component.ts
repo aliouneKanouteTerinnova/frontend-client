@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/dot-notation */
+// import { MustMatch } from 'src/app/_helpers/must-match.validator';
 /* eslint-disable @typescript-eslint/restrict-template-expressions */
 import { ConditionUsedComponent } from './../../user/condition-used/condition-used.component';
 import { MatDialog } from '@angular/material/dialog';
@@ -90,13 +92,18 @@ export class SignupComponent implements OnInit {
       );
     }
 
-    this.signinForm = this.fb.group({
-      username: ['', Validators.required],
-      email: ['', [Validators.required, Validators.pattern(this.emailRegex)]],
-      password: ['', [Validators.required, Validators.minLength(8)]],
-      password2: ['', Validators.required],
-      checked: [false, Validators.required],
-    });
+    this.signinForm = this.fb.group(
+      {
+        username: ['', Validators.required],
+        email: ['', [Validators.required, Validators.pattern(this.emailRegex)]],
+        password: ['', [Validators.required, Validators.minLength(8)]],
+        password2: ['', Validators.required],
+        checked: [true, Validators.required],
+      },
+      {
+        validator: MustMatch('password', 'password2'),
+      }
+    );
 
     this.loginForm = this.fb.group({
       email: [null, [Validators.required, Validators.pattern(this.emailRegex)]],

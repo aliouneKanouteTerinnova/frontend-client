@@ -80,7 +80,7 @@ export class OrderListComponent implements OnInit {
 
   logout(): void {
     this.authService.logOut();
-    // window.location.reload();
+    window.location.reload();
     this.router.navigate(['/']);
   }
 }
