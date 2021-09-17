@@ -11,6 +11,7 @@
             height="40px"
             width="40px"
             alt="vaanah facebook signin"
+            (click)="signInWithFB()"
           />
           <img
             class="offset-1"
@@ -18,6 +19,7 @@
             height="45px"
             width="45px"
             alt="vaanah facebook signin"
+            (click)="loginWithGoogle()"
           />
         </div>
 
@@ -29,7 +31,7 @@
 
         <mat-dialog-content mat-typography>
           <div class="dialog-form">
-            <form [formGroup]="signinForm" (submit)="signin()">
+            <form [formGroup]="loginForm" (submit)="login()">
               <p>
                 <mat-form-field appearance="outline">
                   <mat-label>Email</mat-label>
@@ -90,6 +92,7 @@
             height="40px"
             width="40px"
             alt="vaanah facebook signin"
+            (click)="signInWithFB()"
           />
           <img
             class="offset-1"
@@ -97,6 +100,7 @@
             height="45px"
             width="45px"
             alt="vaanah facebook signin"
+            (click)="loginWithGoogle()"
           />
         </div>
 
@@ -167,7 +171,9 @@
                 </mat-form-field>
               </p>
               <p>
-                <mat-checkbox formControlName="checked">I have read and accept the Privacy Policy.</mat-checkbox>
+                <mat-checkbox (click)="openDialog()" formControlName="checked"
+                  >I have read and accept the Privacy Policy.</mat-checkbox
+                >
               </p>
 
               <p>
