@@ -39,20 +39,21 @@ export class ProfileComponent implements OnInit {
 
   async ngOnInit() {
     this.currentUser = await this.authService.currentUserValue;
-
+    // debugger;
     if (this.currentUser) {
       const res: any = await this.authService
         .getUser(this.currentUser.token || this.currentUser['user'].token)
         .toPromise();
       console.log(res);
-      this.user = res.body['user'];
+      this.user = res.body['user'] || res;
       this.router.navigate(['/profile']);
+
       if (res) {
         this.showSpinner = false;
         // window.location.reload();
       }
 
-      if (this.currentUser.account_type === 'SELLER' || this.currentUser.account_type === 'Seller') {
+      if (res.body['user'].account_type === 'SELLER' || res.body['user'].account_type === 'Seller') {
         this.is_seller = true;
       }
     } else {

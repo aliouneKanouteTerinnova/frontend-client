@@ -11,8 +11,10 @@ import { Component, OnInit } from '@angular/core';
 export class StoresViewComponent implements OnInit {
   bestShop = [];
   title: string;
+  titles = 'All shop';
   carouselId: string;
   showSpinner = true;
+  shopOfTheWeek = [];
   constructor(private storesViewService: StoresViewService) {}
 
   async ngOnInit(): Promise<void> {
@@ -21,6 +23,6 @@ export class StoresViewComponent implements OnInit {
       this.showSpinner = false;
     }
     this.bestShop = res.results;
-    console.log(res.results);
+    this.shopOfTheWeek = res.results[0];
   }
 }
