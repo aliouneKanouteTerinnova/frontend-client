@@ -118,6 +118,8 @@
     "category": " KATEGORIE V",
     "best_sale": "BESTE VERKÄUFE",
     "good_deals": "GUTE DEALS",
+    "top_categories": "TOP-KATEGORIEN",
+    "top_categories_desc": "Klicken Sie auf eine Karte, um nur Produkte aus der jeweiligen Region anzuzeigen.",
     "plus": "MEHR LERNEN >",
     "search": "Suche",
     "result": "Kein Produkt gefunden"
@@ -285,7 +287,11 @@
     "back_button": "Zurück zum Shop",
     "add_button": "In den Warenkorb legen",
     "remove_button": "Entfernen",
-    "similar_product": "Gleichartige produkte"
+    "similar_product": "Gleichartige produkte",
+    "unit_price": "Preis pro Einheit",
+    "stock_status": "Status der bestände",
+    "low_stock": "Niedriger bestand",
+    "in_stock": "Vorrätig"
   },
   "storeProduct": {
     "deals": "Deals",

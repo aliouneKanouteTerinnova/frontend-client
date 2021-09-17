@@ -7,6 +7,8 @@ import { AccountType } from './../../../enums/account-type.enum';
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 import { SellersRegisterService } from './../../../services/sellers-register/sellers-register.service';
 import { SwalComponent } from '@sweetalert2/ngx-sweetalert2';
+/* eslint-disable @typescript-eslint/restrict-plus-operands */
+/* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-floating-promises */
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
@@ -46,11 +48,11 @@ export class BuyerNavbarComponent implements OnInit {
   total = 0;
   cartTotal: Number;
   isSeller = false;
-  currentUser: AuthResponded;
+  currentUser: any;
   lang = '';
   changeLanguage = 'de';
   user: any;
-  users: AuthResponded;
+  users: any;
   updateForm: FormGroup;
   // userAccountType = 'Seller';
   constructor(
@@ -63,24 +65,26 @@ export class BuyerNavbarComponent implements OnInit {
     public signinDialog: MatDialog
   ) {}
 
-  ngOnInit(): void {
+  async ngOnInit() {
     if (this.i18nServiceService.currentLangValue === null || this.i18nServiceService.currentLangValue === 'en') {
-      this.lang = 'en';
+      this.lang = '🇺🇸';
     } else if (this.i18nServiceService.currentLangValue === 'de') {
-      this.lang = 'de';
+      this.lang = '🇩🇪';
     } else {
-      this.lang = 'fr';
+      this.lang = '🇫🇷';
     }
-    this.currentUser = this.authService.currentUserValue;
-    if (this.currentUser != null) {
-      this.authService.getUser(this.currentUser['user'].token).subscribe((data) => {
-        console.log(data);
-        this.user = data.body['user'].username;
+    this.currentUser = await this.authService.currentUserValue;
+    console.log(this.currentUser);
+    // debugger;
+    if (this.currentUser) {
+      this.users = await this.authService.getUser(this.currentUser.token || this.currentUser['user'].token).toPromise();
+      console.log(this.users);
+      this.user = this.users.body['user'].username || this.users.username;
+      // localStorage.setItem('currentUser', JSON.stringify(res.body['user']));
 
-        if (this.currentUser['user'].account_type === 'SELLER' || this.currentUser['user'].account_type === 'Seller') {
-          this.isSeller = true;
-        }
-      });
+      if (this.users.body['user'].account_type === 'SELLER' || this.users.body['user'].account_type === 'Seller') {
+        this.isSeller = true;
+      }
     }
 
     this.cartService.cartDataObs$.subscribe((data: CartModelServer) => {
@@ -99,23 +103,6 @@ export class BuyerNavbarComponent implements OnInit {
     });
 
     this.getCategory();
-
-    this.onUpdateUser();
-
-    this.authService.getUser(this.currentUser['user'].token).subscribe((data) => {
-      console.log(data.body);
-      const user: AuthResponded = data.body;
-      this.updateForm.patchValue({
-        username: user['user'].username,
-        email: user['user'].email,
-        gender: user['user'].gender,
-        state: user['user'].address.state,
-        zipcode: user['user'].address.zipcode,
-        country: user['user'].address.country,
-        street: user['user'].address.street,
-        account_type: user['user'].account_type,
-      });
-    });
   }
 
   toOpenDialog() {
@@ -133,50 +120,28 @@ export class BuyerNavbarComponent implements OnInit {
   }
 
   onUpdateUser() {
-    // this.authService.getUser(this.currentUser['user'].token).subscribe((data) => {
-    //   // console.log(data);
-    //   this.users = data.body;
-    // });
-    // console.log(this.users);
+    this.authService.getUser(this.currentUser.token || this.currentUser['user'].token).subscribe((data) => {
+      console.log(data.body);
+      const users: any = data.body;
 
-    const username = this.updateForm.get('username').value;
-    const sexe = this.updateForm.get('gender').value;
-    const state = this.updateForm.get('country').value;
-    const zipcode = this.updateForm.get('zipcode').value;
-    const country = this.updateForm.get('state').value;
-    const street = this.updateForm.get('street').value;
-    const accountType = 0;
-    const address: Address = {
-      state: state,
-      zipcode: zipcode,
-      country: country,
-      street: street,
-    };
-    const user = {
-      username: username,
-      gender: sexe,
-      address: address,
-      account_type: accountType,
-    };
-    console.log('user test ', user);
+      console.log('user test ', users.user);
 
-    // const newUserSeller = {
-    //   username: this.currentUser['user'].username,
-    //   email: this.currentUser['user'].email,
-    //   accountType: 'Seller',
-    //   // adress: this.currentUser['user'].adress,
-    //   gender: this.currentUser['user'].gender,
-    //   // token: this.users.token,
-    // };
-    // console.log(newUserSeller);
-    // this.sellersRegisterService.updateUserType(newUserSeller, this.currentUser['user'].token).subscribe(
-    //   (res) => {
-    //     console.log(res);
-    //   },
-    //   (error) => {
-    //     console.log(error);
-    //   }
-    // );
+      const user = {
+        username: users.user.username,
+        email: users.user.email,
+        gender: users.user.gender,
+        account_type: 'Seller',
+        address: users.user.address,
+      };
+
+      console.log(user);
+      this.authService.update(user, users.user.token).subscribe((res) => {
+        console.log('updated from backend ', res.body);
+        this.users = res.body;
+        console.log(this.users);
+        window.location.reload();
+      });
+    });
   }
 
   openDialog(): void {
@@ -189,8 +154,6 @@ export class BuyerNavbarComponent implements OnInit {
       this.category = res.results;
 
       this.categoryParents = this.category.filter((category) => category.parent === null);
-
-      console.log(this.categoryParents);
     });
   }
 
@@ -244,6 +207,7 @@ export class BuyerNavbarComponent implements OnInit {
 
   logout(): void {
     this.authService.logOut();
+    this.router.navigate(['/home']);
     window.location.reload();
   }
 }

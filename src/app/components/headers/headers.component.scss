@@ -20,14 +20,6 @@
       border-radius: 40px;
       font-family: 'Raleway';
     }
-
-    // button span {
-    //   padding: 8px;
-    // }
-
-    // button.click-here::before {
-    //   content: url('./../../../assets/img/icons/hermes-logo.png');
-    // }
   }
 
   h1 {
@@ -68,9 +60,32 @@
   }
 }
 
-@media (max-width: 767px) {
-  .carousel-item,
-  .carousel-indicators {
-    display: none;
+@media (max-width: 1200px) {
+  button.click-here {
+    margin: auto !important;
+  }
+
+  .carousel-item.active {
+    justify-content: center !important;
+  }
+}
+
+@media (max-width: 770px) {
+  .carousel-item.active,
+  .d-none {
+    display: flex !important;
+  }
+
+  .carousel-caption {
+    display: block !important;
+  }
+
+  .carousel-caption h1 {
+    line-height: 1.4;
+  }
+
+  button.click-here {
+    margin: auto !important;
+    font-size: 1.2rem;
   }
 }

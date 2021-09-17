@@ -16,7 +16,7 @@ import Swal from 'sweetalert2';
 export class ProductComponent implements OnInit {
   @Input() products: any[];
   isIconClicked = false;
-  currentUser: AuthResponded;
+  currentUser: any;
   token;
   constructor(
     private i18nServiceService: I18nServiceService,
@@ -58,7 +58,7 @@ export class ProductComponent implements OnInit {
     if (!this.currentUser) {
       this.router.navigate(['/register']);
     }
-    this.token = this.currentUser['user'].token;
+    this.token = this.currentUser.token;
     const products = {
       product: id,
     };

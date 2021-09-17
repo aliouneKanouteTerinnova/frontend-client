@@ -4,12 +4,14 @@
 
 <!-- ========================= SECTION CONTENT ========================= -->
 
+<app-breadcrumb [home]="home" [name]="categoryName"></app-breadcrumb>
+
 <section class="section-content padding-y">
   <div class="container">
     <div class="row">
-      <div class="col-12 mb-0">
+      <!-- <div class="col-12 mb-0">
         <app-search (login)="searchProduct($event)" [isClicked]="isClicked" [searchWord]="keyWord"></app-search>
-      </div>
+      </div> -->
       <!-- <div class="col-12" *ngIf="products.length === 0">
         <p class="text-center text-uppercase mt-10" translate>home.result</p>
       </div> -->
@@ -63,7 +65,7 @@
         <!-- sect-heading -->
       </div>
       <div class="row" *ngIf="isChecked">
-        <aside class="col-md-3">
+        <aside class="col-md-3 filters">
           <div class="card card-filter">
             <div class="card-header filter-header">
               <h2 class="label"><span translate>search.filter_by</span></h2>
@@ -113,14 +115,14 @@
               </header>
               <div class="filter-content collapse show" id="collapse_3" style="">
                 <div class="card-body">
-                  <input
+                  <!-- <input
                     type="range"
                     class="custom-range"
                     min="0"
                     max="15000"
                     name=""
                     (change)="priceFiltering($event)"
-                  />
+                  /> -->
                   <div class="form-row">
                     <div class="form-group col-md-6">
                       <label><span translate>search.min</span></label>
@@ -140,14 +142,14 @@
               </div>
             </article>
             <!-- filter-group .// -->
-            <article class="filter-group">
+            <!-- <article class="filter-group">
               <header class="card-header">
                 <a href="#" data-toggle="collapse" data-target="#collapse_4" aria-expanded="true" class="">
                   <i class="icon-control fa fa-chevron-down"></i>
                   <h3 class="label"><span translate>search.size</span></h3>
                 </a>
-              </header>
-              <div class="filter-content collapse show" id="collapse_4" style="">
+              </header> -->
+            <!-- <div class="filter-content collapse show" id="collapse_4" style="">
                 <div class="card-body">
                   <label class="checkbox-btn">
                     <input type="checkbox" />
@@ -173,9 +175,8 @@
                     <span class="btn btn-light"> L </span>
                   </label>
                 </div>
-                <!-- card-body.// -->
-              </div>
-            </article>
+              </div> -->
+            <!-- </article> -->
             <!-- filter-group .// -->
             <article class="filter-group">
               <header class="card-header">
@@ -227,14 +228,14 @@
               </div>
             </article>
             <!-- filter-group .// -->
-            <article class="filter-group">
+            <!-- <article class="filter-group">
               <header class="card-header">
                 <a href="#" data-toggle="collapse" data-target="#collapse_4" aria-expanded="true" class="">
                   <i class="icon-control fa fa-chevron-down"></i>
                   <h3 class="label"><span translate>search.color</span></h3>
                 </a>
-              </header>
-              <div class="filter-content collapse show" id="collapse_4" style="">
+              </header> -->
+            <!-- <div class="filter-content collapse show" id="collapse_4" style="">
                 <div class="card-body">
                   <label class="checkbox-btn">
                     <input type="checkbox" />
@@ -251,9 +252,8 @@
                     <span class="fa fa-circle" id="blue"></span>
                   </label>
                 </div>
-                <!-- card-body.// -->
-              </div>
-            </article>
+              </div> -->
+            <!-- </article> -->
             <!-- filter-group .// -->
           </div>
           <!-- card.// -->

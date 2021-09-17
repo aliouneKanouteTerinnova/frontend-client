@@ -4,6 +4,9 @@ nav {
   align-items: center;
   padding: 0 10rem;
 }
+.value-1 {
+  background-image: url('./../../../../assets/img/lang/United_Kingdom.svg');
+}
 
 .navbar-brand {
   svg {
@@ -114,16 +117,20 @@ div.nav-right {
   nav {
     padding: 0 2rem;
   }
-}
 
-@media (max-width: 768px) {
-  // nav {
-  //   padding: 0 2rem;
-  // }
   .navbar-brand {
     display: none;
   }
 }
+
+// @media (max-width: 768px) {
+//   // nav {
+//   //   padding: 0 2rem;
+//   // }
+//   .navbar-brand {
+//     display: none;
+//   }
+// }
 
 @media (max-width: 566px) {
   nav {

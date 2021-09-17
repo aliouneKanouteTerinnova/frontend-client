@@ -29,7 +29,7 @@ export class ReviewsComponent implements OnInit {
   }
 
   onReviewAdd(): void {
-    this.reviewAdd.emit();
+    this.reviewAdd.emit('add review');
   }
 
   onReviewEdit(id): void {

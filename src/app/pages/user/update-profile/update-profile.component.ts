@@ -23,7 +23,7 @@ export class UpdateProfileComponent implements OnInit {
 
   ngOnInit(): void {
     this.currentUser = this.authService.currentUserValue;
-    console.log(this.currentUser['user'].token);
+    console.log(this.currentUser.token);
     this.registerForm = this.formBuilder.group({
       username: [null, Validators.required],
       email: new FormControl({ value: '', disabled: true }),
@@ -35,7 +35,7 @@ export class UpdateProfileComponent implements OnInit {
       account_type: new FormControl({ value: '', disabled: true }),
     });
 
-    this.authService.getUser(this.currentUser['user'].token).subscribe((data) => {
+    this.authService.getUser(this.currentUser.token || this.currentUser['user'].token).subscribe((data) => {
       console.log(data.body);
       const user: AuthResponded = data.body;
       this.registerForm.patchValue({
@@ -69,7 +69,7 @@ export class UpdateProfileComponent implements OnInit {
       address: address,
     };
     console.log(user);
-    this.authService.update(user, this.currentUser.user.token).subscribe(
+    this.authService.update(user, this.currentUser.token || this.currentUser['user'].token).subscribe(
       (data) => {
         console.log('update ', data);
         Swal.fire({

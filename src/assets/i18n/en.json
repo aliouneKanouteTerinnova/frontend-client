@@ -1,8 +1,8 @@
 {
   "registration": {
     "register": {
-      "title": "SUBSCRIBE",
-      "sub_title": "registration",
+      "title": "Subscribe",
+      "sub_title": "Registration",
       "username": "Username",
       "email": "Email",
       "address": "Address",
@@ -11,7 +11,7 @@
       "password": "Password",
       "confirm_password": "Confirm Password",
       "conditions": "I accept all conditions",
-      "inscription": "registration",
+      "inscription": "Registration",
       "registration": "SUBSCRIBE",
       "resend": "Resend Email",
       "country": "Country",
@@ -27,8 +27,8 @@
       "close": "Close"
     },
     "login": {
-      "title": "LOGIN",
-      "sub_title": "connexion",
+      "title": "Login",
+      "sub_title": "Connexion",
       "email": "Email",
       "password": "Password",
       "connect_with": "CONNECT WITH",
@@ -117,7 +117,8 @@
     "ajouter": "Add",
     "category": "CATEGORY V",
     "best_sale": "BEST SALES",
-    "good_deals": "GOOD DEALS",
+    "top_categories": "TOP CATEGORIES",
+    "top_categories_desc": "Click on a map to show only products related to that specific region",
     "plus": "LEARN MORE >",
     "search": "Search",
     "result": "No product found"
@@ -229,7 +230,7 @@
     "cancel_button": "Cancel"
   },
   "product_detail": {
-    "share": "SHARE THE PRODUCT WITH YOUR FRIENDS",
+    "share": "SHARE :",
     "description": "DESCRIPTION",
     "livraison": "DELIVERY",
     "order_button": "Order",
@@ -284,7 +285,11 @@
     "back_button": "Back to shop",
     "add_button": "Add to basket",
     "remove_button": "Remove",
-    "similar_product": "Similary products"
+    "similar_product": "Similary products",
+    "unit_price": "Unit price",
+    "stock_status": "Stock status",
+    "low_stock": "Low stock",
+    "in_stock": "In stock"
   },
   "storeProduct": {
     "deals": "Deals",

@@ -12,15 +12,15 @@ import { AccountType } from 'src/app/enums/account-type.enum';
 export class SellersRegisterService {
   constructor(private http: HttpClient) {}
 
-  register(seller: User) {
-    return this.http.post<any>(`${environment.baseUrlTestSellerRegister}users/seller-register`, seller);
-  }
+  // register(seller: User) {
+  //   return this.http.post<any>(`${environment.baseUrlTestSellerRegister}users/seller-register`, seller);
+  // }
 
-  updateUserType(user: any, token: string) {
-    token = 'token ' + token;
-    return this.http.put(`${environment.baseUrlTestSellerRegister}users/become-seller`, user, {
-      headers: new HttpHeaders().set('Authorization', token),
-      observe: 'response',
-    });
-  }
+  // updateUserType(user: any, token: string) {
+  //   token = 'token ' + token;
+  //   return this.http.put(`${environment.baseUrlTestSellerRegister}users/become-seller`, user, {
+  //     headers: new HttpHeaders().set('Authorization', token),
+  //     observe: 'response',
+  //   });
+  // }
 }
