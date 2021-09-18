@@ -11,7 +11,7 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { SharedModule } from './shared/shared.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
-
+import { MatStepperModule } from '@angular/material/stepper';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
@@ -156,6 +156,7 @@ const CLIENT_ID = environment.clientId;
 
   imports: [
     BrowserModule,
+    MatStepperModule,
     BrowserAnimationsModule,
     AppRoutingModule,
     NgxPaginationModule,

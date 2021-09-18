@@ -58,6 +58,8 @@ export class CheckoutComponent implements OnInit {
   items: CartItem[] = [];
   cart: CartModel;
   errorMessage: any;
+  title = 'Billing';
+  panelOpenState = false;
   constructor(
     public cartService: CartService,
     private formBuilder: FormBuilder,
@@ -335,4 +337,35 @@ export class CheckoutComponent implements OnInit {
     }
     return prices;
   }
+
+  orderPlaced() {
+    // //validate before submission
+    // var form = document.getElementsByClassName('needs-validation')[0] as HTMLFormElement;
+    // if (form.checkValidity() === false) {
+    //   event.preventDefault();
+    //   event.stopPropagation();
+    //   form.classList.add('was-validated');
+    // }
+    // else {
+    //   alert('Order placed Successfully ! ');
+    //   this.getItemsFromCart();
+    //   let leftCartItems = this.totalCartItems;
+    //   for (let i = leftCartItems - 1; i >= 0; i--) {
+    //     this.cartService.removeCart(i);
+    //   }
+    //   this.router.navigateByUrl('/home');
+    // }
+  }
+
+  getItemsFromCart = () => {
+    // this.cartService.cartListSubject
+    //   .subscribe(res => {
+    //     this.cartList = res;
+    //     let totalItems = 0;
+    //     for (let cart of this.cartList) {
+    //       totalItems += 1;
+    //     }
+    //     this.totalCartItems = totalItems;
+    //   })
+  };
 }

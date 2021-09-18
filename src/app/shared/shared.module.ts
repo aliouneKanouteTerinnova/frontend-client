@@ -7,14 +7,17 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatStepperModule } from '@angular/material/stepper';
 import { MatCardModule } from '@angular/material/card';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatExpansionModule } from '@angular/material/expansion';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatInputModule } from '@angular/material/input';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatCarouselModule } from '@ngmodule/material-carousel';
 import { MatDialogModule } from '@angular/material/dialog';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { MatRadioModule } from '@angular/material/radio';
 @NgModule({
   declarations: [],
   imports: [],
@@ -29,11 +32,14 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
     MatInputModule,
     MatCheckboxModule,
     MatCarouselModule,
+    MatStepperModule,
     FormsModule,
     ReactiveFormsModule,
     MatDialogModule,
     MatProgressSpinnerModule,
     MatProgressBarModule,
+    MatExpansionModule,
+    MatRadioModule,
   ],
   providers: [
     {
