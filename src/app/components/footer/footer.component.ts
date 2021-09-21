@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/dot-notation */
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 /* eslint-disable @typescript-eslint/no-floating-promises */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
@@ -22,7 +23,10 @@ export class FooterComponent implements OnInit {
   currentUser: any;
   newsletterForm: FormGroup;
   vaana;
-  compte;
+  compte = [];
+  title = '';
+  link = '';
+  orderRoute = '';
 
   constructor(
     private route: Router,
@@ -32,19 +36,39 @@ export class FooterComponent implements OnInit {
     private authService: AuthenticationsService
   ) {}
 
-  ngOnInit(): void {
-    this.currentUser = this.authService.currentUserValue;
-    this.compte = [
-      this.currentUser ? '' : { title: 'Sidentifier', link: '/register' },
-      { title: 'Panier', link: '/cart' },
-      { title: 'Commande', link: this.currentUser.user.account_type === 'Seller' ? '/orders-seller' : 'order' },
-    ];
+  async ngOnInit(): Promise<any> {
+    this.currentUser = await this.authService.currentUserValue;
 
     this.getStores();
+
     this.newsletterForm = this.fb.group({
       email: [''],
     });
+
+    if (this.currentUser) {
+      this.title = 'Compte';
+      this.link = '/profile';
+
+      if (this.currentUser.user.account_type || this.currentUser['user'].account_type === 'Seller') {
+        this.orderRoute = '/orders-seller';
+      } else {
+        this.orderRoute = '/order';
+      }
+    } else {
+      this.title = 'Sidentifier';
+      this.link = '/register';
+    }
+
+    this.compte = [
+      { title: this.title, link: this.link },
+      { title: 'Panier', link: '/cart' },
+      {
+        title: 'Commande',
+        link: this.orderRoute,
+      },
+    ];
   }
+
   async getStores(): Promise<any> {
     const data = await this.storesService.getAllStores().toPromise();
 
