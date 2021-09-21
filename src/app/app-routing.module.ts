@@ -32,6 +32,7 @@ import { SellerOrderComponent } from './pages/order/seller-order/seller-order.co
 import { ProductResultComponent } from './pages/products/product-result/product-result.component';
 import { StoreProductsComponent } from './pages/stores/store-products/store-products.component';
 import { CategoyDetailComponent } from './pages/category-page/categoy-detail/categoy-detail.component';
+import { AboutUsComponent } from './pages/components/about-us/about-us.component';
 
 const routes: Routes = [
   {
@@ -59,6 +60,10 @@ const routes: Routes = [
   {
     path: 'cart',
     component: CartComponent,
+  },
+  {
+    path: 'about-us',
+    component: AboutUsComponent,
   },
   {
     path: 'register',
