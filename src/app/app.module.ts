@@ -86,6 +86,7 @@ import { GoogleLoginProvider, FacebookLoginProvider } from 'angularx-social-logi
 import { environment } from 'src/environments/environment';
 import { StoresViewComponent } from './pages/components/stores-view/stores-view.component';
 import { LayoutsComponent } from './pages/components/stores-view/layouts/layouts.component';
+import { AboutUsComponent } from './pages/components/about-us/about-us.component';
 
 export function rootLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -159,6 +160,7 @@ const CLIENT_ID = environment.clientId;
 
     StoresViewComponent,
     LayoutsComponent,
+    AboutUsComponent,
   ],
 
   imports: [
