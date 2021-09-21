@@ -1,3 +1,9 @@
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
+/* eslint-disable @typescript-eslint/no-floating-promises */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+import { AuthenticationsService } from 'src/app/services/authentications/authentications.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -15,46 +21,34 @@ export class FooterComponent implements OnInit {
   storesTemp = [];
   currentUser: any;
   newsletterForm: FormGroup;
-  vaana = [
-    { title: 'Accueil', link: '/' },
-    { title: 'A propos', link: '/apropos' },
-    { title: 'Vision', link: '/vision' },
-    { title: 'Mission', link: '/mission' },
-    { title: 'Blog', link: '/blog' },
-    { title: 'Contact', link: '/contact' },
-  ];
-  compte = [
-    { title: 'Sidentifier', link: '/register' },
-    { title: 'Achats', link: '/' },
-    { title: 'Panier', link: '/cart' },
-    { title: 'Commande', link: '/order' },
-    { title: 'Remises', link: '/' },
-    { title: 'Questions', link: '/' },
-  ];
-  // hideBtn;
+  vaana;
+  compte;
+
   constructor(
     private route: Router,
     private storesService: StoresService,
     private newsletterService: NewsletterService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private authService: AuthenticationsService
   ) {}
 
   ngOnInit(): void {
+    this.currentUser = this.authService.currentUserValue;
+    this.compte = [
+      this.currentUser ? '' : { title: 'Sidentifier', link: '/register' },
+      { title: 'Panier', link: '/cart' },
+      { title: 'Commande', link: this.currentUser.user.account_type === 'Seller' ? '/orders-seller' : 'order' },
+    ];
+
     this.getStores();
     this.newsletterForm = this.fb.group({
       email: [''],
     });
   }
-  getStores() {
-    this.storesService.getAllStores().subscribe(
-      (res) => {
-        this.stores = res.results;
-        this.storesTemp = this.stores.slice(0, 5);
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
+  async getStores(): Promise<any> {
+    const data = await this.storesService.getAllStores().toPromise();
+
+    this.stores = data.results.slice(0, 5);
   }
 
   hideBtn() {
