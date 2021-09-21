@@ -74,13 +74,10 @@ export class BuyerNavbarComponent implements OnInit {
       this.lang = '🇫🇷';
     }
     this.currentUser = await this.authService.currentUserValue;
-    console.log(this.currentUser);
-    // debugger;
+
     if (this.currentUser) {
       this.users = await this.authService.getUser(this.currentUser.token || this.currentUser['user'].token).toPromise();
-      console.log(this.users);
       this.user = this.users.body['user'].username || this.users.username;
-      // localStorage.setItem('currentUser', JSON.stringify(res.body['user']));
 
       if (this.users.body['user'].account_type === 'SELLER' || this.users.body['user'].account_type === 'Seller') {
         this.isSeller = true;

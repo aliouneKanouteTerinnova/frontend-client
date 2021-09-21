@@ -237,7 +237,7 @@
                   {{ product.name.slice(0, 15) }}...
                 </h3>
                 <h3 class="card-product-hover-title" *ngIf="product.name.length <= 17">{{ product.name }}</h3>
-                <span class="card-product-hover-price">Legacy Foundation Tee</span>
+                <span class="card-product-hover-price">{{ product.description.slice(0, 30) }}...</span>
               </div>
             </div>
           </div>

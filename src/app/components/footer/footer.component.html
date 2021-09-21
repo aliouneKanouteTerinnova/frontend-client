@@ -4,8 +4,8 @@
     <div class="col-md-4 col-lg-2">
       <h2 translate>Vaanah</h2>
       <div class="shops-items">
-        <li class="item" *ngFor="let item of vaana">
-          <a routerLink="{{ item.link }}">{{ item.title }}</a>
+        <li class="item">
+          <a href="#home">Accueil</a>
         </li>
       </div>
     </div>
@@ -22,7 +22,7 @@
     <div class="col-md-4 col-lg-2">
       <h2 translate>footer.shops</h2>
       <div class="shops-items">
-        <li class="item" *ngFor="let store of storesTemp.slice(0, 5)">
+        <li class="item" *ngFor="let store of stores">
           <span routerLink="/store-products/{{ store.id }}">{{ store.name }}</span>
         </li>
         <!-- <li *ngIf="stores.length > 5">
@@ -41,7 +41,7 @@
         <span translate>footer.descriptionNewsletter2</span>
       </p>
       <div class="d-flex mb-4">
-        <form [formGroup]="newsletterForm">
+        <form [formGroup]="newsletterForm" class="d-flex">
           <input type="email" class="form-control" formControlName="email" id="email" placeholder="ENTER YOUR EMAIL" />
           <input type="submit" class="btn btn-dark" value="OK" (click)="onSubmit()" />
         </form>
@@ -73,13 +73,19 @@
 
       <div class="item-social mt-3">
         <li class="item">
-          <img src="./../../../assets/img/icons/Whatsapp.png" alt="" />
+          <a href="https://www.whatsapp.com" target="_blank">
+            <img src="./../../../assets/img/icons/Whatsapp.png" alt="" />
+          </a>
         </li>
         <li class="item">
-          <img src="./../../../assets/img/icons/Facebook.png" alt="" />
+          <a href="https://www.facebook.com" target="_blank">
+            <img src="./../../../assets/img/icons/Facebook.png" alt="" />
+          </a>
         </li>
         <li class="item">
-          <img src="./../../../assets/img/icons/Instagram.png" alt="" />
+          <a href="https://www.instagram.com" target="_blank">
+            <img src="./../../../assets/img/icons/Instagram.png" alt="" />
+          </a>
         </li>
       </div>
     </div>
