@@ -1,0 +1,52 @@
+.main-content {
+  background-color: #f8f8f8;
+  padding: 30px 0;
+
+  b {
+    font-size: 22px;
+  }
+}
+
+.card {
+  border: none;
+}
+
+.card-header {
+  background-color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: row;
+  align-items: end;
+  justify-content: space-evenly;
+  padding: 20px;
+
+  .first-box {
+    position: relative;
+
+    div {
+      img {
+        position: absolute;
+        top: 35%;
+        left: 30%;
+      }
+    }
+  }
+}
+
+.rigth-section {
+  padding: 20px;
+  top: -675px;
+  left: 1099px;
+  width: 297px;
+  height: 745px;
+
+  p {
+    margin: 15px 0;
+    font: normal normal normal 20px/18px Raleway;
+    letter-spacing: 0px;
+    color: #171832;
+    opacity: 0.6;
+    line-height: 1.5;
+  }
+}

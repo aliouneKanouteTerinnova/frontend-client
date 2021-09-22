@@ -33,6 +33,7 @@ import { ProductResultComponent } from './pages/products/product-result/product-
 import { StoreProductsComponent } from './pages/stores/store-products/store-products.component';
 import { CategoyDetailComponent } from './pages/category-page/categoy-detail/categoy-detail.component';
 import { AboutUsComponent } from './pages/components/about-us/about-us.component';
+import { DashoardComponent } from './pages/admin/dashoard/dashoard.component';
 
 const routes: Routes = [
   {
@@ -81,6 +82,10 @@ const routes: Routes = [
   {
     path: 'profile',
     component: ProfileComponent,
+  },
+  {
+    path: 'dashboard',
+    component: DashoardComponent,
   },
   { path: 'products', component: ProductsComponent },
   { path: 'addproduct', component: CreateProductComponent, canActivate: [AuthGuard] },
