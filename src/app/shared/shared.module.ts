@@ -16,12 +16,12 @@ import { MatCarouselModule } from '@ngmodule/material-carousel';
 import { MatDialogModule } from '@angular/material/dialog';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
-// import {MatButtonModule} from '@angular/material/button';
-// import {MatInputModule} from '@angular/material/input';
 import { MatRippleModule } from '@angular/material/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatSelectModule } from '@angular/material/select';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatSidenavModule } from '@angular/material/sidenav';
 
 @NgModule({
   declarations: [],
@@ -42,10 +42,10 @@ import { MatSelectModule } from '@angular/material/select';
     MatDialogModule,
     MatProgressSpinnerModule,
     MatProgressBarModule,
-    // MatButtonModule,
+    MatSidenavModule,
     MatRippleModule,
     MatFormFieldModule,
-    // MatInputModule,
+    MatDividerModule,
     MatSelectModule,
     MatTooltipModule,
   ],

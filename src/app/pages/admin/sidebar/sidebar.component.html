@@ -1,0 +1,68 @@
+<!-- <mat-toolbar class="mat-elevation-z8"> -->
+<button mat-icon-button *ngIf="sidenav.mode === 'over'" (click)="sidenav.toggle()">
+  <mat-icon *ngIf="!sidenav.opened"> menu </mat-icon>
+  <mat-icon *ngIf="sidenav.opened"> close </mat-icon>
+</button>
+<!-- Responsive side navigation
+</mat-toolbar> -->
+
+<mat-sidenav-container style="z-index: 0">
+  <mat-sidenav #sidenav="matSidenav" class="mat-elevation-z8">
+    <img class="avatar mat-elevation-z8" src="./../../../../assets/dashboard/Vaanah logotype privisoire-05.svg" />
+
+    <mat-divider></mat-divider>
+
+    <button
+      *ngFor="let item of menuItems"
+      mat-button
+      class="menu-button"
+      routerLink="{{ item.path }}"
+      routerLinkActive="active"
+    >
+      <mat-icon>{{ item.icon }}</mat-icon>
+      <span>{{ item.title }}</span>
+    </button>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <!-- content -->
+    <div class="mat-elevation-z8 main-content d-flex py-3">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-lg-5 col-md-6 col-sm-6">
+            <app-box-layouts [items]="itemsP" [itemsName]="itemsNameP" [imgBg]="imgBgP" [img]="imgP"></app-box-layouts>
+          </div>
+
+          <div class="col-lg-5 col-md-6 col-sm-6">
+            <app-box-layouts [items]="itemsS" [itemsName]="itemsNameS" [imgBg]="imgBgS" [img]="imgS"></app-box-layouts>
+          </div>
+        </div>
+
+        <div class="row mt-4">
+          <div class="col-lg-5 col-md-6 col-sm-6">
+            <app-box-layouts [items]="itemsC" [itemsName]="itemsNameC" [imgBg]="imgBgC" [img]="imgC"></app-box-layouts>
+          </div>
+
+          <div class="col-lg-5 col-md-6 col-sm-6">
+            <app-box-layouts [items]="itemsN" [itemsName]="itemsNameN" [imgBg]="imgBgN" [img]="imgN"></app-box-layouts>
+          </div>
+        </div>
+
+        <div class="row mt-4">
+          <div class="col-lg-10 col-md-12">
+            <app-table-layouts></app-table-layouts>
+          </div>
+        </div>
+      </div>
+      <div class="card rigth-section">
+        <h2>Activities</h2>
+
+        <p>Command #1236 delivrered 2 days ago</p>
+        <p>Command #1236 delivrered 2 days ago</p>
+        <p>Command #1236 delivrered 2 days ago</p>
+        <p>Command #1236 delivrered 2 days ago</p>
+        <p>Command #1236 delivrered 2 days ago</p>
+        <p>Command #1236 delivrered 2 days ago</p>
+      </div>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>
