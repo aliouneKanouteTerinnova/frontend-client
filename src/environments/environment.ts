@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  baseUrl: 'http://3.126.109.165:8082/api/',
+  baseUrl: 'http://3.69.254.83:8082/api/',
 
   // test new port
   // baseUrlP: 'http://3.126.109.165:8082/api/',
