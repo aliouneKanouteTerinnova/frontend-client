@@ -1,3 +1,4 @@
+import { ReloadRouteComponent } from './components/reload-route/reload-route.component';
 /* eslint-disable prefer-arrow/prefer-arrow-functions */
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import { UpdateCategoriesComponent } from './pages/categories/update-categories/update-categories.component';
@@ -61,10 +62,37 @@ import { UpdateProductReviewComponent } from './pages/products/product-review/up
 import { ProductReviewComponent } from './pages/products/product-review/product-review.component';
 import { StoreReviewComponent } from './pages/stores/store-review/store-review/store-review.component';
 import { UpdateStoreReviewComponent } from './pages/stores/store-review/update-store-review/update-store-review.component';
+import { BuyerNavbarComponent } from './components/buyer/buyer-navbar/buyer-navbar.component';
+import { NavLogoComponent } from './components/nav-logo/nav-logo.component';
+import { HeadersComponent } from './components/headers/headers.component';
+import { RegionsComponent } from './pages/components/regions/regions.component';
+import { BestDealsComponent } from './pages/components/best-deals/best-deals.component';
+import { PubSectionComponent } from './pages/components/pub-section/pub-section.component';
+import { SignupComponent } from './pages/components/signup/signup.component';
+import { ReviewsComponent } from './components/reviews/reviews.component';
+import { ReviewStarsComponent } from './components/review-stars/review-stars.component';
+import { ReviewItemComponent } from './components/review-item/review-item.component';
+import { ReviewsStatsComponent } from './components/reviews-stats/reviews-stats.component';
+import { TopCategoriesComponent } from './pages/components/top-categories/top-categories.component';
+import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.component';
+import { PaginationComponent } from './components/pagination/pagination.component';
+import { OrderItemComponent } from './components/order-item/order-item.component';
+import { OrderStatusComponent } from './components/order-status/order-status.component';
+import { LoadingSpinnerComponent } from './components/loading-spinner/loading-spinner.component';
+import { RouteReuseStrategy } from '@angular/router';
+import { FloatingShareButtonComponent } from './components/floating-share-button/floating-share-button.component';
+import { SocialLoginModule, SocialAuthServiceConfig } from 'angularx-social-login';
+import { GoogleLoginProvider, FacebookLoginProvider } from 'angularx-social-login';
+import { environment } from 'src/environments/environment';
+import { StoresViewComponent } from './pages/components/stores-view/stores-view.component';
+import { LayoutsComponent } from './pages/components/stores-view/layouts/layouts.component';
+import { AboutUsComponent } from './pages/components/about-us/about-us.component';
 
 export function rootLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
 }
+
+const CLIENT_ID = environment.clientId;
 
 @NgModule({
   declarations: [
@@ -111,6 +139,28 @@ export function rootLoaderFactory(http: HttpClient) {
     UpdateProductReviewComponent,
     StoreReviewComponent,
     UpdateStoreReviewComponent,
+    BuyerNavbarComponent,
+    NavLogoComponent,
+    HeadersComponent,
+    RegionsComponent,
+    BestDealsComponent,
+    PubSectionComponent,
+    SignupComponent,
+    ReviewsComponent,
+    ReviewStarsComponent,
+    ReviewItemComponent,
+    ReviewsStatsComponent,
+    TopCategoriesComponent,
+    BreadcrumbComponent,
+    PaginationComponent,
+    OrderItemComponent,
+    OrderStatusComponent,
+    LoadingSpinnerComponent,
+    FloatingShareButtonComponent,
+
+    StoresViewComponent,
+    LayoutsComponent,
+    AboutUsComponent,
   ],
 
   imports: [
@@ -130,12 +180,36 @@ export function rootLoaderFactory(http: HttpClient) {
     HttpClientModule,
     SharedModule,
     FormsModule,
+    SocialLoginModule,
     ReactiveFormsModule,
     StripeModule.forRoot(
       'pk_test_51HQ3ZXFunRLoLWctiy0l6VVOeflU8ES2IRjTyY7LL9rEpKedBIfOfKB1BSSftQk4Qmke8HdtRcdmje7R2whuWgTz00U7HXpwjn'
     ),
   ],
-  providers: [CookieService],
+  providers: [
+    {
+      provide: 'SocialAuthServiceConfig',
+      useValue: {
+        autoLogin: true,
+        providers: [
+          {
+            id: GoogleLoginProvider.PROVIDER_ID,
+            provider: new GoogleLoginProvider(CLIENT_ID),
+          },
+          {
+            id: FacebookLoginProvider.PROVIDER_ID,
+            provider: new FacebookLoginProvider('3096271000691862'),
+          },
+        ],
+      } as SocialAuthServiceConfig,
+    },
+    CookieService,
+    HttpClientModule,
+    {
+      provide: RouteReuseStrategy,
+      useClass: ReloadRouteComponent,
+    },
+  ],
 
   bootstrap: [AppComponent],
 })

@@ -6,6 +6,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatCardModule } from '@angular/material/card';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTabsModule } from '@angular/material/tabs';
@@ -32,6 +33,7 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
     ReactiveFormsModule,
     MatDialogModule,
     MatProgressSpinnerModule,
+    MatProgressBarModule,
   ],
   providers: [
     {

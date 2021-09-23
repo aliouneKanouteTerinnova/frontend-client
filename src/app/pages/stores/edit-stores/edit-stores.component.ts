@@ -71,7 +71,7 @@ export class EditStoresComponent implements OnInit {
       (err) => {
         Swal.fire({
           icon: 'error',
-          title: 'Oops...',
+          title: 'store name already exists.',
           text: err.error.error,
         });
       }

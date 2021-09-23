@@ -1,3 +1,4 @@
+import { StoresViewComponent } from './pages/components/stores-view/stores-view.component';
 import { WishlistComponent } from './pages/wishlist/wishlist.component';
 import { CategoryPageComponent } from './pages/category-page/category-page.component';
 import { UpdateCategoriesComponent } from './pages/categories/update-categories/update-categories.component';
@@ -31,6 +32,7 @@ import { SellerOrderComponent } from './pages/order/seller-order/seller-order.co
 import { ProductResultComponent } from './pages/products/product-result/product-result.component';
 import { StoreProductsComponent } from './pages/stores/store-products/store-products.component';
 import { CategoyDetailComponent } from './pages/category-page/categoy-detail/categoy-detail.component';
+import { AboutUsComponent } from './pages/components/about-us/about-us.component';
 
 const routes: Routes = [
   {
@@ -44,6 +46,7 @@ const routes: Routes = [
   {
     path: 'wishlist',
     component: WishlistComponent,
+    canActivate: [AuthGuard],
   },
   {
     path: 'user/reset-password',
@@ -57,6 +60,10 @@ const routes: Routes = [
   {
     path: 'cart',
     component: CartComponent,
+  },
+  {
+    path: 'about-us',
+    component: AboutUsComponent,
   },
   {
     path: 'register',
@@ -81,17 +88,17 @@ const routes: Routes = [
   { path: 'update-product/:id', component: UpdateProductComponent, canActivate: [AuthGuard] },
   { path: 'product-detail/:id/:indexPhoto', component: ProductDetailComponent },
   { path: 'list-store', component: StoresComponent },
-  { path: 'all-stores', component: StoresComponent },
+  { path: 'all-stores', component: StoresViewComponent },
   { path: 'store-products/:id', component: StoreProductsComponent },
   { path: 'updatestore/:id', component: EditStoresComponent, canActivate: [AuthGuard] },
   { path: 'create-store', component: CreateStoresComponent, canActivate: [AuthGuard] },
-  { path: 'categories', component: CategoriesComponent },
+  { path: 'categories', component: CategoriesComponent, canActivate: [AuthGuard] },
   { path: 'categories-detail/:id', component: CategoyDetailComponent },
   { path: 'category', component: CategoryPageComponent },
   { path: 'update-categories/:id', component: UpdateCategoriesComponent },
   { path: 'create-categories', component: CreateCategoriesComponent, canActivate: [AuthGuard] },
   { path: 'orders/:id', component: OrderDetailsComponent },
-  { path: 'orders', component: OrderListComponent },
+  { path: 'orders', component: OrderListComponent, canActivate: [AuthGuard] },
   { path: 'orders-seller', component: SellerOrderComponent },
   { path: 'conditions', component: ConditionUsedComponent },
   { path: 'product/:keyword', component: ProductResultComponent },

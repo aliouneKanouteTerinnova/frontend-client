@@ -1,15 +1,7 @@
-<app-navbar></app-navbar>
-<app-header></app-header>
-
-<div class="container">
-  <h1 class="text-center my-5 deal">
-    <b>{{ storeName }}</b>
+<div class="container mt-5">
+  <h1 class="text-center my-5 deal mt-5">
+    <b class="mt-5">{{ storeName }}</b>
   </h1>
-  <div class="rating-wrap">
-    <span *ngFor="let rat of getCheckedRatingArray(rating)" class="fa fa-star checked"></span>
-    <span class="fa fa-star" *ngFor="let rat of getRatingArray(rating)"></span>
-    <div class="label-rating">({{ parseRating(rating) }} <span translate>search.vote</span>)</div>
-  </div>
   <h1 class="text-center my-5 deal" *ngIf="produits1.length > 0" translate>storeProduct.deals</h1>
   <div class="row">
     <div class="col" *ngFor="let produit1 of produits1; let i = index">
@@ -40,38 +32,11 @@
 </div>
 
 <div class="similar_products container" *ngIf="products.length !== 0">
-  <h1><span translate>review.reviews</span></h1>
-  <div class="button col-3" style="float: right">
-    <button (click)="addReview(idStore)"><span translate>review.addReview</span></button>
-  </div>
-  <br /><br /><br />
-  <br />
-  <div *ngFor="let review of reviews">
-    <div class="row">
-      <div class="col-6" style="float: left">
-        <h2>
-          <b>{{ review.user.username }}</b>
-        </h2>
-      </div>
-      <div class="col-6" style="float: right">
-        <h2>{{ review.created_at | date: 'dd/MM/yyyy hh:mm' }}</h2>
-      </div>
-    </div>
-    <h2>{{ review.title }}</h2>
-    <div class="rating-wrap">
-      <span *ngFor="let rat of getCheckedRatingArray(review.rating)" class="fa fa-star checked"> </span>
-      <span class="fa fa-star" *ngFor="let rat of getRatingArray(review.rating)"></span>
-      <div class="label-rating">({{ parseRating(review.rating) }} votes)</div>
-    </div>
-    <h4>{{ review.comment }}</h4>
-    <div class="row" style="float: right; margin-top: -3%" *ngIf="currentUser.user.username === review.user.username">
-      <button color="accent" (click)="updateReview(review.id)" *ngIf="currentUser" mat-button>
-        <mat-icon>edit</mat-icon>
-      </button>
-      <button (click)="deleteReview(review.id)" *ngIf="currentUser" mat-button color="accent">
-        <mat-icon>delete</mat-icon>
-      </button>
-    </div>
-    <hr />
-  </div>
+  <app-reviews
+    (reviewEdit)="updateReview($event)"
+    (reviewAdd)="addReview(idStore)"
+    (reviewDelete)="deleteReview($event)"
+    [reviews]="reviews"
+    [rating]="rating"
+  ></app-reviews>
 </div>

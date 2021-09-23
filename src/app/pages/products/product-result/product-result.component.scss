@@ -7,7 +7,7 @@
 }
 
 .section-content {
-  margin-top: -195px;
+  margin-top: -30px;
 }
 .product {
   background-color: rgba(244, 245, 240, 0.959);
@@ -87,6 +87,13 @@
   justify-content: space-between;
   align-items: center;
   margin: auto;
+}
+
+@media (max-width: 768px) {
+  .filters,
+  header {
+    display: none;
+  }
 }
 
 @media only screen and (max-width: 600px) {

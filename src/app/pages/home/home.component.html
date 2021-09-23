@@ -1,155 +1,23 @@
-<app-navbar></app-navbar>
-<app-header></app-header>
-<search-bar (login)="searchProducts($event)"></search-bar>
+<app-headers></app-headers>
 
-<div class="scrollBar" *ngIf="products.length > 0">
-  <div class="buttonEl">
-    <button mat-raised-button color="primary" class="categoryScroll" routerLink="/category">
-      <span translate>home.category</span>
-    </button>
-  </div>
-  <div class="_2KdhY">
-    <div class="_2B5SH _1nF12 _3S3n_">
-      <div class="_1Fn_q _2e6WW" *ngIf="left">
-        <button type="button" title="scroll" class="_1Abnl _3d86A hvMNc _1mizB" (click)="handleLeftClick()">
-          <svg width="24" height="24" class="_1A-eG" version="1.1" viewBox="0 0 32 32" aria-hidden="false">
-            <path d="M20.6667 24.6666l-2 2L8 16 18.6667 5.3333l2 2L12 16l8.6667 8.6666z"></path>
-          </svg>
-        </button>
-      </div>
-      <div class="_1czme _2e6WW" *ngIf="right">
-        <button type="button" title="scroll" class="_1Abnl _3d86A y6Io2 _2wD_J" (click)="handleRightClick()">
-          <svg width="150" height="150" class="_1A-eG" version="1.1" viewBox="0 0 32 32" aria-hidden="false">
-            <path d="M11.3333 7.3333l2-2L24 16 13.3333 26.6666l-2-2L20 16l-8.6667-8.6667z"></path>
-          </svg>
-        </button>
-      </div>
+<app-regions></app-regions>
 
-      <div class="_1RBDA">
-        <div></div>
-        <div class="_2QwuK">
-          <div class="_22XDl">
-            <div class="mkUrf" *ngFor="let country of countries">
-              <div class="uCURQ _3CVLp">
-                <a title="More building images" class="zVhYF xLon9 _1CBrG _1ByhS" routerLink="/category">{{
-                  country
-                }}</a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+<div class="container">
+  <app-best-deals title="Best deals" [products]="bestDeals" carouselId="carouselExampleIndicators3"></app-best-deals>
+
+  <app-loading-spinner *ngIf="showSpinner"></app-loading-spinner>
 </div>
-<div class="main" *ngIf="products.length > 0">
-  <div class="product" *ngFor="let product of products; let i = index">
-    <img src="{{ product.images[0].file }}" alt="" (click)="imageClicked()" />
-    <div class="overview1" (click)="imageClicked(product.id, i)">
-      <!-- <h3>overview:</h3> -->
-      <div class="product-icon">
-        <div class="icon-element">
-          <img
-            class="icon-heart"
-            src="./../../assets/img/icons/Contour.svg"
-            alt="user_icon"
-            (click)="AddWishlist(product.id)"
-          />
-          <span translate>home.aimer</span>
-        </div>
-        <div class="icon-element">
-          <img class="icon" src="./../../assets/img/icons/panier.svg" alt="user_icon" (click)="addToCart(product.id)" />
-          <span translate>home.ajouter</span>
-        </div>
-      </div>
-      <span class="price">{{ formatPrice(product.price | currency: 'EUR') }}</span>
-    </div>
-    <a (click)="redirectProduct(product.id, i)">
-      <div class="product-info">
-        <h3 *ngIf="product.name.length > 17">{{ product.name.slice(0, 20) }}...</h3>
-        <h3 *ngIf="product.name.length <= 17">{{ product.name }}</h3>
-      </div></a
-    >
-  </div>
-</div>
-<div class="main" *ngIf="products.length === 0">
-  <!-- <span class="not-found" translate>home.result</span> -->
-</div>
-<div class="subtitle" *ngIf="products.length > 0"><h3 translate>home.best_sale</h3></div>
-<div class="main">
-  <div class="product" *ngFor="let product of bestSelling; let i = index">
-    <img src="{{ product.images[0].file }}" alt="" />
-    <div class="overview1" (click)="imageClicked(product.id, i)">
-      <!-- <h3>overview:</h3> -->
-      <div class="product-icon">
-        <div class="icon-element">
-          <img
-            class="icon-heart"
-            src="./../../assets/img/icons/Contour.svg"
-            alt="user_icon"
-            (click)="AddWishlist(product.id)"
-          />
-          <span translate>home.aimer</span>
-        </div>
-        <div class="icon-element">
-          <img class="icon" src="./../../assets/img/icons/panier.svg" alt="user_icon" (click)="addToCart(product.id)" />
-          <span translate>home.ajouter</span>
-        </div>
-      </div>
-      <span class="price">{{ formatPrice(product.price | currency: 'EUR') }}</span>
-    </div>
-    <a routerLink="/product-detail/{{ product.id }}/{{ i }}/">
-      <div class="product-info">
-        <h3 *ngIf="product.name.length > 17">{{ product.name.slice(0, 20) }}...</h3>
-        <h3 *ngIf="product.name.length <= 17">{{ product.name }}</h3>
-      </div></a
-    >
-  </div>
-</div>
-<div class="advertise" *ngIf="products.length > 0">
-  <div class="title">
-    <h3>
-      Lorem ips <br />
-      dolor sit amet
-    </h3>
-    <h6>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore<br />
-      magna aliqua. Ut enim ad minim veniam, quis nostrud
-    </h6>
-    <button mat-button class="advertiseBtn"><span translate>home.plus </span></button>
-  </div>
-  <div class="imgEl">
-    <img src="./../../assets/img/clothes.png" alt="advertise" />
-  </div>
-</div>
-<div class="subtitle" *ngIf="goodStuff.length > 0"><h3 translate>home.good_deals</h3></div>
-<div class="main">
-  <div class="product" *ngFor="let product of goodStuff; let i = index">
-    <img src="{{ product.images[0].file }}" alt="" />
-    <div class="overview1" (click)="imageClicked(product.id, i)">
-      <!-- <h3>overview:</h3> -->
-      <div class="product-icon">
-        <div class="icon-element">
-          <img
-            class="icon-heart"
-            src="./../../assets/img/icons/Contour.svg"
-            alt="user_icon"
-            (click)="AddWishlist(product.id)"
-          />
-          <span translate>home.aimer</span>
-        </div>
-        <div class="icon-element">
-          <img class="icon" src="./../../assets/img/icons/panier.svg" alt="user_icon" (click)="addToCart(product.id)" />
-          <span translate>home.ajouter</span>
-        </div>
-      </div>
-      <span class="price">{{ formatPrice(product.price | currency: 'EUR') }}</span>
-    </div>
-    <a routerLink="/product-detail/{{ product.id }}/{{ i }}/">
-      <div class="product-info">
-        <h3 *ngIf="product.name.length > 17">{{ product.name.slice(0, 20) }}...</h3>
-        <h3 *ngIf="product.name.length <= 17">{{ product.name }}</h3>
-      </div></a
-    >
-  </div>
+
+<app-pub-section></app-pub-section>
+
+<app-top-categories></app-top-categories>
+
+<div class="container">
+  <app-best-deals
+    title="Most popular"
+    [products]="mostPopular"
+    carouselId="carouselExampleIndicators4"
+  ></app-best-deals>
+
+  <app-loading-spinner *ngIf="showSpinner"></app-loading-spinner>
 </div>

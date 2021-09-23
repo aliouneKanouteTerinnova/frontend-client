@@ -1,3 +1,9 @@
+import { SwalComponent } from '@sweetalert2/ngx-sweetalert2';
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/ban-types */
+/* eslint-disable @typescript-eslint/no-unsafe-return */
+/* eslint-disable @typescript-eslint/restrict-plus-operands */
+/* eslint-disable @typescript-eslint/no-floating-promises */
 import { I18nServiceService } from 'src/app/services/i18n-service/i18n-service.service';
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 /* eslint-disable @typescript-eslint/indent */
@@ -7,7 +13,7 @@ import { I18nServiceService } from 'src/app/services/i18n-service/i18n-service.s
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import { ProductsService } from 'src/app/services/products/products.service';
 import { AuthenticationsService } from 'src/app/services/authentications/authentications.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { AuthResponded } from 'src/app/models/auth/auth';
 import { WishlistService } from 'src/app/services/wishlist/wishlist.service';
 import Swal from 'sweetalert2';
@@ -19,11 +25,17 @@ import { CartService } from 'src/app/services/cart/cart.service';
   styleUrls: ['./wishlist.component.scss'],
 })
 export class WishlistComponent implements OnInit {
-  currentUser: AuthResponded;
+  @ViewChild('effacerSwal', { static: false })
+  private effacerSwal: SwalComponent;
+  currentUser: any;
   token;
   wishlists = [];
   items;
   similarProducts = [];
+  home = '/';
+  categoryName = 'wishlists';
+  showSpinner = true;
+  productId: any;
 
   constructor(
     private productsService: ProductsService,
@@ -35,7 +47,7 @@ export class WishlistComponent implements OnInit {
 
   ngOnInit(): void {
     this.currentUser = this.authService.currentUserValue;
-    this.token = this.currentUser['user'].token;
+    this.token = this.currentUser.token || this.currentUser['user'].token;
     this.getProducts();
     this.getWishlist();
   }
@@ -43,6 +55,7 @@ export class WishlistComponent implements OnInit {
   getWishlist(): void {
     this.wishlistService.getAllWishlist(this.token).subscribe((data) => {
       this.items = data.body.items;
+      this.showSpinner = false;
       this.items.forEach((element) => {
         this.productsService.getCurrentData(element.product).subscribe((res) => {
           const item = {
@@ -61,7 +74,8 @@ export class WishlistComponent implements OnInit {
     });
   }
 
-  addToCart(id: Number) {
+  addToCart(data): void {
+    const id = data.product.id;
     this.cartService.AddProductToCart(id);
     Swal.fire({
       // position: 'top-end',
@@ -69,11 +83,21 @@ export class WishlistComponent implements OnInit {
       title: 'Product added to cart!',
       showConfirmButton: false,
       timer: 2000,
+    }).then(() => {
+      console.log(data);
+      this.wishlistService.deletWishlist(data.item, this.token).subscribe(
+        (res) => {
+          window.location.reload();
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
     });
   }
 
   formatPrice(price: any) {
-    var prices = price.split('.');
+    let prices = price.split('.');
     if (this.i18nServiceService.currentLangValue === null || this.i18nServiceService.currentLangValue === 'en') {
       prices = price;
     } else {
@@ -85,8 +109,8 @@ export class WishlistComponent implements OnInit {
     return prices;
   }
 
-  removeWishlist(id: any) {
-    this.wishlistService.deletWishlist(id, this.token).subscribe(
+  deleteProducts() {
+    this.wishlistService.deletWishlist(this.productId, this.token).subscribe(
       (res) => {
         Swal.fire({
           // position: 'top-end',
@@ -94,13 +118,19 @@ export class WishlistComponent implements OnInit {
           title: 'Items removed to your Wishlist!',
           showConfirmButton: false,
           timer: 2000,
+        }).then(() => {
+          // this.getWishlist();
+          window.location.reload();
         });
-        this.getWishlist();
-        window.location.reload();
       },
       (error) => {
         console.log(error);
       }
     );
+  }
+
+  removeWishlist(id: any) {
+    this.productId = id;
+    this.effacerSwal.fire();
   }
 }
