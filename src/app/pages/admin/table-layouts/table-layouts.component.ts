@@ -1,9 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-
-declare interface Th {
-  title: string;
-}
-export const THEAD: Th[] = [{ title: 'Product' }, { title: 'Price' }, { title: 'Quantity' }, { title: 'Amount' }];
+/* eslint-disable @typescript-eslint/member-ordering */
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-table-layouts',
@@ -11,10 +7,12 @@ export const THEAD: Th[] = [{ title: 'Product' }, { title: 'Price' }, { title: '
   styleUrls: ['./table-layouts.component.scss'],
 })
 export class TableLayoutsComponent implements OnInit {
-  thItems: any[];
+  @Input() thItems: any[];
+  @Input() title;
+  @Input() trItems: any[];
   constructor() {}
 
   ngOnInit(): void {
-    this.thItems = THEAD.filter((thItem) => thItem);
+    // this.trItems = TBODY.filter((thItem) => thItem);
   }
 }

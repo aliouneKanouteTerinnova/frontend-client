@@ -1,6 +1,6 @@
 <div class="card" style="border: none">
-  <div class="card-header card-header-warning">
-    <h4 class="card-title">Top Selling Product</h4>
+  <div *ngIf="title" class="card-header card-header-warning">
+    <h4 class="card-title">{{ title }}</h4>
   </div>
   <div class="card-body table-responsive">
     <table class="table table-hover">
@@ -8,29 +8,14 @@
         <th *ngFor="let item of thItems">{{ item.title }}</th>
       </thead>
       <tbody>
-        <tr>
-          <td>CamMask</td>
-          <td>€128.50</td>
-          <td>€128.50</td>
-          <td>€1,965.81</td>
-        </tr>
-        <tr>
-          <td>CaTam</td>
-          <td>€128.50</td>
-          <td>€128.50</td>
-          <td>€1,965.81</td>
-        </tr>
-        <tr>
-          <td>Waxy</td>
-          <td>€128.50</td>
-          <td>€128.50</td>
-          <td>€1,965.81</td>
-        </tr>
-        <tr>
-          <td>WaxCa</td>
-          <td>€128.50</td>
-          <td>€128.50</td>
-          <td>€1,965.81</td>
+        <tr *ngFor="let item of trItems">
+          <td>
+            <img class="mr-3" *ngIf="item.image" src="{{ item.image }}" width="50" height="50" alt="" />
+            {{ item.name }}
+          </td>
+          <td>{{ item.price }}</td>
+          <td>{{ item.quantity }}</td>
+          <td>{{ item.amount }}</td>
         </tr>
       </tbody>
     </table>

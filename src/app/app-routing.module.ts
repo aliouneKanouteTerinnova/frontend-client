@@ -34,6 +34,7 @@ import { StoreProductsComponent } from './pages/stores/store-products/store-prod
 import { CategoyDetailComponent } from './pages/category-page/categoy-detail/categoy-detail.component';
 import { AboutUsComponent } from './pages/components/about-us/about-us.component';
 import { DashoardComponent } from './pages/admin/dashoard/dashoard.component';
+import { AdminProductsComponent } from './pages/admin/admin-products/admin-products.component';
 
 const routes: Routes = [
   {
@@ -107,6 +108,10 @@ const routes: Routes = [
   { path: 'orders-seller', component: SellerOrderComponent },
   { path: 'conditions', component: ConditionUsedComponent },
   { path: 'product/:keyword', component: ProductResultComponent },
+  {
+    path: 'dashboard',
+    loadChildren: () => import('./pages/admin/admin.module').then((m) => m.AdminModule),
+  },
 ];
 @NgModule({
   declarations: [],

@@ -4,6 +4,7 @@
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
+import { Router } from '@angular/router';
 import { delay } from 'rxjs/operators';
 
 declare const $: any;
@@ -16,10 +17,28 @@ declare interface RouteInfo {
 export const ROUTES: RouteInfo[] = [
   { path: '/dashboard', title: 'Dashboard', icon: 'dashboard', class: '' },
   { path: '/sales-analytics', title: 'Sales analytics', icon: 'leaderboard', class: '' },
-  { path: '/products', title: 'Products', icon: 'ballot', class: '' },
-  { path: '/orders', title: 'Orders', icon: 'lock', class: '' },
-  { path: '/customers', title: 'Customers', icon: 'person', class: '' },
+  { path: '/admin-products', title: 'Products', icon: 'ballot', class: '' },
+  { path: '/admin-orders', title: 'Orders', icon: 'lock', class: '' },
+  { path: '/admin-customers', title: 'Customers', icon: 'person', class: '' },
 ];
+
+declare interface Tr {
+  name: string;
+  price: string;
+  quantity: string;
+  amount: string;
+}
+export const TBODY: Tr[] = [
+  { name: 'CamMask', price: '€128.50', quantity: '5', amount: '€1,965.81' },
+  { name: 'CaTam', price: '€128.50', quantity: '5', amount: '€1,965.81' },
+  { name: 'Waxy', price: '€128.50', quantity: '5', amount: '€1,965.81' },
+  { name: 'WaxCa', price: '€128.50', quantity: '5', amount: '€1,965.81' },
+];
+
+declare interface Th {
+  title: string;
+}
+export const THEAD: Th[] = [{ title: 'Product' }, { title: 'Price' }, { title: 'Quantity' }, { title: 'Amount' }];
 
 @Component({
   selector: 'app-sidebar',
@@ -30,6 +49,9 @@ export class SidebarComponent implements OnInit {
   @ViewChild(MatSidenav)
   sidenav!: MatSidenav;
   menuItems: any[];
+  thItems: any[];
+  trItem: any[];
+  title = 'Top Selling Product';
 
   itemsP = 2332;
   itemsNameP = 'Pending orders';
@@ -51,10 +73,12 @@ export class SidebarComponent implements OnInit {
   imgBgN = './../../../../assets/dashboard/Rectangle 6 (3).svg';
   imgN = './../../../../assets/dashboard/Group (3).svg';
 
-  constructor(private observer: BreakpointObserver) {}
+  constructor(private router: Router, private observer: BreakpointObserver) {}
 
   ngOnInit(): void {
     this.menuItems = ROUTES.filter((menuItem) => menuItem);
+    this.thItems = THEAD.filter((thItem) => thItem);
+    this.trItem = TBODY.filter((thItem) => thItem);
   }
 
   ngAfterViewInit(): void {

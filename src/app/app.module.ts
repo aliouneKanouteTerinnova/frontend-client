@@ -92,6 +92,8 @@ import { SidebarComponent } from './pages/admin/sidebar/sidebar.component';
 import { BoxLayoutsComponent } from './pages/admin/box-layouts/box-layouts.component';
 import { TableLayoutsComponent } from './pages/admin/table-layouts/table-layouts.component';
 import { AdminNavbarComponent } from './pages/admin/components/admin-navbar/admin-navbar.component';
+import { AdminProductsComponent } from './pages/admin/admin-products/admin-products.component';
+import { AdminModule } from './pages/admin/admin.module';
 
 export function rootLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -171,6 +173,7 @@ const CLIENT_ID = environment.clientId;
     BoxLayoutsComponent,
     TableLayoutsComponent,
     AdminNavbarComponent,
+    AdminProductsComponent,
   ],
 
   imports: [
@@ -189,6 +192,7 @@ const CLIENT_ID = environment.clientId;
     }),
     HttpClientModule,
     SharedModule,
+    AdminModule,
     FormsModule,
     SocialLoginModule,
     ReactiveFormsModule,
