@@ -52,6 +52,8 @@ export class SidebarComponent implements OnInit {
   thItems: any[];
   trItem: any[];
   title = 'Top Selling Product';
+  welcome = 'Mr Test Test';
+  infos = 'here are the informations we have on your shops';
 
   itemsP = 2332;
   itemsNameP = 'Pending orders';

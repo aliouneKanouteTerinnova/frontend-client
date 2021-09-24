@@ -108,9 +108,19 @@ const routes: Routes = [
   { path: 'orders-seller', component: SellerOrderComponent },
   { path: 'conditions', component: ConditionUsedComponent },
   { path: 'product/:keyword', component: ProductResultComponent },
+  // {
+  //   path: 'dashboard',
+  //   loadChildren: () => import('./pages/admin/admin.module').then((m) => m.AdminModule),
+  // },
   {
     path: 'dashboard',
-    loadChildren: () => import('./pages/admin/admin.module').then((m) => m.AdminModule),
+    component: DashoardComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'admin-products',
+    component: AdminProductsComponent,
+    canActivate: [AuthGuard],
   },
 ];
 @NgModule({

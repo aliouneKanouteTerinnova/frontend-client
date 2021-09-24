@@ -1,4 +1,24 @@
-import { Component, OnInit } from '@angular/core';
+/* eslint-disable @typescript-eslint/no-floating-promises */
+import { delay } from 'rxjs/operators';
+import { BreakpointObserver } from '@angular/cdk/layout';
+import { Router } from '@angular/router';
+import { MatSidenav } from '@angular/material/sidenav';
+import { Component, OnInit, ViewChild } from '@angular/core';
+
+declare const $: any;
+declare interface RouteInfo {
+  path: string;
+  title: string;
+  icon: string;
+  class: string;
+}
+export const ROUTES: RouteInfo[] = [
+  { path: '/dashboard', title: 'Dashboard', icon: 'dashboard', class: '' },
+  { path: '/sales-analytics', title: 'Sales analytics', icon: 'leaderboard', class: '' },
+  { path: '/admin-products', title: 'Products', icon: 'ballot', class: '' },
+  { path: '/admin-orders', title: 'Orders', icon: 'lock', class: '' },
+  { path: '/admin-customers', title: 'Customers', icon: 'person', class: '' },
+];
 
 declare interface Th {
   title: string;
@@ -56,13 +76,34 @@ export const TBODY: Tr[] = [
   styleUrls: ['./admin-products.component.scss'],
 })
 export class AdminProductsComponent implements OnInit {
+  @ViewChild(MatSidenav)
+  sidenav!: MatSidenav;
+  menuItems: any[];
   thItem: any[];
   trItem: any[];
   title;
-  constructor() {}
+  welcome = 'Products';
+  infos = '';
+  constructor(private router: Router, private observer: BreakpointObserver) {}
 
   ngOnInit(): void {
+    this.menuItems = ROUTES.filter((menuItem) => menuItem);
     this.thItem = THEAD.filter((thItem) => thItem);
     this.trItem = TBODY.filter((thItem) => thItem);
+  }
+
+  ngAfterViewInit(): void {
+    this.observer
+      .observe(['(max-width: 800px)'])
+      .pipe(delay(1))
+      .subscribe((res) => {
+        if (res.matches) {
+          this.sidenav.mode = 'over';
+          this.sidenav.close();
+        } else {
+          this.sidenav.mode = 'side';
+          this.sidenav.open();
+        }
+      });
   }
 }
