@@ -85,9 +85,12 @@ import { FloatingShareButtonComponent } from './components/floating-share-button
 import { SocialLoginModule, SocialAuthServiceConfig } from 'angularx-social-login';
 import { GoogleLoginProvider, FacebookLoginProvider } from 'angularx-social-login';
 import { environment } from 'src/environments/environment';
+<<<<<<< HEAD
+=======
 import { ShippingAdressComponent } from './components/shipping-adress/shipping-adress.component';
 import { ShippingComponent } from './components/shipping/shipping.component';
 import { BankAccountComponent } from './components/bank-account/bank-account.component';
+>>>>>>> 6daacc496cabc2fc0cb09da4e0a82fa5b7a9c40b
 import { StoresViewComponent } from './pages/components/stores-view/stores-view.component';
 import { LayoutsComponent } from './pages/components/stores-view/layouts/layouts.component';
 import { AboutUsComponent } from './pages/components/about-us/about-us.component';
@@ -167,10 +170,13 @@ const CLIENT_ID = environment.clientId;
     OrderItemComponent,
     OrderStatusComponent,
     LoadingSpinnerComponent,
+<<<<<<< HEAD
+=======
     ShippingAdressComponent,
     ArticleCheckoutComponent,
     ShippingComponent,
     BankAccountComponent,
+>>>>>>> 6daacc496cabc2fc0cb09da4e0a82fa5b7a9c40b
     FloatingShareButtonComponent,
 
     StoresViewComponent,
