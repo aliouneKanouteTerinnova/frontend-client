@@ -1,3 +1,12 @@
+/* eslint-disable object-shorthand */
+import { Address } from './../../../dtos/order/address';
+/* eslint-disable @typescript-eslint/naming-convention */
+import { FormGroup } from '@angular/forms';
+import { AccountType } from './../../../enums/account-type.enum';
+/* eslint-disable @typescript-eslint/restrict-plus-operands */
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+import { SellersRegisterService } from './../../../services/sellers-register/sellers-register.service';
+import { SwalComponent } from '@sweetalert2/ngx-sweetalert2';
 /* eslint-disable @typescript-eslint/restrict-plus-operands */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unused-vars */
@@ -15,9 +24,10 @@ import { CartModelServer } from './../../../models/cart/cart';
 import { Router } from '@angular/router';
 import { CategoriesService } from 'src/app/services/categories/categories.service';
 import { AuthenticationsService } from 'src/app/services/authentications/authentications.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { SignupComponent } from 'src/app/pages/components/signup/signup.component';
+import { User } from 'src/app/models/user/user';
 
 @Component({
   selector: 'app-buyer-navbar',
@@ -25,6 +35,8 @@ import { SignupComponent } from 'src/app/pages/components/signup/signup.componen
   styleUrls: ['./buyer-navbar.component.scss'],
 })
 export class BuyerNavbarComponent implements OnInit {
+  @ViewChild('effacerSwal', { static: false })
+  private effacerSwal: SwalComponent;
   categoryParents = [];
   category = [];
   subCategory: string;
@@ -40,8 +52,12 @@ export class BuyerNavbarComponent implements OnInit {
   lang = '';
   changeLanguage = 'de';
   user: any;
+  users: any;
+  updateForm: FormGroup;
+  // userAccountType = 'Seller';
   constructor(
     private authService: AuthenticationsService,
+    private sellersRegisterService: SellersRegisterService,
     private categoriesService: CategoriesService,
     private router: Router,
     private i18nServiceService: I18nServiceService,
@@ -57,18 +73,13 @@ export class BuyerNavbarComponent implements OnInit {
     } else {
       this.lang = '🇫🇷';
     }
-
     this.currentUser = await this.authService.currentUserValue;
-    console.log(this.currentUser);
-    if (this.currentUser) {
-      const res: any = await this.authService
-        .getUser(this.currentUser.token || this.currentUser['user'].token)
-        .toPromise();
-      console.log(res);
-      this.user = res.body['user'].username;
-      // localStorage.setItem('currentUser', JSON.stringify(res.body['user']));
 
-      if (this.currentUser.account_type === 'SELLER' || this.currentUser.account_type === 'Seller') {
+    if (this.currentUser) {
+      this.users = await this.authService.getUser(this.currentUser.token || this.currentUser['user'].token).toPromise();
+      this.user = this.users.body['user'].username || this.users.username;
+
+      if (this.users.body['user'].account_type === 'SELLER' || this.users.body['user'].account_type === 'Seller') {
         this.isSeller = true;
       }
     }
@@ -89,6 +100,45 @@ export class BuyerNavbarComponent implements OnInit {
     });
 
     this.getCategory();
+  }
+
+  toOpenDialog() {
+    if (this.currentUser) {
+      this.oldBuyerNewSeller();
+    }
+
+    if (!this.currentUser) {
+      this.openDialog();
+    }
+  }
+
+  oldBuyerNewSeller(): void {
+    this.effacerSwal.fire();
+  }
+
+  onUpdateUser() {
+    this.authService.getUser(this.currentUser.token || this.currentUser['user'].token).subscribe((data) => {
+      console.log(data.body);
+      const users: any = data.body;
+
+      console.log('user test ', users.user);
+
+      const user = {
+        username: users.user.username,
+        email: users.user.email,
+        gender: users.user.gender,
+        account_type: 'Seller',
+        address: users.user.address,
+      };
+
+      console.log(user);
+      this.authService.update(user, users.user.token).subscribe((res) => {
+        console.log('updated from backend ', res.body);
+        this.users = res.body;
+        console.log(this.users);
+        window.location.reload();
+      });
+    });
   }
 
   openDialog(): void {

@@ -37,29 +37,28 @@ export class ProfileComponent implements OnInit {
     private i18nServiceService: I18nServiceService
   ) {}
 
-  async ngOnInit() {
-    this.currentUser = await this.authService.currentUserValue;
+  ngOnInit(): void {
+    this.currentUser = this.authService.currentUserValue;
+    this.getProfileData();
+    this.wallet();
+  }
 
+  async getProfileData(): Promise<any> {
     if (this.currentUser) {
-      const res: any = await this.authService
-        .getUser(this.currentUser.token || this.currentUser['user'].token)
-        .toPromise();
-      console.log(res);
-      this.user = res.body['user'];
+      const res = await this.authService.getUser(this.currentUser.token || this.currentUser['user'].token).toPromise();
+      this.user = res.body['user'] || res;
       this.router.navigate(['/profile']);
+
       if (res) {
         this.showSpinner = false;
-        // window.location.reload();
       }
 
-      if (this.currentUser.account_type === 'SELLER' || this.currentUser.account_type === 'Seller') {
+      if (res.body['user'].account_type === 'SELLER' || res.body['user'].account_type === 'Seller') {
         this.is_seller = true;
       }
     } else {
       this.router.navigate(['/register']);
     }
-
-    this.wallet();
   }
 
   wallet() {

@@ -18,6 +18,7 @@ export type AuthResponded = {
   id: string;
   email: string;
   username: string;
+  fullname: string;
   token: string;
   account_type: AccountType;
   gender: Gender;
@@ -27,6 +28,7 @@ export type AuthResponded = {
 export type RegisterResponded = {
   email: string;
   username: string;
+  fullname: string;
   token: string;
   is_verified: boolean;
   account_type: AccountType;

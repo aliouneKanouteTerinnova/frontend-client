@@ -19,6 +19,13 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
+
+import { MatRippleModule } from '@angular/material/core';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatSidenavModule } from '@angular/material/sidenav';
+
 @NgModule({
   declarations: [],
   imports: [],
@@ -42,6 +49,12 @@ import { MatSelectModule } from '@angular/material/select';
     MatExpansionModule,
     MatRadioModule,
     MatSelectModule,
+    MatSidenavModule,
+    MatRippleModule,
+    MatFormFieldModule,
+    MatDividerModule,
+    MatSelectModule,
+    MatTooltipModule,
   ],
   providers: [
     {

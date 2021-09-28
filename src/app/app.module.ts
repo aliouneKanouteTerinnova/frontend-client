@@ -81,12 +81,23 @@ import { OrderItemComponent } from './components/order-item/order-item.component
 import { OrderStatusComponent } from './components/order-status/order-status.component';
 import { LoadingSpinnerComponent } from './components/loading-spinner/loading-spinner.component';
 import { RouteReuseStrategy } from '@angular/router';
+import { FloatingShareButtonComponent } from './components/floating-share-button/floating-share-button.component';
 import { SocialLoginModule, SocialAuthServiceConfig } from 'angularx-social-login';
 import { GoogleLoginProvider, FacebookLoginProvider } from 'angularx-social-login';
 import { environment } from 'src/environments/environment';
 import { ShippingAdressComponent } from './components/shipping-adress/shipping-adress.component';
 import { ShippingComponent } from './components/shipping/shipping.component';
 import { BankAccountComponent } from './components/bank-account/bank-account.component';
+import { StoresViewComponent } from './pages/components/stores-view/stores-view.component';
+import { LayoutsComponent } from './pages/components/stores-view/layouts/layouts.component';
+import { AboutUsComponent } from './pages/components/about-us/about-us.component';
+import { DashoardComponent } from './pages/admin/dashoard/dashoard.component';
+import { SidebarComponent } from './pages/admin/sidebar/sidebar.component';
+import { BoxLayoutsComponent } from './pages/admin/box-layouts/box-layouts.component';
+import { TableLayoutsComponent } from './pages/admin/table-layouts/table-layouts.component';
+import { AdminNavbarComponent } from './pages/admin/components/admin-navbar/admin-navbar.component';
+import { AdminProductsComponent } from './pages/admin/admin-products/admin-products.component';
+import { AdminModule } from './pages/admin/admin.module';
 
 export function rootLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -160,6 +171,17 @@ const CLIENT_ID = environment.clientId;
     ArticleCheckoutComponent,
     ShippingComponent,
     BankAccountComponent,
+    FloatingShareButtonComponent,
+
+    StoresViewComponent,
+    LayoutsComponent,
+    AboutUsComponent,
+    DashoardComponent,
+    SidebarComponent,
+    BoxLayoutsComponent,
+    TableLayoutsComponent,
+    AdminNavbarComponent,
+    AdminProductsComponent,
   ],
 
   imports: [
@@ -179,6 +201,7 @@ const CLIENT_ID = environment.clientId;
     }),
     HttpClientModule,
     SharedModule,
+    AdminModule,
     FormsModule,
     SocialLoginModule,
     ReactiveFormsModule,

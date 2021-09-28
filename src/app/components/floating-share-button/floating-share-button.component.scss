@@ -1,0 +1,27 @@
+.social-media {
+  top: 50%;
+  right: 50px;
+  position: fixed;
+  z-index: 1;
+
+  .social-content {
+    position: relative;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1.25rem;
+
+    .social-items {
+      margin-bottom: 1rem;
+      margin-right: 0px;
+      padding: 10px;
+      background: aqua;
+      border-radius: 50%;
+      background-color: #29235c;
+
+      &:hover {
+        background-color: #f39200;
+      }
+    }
+  }
+}

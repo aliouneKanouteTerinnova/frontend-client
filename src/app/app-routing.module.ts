@@ -1,3 +1,4 @@
+import { StoresViewComponent } from './pages/components/stores-view/stores-view.component';
 import { WishlistComponent } from './pages/wishlist/wishlist.component';
 import { CategoryPageComponent } from './pages/category-page/category-page.component';
 import { UpdateCategoriesComponent } from './pages/categories/update-categories/update-categories.component';
@@ -31,6 +32,9 @@ import { SellerOrderComponent } from './pages/order/seller-order/seller-order.co
 import { ProductResultComponent } from './pages/products/product-result/product-result.component';
 import { StoreProductsComponent } from './pages/stores/store-products/store-products.component';
 import { CategoyDetailComponent } from './pages/category-page/categoy-detail/categoy-detail.component';
+import { AboutUsComponent } from './pages/components/about-us/about-us.component';
+import { DashoardComponent } from './pages/admin/dashoard/dashoard.component';
+import { AdminProductsComponent } from './pages/admin/admin-products/admin-products.component';
 
 const routes: Routes = [
   {
@@ -60,6 +64,10 @@ const routes: Routes = [
     component: CartComponent,
   },
   {
+    path: 'about-us',
+    component: AboutUsComponent,
+  },
+  {
     path: 'register',
     component: RegistrationComponent,
     canActivate: [NotConnectedGuard],
@@ -76,13 +84,17 @@ const routes: Routes = [
     path: 'profile',
     component: ProfileComponent,
   },
+  {
+    path: 'dashboard',
+    component: DashoardComponent,
+  },
   { path: 'products', component: ProductsComponent },
   { path: 'addproduct', component: CreateProductComponent, canActivate: [AuthGuard] },
   { path: 'checkout', component: CheckoutComponent, canActivate: [AuthGuard] },
   { path: 'update-product/:id', component: UpdateProductComponent, canActivate: [AuthGuard] },
   { path: 'product-detail/:id/:indexPhoto', component: ProductDetailComponent },
   { path: 'list-store', component: StoresComponent },
-  { path: 'all-stores', component: StoresComponent },
+  { path: 'all-stores', component: StoresViewComponent },
   { path: 'store-products/:id', component: StoreProductsComponent },
   { path: 'updatestore/:id', component: EditStoresComponent, canActivate: [AuthGuard] },
   { path: 'create-store', component: CreateStoresComponent, canActivate: [AuthGuard] },
@@ -96,6 +108,20 @@ const routes: Routes = [
   { path: 'orders-seller', component: SellerOrderComponent },
   { path: 'conditions', component: ConditionUsedComponent },
   { path: 'product/:keyword', component: ProductResultComponent },
+  // {
+  //   path: 'dashboard',
+  //   loadChildren: () => import('./pages/admin/admin.module').then((m) => m.AdminModule),
+  // },
+  {
+    path: 'dashboard',
+    component: DashoardComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'admin-products',
+    component: AdminProductsComponent,
+    canActivate: [AuthGuard],
+  },
 ];
 @NgModule({
   declarations: [],
