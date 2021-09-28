@@ -43,6 +43,7 @@ import { ProfileComponent } from './pages/user/profile/profile.component';
 import { OrderListComponent } from './pages/order/order-list/order-list.component';
 import { OrderDetailsComponent } from './pages/order/order-details/order-details.component';
 import { RegistrationComponent } from './pages/user/registration/registration.component';
+import { ArticleCheckoutComponent } from './components/article-checkout/article-checkout.component';
 
 import { StripeModule } from 'stripe-angular';
 import { ConditionUsedComponent } from './pages/user/condition-used/condition-used.component';
@@ -83,6 +84,9 @@ import { RouteReuseStrategy } from '@angular/router';
 import { SocialLoginModule, SocialAuthServiceConfig } from 'angularx-social-login';
 import { GoogleLoginProvider, FacebookLoginProvider } from 'angularx-social-login';
 import { environment } from 'src/environments/environment';
+import { ShippingAdressComponent } from './components/shipping-adress/shipping-adress.component';
+import { ShippingComponent } from './components/shipping/shipping.component';
+import { BankAccountComponent } from './components/bank-account/bank-account.component';
 
 export function rootLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -152,6 +156,10 @@ const CLIENT_ID = environment.clientId;
     OrderItemComponent,
     OrderStatusComponent,
     LoadingSpinnerComponent,
+    ShippingAdressComponent,
+    ArticleCheckoutComponent,
+    ShippingComponent,
+    BankAccountComponent,
   ],
 
   imports: [

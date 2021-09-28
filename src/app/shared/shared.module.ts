@@ -18,6 +18,7 @@ import { MatCarouselModule } from '@ngmodule/material-carousel';
 import { MatDialogModule } from '@angular/material/dialog';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { MatRadioModule } from '@angular/material/radio';
+import { MatSelectModule } from '@angular/material/select';
 @NgModule({
   declarations: [],
   imports: [],
@@ -40,6 +41,7 @@ import { MatRadioModule } from '@angular/material/radio';
     MatProgressBarModule,
     MatExpansionModule,
     MatRadioModule,
+    MatSelectModule,
   ],
   providers: [
     {

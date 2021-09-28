@@ -26,10 +26,9 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     console.log = function () {};
     this.currentUser = this.authService.currentUserValue;
-    if (!isDevMode()) {
+    if (isDevMode()) {
       console.log = function () {};
     }
-    console.log = function () {};
   }
 
   goRegister() {

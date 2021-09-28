@@ -17,7 +17,7 @@
 /* eslint-disable max-len */
 import { PaymentsService } from './../../services/payments.service';
 /* eslint-disable @typescript-eslint/naming-convention */
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Address } from 'src/app/models/address/address';
@@ -35,6 +35,7 @@ import { I18nServiceService } from 'src/app/services/i18n-service/i18n-service.s
 import { CartItem } from 'src/app/dtos/cart-item/cart-item';
 import { CartModel } from 'src/app/models/cart/cart-model';
 import { CartItemModel } from 'src/app/models/cart/cart-item-model';
+import { ShippingAdressComponent } from 'src/app/components/shipping-adress/shipping-adress.component';
 
 @Component({
   selector: 'app-checkout',
@@ -60,6 +61,10 @@ export class CheckoutComponent implements OnInit {
   errorMessage: any;
   title = 'Billing';
   panelOpenState = false;
+
+  price = '100';
+  shop = 'Adidas';
+
   constructor(
     public cartService: CartService,
     private formBuilder: FormBuilder,
@@ -76,11 +81,13 @@ export class CheckoutComponent implements OnInit {
     this.cartService.cartDataObs$.subscribe((data: CartModelServer) => {
       this.cartData = data;
     });
+
     this.cartService.cartTotal$.subscribe((total) => {
       this.cartTotal = total;
     });
+
     this.checkoutForm = this.formBuilder.group({
-      firstname: [null, Validators.required],
+      fullname: [null, Validators.required],
       email: [null, [Validators.required, Validators.pattern(this.emailRegex)]],
       address: [null, Validators.required],
       city: [null, Validators.required],
@@ -94,12 +101,14 @@ export class CheckoutComponent implements OnInit {
       cvv: '',
       // sameadr: '',
     });
+
     this.initForm('', '');
+
     if (this.currentUser) {
       this.authService.getUser(this.currentUser.token || this.currentUser['user'].token).subscribe((data) => {
         const user: AuthResponded = data.body;
         this.checkoutForm.patchValue({
-          firstname: user['user'].username,
+          fulltname: user['user'].username,
           email: user['user'].email,
           state: user['user'].address.state,
           zip: user['user'].address.zipcode,
@@ -115,11 +124,13 @@ export class CheckoutComponent implements OnInit {
 
   getCartDto() {
     let items: CartItem[] = [];
+
     this.cartData.data.forEach((element) => {
       const item: CartItem = {
         product: element.product.id.toString(),
         quantity: element.numInCart,
       };
+
       items.push(item);
     });
 
@@ -170,13 +181,14 @@ export class CheckoutComponent implements OnInit {
     const style = {
       style: {
         base: {
-          fontFamily: 'Arial, sans-serif',
-          fontSize: '30px',
+          fontFamily: 'Raleway, sans-serif',
+          fontSize: '16px',
           color: '#C1C7CD',
         },
         invalid: { color: 'red' },
       },
     };
+
     this.card = elements.create('card', style);
 
     this.card.mount('#card-element');
@@ -213,12 +225,14 @@ export class CheckoutComponent implements OnInit {
             }
           );
         }); */
+
         const addresse: Address = {
           country: state,
           state: city,
           street: address,
           zipcode: zip,
         };
+
         const shippingAddress: ShippingAddress = {
           phone_number: '781051173',
           notes: '',
@@ -238,6 +252,7 @@ export class CheckoutComponent implements OnInit {
           shipping_address: shippingAddress,
           shipping_method: shippingMethod,
         };
+
         this.orderService.addOrder(order, this.currentUser.token || this.currentUser['user'].token).subscribe(
           (data) => {
             console.log('oder created ', data);
@@ -368,4 +383,35 @@ export class CheckoutComponent implements OnInit {
     //     this.totalCartItems = totalItems;
     //   })
   };
+
+  shipping() {}
+
+  // ChangeQuantity(id: Number, increaseQuantity: Boolean) {
+  //   this.cartService.UpdateCartData(id, increaseQuantity);
+  // }
+
+  // changeQuantity(e, c, index) {
+  //   const quantity = Number(e.target.value);
+  //   const temp = c.numInCart;
+  //   if (quantity > c.product.quantity) {
+  //     Swal.fire({
+  //       icon: 'error',
+  //       title: 'Oops...',
+  //       text: `${c.product.quantity} articles of ${c.product.name} left`,
+  //     });
+  //     c.numInCart = c.product.quantity;
+  //   } else if (quantity <= 0) {
+  //     Swal.fire({
+  //       icon: 'error',
+  //       title: 'Oops...',
+  //       text: 'You cannot have 0 article',
+  //     });
+  //     c.numInCart = 1;
+  //   } else {
+  //     c.numInCart = quantity - 1;
+  //     this.ChangeQuantity(index, true);
+  //   }
+
+  //   console.log(quantity, c);
+  // }
 }
