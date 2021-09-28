@@ -1,3 +1,10 @@
+/* eslint-disable @typescript-eslint/consistent-type-assertions */
+/* eslint-disable @typescript-eslint/no-floating-promises */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable object-shorthand */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/naming-convention */
+/* eslint-disable @typescript-eslint/unbound-method */
 import { Router } from '@angular/router';
 import { Store } from '../../../models/store/store';
 import { StoresService } from 'src/app/services/stores/stores.service';
@@ -40,6 +47,7 @@ export class CreateStoresComponent implements OnInit {
       country: ['', Validators.required],
       street: ['', Validators.required],
       image: ['', Validators.required],
+      region: ['', Validators.required],
     });
   }
 
@@ -68,15 +76,16 @@ export class CreateStoresComponent implements OnInit {
 
         store.name = this.createStore.get('name').value;
         store.address = address;
-
-        // data.created_by = this.currentUser.user.id;
-        // store.store_address = this.createStore.get('store_address').value;
         store.is_active = true;
-        store.products = [];
+        // store.products = [];
         store.image = this.image;
+        store.region = this.createStore.get('region').value;
+
+        console.log(store);
 
         this.storesService.createStores(store, this.currentUser.user.token).subscribe(
           (res) => {
+            console.log(res);
             Swal.fire({
               position: 'top-end',
               icon: 'success',

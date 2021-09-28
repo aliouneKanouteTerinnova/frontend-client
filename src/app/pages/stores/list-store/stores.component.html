@@ -37,7 +37,9 @@
           </div>
         </div>
         <div class="card-body adresse">
-          <b><span translate>store.address</span> :</b> {{ store.store_address }}
+          <!-- <b><span translate>store.address</span> :</b> {{ store.address }} -->
+          <span>Adress: {{ store.address.country }}</span> <br />
+          <span>Region: {{ store.region }}</span>
         </div>
         <div class="card-body adresse">
           <b><span translate>store.is_active</span> :</b> {{ store.is_active }}

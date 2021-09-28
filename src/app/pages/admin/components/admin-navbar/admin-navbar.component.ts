@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/dot-notation */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { I18nServiceService } from './../../../../services/i18n-service/i18n-service.service';
 /* eslint-disable @typescript-eslint/no-floating-promises */
 import { Router } from '@angular/router';
@@ -12,13 +15,23 @@ import { AuthenticationsService } from 'src/app/services/authentications/authent
 export class AdminNavbarComponent implements OnInit {
   @Input() welcome;
   @Input() infos;
+  currentUser: any;
+  users: any;
+  user: any;
   constructor(
     private authService: AuthenticationsService,
     private router: Router,
     private i18nServiceService: I18nServiceService
   ) {}
 
-  ngOnInit(): void {}
+  async ngOnInit() {
+    this.currentUser = await this.authService.currentUserValue;
+
+    if (this.currentUser) {
+      this.users = await this.authService.getUser(this.currentUser.token || this.currentUser['user'].token).toPromise();
+      this.user = this.users.body['user'].username || this.users.username;
+    }
+  }
 
   logout(): void {
     this.authService.logOut();
