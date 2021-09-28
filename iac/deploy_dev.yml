@@ -80,10 +80,10 @@
         docker pull terinnova/vaana-new-ui:v0.1
       become: yes
 
-    # - name: Kill Previous container
-    #   shell: |
-    #     docker kill new_ui
-    #   become: yes
+    - name: Kill Previous container
+      shell: |
+        docker kill new_ui
+      become: yes
 
     - name: Prune container
       docker_prune:
@@ -96,5 +96,5 @@
 
     - name: Run Image
       shell: |
-        docker run -d -p 8084:80 --name new_ui terinnova/vaana-new-ui:v0.1
+        docker run -d --restart always -p 8084:80 --name new_ui terinnova/vaana-new-ui:v0.1
       become: yes
