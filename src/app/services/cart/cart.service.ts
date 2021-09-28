@@ -28,6 +28,7 @@ export class CartService {
   ServerURL = environment.baseUrl;
 
   private cartDataClient: CartModelPublic = { prodData: [{ incart: 0, id: 0 }], total: 0 };
+
   // This will be sent to the backend Server as post data
   // Cart Data variable to store the cart information on the server
   private cartDataServer: CartModelServer = {
@@ -37,12 +38,16 @@ export class CartService {
         numInCart: 0,
       },
     ],
+
     total: 0,
   };
+
   info: CartModelPublic;
 
   cartTotal$ = new BehaviorSubject<Number>(0);
+
   productTotal$ = new BehaviorSubject<Number>(0);
+
   // Data variable to store the cart information on the client's local storage
 
   cartDataObs$ = new BehaviorSubject<CartModelServer>(this.cartDataServer);
@@ -90,6 +95,7 @@ export class CartService {
       });
     }
   }
+
   deleteCart() {
     this.cookieService.delete('cart');
     this.cartDataServer = {

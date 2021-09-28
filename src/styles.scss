@@ -32,3 +32,9 @@ body {
   background-color: rgba(243, 146, 0, 0.3) !important;
   color: #000 !important;
 }
+
+.billing {
+  :host ::ng-deep .mat-step-icon {
+    border-radius: 50% !important;
+  }
+}
