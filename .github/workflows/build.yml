@@ -107,7 +107,7 @@ jobs:
           ANSIBLE_HOST_KEY_CHECKING: 'false'
           ANSIBLE_DEPRECATION_WARNINGS: 'false'
 
-#       - name: Run playbook ok
+#       - name: Run playbook
 #         uses: dawidd6/action-ansible-playbook@v2
 #         with:
 #           playbook: deploy_dev.yml
