@@ -1,0 +1,26 @@
+<div class="shipping-adress">
+  <div class="address" *ngFor="let shippingAdress of shippingAdresses">
+    <ul>
+      <li class="">
+        <b>{{ shippingAdress.fullName }}</b>
+      </li>
+      <li class="">{{ shippingAdress.adress }}</li>
+      <li class="">{{ shippingAdress.city }}</li>
+      <li class="">{{ shippingAdress.country }}</li>
+    </ul>
+
+    <div class="deliver-to">
+      <a class="btn-deliver-to" href="#"> Deliver to this address </a>
+    </div>
+
+    <div class="edit-delete">
+      <div class="edit">
+        <a class="btn-edit" href="#">Edit</a>
+      </div>
+
+      <div class="delete">
+        <a class="btn-delete" href="#">Delete</a>
+      </div>
+    </div>
+  </div>
+</div>

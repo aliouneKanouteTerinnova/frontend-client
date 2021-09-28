@@ -1,9 +1,16 @@
 <app-nav-logo></app-nav-logo>
 <app-buyer-navbar></app-buyer-navbar>
+<<<<<<< HEAD
+=======
+<app-breadcrumb [name]="title"></app-breadcrumb>
+<!-- <div class="row p-5" style="margin-top: 20px">
+
+>>>>>>> 6daacc496cabc2fc0cb09da4e0a82fa5b7a9c40b
 <app-floating-share-button></app-floating-share-button>
 <div class="row p-5" style="margin-top: 20px">
   <div class="col-75">
     <div class="container">
+
       <form [formGroup]="checkoutForm" (submit)="checkout()">
         <div class="row">
           <div class="col-50">
@@ -60,12 +67,11 @@
         <label translate>
           <input type="checkbox" checked="checked" formControlName="sameadr" /> checkout.ship_bill
         </label>
-        <div style="float: right; margin-top: -40px">
-          <img src="./../../../assets/img/icons/secure-payment.svg" alt="secure" width="50" height="50" />
-        </div>
         <button class="btn" translate>checkout.checkout_button</button>
       </form>
+
       <div class="row" style="padding: 25px; margin: 0">
+
         <div class="col-100">
           <div class="container">
             <div class="mb-5 mt-5">
@@ -113,6 +119,372 @@
           ><b>{{ formatPrice(cartTotal | currency: 'EUR') }}</b></span
         >
       </p>
+    </div>
+  </div>
+</div> -->
+
+<div class="container">
+  <div class="billing">
+    <mat-horizontal-stepper #stepper>
+      <mat-step [stepControl]="testForm">
+        <ng-template matStepLabel>Shipping Adress</ng-template>
+
+        <app-shipping-adress></app-shipping-adress>
+
+        <hr />
+
+        <form [formGroup]="checkoutForm" (submit)="checkout()">
+          <div class="row1">
+            <h2>Add a new address</h2>
+
+            <mat-form-field appearance="outline" class="mr-4">
+              <mat-label for="fullname">Full Name</mat-label>
+              <input matInput type="text" id="fullname" formControlName="fullname" placeholder="Name" required />
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label for="email">Email</mat-label>
+              <input matInput type="text" id="email" formControlName="email" placeholder="john@example.com" required />
+            </mat-form-field>
+          </div>
+
+          <div class="row2">
+            <mat-form-field appearance="outline" class="mr-4">
+              <mat-label for="adress">Adress</mat-label>
+              <input
+                matInput
+                type="text"
+                id="adr"
+                formControlName="address"
+                placeholder="542 W. 15th Street"
+                required
+              />
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label for="city">City</mat-label>
+              <input matInput type="text" id="state" formControlName="city" required />
+            </mat-form-field>
+          </div>
+
+          <div class="row3">
+            <mat-form-field appearance="outline" class="mr-4">
+              <mat-label for="country">Country</mat-label>
+              <input matInput type="text" id="country" formControlName="country" required />
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label for="zip">Zip Code</mat-label>
+              <input matInput type="text" id="zip" formControlName="zip" required />
+            </mat-form-field>
+          </div>
+
+          <div class="row4">
+            <section class="example-section" [formGroup]="checkoutForm">
+              <p><mat-checkbox formControlName="same_adress">Use as my default address.</mat-checkbox></p>
+            </section>
+          </div>
+
+          <div>
+            <button mat-button matStepperNext>Use this adress</button>
+          </div>
+        </form>
+      </mat-step>
+
+      <mat-step>
+        <ng-template matStepLabel>Articles</ng-template>
+
+        <h2>Choose the delivery address for each item</h2>
+
+        <p>
+          Did you forget an address?
+          <a href="#"> Enter a new shipping address </a>
+        </p>
+
+        <form [formGroup]="checkoutForm" (submit)="checkout()">
+          <div class="article-header">
+            <div class="article"><b>Articles</b></div>
+            <div class="qte"><b>Qte</b></div>
+            <div class="shipadress"><b>Shipping Adress</b></div>
+          </div>
+
+          <hr />
+
+          <app-article-checkout></app-article-checkout>
+        </form>
+
+        <div>
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button matStepperNext>Got To Payment Method</button>
+        </div>
+      </mat-step>
+
+      <mat-step>
+        <ng-template matStepLabel>Shipping</ng-template>
+
+        <app-shipping></app-shipping>
+
+        <div>
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button matStepperNext>Got To Payment Method</button>
+        </div>
+      </mat-step>
+
+      <mat-step>
+        <ng-template matStepLabel>Choose Payment Method</ng-template>
+
+        <div>
+          <form></form>
+          <h2>Select a payment method</h2>
+
+          <div class="payment_method_selected"></div>
+
+          <hr />
+
+          <div></div>
+
+          <mat-accordion>
+            <mat-expansion-panel class="mb-4">
+              <mat-expansion-panel-header>
+                <mat-panel-title> Your bank account </mat-panel-title>
+              </mat-expansion-panel-header>
+
+              <div class="bank">
+                <form (ngSubmit)="OnSubmit()" [formGroup]="testForm">
+                  <!-- <div class="card uk-card-default uk-width-*">
+                    <div class="uk-card-header text-center" translate>payment.title</div>
+                    <div class="uk-card-body">
+                      <p class="text-danger">{{ errorMessage }}</p>
+            
+                      <input type="text" readonly id="amount" class="form-control" formControlName="amount" />
+                      <input type="text" readonly id="orderNumber" class="form-control" formControlName="orderNumber" />
+                      <div id="card-element" class="mt-3 mb-3"></div>
+                      <div class="card-errors" role="alert"></div>
+                      <button class="payBtn mt-3" type="submit" translate>payment.payment_button</button>
+                    </div>
+                  </div> -->
+
+                  <div class="row1">
+                    <h2>Add a current account</h2>
+
+                    <mat-form-field appearance="outline" class="mr-4">
+                      <mat-label for="fullname">BIC (Swift-Code)</mat-label>
+                      <input
+                        matInput
+                        type="text"
+                        id="fullname"
+                        formControlName="fullname"
+                        placeholder="Name"
+                        required
+                      />
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline" class="mr-4">
+                      <mat-label for="email">IBAN</mat-label>
+                      <input
+                        matInput
+                        type="text"
+                        id="email"
+                        formControlName="email"
+                        placeholder="john@example.com"
+                        required
+                      />
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline">
+                      <mat-label for="email">Account holder name</mat-label>
+                      <input
+                        matInput
+                        type="text"
+                        id="email"
+                        formControlName="email"
+                        placeholder="john@example.com"
+                        required
+                      />
+                    </mat-form-field>
+                  </div>
+
+                  <div class="row4">
+                    <section class="example-section" [formGroup]="checkoutForm">
+                      <p>
+                        <mat-checkbox formControlName="same_adress">Set as my default payment method.</mat-checkbox>
+                      </p>
+                    </section>
+                  </div>
+
+                  <div>
+                    <button class="payBtn mt-3" type="submit" translate>Add bank account</button>
+                  </div>
+                </form>
+
+                <div>
+                  <div></div>
+                </div>
+              </div>
+            </mat-expansion-panel>
+
+            <mat-expansion-panel class="mb-4">
+              <mat-expansion-panel-header>
+                <mat-panel-title> Your credit card </mat-panel-title>
+              </mat-expansion-panel-header>
+
+              <div class="credit-card">
+                <form (ngSubmit)="OnSubmit()" [formGroup]="testForm">
+                  <!-- <div class="card uk-card-default uk-width-*">
+                    <div class="uk-card-header text-center" translate>payment.title</div>
+                    <div class="uk-card-body">
+                      <p class="text-danger">{{ errorMessage }}</p>
+  
+                      <input type="text" readonly id="amount" class="form-control" formControlName="amount" />
+                      <input type="text" readonly id="orderNumber" class="form-control" formControlName="orderNumber" />
+                      <div id="card-element" class="mt-3 mb-3"></div>
+                      <div class="card-errors" role="alert"></div>
+                      <button class="payBtn mt-3" type="submit" translate>payment.payment_button</button>
+                    </div>
+                  </div> -->
+
+                  <div class="row1">
+                    <h2>Add a new address</h2>
+
+                    <mat-form-field appearance="outline" class="mr-4">
+                      <mat-label for="fullname">Card Number</mat-label>
+                      <input
+                        matInput
+                        type="text"
+                        id="fullname"
+                        formControlName="fullname"
+                        placeholder="Name"
+                        required
+                      />
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline">
+                      <mat-label for="email">Name on card</mat-label>
+                      <input
+                        matInput
+                        type="text"
+                        id="email"
+                        formControlName="email"
+                        placeholder="john@example.com"
+                        required
+                      />
+                    </mat-form-field>
+                  </div>
+                  <div>
+                    <mat-form-field appearance="outline" class="mr-4">
+                      <mat-select placeholder="01">
+                        <mat-option value="01">1</mat-option>
+                        <mat-option value="02">2</mat-option>
+                        <mat-option value="03">3</mat-option>
+                        <mat-option value="04">4</mat-option>
+                        <mat-option value="05">5</mat-option>
+                        <mat-option value="06">6</mat-option>
+                        <mat-option value="07">7</mat-option>
+                        <mat-option value="08">8</mat-option>
+                        <mat-option value="09">9</mat-option>
+                        <mat-option value="10">10</mat-option>
+                        <mat-option value="11">11</mat-option>
+                        <mat-option value="12">12</mat-option>
+                      </mat-select>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline">
+                      <mat-select placeholder="2022">
+                        <mat-option value="1">2023</mat-option>
+                        <mat-option value="2">2024</mat-option>
+                        <mat-option value="3">2025</mat-option>
+                        <mat-option value="3">2026</mat-option>
+                        <mat-option value="3">2027</mat-option>
+                        <mat-option value="3">2028</mat-option>
+                        <mat-option value="3">2029</mat-option>
+                        <mat-option value="3">2030</mat-option>
+                        <mat-option value="3">2031</mat-option>
+                        <mat-option value="3">2032</mat-option>
+                        <mat-option value="3">2033</mat-option>
+                        <mat-option value="3">2034</mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+
+                  <div class="row4">
+                    <section class="example-section" [formGroup]="checkoutForm">
+                      <p>
+                        <mat-checkbox formControlName="same_adress">Set as my default payment method.</mat-checkbox>
+                      </p>
+                    </section>
+                  </div>
+
+                  <div>
+                    <button class="payBtn mt-3" type="submit" translate>Add card</button>
+                  </div>
+                </form>
+
+                <div>
+                  <div><img src="../../../assets/img/credit-card.png" alt="" /></div>
+                </div>
+              </div>
+            </mat-expansion-panel>
+
+            <mat-expansion-panel class="mb-4">
+              <mat-expansion-panel-header>
+                <mat-panel-title> Others payment methods </mat-panel-title>
+              </mat-expansion-panel-header>
+
+              <p><a href="https://www.paypal.com/fr/signin">Add paypal account</a></p>
+            </mat-expansion-panel>
+          </mat-accordion>
+        </div>
+
+        <div>
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button matStepperNext>Review</button>
+        </div>
+      </mat-step>
+
+      <mat-step>
+        <ng-template matStepLabel>Review and payment</ng-template>
+
+        Display product ordered.
+
+        <div>
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button matStepperNext>Pay</button>
+        </div>
+      </mat-step>
+    </mat-horizontal-stepper>
+  </div>
+
+  <div class="col-25">
+    <div class="summary">
+      <div class="total">
+        <h6 class="title">Summary</h6>
+
+        <div class="subtotal">
+          <div class="subtotal1">
+            <span>Item Price :</span> <span class="devic">{{ formatPrice(cartTotal | currency: 'EUR') }}</span>
+          </div>
+
+          <div class="taxe">
+            <span>Taxe :</span>
+
+            <span class="devic">{{ formatPrice(cartTotal | currency: 'EUR') }}</span>
+          </div>
+
+          <hr />
+
+          <div class="subtotal1">
+            <span translate>Posting & pakaging :</span>
+
+            <span class="devic">{{ formatPrice(cartTotal | currency: 'EUR') }}</span>
+          </div>
+        </div>
+
+        <div class="checkouBtn"><button routerLink="#">Place Order</button></div>
+
+        <div class="text-order">
+          <span>By placing an order, you agree to Vaanah <a routerLink="#">terms and conditions.</a></span>
+        </div>
+      </div>
     </div>
   </div>
 </div>
