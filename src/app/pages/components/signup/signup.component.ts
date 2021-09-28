@@ -147,6 +147,7 @@ export class SignupComponent implements OnInit {
     const username = this.signinForm.get('username').value;
     const typeUser = 'Seller';
     const email = this.signinForm.get('email').value;
+    const fullname = '';
     const password = this.signinForm.get('password').value;
     const state = 'to be change';
     const zipcode = 'to be change';
@@ -163,6 +164,7 @@ export class SignupComponent implements OnInit {
     const user: User = {
       email: email,
       username: username,
+      fullname: fullname,
       account_type: typeUser,
       gender: gender,
       address: address,

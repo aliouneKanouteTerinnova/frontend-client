@@ -180,6 +180,7 @@ export class RegistrationComponent implements OnInit {
     const username = this.registerForm.get('username').value;
     const typeUser = this.registerForm.get('typeUser').value;
     const email = this.registerForm.get('email').value;
+    const fullname = '';
     const password = this.registerForm.get('password').value;
     const state = this.registerForm.get('state').value;
     const zipcode = this.registerForm.get('zipcode').value;
@@ -196,6 +197,7 @@ export class RegistrationComponent implements OnInit {
     const user: User = {
       email: email,
       username: username,
+      fullname: fullname,
       account_type: typeUser,
       gender: gender,
       address: address,
@@ -254,9 +256,9 @@ export class RegistrationComponent implements OnInit {
         // console.log(data);
         localStorage.setItem('currentUser', JSON.stringify(data));
         if (data['user'].account_type === 'Seller' || data['user'].account_type === 'SELLER') {
-          this.router.navigate(['profile']);
+          this.router.navigate(['dashboard']);
         } else {
-          this.router.navigate(['home']);
+          this.router.navigate(['profile']);
           window.location.reload();
         }
         this.userResponded = data;
