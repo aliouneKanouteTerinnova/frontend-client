@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
 import Swal from 'sweetalert2';
 import { AuthenticationsService } from 'src/app/services/authentications/authentications.service';
 import { ProductsService } from 'src/app/services/products/products.service';
+import { Address } from 'src/app/models/address/address';
 
 @Component({
   selector: 'app-create-stores',
@@ -33,7 +34,11 @@ export class CreateStoresComponent implements OnInit {
       name: ['', Validators.required],
       created_at: [''],
       created_by: [''],
-      store_address: ['', Validators.required],
+      // store_address: ['', Validators.required],
+      state: ['', Validators.required],
+      zipcode: ['', Validators.required],
+      country: ['', Validators.required],
+      street: ['', Validators.required],
       image: ['', Validators.required],
     });
   }
@@ -45,15 +50,27 @@ export class CreateStoresComponent implements OnInit {
   onSubmit() {
     this.submited = true;
 
+    const state = this.createStore.get('state').value;
+    const zipcode = this.createStore.get('zipcode').value;
+    const country = this.createStore.get('country').value;
+    const street = this.createStore.get('street').value;
+    const address: Address = {
+      state: state,
+      zipcode: zipcode,
+      country: country,
+      street: street,
+    };
+
     this.productsService.uploadFile(this.fd, this.currentUser.user.token).subscribe(
       (data) => {
         this.image = data.body.file;
         const store = new Store();
 
         store.name = this.createStore.get('name').value;
+        store.address = address;
 
         // data.created_by = this.currentUser.user.id;
-        store.store_address = this.createStore.get('store_address').value;
+        // store.store_address = this.createStore.get('store_address').value;
         store.is_active = true;
         store.products = [];
         store.image = this.image;
