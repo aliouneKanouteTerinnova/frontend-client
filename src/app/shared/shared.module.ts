@@ -15,6 +15,14 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatCarouselModule } from '@ngmodule/material-carousel';
 import { MatDialogModule } from '@angular/material/dialog';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
+
+import { MatRippleModule } from '@angular/material/core';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatSelectModule } from '@angular/material/select';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatSidenavModule } from '@angular/material/sidenav';
+
 @NgModule({
   declarations: [],
   imports: [],
@@ -34,6 +42,12 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
     MatDialogModule,
     MatProgressSpinnerModule,
     MatProgressBarModule,
+    MatSidenavModule,
+    MatRippleModule,
+    MatFormFieldModule,
+    MatDividerModule,
+    MatSelectModule,
+    MatTooltipModule,
   ],
   providers: [
     {

@@ -254,9 +254,9 @@ export class RegistrationComponent implements OnInit {
         // console.log(data);
         localStorage.setItem('currentUser', JSON.stringify(data));
         if (data['user'].account_type === 'Seller' || data['user'].account_type === 'SELLER') {
-          this.router.navigate(['profile']);
+          this.router.navigate(['dashboard']);
         } else {
-          this.router.navigate(['home']);
+          this.router.navigate(['profile']);
           window.location.reload();
         }
         this.userResponded = data;
