@@ -74,6 +74,10 @@ export class CreateCategoriesComponent implements OnInit {
     this.productsService.uploadFile(this.fd, this.currentUser.user.token).subscribe((data) => {
       this.image = data.body.file;
       const categories = new Category();
+<<<<<<< HEAD
+=======
+      debugger;
+>>>>>>> 6daacc496cabc2fc0cb09da4e0a82fa5b7a9c40b
       if (!this.createCategoriesForm.get('parent').value) {
         categories.name = this.createCategoriesForm.get('name').value;
         categories.slug = this.createCategoriesForm.get('slug').value;
