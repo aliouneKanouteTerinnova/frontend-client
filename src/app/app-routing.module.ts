@@ -35,6 +35,7 @@ import { CategoyDetailComponent } from './pages/category-page/categoy-detail/cat
 import { AboutUsComponent } from './pages/components/about-us/about-us.component';
 import { DashoardComponent } from './pages/admin/dashoard/dashoard.component';
 import { AdminProductsComponent } from './pages/admin/admin-products/admin-products.component';
+import { SingleRegionComponent } from './pages/components/regions/single-region/single-region.component';
 
 const routes: Routes = [
   {
@@ -66,6 +67,10 @@ const routes: Routes = [
   {
     path: 'about-us',
     component: AboutUsComponent,
+  },
+  {
+    path: 'single-region',
+    component: SingleRegionComponent,
   },
   {
     path: 'register',
