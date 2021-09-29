@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-floating-promises */
-
+import { isDevMode } from '@angular/core';
 import { Router } from '@angular/router';
 /* eslint-disable @typescript-eslint/quotes */
 /* eslint-disable @typescript-eslint/semi */
@@ -24,7 +24,11 @@ export class AppComponent implements OnInit {
   constructor(private authService: AuthenticationsService, private router: Router) {}
 
   ngOnInit() {
+    console.log = function () {};
     this.currentUser = this.authService.currentUserValue;
+    if (isDevMode()) {
+      console.log = function () {};
+    }
   }
 
   goRegister() {

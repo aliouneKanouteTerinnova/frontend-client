@@ -12,7 +12,7 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { SharedModule } from './shared/shared.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
-
+import { MatStepperModule } from '@angular/material/stepper';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
@@ -44,6 +44,7 @@ import { ProfileComponent } from './pages/user/profile/profile.component';
 import { OrderListComponent } from './pages/order/order-list/order-list.component';
 import { OrderDetailsComponent } from './pages/order/order-details/order-details.component';
 import { RegistrationComponent } from './pages/user/registration/registration.component';
+import { ArticleCheckoutComponent } from './components/article-checkout/article-checkout.component';
 
 import { StripeModule } from 'stripe-angular';
 import { ConditionUsedComponent } from './pages/user/condition-used/condition-used.component';
@@ -85,6 +86,9 @@ import { FloatingShareButtonComponent } from './components/floating-share-button
 import { SocialLoginModule, SocialAuthServiceConfig } from 'angularx-social-login';
 import { GoogleLoginProvider, FacebookLoginProvider } from 'angularx-social-login';
 import { environment } from 'src/environments/environment';
+import { ShippingAdressComponent } from './components/shipping-adress/shipping-adress.component';
+import { ShippingComponent } from './components/shipping/shipping.component';
+import { BankAccountComponent } from './components/bank-account/bank-account.component';
 import { StoresViewComponent } from './pages/components/stores-view/stores-view.component';
 import { LayoutsComponent } from './pages/components/stores-view/layouts/layouts.component';
 import { AboutUsComponent } from './pages/components/about-us/about-us.component';
@@ -164,6 +168,10 @@ const CLIENT_ID = environment.clientId;
     OrderItemComponent,
     OrderStatusComponent,
     LoadingSpinnerComponent,
+    ShippingAdressComponent,
+    ArticleCheckoutComponent,
+    ShippingComponent,
+    BankAccountComponent,
     FloatingShareButtonComponent,
 
     StoresViewComponent,
@@ -180,6 +188,7 @@ const CLIENT_ID = environment.clientId;
 
   imports: [
     BrowserModule,
+    MatStepperModule,
     BrowserAnimationsModule,
     AppRoutingModule,
     NgxPaginationModule,
