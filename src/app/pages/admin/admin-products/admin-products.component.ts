@@ -93,6 +93,7 @@ export class AdminProductsComponent implements OnInit {
   infos = '';
   currentUser: any;
   categoryName: any;
+  terms;
 
   constructor(
     private router: Router,

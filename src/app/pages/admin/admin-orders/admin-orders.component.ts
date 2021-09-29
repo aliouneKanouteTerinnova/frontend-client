@@ -108,6 +108,7 @@ export class AdminOrdersComponent implements OnInit {
   sellerOrderSubscription: Subscription;
   listOrders = [];
   categoryName: any;
+  terms;
 
   itemsP;
   itemsNameP = 'Pending';

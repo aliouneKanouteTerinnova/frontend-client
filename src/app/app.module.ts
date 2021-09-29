@@ -101,6 +101,8 @@ import { AdminProductsComponent } from './pages/admin/admin-products/admin-produ
 import { AdminModule } from './pages/admin/admin.module';
 import { SingleRegionComponent } from './pages/components/regions/single-region/single-region.component';
 
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
+
 export function rootLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
 }
@@ -212,6 +214,7 @@ const CLIENT_ID = environment.clientId;
     StripeModule.forRoot(
       'pk_test_51HQ3ZXFunRLoLWctiy0l6VVOeflU8ES2IRjTyY7LL9rEpKedBIfOfKB1BSSftQk4Qmke8HdtRcdmje7R2whuWgTz00U7HXpwjn'
     ),
+    Ng2SearchPipeModule,
   ],
   providers: [
     {
