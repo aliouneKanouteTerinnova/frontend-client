@@ -98,6 +98,7 @@ import { TableLayoutsComponent } from './pages/admin/table-layouts/table-layouts
 import { AdminNavbarComponent } from './pages/admin/components/admin-navbar/admin-navbar.component';
 import { AdminProductsComponent } from './pages/admin/admin-products/admin-products.component';
 import { AdminModule } from './pages/admin/admin.module';
+import { SingleRegionComponent } from './pages/components/regions/single-region/single-region.component';
 
 export function rootLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -182,6 +183,7 @@ const CLIENT_ID = environment.clientId;
     TableLayoutsComponent,
     AdminNavbarComponent,
     AdminProductsComponent,
+    SingleRegionComponent,
   ],
 
   imports: [
