@@ -1,3 +1,4 @@
+import { AdminOrdersComponent } from './pages/admin/admin-orders/admin-orders.component';
 import { ReloadRouteComponent } from './components/reload-route/reload-route.component';
 /* eslint-disable prefer-arrow/prefer-arrow-functions */
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
@@ -174,6 +175,7 @@ const CLIENT_ID = environment.clientId;
     TableLayoutsComponent,
     AdminNavbarComponent,
     AdminProductsComponent,
+    AdminOrdersComponent,
   ],
 
   imports: [
