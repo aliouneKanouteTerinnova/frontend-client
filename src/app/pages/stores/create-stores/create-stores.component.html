@@ -14,8 +14,14 @@
       </div>
 
       <div class="col-6">
-        <label for="region"><span>region</span></label>
-        <input type="text" name="region" formControlName="region" class="form-control" />
+        <label for="region"><span>Region</span></label>
+        <!-- <input type="text" name="region" formControlName="region" class="form-control" /> -->
+        <select class="form-control" name="region" formControlName="region">
+          <option value="Afrique"><span translate>region.africa</span></option>
+          <option value="Amerique"><span translate>region.america</span></option>
+          <option value="Europe"><span translate>region.europe</span></option>
+          <option value="Asie"><span translate>region.asia</span></option>
+        </select>
       </div>
       <div class="col-6">
         <label for="state"><span translate>registration.register.city</span></label>
