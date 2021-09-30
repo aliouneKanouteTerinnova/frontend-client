@@ -115,8 +115,9 @@ export class AdminProductsComponent implements OnInit {
     this.adminProductsService.getProducts(this.currentUser.token || this.currentUser['user'].token).subscribe((res) => {
       this.trItem = res.body.results;
 
-      this.trItem.forEach((element) => {
+      this.trItem.forEach((element, i) => {
         this.adminProductsService.getCategory(element.category).subscribe((data) => {
+          this.trItem[i].category = data.name;
           this.categoryName = data.name;
         });
       });
