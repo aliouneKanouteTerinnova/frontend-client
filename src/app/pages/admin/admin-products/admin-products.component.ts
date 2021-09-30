@@ -1,9 +1,16 @@
+/* eslint-disable @typescript-eslint/no-misused-promises */
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/dot-notation */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-floating-promises */
 import { delay } from 'rxjs/operators';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { Router } from '@angular/router';
 import { MatSidenav } from '@angular/material/sidenav';
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { AdminProductsService } from './admin-products.service';
+import { AuthenticationsService } from 'src/app/services/authentications/authentications.service';
 
 declare const $: any;
 declare interface RouteInfo {
@@ -84,12 +91,30 @@ export class AdminProductsComponent implements OnInit {
   title;
   welcome = 'Products';
   infos = '';
-  constructor(private router: Router, private observer: BreakpointObserver) {}
+  currentUser: any;
+  categoryName: any;
 
-  ngOnInit(): void {
+  constructor(
+    private router: Router,
+    private observer: BreakpointObserver,
+    private authService: AuthenticationsService,
+    private adminProductsService: AdminProductsService
+  ) {}
+
+  async ngOnInit(): Promise<any> {
+    this.currentUser = await this.authService.currentUserValue;
     this.menuItems = ROUTES.filter((menuItem) => menuItem);
     this.thItem = THEAD.filter((thItem) => thItem);
-    this.trItem = TBODY.filter((thItem) => thItem);
+    // this.trItem = TBODY.filter((thItem) => thItem);
+
+    this.adminProductsService.getProducts(this.currentUser.token || this.currentUser['user'].token).subscribe((res) => {
+      this.trItem = res.body.results;
+
+      this.trItem.forEach(async (element) => {
+        const category = await this.adminProductsService.getCategory(element.category).toPromise();
+        this.categoryName = category.name;
+      });
+    });
   }
 
   ngAfterViewInit(): void {

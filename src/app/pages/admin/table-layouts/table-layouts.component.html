@@ -10,12 +10,13 @@
       <tbody>
         <tr *ngFor="let item of trItems">
           <td>
-            <img class="mr-3" *ngIf="item.image" src="{{ item.image }}" width="50" height="50" alt="" />
+            <img class="mr-3" src="{{ item.images[0].file }}" width="50" height="50" alt="" />
             {{ item.name }}
           </td>
-          <td>{{ item.price }}</td>
+          <td *ngIf="!categoryName">€{{ item.price }}</td>
+          <td *ngIf="categoryName">{{ categoryName }}</td>
           <td>{{ item.quantity }}</td>
-          <td>{{ item.amount }}</td>
+          <td>€{{ +item.price * +item.quantity }}</td>
         </tr>
       </tbody>
     </table>

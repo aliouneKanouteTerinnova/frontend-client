@@ -1,3 +1,6 @@
+<app-nav-logo></app-nav-logo>
+<app-buyer-navbar></app-buyer-navbar>
+<app-floating-share-button></app-floating-share-button>
 <app-breadcrumb home="/" categoryName="/categories-detail"></app-breadcrumb>
 
 <app-loading-spinner *ngIf="showSpinner"></app-loading-spinner>
@@ -25,3 +28,4 @@
 <div *ngIf="products.length > 0">
   <app-pagination [products]="products"></app-pagination>
 </div>
+<app-footer></app-footer>
