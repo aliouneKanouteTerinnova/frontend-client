@@ -170,9 +170,15 @@
                   />
                 </mat-form-field>
               </p>
-              <h4 style="color: red !important" *ngIf="signinForm.controls.password2.errors.mustMatch" translate>
-                registration.errors.match_password
-              </h4>
+              <div *ngIf="signinForm.controls.password2.touched && registerForm.controls.password2.invalid">
+                <h4 style="color: red !important" *ngIf="signinForm.controls.password2.errors.required" translate>
+                  registration.errors.required_error
+                </h4>
+
+                <h4 style="color: red !important" *ngIf="signinForm.controls.password2.errors.mustMatch" translate>
+                  registration.errors.match_password
+                </h4>
+              </div>
               <p>
                 <mat-checkbox (click)="openDialog()" formControlName="checked"
                   >I have read and accept the Privacy Policy.</mat-checkbox
