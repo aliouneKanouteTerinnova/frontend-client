@@ -1,8 +1,27 @@
-<app-navbar></app-navbar>
+<app-breadcrumb home="/" categoryName="/categories-detail"></app-breadcrumb>
 
-<div class="container">
+<app-loading-spinner *ngIf="showSpinner"></app-loading-spinner>
+
+<div class="container" *ngIf="products.length > 0">
+  <app-best-deals
+    title=" {{ 'Best products of the category ' + title }} "
+    [products]="products"
+    carouselId="carouselExampleIndicators5"
+  ></app-best-deals>
+</div>
+
+<app-pub-section *ngIf="products.length > 0"></app-pub-section>
+
+<div class="container" *ngIf="products.length > 0">
+  <div class="col-12 text-center mb-5">
+    <h1>All {{ title }} products</h1>
+  </div>
   <app-product [products]="products"></app-product>
   <div class="no-products" *ngIf="products.length === 0">
     <span class="not-found" translate>home.result</span>
   </div>
+</div>
+
+<div *ngIf="products.length > 0">
+  <app-pagination [products]="products"></app-pagination>
 </div>

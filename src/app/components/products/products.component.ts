@@ -1,3 +1,7 @@
+import { WishlistService } from './../../services/wishlist/wishlist.service';
+import { Router } from '@angular/router';
+import { AuthResponded } from './../../models/auth/auth';
+import { AuthenticationsService } from './../../services/authentications/authentications.service';
 import { Input } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
 import { CartService } from 'src/app/services/cart/cart.service';
@@ -11,9 +15,20 @@ import Swal from 'sweetalert2';
 })
 export class ProductComponent implements OnInit {
   @Input() products: any[];
-  constructor(private i18nServiceService: I18nServiceService, private cartService: CartService) {}
+  isIconClicked = false;
+  currentUser: any;
+  token;
+  constructor(
+    private i18nServiceService: I18nServiceService,
+    private cartService: CartService,
+    private authService: AuthenticationsService,
+    private wishlistService: WishlistService,
+    private router: Router
+  ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.currentUser = this.authService.currentUserValue;
+  }
   formatPrice(price: any) {
     var prices = price.split('.');
     if (this.i18nServiceService.currentLangValue === null || this.i18nServiceService.currentLangValue === 'en') {
@@ -36,5 +51,45 @@ export class ProductComponent implements OnInit {
       showConfirmButton: false,
       timer: 2000,
     });
+  }
+
+  AddWishlist(id: any) {
+    this.isIconClicked = true;
+    if (!this.currentUser) {
+      this.router.navigate(['/register']);
+    }
+    this.token = this.currentUser.token;
+    const products = {
+      product: id,
+    };
+    this.wishlistService.AddToWishlist(products, this.token).subscribe(
+      (res) => {
+        Swal.fire({
+          icon: 'success',
+          title: 'Product added to your Wishlist!',
+          showConfirmButton: false,
+          timer: 2000,
+        });
+        this.isIconClicked = false;
+      },
+      (error) => {
+        Swal.fire({
+          icon: 'error',
+          title: error.error.error,
+          showConfirmButton: false,
+          timer: 2000,
+        });
+        this.isIconClicked = false;
+      }
+    );
+  }
+  redirectProduct(id, index): void {
+    this.router.navigate([`/product-detail/${id}/${index}/`]);
+  }
+
+  imageClicked(id, index) {
+    if (!this.isIconClicked) {
+      this.redirectProduct(id, index);
+    }
   }
 }

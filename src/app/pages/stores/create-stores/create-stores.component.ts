@@ -1,3 +1,10 @@
+/* eslint-disable @typescript-eslint/consistent-type-assertions */
+/* eslint-disable @typescript-eslint/no-floating-promises */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable object-shorthand */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/naming-convention */
+/* eslint-disable @typescript-eslint/unbound-method */
 import { Router } from '@angular/router';
 import { Store } from '../../../models/store/store';
 import { StoresService } from 'src/app/services/stores/stores.service';
@@ -6,6 +13,7 @@ import { Component, OnInit } from '@angular/core';
 import Swal from 'sweetalert2';
 import { AuthenticationsService } from 'src/app/services/authentications/authentications.service';
 import { ProductsService } from 'src/app/services/products/products.service';
+import { Address } from 'src/app/models/address/address';
 
 @Component({
   selector: 'app-create-stores',
@@ -33,8 +41,13 @@ export class CreateStoresComponent implements OnInit {
       name: ['', Validators.required],
       created_at: [''],
       created_by: [''],
-      store_address: ['', Validators.required],
+      // store_address: ['', Validators.required],
+      state: ['', Validators.required],
+      zipcode: ['', Validators.required],
+      country: ['', Validators.required],
+      street: ['', Validators.required],
       image: ['', Validators.required],
+      region: ['', Validators.required],
     });
   }
 
@@ -45,21 +58,34 @@ export class CreateStoresComponent implements OnInit {
   onSubmit() {
     this.submited = true;
 
+    const state = this.createStore.get('state').value;
+    const zipcode = this.createStore.get('zipcode').value;
+    const country = this.createStore.get('country').value;
+    const street = this.createStore.get('street').value;
+    const address: Address = {
+      state: state,
+      zipcode: zipcode,
+      country: country,
+      street: street,
+    };
+
     this.productsService.uploadFile(this.fd, this.currentUser.user.token).subscribe(
       (data) => {
         this.image = data.body.file;
         const store = new Store();
 
         store.name = this.createStore.get('name').value;
-
-        // data.created_by = this.currentUser.user.id;
-        store.store_address = this.createStore.get('store_address').value;
+        store.address = address;
         store.is_active = true;
-        store.products = [];
+        // store.products = [];
         store.image = this.image;
+        store.region = this.createStore.get('region').value;
+
+        console.log(store);
 
         this.storesService.createStores(store, this.currentUser.user.token).subscribe(
           (res) => {
+            console.log(res);
             Swal.fire({
               position: 'top-end',
               icon: 'success',

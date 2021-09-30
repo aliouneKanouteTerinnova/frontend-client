@@ -1,15 +1,20 @@
-<app-navbar></app-navbar>
-<div class="title">
-  <h3 *ngIf="isConnection" translate>registration.login.title</h3>
-  <h3 *ngIf="isInscription" translate>registration.register.title</h3>
-</div>
+<app-nav-logo></app-nav-logo>
+<app-buyer-navbar></app-buyer-navbar>
+<app-floating-share-button></app-floating-share-button>
 <div class="example-card">
   <div class="globe-image">
-    <div>
-      <img class="globe" src="./../../assets/img/globe.PNG" alt="globe" />
+    <div *ngIf="isConnection">
+      <img class="globe-login" src="./../../assets/img/globe.PNG" alt="globe" />
+    </div>
+    <div *ngIf="isInscription">
+      <img class="globe-register" src="./../../assets/img/globe.PNG" alt="globe" />
     </div>
   </div>
   <div class="center-content">
+    <div class="title">
+      <h3 *ngIf="isConnection" translate>registration.login.title</h3>
+      <h3 *ngIf="isInscription" translate>registration.register.title</h3>
+    </div>
     <span class="successMessage" *ngIf="successMessage">{{ successMessage }}</span>
     <div class="button" *ngIf="!resendLink">
       <button
@@ -59,12 +64,12 @@
       <div class="social-network">
         <ul>
           <li>
-            <a href="https://www.facebook.com/" target="_blank">
+            <a (click)="signInWithFB()">
               <img class="globe" src="./../../assets/img/facebook-logo.jpg" alt="user_icon" />
             </a>
           </li>
           <li>
-            <a href="https://www.google.com/intl/fr/gmail/about/" target="_blank">
+            <a (click)="loginWithGoogle()">
               <img class="globe" src="./../../assets/img/courriel.png" alt="user_icon" />
             </a>
           </li>
@@ -204,3 +209,4 @@
     </div>
   </div>
 </div>
+<app-footer></app-footer>

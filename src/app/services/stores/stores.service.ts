@@ -56,4 +56,8 @@ export class StoresService {
       observe: 'response',
     });
   }
+
+  getStoresByRegion(region: string) {
+    return this.http.get<any>(`${environment.baseUrl}stores/regions/${region}`);
+  }
 }

@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
+/* eslint-disable @typescript-eslint/quotes */
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
@@ -69,5 +71,13 @@ export class ProductsService {
       headers: new HttpHeaders().set('Authorization', token),
       observe: 'response',
     });
+  }
+
+  bestDeals() {
+    return this.httpClient.get<any>(`${environment.baseUrl}products/latest`);
+  }
+
+  mostPopular() {
+    return this.httpClient.get<any>(`${environment.baseUrl}products/most-viewed`);
   }
 }

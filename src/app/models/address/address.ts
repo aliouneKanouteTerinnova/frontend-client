@@ -1,6 +1,6 @@
 export type Address = {
-  state: string;
-  zipcode: string;
   country: string;
+  state: string;
   street: string;
+  zipcode: string;
 };

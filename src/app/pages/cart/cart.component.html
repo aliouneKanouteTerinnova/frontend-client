@@ -1,27 +1,42 @@
-<app-navbar></app-navbar>
+<app-nav-logo></app-nav-logo>
+<app-buyer-navbar></app-buyer-navbar>
+<app-floating-share-button></app-floating-share-button>
+<app-breadcrumb [name]="title"></app-breadcrumb>
+
 <div *ngIf="cartData.data[0].numInCart === 0" class="text-center my-5">
   <h4 translate>basket.empty_basket</h4>
-  <button class="btn btn-primary btn-lg mt-3" routerLink="/" translate>basket.go_shop</button>
+  <button class="go-home mt-3" routerLink="/" translate>basket.go_shop</button>
 </div>
 <div class="container" *ngIf="cartData.data[0].numInCart !== 0">
   <div class="main-product">
-    <div class="basket-title"><h3 translate>basket.basket</h3></div>
+    <div class="head">
+      <div class="basket-title"><h3 translate>Cart</h3></div>
+      <div class="tolalPrice">
+        <h3 translate>
+          basket.total <span> {{ formatPrice(cartTotal | currency: 'EUR') }}</span>
+        </h3>
+      </div>
+    </div>
     <div class="basket">
       <div class="product" *ngFor="let c of cartData.data; let i = index">
         <div class="image">
           <img routerLink="/product-detail/{{ c.product.id }}/{{ i }}/" src="{{ c.product.images[0].file }}" alt="" />
         </div>
+
         <div class="info">
-          <span class="price" routerLink="/product-detail/{{ c.product.id }}/{{ i }}/">{{ c.product.name }}</span>
+          <span class="product-name" routerLink="/product-detail/{{ c.product.id }}/{{ i }}/">{{
+            c.product.name
+          }}</span>
           <p class="description">
             {{ c.product.description }}
           </p>
           <div class="button">
             <button>
-              <span translate>basket.unity </span><span>{{ formatPrice(c.product.price | currency: 'EUR') }}</span>
+              <span translate>basket.unity </span
+              ><span class="amount">{{ formatPrice(c.product.price | currency: 'EUR') }}</span>
             </button>
             <form class="qty">
-              <span translate>basket.qty </span>
+              <span translate>basket.qty</span>
               <div class="inc">
                 <div class="value-button" id="decrease" (click)="ChangeQuantity(i, false)">
                   <svg
@@ -63,7 +78,7 @@
                 (change)="changeQuantity($event, c, i)"
               />
             </form>
-            <button>
+            <button class="amount">
               <span class="totalBtn" translate>basket.total </span
               ><span>{{ formatPrice(cartService.CalculateSubTotal(i) | currency: 'EUR') }}</span>
             </button>
@@ -86,38 +101,84 @@
         </div>
       </div>
     </div>
-    <div class="tolalPrice">
-      <h3 translate>
-        basket.total <span> {{ formatPrice(cartTotal | currency: 'EUR') }}</span>
-      </h3>
-    </div>
   </div>
   <div class="checkout">
     <div class="total">
       <h6 class="title" translate>basket.total</h6>
       <div class="subtotal">
         <div class="subtotal1">
-          <span translate>basket.total </span> <span>{{ formatPrice(cartTotal | currency: 'EUR') }}</span>
+          <span translate>basket.total </span> <span class="devic">{{ formatPrice(cartTotal | currency: 'EUR') }}</span>
         </div>
-        <div class="subtotal2"><span translate>basket.delivery </span> <span> &euro; 0</span></div>
+        <div class="subtotal2"><span translate>basket.delivery </span> <span class="devic"> &euro; 0</span></div>
+        <hr />
         <div class="subtotal1">
-          <span translate>basket.net_to_pay </span> <span>{{ formatPrice(cartTotal | currency: 'EUR') }}</span>
+          <span translate>basket.net_to_pay </span>
+          <span class="devic">{{ formatPrice(cartTotal | currency: 'EUR') }}</span>
         </div>
       </div>
       <div class="checkouBtn"><button routerLink="/checkout" translate>basket.checkout</button></div>
-      <div style="float: right; margin-top: -37px; position: relative; bottom: -40px; right: -35px">
+      <!-- <div style="float: right; margin-top: -37px; position: relative; bottom: -40px; right: -35px">
         <img src="./../../../assets/img/icons/secure-payment.svg" alt="secure" style="width: 35px; height: 35px" />
-      </div>
+      </div> -->
     </div>
     <div class="payment-method">
       <div class="title"><span translate>basket.accept</span></div>
       <div class="payment">
-        <img id="Rectangle_199" src="./../../assets/img/Rectangle_199.png" />
+        <div class="img-payment">
+          <img id="Rectangle_199" src="./../../../assets/img/icons/Icon awesome-cc-visa.png" />
+          <img id="Rectangle_199" src="./../../../assets/img/icons/Icon awesome-cc-mastercard.png" />
+          <img id="Rectangle_199" src="./../../../assets/img/icons/Icon ionic-md-cash.png" />
+          <img id="Rectangle_199" src="./../../../assets/img/icons/Icon awesome-cc-paypal.png" />
+        </div>
+
+        <div class="coupn">
+          <div><a class="cpn" href="#">Got a coupon?</a></div>
+          <div><a class="cpn" href="#">Use it in next screen</a></div>
+        </div>
       </div>
     </div>
   </div>
 </div>
-<div class="followed" *ngIf="cartData.data[0].numInCart !== 0">
+
+<!-- <section class="pt-5 pb-5">
+  <div class="container">
+    <div class="row">
+      <div class="col-12 text-center mb-5"><h1 translate>basket.followed_product</h1></div>
+
+      <div class="col-12">
+        <div class="row mt-3">
+          <div class="col-md-3 mb-5" *ngFor="let product of bestSelling; let i = index">
+            <div class="card card-product-hover">
+              <img src="{{ product.images[0].file }}" height="300" alt="" />
+
+              <div class="card-product-hover-icons">
+                <a (click)="addToCart(product.id)"
+                  ><img src="./../../../../assets/img/hover-icon/icon cart.png" width="25" height="25" alt=""
+                /></a>
+                <a (click)="AddWishlist(product.id)" class="mt-2"
+                  ><img src="./../../../../assets/img/hover-icon/Heart.png" width="25" height="25" alt=""
+                /></a>
+                <a class="price">{{ formatPrice(product.price | currency: 'EUR') }}</a>
+                <a class="details" (click)="redirectProduct(product.id, i)"
+                  ><img src="./../../../../assets/img/hover-icon/Plus.png" width="35" height="35" alt=""
+                /></a>
+              </div>
+              <div class="card-product-hover-details">
+                <h3 class="card-product-hover-title" *ngIf="product.name.length > 17">
+                  {{ product.name.slice(0, 15) }}...
+                </h3>
+                <h3 class="card-product-hover-title" *ngIf="product.name.length <= 17">{{ product.name }}</h3>
+                <span class="card-product-hover-price">Legacy Foundation Tee</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section> -->
+
+<!-- <div class="followed" *ngIf="cartData.data[0].numInCart !== 0">
   <div class="followed-title"><h3 translate>basket.followed_product</h3></div>
   <div class="home-main">
     <div class="home-product" *ngFor="let product of bestSelling; let i = index">
@@ -135,8 +196,8 @@
       </div>
     </div>
   </div>
-</div>
-<div class="followed" *ngIf="cartData.data[0].numInCart !== 0">
+</div> -->
+<!-- <div class="followed" *ngIf="cartData.data[0].numInCart !== 0">
   <div class="followed-title"><h3 translate>basket.similar_product</h3></div>
   <div class="home-main">
     <div class="home-product" *ngFor="let product of bestSelling; let i = index">
@@ -151,7 +212,44 @@
       </div>
     </div>
   </div>
-</div>
+</div> -->
+<section class="">
+  <div class="container">
+    <div class="row">
+      <div class="col-12 text-center mb-5"><h1 translate>basket.similar_product</h1></div>
+
+      <div class="col-12">
+        <div class="row mt-3">
+          <div class="col-md-3 mb-5" *ngFor="let product of bestSelling; let i = index">
+            <div class="card card-product-hover">
+              <img src="{{ product.images[0].file }}" height="300" alt="" />
+
+              <div class="card-product-hover-icons">
+                <a (click)="addToCart(product.id)"
+                  ><img src="./../../../../assets/img/hover-icon/icon cart.png" width="25" height="25" alt=""
+                /></a>
+                <a (click)="AddWishlist(product.id)" class="mt-2"
+                  ><img src="./../../../../assets/img/hover-icon/Heart.png" width="25" height="25" alt=""
+                /></a>
+                <a class="price">{{ formatPrice(product.price | currency: 'EUR') }}</a>
+                <a class="details" (click)="redirectProduct(product.id, i)"
+                  ><img src="./../../../../assets/img/hover-icon/Plus.png" width="35" height="35" alt=""
+                /></a>
+              </div>
+              <div class="card-product-hover-details">
+                <h3 class="card-product-hover-title" *ngIf="product.name.length > 17">
+                  {{ product.name.slice(0, 15) }}...
+                </h3>
+                <h3 class="card-product-hover-title" *ngIf="product.name.length <= 17">{{ product.name }}</h3>
+                <span class="card-product-hover-price">{{ product.description.slice(0, 30) }}...</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 <swal
   #effacerSwal
   title="Deletion"
@@ -163,3 +261,4 @@
   [focusCancel]="true"
   (confirm)="cartService.DeleteProductFromCart(idProduct)"
 ></swal>
+<app-footer></app-footer>
