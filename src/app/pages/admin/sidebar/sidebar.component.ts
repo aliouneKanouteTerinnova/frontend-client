@@ -61,7 +61,7 @@ export class SidebarComponent implements OnInit {
   thItems: any[];
   trItem: any[];
   title = 'Top Selling Product';
-  welcome = 'Mr Test Test';
+  welcome = '';
   infos = 'here are the informations we have on your shops';
   listOrders = [];
   currentUser: any;
@@ -69,6 +69,8 @@ export class SidebarComponent implements OnInit {
   products = [];
   topSelling = [];
   activities = [];
+  users: any;
+  user: any;
 
   itemsP;
   itemsNameP = 'Pending orders';
@@ -100,6 +102,14 @@ export class SidebarComponent implements OnInit {
 
   async ngOnInit(): Promise<any> {
     this.currentUser = await this.authService.currentUserValue;
+
+    if (this.currentUser) {
+      this.users = await this.authService.getUser(this.currentUser.token || this.currentUser['user'].token).toPromise();
+      this.user = this.users.body['user'].username || this.users.username;
+
+      this.welcome = this.user;
+    }
+
     this.menuItems = ROUTES.filter((menuItem) => menuItem);
     this.thItems = THEAD.filter((thItem) => thItem);
     // this.trItem = TBODY.filter((thItem) => thItem);

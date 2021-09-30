@@ -102,6 +102,7 @@ import { AdminModule } from './pages/admin/admin.module';
 import { SingleRegionComponent } from './pages/components/regions/single-region/single-region.component';
 
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { BuyerRegisterComponent } from './pages/components/buyer-register/buyer-register.component';
 
 export function rootLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -188,6 +189,7 @@ const CLIENT_ID = environment.clientId;
     AdminProductsComponent,
     AdminOrdersComponent,
     SingleRegionComponent,
+    BuyerRegisterComponent,
   ],
 
   imports: [
