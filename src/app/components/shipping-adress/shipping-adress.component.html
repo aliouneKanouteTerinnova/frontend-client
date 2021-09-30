@@ -2,11 +2,11 @@
   <div class="address" *ngFor="let shippingAdress of shippingAdresses">
     <ul>
       <li class="">
-        <b>{{ shippingAdress.fullName }}</b>
+        <b>{{ shippingAdress.name }}</b>
       </li>
-      <li class="">{{ shippingAdress.adress }}</li>
-      <li class="">{{ shippingAdress.city }}</li>
       <li class="">{{ shippingAdress.country }}</li>
+      <li class="">{{ shippingAdress.state }}</li>
+      <li class="">{{ shippingAdress.city }}, {{ shippingAdress.street1 }}</li>
     </ul>
 
     <div class="deliver-to">

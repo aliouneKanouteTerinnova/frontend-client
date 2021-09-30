@@ -23,13 +23,7 @@ export class AppComponent implements OnInit {
   isLoggedin = true;
   constructor(private authService: AuthenticationsService, private router: Router) {}
 
-  ngOnInit() {
-    console.log = function () {};
-    this.currentUser = this.authService.currentUserValue;
-    if (isDevMode()) {
-      console.log = function () {};
-    }
-  }
+  ngOnInit() {}
 
   goRegister() {
     this.router.navigate(['/register']);
