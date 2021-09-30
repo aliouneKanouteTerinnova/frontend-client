@@ -25,9 +25,7 @@
             "assets": ["src/favicon.ico", "src/assets"],
             "styles": ["src/styles.scss", "src/custom-theme.scss", "./node_modules/font-awesome/css/font-awesome.css"],
             "scripts": [
-              "node_modules/jquery/dist/jquery.min.js",
-              "src/assets/js/chat.js",
-              "https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"
+              "node_modules/jquery/dist/jquery.min.js"
             ]
           },
           "configurations": {
