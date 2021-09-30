@@ -1,5 +1,5 @@
 <mat-tab-group animationDuration="800ms">
-  <!-- <mat-tab label="Login" focusChange>
+  <mat-tab label="Login" focusChange>
     <ng-template matTabContent>
       <div class="signup-dialog">
         <h3 mat-dialog-title align="center" class="mt-4">Login with your social network :</h3>
@@ -62,6 +62,7 @@
               </p>
 
               <p>
+                <!-- mat-dialog-close -->
                 <button mat-flat-button color="primary">Login</button>
               </p>
             </form>
@@ -77,7 +78,7 @@
         </div>
       </div>
     </ng-template>
-  </mat-tab> -->
+  </mat-tab>
 
   <mat-tab label="Register">
     <ng-template matTabContent>
@@ -141,6 +142,36 @@
                   />
                 </mat-form-field>
               </p>
+
+              <!-- <p>
+                <mat-form-field appearance="outline">
+                  <mat-label>Tel</mat-label>
+                  <input
+                    matInput
+                    placeholder="phone"
+                    type="tel"
+                    name="tel"
+                    id="tel"
+                    formControlName="tel"
+                    required
+                  />
+                </mat-form-field>
+              </p>
+
+              <p>
+                <mat-form-field appearance="outline">
+                  <mat-label>Email</mat-label>
+                  <input
+                    matInput
+                    placeholder="Email"
+                    type="email"
+                    name="email"
+                    id="email"
+                    formControlName="email"
+                    required
+                  />
+                </mat-form-field>
+              </p> -->
 
               <p>
                 <mat-form-field appearance="outline">

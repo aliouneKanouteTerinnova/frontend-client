@@ -28,6 +28,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { SignupComponent } from 'src/app/pages/components/signup/signup.component';
 import { User } from 'src/app/models/user/user';
+import { BuyerRegisterComponent } from 'src/app/pages/components/buyer-register/buyer-register.component';
 
 @Component({
   selector: 'app-buyer-navbar',
@@ -139,6 +140,11 @@ export class BuyerNavbarComponent implements OnInit {
         window.location.reload();
       });
     });
+  }
+
+  openRegisterDialog(): void {
+    const dialogRef = this.signinDialog.open(BuyerRegisterComponent);
+    dialogRef.afterClosed().subscribe((result) => console.log('dialog closed |' + result.toString()));
   }
 
   openDialog(): void {
