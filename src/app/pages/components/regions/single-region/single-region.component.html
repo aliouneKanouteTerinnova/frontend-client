@@ -2,9 +2,9 @@
 <app-buyer-navbar></app-buyer-navbar>
 <app-floating-share-button></app-floating-share-button>
 <app-headers></app-headers>
-<app-breadcrumb [name]="'Region/' + region"></app-breadcrumb>
+<app-breadcrumb [name]="'Region / ' + region"></app-breadcrumb>
 
-<h2 class="row" *ngIf="storesNumber === 0">
+<h2 class="text-center" *ngIf="storesNumber === 0">
   <span class="not-found" translate>store.result</span>
 </h2>
 
@@ -17,7 +17,7 @@
 </div>-->
 
 <div class="container" *ngIf="storesNumber > 0">
-  <app-layouts title="{{ region + ' shops' }}" [stores]="stores" carouselId=""></app-layouts>
+  <app-layouts title="{{ region + ' shops' }}" [stores]="stores" carouselId="carouselExampleIndicators6"></app-layouts>
 
   <app-pagination [products]="products"></app-pagination>
 </div>

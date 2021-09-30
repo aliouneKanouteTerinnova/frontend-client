@@ -51,7 +51,7 @@
           </div>
         </div>
 
-        <div class="row mt-4">
+        <div class="row mt-4" *ngIf="topSelling.length > 0">
           <div class="col-lg-10 col-md-12">
             <app-table-layouts [title]="title" [thItems]="thItems" [trItems]="topSelling"></app-table-layouts>
           </div>
@@ -59,13 +59,15 @@
       </div>
       <div class="card rigth-section">
         <h2>Activities</h2>
-
-        <p *ngFor="let item of listOrders">
-          Command: {{ item.number }} status
-          <span [ngClass]="{ status: item.status === 'confirmed', init: item.status === 'initiated' }">{{
-            item.status
-          }}</span>
-        </p>
+        <p *ngIf="listOrders.length === 0">no activities</p>
+        <div *ngIf="listOrders.length > 0">
+          <p *ngFor="let item of listOrders">
+            Command: {{ item.number }} status
+            <span [ngClass]="{ status: item.status === 'confirmed', init: item.status === 'initiated' }">{{
+              item.status
+            }}</span>
+          </p>
+        </div>
       </div>
     </div>
 
