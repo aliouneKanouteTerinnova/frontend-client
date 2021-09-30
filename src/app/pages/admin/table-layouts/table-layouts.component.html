@@ -8,7 +8,7 @@
         <th *ngFor="let item of thItems">{{ item.title }}</th>
       </thead>
       <tbody>
-        <tr *ngFor="let item of trItems">
+        <tr *ngFor="let item of trItems | filter: terms">
           <td>
             <img class="mr-3" src="{{ item.images[0].file }}" width="50" height="50" alt="" />
             {{ item.name }}

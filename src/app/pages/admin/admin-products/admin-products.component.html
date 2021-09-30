@@ -34,14 +34,25 @@
             <hr />
             <form class="mt-3 mb-3 d-flex align-items-center">
               <label for="filter">FILTERS</label>
-              <input class="ml-3 form-control" type="search" id="filter" name="filter" placeholder="search products" />
+              <input
+                class="ml-3 form-control"
+                type="search"
+                id="filter"
+                name="terms"
+                placeholder="search products"
+                [(ngModel)]="terms"
+              />
             </form>
-            <app-table-layouts
-              [title]="title"
-              [thItems]="thItem"
-              [trItems]="trItem"
-              [categoryName]="categoryName"
-            ></app-table-layouts>
+            <p *ngIf="trItem.length === 0">nos products</p>
+            <div *ngIf="trItem.length > 0">
+              <app-table-layouts
+                [title]="title"
+                [thItems]="thItem"
+                [trItems]="trItem"
+                [categoryName]="categoryName"
+                [terms]="terms"
+              ></app-table-layouts>
+            </div>
           </div>
         </div>
       </div>
