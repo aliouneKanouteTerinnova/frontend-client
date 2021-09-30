@@ -10,6 +10,8 @@ export class TableLayoutsComponent implements OnInit {
   @Input() thItems: any[];
   @Input() title;
   @Input() trItems: any[];
+  @Input() categoryName: any;
+  @Input() showOrdersItems: any;
   constructor() {}
 
   ngOnInit(): void {
