@@ -75,18 +75,18 @@ export class SidebarComponent implements OnInit {
   imgBgP = './../../../../assets/dashboard/Rectangle 6.svg';
   imgP = './../../../../assets/dashboard/Group.svg';
 
-  itemsS = 4243;
+  itemsS;
   itemsNameS = 'Sold';
   imgBgS = './../../../../assets/dashboard/Rectangle 6 (1).svg';
   imgS = './../../../../assets/dashboard/Group (1).svg';
 
-  itemsC = 0;
+  itemsC;
   itemsNameC = 'Canceled';
   imgBgC = './../../../../assets/dashboard/Rectangle 6 (2).svg';
   imgC = './../../../../assets/dashboard/Group (2).svg';
 
-  itemsN = 83457;
-  itemsNameN = 'New clients';
+  itemsN;
+  itemsNameN = 'Clients';
   imgBgN = './../../../../assets/dashboard/Rectangle 6 (3).svg';
   imgN = './../../../../assets/dashboard/Group (3).svg';
 
@@ -119,10 +119,14 @@ export class SidebarComponent implements OnInit {
     this.sellerOrderSubscription = this.orderService.sellerOrdersSubject.subscribe((data) => {
       this.listOrders = data;
       this.itemsP = data.length;
-      this.itemsS = data.length;
       this.itemsN = data.length;
+
+      const sold = data.filter((res) => res.status === 'confirmed');
+      this.itemsS = sold.length;
+
+      const cancel = data.filter((res) => res.status === 'canceled');
+      this.itemsC = cancel.length;
     });
-    console.log(this.activities);
     this.orderService.emitSellerOrders();
   }
 
