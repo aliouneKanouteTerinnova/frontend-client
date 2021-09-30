@@ -35,7 +35,8 @@ export class AdminNavbarComponent implements OnInit {
 
   logout(): void {
     this.authService.logOut();
-    this.router.navigate(['/register']);
-    window.location.reload();
+    this.router.navigate(['/']).then(() => {
+      window.location.reload();
+    });
   }
 }
