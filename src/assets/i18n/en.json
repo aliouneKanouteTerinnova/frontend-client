@@ -227,7 +227,13 @@
     "delete_product": "Delete",
     "create_product": "Create product",
     "create_button": "Submit",
-    "cancel_button": "Cancel"
+    "cancel_button": "Cancel",
+    "length": "Length",
+    "width": "Width",
+    "height": "Height",
+    "weight": "Weight",
+    "distance_unit": "Distance Unit",
+    "mass_unit": "Mass Unit"
   },
   "product_detail": {
     "share": "SHARE :",

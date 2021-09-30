@@ -83,6 +83,7 @@ export class ProductComponent implements OnInit {
       }
     );
   }
+
   redirectProduct(id, index): void {
     this.router.navigate([`/product-detail/${id}/${index}/`]);
   }
