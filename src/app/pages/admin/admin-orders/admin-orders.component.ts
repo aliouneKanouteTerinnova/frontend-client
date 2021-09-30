@@ -1,16 +1,15 @@
-/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
+/* eslint-disable @typescript-eslint/no-misused-promises */
 /* eslint-disable @typescript-eslint/dot-notation */
 /* eslint-disable @typescript-eslint/no-unused-expressions */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
-import { Subscription } from 'rxjs';
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-floating-promises */
+import { Subscription } from 'rxjs';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
-import { Router } from '@angular/router';
 import { delay } from 'rxjs/operators';
 import { OrderService } from 'src/app/services/order/order.service';
 import { AuthenticationsService } from 'src/app/services/authentications/authentications.service';
@@ -31,47 +30,87 @@ export const ROUTES: RouteInfo[] = [
   { path: '/admin-customers', title: 'Customers', icon: 'person', class: '' },
 ];
 
+declare interface Th {
+  title: string;
+}
+export const THEAD: Th[] = [
+  { title: 'ID' },
+  { title: 'Product' },
+  { title: 'Category' },
+  { title: 'Payment' },
+  { title: 'Status' },
+  { title: 'Total' },
+  { title: 'Delivery Date' },
+  { title: 'Action' },
+];
+
 // declare interface Tr {
+//   image: string;
 //   name: string;
 //   price: string;
 //   quantity: string;
 //   amount: string;
 // }
 // export const TBODY: Tr[] = [
-//   { name: 'CamMask', price: '€128.50', quantity: '5', amount: '€1,965.81' },
-//   { name: 'CaTam', price: '€128.50', quantity: '5', amount: '€1,965.81' },
-//   { name: 'Waxy', price: '€128.50', quantity: '5', amount: '€1,965.81' },
-//   { name: 'WaxCa', price: '€128.50', quantity: '5', amount: '€1,965.81' },
+//   {
+//     image: 'https://mdbootstrap.com/img/Photos/Avatars/img (31).jpg',
+//     name: 'CamerMask',
+//     price: 'Art',
+//     quantity: '2/2 channels',
+//     amount: '€2000',
+//   },
+//   {
+//     image: 'https://mdbootstrap.com/img/Photos/Avatars/img (31).jpg',
+//     name: 'Tata Lisa',
+//     price: 'Clothing',
+//     quantity: '2/2 channels',
+//     amount: '€2000',
+//   },
+//   {
+//     image: 'https://mdbootstrap.com/img/Photos/Avatars/img (31).jpg',
+//     name: 'Meet',
+//     price: 'Food',
+//     quantity: '2/2 channels',
+//     amount: '€2000',
+//   },
+//   {
+//     image: 'https://mdbootstrap.com/img/Photos/Avatars/img (31).jpg',
+//     name: 'CamerBrush',
+//     price: 'Art',
+//     quantity: '2/2 channels',
+//     amount: '€2000',
+//   },
+//   {
+//     image: 'https://mdbootstrap.com/img/Photos/Avatars/img (31).jpg',
+//     name: 'MamaLisa',
+//     price: 'Art',
+//     quantity: 'Out of Stocks',
+//     amount: '€2000',
+//   },
 // ];
 
-declare interface Th {
-  title: string;
-}
-export const THEAD: Th[] = [{ title: 'Product' }, { title: 'Price' }, { title: 'Quantity' }, { title: 'Amount' }];
-
 @Component({
-  selector: 'app-sidebar',
-  templateUrl: './sidebar.component.html',
-  styleUrls: ['./sidebar.component.scss'],
+  selector: 'app-admin-orders',
+  templateUrl: './admin-orders.component.html',
+  styleUrls: ['./admin-orders.component.scss'],
 })
-export class SidebarComponent implements OnInit {
+export class AdminOrdersComponent implements OnInit {
   @ViewChild(MatSidenav)
   sidenav!: MatSidenav;
   menuItems: any[];
-  thItems: any[];
+  thItem: any[];
   trItem: any[];
-  title = 'Top Selling Product';
-  welcome = 'Mr Test Test';
-  infos = 'here are the informations we have on your shops';
-  listOrders = [];
+  title;
+  welcome = 'Orders';
+  infos = '';
   currentUser: any;
+  showOrdersItems = true;
   sellerOrderSubscription: Subscription;
-  products = [];
-  topSelling = [];
-  activities = [];
+  listOrders = [];
+  categoryName: any;
 
   itemsP;
-  itemsNameP = 'Pending orders';
+  itemsNameP = 'Pending';
   imgBgP = './../../../../assets/dashboard/Rectangle 6.svg';
   imgP = './../../../../assets/dashboard/Group.svg';
 
@@ -85,31 +124,23 @@ export class SidebarComponent implements OnInit {
   imgBgC = './../../../../assets/dashboard/Rectangle 6 (2).svg';
   imgC = './../../../../assets/dashboard/Group (2).svg';
 
-  itemsN = 83457;
-  itemsNameN = 'New clients';
+  itemsN = 83;
+  itemsNameN = 'Total products';
   imgBgN = './../../../../assets/dashboard/Rectangle 6 (3).svg';
   imgN = './../../../../assets/dashboard/Group (3).svg';
 
   constructor(
-    private router: Router,
     private observer: BreakpointObserver,
-    private orderService: OrderService,
     private authService: AuthenticationsService,
+    private orderService: OrderService,
     private adminProductsService: AdminProductsService
   ) {}
 
   async ngOnInit(): Promise<any> {
     this.currentUser = await this.authService.currentUserValue;
     this.menuItems = ROUTES.filter((menuItem) => menuItem);
-    this.thItems = THEAD.filter((thItem) => thItem);
+    this.thItem = THEAD.filter((thItem) => thItem);
     // this.trItem = TBODY.filter((thItem) => thItem);
-
-    this.adminProductsService.getProducts(this.currentUser.token || this.currentUser['user'].token).subscribe((res) => {
-      this.trItem = res.body.results;
-      this.products = res.body.results;
-
-      this.topSelling = this.products.filter((data) => data.rating >= 3);
-    });
 
     this.getOrders();
   }
@@ -121,8 +152,13 @@ export class SidebarComponent implements OnInit {
       this.itemsP = data.length;
       this.itemsS = data.length;
       this.itemsN = data.length;
+      console.log(data);
+
+      this.listOrders.forEach(async (element) => {
+        const category = await this.adminProductsService.getCategory(element.cart_item.product.category).toPromise();
+        this.categoryName = category.name;
+      });
     });
-    console.log(this.activities);
     this.orderService.emitSellerOrders();
   }
 

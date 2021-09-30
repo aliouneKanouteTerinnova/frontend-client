@@ -36,7 +36,12 @@
               <label for="filter">FILTERS</label>
               <input class="ml-3 form-control" type="search" id="filter" name="filter" placeholder="search products" />
             </form>
-            <app-table-layouts [title]="title" [thItems]="thItem" [trItems]="trItem"></app-table-layouts>
+            <app-table-layouts
+              [title]="title"
+              [thItems]="thItem"
+              [trItems]="trItem"
+              [categoryName]="categoryName"
+            ></app-table-layouts>
           </div>
         </div>
       </div>

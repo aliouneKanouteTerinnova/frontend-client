@@ -53,19 +53,19 @@
 
         <div class="row mt-4">
           <div class="col-lg-10 col-md-12">
-            <app-table-layouts [title]="title" [thItems]="thItems" [trItems]="trItem"></app-table-layouts>
+            <app-table-layouts [title]="title" [thItems]="thItems" [trItems]="topSelling"></app-table-layouts>
           </div>
         </div>
       </div>
       <div class="card rigth-section">
         <h2>Activities</h2>
 
-        <p>Command #1236 delivrered 2 days ago</p>
-        <p>Command #1236 delivrered 2 days ago</p>
-        <p>Command #1236 delivrered 2 days ago</p>
-        <p>Command #1236 delivrered 2 days ago</p>
-        <p>Command #1236 delivrered 2 days ago</p>
-        <p>Command #1236 delivrered 2 days ago</p>
+        <p *ngFor="let item of listOrders">
+          Command: {{ item.number }} status
+          <span [ngClass]="{ status: item.status === 'confirmed', init: item.status === 'initiated' }">{{
+            item.status
+          }}</span>
+        </p>
       </div>
     </div>
 
