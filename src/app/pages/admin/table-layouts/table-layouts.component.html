@@ -14,7 +14,7 @@
             {{ item.name }}
           </td>
           <td *ngIf="!categoryName">€{{ item.price }}</td>
-          <td *ngIf="categoryName">{{ categoryName }}</td>
+          <td *ngIf="categoryName">{{ item.category }}</td>
           <td>{{ item.quantity }}</td>
           <td>€{{ +item.price * +item.quantity }}</td>
         </tr>
