@@ -256,10 +256,13 @@ export class RegistrationComponent implements OnInit {
         // console.log(data);
         localStorage.setItem('currentUser', JSON.stringify(data));
         if (data['user'].account_type === 'Seller' || data['user'].account_type === 'SELLER') {
-          this.router.navigate(['dashboard']);
+          this.router.navigate(['dashboard']).then(() => {
+            window.location.reload();
+          });
         } else {
-          this.router.navigate(['profile']);
-          window.location.reload();
+          this.router.navigate(['profile']).then(() => {
+            window.location.reload();
+          });
         }
         this.userResponded = data;
         Swal.fire({

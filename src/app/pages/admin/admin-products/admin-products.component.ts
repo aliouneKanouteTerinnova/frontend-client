@@ -108,12 +108,17 @@ export class AdminProductsComponent implements OnInit {
     this.thItem = THEAD.filter((thItem) => thItem);
     // this.trItem = TBODY.filter((thItem) => thItem);
 
+    this.getProducts();
+  }
+
+  getProducts() {
     this.adminProductsService.getProducts(this.currentUser.token || this.currentUser['user'].token).subscribe((res) => {
       this.trItem = res.body.results;
 
-      this.trItem.forEach(async (element) => {
-        const category = await this.adminProductsService.getCategory(element.category).toPromise();
-        this.categoryName = category.name;
+      this.trItem.forEach((element) => {
+        this.adminProductsService.getCategory(element.category).subscribe((data) => {
+          this.categoryName = data.name;
+        });
       });
     });
   }

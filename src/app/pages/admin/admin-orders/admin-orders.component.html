@@ -62,11 +62,13 @@
               <div *ngIf="title" class="card-header card-header-warning">
                 <h4 class="card-title">{{ title }}</h4>
               </div>
-              <div class="card-body table-responsive">
+              <p *ngIf="listOrders.length === 0">nos orders</p>
+              <div *ngIf="listOrders.length > 0" class="card-body table-responsive">
                 <table class="table table-hover">
                   <thead class="text-warning">
                     <th *ngFor="let item of thItem">{{ item.title }}</th>
                   </thead>
+
                   <tbody>
                     <tr *ngFor="let item of listOrders | filter: terms">
                       <td>
