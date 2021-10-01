@@ -18,4 +18,12 @@ export class ShipmentService {
     });
   }
 
+  getRates(token: any, id: string){
+    token = 'token ' + token;
+    return this.http.get<any>(`${environment.baseUrl}/shippings/shipments/${id}/rates`, {
+      headers: new HttpHeaders().set('Authorization', token),
+      observe: 'response',
+    });
+  }
+
 }
