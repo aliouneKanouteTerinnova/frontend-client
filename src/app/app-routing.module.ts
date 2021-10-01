@@ -1,3 +1,4 @@
+import { AdminCustomersComponent } from './pages/admin/admin-customers/admin-customers.component';
 import { StoresViewComponent } from './pages/components/stores-view/stores-view.component';
 import { WishlistComponent } from './pages/wishlist/wishlist.component';
 import { CategoryPageComponent } from './pages/category-page/category-page.component';
@@ -131,6 +132,11 @@ const routes: Routes = [
   {
     path: 'admin-orders',
     component: AdminOrdersComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'admin-customers',
+    component: AdminCustomersComponent,
     canActivate: [AuthGuard],
   },
 ];
