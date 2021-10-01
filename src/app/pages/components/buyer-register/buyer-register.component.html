@@ -62,7 +62,6 @@
               </p>
 
               <p>
-                <!-- mat-dialog-close -->
                 <button mat-flat-button color="primary">Login</button>
               </p>
             </form>
@@ -143,36 +142,6 @@
                 </mat-form-field>
               </p>
 
-              <!-- <p>
-                <mat-form-field appearance="outline">
-                  <mat-label>Tel</mat-label>
-                  <input
-                    matInput
-                    placeholder="phone"
-                    type="tel"
-                    name="tel"
-                    id="tel"
-                    formControlName="tel"
-                    required
-                  />
-                </mat-form-field>
-              </p>
-
-              <p>
-                <mat-form-field appearance="outline">
-                  <mat-label>Email</mat-label>
-                  <input
-                    matInput
-                    placeholder="Email"
-                    type="email"
-                    name="email"
-                    id="email"
-                    formControlName="email"
-                    required
-                  />
-                </mat-form-field>
-              </p> -->
-
               <p>
                 <mat-form-field appearance="outline">
                   <mat-label>Password</mat-label>
@@ -200,6 +169,7 @@
                   />
                 </mat-form-field>
               </p>
+
               <div *ngIf="signinForm.controls.password2.touched && registerForm.controls.password2.invalid">
                 <h4 style="color: red !important" *ngIf="signinForm.controls.password2.errors.required" translate>
                   registration.errors.required_error
