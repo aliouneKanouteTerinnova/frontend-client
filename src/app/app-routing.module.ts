@@ -73,11 +73,11 @@ const routes: Routes = [
     path: 'single-region',
     component: SingleRegionComponent,
   },
-  {
-    path: 'register',
-    component: RegistrationComponent,
-    canActivate: [NotConnectedGuard],
-  },
+  // {
+  //   path: 'register',
+  //   component: RegistrationComponent,
+  //   canActivate: [NotConnectedGuard],
+  // },
   {
     path: 'email/verify',
     component: RegistrationComponent,
