@@ -61,7 +61,7 @@ export class SidebarComponent implements OnInit {
   thItems: any[];
   trItem: any[];
   title = 'Top Selling Product';
-  welcome = 'Mr Test Test';
+  welcome = '';
   infos = 'here are the informations we have on your shops';
   listOrders = [];
   currentUser: any;
@@ -69,24 +69,26 @@ export class SidebarComponent implements OnInit {
   products = [];
   topSelling = [];
   activities = [];
+  users: any;
+  user: any;
 
   itemsP;
   itemsNameP = 'Pending orders';
   imgBgP = './../../../../assets/dashboard/Rectangle 6.svg';
   imgP = './../../../../assets/dashboard/Group.svg';
 
-  itemsS = 4243;
+  itemsS;
   itemsNameS = 'Sold';
   imgBgS = './../../../../assets/dashboard/Rectangle 6 (1).svg';
   imgS = './../../../../assets/dashboard/Group (1).svg';
 
-  itemsC = 0;
+  itemsC;
   itemsNameC = 'Canceled';
   imgBgC = './../../../../assets/dashboard/Rectangle 6 (2).svg';
   imgC = './../../../../assets/dashboard/Group (2).svg';
 
-  itemsN = 83457;
-  itemsNameN = 'New clients';
+  itemsN;
+  itemsNameN = 'Clients';
   imgBgN = './../../../../assets/dashboard/Rectangle 6 (3).svg';
   imgN = './../../../../assets/dashboard/Group (3).svg';
 
@@ -100,6 +102,14 @@ export class SidebarComponent implements OnInit {
 
   async ngOnInit(): Promise<any> {
     this.currentUser = await this.authService.currentUserValue;
+
+    if (this.currentUser) {
+      this.users = await this.authService.getUser(this.currentUser.token || this.currentUser['user'].token).toPromise();
+      this.user = this.users.body['user'].username || this.users.username;
+
+      this.welcome = this.user;
+    }
+
     this.menuItems = ROUTES.filter((menuItem) => menuItem);
     this.thItems = THEAD.filter((thItem) => thItem);
     // this.trItem = TBODY.filter((thItem) => thItem);
@@ -119,10 +129,14 @@ export class SidebarComponent implements OnInit {
     this.sellerOrderSubscription = this.orderService.sellerOrdersSubject.subscribe((data) => {
       this.listOrders = data;
       this.itemsP = data.length;
-      this.itemsS = data.length;
       this.itemsN = data.length;
+
+      const sold = data.filter((res) => res.status === 'confirmed');
+      this.itemsS = sold.length;
+
+      const cancel = data.filter((res) => res.status === 'canceled');
+      this.itemsC = cancel.length;
     });
-    console.log(this.activities);
     this.orderService.emitSellerOrders();
   }
 

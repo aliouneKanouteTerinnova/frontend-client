@@ -1,43 +1,36 @@
-/* eslint-disable @typescript-eslint/dot-notation */
-// import { MustMatch } from 'src/app/_helpers/must-match.validator';
-/* eslint-disable @typescript-eslint/restrict-template-expressions */
-import { ConditionUsedComponent } from './../../user/condition-used/condition-used.component';
-import { MatDialog } from '@angular/material/dialog';
-import { Gender } from './../../../enums/gender.enum';
-import { AccountType } from './../../../enums/account-type.enum';
 import { HttpClient } from '@angular/common/http';
-import { Auth, AuthResponded } from './../../../models/auth/auth';
+import { MatDialog } from '@angular/material/dialog';
+import { Router, ActivatedRoute } from '@angular/router';
 import { SellersRegisterService } from './../../../services/sellers-register/sellers-register.service';
-import { ActivatedRoute } from '@angular/router';
+import { AuthenticationsService } from './../../../services/authentications/authentications.service';
+import { Auth, AuthResponded } from './../../../models/auth/auth';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { SocialUser, SocialAuthService, GoogleLoginProvider, FacebookLoginProvider } from 'angularx-social-login';
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/naming-convention */
 /* eslint-disable object-shorthand */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-floating-promises */
-import { Router } from '@angular/router';
-import { AuthenticationsService } from 'src/app/services/authentications/authentications.service';
-import { User } from 'src/app/models/user/user';
-import { Address } from 'src/app/models/address/address';
+/* eslint-disable @typescript-eslint/dot-notation */
+// import { MustMatch } from 'src/app/_helpers/must-match.validator';
+/* eslint-disable @typescript-eslint/restrict-template-expressions */
 /* eslint-disable @typescript-eslint/unbound-method */
 /* eslint-disable max-len */
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
-import Swal from 'sweetalert2';
 import { MustMatch } from 'src/app/_helpers/must-match.validator';
-
-import { SocialAuthService } from 'angularx-social-login';
-import { SocialUser } from 'angularx-social-login';
-import { GoogleLoginProvider } from 'angularx-social-login';
-import { FacebookLoginProvider } from 'angularx-social-login';
+import { ConditionUsedComponent } from '../../user/condition-used/condition-used.component';
+import Swal from 'sweetalert2';
+import { Address } from 'src/app/models/address/address';
+import { User } from 'src/app/models/user/user';
 import { environment } from 'src/environments/environment';
 
 @Component({
-  selector: 'app-signup',
-  templateUrl: './signup.component.html',
-  styleUrls: ['./signup.component.scss'],
+  selector: 'app-buyer-register',
+  templateUrl: './buyer-register.component.html',
+  styleUrls: ['./buyer-register.component.scss'],
 })
-export class SignupComponent implements OnInit {
+export class BuyerRegisterComponent implements OnInit {
   public user: SocialUser = new SocialUser();
   signinForm: FormGroup;
   emailRegex = /^(([^<>+()\[\]\\.,;:\s@"-#$%&=]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,3}))$/;
@@ -145,7 +138,7 @@ export class SignupComponent implements OnInit {
 
   signin(): void {
     const username = this.signinForm.get('username').value;
-    const typeUser = 'Seller';
+    const typeUser = 'Customer';
     const email = this.signinForm.get('email').value;
     const fullname = '';
     const password = this.signinForm.get('password').value;
@@ -190,7 +183,8 @@ export class SignupComponent implements OnInit {
             showConfirmButton: false,
             timer: 2000,
           }).then(() => {
-            this.router.navigate(['/profile']);
+            window.location.reload();
+            // this.router.navigate(['/profile']);
           });
         },
         (error) => {

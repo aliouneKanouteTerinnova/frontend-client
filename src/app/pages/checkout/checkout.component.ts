@@ -36,6 +36,8 @@ import { CartItem } from 'src/app/dtos/cart-item/cart-item';
 import { CartModel } from 'src/app/models/cart/cart-model';
 import { CartItemModel } from 'src/app/models/cart/cart-item-model';
 import { ShippingAdressComponent } from 'src/app/components/shipping-adress/shipping-adress.component';
+import { ShippingAdressService } from 'src/app/services/shipping-adress/shipping-adress.service';
+// import { ShippingMethod } from 'src/app/dtos/order/shipping-method';
 
 @Component({
   selector: 'app-checkout',
@@ -43,7 +45,7 @@ import { ShippingAdressComponent } from 'src/app/components/shipping-adress/ship
   styleUrls: ['./checkout.component.scss'],
 })
 export class CheckoutComponent implements OnInit {
-  checkoutForm: FormGroup;
+  ShippingAdressForm: FormGroup;
   testForm: FormGroup;
   emailRegex = /^(([^<>+()\[\]\\.,;:\s@"-#$%&=]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,3}))$/;
   currentUser: any;
@@ -72,7 +74,8 @@ export class CheckoutComponent implements OnInit {
     private orderService: OrderService,
     private router: Router,
     private payment: PaymentsService,
-    private i18nServiceService: I18nServiceService
+    private i18nServiceService: I18nServiceService,
+    private shippingAdress: ShippingAdressService
   ) {}
 
   ngOnInit(): void {
@@ -86,38 +89,34 @@ export class CheckoutComponent implements OnInit {
       this.cartTotal = total;
     });
 
-    this.checkoutForm = this.formBuilder.group({
+    this.ShippingAdressForm = this.formBuilder.group({
       fullname: [null, Validators.required],
       email: [null, [Validators.required, Validators.pattern(this.emailRegex)]],
-      address: [null, Validators.required],
-      city: [null, Validators.required],
-      state: [null, Validators.required],
-      zip: [null, Validators.required],
+      phone: [null, Validators.required],
+      zipcode: [null, Validators.required],
       country: [null, Validators.required],
-      cardname: '',
-      cardnumber: '',
-      expmonth: '',
-      expyear: '',
-      cvv: '',
-      // sameadr: '',
+      state: [null, Validators.required],
+      city: [null, Validators.required],
+      street: [null, Validators.required],
+      use_default: '',
     });
 
     this.initForm('', '');
 
-    if (this.currentUser) {
-      this.authService.getUser(this.currentUser.token || this.currentUser['user'].token).subscribe((data) => {
-        const user: AuthResponded = data.body;
-        this.checkoutForm.patchValue({
-          fulltname: user['user'].username,
-          email: user['user'].email,
-          state: user['user'].address.state,
-          zip: user['user'].address.zipcode,
-          country: user['user'].address.country,
-          address: user['user'].address.street,
-          city: user['user'].address.state,
-        });
-      });
-    }
+    // if (this.currentUser) {
+    //   this.authService.getUser(this.currentUser.token || this.currentUser['user'].token).subscribe((data) => {
+    //     const user: AuthResponded = data.body;
+    //     this.ShippingAdressForm.patchValue({
+    //       fullname: user['user'].fullname,
+    //       email: user['user'].email,
+    //       state: user['user'].address.state,
+    //       zip: user['user'].address.zipcode,
+    //       country: user['user'].address.country,
+    //       address: user['user'].address.street,
+    //       city: user['user'].address.state,
+    //     });
+    //   });
+    // }
 
     this.updateCartOnServer();
   }
@@ -133,7 +132,6 @@ export class CheckoutComponent implements OnInit {
 
       items.push(item);
     });
-
     return items;
   }
 
@@ -141,6 +139,7 @@ export class CheckoutComponent implements OnInit {
     let cart = new CartModel();
     cart.id = data.id;
     cart.items = [];
+
     data.items.forEach((element) => {
       let item = new CartItemModel();
       item.id = element.id;
@@ -203,16 +202,23 @@ export class CheckoutComponent implements OnInit {
   }
 
   checkout() {
-    const address = this.checkoutForm.get('address').value;
-    const state = this.checkoutForm.get('state').value;
-    const city = this.checkoutForm.get('city').value;
-    const zip = this.checkoutForm.get('zip').value;
-    if (!this.checkoutForm.valid) {
+    const fullname = this.ShippingAdressForm.get('fullname').value;
+    const email = this.ShippingAdressForm.get('email').value;
+    const phone = this.ShippingAdressForm.get('phone').value;
+    const zipcode = this.ShippingAdressForm.get('zip').value;
+    const country = this.ShippingAdressForm.get('country').value;
+    const state = this.ShippingAdressForm.get('state').value;
+    const city = this.ShippingAdressForm.get('city').value;
+    const street = this.ShippingAdressForm.get('street').value;
+
+    if (!this.ShippingAdressForm.valid) {
       return;
     }
+
     this.cartService.get(this.currentUser.token || this.currentUser['user'].token).subscribe(
       (data) => {
         this.idCart = data.body.id;
+
         /* this.cartData.data.forEach((element) => {
           const item: Item = {
             product: element.product.id,
@@ -226,23 +232,30 @@ export class CheckoutComponent implements OnInit {
           );
         }); */
 
-        const addresse: Address = {
-          country: state,
-          state: city,
-          street: address,
-          zipcode: zip,
-        };
+        // const addresse: Address = {
+        //   country: state,
+        //   state: city,
+        //   street: address,
+        //   zip_code: zip_code,
+        // };
 
         const shippingAddress: ShippingAddress = {
-          phone_number: '781051173',
-          notes: '',
-          address: addresse,
+          name: fullname,
+          state: state,
+          street1: street,
+          city: city,
+          zip_code: zipcode,
+          country: country,
+          phone: phone,
+          email: email,
         };
+
         const shippingMethod: ShippingMethod = {
           name: 'DHL',
           price: 10000,
           currency: 'EUR',
         };
+
         const order = {
           cart: this.idCart,
           currency: 'EUR',
@@ -304,6 +317,37 @@ export class CheckoutComponent implements OnInit {
           timer: 5000,
         });
         console.log(errors);
+      }
+    );
+  }
+
+  addShippingAdress() {
+    const name = this.ShippingAdressForm.get('fullname').value;
+    const state = this.ShippingAdressForm.get('state').value;
+    const street = this.ShippingAdressForm.get('street').value;
+    const city = this.ShippingAdressForm.get('city').value;
+    const zipcode = this.ShippingAdressForm.get('zipcode').value;
+    const country = this.ShippingAdressForm.get('country').value;
+    const phone = this.ShippingAdressForm.get('phone').value;
+    const email = this.ShippingAdressForm.get('email').value;
+
+    const shippingAdress: ShippingAddress = {
+      name: name,
+      state: state,
+      street1: street,
+      city: city,
+      zip_code: zipcode,
+      country: country,
+      phone: phone,
+      email: email,
+    };
+
+    this.shippingAdress.addShippingAdress(this.token, shippingAdress).subscribe(
+      (res) => {
+        console.log(res.status);
+      },
+      (err) => {
+        console.log(err);
       }
     );
   }
