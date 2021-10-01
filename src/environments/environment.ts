@@ -4,9 +4,19 @@
 
 export const environment = {
   production: false,
-  baseUrl: 'http://3.126.109.165:8080/api/',
+  baseUrl: 'http://18.196.106.255:8072/api/',
 
+  // test new port
+  // baseUrlP: 'http://3.126.109.165:8082/api/',
+
+  // from fatma
+  // baseUrl: 'http://192.168.1.17:8000/api/',
+  clientId: '362829290794-91601oi5pvqjoclq9u6eu7lvp04m620u.apps.googleusercontent.com',
+
+  // from my account test
+  secretClient: 'nAFzDLUeFLAH93AAhcmte1JW',
 };
+
 /*
  * For easier debugging in development mode, you can import the following file
  * to ignore zone related error stack frames such as `zone.run`, `zoneDelegate.invokeTask`.

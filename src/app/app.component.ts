@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-floating-promises */
-
+import { isDevMode } from '@angular/core';
 import { Router } from '@angular/router';
 /* eslint-disable @typescript-eslint/quotes */
 /* eslint-disable @typescript-eslint/semi */
@@ -23,9 +23,7 @@ export class AppComponent implements OnInit {
   isLoggedin = true;
   constructor(private authService: AuthenticationsService, private router: Router) {}
 
-  ngOnInit() {
-    this.currentUser = this.authService.currentUserValue;
-  }
+  ngOnInit() {}
 
   goRegister() {
     this.router.navigate(['/register']);

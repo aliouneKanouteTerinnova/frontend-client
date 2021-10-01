@@ -48,13 +48,30 @@
     "compte": "Einloggen/Registrieren",
     "panier": "Anzeige",
     "category": "KATEGORIE",
-    "Your_Account": "Ihr Konto",
+    "account": "Konto",
     "Commands": "Befehle",
     "Wishlist": "Wunschzettel",
     "Setting": "Einstellung",
-    "Disconnection": "Unterbrechung"
+    "Disconnection": "Unterbrechung",
+    "BecomeSeller": "Verkäufer werden",
+    "Shops": "Geschäfte",
+    "ClickHere": "HIER KLICKEN"
+  },
+  "region": {
+    "title": "REGIONEN",
+    "description": "Klicken Sie auf eine Karte, um nur Produkte aus der jeweiligen Region anzuzeigen.",
+    "africa": "Afrika",
+    "america": "America",
+    "asia": "Asien",
+    "europe": "Europa"
   },
   "footer": {
+    "myAccount": "Mein Konto",
+    "newsletter": "Rundschreiben",
+    "descriptionNewsletter": "Schließen Sie sich Tausenden von anderen an",
+    "descriptionNewsletter2": "abonnieren Sie unsere Nachrichten",
+    "about": "Über Vaanah",
+    "designBy": "2021 Vaana Alle Rechte vorbehalten - Entworfen von Sawa",
     "shops": "GESCHÄFTE",
     "moreShop": "Mehr Shops anzeigen",
     "paymentMode": "ZAHLUNGSWEISE",
@@ -101,6 +118,8 @@
     "category": " KATEGORIE V",
     "best_sale": "BESTE VERKÄUFE",
     "good_deals": "GUTE DEALS",
+    "top_categories": "TOP-KATEGORIEN",
+    "top_categories_desc": "Klicken Sie auf eine Karte, um nur Produkte aus der jeweiligen Region anzuzeigen.",
     "plus": "MEHR LERNEN >",
     "search": "Suche",
     "result": "Kein Produkt gefunden"
@@ -122,9 +141,19 @@
   },
   "orders": {
     "order_list": {
-      "no_order": "Keine Aufträge",
-      "order_list": "Auftragsliste",
-      "result": "Keine Aufträge gefunden",
+      "order_menu_security": "Sicherheit",
+      "order_menu_payment": "Zahlungen",
+      "order_menu_settings": "Einstellungen",
+      "shopping_button": "Einkauf fortsetzen",
+      "no_order": "Noch keine Bestellungen",
+      "order_list": "Befehle",
+      "order_items": "Artikel",
+      "order_tracking": "Paket verfolgen",
+      "result": "Keine Bestellung gefunden",
+      "manage_order": "Bestellung verwalten",
+      "order_shipping_info": "Versandinformationen",
+      "order_package_status": "Paketinformationen",
+      "order_buy_again": "Erneut kaufen",
       "order_date": "Aufträge Datum",
       "order_number": "Auftragsnummer",
       "order_amount": "Betrag",
@@ -132,10 +161,11 @@
       "order_tax": "Steuer",
       "order_status": "Status",
       "order_actions": "Aktionen",
-      "detail_button": "Details",
+      "detail_button": "Einzelheiten",
       "product": "Produkte bestellen"
     },
     "order_details": {
+      "order": "Bestellung",
       "order_confirm": "Ihre Bestellung wurde bestätigt !",
       "order_intro": "Ihre Bestellung wurde bestätigt und wird in den nächsten zwei Tagen verschickt !",
       "order_payment": "Zahlung",
@@ -257,7 +287,11 @@
     "back_button": "Zurück zum Shop",
     "add_button": "In den Warenkorb legen",
     "remove_button": "Entfernen",
-    "similar_product": "Gleichartige produkte"
+    "similar_product": "Gleichartige produkte",
+    "unit_price": "Preis pro Einheit",
+    "stock_status": "Status der bestände",
+    "low_stock": "Niedriger bestand",
+    "in_stock": "Vorrätig"
   },
   "storeProduct": {
     "deals": "Deals",
@@ -267,8 +301,14 @@
     "noProducts": "Dieser shop hat keine produkte"
   },
   "review": {
-    "reviews": "REVIENTS",
+    "reviews": "Revients",
     "addReview": "Eine Bewertung schreiben",
+    "votes": "stimmen",
+    "no_reviews": "Seien Sie der Erste, der eine Bewertung abgibt",
+    "no_questions": "Sei der Erste, der eine Frage stellt",
+    "ask_questions": "Stellen Sie eine Frage",
+    "questions": "Fragen",
+    "answers": "Antworten",
     "title": "Titel",
     "comment": "Kommentar",
     "rate": "Bewertung",

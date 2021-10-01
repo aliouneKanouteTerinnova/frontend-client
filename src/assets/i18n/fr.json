@@ -48,13 +48,30 @@
     "compte": "Connexion/Inscription",
     "panier": "Panier",
     "category": "CATÉGORIE",
-    "Your_Account": "Votre Compte",
+    "account": "Compte",
     "Commands": "Commandes",
     "Wishlist": "Liste de souhaits",
     "Setting": "Securite",
-    "Disconnection": "Deconnexion"
+    "Disconnection": "Deconnexion",
+    "BecomeSeller": "Devenir vendeur",
+    "Shops": "Boutiques",
+    "ClickHere": "CLIQUEZ ICI"
+  },
+  "region": {
+    "title": "RÉGIONS",
+    "description": "Cliquez sur une carte pour afficher uniquement les produits liés à cette région spécifique.",
+    "africa": "Afrique",
+    "america": "Amérique",
+    "asia": "Asie",
+    "europe": "Europe"
   },
   "footer": {
+    "myAccount": "Mon compte",
+    "newsletter": "Newsletter",
+    "descriptionNewsletter": "Rejoignez des milliers d'autre personnes",
+    "descriptionNewsletter2": "abonnez-vous a nos actualites",
+    "about": "A propos de Vaanah",
+    "designBy": "2021 Vaanah Tous droits réservés - Conçu par Sawa",
     "shops": "BOUTIQUES",
     "moreShop": "Voir plus de Boutique",
     "paymentMode": "MODE DE PAIEMENT",
@@ -101,6 +118,8 @@
     "category": "CATÉGORIE V",
     "best_sale": "MEILLEURES VENTES",
     "good_deals": "BONNES AFFAIRES",
+    "top_categories": "TOP CATEGORIES",
+    "top_categories_desc": "Cliquez sur une carte pour afficher uniquement les produits liés à cette région spécifique.",
     "plus": "EN SAVOIR PLUS >",
     "search": "Chercher",
     "result": "Aucun produit trouvé"
@@ -122,9 +141,20 @@
   },
   "orders": {
     "order_list": {
+      "order": "Commande",
+      "order_menu_security": "Sécurité",
+      "order_menu_payment": "Paiements",
+      "order_menu_settings": "Paramètres",
+
+      "shopping_button": "Continuer mes achats",
       "no_order": "Aucune commande",
-      "order_list": "Liste des commandes",
+      "order_items": "Elements",
       "result": "Aucune commande trouvée",
+      "manage_order": "Gérer la commande",
+      "order_shipping_info": "Infos de Livraison",
+      "order_package_status": "Status du Colis",
+      "order_buy_again": "Acheter encore",
+      "order_tracking": "Traquer le colis",
       "order_date": "Date de la commande",
       "order_number": "N° de commande",
       "order_amount": "Montant",
@@ -136,6 +166,7 @@
       "product": "Produits de la commande"
     },
     "order_details": {
+      "order": "Commande",
       "order_confirm": "Votre commande est confirmée !",
       "order_intro": "Votre commande a été confirmée et sera expédiée dans les deux prochains jours !",
       "order_payment": "Paiement",
@@ -146,7 +177,7 @@
       "order_ship_fee": "Frais d'expédition",
       "order_tax_fee": "Taxe d'impôt",
       "order_discount": "Remise",
-      "order_total": "Total",
+      "order_total": "Order Total",
       "order_conclusion": "Nous enverrons un courriel de confirmation d'expédition lorsque l'article aura été expédié avec succès !",
       "order_thanks": "Merci de faire vos achats chez nous !",
       "order_footer": "Besoin d'aide ? Visitez notre ",
@@ -257,7 +288,11 @@
     "back_button": "Retourner à la boutique",
     "add_button": "Ajouter au panier",
     "remove_button": "Supprimer",
-    "similar_product": "Produits similaires"
+    "similar_product": "Produits similaires",
+    "unit_price": "Prix unitaire",
+    "stock_status": "État du stock",
+    "low_stock": "Stock bas",
+    "in_stock": "En stock"
   },
   "storeProduct": {
     "deals": "Offres",
@@ -267,7 +302,13 @@
     "noProducts": "Cette boutique n'a pas de produits"
   },
   "review": {
-    "reviews": "REVUES",
+    "reviews": "Avis",
+    "no_reviews": "Soyez le premier à donner un avis",
+    "no_questions": "Soyez le premier à poser une question",
+    "votes": "votes",
+    "questions": "Questions",
+    "answers": "Réponses",
+    "ask_questions": "Poser une question",
     "addReview": "Écrire un commentaire",
     "title": "Titre",
     "comment": "Commentaire",

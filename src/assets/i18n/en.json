@@ -1,8 +1,8 @@
 {
   "registration": {
     "register": {
-      "title": "SUBSCRIBE",
-      "sub_title": "registration",
+      "title": "Subscribe",
+      "sub_title": "Registration",
       "username": "Username",
       "email": "Email",
       "address": "Address",
@@ -11,7 +11,7 @@
       "password": "Password",
       "confirm_password": "Confirm Password",
       "conditions": "I accept all conditions",
-      "inscription": "registration",
+      "inscription": "Registration",
       "registration": "SUBSCRIBE",
       "resend": "Resend Email",
       "country": "Country",
@@ -27,8 +27,8 @@
       "close": "Close"
     },
     "login": {
-      "title": "LOGIN",
-      "sub_title": "connexion",
+      "title": "Login",
+      "sub_title": "Connexion",
       "email": "Email",
       "password": "Password",
       "connect_with": "CONNECT WITH",
@@ -48,13 +48,30 @@
     "compte": "Log In/Register",
     "panier": "Basket",
     "category": "CATEGORY",
-    "Your_Account": "Your Account",
+    "account": "Account",
     "Commands": "Commands",
     "Wishlist": "Wishlist",
     "Setting": "Setting",
-    "Disconnection": "Disconnection"
+    "Disconnection": "logout",
+    "BecomeSeller": "Become a seller",
+    "Shops": "Shops",
+    "ClickHere": "CLICK HERE"
+  },
+  "region": {
+    "title": "REGIONS",
+    "description": "Click on a map to show only products related to that specific region",
+    "africa": "Africa",
+    "america": "America",
+    "asia": "Asia",
+    "europe": "Europe"
   },
   "footer": {
+    "myAccount": "My account",
+    "newsletter": "Newsletter",
+    "descriptionNewsletter": "Join thousands of other people",
+    "descriptionNewsletter2": "subscribe to our news",
+    "about": "About Vaanah",
+    "designBy": "2021 Vaanah Allrights reserved - Designed by Sawa",
     "shops": "SHOPS",
     "moreShop": "View more shops",
     "paymentMode": "PAYMENT MODE",
@@ -100,7 +117,8 @@
     "ajouter": "Add",
     "category": "CATEGORY V",
     "best_sale": "BEST SALES",
-    "good_deals": "GOOD DEALS",
+    "top_categories": "TOP CATEGORIES",
+    "top_categories_desc": "Click on a map to show only products related to that specific region",
     "plus": "LEARN MORE >",
     "search": "Search",
     "result": "No product found"
@@ -122,9 +140,18 @@
   },
   "orders": {
     "order_list": {
-      "no_order": "No orders",
-      "order_list": "Orders List",
-      "result": "No orders found",
+      "order_menu_security": "Security",
+      "order_menu_payment": "Payments",
+      "order_menu_settings": "Settings",
+      "shopping_button": "Continue shopping",
+      "no_order": "No orders yet",
+      "order_items": "Items",
+      "result": "No order found",
+      "manage_order": "Manage order",
+      "order_shipping_info": "Shipping Info",
+      "order_package_status": "Package Info",
+      "order_tracking": "Track Package",
+      "order_buy_again": "Buy again",
       "order_date": "Order Date",
       "order_number": "Order No",
       "order_amount": "Amount",
@@ -136,6 +163,7 @@
       "product": "Order products"
     },
     "order_details": {
+      "order": "Order",
       "order_confirm": "Your order Confirmed !",
       "order_intro": "You order has been confirmed and will be shipped in next two days !",
       "order_payment": "Payment",
@@ -199,10 +227,16 @@
     "delete_product": "Delete",
     "create_product": "Create product",
     "create_button": "Submit",
-    "cancel_button": "Cancel"
+    "cancel_button": "Cancel",
+    "length": "Length",
+    "width": "Width",
+    "height": "Height",
+    "weight": "Weight",
+    "distance_unit": "Distance Unit",
+    "mass_unit": "Mass Unit"
   },
   "product_detail": {
-    "share": "SHARE THE PRODUCT WITH YOUR FRIENDS",
+    "share": "SHARE :",
     "description": "DESCRIPTION",
     "livraison": "DELIVERY",
     "order_button": "Order",
@@ -257,7 +291,11 @@
     "back_button": "Back to shop",
     "add_button": "Add to basket",
     "remove_button": "Remove",
-    "similar_product": "Similary products"
+    "similar_product": "Similary products",
+    "unit_price": "Unit price",
+    "stock_status": "Stock status",
+    "low_stock": "Low stock",
+    "in_stock": "In stock"
   },
   "storeProduct": {
     "deals": "Deals",
@@ -267,8 +305,14 @@
     "noProducts": "This store has no products"
   },
   "review": {
-    "reviews": "REVIEWS",
+    "reviews": "Reviews",
+    "votes": "votes",
+    "no_reviews": "Be the first to write a review",
+    "no_questions": "Be the first to ask a question",
     "addReview": "Write a review",
+    "questions": "Questions",
+    "ask_questions": "Ask a question",
+    "answers": "Answers",
     "title": "Title",
     "comment": "Comment",
     "rate": "Rate",

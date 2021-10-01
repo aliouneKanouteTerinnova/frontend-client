@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/indent */
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/consistent-type-assertions */
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 /* eslint-disable @typescript-eslint/unbound-method */
 /* eslint-disable @typescript-eslint/no-floating-promises */
@@ -22,7 +25,7 @@ uuidv4();
 })
 export class CreateCategoriesComponent implements OnInit {
   createCategoriesForm: FormGroup;
-  categories: Category;
+  categories: any;
   currentUser: any;
   categoryId: any;
   submited = false;
@@ -53,7 +56,7 @@ export class CreateCategoriesComponent implements OnInit {
 
   getCategory() {
     this.categoryService.getAllCategories().subscribe((data) => {
-      this.categories = data;
+      this.categories = data.results;
     });
   }
 
@@ -71,20 +74,30 @@ export class CreateCategoriesComponent implements OnInit {
     this.productsService.uploadFile(this.fd, this.currentUser.user.token).subscribe((data) => {
       this.image = data.body.file;
       const categories = new Category();
-
-      categories.name = this.createCategoriesForm.get('name').value;
-      categories.slug = this.createCategoriesForm.get('slug').value;
-      categories.description = this.createCategoriesForm.get('description').value;
-      categories.is_active = true;
-      // categories.created_by = '';
-      // categories.products = '';
-      categories.image = this.image;
-
-      if (this.createCategoriesForm.get('parent').value === '---') {
-        categories.parent = null;
-      } else {
-        categories.parent = this.createCategoriesForm.get('parent').value;
+      if (!this.createCategoriesForm.get('parent').value) {
+        categories.name = this.createCategoriesForm.get('name').value;
+        categories.slug = this.createCategoriesForm.get('slug').value;
+        categories.description = this.createCategoriesForm.get('description').value;
+        categories.is_active = true;
+        // categories.created_by = '';
+        // categories.products = '';
+        categories.image = this.image;
       }
+      if (this.createCategoriesForm.get('parent').value) {
+        categories.name = this.createCategoriesForm.get('name').value;
+        categories.slug = this.createCategoriesForm.get('slug').value;
+        categories.description = this.createCategoriesForm.get('description').value;
+        categories.is_active = true;
+        categories.image = this.image;
+
+        this.categories.forEach((el, index) => {
+          if (this.createCategoriesForm.get('parent').value === this.categories[index].name) {
+            categories.parent = this.categories[index].id;
+          }
+        });
+      }
+
+      console.log(categories);
 
       this.categoryService.addCategory(categories, this.currentUser.user.token).subscribe(
         (res) => {

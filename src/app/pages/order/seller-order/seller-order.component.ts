@@ -25,8 +25,8 @@ export class SellerOrderComponent implements OnInit {
 
   ngOnInit(): void {
     this.currentUser = this.authService.currentUserValue;
-    this.token = this.currentUser['user'].token;
-    this.typeUser = this.currentUser['user'].account_type;
+    this.token = this.currentUser.token || this.currentUser['user'].token;
+    this.typeUser = this.currentUser.account_type;
     this.getSellerOrders();
   }
 
@@ -34,6 +34,7 @@ export class SellerOrderComponent implements OnInit {
     this.orderService.getSellerOrders(this.token);
     this.sellerOrderSubscription = this.orderService.sellerOrdersSubject.subscribe((data) => {
       this.listOrders = data;
+      console.log(data);
     });
     this.orderService.emitSellerOrders();
     // this.orderService.getAllOrdersFromSeller(this.token).subscribe(

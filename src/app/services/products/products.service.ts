@@ -1,15 +1,19 @@
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
+/* eslint-disable @typescript-eslint/quotes */
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { environment } from '../../../environments/environment';
 import { Products } from '../../models/products/products';
 import { Observable } from 'rxjs';
+import { Parcel } from 'src/app/models/parcel/parcel';
 
 const httpOptions = {
   headers: new HttpHeaders({
     'Content-Type': 'application/json',
   }),
 };
+
 @Injectable({
   providedIn: 'root',
 })
@@ -59,13 +63,31 @@ export class ProductsService {
       observe: 'response',
     });
   }
+
   searchProducts(keyword: any) {
     return this.httpClient.get<any>(`${environment.baseUrl}products/?search=${keyword}`);
   }
+
   uploadFile(file: any, token: string) {
     token = 'token ' + token;
     // const image = { file: file };
     return this.httpClient.post<any>(`${environment.baseUrl}files`, file, {
+      headers: new HttpHeaders().set('Authorization', token),
+      observe: 'response',
+    });
+  }
+
+  bestDeals() {
+    return this.httpClient.get<any>(`${environment.baseUrl}products/latest`);
+  }
+
+  mostPopular() {
+    return this.httpClient.get<any>(`${environment.baseUrl}products/most-viewed`);
+  }
+
+  addParcel(id: number, parcel: Parcel, token: string) {
+    token = 'token ' + token;
+    return this.httpClient.post(`${environment.baseUrl}products/${id}/parcels`, parcel, {
       headers: new HttpHeaders().set('Authorization', token),
       observe: 'response',
     });
