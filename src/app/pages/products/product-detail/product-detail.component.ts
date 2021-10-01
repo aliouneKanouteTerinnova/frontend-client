@@ -29,6 +29,7 @@ export class ProductDetailComponent implements OnInit {
   similarProducts = [];
   currentUser: any;
   isOwner: any;
+  hasOrdered = false;
   constructor(
     private productsService: ProductsService,
     private router: ActivatedRoute,
