@@ -16,6 +16,7 @@ export class ReviewItemComponent implements OnInit {
   private effacerSwal: SwalComponent;
   @Input() review: any;
   currentUser: any;
+  users;
   @Output() btnDeleteReviewClick = new EventEmitter();
   @Output() btnUpdateReviewClick = new EventEmitter();
 
@@ -25,7 +26,7 @@ export class ReviewItemComponent implements OnInit {
     // this.currentUser = this.authService.currentUserValue;
     this.currentUser = localStorage.getItem('currentUser');
     const obj = this.currentUser;
-    const users = JSON.parse(obj);
+    this.users = JSON.parse(obj);
   }
 
   onReviewUpdate() {
