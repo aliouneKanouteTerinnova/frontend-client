@@ -178,15 +178,33 @@ export class CreateProductComponent implements OnInit {
             this.productsService.addProduct(products, this.currentUser.user.token).subscribe(
               (res) => {
                 this.productId = res.body;
-                Swal.fire({
-                  position: 'top-end',
-                  icon: 'success',
-                  title: 'Product Created',
-                  showConfirmButton: false,
-                  timer: 1500,
-                });
-                // this.route.navigate(['/products']);
-                // this.getProducts();
+
+                const parcel = new Parcel();
+
+                parcel.parcel_length = this.createProductForm.get('length').value;
+                parcel.parcel_width = this.createProductForm.get('width').value;
+                parcel.parcel_height = this.createProductForm.get('height').value;
+                parcel.parcel_weight = this.createProductForm.get('weight').value;
+                parcel.distance_unit = this.createProductForm.get('weight').value;
+                parcel.mass_unit = this.createProductForm.get('weight').value;
+
+                this.productsService.addParcel(this.productId.id, parcel, this.currentUser.user.token).subscribe(
+                  (res) => {
+                    console.table('Parcel sucess !');
+                    Swal.fire({
+                      position: 'top-end',
+                      icon: 'success',
+                      title: 'Product Created',
+                      showConfirmButton: false,
+                      timer: 1500,
+                    });
+                  },
+                  (err) => {
+                    console.table('Parcel error !');
+                  }
+                );
+                this.route.navigate(['/products']);
+                this.getProducts();
               },
               (err) => {
                 Swal.fire({
@@ -203,24 +221,6 @@ export class CreateProductComponent implements OnInit {
         }
       );
     });
-
-    const parcel = new Parcel();
-
-    parcel.parcel_length = this.createProductForm.get('length').value;
-    parcel.parcel_width = this.createProductForm.get('width').value;
-    parcel.parcel_height = this.createProductForm.get('height').value;
-    parcel.parcel_weight = this.createProductForm.get('weight').value;
-    parcel.distance_unit = this.createProductForm.get('weight').value;
-    parcel.mass_unit = this.createProductForm.get('weight').value;
-
-    this.productsService.addParcel(this.productId.id, parcel, this.currentUser.user.token).subscribe(
-      (res) => {
-        console.table('Parcel sucess !');
-      },
-      (err) => {
-        console.table('Parcel error !');
-      }
-    );
 
     // products.id = Math.floor(Math.random() * 100);
   }
