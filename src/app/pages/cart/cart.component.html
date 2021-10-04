@@ -7,6 +7,7 @@
   <h4 translate>basket.empty_basket</h4>
   <button class="go-home mt-3" routerLink="/" translate>basket.go_shop</button>
 </div>
+
 <div class="container" *ngIf="cartData.data[0].numInCart !== 0">
   <div class="main-product">
     <div class="head">
@@ -35,6 +36,7 @@
               <span translate>basket.unity </span
               ><span class="amount">{{ formatPrice(c.product.price | currency: 'EUR') }}</span>
             </button>
+
             <form class="qty">
               <span translate>basket.qty</span>
               <div class="inc">
@@ -83,6 +85,7 @@
               ><span>{{ formatPrice(cartService.CalculateSubTotal(i) | currency: 'EUR') }}</span>
             </button>
           </div>
+
           <div class="icone">
             <svg class="Trac_261_ck" viewBox="31.36 287.676 34.992 33.557" (click)="AddWishlist(c.product.id)">
               <path

@@ -2,9 +2,8 @@ import { Address } from '../address/address';
 import { User } from '../user/user';
 
 export type ShippingAddress = {
-  // phone_number: String;
-  // notes: String;
-  // address: Address;
+  id?: string | undefined;
+  company?: string | undefined;
   name: string;
   state: string;
   street1: string;

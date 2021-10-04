@@ -45,7 +45,6 @@ import { OrderListComponent } from './pages/order/order-list/order-list.componen
 import { OrderDetailsComponent } from './pages/order/order-details/order-details.component';
 import { RegistrationComponent } from './pages/user/registration/registration.component';
 import { ArticleCheckoutComponent } from './components/article-checkout/article-checkout.component';
-
 import { StripeModule } from 'stripe-angular';
 import { ConditionUsedComponent } from './pages/user/condition-used/condition-used.component';
 import { SellerOrderComponent } from './pages/order/seller-order/seller-order.component';
@@ -103,6 +102,7 @@ import { SingleRegionComponent } from './pages/components/regions/single-region/
 
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { BuyerRegisterComponent } from './pages/components/buyer-register/buyer-register.component';
+import { AdminCustomersComponent } from './pages/admin/admin-customers/admin-customers.component';
 
 export function rootLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -177,7 +177,6 @@ const CLIENT_ID = environment.clientId;
     ShippingComponent,
     BankAccountComponent,
     FloatingShareButtonComponent,
-
     StoresViewComponent,
     LayoutsComponent,
     AboutUsComponent,
@@ -190,6 +189,7 @@ const CLIENT_ID = environment.clientId;
     AdminOrdersComponent,
     SingleRegionComponent,
     BuyerRegisterComponent,
+    AdminCustomersComponent,
   ],
 
   imports: [

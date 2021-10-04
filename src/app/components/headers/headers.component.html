@@ -9,8 +9,8 @@
     <div class="carousel-item active" data-bs-interval="10000">
       <div></div>
       <div class="carousel-caption d-none d-md-block">
-        <h1 translate>nav.BecomeSeller</h1>
-        <button (click)="openDialog()" class="click-here">
+        <h1 *ngIf="!isSeller" translate>nav.BecomeSeller</h1>
+        <button *ngIf="!isSeller" (click)="toOpenDialog()" class="click-here">
           <span translate>nav.ClickHere</span>
         </button>
       </div>
@@ -41,3 +41,14 @@
     </div>
   </div> -->
 </div>
+<swal
+  #effacerSwal
+  title="Comfirmation "
+  text="Are you sure ?  "
+  type="question"
+  confirmButtonText="Yes"
+  cancelButtonText="No"
+  [showCancelButton]="true"
+  [focusCancel]="true"
+  (confirm)="onUpdateUser()"
+></swal>
