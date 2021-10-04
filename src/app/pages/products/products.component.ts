@@ -133,10 +133,12 @@ export class ProductsComponent implements OnInit {
       }
     );
   }
+
   suppressionProduct(id) {
     this.idProduct = id;
     this.effacerSwal.fire();
   }
+
   addProducts(id) {
     this.cartService.AddProductToCart(id);
     Swal.fire({
@@ -161,6 +163,7 @@ export class ProductsComponent implements OnInit {
     return prices;
   }
 }
+
 function id(id: any) {
   throw new Error('Function not implemented.');
 }
