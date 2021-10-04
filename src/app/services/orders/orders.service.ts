@@ -11,21 +11,20 @@ const httpOptions = {
 };
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class OrdersService {
+  constructor(private http: HttpClient) {}
 
-  constructor(private http: HttpClient) { }
-
-  initiate(token: any, order: OrderDto){
+  initiate(token: any, order: OrderDto) {
     token = 'token ' + token;
-    return this.http.post<any>(`${environment.baseUrl}/orders/initiate`, order, {
+    return this.http.post<any>(`${environment.baseUrl}orders/initiate`, order, {
       headers: new HttpHeaders().set('Authorization', token),
       observe: 'response',
     });
   }
 
-  allSellerOrders(token: any){
+  allSellerOrders(token: any) {
     token = 'token ' + token;
     return this.http.get<any>(`${environment.baseUrl}/orders/sellers`, {
       headers: new HttpHeaders().set('Authorization', token),
@@ -33,7 +32,7 @@ export class OrdersService {
     });
   }
 
-  allCustomerOrders(token: any){
+  allCustomerOrders(token: any) {
     token = 'token ' + token;
     return this.http.get<any>(`${environment.baseUrl}/orders/customers`, {
       headers: new HttpHeaders().set('Authorization', token),
@@ -41,13 +40,11 @@ export class OrdersService {
     });
   }
 
-  allSellerCustomers(token: any){
+  allSellerCustomers(token: any) {
     token = 'token ' + token;
     return this.http.get<any>(`${environment.baseUrl}/orders/sellers/customers`, {
       headers: new HttpHeaders().set('Authorization', token),
       observe: 'response',
     });
   }
-
-
 }

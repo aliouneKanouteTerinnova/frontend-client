@@ -45,7 +45,6 @@ import { OrderListComponent } from './pages/order/order-list/order-list.componen
 import { OrderDetailsComponent } from './pages/order/order-details/order-details.component';
 import { RegistrationComponent } from './pages/user/registration/registration.component';
 import { ArticleCheckoutComponent } from './components/article-checkout/article-checkout.component';
-
 import { StripeModule } from 'stripe-angular';
 import { ConditionUsedComponent } from './pages/user/condition-used/condition-used.component';
 import { SellerOrderComponent } from './pages/order/seller-order/seller-order.component';
@@ -177,7 +176,6 @@ const CLIENT_ID = environment.clientId;
     ShippingComponent,
     BankAccountComponent,
     FloatingShareButtonComponent,
-
     StoresViewComponent,
     LayoutsComponent,
     AboutUsComponent,
