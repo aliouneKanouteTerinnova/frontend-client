@@ -37,13 +37,7 @@ export class ReviewsStatsComponent implements OnInit {
     });
     this.currentUser = this.authService.currentUserValue;
     this.token = this.currentUser.token || this.currentUser['user'].token;
-    this.typeUser = this.currentUser.account_type;
-    if (this.typeUser === 'Seller') {
-      this.isSeller = true;
-      this.getOrderedStores();
-    } else {
-      this.getOrderedProducts();
-    }
+    this.getOrderedProducts();
   }
 
   onClick() {
