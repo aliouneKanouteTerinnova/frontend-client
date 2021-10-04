@@ -17,8 +17,8 @@
 /* eslint-disable max-len */
 import { PaymentsService } from './../../services/payments.service';
 /* eslint-disable @typescript-eslint/naming-convention */
-import { Component, OnInit, Input } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Address } from 'src/app/models/address/address';
 import { AuthResponded } from 'src/app/models/auth/auth';
@@ -35,8 +35,15 @@ import { I18nServiceService } from 'src/app/services/i18n-service/i18n-service.s
 import { CartItem } from 'src/app/dtos/cart-item/cart-item';
 import { CartModel } from 'src/app/models/cart/cart-model';
 import { CartItemModel } from 'src/app/models/cart/cart-item-model';
-import { ShippingAdressComponent } from 'src/app/components/shipping-adress/shipping-adress.component';
 import { ShippingAdressService } from 'src/app/services/shipping-adress/shipping-adress.service';
+import { Observable } from 'rxjs';
+import { OrdersService } from 'src/app/services/orders/orders.service';
+import { Order } from 'src/app/models/order/order';
+import { OrderDto } from 'src/app/dtos/orders/order-dto';
+import { OrderItem } from 'src/app/dtos/orders/order-item';
+import { PaymentService } from 'src/app/services/payment/payment.service';
+import { BankAccount } from 'src/app/models/payment/bank-account';
+import { CreditCard } from 'src/app/models/payment/credit-card';
 // import { ShippingMethod } from 'src/app/dtos/order/shipping-method';
 
 @Component({
@@ -54,6 +61,8 @@ export class CheckoutComponent implements OnInit {
   subTotal: Number;
   idCart: any;
   stripe: any;
+  totalTax: number = 20;
+  shippingTax: Number = 20;
   card;
   token;
   pbKey;
@@ -63,31 +72,35 @@ export class CheckoutComponent implements OnInit {
   errorMessage: any;
   title = 'Billing';
   panelOpenState = false;
-
-  price = '100';
-  shop = 'Adidas';
+  ShippingAdress: ShippingAddress;
+  shippingAdresses: ShippingAddress[];
+  selected: string;
 
   constructor(
     public cartService: CartService,
     private formBuilder: FormBuilder,
     private authService: AuthenticationsService,
-    private orderService: OrderService,
+    private orderService: OrdersService,
     private router: Router,
-    private payment: PaymentsService,
+    private payment: PaymentService,
     private i18nServiceService: I18nServiceService,
-    private shippingAdress: ShippingAdressService
+    private shippingAdressService: ShippingAdressService
   ) {}
 
   ngOnInit(): void {
     this.currentUser = this.authService.currentUserValue;
     this.token = this.currentUser.token || this.currentUser['user'].token;
+
     this.cartService.cartDataObs$.subscribe((data: CartModelServer) => {
       this.cartData = data;
+      console.log(data);
     });
 
     this.cartService.cartTotal$.subscribe((total) => {
       this.cartTotal = total;
     });
+
+    this.initForm('', '');
 
     this.ShippingAdressForm = this.formBuilder.group({
       fullname: [null, Validators.required],
@@ -98,10 +111,8 @@ export class CheckoutComponent implements OnInit {
       state: [null, Validators.required],
       city: [null, Validators.required],
       street: [null, Validators.required],
-      use_default: '',
+      use_default: [false],
     });
-
-    this.initForm('', '');
 
     // if (this.currentUser) {
     //   this.authService.getUser(this.currentUser.token || this.currentUser['user'].token).subscribe((data) => {
@@ -118,7 +129,11 @@ export class CheckoutComponent implements OnInit {
     //   });
     // }
 
+    this.allShippingAdress();
+
     this.updateCartOnServer();
+
+    this.selected = this.shippingAdresses[-1].name + ', ' + this.shippingAdresses[-1].city;
   }
 
   getCartDto() {
@@ -201,127 +216,98 @@ export class CheckoutComponent implements OnInit {
     });
   }
 
-  checkout() {
-    const fullname = this.ShippingAdressForm.get('fullname').value;
-    const email = this.ShippingAdressForm.get('email').value;
-    const phone = this.ShippingAdressForm.get('phone').value;
-    const zipcode = this.ShippingAdressForm.get('zip').value;
-    const country = this.ShippingAdressForm.get('country').value;
-    const state = this.ShippingAdressForm.get('state').value;
-    const city = this.ShippingAdressForm.get('city').value;
-    const street = this.ShippingAdressForm.get('street').value;
-
-    if (!this.ShippingAdressForm.valid) {
-      return;
-    }
-
-    this.cartService.get(this.currentUser.token || this.currentUser['user'].token).subscribe(
-      (data) => {
-        this.idCart = data.body.id;
-
-        /* this.cartData.data.forEach((element) => {
-          const item: Item = {
-            product: element.product.id,
-            quantity: element.numInCart,
-          };
-          this.cartService.addItemToCart(item, this.currentUser.token).subscribe(
-            (dataItem) => {},
-            (error) => {
-              console.log(error);
-            }
-          );
-        }); */
-
-        // const addresse: Address = {
-        //   country: state,
-        //   state: city,
-        //   street: address,
-        //   zip_code: zip_code,
-        // };
-
-        const shippingAddress: ShippingAddress = {
-          name: fullname,
-          state: state,
-          street1: street,
-          city: city,
-          zip_code: zipcode,
-          country: country,
-          phone: phone,
-          email: email,
-        };
-
-        const shippingMethod: ShippingMethod = {
-          name: 'DHL',
-          price: 10000,
-          currency: 'EUR',
-        };
-
-        const order = {
-          cart: this.idCart,
-          currency: 'EUR',
-          total_tax: 20,
-          shipping_tax: 20,
-          total_prices: this.cartTotal,
-          shipping_address: shippingAddress,
-          shipping_method: shippingMethod,
-        };
-
-        this.orderService.addOrder(order, this.currentUser.token || this.currentUser['user'].token).subscribe(
-          (data) => {
-            console.log('oder created ', data);
-            const sommes = +order.total_prices + +order.total_tax + +order.shipping_method.price;
-            const param = {
-              order_number: data.body.number,
-              method: 'card',
-              amount: Math.round(sommes),
-              currency: 'EUR',
-            };
-            this.payment.payment(param, this.currentUser.token || this.currentUser['user'].token).subscribe(
-              (res) => {
-                this.pbKey = res.body.public_key;
-                this.token = res.body.token;
-                this.orderNumber = res.body.payment.order_number;
-                // const method = res.body.payment.method;
-                // const amount = res.body.payment.amount;
-                this.stripe = Stripe(this.pbKey);
-
-                this.initStripeForm();
-
-                this.initForm(sommes, this.orderNumber);
-                console.log(res);
-              },
-              (err) => {
-                console.log(err);
-              }
-            );
-            this.cartService.deleteCart();
-            Swal.fire({
-              position: 'top-end',
-              icon: 'success',
-              title: `Order has been successfully registrered, check your my to see confirmation`,
-              showConfirmButton: false,
-              timer: 5000,
-            });
-          },
-          (error) => {
-            console.log(error);
-          }
-        );
+  allShippingAdress() {
+    this.shippingAdressService.all(this.token).subscribe(
+      (res) => {
+        this.shippingAdresses = res.body;
       },
-      (errors) => {
-        Swal.fire({
-          position: 'top-end',
-          icon: 'error',
-          title: `${errors.error.error}`,
-          showConfirmButton: true,
-          timer: 5000,
-        });
-        console.log(errors);
+      (err) => {
+        console.table(err);
       }
     );
   }
 
+  getShippingAdress(id: string) {
+    this.shippingAdressService.get(this.token, id).subscribe(
+      (res) => {
+        return res.body.result;
+      },
+      (err) => {
+        console.table(err);
+      }
+    );
+  }
+
+  deleteShippingAdress(shippingAdress: ShippingAddress) {
+    this.shippingAdressService.delete(this.token, shippingAdress.id).subscribe(
+      (res) => {
+        Swal.fire({
+          // position: 'top-end',
+          icon: 'success',
+          title: 'Adress deleted!',
+          showConfirmButton: false,
+          timer: 2000,
+        }),
+          (this.shippingAdresses = this.shippingAdresses.filter((t) => t.id !== shippingAdress.id));
+      },
+      (err) => {
+        console.table(err);
+      }
+    );
+  }
+
+  formatPrice(price: any) {
+    let prices = price.split('.');
+    if (this.i18nServiceService.currentLangValue === null || this.i18nServiceService.currentLangValue === 'en') {
+      prices = price;
+    } else {
+      prices = prices[0] + ',' + prices[1];
+      if (prices.split(',').length > 2) {
+        prices = prices.split(',')[0] + '' + prices.split(',')[1] + ',' + prices.split(',')[2];
+      }
+    }
+    return prices;
+  }
+
+  createOrder() {
+    this.cartService.get(this.currentUser.token || this.currentUser['user'].token).subscribe((data) => {
+      this.idCart = data.body.id;
+
+      // this.cartData.data.map((element) => {
+
+      //   const orderItem: Item = {
+      //     product: element.product.id,
+      //     quantity: element.numInCart,
+      //   };
+
+      //   this.cartService.addItemToCart(orderItem, this.currentUser.token).subscribe(
+      //     (dataItem) => {},
+      //     (error) => {
+      //       console.log(error);
+      //     }
+      //   );
+
+      // });
+
+      const order: OrderDto = {
+        cart: this.idCart,
+        total_tax: this.totalTax,
+      };
+
+      this.orderService.initiate(this.token, order).subscribe(
+        (data) => {
+          console.table(data);
+        },
+        (err) => {
+          console.table(err);
+        }
+      );
+    });
+  }
+
   addShippingAdress() {
+    this.createOrder();
+
     const name = this.ShippingAdressForm.get('fullname').value;
     const state = this.ShippingAdressForm.get('state').value;
     const street = this.ShippingAdressForm.get('street').value;
@@ -342,9 +328,18 @@ export class CheckoutComponent implements OnInit {
       email: email,
     };
 
-    this.shippingAdress.addShippingAdress(this.token, shippingAdress).subscribe(
+    this.shippingAdressService.create(this.token, shippingAdress).subscribe(
       (res) => {
-        console.log(res.status);
+        this.shippingAdresses.push(res.body);
+        this.ShippingAdress = shippingAdress;
+        console.table(this.cartData);
+        Swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          title: 'Adress added sucessfully !',
+          showConfirmButton: false,
+          timer: 2000,
+        });
       },
       (err) => {
         console.log(err);
@@ -352,110 +347,243 @@ export class CheckoutComponent implements OnInit {
     );
   }
 
-  OnSubmit() {
-    this.stripe
-      .confirmCardPayment(`${this.token}`, {
-        payment_method: {
-          card: this.card,
-        },
-      })
-      .then((result) => {
-        console.log(result);
-        if (result.error) {
-          this.errorMessage = result.error.message;
-        } else if (result.paymentIntent.status === 'succeeded') {
-          Swal.fire({
-            position: 'top-end',
-            icon: 'success',
-            title: 'payment has been made',
-            showConfirmButton: false,
-            timer: 1500,
-          });
-          const body = {
-            order_number: this.orderNumber,
-          };
-          this.payment
-            .confirmCardPayment(this.currentUser.token || this.currentUser['user'].token, result.paymentIntent.id, body)
-            .subscribe((res) => {
-              this.router.navigate(['/orders']);
-              console.log(res);
-            });
-        }
-      });
+  createShipment() {}
+
+  updateCartItems(form) {
+    console.table(form.value);
   }
 
-  formatPrice(price: any) {
-    let prices = price.split('.');
-    if (this.i18nServiceService.currentLangValue === null || this.i18nServiceService.currentLangValue === 'en') {
-      prices = price;
-    } else {
-      prices = prices[0] + ',' + prices[1];
-      if (prices.split(',').length > 2) {
-        prices = prices.split(',')[0] + '' + prices.split(',')[1] + ',' + prices.split(',')[2];
+  addBankAcc(form) {
+    const bic = form.value.bic;
+    const iban = form.value.iban;
+    const account_name = form.value.account_name;
+
+    const bankAccount: BankAccount = {
+      bic: bic,
+      iban: iban,
+      account_name: account_name,
+    };
+
+    this.payment.addBankAccount(this.token, bankAccount).subscribe(
+      (res) => {
+        console.table(res);
+      },
+      (err) => {
+        console.table(err);
       }
-    }
-    return prices;
+    );
   }
 
-  orderPlaced() {
-    // //validate before submission
-    // var form = document.getElementsByClassName('needs-validation')[0] as HTMLFormElement;
-    // if (form.checkValidity() === false) {
-    //   event.preventDefault();
-    //   event.stopPropagation();
-    //   form.classList.add('was-validated');
-    // }
-    // else {
-    //   alert('Order placed Successfully ! ');
-    //   this.getItemsFromCart();
-    //   let leftCartItems = this.totalCartItems;
-    //   for (let i = leftCartItems - 1; i >= 0; i--) {
-    //     this.cartService.removeCart(i);
-    //   }
-    //   this.router.navigateByUrl('/home');
-    // }
+  addCreditCard(form) {
+    const card = new CreditCard();
+    card.card_name = form.value.name_on_card;
+    card.card_number = form.value.card_number;
+    card.cvc = form.value.cvc;
+    card.expiration_date = form.value.expireYY + '-' + form.value.expireMM + '-01';
+
+    this.payment.addCreditCard(this.token, card).subscribe(
+      (res) => {
+        console.table(res);
+      },
+      (err) => {
+        console.table(err);
+      }
+    );
   }
 
-  getItemsFromCart = () => {
-    // this.cartService.cartListSubject
-    //   .subscribe(res => {
-    //     this.cartList = res;
-    //     let totalItems = 0;
-    //     for (let cart of this.cartList) {
-    //       totalItems += 1;
-    //     }
-    //     this.totalCartItems = totalItems;
-    //   })
-  };
+  // checkout() {
 
-  shipping() {}
+  // if (this.shippingAdresses == undefined) {
+  //   return;
+  // }
+
+  // this.cartService.get(this.currentUser.token || this.currentUser['user'].token).subscribe(
+  //   (data) => {
+  //     this.idCart = data.body.id;
+
+  //     this.cartData.data.forEach((element) => {
+  //       const item: Item = {
+  //         product: element.product.id,
+  //         quantity: element.numInCart,
+  //       };
+  //       this.cartService.addItemToCart(item, this.currentUser.token).subscribe(
+  //         (dataItem) => {},
+  //         (error) => {
+  //           console.log(error);
+  //         }
+  //       );
+  //     });
+
+  // const addresse: Address = {
+  //   country: state,
+  //   state: city,
+  //   street: address,
+  //   zip_code: zip_code,
+  // };
+
+  // const shippingMethod: ShippingMethod = {
+  //   name: 'DHL',
+  //   price: 10000,
+  //   currency: 'EUR',
+  // };
+
+  // const order = {
+  //   cart: this.idCart,
+  //   // currency: 'EUR',
+  //   total_tax: this.totalTax,
+  //   // shipping_tax: this.shippingTax,
+  //   // total_prices: this.cartTotal,
+  //   // shipping_address: this.ShippingAdress,
+  //   // shipping_method: shippingMethod,
+  // };
+
+  // this.orderService.initiate(order, this.currentUser.token || this.currentUser['user'].token).subscribe(
+  //   (data) => {
+  //     console.log('oder created ', data);
+  //     // const sommes = +order.total_prices + +order.total_tax + +order.shipping_method.price;
+  //     const param = {
+  //       order_number: data.body.number,
+  //       method: 'card',
+  //       // amount: Math.round(sommes),
+  //       currency: 'EUR',
+  //     };
+  //           this.payment.payment(param, this.currentUser.token || this.currentUser['user'].token).subscribe(
+  //             (res) => {
+  //               this.pbKey = res.body.public_key;
+  //               this.token = res.body.token;
+  //               this.orderNumber = res.body.payment.order_number;
+  //               // const method = res.body.payment.method;
+  //               // const amount = res.body.payment.amount;
+  //               this.stripe = Stripe(this.pbKey);
+
+  //               this.initStripeForm();
+
+  //               // this.initForm(sommes, this.orderNumber);
+  //               console.log(res);
+  //             },
+  //             (err) => {
+  //               console.log(err);
+  //             }
+  //           );
+  //           this.cartService.deleteCart();
+  //           Swal.fire({
+  //             position: 'top-end',
+  //             icon: 'success',
+  //             title: `Order has been successfully registrered, check your my to see confirmation`,
+  //             showConfirmButton: false,
+  //             timer: 5000,
+  //           });
+  //         },
+  //         (error) => {
+  //           console.log(error);
+  //         }
+  //       );
+  //     },
+  //     (errors) => {
+  //       Swal.fire({
+  //         position: 'top-end',
+  //         icon: 'error',
+  //         title: `${errors.error.error}`,
+  //         showConfirmButton: true,
+  //         timer: 5000,
+  //       });
+  //       console.log(errors);
+  //     }
+  //   );
+  // }
+
+  // OnSubmit() {
+  // this.stripe
+  //   .confirmCardPayment(`${this.token}`, {
+  //     payment_method: {
+  //       card: this.card,
+  //     },
+  //   })
+  //   .then((result) => {
+  //     console.log(result);
+  //     if (result.error) {
+  //       this.errorMessage = result.error.message;
+  //     } else if (result.paymentIntent.status === 'succeeded') {
+  //       Swal.fire({
+  //         position: 'top-end',
+  //         icon: 'success',
+  //         title: 'payment has been made',
+  //         showConfirmButton: false,
+  //         timer: 1500,
+  //       });
+  //       const body = {
+  //         order_number: this.orderNumber,
+  //       };
+  //       this.payment
+  //         .confirmCardPayment(this.currentUser.token || this.currentUser['user'].token, result.paymentIntent.id, body)
+  //         .subscribe((res) => {
+  //           this.router.navigate(['/orders']);
+  //           console.log(res);
+  //         });
+  //     }
+  //   });
+  // }
+
+  // orderPlaced() {
+  // //validate before submission
+  // var form = document.getElementsByClassName('needs-validation')[0] as HTMLFormElement;
+  // if (form.checkValidity() === false) {
+  //   event.preventDefault();
+  //   event.stopPropagation();
+  //   form.classList.add('was-validated');
+  // }
+  // else {
+  //   alert('Order placed Successfully ! ');
+  //   this.getItemsFromCart();
+  //   let leftCartItems = this.totalCartItems;
+  //   for (let i = leftCartItems - 1; i >= 0; i--) {
+  //     this.cartService.removeCart(i);
+  //   }
+  //   this.router.navigateByUrl('/home');
+  // }
+  // }
+
+  // getItemsFromCart = () => {
+  //   // this.cartService.cartListSubject
+  //   //   .subscribe(res => {
+  //   //     this.cartList = res;
+  //   //     let totalItems = 0;
+  //   //     for (let cart of this.cartList) {
+  //   //       totalItems += 1;
+  //   //     }
+  //   //     this.totalCartItems = totalItems;
+  //   //   })
+  // };
+
+  // shipping() {}
 
   // ChangeQuantity(id: Number, increaseQuantity: Boolean) {
   //   this.cartService.UpdateCartData(id, increaseQuantity);
   // }
 
-  // changeQuantity(e, c, index) {
-  //   const quantity = Number(e.target.value);
-  //   const temp = c.numInCart;
-  //   if (quantity > c.product.quantity) {
-  //     Swal.fire({
-  //       icon: 'error',
-  //       title: 'Oops...',
-  //       text: `${c.product.quantity} articles of ${c.product.name} left`,
-  //     });
-  //     c.numInCart = c.product.quantity;
-  //   } else if (quantity <= 0) {
-  //     Swal.fire({
-  //       icon: 'error',
-  //       title: 'Oops...',
-  //       text: 'You cannot have 0 article',
-  //     });
-  //     c.numInCart = 1;
-  //   } else {
-  //     c.numInCart = quantity - 1;
-  //     this.ChangeQuantity(index, true);
-  //   }
+  changeQuantity(e, c, index) {
+    const quantity = Number(e.target.value);
+    const temp = c.numInCart;
+    if (quantity > c.product.quantity) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: `${c.product.quantity} articles of ${c.product.name} left`,
+      });
+      c.numInCart = c.product.quantity;
+    } else if (quantity <= 0) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'You cannot have 0 article',
+      });
+      c.numInCart = 1;
+    } else {
+      c.numInCart = quantity - 1;
+      // this.ChangeQuantity(index, true);
+    }
 
-  //   console.log(quantity, c);
-  // }
+    //   console.log(quantity, c);
+    // }
+  }
 }
