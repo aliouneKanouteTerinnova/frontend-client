@@ -149,9 +149,11 @@ export class AdminOrdersComponent implements OnInit {
   getOrders() {
     this.orderService.getSellerOrders(this.currentUser.token || this.currentUser['user'].token);
     this.sellerOrderSubscription = this.orderService.sellerOrdersSubject.subscribe((data) => {
-      this.listOrders = data;
+      // this.listOrders = data;
       this.itemsP = data.length;
       this.itemsN = data.length;
+
+      // console.dir(data);
 
       const sold = data.filter((res) => res.status === 'confirmed');
       this.itemsS = sold.length;
