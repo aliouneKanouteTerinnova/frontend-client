@@ -23,6 +23,7 @@
       <mat-icon>{{ item.icon }}</mat-icon>
       <span>{{ item.title }}</span>
     </button>
+    <button *ngIf="showBtn" class="button" routerLink="/addproduct"><mat-icon>add</mat-icon> Upload product</button>
   </mat-sidenav>
   <mat-sidenav-content>
     <app-admin-navbar [welcome]="welcome" [infos]="infos"></app-admin-navbar>

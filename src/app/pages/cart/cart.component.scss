@@ -776,6 +776,18 @@ h3 {
 }
 
 @media only screen and (max-width: 600px) {
+  .product {
+    flex-direction: column;
+    .image {
+      img {
+        width: 100% !important;
+      }
+    }
+
+    .button {
+      flex-direction: row;
+    }
+  }
   .container {
     display: flex;
     flex-direction: column;

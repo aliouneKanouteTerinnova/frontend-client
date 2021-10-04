@@ -53,6 +53,7 @@ export class AdminCustomersComponent implements OnInit {
   currentUser: any;
   categoryName: any;
   terms;
+  showBtn = false;
 
   constructor(
     private observer: BreakpointObserver,
@@ -81,6 +82,7 @@ export class AdminCustomersComponent implements OnInit {
         if (res.matches) {
           this.sidenav.mode = 'over';
           this.sidenav.close();
+          this.showBtn = true;
         } else {
           this.sidenav.mode = 'side';
           this.sidenav.open();
