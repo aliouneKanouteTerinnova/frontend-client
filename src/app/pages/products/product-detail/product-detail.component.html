@@ -72,7 +72,6 @@
     <app-product [products]="similarProducts"> </app-product>
   </div>
   <app-reviews
-    *ngIf="hasOrdered"
     (reviewEdit)="updateReview($event)"
     (reviewAdd)="addReview(product?.id)"
     (reviewDelete)="deleteReview($event)"
