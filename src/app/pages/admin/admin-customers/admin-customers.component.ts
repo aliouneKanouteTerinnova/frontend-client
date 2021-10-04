@@ -1,4 +1,3 @@
-import { AdminProductsService } from './../admin-products/admin-products.service';
 /* eslint-disable @typescript-eslint/no-misused-promises */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/dot-notation */
@@ -7,10 +6,10 @@ import { AdminProductsService } from './../admin-products/admin-products.service
 /* eslint-disable @typescript-eslint/no-floating-promises */
 import { delay } from 'rxjs/operators';
 import { BreakpointObserver } from '@angular/cdk/layout';
-import { Router } from '@angular/router';
 import { MatSidenav } from '@angular/material/sidenav';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { AuthenticationsService } from 'src/app/services/authentications/authentications.service';
+import { AdminCustomersService } from './services/admin-customers.service';
 
 declare const $: any;
 declare interface RouteInfo {
@@ -30,52 +29,13 @@ export const ROUTES: RouteInfo[] = [
 declare interface Th {
   title: string;
 }
-export const THEAD: Th[] = [{ title: 'Product' }, { title: 'Category' }, { title: 'Availablity' }, { title: 'Total' }];
-
-declare interface Tr {
-  image: string;
-  name: string;
-  price: string;
-  quantity: string;
-  amount: string;
-}
-export const TBODY: Tr[] = [
-  {
-    image: 'https://mdbootstrap.com/img/Photos/Avatars/img (31).jpg',
-    name: 'CamerMask',
-    price: 'Art',
-    quantity: '2/2 channels',
-    amount: '€2000',
-  },
-  {
-    image: 'https://mdbootstrap.com/img/Photos/Avatars/img (31).jpg',
-    name: 'Tata Lisa',
-    price: 'Clothing',
-    quantity: '2/2 channels',
-    amount: '€2000',
-  },
-  {
-    image: 'https://mdbootstrap.com/img/Photos/Avatars/img (31).jpg',
-    name: 'Meet',
-    price: 'Food',
-    quantity: '2/2 channels',
-    amount: '€2000',
-  },
-  {
-    image: 'https://mdbootstrap.com/img/Photos/Avatars/img (31).jpg',
-    name: 'CamerBrush',
-    price: 'Art',
-    quantity: '2/2 channels',
-    amount: '€2000',
-  },
-  {
-    image: 'https://mdbootstrap.com/img/Photos/Avatars/img (31).jpg',
-    name: 'MamaLisa',
-    price: 'Art',
-    quantity: 'Out of Stocks',
-    amount: '€2000',
-  },
+export const THEAD: Th[] = [
+  { title: 'Customers' },
+  { title: 'Phone' },
+  { title: 'Number of commands' },
+  { title: 'Total spend' },
 ];
+
 @Component({
   selector: 'app-admin-customers',
   templateUrl: './admin-customers.component.html',
@@ -95,32 +55,22 @@ export class AdminCustomersComponent implements OnInit {
   terms;
 
   constructor(
-    private router: Router,
     private observer: BreakpointObserver,
     private authService: AuthenticationsService,
-    private adminProductsService: AdminProductsService
+    private adminCustomersService: AdminCustomersService
   ) {}
 
   async ngOnInit(): Promise<any> {
     this.currentUser = await this.authService.currentUserValue;
     this.menuItems = ROUTES.filter((menuItem) => menuItem);
     this.thItem = THEAD.filter((thItem) => thItem);
-    // this.trItem = TBODY.filter((thItem) => thItem);
 
-    this.getProducts();
-  }
-
-  getProducts() {
-    this.adminProductsService.getProducts(this.currentUser.token || this.currentUser['user'].token).subscribe((res) => {
-      this.trItem = res.body.results;
-
-      this.trItem.forEach((element, i) => {
-        this.adminProductsService.getCategory(element.category).subscribe((data) => {
-          this.trItem[i].category = data.name;
-          this.categoryName = data.name;
-        });
+    this.adminCustomersService
+      .getCustomers(this.currentUser.token || this.currentUser['user'].token)
+      .subscribe((res) => {
+        this.trItem = res.body;
+        console.dir(res.body);
       });
-    });
   }
 
   ngAfterViewInit(): void {

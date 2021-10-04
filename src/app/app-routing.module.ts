@@ -107,7 +107,7 @@ const routes: Routes = [
   { path: 'create-store', component: CreateStoresComponent, canActivate: [AuthGuard] },
   { path: 'categories', component: CategoriesComponent, canActivate: [AuthGuard] },
   { path: 'categories-detail/:id', component: CategoyDetailComponent },
-  { path: 'category', component: CategoryPageComponent },
+  // { path: 'category', component: CategoryPageComponent },
   { path: 'update-categories/:id', component: UpdateCategoriesComponent },
   { path: 'create-categories', component: CreateCategoriesComponent, canActivate: [AuthGuard] },
   { path: 'orders/:id', component: OrderDetailsComponent },
