@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { StripePaymentDto } from 'src/app/dtos/payment/stripe-payment-dto';
 import { environment } from 'src/environments/environment';
 import { BankAccount } from 'src/app/models/payment/bank-account';
+import { CreditCard } from 'src/app/models/payment/credit-card';
 
 @Injectable({
   providedIn: 'root',
@@ -33,6 +34,14 @@ export class PaymentService {
   addBankAccount(token: any, account: BankAccount) {
     token = 'token ' + token;
     return this.httpClient.post<any>(`${environment.baseUrl}payments/accounts`, account, {
+      headers: new HttpHeaders().set('Authorization', token),
+      observe: 'response',
+    });
+  }
+
+  addCreditCard(token: any, card: CreditCard) {
+    token = 'token ' + token;
+    return this.httpClient.post<any>(`${environment.baseUrl}payments/cards`, card, {
       headers: new HttpHeaders().set('Authorization', token),
       observe: 'response',
     });

@@ -19,18 +19,5 @@ export class ShippingAdressComponent implements OnInit {
   ngOnInit() {
     this.currentUser = this.authService.currentUserValue;
     this.token = this.currentUser.token || this.currentUser['user'].token;
-
-    this.getShippingAdresses();
-  }
-
-  getShippingAdresses() {
-    this.shippingAdressService.getShippingAdress(this.token).subscribe(
-      (data) => {
-        this.shippingAdresses = data.body;
-      },
-      (err) => {
-        console.log(err);
-      }
-    );
   }
 }

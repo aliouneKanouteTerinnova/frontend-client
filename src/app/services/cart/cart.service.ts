@@ -55,7 +55,6 @@ export class CartService {
   constructor(
     private productService: ProductsService,
     private httpClient: HttpClient,
-    private router: Router,
     private cookieService: CookieService
   ) {
     if (cookieService.check('cart')) {
