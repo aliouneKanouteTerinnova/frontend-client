@@ -191,7 +191,7 @@
                   />
                 </mat-form-field>
               </p>
-              <div *ngIf="signinForm.controls.password2.touched && registerForm.controls.password2.invalid">
+              <div *ngIf="signinForm.controls.password2.touched && signinForm.controls.password2.invalid">
                 <h4 style="color: red !important" *ngIf="signinForm.controls.password2.errors.required" translate>
                   registration.errors.required_error
                 </h4>

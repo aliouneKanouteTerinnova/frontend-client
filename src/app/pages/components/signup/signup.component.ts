@@ -82,7 +82,14 @@ export class SignupComponent implements OnInit {
         (data) => {
           if (Number(data.code) === 200) {
             this.isActivated = true;
-            this.successMessage = 'Account activated successfully, you can now log in';
+            Swal.fire({
+              position: 'top-end',
+              icon: 'success',
+              title: 'Account activated successfully, you can now log in',
+              showConfirmButton: false,
+              timer: 2500,
+            });
+            // this.successMessage = 'Account activated successfully, you can now log in';
           }
         },
         (error) => {
