@@ -1,15 +1,14 @@
-/* eslint-disable @typescript-eslint/no-misused-promises */
-/* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/dot-notation */
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-floating-promises */
-import { delay } from 'rxjs/operators';
 import { BreakpointObserver } from '@angular/cdk/layout';
+import { ViewChild } from '@angular/core';
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+import { ActivatedRoute } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { AdminProductDetailService } from './services/admin-product-detail.service';
 import { MatSidenav } from '@angular/material/sidenav';
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { AuthenticationsService } from 'src/app/services/authentications/authentications.service';
-import { AdminCustomersService } from './services/admin-customers.service';
+import { delay } from 'rxjs/operators';
 
 declare const $: any;
 declare interface RouteInfo {
@@ -29,49 +28,46 @@ export const ROUTES: RouteInfo[] = [
 declare interface Th {
   title: string;
 }
-export const THEAD: Th[] = [
-  { title: 'Customers' },
-  { title: 'Phone' },
-  { title: 'Number of commands' },
-  { title: 'Total spend' },
-];
+export const THEAD: Th[] = [{ title: 'Product' }, { title: 'Category' }, { title: 'Availablity' }, { title: 'Total' }];
 
 @Component({
-  selector: 'app-admin-customers',
-  templateUrl: './admin-customers.component.html',
-  styleUrls: ['./admin-customers.component.scss'],
+  selector: 'app-admin-product-detail',
+  templateUrl: './admin-product-detail.component.html',
+  styleUrls: ['./admin-product-detail.component.scss'],
 })
-export class AdminCustomersComponent implements OnInit {
+export class AdminProductDetailComponent implements OnInit {
   @ViewChild(MatSidenav)
   sidenav!: MatSidenav;
   menuItems: any[];
   thItem: any[];
-  trItem: any[];
-  title;
-  welcome = 'Customers';
+  productDatas: [] = [];
+  id;
+  welcome = 'Products > Products Details';
   infos = '';
-  currentUser: any;
-  categoryName: any;
-  terms;
   showBtn = false;
+  category;
+  store;
 
   constructor(
+    private router: ActivatedRoute,
     private observer: BreakpointObserver,
-    private authService: AuthenticationsService,
-    private adminCustomersService: AdminCustomersService
+    private adminProductDetailService: AdminProductDetailService
   ) {}
 
   async ngOnInit(): Promise<any> {
-    this.currentUser = await this.authService.currentUserValue;
+    this.id = this.router.snapshot.params.id;
+
     this.menuItems = ROUTES.filter((menuItem) => menuItem);
     this.thItem = THEAD.filter((thItem) => thItem);
 
-    this.adminCustomersService
-      .getCustomers(this.currentUser.token || this.currentUser['user'].token)
-      .subscribe((res) => {
-        this.trItem = res.body;
-        console.dir(res.body);
-      });
+    const productData = await this.adminProductDetailService.getProductsData(this.id).toPromise();
+    this.productDatas = productData;
+
+    const category = await this.adminProductDetailService.getCategoryById(this.productDatas['category']).toPromise();
+    this.category = category.name;
+
+    const store = await this.adminProductDetailService.getStoresById(this.productDatas['store']).toPromise();
+    this.store = store.name;
   }
 
   ngAfterViewInit(): void {

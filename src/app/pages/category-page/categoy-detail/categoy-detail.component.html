@@ -5,6 +5,10 @@
 
 <app-loading-spinner *ngIf="showSpinner"></app-loading-spinner>
 
+<div class="container" *ngIf="products.length === 0">
+  <div class="text-center">this category has no products</div>
+</div>
+
 <div class="container" *ngIf="products.length > 0">
   <app-best-deals
     title=" {{ 'Best products of the category ' + title }} "

@@ -251,3 +251,13 @@
 .selectshipmethod {
   width: 50%;
 }
+
+@media (max-width: 768px) {
+  .container {
+    display: flex;
+    flex-direction: column;
+  }
+  .summary {
+    width: 100%;
+  }
+}
