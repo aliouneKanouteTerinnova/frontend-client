@@ -13,7 +13,7 @@
         </div>
         <div class="thumbnail_img">
           <ul class="image-list" *ngFor="let image of images; let i = index">
-            <li><img src="{{ image.file }}" width="80" alt="" (click)="changeImage(i)" /></li>
+            <li><img class="img-fluid" src="{{ image.file }}" width="80" alt="" (click)="changeImage(i)" /></li>
           </ul>
         </div>
       </div>

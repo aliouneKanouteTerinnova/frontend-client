@@ -71,6 +71,7 @@ export class SidebarComponent implements OnInit {
   activities = [];
   users: any;
   user: any;
+  showBtn = false;
 
   itemsP;
   itemsNameP = 'Pending orders';
@@ -150,6 +151,7 @@ export class SidebarComponent implements OnInit {
         if (res.matches) {
           this.sidenav.mode = 'over';
           this.sidenav.close();
+          this.showBtn = true;
         } else {
           this.sidenav.mode = 'side';
           this.sidenav.open();
