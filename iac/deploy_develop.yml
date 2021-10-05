@@ -80,19 +80,19 @@
         docker pull terinnova/vaana-new-ui-develop:v0.1-beta
       become: yes
 
-    # - name: Kill Previous container
-    #   shell: |
-    #     docker kill new_ui-develop
-    #   become: yes
+    - name: Kill Previous container
+      shell: |
+        docker kill new_ui-develop
+      become: yes
 
-    # - name: Prune container
-    #   docker_prune:
-    #     containers: yes
-    #     images: yes
-    #     images_filters:
-    #       dangling: false
-    #     volumes: yes
-    #     builder_cache: yes
+    - name: Prune container
+      docker_prune:
+        containers: yes
+        images: yes
+        images_filters:
+          dangling: false
+        volumes: yes
+        builder_cache: yes
 
     - name: Run Image
       shell: |
