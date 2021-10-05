@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 import { AuthenticationsService } from 'src/app/services/authentications/authentications.service';
 import { OrderService } from 'src/app/services/order/order.service';
 
@@ -12,6 +12,7 @@ export class ReviewsStatsComponent implements OnInit {
   @Input() reviews: any;
   ratings: number[] = [0, 0, 0, 0, 0];
   @Output() btnAddReviewClick = new EventEmitter();
+  @Input() id: any;
 
   hasOrdered = false;
   listOrders = [];
@@ -19,24 +20,25 @@ export class ReviewsStatsComponent implements OnInit {
   currentUser: any;
   token: any;
   showSpinner = true;
-  idProduct: any;
   typeUser: any;
   isSeller = false;
-
+  storeProducts = [];
+  url: any;
   constructor(
     private orderService: OrderService,
     private authService: AuthenticationsService,
-    private route: ActivatedRoute
+    private router: Router
   ) {}
 
   ngOnInit(): void {
-    this.idProduct = this.route.snapshot.params.id;
-    console.dir(this.idProduct);
+    this.currentUser = this.authService.currentUserValue;
+
+    this.url = this.router.url;
+
     this.reviews.map((review) => {
       this.ratings[review.rating - 1]++;
     });
-    this.currentUser = this.authService.currentUserValue;
-    this.token = this.currentUser.token || this.currentUser['user'].token;
+
     this.getOrderedProducts();
   }
 
@@ -45,49 +47,26 @@ export class ReviewsStatsComponent implements OnInit {
   }
 
   getOrderedProducts() {
-    this.orderService.getAllOrders(this.token).subscribe(
+    this.orderService.getAllOrders(this.currentUser.token || this.currentUser['user'].token).subscribe(
       (data) => {
-        console.dir(data.body);
+        // console.dir(data.body);
         this.listOrders = data.body;
         this.listOrders.forEach((order) => {
           order.order_items.forEach((items) => {
             this.listOrder.push(items);
             this.listOrder.forEach((item) => {
-              if (item.cart_item['product'] == this.idProduct) {
-                console.dir(item.cart_item['product']);
-                this.hasOrdered = true;
+              if (this.url.includes('product-detail')) {
+                if (item.cart_item['product'].id === this.id) {
+                  this.hasOrdered = true;
+                }
+              } else if (this.url.includes('store-products')) {
+                if (item.cart_item['product'].store === this.id) {
+                  this.hasOrdered = true;
+                }
               }
             });
           });
         });
-        console.dir(this.listOrder);
-
-        this.showSpinner = false;
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
-  }
-
-  getOrderedStores() {
-    this.orderService.getAllOrders(this.token).subscribe(
-      (data) => {
-        console.dir(data.body);
-        this.listOrders = data.body;
-        this.listOrders.forEach((order) => {
-          order.order_items.forEach((items) => {
-            this.listOrder.push(items);
-            this.listOrder.forEach((item) => {
-              if (item.cart_item['product'] == this.idProduct) {
-                console.dir(item.cart_item['product']);
-                this.hasOrdered = true;
-              }
-            });
-          });
-        });
-        console.dir(this.listOrder);
-
         this.showSpinner = false;
       },
       (error) => {
