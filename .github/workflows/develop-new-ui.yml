@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        language: ["TypeScript"]
+        language: ['TypeScript']
     steps:
       - name: Checkout repository
         id: checkout_repo
@@ -31,6 +31,17 @@ jobs:
       - name: Perform codeQL analyse
         id: analyze_codeQL
         uses: github/codeql-action/analyze@v1
+
+  Analyze-perform-ui:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Running Page Speed Insights
+        uses: jakepartusch/psi-action@v1.2
+        id: psi
+        with:
+          url: 'http://18.193.203.105:8074/'
+          threshold: 70
+          strategy: desktop
 
   build-and-push:
     name: Vaanah Front Satging Pipeline Deployment
@@ -66,7 +77,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-buildx-
 
-      # Login to DockerHub  
+      # Login to DockerHub
       - name: Login to Docker Hub
         uses: docker/login-action@v1
         with:
@@ -78,8 +89,8 @@ jobs:
       # - name: Set up Docker Buildx
       #   id: buildx
       #   uses: docker/setup-buildx-action@v1
-      
-      # 
+
+      #
       - name: Build and push
         id: docker_build
         uses: docker/build-push-action@v2
@@ -106,7 +117,6 @@ jobs:
         env:
           ANSIBLE_HOST_KEY_CHECKING: 'false'
           ANSIBLE_DEPRECATION_WARNINGS: 'false'
-
 #       - name: Run playbook
 #         uses: dawidd6/action-ansible-playbook@v2
 #         with:
