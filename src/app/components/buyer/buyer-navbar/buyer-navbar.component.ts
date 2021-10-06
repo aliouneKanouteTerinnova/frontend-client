@@ -210,7 +210,8 @@ export class BuyerNavbarComponent implements OnInit {
 
   logout(): void {
     this.authService.logOut();
-    this.router.navigate(['/home']);
-    window.location.reload();
+    this.router.navigate(['/home']).then(() => {
+      window.location.reload();
+    });
   }
 }

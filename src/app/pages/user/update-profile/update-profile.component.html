@@ -49,9 +49,21 @@
             >
           </mat-error>
         </mat-form-field>
+        <!-- <mat-form-field class="example-full-width" appearance="outline"> -->
+        <!-- <mat-label translate>registration.register.country</mat-label> -->
+        <label style="float: left" translate>registration.register.country</label>
+        <select formControlName="city" class="form-control w-100 h-50">
+          <option value="">{{ country }}</option>
+          <option *ngFor="let item of regions">{{ item.name.common }}</option>
+        </select>
+        <!-- <input type="text" matInput placeholder="state" formControlName="state" [disabled]="true" /> -->
+        <!-- <mat-error *ngIf="registerForm.controls.state.touched && registerForm.controls.state.invalid">
+            <span *ngIf="registerForm.controls.state.errors.required">registration.errors.required_error</span>
+          </mat-error> -->
+        <!-- </mat-form-field> -->
         <mat-form-field class="example-full-width" appearance="outline">
-          <mat-label translate>registration.register.country</mat-label>
-          <input type="text" matInput placeholder="state" formControlName="state" [disabled]="true" />
+          <mat-label translate>Phone</mat-label>
+          <input type="tel" matInput placeholder="phone" formControlName="phone" />
           <mat-error *ngIf="registerForm.controls.state.touched && registerForm.controls.state.invalid">
             <span *ngIf="registerForm.controls.state.errors.required">registration.errors.required_error</span>
           </mat-error>
