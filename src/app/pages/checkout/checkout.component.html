@@ -226,18 +226,16 @@
           Did you forget an address?
           <button class="prev_step" matStepperPrevious><a>Enter a new shipping address</a></button>
         </p>
+        <!-- {{ f.value | json }} -->
+        <div class="article-header">
+          <div class="article"><b>Articles</b></div>
+          <!-- <div class="qte"><b>Qte</b></div> -->
+          <div class="shipadress"><b>Shipping Adress</b></div>
+        </div>
 
-        <form #f="ngForm" (ngSubmit)="updateCartItems(f)">
-          <div class="article-header">
-            <div class="article"><b>Articles</b></div>
-            <div class="qte"><b>Qte</b></div>
-            <div class="shipadress"><b>Shipping Adress</b></div>
-          </div>
+        <hr />
 
-          <hr />
-
-          {{ f.value | json }}
-
+        <form [formGroup]="setShipAdressForm" (ngSubmit)="createShipment()">
           <div class="productrow" *ngFor="let c of cartData.data; let i = index">
             <div class="product">
               <div class="img-product">
@@ -253,31 +251,32 @@
               </div>
             </div>
 
-            <div class="incdecqte">
+            <!-- <div class="incdecqte">
               <mat-form-field>
                 <input
-                  ngModel
                   placeholder="Change quantity"
                   matInput
                   id="qte"
                   type="number"
-                  id="number"
                   [value]="c.numInCart"
                   [max]="c.product.quantity"
                   [min]="1"
-                  (change)="changeQuantity($event, c, i)"
                 />
               </mat-form-field>
-            </div>
+            </div> -->
 
             <div class="selectadressship">
-              <mat-form-field>
-                <mat-select placeholder="Change shipping adress" [(value)]="selected">
-                  <mat-option ngModel name="ship_adress" *ngFor="let a of shippingAdresses" value="a.id"
-                    >{{ a.name }}, {{ a.city }}</mat-option
-                  >
-                </mat-select>
-              </mat-form-field>
+              <!-- <mat-form-field> -->
+              <select
+                placeholder="Change shipping adress"
+                (change)="updateCartItems($event)"
+                formControlName="ship_adress"
+              >
+                <option *ngFor="let a of shippingAdresses" value="product,{{ c.product.id }},ship_adress,{{ a.id }}}">
+                  {{ a.name }}, {{ a.city }}
+                </option>
+              </select>
+              <!-- </mat-form-field> -->
             </div>
           </div>
 
@@ -336,36 +335,55 @@
         <ng-template matStepLabel>Choose Payment Method</ng-template>
 
         <div>
-          <form></form>
           <h2>Select a payment method</h2>
 
-          <div class="payment_method_selected"></div>
+          <div class="paymentMethods">
+            <form #p="ngForm" (ngSubmit)="choosePaymentMethod(p)">
+              <mat-card class="col-12 mt-5">
+                <mat-card-title-group>
+                  <mat-card-title>Payments accounts</mat-card-title> </mat-card-title-group
+                ><br />
+                <mat-card-content>
+                  <mat-radio-group
+                    ngModel
+                    name="payment_method"
+                    class="example-radio-group"
+                    *ngFor="let credit of creditCards"
+                  >
+                    <div>
+                      <h4><b>Bank accounts</b></h4>
+                    </div>
+                    <mat-radio-button *ngFor="let acc of bankAccounts" [value]="acc.id">
+                      {{ acc.account_name }} - {{ acc.iban }}
+                    </mat-radio-button>
+                    <div>
+                      <h4><b>Credit Cards accounts</b></h4>
+                    </div>
+                    <mat-radio-button *ngFor="let credit of creditCards" [value]="credit.id">
+                      {{ credit.card_name }} - {{ credit.card_number }}
+                    </mat-radio-button>
+                  </mat-radio-group>
+                </mat-card-content>
+              </mat-card>
 
-          <div></div>
+              <!-- <mat-radio-group>
+                  <mat-radio-button  *ngFor="let credit of creditCards" [value]="credit.id">
+                    {{credit.card_name}}
+                  </mat-radio-button>
+                </mat-radio-group> -->
+            </form>
+          </div>
 
           <hr />
 
           <mat-accordion>
             <mat-expansion-panel class="mb-4">
               <mat-expansion-panel-header>
-                <mat-panel-title> Your bank account </mat-panel-title>
+                <mat-panel-title> Add a bank account </mat-panel-title>
               </mat-expansion-panel-header>
 
               <div class="bank">
                 <form #b="ngForm" (ngSubmit)="addBankAcc(b)">
-                  <!-- <div class="card uk-card-default uk-width-*">
-                    <div class="uk-card-header text-center" translate>payment.title</div>
-                    <div class="uk-card-body">
-                      <p class="text-danger">{{ errorMessage }}</p>
-            
-                      <input type="text" readonly id="amount" class="form-control" formControlName="amount" />
-                      <input type="text" readonly id="orderNumber" class="form-control" formControlName="orderNumber" />
-                      <div id="card-element" class="mt-3 mb-3"></div>
-                      <div class="card-errors" role="alert"></div>
-                      <button class="payBtn mt-3" type="submit" translate>payment.payment_button</button>
-                    </div>
-                  </div> -->
-
                   <div class="row1">
                     <h2>Add a current account</h2>
 
@@ -406,24 +424,11 @@
 
             <mat-expansion-panel class="mb-4">
               <mat-expansion-panel-header>
-                <mat-panel-title> Your credit card </mat-panel-title>
+                <mat-panel-title> Add a credit card </mat-panel-title>
               </mat-expansion-panel-header>
 
               <div class="credit-card">
                 <form #c="ngForm" (ngSubmit)="addCreditCard(c)">
-                  <!-- <div class="card uk-card-default uk-width-*">
-                    <div class="uk-card-header text-center" translate>payment.title</div>
-                    <div class="uk-card-body">
-                      <p class="text-danger">{{ errorMessage }}</p>
-  
-                      <input type="text" readonly id="amount" class="form-control" formControlName="amount" />
-                      <input type="text" readonly id="orderNumber" class="form-control" formControlName="orderNumber" />
-                      <div id="card-element" class="mt-3 mb-3"></div>
-                      <div class="card-errors" role="alert"></div>
-                      <button class="payBtn mt-3" type="submit" translate>payment.payment_button</button>
-                    </div>
-                  </div> -->
-
                   <div class="row1">
                     <h2>Add a credit card</h2>
 
