@@ -121,6 +121,7 @@
 </div> -->
 
 <div class="container">
+  <!-- <div class="row"> -->
   <div class="billing">
     <mat-horizontal-stepper #stepper>
       <mat-step>
@@ -340,9 +341,7 @@
           <div class="paymentMethods">
             <form #p="ngForm" (ngSubmit)="choosePaymentMethod(p)">
               <mat-card class="col-12 mt-5">
-                <mat-card-title-group>
-                  <mat-card-title>Payments accounts</mat-card-title> </mat-card-title-group
-                ><br />
+                <mat-card-title-group> <mat-card-title>Payments accounts</mat-card-title> </mat-card-title-group><br />
                 <mat-card-content>
                   <mat-radio-group
                     ngModel
@@ -564,6 +563,7 @@
       </div>
     </div>
   </div>
+  <!-- </div> -->
 </div>
 
 <app-footer></app-footer>

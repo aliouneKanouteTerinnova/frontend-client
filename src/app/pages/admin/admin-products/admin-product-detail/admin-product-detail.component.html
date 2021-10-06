@@ -27,29 +27,43 @@
   </mat-sidenav>
   <mat-sidenav-content>
     <app-admin-navbar [welcome]="welcome" [infos]="infos"></app-admin-navbar>
-    <div class="mat-elevation-z8 main-content d-flex mt-5 mb-5 pl-5">
+    <div class="mat-elevation-z8 main-content d-flex mt-5 mb-5 p-5">
       <div class="container">
         <div class="row">
-          <div class="card p-4 col-lg-10" style="border: none">
-            <div class="card-body table-responsive">
-              <table class="table table-hover">
-                <thead class="text-warning">
-                  <th *ngFor="let item of thItem">{{ item.title }}</th>
-                </thead>
-                <tbody>
-                  <tr *ngFor="let item of trItem | filter: terms">
-                    <td>
-                      <!-- <img class="mr-3" src="{{ item.images[0].file }}" width="50" height="50" alt="" /> -->
-                      {{ item.username }}
-                    </td>
-                    <td *ngIf="item.phone === null">000 00 00 00 00</td>
-                    <td *ngIf="item.phone !== null">{{ item.phone }}</td>
-                    <td>...</td>
-                    <td>...</td>
-                  </tr>
-                </tbody>
-              </table>
+          <div class="card p-4 col-lg-12" style="border: none">
+            <h1>{{ productDatas['name'] }}</h1>
+          </div>
+
+          <div class="card p-4 col-lg-12 mt-4" style="border: none">
+            {{ productDatas['description'] }}
+          </div>
+
+          <div class="card p-4 col-lg-12 mt-4" style="border: none">
+            <h1>Media</h1>
+            <div>
+              <img
+                class="mr-1 ml-1 mb-2"
+                *ngFor="let item of productDatas['images']"
+                src="{{ item.file }}"
+                width="200"
+                height="200"
+                alt=""
+              />
             </div>
+          </div>
+        </div>
+      </div>
+      <div class="card ml-4" style="border: none; width: 300px; height: fit-content">
+        <div class="text-center p-4">
+          <div class="mb-4">
+            <h2>
+              Categories: <b>{{ category }}</b>
+            </h2>
+          </div>
+          <div class="">
+            <h2>
+              Shop: <b>{{ store }}</b>
+            </h2>
           </div>
         </div>
       </div>

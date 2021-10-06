@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/dot-notation */
 /* eslint-disable @typescript-eslint/no-unsafe-return */
 /* eslint-disable @typescript-eslint/restrict-plus-operands */
 /* eslint-disable no-var */
@@ -18,6 +19,7 @@ import { I18nServiceService } from 'src/app/services/i18n-service/i18n-service.s
 import { ProductReviewService } from 'src/app/services/product-review/product-review.service';
 import { ProductsService } from 'src/app/services/products/products.service';
 import { StoresService } from 'src/app/services/stores/stores.service';
+// import { WishlistService } from 'src/app/services/wishlist/wishlist.service';
 import Swal from 'sweetalert2';
 import { ProductReviewComponent } from '../product-review/product-review.component';
 import { UpdateProductReviewComponent } from '../product-review/update-product-review/update-product-review.component';
@@ -40,6 +42,8 @@ export class ProductDetailComponent implements OnInit {
   similarProducts = [];
   currentUser: any;
   isOwner: any;
+  // token: any;
+  // isIconClicked = false;
   constructor(
     private productsService: ProductsService,
     private router: ActivatedRoute,
@@ -49,7 +53,8 @@ export class ProductDetailComponent implements OnInit {
     private productReviewService: ProductReviewService,
     private authService: AuthenticationsService,
     public addDialog: MatDialog,
-    public editDialog: MatDialog
+    // private route: Router,
+    public editDialog: MatDialog // private wishlistService: WishlistService
   ) {}
 
   ngOnInit(): void {
@@ -113,6 +118,39 @@ export class ProductDetailComponent implements OnInit {
       timer: 2000,
     });
   }
+
+  // AddWishlist(id: any) {
+  //   console.dir(id);
+  //   this.isIconClicked = true;
+  //   if (!this.currentUser) {
+  //     this.route.navigate(['/home']);
+  //   }
+  //   this.token = this.currentUser.token || this.currentUser['user'].token;
+  //   const products = {
+  //     product: id,
+  //   };
+  //   this.wishlistService.AddToWishlist(products, this.token).subscribe(
+  //     (res) => {
+  //       console.dir(res);
+  //       Swal.fire({
+  //         icon: 'success',
+  //         title: 'Product added to your Wishlist!',
+  //         showConfirmButton: false,
+  //         timer: 2000,
+  //       });
+  //       this.isIconClicked = false;
+  //     },
+  //     (error) => {
+  //       Swal.fire({
+  //         icon: 'error',
+  //         title: error.error.error,
+  //         showConfirmButton: false,
+  //         timer: 2000,
+  //       });
+  //       this.isIconClicked = false;
+  //     }
+  //   );
+  // }
 
   getProducts() {
     this.productsService.getAllProducts().subscribe((data) => {
