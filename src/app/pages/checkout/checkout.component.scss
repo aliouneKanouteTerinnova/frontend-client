@@ -252,12 +252,16 @@
   width: 50%;
 }
 
-@media (max-width: 768px) {
-  .container {
-    display: flex;
-    flex-direction: column;
-  }
-  .summary {
-    width: 100%;
+.example-radio-group {
+  display: inline-flex;
+  flex-direction: column;
+  @media (max-width: 768px) {
+    .container {
+      display: flex;
+      flex-direction: column;
+    }
+    .summary {
+      width: 100%;
+    }
   }
 }

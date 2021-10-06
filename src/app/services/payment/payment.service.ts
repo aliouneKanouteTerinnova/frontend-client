@@ -39,9 +39,25 @@ export class PaymentService {
     });
   }
 
+  getBankAccount(token: any) {
+    token = 'token ' + token;
+    return this.httpClient.get<any>(`${environment.baseUrl}payments/accounts`, {
+      headers: new HttpHeaders().set('Authorization', token),
+      observe: 'response',
+    });
+  }
+
   addCreditCard(token: any, card: CreditCard) {
     token = 'token ' + token;
     return this.httpClient.post<any>(`${environment.baseUrl}payments/cards`, card, {
+      headers: new HttpHeaders().set('Authorization', token),
+      observe: 'response',
+    });
+  }
+
+  getCreditCard(token: any) {
+    token = 'token ' + token;
+    return this.httpClient.get<any>(`${environment.baseUrl}payments/cards`, {
       headers: new HttpHeaders().set('Authorization', token),
       observe: 'response',
     });
