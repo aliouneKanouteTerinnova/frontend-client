@@ -44,6 +44,7 @@ import { OrderItem } from 'src/app/dtos/orders/order-item';
 import { PaymentService } from 'src/app/services/payment/payment.service';
 import { BankAccount } from 'src/app/models/payment/bank-account';
 import { CreditCard } from 'src/app/models/payment/credit-card';
+import { OrderItemsService } from 'src/app/services/orders/order-items.service';
 // import { ShippingMethod } from 'src/app/dtos/order/shipping-method';
 
 @Component({
@@ -74,7 +75,14 @@ export class CheckoutComponent implements OnInit {
   panelOpenState = false;
   ShippingAdress: ShippingAddress;
   shippingAdresses: ShippingAddress[];
+  bankAccounts: BankAccount[];
+  creditCards: CreditCard[];
   selected: string;
+  setShipAdressForm: FormGroup;
+  shipAdress: any;
+  orderItem: OrderItem[];
+  shippingAdressesForActicles = [];
+  orderId: any;
 
   constructor(
     public cartService: CartService,
@@ -84,16 +92,16 @@ export class CheckoutComponent implements OnInit {
     private router: Router,
     private payment: PaymentService,
     private i18nServiceService: I18nServiceService,
-    private shippingAdressService: ShippingAdressService
+    private shippingAdressService: ShippingAdressService,
+    private orderItemService: OrderItemsService
   ) {}
 
   ngOnInit(): void {
     this.currentUser = this.authService.currentUserValue;
     this.token = this.currentUser.token || this.currentUser['user'].token;
-
     this.cartService.cartDataObs$.subscribe((data: CartModelServer) => {
       this.cartData = data;
-      console.log(data);
+      console.dir(this.cartData);
     });
 
     this.cartService.cartTotal$.subscribe((total) => {
@@ -129,24 +137,28 @@ export class CheckoutComponent implements OnInit {
     //   });
     // }
 
+    this.setShipAdressForm = this.formBuilder.group({
+      ship_adress: ['', Validators.required],
+    });
+
     this.allShippingAdress();
 
+    this.getCreditCards();
+    this.getBankAccount();
     this.updateCartOnServer();
-
-    this.selected = this.shippingAdresses[-1].name + ', ' + this.shippingAdresses[-1].city;
+    // this.selected = this.shippingAdresses[-1].name + ', ' + this.shippingAdresses[-1].city;
   }
 
   getCartDto() {
     let items: CartItem[] = [];
-
     this.cartData.data.forEach((element) => {
       const item: CartItem = {
         product: element.product.id.toString(),
         quantity: element.numInCart,
       };
-
       items.push(item);
     });
+
     return items;
   }
 
@@ -168,12 +180,16 @@ export class CheckoutComponent implements OnInit {
 
   updateCartOnServer() {
     this.items = this.getCartDto();
+
+    console.dir(this.items, 'Update cart on server');
     this.cartService.get(this.token).subscribe((res) => {
       this.cart = this.updateCart(res.body);
       this.cartService.update(this.token, this.items, this.cart.id).subscribe(
         (response) => {
           this.cart = response.body;
-          console.log(this.cart);
+          console.dir(this.items, 'Update cart on server');
+          //console.dir("Cart :");
+          console.dir(this.cart, 'cart');
         },
         (error) => {
           console.log(error);
@@ -270,24 +286,37 @@ export class CheckoutComponent implements OnInit {
   }
 
   createOrder() {
-    this.cartService.get(this.currentUser.token || this.currentUser['user'].token).subscribe((data) => {
+    this.cartService.get(this.token).subscribe((data) => {
       this.idCart = data.body.id;
+      const cartItems = data.body.items;
 
-      // this.cartData.data.map((element) => {
+      //Reset Cart
+      cartItems.map((elm) => {
+        this.cartService.removeItem(this.token, elm.id).subscribe(
+          (res) => {
+            console.dir(res, 'Item deleted !');
+          },
+          (err) => {
+            console.dir(err);
+          }
+        );
+      });
 
-      //   const orderItem: Item = {
-      //     product: element.product.id,
-      //     quantity: element.numInCart,
-      //   };
+      this.cartData.data.map((element) => {
+        const orderItem: Item = {
+          product: element.product.id,
+          quantity: element.numInCart,
+        };
 
-      //   this.cartService.addItemToCart(orderItem, this.currentUser.token).subscribe(
-      //     (dataItem) => {},
-      //     (error) => {
-      //       console.log(error);
-      //     }
-      //   );
-
-      // });
+        this.cartService.addItemToCart(orderItem, this.token).subscribe(
+          (dataItem) => {
+            console.dir(dataItem);
+          },
+          (error) => {
+            console.dir(error);
+          }
+        );
+      });
 
       const order: OrderDto = {
         cart: this.idCart,
@@ -296,14 +325,26 @@ export class CheckoutComponent implements OnInit {
 
       this.orderService.initiate(this.token, order).subscribe(
         (data) => {
-          console.table(data);
+          this.orderItem = data.body.order_items;
+          this.orderId = data.body.id;
         },
         (err) => {
-          console.table(err);
+          console.dir(err);
         }
       );
     });
   }
+
+  // updateCart() {
+
+  //   const Items: CartItem = {
+  //     product: this.cartData.data,
+  //     quantity: this.cartData.total,
+  //   }
+
+  //   this.cartService.update(this.token, Items, this.idCart).subscribe();
+
+  // }
 
   addShippingAdress() {
     this.createOrder();
@@ -347,11 +388,60 @@ export class CheckoutComponent implements OnInit {
     );
   }
 
-  createShipment() {}
+  updateCartItems(event) {
+    const result = event.target.value;
 
-  updateCartItems(form) {
-    console.table(form.value);
+    var temp = result.split(','),
+      resultObject = {};
+
+    for (let i = 0; i < temp.length; i += 2) {
+      resultObject[temp[i]] = temp[i + 1];
+    }
+
+    this.shippingAdressesForActicles.push(resultObject);
+    console.dir(this.shippingAdressesForActicles);
+
+    console.dir(this.orderItem);
+
+    this.shippingAdressesForActicles.forEach((ship) => {
+      this.orderItem.forEach((item) => {
+        if (ship.product == item.cart_item.product.id) {
+          item.shipping_address = ship.ship_adress;
+          console.dir(item.shipping_address, 'Ship adress set!');
+        }
+      });
+    });
   }
+
+  setOrderItems() {
+    this.orderItem.forEach((item) => {
+      this.orderItemService.update(this.token, item.id, item).subscribe(
+        (res) => {
+          console.dir(res, 'set order items success !');
+        },
+        (err) => {
+          console.dir(err, 'set order items error !');
+        }
+      );
+    });
+  }
+
+  createShipment() {
+    this.setOrderItems();
+
+    this.orderItem.forEach((orderI) => {
+      this.orderItemService.createShipment(this.token, orderI.id).subscribe(
+        (res) => {
+          console.dir(res, 'create shipment success !');
+        },
+        (err) => {
+          console.dir(err, 'create shipment error !');
+        }
+      );
+    });
+  }
+
+  choosePaymentMethod(form) {}
 
   addBankAcc(form) {
     const bic = form.value.bic;
@@ -374,6 +464,13 @@ export class CheckoutComponent implements OnInit {
     );
   }
 
+  getBankAccount() {
+    this.payment.getBankAccount(this.token).subscribe(
+      (res) => (this.bankAccounts = res.body),
+      (err) => console.dir(err)
+    );
+  }
+
   addCreditCard(form) {
     const card = new CreditCard();
     card.card_name = form.value.name_on_card;
@@ -388,6 +485,13 @@ export class CheckoutComponent implements OnInit {
       (err) => {
         console.table(err);
       }
+    );
+  }
+
+  getCreditCards() {
+    this.payment.getCreditCard(this.token).subscribe(
+      (res) => (this.creditCards = res.body),
+      (err) => console.dir(err)
     );
   }
 
@@ -583,7 +687,7 @@ export class CheckoutComponent implements OnInit {
       // this.ChangeQuantity(index, true);
     }
 
-    //   console.log(quantity, c);
+    console.dirxml(quantity, c);
     // }
   }
 }
