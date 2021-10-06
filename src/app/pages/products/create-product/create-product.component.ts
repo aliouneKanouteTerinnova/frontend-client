@@ -21,6 +21,7 @@ import { StoresService } from 'src/app/services/stores/stores.service';
 import Swal from 'sweetalert2';
 import { v4 as uuidv4 } from 'uuid';
 import { AuthenticationsService } from 'src/app/services/authentications/authentications.service';
+import { Parcel } from 'src/app/models/parcel/parcel';
 uuidv4();
 
 @Component({
@@ -38,6 +39,7 @@ export class CreateProductComponent implements OnInit {
   storeId: any;
   images = [];
   imagesTable = [];
+  productId: any;
 
   filePath = './../../assets/img/Products/';
 
@@ -63,6 +65,12 @@ export class CreateProductComponent implements OnInit {
 
       category: ['', Validators.required],
       store: ['', Validators.required],
+      length: [''],
+      width: [''],
+      weight: [''],
+      height: [''],
+      distance_unit: [''],
+      mass_unit: [''],
       pictures: this.fb.array([]),
     });
 
@@ -100,7 +108,6 @@ export class CreateProductComponent implements OnInit {
     if (fileName) {
       fileName = fileName.replace(/[^a-zA-Z0-9\.\-]/g, '_');
     }
-
     this.imagesTable.push(file);
   }
 
@@ -117,6 +124,7 @@ export class CreateProductComponent implements OnInit {
       this.categorys = data.results;
     });
   }
+
   getStores() {
     this.storesService.getSellerStore(this.currentUser.user.token).subscribe(
       (res) => {
@@ -140,14 +148,20 @@ export class CreateProductComponent implements OnInit {
     // products.image = this.createProductForm.get('image').value;
 
     const products = new Products();
+
     let itemsProcessed = 0;
+
     this.imagesTable.forEach((item, index, array) => {
       let fd = new FormData();
+
       fd.append('file', item);
+
       itemsProcessed++;
+
       this.productsService.uploadFile(fd, this.currentUser.user.token).subscribe(
         (data) => {
           this.images.push(data.body.id);
+
           if (this.images.length === this.imagesTable.length) {
             products.name = this.createProductForm.get('name').value;
             products.slug = this.createProductForm.get('slug').value;
@@ -160,15 +174,35 @@ export class CreateProductComponent implements OnInit {
             products.store = this.storeId;
             products.images = this.images;
             products.reviews = [];
+
             this.productsService.addProduct(products, this.currentUser.user.token).subscribe(
               (res) => {
-                Swal.fire({
-                  position: 'top-end',
-                  icon: 'success',
-                  title: 'Product Created',
-                  showConfirmButton: false,
-                  timer: 1500,
-                });
+                this.productId = res.body;
+
+                const parcel = new Parcel();
+
+                parcel.parcel_length = this.createProductForm.get('length').value;
+                parcel.parcel_width = this.createProductForm.get('width').value;
+                parcel.parcel_height = this.createProductForm.get('height').value;
+                parcel.parcel_weight = this.createProductForm.get('weight').value;
+                parcel.distance_unit = this.createProductForm.get('weight').value;
+                parcel.mass_unit = this.createProductForm.get('weight').value;
+
+                this.productsService.addParcel(this.productId.id, parcel, this.currentUser.user.token).subscribe(
+                  (res) => {
+                    console.table('Parcel sucess !');
+                    Swal.fire({
+                      position: 'top-end',
+                      icon: 'success',
+                      title: 'Product Created',
+                      showConfirmButton: false,
+                      timer: 1500,
+                    });
+                  },
+                  (err) => {
+                    console.table('Parcel error !');
+                  }
+                );
                 this.route.navigate(['/products']);
                 this.getProducts();
               },

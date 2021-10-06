@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/member-ordering */
 /* eslint-disable @typescript-eslint/dot-notation */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
@@ -16,8 +17,8 @@ export class AdminNavbarComponent implements OnInit {
   @Input() welcome;
   @Input() infos;
   currentUser: any;
-  users: any;
-  user: any;
+  @Input() users: any;
+  @Input() user: any;
   constructor(
     private authService: AuthenticationsService,
     private router: Router,
@@ -35,7 +36,8 @@ export class AdminNavbarComponent implements OnInit {
 
   logout(): void {
     this.authService.logOut();
-    this.router.navigate(['/register']);
-    window.location.reload();
+    this.router.navigate(['/']).then(() => {
+      window.location.reload();
+    });
   }
 }

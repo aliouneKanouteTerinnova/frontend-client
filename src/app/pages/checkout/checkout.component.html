@@ -121,19 +121,45 @@
 </div> -->
 
 <div class="container">
+  <!-- <div class="row"> -->
   <div class="billing">
     <mat-horizontal-stepper #stepper>
-      <mat-step [stepControl]="testForm">
+      <mat-step>
         <ng-template matStepLabel>Shipping Adress</ng-template>
 
-        <app-shipping-adress></app-shipping-adress>
+        <form [formGroup]="ShippingAdressForm" (ngSubmit)="addShippingAdress()">
+          <div class="shipping-adress">
+            <div class="address" *ngFor="let shippingAdress of shippingAdresses; let i = index">
+              <ul>
+                <li class="">
+                  <b>{{ shippingAdress.name }}</b>
+                </li>
+                <li class="">{{ shippingAdress.country }}</li>
+                <li class="">{{ shippingAdress.state }}</li>
+                <li class="">{{ shippingAdress.city }}, {{ shippingAdress.street1 }}</li>
+              </ul>
 
-        <hr />
+              <div class="deliver-to">
+                <button matStepperNext class="btn-deliver-to">Deliver to this address</button>
+              </div>
 
-        <form [formGroup]="checkoutForm" (submit)="checkout()">
+              <div class="edit-delete">
+                <div class="edit">
+                  <a class="btn-edit" (click)="updateShippingAdress()">Edit</a>
+                </div>
+
+                <div class="delete">
+                  <a class="btn-delete" (click)="deleteShippingAdress(shippingAdress)">Delete</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <hr />
+
+          <h2>Add a new address</h2>
+
           <div class="row1">
-            <h2>Add a new address</h2>
-
             <mat-form-field appearance="outline" class="mr-4">
               <mat-label for="fullname">Full Name</mat-label>
               <input matInput type="text" id="fullname" formControlName="fullname" placeholder="Name" required />
@@ -141,49 +167,53 @@
 
             <mat-form-field appearance="outline">
               <mat-label for="email">Email</mat-label>
-              <input matInput type="text" id="email" formControlName="email" placeholder="john@example.com" required />
+              <input matInput type="text" id="email" formControlName="email" placeholder="Email" required />
             </mat-form-field>
           </div>
 
           <div class="row2">
             <mat-form-field appearance="outline" class="mr-4">
-              <mat-label for="adress">Adress</mat-label>
-              <input
-                matInput
-                type="text"
-                id="adr"
-                formControlName="address"
-                placeholder="542 W. 15th Street"
-                required
-              />
+              <mat-label for="phone">Phone</mat-label>
+              <input matInput type="text" id="phone" formControlName="phone" placeholder="Phone" required />
             </mat-form-field>
 
-            <mat-form-field appearance="outline">
-              <mat-label for="city">City</mat-label>
-              <input matInput type="text" id="state" formControlName="city" required />
+            <mat-form-field appearance="outline" class="mr-4">
+              <mat-label for="zipcode">Zip Code</mat-label>
+              <input matInput type="text" id="zipcode" formControlName="zipcode" placeholder="Zip Code" required />
             </mat-form-field>
           </div>
 
           <div class="row3">
             <mat-form-field appearance="outline" class="mr-4">
               <mat-label for="country">Country</mat-label>
-              <input matInput type="text" id="country" formControlName="country" required />
+              <input matInput type="text" id="country" formControlName="country" placeholder="Country" required />
             </mat-form-field>
 
             <mat-form-field appearance="outline">
-              <mat-label for="zip">Zip Code</mat-label>
-              <input matInput type="text" id="zip" formControlName="zip" required />
+              <mat-label for="state">State</mat-label>
+              <input matInput type="text" id="state" formControlName="state" placeholder="State" required />
+            </mat-form-field>
+          </div>
+          <div class="row4">
+            <mat-form-field appearance="outline" class="mr-4">
+              <mat-label for="city">City</mat-label>
+              <input matInput type="text" id="city" formControlName="city" placeholder="City" required />
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="mr-4">
+              <mat-label for="street">Street</mat-label>
+              <input matInput type="text" id="street" formControlName="street" placeholder="Street" required />
             </mat-form-field>
           </div>
 
-          <div class="row4">
-            <section class="example-section" [formGroup]="checkoutForm">
-              <p><mat-checkbox formControlName="same_adress">Use as my default address.</mat-checkbox></p>
+          <div class="row5">
+            <section>
+              <p><mat-checkbox formControlName="use-default">Use as my default address.</mat-checkbox></p>
             </section>
           </div>
 
           <div>
-            <button mat-button matStepperNext>Use this adress</button>
+            <button matStepperNext mat-button>Use this adress</button>
           </div>
         </form>
       </mat-step>
@@ -195,10 +225,10 @@
 
         <p>
           Did you forget an address?
-          <a href="#"> Enter a new shipping address </a>
+          <button class="prev_step" matStepperPrevious><a>Enter a new shipping address</a></button>
         </p>
 
-        <form [formGroup]="checkoutForm" (submit)="checkout()">
+        <form #f="ngForm" (ngSubmit)="updateCartItems(f)">
           <div class="article-header">
             <div class="article"><b>Articles</b></div>
             <div class="qte"><b>Qte</b></div>
@@ -207,19 +237,95 @@
 
           <hr />
 
-          <app-article-checkout></app-article-checkout>
-        </form>
+          {{ f.value | json }}
 
-        <div>
-          <button mat-button matStepperPrevious>Back</button>
-          <button mat-button matStepperNext>Got To Payment Method</button>
-        </div>
+          <div class="productrow" *ngFor="let c of cartData.data; let i = index">
+            <div class="product">
+              <div class="img-product">
+                <img height="100" width="100" src="{{ c.product.images[0].file }}" alt="" />
+              </div>
+              <div class="info">
+                <h4>
+                  <b>{{ c.product.name }}</b>
+                </h4>
+                <p class="price">{{ c.product.price | currency: 'EUR' }}</p>
+                <p>{{ c.product.description | slice: 0:30 }} ...</p>
+                <a href="#">Delete</a>
+              </div>
+            </div>
+
+            <div class="incdecqte">
+              <mat-form-field>
+                <input
+                  ngModel
+                  placeholder="Change quantity"
+                  matInput
+                  id="qte"
+                  type="number"
+                  id="number"
+                  [value]="c.numInCart"
+                  [max]="c.product.quantity"
+                  [min]="1"
+                  (change)="changeQuantity($event, c, i)"
+                />
+              </mat-form-field>
+            </div>
+
+            <div class="selectadressship">
+              <mat-form-field>
+                <mat-select placeholder="Change shipping adress" [(value)]="selected">
+                  <mat-option ngModel name="ship_adress" *ngFor="let a of shippingAdresses" value="a.id"
+                    >{{ a.name }}, {{ a.city }}</mat-option
+                  >
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+
+          <div>
+            <button matStepperPrevious mat-button>Back</button>
+            <button matStepperNext mat-button>Got To Payment Method</button>
+          </div>
+        </form>
       </mat-step>
 
       <mat-step>
         <ng-template matStepLabel>Shipping</ng-template>
 
-        <app-shipping></app-shipping>
+        <h2>Choose a shipping method for all products</h2>
+
+        <form>
+          <div class="article-header">
+            <div class="article"><b>Articles</b></div>
+            <div class="shipmethod"><b>Shipping Method</b></div>
+          </div>
+
+          <hr />
+
+          <div class="productrow" *ngFor="let c of cartData.data; let i = index">
+            <div class="product">
+              <div class="img-product">
+                <img height="100" width="100" src="{{ c.product.images[0].file }}" alt="" />
+              </div>
+              <div class="info">
+                <h4>
+                  <b>{{ c.product.name }}</b>
+                </h4>
+                <p class="price">{{ c.product.price | currency: 'EUR' }}</p>
+                <p>{{ c.product.description | slice: 0:30 }} ...</p>
+                <a href="#">Delete</a>
+              </div>
+            </div>
+
+            <div class="selectshipmethod">
+              <mat-form-field>
+                <mat-select placeholder="Choose shipping method" [(value)]="selected">
+                  <mat-option *ngFor="let a of shippingAdresses" value="a.id">{{ a.name }}, {{ a.city }}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+        </form>
 
         <div>
           <button mat-button matStepperPrevious>Back</button>
@@ -236,9 +342,9 @@
 
           <div class="payment_method_selected"></div>
 
-          <hr />
-
           <div></div>
+
+          <hr />
 
           <mat-accordion>
             <mat-expansion-panel class="mb-4">
@@ -247,64 +353,43 @@
               </mat-expansion-panel-header>
 
               <div class="bank">
-                <form (ngSubmit)="OnSubmit()" [formGroup]="testForm">
+                <form #b="ngForm" (ngSubmit)="addBankAcc(b)">
                   <!-- <div class="card uk-card-default uk-width-*">
-                    <div class="uk-card-header text-center" translate>payment.title</div>
-                    <div class="uk-card-body">
-                      <p class="text-danger">{{ errorMessage }}</p>
-            
-                      <input type="text" readonly id="amount" class="form-control" formControlName="amount" />
-                      <input type="text" readonly id="orderNumber" class="form-control" formControlName="orderNumber" />
-                      <div id="card-element" class="mt-3 mb-3"></div>
-                      <div class="card-errors" role="alert"></div>
-                      <button class="payBtn mt-3" type="submit" translate>payment.payment_button</button>
-                    </div>
-                  </div> -->
+                      <div class="uk-card-header text-center" translate>payment.title</div>
+                      <div class="uk-card-body">
+                        <p class="text-danger">{{ errorMessage }}</p>
+              
+                        <input type="text" readonly id="amount" class="form-control" formControlName="amount" />
+                        <input type="text" readonly id="orderNumber" class="form-control" formControlName="orderNumber" />
+                        <div id="card-element" class="mt-3 mb-3"></div>
+                        <div class="card-errors" role="alert"></div>
+                        <button class="payBtn mt-3" type="submit" translate>payment.payment_button</button>
+                      </div>
+                    </div> -->
 
                   <div class="row1">
                     <h2>Add a current account</h2>
 
                     <mat-form-field appearance="outline" class="mr-4">
-                      <mat-label for="fullname">BIC (Swift-Code)</mat-label>
-                      <input
-                        matInput
-                        type="text"
-                        id="fullname"
-                        formControlName="fullname"
-                        placeholder="Name"
-                        required
-                      />
+                      <mat-label for="bic">BIC (Swift-Code)</mat-label>
+                      <input matInput type="text" id="bic" ngModel name="bic" required />
                     </mat-form-field>
 
                     <mat-form-field appearance="outline" class="mr-4">
-                      <mat-label for="email">IBAN</mat-label>
-                      <input
-                        matInput
-                        type="text"
-                        id="email"
-                        formControlName="email"
-                        placeholder="john@example.com"
-                        required
-                      />
+                      <mat-label for="iban">IBAN</mat-label>
+                      <input matInput type="text" id="iban" ngModel name="iban" required />
                     </mat-form-field>
 
                     <mat-form-field appearance="outline">
-                      <mat-label for="email">Account holder name</mat-label>
-                      <input
-                        matInput
-                        type="text"
-                        id="email"
-                        formControlName="email"
-                        placeholder="john@example.com"
-                        required
-                      />
+                      <mat-label for="account_name">Account holder name</mat-label>
+                      <input matInput type="text" id="account_name" ngModel name="account_name" required />
                     </mat-form-field>
                   </div>
 
                   <div class="row4">
-                    <section class="example-section" [formGroup]="checkoutForm">
+                    <section>
                       <p>
-                        <mat-checkbox formControlName="same_adress">Set as my default payment method.</mat-checkbox>
+                        <mat-checkbox ngModel name="default_payment">Set as my default payment method.</mat-checkbox>
                       </p>
                     </section>
                   </div>
@@ -326,85 +411,77 @@
               </mat-expansion-panel-header>
 
               <div class="credit-card">
-                <form (ngSubmit)="OnSubmit()" [formGroup]="testForm">
+                <form #c="ngForm" (ngSubmit)="addCreditCard(c)">
                   <!-- <div class="card uk-card-default uk-width-*">
-                    <div class="uk-card-header text-center" translate>payment.title</div>
-                    <div class="uk-card-body">
-                      <p class="text-danger">{{ errorMessage }}</p>
-  
-                      <input type="text" readonly id="amount" class="form-control" formControlName="amount" />
-                      <input type="text" readonly id="orderNumber" class="form-control" formControlName="orderNumber" />
-                      <div id="card-element" class="mt-3 mb-3"></div>
-                      <div class="card-errors" role="alert"></div>
-                      <button class="payBtn mt-3" type="submit" translate>payment.payment_button</button>
-                    </div>
-                  </div> -->
+                      <div class="uk-card-header text-center" translate>payment.title</div>
+                      <div class="uk-card-body">
+                        <p class="text-danger">{{ errorMessage }}</p>
+    
+                        <input type="text" readonly id="amount" class="form-control" formControlName="amount" />
+                        <input type="text" readonly id="orderNumber" class="form-control" formControlName="orderNumber" />
+                        <div id="card-element" class="mt-3 mb-3"></div>
+                        <div class="card-errors" role="alert"></div>
+                        <button class="payBtn mt-3" type="submit" translate>payment.payment_button</button>
+                      </div>
+                    </div> -->
 
                   <div class="row1">
-                    <h2>Add a new address</h2>
+                    <h2>Add a credit card</h2>
 
                     <mat-form-field appearance="outline" class="mr-4">
-                      <mat-label for="fullname">Card Number</mat-label>
-                      <input
-                        matInput
-                        type="text"
-                        id="fullname"
-                        formControlName="fullname"
-                        placeholder="Name"
-                        required
-                      />
+                      <mat-label for="card_number">Card Number</mat-label>
+                      <input matInput type="text" id="card_number" ngModel name="card_number" required />
                     </mat-form-field>
 
                     <mat-form-field appearance="outline">
-                      <mat-label for="email">Name on card</mat-label>
-                      <input
-                        matInput
-                        type="text"
-                        id="email"
-                        formControlName="email"
-                        placeholder="john@example.com"
-                        required
-                      />
+                      <mat-label for="name_on_card">Name on card</mat-label>
+                      <input matInput type="text" id="name_on_card" ngModel name="name_on_card" required />
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline">
+                      <mat-label for="cvc">CVC</mat-label>
+                      <input matInput type="number" id="cvc" ngModel name="cvc" required />
                     </mat-form-field>
                   </div>
+
                   <div>
                     <mat-form-field appearance="outline" class="mr-4">
-                      <mat-select placeholder="01">
-                        <mat-option value="01">1</mat-option>
-                        <mat-option value="02">2</mat-option>
-                        <mat-option value="03">3</mat-option>
-                        <mat-option value="04">4</mat-option>
-                        <mat-option value="05">5</mat-option>
-                        <mat-option value="06">6</mat-option>
-                        <mat-option value="07">7</mat-option>
-                        <mat-option value="08">8</mat-option>
-                        <mat-option value="09">9</mat-option>
-                        <mat-option value="10">10</mat-option>
-                        <mat-option value="11">11</mat-option>
-                        <mat-option value="12">12</mat-option>
+                      <mat-select id="expireMM" ngModel name="expireMM">
+                        <mat-option value="">Month</mat-option>
+                        <mat-option value="01">January</mat-option>
+                        <mat-option value="02">February</mat-option>
+                        <mat-option value="03">March</mat-option>
+                        <mat-option value="04">April</mat-option>
+                        <mat-option value="05">May</mat-option>
+                        <mat-option value="06">June</mat-option>
+                        <mat-option value="07">July</mat-option>
+                        <mat-option value="08">August</mat-option>
+                        <mat-option value="09">September</mat-option>
+                        <mat-option value="10">October</mat-option>
+                        <mat-option value="11">November</mat-option>
+                        <mat-option value="12">December</mat-option>
                       </mat-select>
                     </mat-form-field>
 
                     <mat-form-field appearance="outline">
-                      <mat-select placeholder="2022">
-                        <mat-option value="1">2023</mat-option>
-                        <mat-option value="2">2024</mat-option>
-                        <mat-option value="3">2025</mat-option>
-                        <mat-option value="3">2026</mat-option>
-                        <mat-option value="3">2027</mat-option>
-                        <mat-option value="3">2028</mat-option>
-                        <mat-option value="3">2029</mat-option>
-                        <mat-option value="3">2030</mat-option>
-                        <mat-option value="3">2031</mat-option>
-                        <mat-option value="3">2032</mat-option>
-                        <mat-option value="3">2033</mat-option>
-                        <mat-option value="3">2034</mat-option>
+                      <mat-select id="expireYY" ngModel name="expireYY">
+                        <mat-option value="">Year</mat-option>
+                        <mat-option value="2021">2021</mat-option>
+                        <mat-option value="2022">2022</mat-option>
+                        <mat-option value="2023">2023</mat-option>
+                        <mat-option value="2024">2024</mat-option>
+                        <mat-option value="2025">2025</mat-option>
+                        <mat-option value="2026">2026</mat-option>
+                        <mat-option value="2027">2027</mat-option>
+                        <mat-option value="2028">2028</mat-option>
+                        <mat-option value="2029">2029</mat-option>
+                        <mat-option value="2030">2030</mat-option>
                       </mat-select>
                     </mat-form-field>
                   </div>
 
                   <div class="row4">
-                    <section class="example-section" [formGroup]="checkoutForm">
+                    <section>
                       <p>
                         <mat-checkbox formControlName="same_adress">Set as my default payment method.</mat-checkbox>
                       </p>
@@ -464,14 +541,13 @@
           <div class="taxe">
             <span>Taxe :</span>
 
-            <span class="devic">{{ formatPrice(cartTotal | currency: 'EUR') }}</span>
+            <span class="devic">{{ formatPrice(totalTax | currency: 'EUR') }}</span>
           </div>
 
           <hr />
 
           <div class="subtotal1">
             <span translate>Posting & pakaging :</span>
-
             <span class="devic">{{ formatPrice(cartTotal | currency: 'EUR') }}</span>
           </div>
         </div>
@@ -484,5 +560,7 @@
       </div>
     </div>
   </div>
+  <!-- </div> -->
 </div>
+
 <app-footer></app-footer>

@@ -1,10 +1,7 @@
-<!-- <mat-toolbar class="mat-elevation-z8"> -->
 <button mat-icon-button *ngIf="sidenav.mode === 'over'" (click)="sidenav.toggle()">
   <mat-icon *ngIf="!sidenav.opened"> menu </mat-icon>
   <mat-icon *ngIf="sidenav.opened"> close </mat-icon>
 </button>
-<!-- Responsive side navigation
-</mat-toolbar> -->
 
 <mat-sidenav-container style="z-index: 0">
   <mat-sidenav #sidenav="matSidenav" class="mat-elevation-z8">
@@ -26,7 +23,10 @@
       <mat-icon>{{ item.icon }}</mat-icon>
       <span>{{ item.title }}</span>
     </button>
+
+    <button *ngIf="showBtn" class="button" routerLink="/addproduct"><mat-icon>add</mat-icon> Upload product</button>
   </mat-sidenav>
+
   <mat-sidenav-content>
     <app-admin-navbar [welcome]="welcome" [infos]="infos"></app-admin-navbar>
     <div class="mat-elevation-z8 main-content d-flex mt-5 mb-5 pl-5">
@@ -51,26 +51,27 @@
           </div>
         </div>
 
-        <div class="row mt-4">
+        <div class="row mt-4" *ngIf="topSelling.length > 0">
           <div class="col-lg-10 col-md-12">
-            <app-table-layouts [title]="title" [thItems]="thItems" [trItems]="trItem"></app-table-layouts>
+            <app-table-layouts [title]="title" [thItems]="thItems" [trItems]="topSelling"></app-table-layouts>
           </div>
         </div>
       </div>
+
       <div class="card rigth-section">
         <h2>Activities</h2>
 
-        <p>Command #1236 delivrered 2 days ago</p>
-        <p>Command #1236 delivrered 2 days ago</p>
-        <p>Command #1236 delivrered 2 days ago</p>
-        <p>Command #1236 delivrered 2 days ago</p>
-        <p>Command #1236 delivrered 2 days ago</p>
-        <p>Command #1236 delivrered 2 days ago</p>
+        <p *ngIf="listOrders.length === 0">no activities</p>
+
+        <div *ngIf="listOrders.length > 0">
+          <p *ngFor="let item of listOrders">
+            Command: {{ item.number }} status
+            <span [ngClass]="{ status: item.status === 'confirmed', init: item.status === 'initiated' }">{{
+              item.status
+            }}</span>
+          </p>
+        </div>
       </div>
     </div>
-
-    <!-- <div class="mt-5 mb-5">
-      <app-admin-products></app-admin-products>
-    </div> -->
   </mat-sidenav-content>
 </mat-sidenav-container>

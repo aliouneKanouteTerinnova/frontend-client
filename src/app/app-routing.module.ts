@@ -1,3 +1,5 @@
+import { AdminProductDetailComponent } from './pages/admin/admin-products/admin-product-detail/admin-product-detail.component';
+import { AdminCustomersComponent } from './pages/admin/admin-customers/admin-customers.component';
 import { StoresViewComponent } from './pages/components/stores-view/stores-view.component';
 import { WishlistComponent } from './pages/wishlist/wishlist.component';
 import { CategoryPageComponent } from './pages/category-page/category-page.component';
@@ -35,6 +37,8 @@ import { CategoyDetailComponent } from './pages/category-page/categoy-detail/cat
 import { AboutUsComponent } from './pages/components/about-us/about-us.component';
 import { DashoardComponent } from './pages/admin/dashoard/dashoard.component';
 import { AdminProductsComponent } from './pages/admin/admin-products/admin-products.component';
+import { AdminOrdersComponent } from './pages/admin/admin-orders/admin-orders.component';
+import { SingleRegionComponent } from './pages/components/regions/single-region/single-region.component';
 
 const routes: Routes = [
   {
@@ -68,10 +72,14 @@ const routes: Routes = [
     component: AboutUsComponent,
   },
   {
-    path: 'register',
-    component: RegistrationComponent,
-    canActivate: [NotConnectedGuard],
+    path: 'single-region',
+    component: SingleRegionComponent,
   },
+  // {
+  //   path: 'register',
+  //   component: RegistrationComponent,
+  //   canActivate: [NotConnectedGuard],
+  // },
   {
     path: 'email/verify',
     component: RegistrationComponent,
@@ -100,7 +108,7 @@ const routes: Routes = [
   { path: 'create-store', component: CreateStoresComponent, canActivate: [AuthGuard] },
   { path: 'categories', component: CategoriesComponent, canActivate: [AuthGuard] },
   { path: 'categories-detail/:id', component: CategoyDetailComponent },
-  { path: 'category', component: CategoryPageComponent },
+  // { path: 'category', component: CategoryPageComponent },
   { path: 'update-categories/:id', component: UpdateCategoriesComponent },
   { path: 'create-categories', component: CreateCategoriesComponent, canActivate: [AuthGuard] },
   { path: 'orders/:id', component: OrderDetailsComponent },
@@ -120,6 +128,21 @@ const routes: Routes = [
   {
     path: 'admin-products',
     component: AdminProductsComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'admin-product-detail/:id',
+    component: AdminProductDetailComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'admin-orders',
+    component: AdminOrdersComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'admin-customers',
+    component: AdminCustomersComponent,
     canActivate: [AuthGuard],
   },
 ];

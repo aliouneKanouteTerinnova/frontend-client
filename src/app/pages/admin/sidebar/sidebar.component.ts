@@ -1,3 +1,9 @@
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
+/* eslint-disable @typescript-eslint/dot-notation */
+/* eslint-disable @typescript-eslint/no-unused-expressions */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+import { Subscription } from 'rxjs';
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-floating-promises */
@@ -6,6 +12,9 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
 import { Router } from '@angular/router';
 import { delay } from 'rxjs/operators';
+import { OrderService } from 'src/app/services/order/order.service';
+import { AuthenticationsService } from 'src/app/services/authentications/authentications.service';
+import { AdminProductsService } from '../admin-products/admin-products.service';
 
 declare const $: any;
 declare interface RouteInfo {
@@ -22,18 +31,18 @@ export const ROUTES: RouteInfo[] = [
   { path: '/admin-customers', title: 'Customers', icon: 'person', class: '' },
 ];
 
-declare interface Tr {
-  name: string;
-  price: string;
-  quantity: string;
-  amount: string;
-}
-export const TBODY: Tr[] = [
-  { name: 'CamMask', price: '€128.50', quantity: '5', amount: '€1,965.81' },
-  { name: 'CaTam', price: '€128.50', quantity: '5', amount: '€1,965.81' },
-  { name: 'Waxy', price: '€128.50', quantity: '5', amount: '€1,965.81' },
-  { name: 'WaxCa', price: '€128.50', quantity: '5', amount: '€1,965.81' },
-];
+// declare interface Tr {
+//   name: string;
+//   price: string;
+//   quantity: string;
+//   amount: string;
+// }
+// export const TBODY: Tr[] = [
+//   { name: 'CamMask', price: '€128.50', quantity: '5', amount: '€1,965.81' },
+//   { name: 'CaTam', price: '€128.50', quantity: '5', amount: '€1,965.81' },
+//   { name: 'Waxy', price: '€128.50', quantity: '5', amount: '€1,965.81' },
+//   { name: 'WaxCa', price: '€128.50', quantity: '5', amount: '€1,965.81' },
+// ];
 
 declare interface Th {
   title: string;
@@ -52,35 +61,86 @@ export class SidebarComponent implements OnInit {
   thItems: any[];
   trItem: any[];
   title = 'Top Selling Product';
-  welcome = 'Mr Test Test';
+  welcome = '';
   infos = 'here are the informations we have on your shops';
+  listOrders = [];
+  currentUser: any;
+  sellerOrderSubscription: Subscription;
+  products = [];
+  topSelling = [];
+  activities = [];
+  users: any;
+  user: any;
+  showBtn = false;
 
-  itemsP = 2332;
+  itemsP;
   itemsNameP = 'Pending orders';
   imgBgP = './../../../../assets/dashboard/Rectangle 6.svg';
   imgP = './../../../../assets/dashboard/Group.svg';
 
-  itemsS = 4243;
+  itemsS;
   itemsNameS = 'Sold';
   imgBgS = './../../../../assets/dashboard/Rectangle 6 (1).svg';
   imgS = './../../../../assets/dashboard/Group (1).svg';
 
-  itemsC = 23419;
+  itemsC;
   itemsNameC = 'Canceled';
   imgBgC = './../../../../assets/dashboard/Rectangle 6 (2).svg';
   imgC = './../../../../assets/dashboard/Group (2).svg';
 
-  itemsN = 83457;
-  itemsNameN = 'New clients';
+  itemsN;
+  itemsNameN = 'Clients';
   imgBgN = './../../../../assets/dashboard/Rectangle 6 (3).svg';
   imgN = './../../../../assets/dashboard/Group (3).svg';
 
-  constructor(private router: Router, private observer: BreakpointObserver) {}
+  constructor(
+    private router: Router,
+    private observer: BreakpointObserver,
+    private orderService: OrderService,
+    private authService: AuthenticationsService,
+    private adminProductsService: AdminProductsService
+  ) {}
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<any> {
+    this.currentUser = await this.authService.currentUserValue;
+
+    if (this.currentUser) {
+      this.users = await this.authService.getUser(this.currentUser.token || this.currentUser['user'].token).toPromise();
+      this.user = this.users.body['user'].username || this.users.username;
+
+      this.welcome = this.user;
+    }
+
     this.menuItems = ROUTES.filter((menuItem) => menuItem);
     this.thItems = THEAD.filter((thItem) => thItem);
-    this.trItem = TBODY.filter((thItem) => thItem);
+    // this.trItem = TBODY.filter((thItem) => thItem);
+
+    this.adminProductsService.getProducts(this.currentUser.token || this.currentUser['user'].token).subscribe((res) => {
+      this.trItem = res.body.results;
+      this.products = res.body.results;
+
+      this.topSelling = this.products.filter((data) => data.rating >= 3);
+    });
+
+    this.getOrders();
+  }
+
+  getOrders() {
+    this.orderService.getSellerOrders(this.currentUser.token || this.currentUser['user'].token);
+    this.sellerOrderSubscription = this.orderService.sellerOrdersSubject.subscribe((data) => {
+      this.listOrders = data;
+      this.itemsP = data.length;
+      this.itemsN = data.length;
+
+      console.dir(data);
+
+      const sold = data.filter((res) => res.status === 'confirmed');
+      this.itemsS = sold.length;
+
+      const cancel = data.filter((res) => res.status === 'canceled');
+      this.itemsC = cancel.length;
+    });
+    this.orderService.emitSellerOrders();
   }
 
   ngAfterViewInit(): void {
@@ -91,6 +151,7 @@ export class SidebarComponent implements OnInit {
         if (res.matches) {
           this.sidenav.mode = 'over';
           this.sidenav.close();
+          this.showBtn = true;
         } else {
           this.sidenav.mode = 'side';
           this.sidenav.open();

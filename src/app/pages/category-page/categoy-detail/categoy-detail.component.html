@@ -1,6 +1,13 @@
+<app-nav-logo></app-nav-logo>
+<app-buyer-navbar></app-buyer-navbar>
+<app-floating-share-button></app-floating-share-button>
 <app-breadcrumb home="/" categoryName="/categories-detail"></app-breadcrumb>
 
 <app-loading-spinner *ngIf="showSpinner"></app-loading-spinner>
+
+<div class="container" *ngIf="products.length === 0">
+  <div class="text-center">this category has no products</div>
+</div>
 
 <div class="container" *ngIf="products.length > 0">
   <app-best-deals
@@ -25,3 +32,4 @@
 <div *ngIf="products.length > 0">
   <app-pagination [products]="products"></app-pagination>
 </div>
+<app-footer></app-footer>

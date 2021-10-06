@@ -1,3 +1,4 @@
+import { AdminOrdersComponent } from './pages/admin/admin-orders/admin-orders.component';
 import { ReloadRouteComponent } from './components/reload-route/reload-route.component';
 /* eslint-disable prefer-arrow/prefer-arrow-functions */
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
@@ -44,7 +45,6 @@ import { OrderListComponent } from './pages/order/order-list/order-list.componen
 import { OrderDetailsComponent } from './pages/order/order-details/order-details.component';
 import { RegistrationComponent } from './pages/user/registration/registration.component';
 import { ArticleCheckoutComponent } from './components/article-checkout/article-checkout.component';
-
 import { StripeModule } from 'stripe-angular';
 import { ConditionUsedComponent } from './pages/user/condition-used/condition-used.component';
 import { SellerOrderComponent } from './pages/order/seller-order/seller-order.component';
@@ -98,6 +98,12 @@ import { TableLayoutsComponent } from './pages/admin/table-layouts/table-layouts
 import { AdminNavbarComponent } from './pages/admin/components/admin-navbar/admin-navbar.component';
 import { AdminProductsComponent } from './pages/admin/admin-products/admin-products.component';
 import { AdminModule } from './pages/admin/admin.module';
+import { SingleRegionComponent } from './pages/components/regions/single-region/single-region.component';
+
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { BuyerRegisterComponent } from './pages/components/buyer-register/buyer-register.component';
+import { AdminCustomersComponent } from './pages/admin/admin-customers/admin-customers.component';
+import { AdminProductDetailComponent } from './pages/admin/admin-products/admin-product-detail/admin-product-detail.component';
 
 export function rootLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -172,7 +178,6 @@ const CLIENT_ID = environment.clientId;
     ShippingComponent,
     BankAccountComponent,
     FloatingShareButtonComponent,
-
     StoresViewComponent,
     LayoutsComponent,
     AboutUsComponent,
@@ -182,6 +187,11 @@ const CLIENT_ID = environment.clientId;
     TableLayoutsComponent,
     AdminNavbarComponent,
     AdminProductsComponent,
+    AdminOrdersComponent,
+    SingleRegionComponent,
+    BuyerRegisterComponent,
+    AdminCustomersComponent,
+    AdminProductDetailComponent,
   ],
 
   imports: [
@@ -208,6 +218,7 @@ const CLIENT_ID = environment.clientId;
     StripeModule.forRoot(
       'pk_test_51HQ3ZXFunRLoLWctiy0l6VVOeflU8ES2IRjTyY7LL9rEpKedBIfOfKB1BSSftQk4Qmke8HdtRcdmje7R2whuWgTz00U7HXpwjn'
     ),
+    Ng2SearchPipeModule,
   ],
   providers: [
     {

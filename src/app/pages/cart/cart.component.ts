@@ -57,6 +57,7 @@ export class CartComponent implements OnInit {
     this.cartService.cartDataObs$.subscribe((data: CartModelServer) => {
       this.cartData = data;
     });
+
     this.cartService.cartTotal$.subscribe((total) => {
       this.cartTotal = total;
     });
@@ -87,10 +88,12 @@ export class CartComponent implements OnInit {
       timer: 2000,
     });
   }
+
   suppressionProduict(id) {
     this.idProduct = id;
     this.effacerSwal.fire();
   }
+
   formatPrice(price: any) {
     var prices = price.split('.');
     if (this.i18nServiceService.currentLangValue === null || this.i18nServiceService.currentLangValue === 'en') {
@@ -103,6 +106,7 @@ export class CartComponent implements OnInit {
     }
     return prices;
   }
+
   changeQuantity(e, c, index) {
     const quantity = Number(e.target.value);
     const temp = c.numInCart;
