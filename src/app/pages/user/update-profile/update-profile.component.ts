@@ -14,6 +14,8 @@ import { AuthResponded } from 'src/app/models/auth/auth';
 import { AuthenticationsService } from 'src/app/services/authentications/authentications.service';
 import Swal from 'sweetalert2';
 
+import * as all from './../../../all.json';
+
 @Component({
   selector: 'app-update-profile',
   templateUrl: './update-profile.component.html',
@@ -26,10 +28,14 @@ export class UpdateProfileComponent implements OnInit {
   currentUser: any;
   listGender = ['M', 'F', 'OTHERS'];
   gender = '';
+  regions = all['default'];
+  country;
 
   constructor(private authService: AuthenticationsService, private router: Router, private formBuilder: FormBuilder) {}
 
   ngOnInit(): void {
+    console.dir(this.regions);
+    console.dir(all['default'].name);
     this.currentUser = this.authService.currentUserValue;
     console.log(this.currentUser.token);
     this.registerForm = this.formBuilder.group({
@@ -39,12 +45,16 @@ export class UpdateProfileComponent implements OnInit {
       state: [null, Validators.required],
       zipcode: [null, Validators.required],
       country: [null, Validators.required],
+      city: [null, Validators.required],
       street: [null, Validators.required],
+      phone: [null, Validators.required],
       account_type: new FormControl({ value: '', disabled: true }),
     });
 
     this.authService.getUser(this.currentUser.token || this.currentUser['user'].token).subscribe((data) => {
-      console.log(data.body);
+      // console.dir(data.body);
+      this.country = data.body['user'].address.country;
+
       const user: AuthResponded = data.body;
       this.registerForm.patchValue({
         username: user['user'].username,
@@ -53,6 +63,7 @@ export class UpdateProfileComponent implements OnInit {
         state: user['user'].address.state,
         zipcode: user['user'].address.zipcode,
         country: user['user'].address.country,
+        phone: user['user'].address.phone,
         street: user['user'].address.street,
         account_type: user['user'].account_type,
       });
@@ -63,20 +74,22 @@ export class UpdateProfileComponent implements OnInit {
     const sexe = this.registerForm.get('gender').value;
     const state = this.registerForm.get('country').value;
     const zipcode = this.registerForm.get('zipcode').value;
-    const country = this.registerForm.get('state').value;
+    const country = this.registerForm.get('city').value;
     const street = this.registerForm.get('street').value;
+    const phone = this.registerForm.get('phone').value;
     const address: Address = {
       state: state,
       zipcode: zipcode,
       country: country,
       street: street,
+      phone: phone,
     };
     const user = {
       username: username,
       gender: sexe,
       address: address,
     };
-    console.log(user);
+    console.dir(user);
     this.authService.update(user, this.currentUser.token || this.currentUser['user'].token).subscribe(
       (data) => {
         console.log('update ', data);
