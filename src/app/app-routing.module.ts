@@ -1,3 +1,5 @@
+import { AdminProductDetailComponent } from './pages/admin/admin-products/admin-product-detail/admin-product-detail.component';
+import { AdminCustomersComponent } from './pages/admin/admin-customers/admin-customers.component';
 import { StoresViewComponent } from './pages/components/stores-view/stores-view.component';
 import { WishlistComponent } from './pages/wishlist/wishlist.component';
 import { CategoryPageComponent } from './pages/category-page/category-page.component';
@@ -73,11 +75,11 @@ const routes: Routes = [
     path: 'single-region',
     component: SingleRegionComponent,
   },
-  {
-    path: 'register',
-    component: RegistrationComponent,
-    canActivate: [NotConnectedGuard],
-  },
+  // {
+  //   path: 'register',
+  //   component: RegistrationComponent,
+  //   canActivate: [NotConnectedGuard],
+  // },
   {
     path: 'email/verify',
     component: RegistrationComponent,
@@ -106,7 +108,7 @@ const routes: Routes = [
   { path: 'create-store', component: CreateStoresComponent, canActivate: [AuthGuard] },
   { path: 'categories', component: CategoriesComponent, canActivate: [AuthGuard] },
   { path: 'categories-detail/:id', component: CategoyDetailComponent },
-  { path: 'category', component: CategoryPageComponent },
+  // { path: 'category', component: CategoryPageComponent },
   { path: 'update-categories/:id', component: UpdateCategoriesComponent },
   { path: 'create-categories', component: CreateCategoriesComponent, canActivate: [AuthGuard] },
   { path: 'orders/:id', component: OrderDetailsComponent },
@@ -129,8 +131,18 @@ const routes: Routes = [
     canActivate: [AuthGuard],
   },
   {
+    path: 'admin-product-detail/:id',
+    component: AdminProductDetailComponent,
+    canActivate: [AuthGuard],
+  },
+  {
     path: 'admin-orders',
     component: AdminOrdersComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'admin-customers',
+    component: AdminCustomersComponent,
     canActivate: [AuthGuard],
   },
 ];

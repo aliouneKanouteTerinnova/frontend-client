@@ -82,7 +82,14 @@ export class SignupComponent implements OnInit {
         (data) => {
           if (Number(data.code) === 200) {
             this.isActivated = true;
-            this.successMessage = 'Account activated successfully, you can now log in';
+            Swal.fire({
+              position: 'top-end',
+              icon: 'success',
+              title: 'Account activated successfully, you can now log in',
+              showConfirmButton: false,
+              timer: 2500,
+            });
+            // this.successMessage = 'Account activated successfully, you can now log in';
           }
         },
         (error) => {
@@ -96,6 +103,8 @@ export class SignupComponent implements OnInit {
       {
         username: ['', Validators.required],
         email: ['', [Validators.required, Validators.pattern(this.emailRegex)]],
+        tel: ['', Validators.required],
+        city: ['', Validators.required],
         password: ['', [Validators.required, Validators.minLength(8)]],
         password2: ['', Validators.required],
         checked: [true, Validators.required],
@@ -147,6 +156,8 @@ export class SignupComponent implements OnInit {
     const username = this.signinForm.get('username').value;
     const typeUser = 'Seller';
     const email = this.signinForm.get('email').value;
+    const phone = this.signinForm.get('tel').value;
+    const city = this.signinForm.get('city').value;
     const fullname = '';
     const password = this.signinForm.get('password').value;
     const state = 'your address';
@@ -160,6 +171,8 @@ export class SignupComponent implements OnInit {
       zipcode: zipcode,
       country: country,
       street: street,
+      phone: phone,
+      city: city,
     };
     const user: User = {
       email: email,
@@ -190,7 +203,7 @@ export class SignupComponent implements OnInit {
             showConfirmButton: false,
             timer: 2000,
           }).then(() => {
-            this.router.navigate(['/profile']);
+            this.router.navigate(['/home']);
           });
         },
         (error) => {
@@ -229,11 +242,11 @@ export class SignupComponent implements OnInit {
         // console.log(data);
         localStorage.setItem('currentUser', JSON.stringify(data));
         if (data['user'].account_type === 'Seller' || data['user'].account_type === 'SELLER') {
-          this.router.navigate(['profile']).then(() => {
+          this.router.navigate(['dashboard']).then(() => {
             window.location.reload();
           });
         } else {
-          this.router.navigate(['home']).then(() => {
+          this.router.navigate(['profile']).then(() => {
             window.location.reload();
           });
         }

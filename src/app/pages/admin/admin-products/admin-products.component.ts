@@ -94,6 +94,7 @@ export class AdminProductsComponent implements OnInit {
   currentUser: any;
   categoryName: any;
   terms;
+  showBtn = false;
 
   constructor(
     private router: Router,
@@ -132,6 +133,7 @@ export class AdminProductsComponent implements OnInit {
         if (res.matches) {
           this.sidenav.mode = 'over';
           this.sidenav.close();
+          this.showBtn = true;
         } else {
           this.sidenav.mode = 'side';
           this.sidenav.open();

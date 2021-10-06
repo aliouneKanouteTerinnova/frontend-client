@@ -9,7 +9,7 @@
       </thead>
       <tbody>
         <tr *ngFor="let item of trItems | filter: terms">
-          <td>
+          <td routerLink="/admin-product-detail/{{ item.id }}">
             <img class="mr-3" src="{{ item.images[0].file }}" width="50" height="50" alt="" />
             {{ item.name }}
           </td>

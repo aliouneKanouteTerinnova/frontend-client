@@ -15,6 +15,7 @@ import { I18nServiceService } from 'src/app/services/i18n-service/i18n-service.s
 export class ReviewsComponent implements OnInit {
   @Input() reviews: any;
   @Input() rating: any;
+  @Input() id: any;
 
   @Output() reviewAdd = new EventEmitter();
   @Output() reviewEdit = new EventEmitter();

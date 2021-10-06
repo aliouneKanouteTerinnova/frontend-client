@@ -75,7 +75,14 @@ export class BuyerRegisterComponent implements OnInit {
         (data) => {
           if (Number(data.code) === 200) {
             this.isActivated = true;
-            this.successMessage = 'Account activated successfully, you can now log in';
+            Swal.fire({
+              position: 'top-end',
+              icon: 'success',
+              title: 'Account activated successfully, you can now log in',
+              showConfirmButton: false,
+              timer: 2500,
+            });
+            // this.successMessage = 'Account activated successfully, you can now log in';
           }
         },
         (error) => {
@@ -223,11 +230,11 @@ export class BuyerRegisterComponent implements OnInit {
         // console.log(data);
         localStorage.setItem('currentUser', JSON.stringify(data));
         if (data['user'].account_type === 'Seller' || data['user'].account_type === 'SELLER') {
-          this.router.navigate(['profile']).then(() => {
+          this.router.navigate(['dashboard']).then(() => {
             window.location.reload();
           });
         } else {
-          this.router.navigate(['home']).then(() => {
+          this.router.navigate(['profile']).then(() => {
             window.location.reload();
           });
         }
