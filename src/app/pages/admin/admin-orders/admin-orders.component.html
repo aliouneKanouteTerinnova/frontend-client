@@ -87,14 +87,14 @@
                         {{ item.cart_item.product.name }}
                       </td>
                       <td>{{ categoryName }}</td>
-                      <td>{{ item.order.shipping_method.name }}</td>
+                      <td>{{ item.payment_method }}</td>
                       <td>
                         <span [ngClass]="{ status: item.status === 'confirmed', init: item.status === 'initiated' }">{{
                           item.status
                         }}</span>
                       </td>
-                      <td>€{{ item.amount }}</td>
-                      <td>{{ item.order.shipping_address.created_at | date }}</td>
+                      <td>€{{ item.total_prices }}</td>
+                      <td>{{ item.created_at | date }}</td>
                       <td class="action">
                         <span
                           id="navbarDropdownMenuLink-5"
