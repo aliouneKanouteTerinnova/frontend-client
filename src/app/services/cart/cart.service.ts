@@ -279,7 +279,7 @@ export class CartService {
     this.productTotal$.next(total);
   }
 
-  private resetServerData() {
+  resetServerData() {
     this.cartDataServer = {
       data: [
         {
@@ -307,6 +307,7 @@ export class CartService {
 
   // eslint-disable-next-line spaced-comment
   // Add item to Cart
+
   addItemToCart(data: any, token: any) {
     token = 'token ' + token;
     return this.httpClient.post(`${environment.baseUrl}carts/items`, data, {
