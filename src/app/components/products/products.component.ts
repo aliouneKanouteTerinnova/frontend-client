@@ -58,7 +58,7 @@ export class ProductComponent implements OnInit {
     if (!this.currentUser) {
       this.router.navigate(['/register']);
     }
-    this.token = this.currentUser.token;
+    this.token = this.currentUser.user.token;
     const products = {
       product: id,
     };
