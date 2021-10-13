@@ -1,6 +1,8 @@
+/* eslint-disable @typescript-eslint/ban-types */
+/* eslint-disable @typescript-eslint/naming-convention */
 export class StripePaymentDto {
-  public order_number: string;
+  public order: string;
   public method: string;
-  public amount: number;
+  public amount: Number;
   public currency: string;
 }

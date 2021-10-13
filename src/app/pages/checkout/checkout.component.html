@@ -272,8 +272,12 @@
                 placeholder="Change shipping adress"
                 (change)="updateCartItems($event)"
                 formControlName="ship_adress"
+                [(value)]="selected"
               >
-                <option *ngFor="let a of shippingAdresses" value="product,{{ c.product.id }},ship_adress,{{ a.id }}}">
+                <!-- <option value="product,{{ c.product.id }},ship_adress,{{ a.id }}" selected="selected">
+                {{ a.name }}, {{ a.city }}
+              </option> -->
+                <option *ngFor="let a of shippingAdresses" value="product,{{ c.product.id }},ship_adress,{{ a.id }}">
                   {{ a.name }}, {{ a.city }}
                 </option>
               </select>
@@ -283,7 +287,7 @@
 
           <div>
             <button matStepperPrevious mat-button>Back</button>
-            <button matStepperNext mat-button>Got To Payment Method</button>
+            <button matStepperNext mat-button>Got Shipping Method</button>
           </div>
         </form>
       </mat-step>
@@ -293,7 +297,7 @@
 
         <h2>Choose a shipping method for all products</h2>
 
-        <form>
+        <form [formGroup]="setRates" (ngSubmit)="updateOrderItems()">
           <div class="article-header">
             <div class="article"><b>Articles</b></div>
             <div class="shipmethod"><b>Shipping Method</b></div>
@@ -317,19 +321,26 @@
             </div>
 
             <div class="selectshipmethod">
-              <mat-form-field>
-                <mat-select placeholder="Choose shipping method" [(value)]="selected">
-                  <mat-option *ngFor="let a of shippingAdresses" value="a.id">{{ a.name }}, {{ a.city }}</mat-option>
-                </mat-select>
-              </mat-form-field>
+              <!-- <mat-form-field> -->
+              <select
+                (change)="updateShipmentMethod($event)"
+                placeholder="Choose shipping method"
+                [(value)]="selected"
+                formControlName="_rates"
+              >
+                <option *ngFor="let r of rates; let i = index" value="object_id,{{ r.object_id }}">
+                  provider: {{ r.provider }} -- price: €{{ r.amount }}
+                </option>
+              </select>
+              <!-- </mat-form-field> -->
             </div>
           </div>
-        </form>
 
-        <div>
-          <button mat-button matStepperPrevious>Back</button>
-          <button mat-button matStepperNext>Got To Payment Method</button>
-        </div>
+          <div>
+            <button mat-button matStepperPrevious>Back</button>
+            <button mat-button matStepperNext>Got To Payment Method</button>
+          </div>
+        </form>
       </mat-step>
 
       <mat-step>
@@ -337,29 +348,29 @@
 
         <div>
           <h2>Select a payment method</h2>
-
+          {{ p.value | json }}
           <div class="paymentMethods">
             <form #p="ngForm" (ngSubmit)="choosePaymentMethod(p)">
               <mat-card class="col-12 mt-5">
                 <mat-card-title-group> <mat-card-title>Payments accounts</mat-card-title> </mat-card-title-group><br />
                 <mat-card-content>
-                  <mat-radio-group
-                    ngModel
-                    name="payment_method"
-                    class="example-radio-group"
-                    *ngFor="let credit of creditCards"
-                  >
+                  <mat-radio-group ngModel name="payment_method" class="example-radio-group">
                     <div>
                       <h4><b>Bank accounts</b></h4>
                     </div>
-                    <mat-radio-button *ngFor="let acc of bankAccounts" [value]="acc.id">
+
+                    <mat-radio-button *ngFor="let acc of bankAccounts" value="paymentMethod,bank,id,{{ acc.id }}">
                       {{ acc.account_name }} - {{ acc.iban }}
+                      <a class="ml-5" routerLink="#" (click)="deleteBankAcc(acc.id)">Delete</a>
                     </mat-radio-button>
+
                     <div>
                       <h4><b>Credit Cards accounts</b></h4>
                     </div>
-                    <mat-radio-button *ngFor="let credit of creditCards" [value]="credit.id">
+
+                    <mat-radio-button *ngFor="let credit of creditCards" value="paymentMethod,card,id,{{ credit.id }}">
                       {{ credit.card_name }} - {{ credit.card_number }}
+                      <a class="ml-5" routerLink="#" (click)="deleteCreditCard(credit.id)">Delete</a>
                     </mat-radio-button>
                   </mat-radio-group>
                 </mat-card-content>
@@ -514,7 +525,7 @@
 
         <div>
           <button mat-button matStepperPrevious>Back</button>
-          <button mat-button matStepperNext>Review</button>
+          <button mat-button matStepperNext (click)="choosePaymentMethod(p)">Review</button>
         </div>
       </mat-step>
 
@@ -525,7 +536,6 @@
 
         <div>
           <button mat-button matStepperPrevious>Back</button>
-          <button mat-button matStepperNext>Pay</button>
         </div>
       </mat-step>
     </mat-horizontal-stepper>
@@ -555,7 +565,17 @@
           </div>
         </div>
 
-        <div class="checkouBtn"><button routerLink="#">Place Order</button></div>
+        <div class="checkouBtn">
+          <button
+            routerLink="to_pay"
+            matButton
+            (click)="place_order = !place_order; initPayment()"
+            [disabled]="setShipAdressForm.invalid"
+            routerLink="#"
+          >
+            Place Order
+          </button>
+        </div>
 
         <div class="text-order">
           <span>By placing an order, you agree to Vaanah <a routerLink="#">terms and conditions.</a></span>
@@ -564,6 +584,20 @@
     </div>
   </div>
   <!-- </div> -->
-</div>
 
+  <form (ngSubmit)="onSubmit()" [formGroup]="testForm" *ngIf="place_order" id="to_pay">
+    <div class="card uk-card-default uk-width-*">
+      <div class="uk-card-header text-center pt-2" translate>payment.title</div>
+      <div class="uk-card-body">
+        <p class="text-danger">{{ errorMessage }}</p>
+
+        <input type="text" readonly id="amount" class="form-control" formControlName="amount" />
+        <input type="text" readonly id="orderNumber" class="form-control" formControlName="orderNumber" />
+        <div id="card-element" class="mt-3 mb-3"></div>
+        <div class="card-errors" role="alert"></div>
+        <button class="btn payBtn btn-block mt-3" type="submit" translate>payment.payment_button</button>
+      </div>
+    </div>
+  </form>
+</div>
 <app-footer></app-footer>

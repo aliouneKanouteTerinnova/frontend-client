@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/naming-convention */
 /* eslint-disable @typescript-eslint/restrict-plus-operands */
 /* eslint-disable @typescript-eslint/consistent-type-assertions */
 /* eslint-disable prefer-const */
@@ -40,7 +41,10 @@ export class CreateProductComponent implements OnInit {
   images = [];
   imagesTable = [];
   productId: any;
-
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  default_dist_unit = 'Choose distance unit';
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  default_mass_unit = 'Choose mass unit';
   filePath = './../../assets/img/Products/';
 
   imgSrc: File = null;
