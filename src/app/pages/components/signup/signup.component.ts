@@ -32,6 +32,8 @@ import { GoogleLoginProvider } from 'angularx-social-login';
 import { FacebookLoginProvider } from 'angularx-social-login';
 import { environment } from 'src/environments/environment';
 
+import * as all from './../../../all.json';
+
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
@@ -50,6 +52,7 @@ export class SignupComponent implements OnInit {
   loginForm: FormGroup;
   userResponded: AuthResponded;
   checked = false;
+  regions = all['default'];
 
   constructor(
     private authService: AuthenticationsService,
@@ -72,6 +75,8 @@ export class SignupComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    console.dir(this.regions);
+    console.dir(all['default'].name);
     // from google auth
     this.googleAuthService.authState.subscribe((user) => {
       this.user = user;
@@ -105,6 +110,9 @@ export class SignupComponent implements OnInit {
         email: ['', [Validators.required, Validators.pattern(this.emailRegex)]],
         tel: ['', Validators.required],
         city: ['', Validators.required],
+        state: ['', Validators.required],
+        zipcode: ['', Validators.required],
+        street: ['', Validators.required],
         password: ['', [Validators.required, Validators.minLength(8)]],
         password2: ['', Validators.required],
         checked: [true, Validators.required],
@@ -160,10 +168,10 @@ export class SignupComponent implements OnInit {
     const city = this.signinForm.get('city').value;
     const fullname = '';
     const password = this.signinForm.get('password').value;
-    const state = 'your address';
-    const zipcode = 'your address';
-    const country = 'your address';
-    const street = 'your address';
+    const state = this.signinForm.get('state').value;
+    const zipcode = this.signinForm.get('zipcode').value;
+    const country = state;
+    const street = this.signinForm.get('street').value;
     const gender = 'OTHERS';
     const checked = this.signinForm.get('checked').value;
     const address: Address = {
@@ -183,6 +191,8 @@ export class SignupComponent implements OnInit {
       address: address,
       password: password,
     };
+
+    console.dir(user);
 
     if (!checked) {
       Swal.fire({

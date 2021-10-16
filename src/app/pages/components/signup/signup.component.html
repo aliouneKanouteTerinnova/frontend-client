@@ -148,11 +148,48 @@
                   <input matInput placeholder="Tel" type="tel" name="tel" id="tel" formControlName="tel" required />
                 </mat-form-field>
               </p>
-
               <p>
                 <mat-form-field appearance="outline">
-                  <mat-label>City</mat-label>
+                  <mat-label>state</mat-label>
+                  <input matInput placeholder="state" type="text" name="state" id="state" formControlName="state" />
+                </mat-form-field>
+              </p>
+              <p>
+                <mat-form-field appearance="outline">
+                  <mat-label>zipcode</mat-label>
                   <input
+                    matInput
+                    placeholder="zipcode"
+                    type="number"
+                    name="zipcode"
+                    id="zipcode"
+                    formControlName="zipcode"
+                    required
+                  />
+                </mat-form-field>
+              </p>
+              <p>
+                <mat-form-field appearance="outline">
+                  <mat-label>street</mat-label>
+                  <input
+                    matInput
+                    placeholder="street"
+                    type="text"
+                    name="street"
+                    id="street"
+                    formControlName="street"
+                    required
+                  />
+                </mat-form-field>
+              </p>
+
+              <p class="mb-4">
+                <!-- <mat-form-field appearance="outline"> -->
+                <label>City</label>
+                <select formControlName="city" class="form-control w-100 h-50">
+                  <option *ngFor="let item of regions" value="{{ item.cca2 }}">{{ item.name.common }}</option>
+                </select>
+                <!-- <input
                     matInput
                     placeholder="City"
                     type="text"
@@ -160,8 +197,8 @@
                     id="city"
                     formControlName="city"
                     required
-                  />
-                </mat-form-field>
+                  /> -->
+                <!-- </mat-form-field> -->
               </p>
 
               <p>

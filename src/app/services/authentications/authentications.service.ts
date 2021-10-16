@@ -1,3 +1,7 @@
+/* eslint-disable @typescript-eslint/no-floating-promises */
+import { Router } from '@angular/router';
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/indent */
 /* eslint-disable @typescript-eslint/member-ordering */
@@ -25,7 +29,7 @@ export class AuthenticationsService {
   obj = this.currentUser;
   users = JSON.parse(this.obj);
 
-  constructor(private httpClient: HttpClient, private cookieService: CookieService) {
+  constructor(private httpClient: HttpClient, private router: Router, private cookieService: CookieService) {
     // if (cookieService.check('currentUser')) {
     //   this.currentUserSubject = new BehaviorSubject<AuthResponded>(JSON.parse(this.cookieService.get('currentUser')));
     // } else {
@@ -108,6 +112,9 @@ export class AuthenticationsService {
   logOut() {
     this.cookieService.delete('currentUser');
     localStorage.removeItem('currentUser');
+    this.router.navigate(['/home']).then(() => {
+      window.location.reload();
+    });
     // this.currentUserSubject.next(null);
   }
 

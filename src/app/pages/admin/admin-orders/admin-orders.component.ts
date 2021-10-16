@@ -150,11 +150,13 @@ export class AdminOrdersComponent implements OnInit {
   getOrders() {
     this.orderService.getSellerOrders(this.currentUser.token || this.currentUser['user'].token);
     this.sellerOrderSubscription = this.orderService.sellerOrdersSubject.subscribe((data) => {
-      // this.listOrders = data;
+      this.listOrders = data;
       this.itemsP = data.length;
       this.itemsN = data.length;
 
-      // console.dir(data);
+      console.dir(data);
+      console.dir(data['cart_item']);
+      console.dir(this.listOrders);
 
       const sold = data.filter((res) => res.status === 'confirmed');
       this.itemsS = sold.length;
@@ -163,6 +165,7 @@ export class AdminOrdersComponent implements OnInit {
       this.itemsC = cancel.length;
 
       this.listOrders.forEach(async (element) => {
+        console.dir(element);
         const category = await this.adminProductsService.getCategory(element.cart_item.product.category).toPromise();
         this.categoryName = category.name;
       });
