@@ -112,7 +112,7 @@
 
                 <mat-form-field class="col-6">
                   <mat-label for="distance_unit" translate>product.distance_unit</mat-label>
-                  <mat-select id="distance_unit" formControlName="distance_unit">
+                  <mat-select id="distance_unit" formControlName="distance_unit" [(value)]="default_dist_unit">
                     <mat-option value="cm">cm</mat-option>
                     <mat-option value="in">in</mat-option>
                     <mat-option value="ft">ft</mat-option>
@@ -124,7 +124,7 @@
 
                 <mat-form-field class="col-6">
                   <mat-label for="mass_unit"><span translate>product.mass_unit</span></mat-label>
-                  <mat-select id="mass_unit" formControlName="mass_unit">
+                  <mat-select id="mass_unit" formControlName="mass_unit" [(value)]="default_mass_unit">
                     <mat-option value="g">g</mat-option>
                     <mat-option value="oz">oz</mat-option>
                     <mat-option value="lb">lb</mat-option>
