@@ -213,7 +213,7 @@
           </div>
 
           <div>
-            <button matStepperNext mat-button>Use this adress</button>
+            <button matStepperNext mat-button>Use this adress ⮞</button>
           </div>
         </form>
       </mat-step>
@@ -286,8 +286,8 @@
           </div>
 
           <div>
-            <button matStepperPrevious mat-button>Back</button>
-            <button matStepperNext mat-button>Got Shipping Method</button>
+            <button class="mr-4" matStepperPrevious mat-button>⮜ Back</button>
+            <button matStepperNext mat-button>Got Shipping Method ⮞</button>
           </div>
         </form>
       </mat-step>
@@ -337,8 +337,8 @@
           </div>
 
           <div>
-            <button mat-button matStepperPrevious>Back</button>
-            <button mat-button matStepperNext>Got To Payment Method</button>
+            <button class="mr-4" mat-button matStepperPrevious>⮜ Back</button>
+            <button mat-button matStepperNext>Got To Payment Method ⮞</button>
           </div>
         </form>
       </mat-step>
@@ -355,7 +355,7 @@
                 <mat-card-title-group> <mat-card-title>Payments accounts</mat-card-title> </mat-card-title-group><br />
                 <mat-card-content>
                   <mat-radio-group ngModel name="payment_method" class="example-radio-group">
-                    <div>
+                    <div class="mt-4">
                       <h4><b>Bank accounts</b></h4>
                     </div>
 
@@ -364,13 +364,21 @@
                       <a class="ml-5" routerLink="#" (click)="deleteBankAcc(acc.id)">Delete</a>
                     </mat-radio-button>
 
-                    <div>
+                    <div class="mt-4">
                       <h4><b>Credit Cards accounts</b></h4>
                     </div>
 
                     <mat-radio-button *ngFor="let credit of creditCards" value="paymentMethod,card,id,{{ credit.id }}">
                       {{ credit.card_name }} - {{ credit.card_number }}
                       <a class="ml-5" routerLink="#" (click)="deleteCreditCard(credit.id)">Delete</a>
+                    </mat-radio-button>
+
+                    <div class="mt-4">
+                      <h4><b>Others payment methods</b></h4>
+                    </div>
+
+                    <mat-radio-button value="paymentMethod,paypal">
+                      <div><img src="../../../assets/img/icons/logo-Paypal.jpg" height="40" width="90" /></div>
                     </mat-radio-button>
                   </mat-radio-group>
                 </mat-card-content>
@@ -513,29 +521,53 @@
               </div>
             </mat-expansion-panel>
 
-            <mat-expansion-panel class="mb-4">
+            <!-- <mat-expansion-panel class="mb-4">
               <mat-expansion-panel-header>
                 <mat-panel-title> Others payment methods </mat-panel-title>
               </mat-expansion-panel-header>
+              <div>
+                mat
+              </div>
 
-              <p><a href="https://www.paypal.com/fr/signin">Add paypal account</a></p>
-            </mat-expansion-panel>
+            </mat-expansion-panel> -->
           </mat-accordion>
         </div>
 
         <div>
-          <button mat-button matStepperPrevious>Back</button>
-          <button mat-button matStepperNext (click)="choosePaymentMethod(p)">Review</button>
+          <button class="mr-4" mat-button matStepperPrevious>⮜ Back</button>
+          <button mat-button matStepperNext (click)="choosePaymentMethod(p); place_order = !place_order">
+            Review ⮞
+          </button>
         </div>
       </mat-step>
 
       <mat-step>
         <ng-template matStepLabel>Review and payment</ng-template>
 
-        Display product ordered.
+        <div class="productrow" *ngFor="let c of cartData.data; let i = index">
+          <div class="product">
+            <div class="img-product">
+              <img height="100" width="100" src="{{ c.product.images[0].file }}" alt="" />
+            </div>
+            <div class="info">
+              <h4>
+                <b>{{ c.product.name }}</b>
+              </h4>
+              <p class="price">{{ c.product.price | currency: 'EUR' }}</p>
+              <p>{{ c.product.description | slice: 0:30 }} ...</p>
+              <p>Quantity: {{ c.numInCart }}</p>
+            </div>
+          </div>
+
+          <div class="selectshipmethod">
+            <!-- <mat-form-field> -->
+            <!-- <a routerLink="#"></a> -->
+            <!-- </mat-form-field> -->
+          </div>
+        </div>
 
         <div>
-          <button mat-button matStepperPrevious>Back</button>
+          <button class="mr-4" mat-button matStepperPrevious>⮜ Back</button>
         </div>
       </mat-step>
     </mat-horizontal-stepper>
@@ -569,8 +601,8 @@
           <button
             routerLink="to_pay"
             matButton
-            (click)="place_order = !place_order; initPayment()"
-            [disabled]="setShipAdressForm.invalid"
+            (click)="initPayment(); _pay()"
+            [disabled]="!place_order"
             routerLink="#"
           >
             Place Order
@@ -585,7 +617,7 @@
   </div>
   <!-- </div> -->
 
-  <form (ngSubmit)="onSubmit()" [formGroup]="testForm" *ngIf="place_order" id="to_pay">
+  <!-- <form (ngSubmit)="onSubmit()" [formGroup]="testForm" *ngIf="to_pay" id="to_pay">
     <div class="card uk-card-default uk-width-*">
       <div class="uk-card-header text-center pt-2" translate>payment.title</div>
       <div class="uk-card-body">
@@ -594,10 +626,28 @@
         <input type="text" readonly id="amount" class="form-control" formControlName="amount" />
         <input type="text" readonly id="orderNumber" class="form-control" formControlName="orderNumber" />
         <div id="card-element" class="mt-3 mb-3"></div>
-        <div class="card-errors" role="alert"></div>
         <button class="btn payBtn btn-block mt-3" type="submit" translate>payment.payment_button</button>
       </div>
     </div>
+  </form> -->
+
+  <form id="payment-form" (ngSubmit)="onSubmit()" [formGroup]="testForm" *ngIf="is_card">
+    <div id="card-element"><!--Stripe.js injects the Card Element--></div>
+
+    <button id="submit" type="submit" class="payBtn">
+      <div class="spinner hidden" id="spinner"></div>
+
+      <span id="button-text">Pay now</span>
+    </button>
+
+    <p id="card-error" role="alert"></p>
+
+    <p class="result-message hidden"></p>
   </form>
+
+  <div class="uk-container mb-5 mt-5" *ngIf="is_paypal">
+    <p class="text-danger">{{ errorMessage }}</p>
+    <div id="paypal"></div>
+  </div>
 </div>
 <app-footer></app-footer>

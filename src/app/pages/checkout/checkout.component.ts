@@ -1,3 +1,7 @@
+/* eslint-disable no-debugger */
+/* eslint-disable prefer-arrow/prefer-arrow-functions */
+/* eslint-disable space-before-function-paren */
+/* eslint-disable object-shorthand */
 /* eslint-disable no-trailing-spaces */
 /* eslint-disable @typescript-eslint/no-unused-expressions */
 /* eslint-disable prefer-const */
@@ -23,6 +27,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Address } from 'src/app/models/address/address';
+import * as braintree from 'braintree-web-drop-in';
 import { AuthResponded } from 'src/app/models/auth/auth';
 import { CartModelServer } from 'src/app/models/cart/cart';
 import { Item } from 'src/app/models/item/item';
@@ -51,6 +56,8 @@ import { ShipmentService } from 'src/app/services/shipments/shipment.service';
 import { promise } from 'selenium-webdriver';
 import { StripePaymentDto } from 'src/app/dtos/payment/stripe-payment-dto';
 import { PaymentInfoDto } from 'src/app/dtos/payment/payment-info';
+import { TransactionDto } from 'src/app/dtos/payment/transaction-dto';
+import { ClientToken } from 'src/app/dtos/payment/client-token';
 // import { ShippingMethod } from 'src/app/dtos/order/shipping-method';
 
 @Component({
@@ -77,6 +84,7 @@ export class CheckoutComponent implements OnInit {
   items: CartItem[] = [];
   cart: CartModel;
   errorMessage: any;
+  errorMessages: String | undefined;
   title = 'Billing';
   panelOpenState = false;
   ShippingAdress: ShippingAddress;
@@ -100,7 +108,11 @@ export class CheckoutComponent implements OnInit {
   info: StripePaymentDto;
   stripeToken: any;
   place_order = false;
+  is_card = false;
+  is_paypal = false;
+  is_bank = false;
   somme: any;
+  paypalToken: ClientToken | undefined;
 
   constructor(
     public cartService: CartService,
@@ -112,7 +124,8 @@ export class CheckoutComponent implements OnInit {
     private i18nServiceService: I18nServiceService,
     private shippingAdressService: ShippingAdressService,
     private orderItemService: OrderItemsService,
-    private shipmentService: ShipmentService
+    private shipmentService: ShipmentService,
+    private paymentService: PaymentsService
   ) {}
 
   ngOnInit(): void {
@@ -173,7 +186,61 @@ export class CheckoutComponent implements OnInit {
     this.getBankAccount();
     // this.updateCartOnServer();
     this.resetCart();
+
     // this.selected = this.shippingAdresses[-1].name + ', ' + this.shippingAdresses[-1].city;
+  }
+
+  getClientToken() {
+    this.paymentService.getBraintreeClientToken(this.token).subscribe(
+      (res) => {
+        // this.paypalToken.client_token = res.body.token;
+        // console.dir(this.paypalToken, "Get paypal token success !");
+        this.createBraintreeUI(res.body.client_token);
+      },
+      (err) => {
+        console.dir(err, 'Get paypal token error !');
+      }
+    );
+  }
+
+  createBraintreeUI(token: string) {
+    // let button = document.querySelector('#submit-button');
+    let amount = this.cartTotal;
+    // console.dir(this.paypalToken?.client_token);
+    braintree.create(
+      {
+        authorization: token,
+        container: '#paypal',
+        card: false,
+        paypal: {
+          flow: 'checkout',
+          amount: amount,
+          currency: 'EUR',
+        },
+      },
+      (createErr, instance) => {
+        if (createErr) {
+          console.dir(createErr);
+          return;
+        }
+
+        instance?.requestPaymentMethod((requestPaymentMethodErr, payload) => {
+          if (requestPaymentMethodErr) {
+            console.error(requestPaymentMethodErr);
+            return;
+          }
+
+          const data = new TransactionDto();
+          data.nonce = payload.nonce;
+          data.device_data = payload.deviceData;
+          data.amount = amount;
+          this.paymentService.braintreeTransactionSale(this.token, data).subscribe(
+            (response) => console.dir(response),
+            (error) => console.error(error)
+          );
+        });
+      }
+    );
   }
 
   getCartDto() {
@@ -229,26 +296,108 @@ export class CheckoutComponent implements OnInit {
     this.testForm = this.formBuilder.group({
       amount: ['Amount : ' + amount, Validators.required],
       orderNumber: ['Order number : ' + orderNumber, Validators.required],
+      // cardNumber: ['', Validators.required],
+      // cvc: ['', Validators.required],
+      // cardExpiry: ['', Validators.required],
     });
   }
+
+  // registerElements(elements) {
+
+  //   // let errorMessage = $('#errorMessage');
+  //   // eslint-disable-next-line prefer-arrow/prefer-arrow-functions
+  //   elements.forEach(function(element) {
+  //       element.on('change', (event) => {
+  //           if(event.error) {
+  //               this.errorMessage.html(`<p>${event.error.message}</p>`);
+  //               this.errorMessage.show();
+  //           } else {
+  //             this.errorMessage.hide();
+  //           }
+  //       });
+  //   });
+  // }
 
   initStripeForm() {
     const elements = this.stripe.elements();
     // eslint-disable-next-line no-var
-    const style = {
-      style: {
-        base: {
-          fontFamily: 'Raleway, sans-serif',
-          fontSize: '16px',
-          color: '#C1C7CD',
+
+    let style = {
+      base: {
+        hidePostalCode: true,
+
+        color: '#32325d',
+
+        fontFamily: 'Raleway, sans-serif',
+
+        fontSmoothing: 'antialiased',
+
+        fontSize: '16px',
+
+        '::placeholder': {
+          color: '#32325d',
         },
-        invalid: { color: 'red' },
+
+        invalid: {
+          fontFamily: 'Arial, sans-serif',
+
+          color: '#fa755a',
+
+          iconColor: '#fa755a',
+        },
       },
     };
 
-    this.card = elements.create('card', style);
+    // let cardNumber = elements.create('cardNumber', {
+    //   style: style
+    // });
+
+    // cardNumber.mount('#cardNumber');
+
+    // let cardExpiry = elements.create('cardExpiry', {
+    //   style
+    // });
+
+    // cardExpiry.mount('#cardExpire');
+    //   let cardCvc = elements.create('cardCvc', {
+    //   style
+    // });
+
+    // cardCvc.mount('#cardCvc');
+
+    // this.registerElements([cardNumber, cardExpiry, cardCvc]);
+
+    this.card = elements.create('card', { style: style });
 
     this.card.mount('#card-element');
+
+    this.card.on('change', function (event) {
+      // Disable the Pay button if there are no card details in the Element
+
+      document.querySelector('button').disabled = event.empty;
+
+      document.querySelector('#card-error').textContent = event.error ? event.error.message : '';
+    });
+
+    // Show a spinner on payment submission
+
+    const loading = function (isLoading) {
+      if (isLoading) {
+        // Disable the button and show a spinner
+
+        document.querySelector('button').disabled = true;
+
+        document.querySelector('#spinner').classList.remove('hidden');
+
+        document.querySelector('#button-text').classList.add('hidden');
+      } else {
+        document.querySelector('button').disabled = false;
+
+        document.querySelector('#spinner').classList.add('hidden');
+
+        document.querySelector('#button-text').classList.remove('hidden');
+      }
+    };
 
     this.card.addEventListener('change', (event) => {
       if (event.error) {
@@ -449,25 +598,29 @@ export class CheckoutComponent implements OnInit {
   }
 
   initPayment() {
-    this.info = {
-      order: this.orderId,
-      method: this.payInfos.paymentMethod,
-      amount: this.cartTotal,
-      currency: 'EUR',
-    };
+    if (this.payInfos.paymentMethod === 'card') {
+      this.info = {
+        order: this.orderId,
+        method: this.payInfos.paymentMethod,
+        amount: this.cartTotal,
+        currency: 'EUR',
+      };
 
-    this.payment.initiateStripePayment(this.token, this.info).subscribe(
-      (res) => {
-        console.dir(res, 'Init payment success !');
-        this.pbKey = res.body.public_key;
-        console.dir(this.pbKey, 'store pbKey success !');
-        this.stripeToken = res.body.token;
-        this.stripe = Stripe(this.pbKey);
-        this.initStripeForm();
-        this.initForm(this.cartTotal, this.orderId);
-      },
-      (err) => console.dir(err, 'Init payment error !')
-    );
+      this.payment.initiateStripePayment(this.token, this.info).subscribe(
+        (res) => {
+          console.dir(res, 'Init payment success !');
+          this.pbKey = res.body.public_key;
+          console.dir(this.pbKey, 'Store pbKey success !');
+          this.stripeToken = res.body.token;
+          this.stripe = Stripe(this.pbKey);
+          this.initStripeForm();
+          this.initForm(this.cartTotal, this.orderId);
+        },
+        (err) => console.dir(err, 'Init payment error !')
+      );
+    } else if (this.payInfos.paymentMethod === 'bank') {
+      console.dir('Not yet avaible !');
+    }
   }
 
   addBankAcc(form) {
@@ -632,7 +785,6 @@ export class CheckoutComponent implements OnInit {
 
   updateShipmentMethod(event) {
     const shipmentMethod = event.target.value;
-    console.table(shipmentMethod);
 
     const temp = shipmentMethod.split(',');
     const resultObject = {};
@@ -675,6 +827,27 @@ export class CheckoutComponent implements OnInit {
 
   is_placed_order() {
     this.place_order = true;
+  }
+
+  _pay() {
+    if (this.payInfos.paymentMethod === 'card') {
+      this.is_card = true;
+      this.is_paypal = false;
+      this.is_bank = false;
+    }
+
+    if (this.payInfos.paymentMethod === 'paypal') {
+      this.is_paypal = true;
+      this.is_card = false;
+      this.is_bank = false;
+      this.getClientToken();
+    }
+
+    if (this.payInfos.paymentMethod === 'bank') {
+      this.is_bank = true;
+      this.is_paypal = false;
+      this.is_card = false;
+    }
   }
 
   onSubmit() {
