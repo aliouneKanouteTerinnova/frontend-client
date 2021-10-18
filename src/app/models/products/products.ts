@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/naming-convention */
 import { ProductReview } from '../product-review/product-review';
 
 export class Products {
