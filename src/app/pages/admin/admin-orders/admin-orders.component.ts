@@ -44,51 +44,6 @@ export const THEAD: Th[] = [
   { title: 'Action' },
 ];
 
-// declare interface Tr {
-//   image: string;
-//   name: string;
-//   price: string;
-//   quantity: string;
-//   amount: string;
-// }
-// export const TBODY: Tr[] = [
-//   {
-//     image: 'https://mdbootstrap.com/img/Photos/Avatars/img (31).jpg',
-//     name: 'CamerMask',
-//     price: 'Art',
-//     quantity: '2/2 channels',
-//     amount: '€2000',
-//   },
-//   {
-//     image: 'https://mdbootstrap.com/img/Photos/Avatars/img (31).jpg',
-//     name: 'Tata Lisa',
-//     price: 'Clothing',
-//     quantity: '2/2 channels',
-//     amount: '€2000',
-//   },
-//   {
-//     image: 'https://mdbootstrap.com/img/Photos/Avatars/img (31).jpg',
-//     name: 'Meet',
-//     price: 'Food',
-//     quantity: '2/2 channels',
-//     amount: '€2000',
-//   },
-//   {
-//     image: 'https://mdbootstrap.com/img/Photos/Avatars/img (31).jpg',
-//     name: 'CamerBrush',
-//     price: 'Art',
-//     quantity: '2/2 channels',
-//     amount: '€2000',
-//   },
-//   {
-//     image: 'https://mdbootstrap.com/img/Photos/Avatars/img (31).jpg',
-//     name: 'MamaLisa',
-//     price: 'Art',
-//     quantity: 'Out of Stocks',
-//     amount: '€2000',
-//   },
-// ];
-
 @Component({
   selector: 'app-admin-orders',
   templateUrl: './admin-orders.component.html',
@@ -144,6 +99,10 @@ export class AdminOrdersComponent implements OnInit {
     this.thItem = THEAD.filter((thItem) => thItem);
     // this.trItem = TBODY.filter((thItem) => thItem);
 
+    this.adminProductsService.getProducts(this.currentUser.token || this.currentUser['user'].token).subscribe((res) => {
+      this.itemsN = res.body.results.length;
+    });
+
     this.getOrders();
   }
 
@@ -151,12 +110,6 @@ export class AdminOrdersComponent implements OnInit {
     this.orderService.getSellerOrders(this.currentUser.token || this.currentUser['user'].token);
     this.sellerOrderSubscription = this.orderService.sellerOrdersSubject.subscribe((data) => {
       this.listOrders = data;
-      this.itemsP = data.length;
-      this.itemsN = data.length;
-
-      console.dir(data);
-      console.dir(data['cart_item']);
-      console.dir(this.listOrders);
 
       const sold = data.filter((res) => res.status === 'confirmed');
       this.itemsS = sold.length;
@@ -164,10 +117,22 @@ export class AdminOrdersComponent implements OnInit {
       const cancel = data.filter((res) => res.status === 'canceled');
       this.itemsC = cancel.length;
 
-      this.listOrders.forEach(async (element) => {
-        console.dir(element);
-        const category = await this.adminProductsService.getCategory(element.cart_item.product.category).toPromise();
-        this.categoryName = category.name;
+      const pending = data.filter((res) => res.status === 'initiated');
+      this.itemsP = pending.length;
+
+      this.listOrders.forEach((element, i) => {
+        // console.dir(element);
+        // console.dir(i);
+        // const category = await this.adminProductsService.getCategory(element.cart_item.product.category).toPromise();
+        // console.dir(category[i]);
+        // this.categoryName = category.name;
+        this.adminProductsService.getCategory(element.cart_item.product.category).subscribe((category) => {
+          this.listOrders[i].category = category.name;
+          this.categoryName = this.listOrders[i].category;
+          // console.dir(this.listOrders);
+          // console.dir(this.listOrders[i]);
+          // console.dir(this.listOrders[i].category);
+        });
       });
     });
     this.orderService.emitSellerOrders();

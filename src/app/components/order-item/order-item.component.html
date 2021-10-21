@@ -1,11 +1,11 @@
 <div class="row mx-0 order" *ngIf="orderItem">
   <mat-toolbar class="col-12">
-    <span class="col-3"><span translate>orders.order_details.order</span> #{{ order.number }}</span>
-    <span class="col-2">{{ order.created_at | date: 'dd/MM/yyyy hh:mm:ss' }}</span>
+    <span class="col-3"><span translate>orders.order_details.order</span> #{{ order.order_items[index].number }}</span>
+    <span class="col-2">{{ order.order_items[index].created_at | date: 'dd/MM/yyyy hh:mm:ss' }}</span>
     <span class="col-3 offset-1"
       ><span class="ml-4"
         ><span translate>orders.order_details.order_total</span> :
-        {{ formatPrice(order.total_prices | currency: 'EUR') }}</span
+        {{ formatPrice(order.order_items[index].total_prices | currency: 'EUR') }}</span
       ></span
     >
     <span class="col-3" translate>orders.order_list.manage_order</span>
@@ -64,7 +64,7 @@
     <img class="col-2" [src]="product.images[0].file" alt="" />
     <span class="col-3">
       <span translate>orders.order_list.order_items</span> :
-      <button mat-raised-button>{{ order.order_items.length }}</button>
+      <button mat-raised-button>{{ order.order_items[index].length }}</button>
       <button class="w-100" mat-raised-button color="primary" (click)="addToCart(product.id)">
         <span translate>orders.order_list.order_buy_again</span>
       </button>
@@ -72,12 +72,12 @@
     <span class="col-4">
       <ul class="list-unstyled">
         <li>{{ user.username }}</li>
-        <li>{{ order.shipping_address.address.country }}</li>
-        <li>{{ order.shipping_method.name }}</li>
-        <li>
+        <li>{{ order.order_items[index].shipping_address }}</li>
+        <li>{{ order.order_items[index].shipping_method }}</li>
+        <!-- <li>
           {{ order.shipping_address.address.state }}, {{ order.shipping_address.address.street }} -
           {{ order.shipping_address.phone_number }}
-        </li>
+        </li> -->
       </ul>
     </span>
     <span class="col">
