@@ -69,18 +69,12 @@ export class OrderListComponent implements OnInit {
       this.listOrders = data;
     });
     this.orderService.emitSellerOrders();
-    // this.orderService.getAllOrdersFromSeller(this.token).subscribe(
-    //   (data) => {
-    //     console.log(data);
-    //     this.listOrders = data.body;
-    //   },
-    //   (error) => {}
-    // );
   }
 
   logout(): void {
     this.authService.logOut();
-    window.location.reload();
-    this.router.navigate(['/']);
+    this.router.navigate(['/']).then(() => {
+      window.location.reload();
+    });
   }
 }
