@@ -1,3 +1,9 @@
+/* eslint-disable no-debugger */
+/* eslint-disable prefer-arrow/prefer-arrow-functions */
+/* eslint-disable space-before-function-paren */
+/* eslint-disable object-shorthand */
+/* eslint-disable no-trailing-spaces */
+/* eslint-disable @typescript-eslint/no-unused-expressions */
 /* eslint-disable prefer-const */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-unsafe-return */
@@ -21,6 +27,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Address } from 'src/app/models/address/address';
+import * as braintree from 'braintree-web-drop-in';
 import { AuthResponded } from 'src/app/models/auth/auth';
 import { CartModelServer } from 'src/app/models/cart/cart';
 import { Item } from 'src/app/models/item/item';
@@ -45,6 +52,12 @@ import { PaymentService } from 'src/app/services/payment/payment.service';
 import { BankAccount } from 'src/app/models/payment/bank-account';
 import { CreditCard } from 'src/app/models/payment/credit-card';
 import { OrderItemsService } from 'src/app/services/orders/order-items.service';
+import { ShipmentService } from 'src/app/services/shipments/shipment.service';
+import { promise } from 'selenium-webdriver';
+import { StripePaymentDto } from 'src/app/dtos/payment/stripe-payment-dto';
+import { PaymentInfoDto } from 'src/app/dtos/payment/payment-info';
+import { TransactionDto } from 'src/app/dtos/payment/transaction-dto';
+import { ClientToken } from 'src/app/dtos/payment/client-token';
 // import { ShippingMethod } from 'src/app/dtos/order/shipping-method';
 
 @Component({
@@ -62,7 +75,7 @@ export class CheckoutComponent implements OnInit {
   subTotal: Number;
   idCart: any;
   stripe: any;
-  totalTax: number = 20;
+  totalTax = 20;
   shippingTax: Number = 20;
   card;
   token;
@@ -71,6 +84,7 @@ export class CheckoutComponent implements OnInit {
   items: CartItem[] = [];
   cart: CartModel;
   errorMessage: any;
+  errorMessages: String | undefined;
   title = 'Billing';
   panelOpenState = false;
   ShippingAdress: ShippingAddress;
@@ -83,6 +97,22 @@ export class CheckoutComponent implements OnInit {
   orderItem: OrderItem[];
   shippingAdressesForActicles = [];
   orderId: any;
+  shipments: any[];
+  payInfos: PaymentInfoDto;
+  rates: any[];
+  cartItems: CartItem[] = [];
+  setRates: FormGroup;
+  shippingMethodForActicles = [];
+  updatedItems: OrderItem[] = [];
+  choose_payment: FormGroup;
+  info: StripePaymentDto;
+  stripeToken: any;
+  place_order = false;
+  is_card = false;
+  is_paypal = false;
+  is_bank = false;
+  somme: any;
+  paypalToken: ClientToken | undefined;
 
   constructor(
     public cartService: CartService,
@@ -93,7 +123,9 @@ export class CheckoutComponent implements OnInit {
     private payment: PaymentService,
     private i18nServiceService: I18nServiceService,
     private shippingAdressService: ShippingAdressService,
-    private orderItemService: OrderItemsService
+    private orderItemService: OrderItemsService,
+    private shipmentService: ShipmentService,
+    private paymentService: PaymentsService
   ) {}
 
   ngOnInit(): void {
@@ -141,12 +173,74 @@ export class CheckoutComponent implements OnInit {
       ship_adress: ['', Validators.required],
     });
 
-    this.allShippingAdress();
+    this.setRates = this.formBuilder.group({
+      _rates: ['', Validators.required],
+    });
 
+    this.choose_payment = this.formBuilder.group({
+      payment_method: ['', Validators.required],
+    });
+
+    this.allShippingAdress();
     this.getCreditCards();
     this.getBankAccount();
-    this.updateCartOnServer();
+    // this.updateCartOnServer();
+    this.resetCart();
+
     // this.selected = this.shippingAdresses[-1].name + ', ' + this.shippingAdresses[-1].city;
+  }
+
+  getClientToken() {
+    this.paymentService.getBraintreeClientToken(this.token).subscribe(
+      (res) => {
+        // this.paypalToken.client_token = res.body.token;
+        // console.dir(this.paypalToken, "Get paypal token success !");
+        this.createBraintreeUI(res.body.client_token);
+      },
+      (err) => {
+        console.dir(err, 'Get paypal token error !');
+      }
+    );
+  }
+
+  createBraintreeUI(token: string) {
+    // let button = document.querySelector('#submit-button');
+    let amount = this.cartTotal;
+    // console.dir(this.paypalToken?.client_token);
+    braintree.create(
+      {
+        authorization: token,
+        container: '#paypal',
+        card: false,
+        paypal: {
+          flow: 'checkout',
+          amount: amount,
+          currency: 'EUR',
+        },
+      },
+      (createErr, instance) => {
+        if (createErr) {
+          console.dir(createErr);
+          return;
+        }
+
+        instance?.requestPaymentMethod((requestPaymentMethodErr, payload) => {
+          if (requestPaymentMethodErr) {
+            console.error(requestPaymentMethodErr);
+            return;
+          }
+
+          const data = new TransactionDto();
+          data.nonce = payload.nonce;
+          data.device_data = payload.deviceData;
+          data.amount = amount;
+          this.paymentService.braintreeTransactionSale(this.token, data).subscribe(
+            (response) => console.dir(response),
+            (error) => console.error(error)
+          );
+        });
+      }
+    );
   }
 
   getCartDto() {
@@ -188,7 +282,7 @@ export class CheckoutComponent implements OnInit {
         (response) => {
           this.cart = response.body;
           console.dir(this.items, 'Update cart on server');
-          //console.dir("Cart :");
+          // console.dir("Cart :");
           console.dir(this.cart, 'cart');
         },
         (error) => {
@@ -202,26 +296,108 @@ export class CheckoutComponent implements OnInit {
     this.testForm = this.formBuilder.group({
       amount: ['Amount : ' + amount, Validators.required],
       orderNumber: ['Order number : ' + orderNumber, Validators.required],
+      // cardNumber: ['', Validators.required],
+      // cvc: ['', Validators.required],
+      // cardExpiry: ['', Validators.required],
     });
   }
+
+  // registerElements(elements) {
+
+  //   // let errorMessage = $('#errorMessage');
+  //   // eslint-disable-next-line prefer-arrow/prefer-arrow-functions
+  //   elements.forEach(function(element) {
+  //       element.on('change', (event) => {
+  //           if(event.error) {
+  //               this.errorMessage.html(`<p>${event.error.message}</p>`);
+  //               this.errorMessage.show();
+  //           } else {
+  //             this.errorMessage.hide();
+  //           }
+  //       });
+  //   });
+  // }
 
   initStripeForm() {
     const elements = this.stripe.elements();
     // eslint-disable-next-line no-var
-    const style = {
-      style: {
-        base: {
-          fontFamily: 'Raleway, sans-serif',
-          fontSize: '16px',
-          color: '#C1C7CD',
+
+    let style = {
+      base: {
+        hidePostalCode: true,
+
+        color: '#32325d',
+
+        fontFamily: 'Raleway, sans-serif',
+
+        fontSmoothing: 'antialiased',
+
+        fontSize: '16px',
+
+        '::placeholder': {
+          color: '#32325d',
         },
-        invalid: { color: 'red' },
+
+        invalid: {
+          fontFamily: 'Arial, sans-serif',
+
+          color: '#fa755a',
+
+          iconColor: '#fa755a',
+        },
       },
     };
 
-    this.card = elements.create('card', style);
+    // let cardNumber = elements.create('cardNumber', {
+    //   style: style
+    // });
+
+    // cardNumber.mount('#cardNumber');
+
+    // let cardExpiry = elements.create('cardExpiry', {
+    //   style
+    // });
+
+    // cardExpiry.mount('#cardExpire');
+    //   let cardCvc = elements.create('cardCvc', {
+    //   style
+    // });
+
+    // cardCvc.mount('#cardCvc');
+
+    // this.registerElements([cardNumber, cardExpiry, cardCvc]);
+
+    this.card = elements.create('card', { style: style });
 
     this.card.mount('#card-element');
+
+    this.card.on('change', function (event) {
+      // Disable the Pay button if there are no card details in the Element
+
+      document.querySelector('button').disabled = event.empty;
+
+      document.querySelector('#card-error').textContent = event.error ? event.error.message : '';
+    });
+
+    // Show a spinner on payment submission
+
+    const loading = function (isLoading) {
+      if (isLoading) {
+        // Disable the button and show a spinner
+
+        document.querySelector('button').disabled = true;
+
+        document.querySelector('#spinner').classList.remove('hidden');
+
+        document.querySelector('#button-text').classList.add('hidden');
+      } else {
+        document.querySelector('button').disabled = false;
+
+        document.querySelector('#spinner').classList.add('hidden');
+
+        document.querySelector('#button-text').classList.remove('hidden');
+      }
+    };
 
     this.card.addEventListener('change', (event) => {
       if (event.error) {
@@ -245,9 +421,7 @@ export class CheckoutComponent implements OnInit {
 
   getShippingAdress(id: string) {
     this.shippingAdressService.get(this.token, id).subscribe(
-      (res) => {
-        return res.body.result;
-      },
+      (res) => res.body.result,
       (err) => {
         console.table(err);
       }
@@ -285,12 +459,13 @@ export class CheckoutComponent implements OnInit {
     return prices;
   }
 
-  createOrder() {
+  resetCart() {
     this.cartService.get(this.token).subscribe((data) => {
       this.idCart = data.body.id;
+
       const cartItems = data.body.items;
 
-      //Reset Cart
+      // Reset Cart
       cartItems.map((elm) => {
         this.cartService.removeItem(this.token, elm.id).subscribe(
           (res) => {
@@ -301,38 +476,58 @@ export class CheckoutComponent implements OnInit {
           }
         );
       });
-
-      this.cartData.data.map((element) => {
-        const orderItem: Item = {
-          product: element.product.id,
-          quantity: element.numInCart,
-        };
-
-        this.cartService.addItemToCart(orderItem, this.token).subscribe(
-          (dataItem) => {
-            console.dir(dataItem);
-          },
-          (error) => {
-            console.dir(error);
-          }
-        );
-      });
-
-      const order: OrderDto = {
-        cart: this.idCart,
-        total_tax: this.totalTax,
-      };
-
-      this.orderService.initiate(this.token, order).subscribe(
-        (data) => {
-          this.orderItem = data.body.order_items;
-          this.orderId = data.body.id;
-        },
-        (err) => {
-          console.dir(err);
-        }
-      );
     });
+  }
+
+  addItemsToCart() {
+    let promise = Promise.resolve(
+      this.cartService.get(this.token).subscribe((data) => {
+        this.idCart = data.body.id;
+
+        this.cartData.data.map((element) => {
+          const orderItem: Item = {
+            product: element.product.id,
+            quantity: element.numInCart,
+          };
+
+          this.cartService.addItemToCart(orderItem, this.token).subscribe(
+            (dataItem) => {
+              console.dir(dataItem, 'Item added !');
+            },
+            (error) => {
+              console.dir(error);
+            }
+          );
+        });
+      })
+    );
+
+    return promise;
+  }
+
+  createOrder() {
+    this.addItemsToCart()
+      .then(() => {
+        this.cartService.get(this.token).subscribe((data) => {
+          this.idCart = data.body.id;
+
+          const order: OrderDto = {
+            cart: this.idCart,
+            total_tax: this.totalTax,
+          };
+
+          this.orderService.initiate(this.token, order).subscribe(
+            (data) => {
+              this.orderItem = data.body.order_items;
+              this.orderId = data.body.id;
+            },
+            (err) => {
+              console.dir(err);
+            }
+          );
+        });
+      })
+      .catch((e) => console.dir('Create Order Error', e));
   }
 
   // updateCart() {
@@ -359,20 +554,19 @@ export class CheckoutComponent implements OnInit {
     const email = this.ShippingAdressForm.get('email').value;
 
     const shippingAdress: ShippingAddress = {
-      name: name,
-      state: state,
+      name,
+      state,
       street1: street,
-      city: city,
+      city,
       zip_code: zipcode,
-      country: country,
-      phone: phone,
-      email: email,
+      country,
+      phone,
+      email,
     };
 
     this.shippingAdressService.create(this.token, shippingAdress).subscribe(
       (res) => {
         this.shippingAdresses.push(res.body);
-        this.ShippingAdress = shippingAdress;
         console.table(this.cartData);
         Swal.fire({
           position: 'top-end',
@@ -388,60 +582,46 @@ export class CheckoutComponent implements OnInit {
     );
   }
 
-  updateCartItems(event) {
-    const result = event.target.value;
+  choosePaymentMethod(form) {
+    const result = form.value.payment_method;
 
-    var temp = result.split(','),
-      resultObject = {};
+    const temp = result.split(',');
+    const resultObject = {};
 
     for (let i = 0; i < temp.length; i += 2) {
       resultObject[temp[i]] = temp[i + 1];
     }
 
-    this.shippingAdressesForActicles.push(resultObject);
-    console.dir(this.shippingAdressesForActicles);
+    this.payInfos = resultObject;
 
-    console.dir(this.orderItem);
-
-    this.shippingAdressesForActicles.forEach((ship) => {
-      this.orderItem.forEach((item) => {
-        if (ship.product == item.cart_item.product.id) {
-          item.shipping_address = ship.ship_adress;
-          console.dir(item.shipping_address, 'Ship adress set!');
-        }
-      });
-    });
+    console.dir(this.payInfos, 'Pay info');
   }
 
-  setOrderItems() {
-    this.orderItem.forEach((item) => {
-      this.orderItemService.update(this.token, item.id, item).subscribe(
+  initPayment() {
+    if (this.payInfos.paymentMethod === 'card') {
+      this.info = {
+        order: this.orderId,
+        method: this.payInfos.paymentMethod,
+        amount: this.cartTotal,
+        currency: 'EUR',
+      };
+
+      this.payment.initiateStripePayment(this.token, this.info).subscribe(
         (res) => {
-          console.dir(res, 'set order items success !');
+          console.dir(res, 'Init payment success !');
+          this.pbKey = res.body.public_key;
+          console.dir(this.pbKey, 'Store pbKey success !');
+          this.stripeToken = res.body.token;
+          this.stripe = Stripe(this.pbKey);
+          this.initStripeForm();
+          this.initForm(this.cartTotal, this.orderId);
         },
-        (err) => {
-          console.dir(err, 'set order items error !');
-        }
+        (err) => console.dir(err, 'Init payment error !')
       );
-    });
+    } else if (this.payInfos.paymentMethod === 'bank') {
+      console.dir('Not yet avaible !');
+    }
   }
-
-  createShipment() {
-    this.setOrderItems();
-
-    this.orderItem.forEach((orderI) => {
-      this.orderItemService.createShipment(this.token, orderI.id).subscribe(
-        (res) => {
-          console.dir(res, 'create shipment success !');
-        },
-        (err) => {
-          console.dir(err, 'create shipment error !');
-        }
-      );
-    });
-  }
-
-  choosePaymentMethod(form) {}
 
   addBankAcc(form) {
     const bic = form.value.bic;
@@ -449,13 +629,14 @@ export class CheckoutComponent implements OnInit {
     const account_name = form.value.account_name;
 
     const bankAccount: BankAccount = {
-      bic: bic,
-      iban: iban,
-      account_name: account_name,
+      bic,
+      iban,
+      account_name,
     };
 
     this.payment.addBankAccount(this.token, bankAccount).subscribe(
       (res) => {
+        this.bankAccounts.push(res.body);
         console.table(res);
       },
       (err) => {
@@ -471,6 +652,13 @@ export class CheckoutComponent implements OnInit {
     );
   }
 
+  deleteBankAcc(id: string) {
+    this.payment.deleteBankAccount(id, this.token).subscribe(
+      () => (this.bankAccounts = this.bankAccounts.filter((t) => t.id !== id)),
+      (err) => console.dir(err, 'Delete bankAcc error')
+    );
+  }
+
   addCreditCard(form) {
     const card = new CreditCard();
     card.card_name = form.value.name_on_card;
@@ -480,11 +668,10 @@ export class CheckoutComponent implements OnInit {
 
     this.payment.addCreditCard(this.token, card).subscribe(
       (res) => {
+        this.creditCards.push(res.body);
         console.table(res);
       },
-      (err) => {
-        console.table(err);
-      }
+      (err) => console.table(err)
     );
   }
 
@@ -493,6 +680,205 @@ export class CheckoutComponent implements OnInit {
       (res) => (this.creditCards = res.body),
       (err) => console.dir(err)
     );
+  }
+
+  deleteCreditCard(id: string) {
+    this.payment.deleteCreditCard(id, this.token).subscribe(
+      () => (this.creditCards = this.creditCards.filter((t) => t.id !== id)),
+      (err) => console.dir(err, 'Delete credit card erro')
+    );
+  }
+
+  updateCartItems(event) {
+    const result = event.target.value;
+
+    const temp = result.split(',');
+    const resultObject = {};
+
+    for (let i = 0; i < temp.length; i += 2) {
+      resultObject[temp[i]] = temp[i + 1];
+    }
+
+    if (!this.shippingAdressesForActicles.some((el) => el === resultObject)) {
+      this.shippingAdressesForActicles.push(resultObject);
+      console.dir(this.shippingAdressesForActicles);
+    }
+
+    console.dir(this.orderItem);
+    this.shippingAdressesForActicles.map((ship) => {
+      this.orderItem.map((item) => {
+        if (ship.product === item.cart_item.product.id) {
+          item.shipping_address = ship.ship_adress;
+          console.dir(item.shipping_address, 'Ship adress set!');
+          this.orderItemService.update(this.token, item.id, item).subscribe(
+            (res) => {
+              console.dir(res.body, 'set order items success !');
+              this.updateItems(res.body);
+            },
+            (err) => {
+              console.dir(err, 'set order items error !');
+            }
+          );
+        }
+      });
+    });
+  }
+
+  updateItems(item) {
+    if (!this.updatedItems.some((el) => el.id === item.id)) {
+      this.updatedItems.push(item);
+      console.dir(this.updatedItems, 'Item stored !');
+    }
+  }
+
+  getRates(id) {
+    this.shipmentService.getRates(this.token, id).subscribe(
+      (res) => {
+        this.rates = res.body.results;
+        console.dir(res, 'Rates !');
+      },
+      (err) => console.dir(err, 'Rates error')
+    );
+  }
+
+  getShipment(id) {
+    this.shipmentService.getShipments(this.token, id).subscribe(
+      (res) => {
+        this.shipments = res.body.result;
+        // res.body.forEach(item => this.shipments.push(item));
+        console.dir(res, 'Get shipment');
+      },
+      (err) => console.dir('Get shipment error !', err)
+    );
+  }
+
+  Exists(object_id, arr: any[]) {
+    return arr.some((el) => el.object_id === object_id);
+  }
+
+  createShipment() {
+    this.orderItem.forEach((orderI) => {
+      this.orderItemService.createShipment(this.token, orderI.id).subscribe(
+        (res) => {
+          console.dir(res, 'create shipment success !');
+          // console.dir(this.shipments, 'Shipment stored !');
+          this.updatedItems.forEach((i) => {
+            i.shipment = res;
+          });
+          console.dir(this.updatedItems, 'Shipment added !');
+          this.getRates(res.id);
+          this.getShipment(res.id);
+        },
+        (err) => {
+          Swal.fire({
+            // position: 'top-end',
+            icon: 'error',
+            title: `Shiping Adress invalid`,
+            showConfirmButton: false,
+            timer: 2000,
+          }),
+            console.dir(err, 'create shipment error !');
+        }
+      );
+    });
+  }
+
+  updateShipmentMethod(event) {
+    const shipmentMethod = event.target.value;
+
+    const temp = shipmentMethod.split(',');
+    const resultObject = {};
+
+    for (let i = 0; i < temp.length; i += 2) {
+      resultObject[temp[i]] = temp[i + 1];
+    }
+
+    if (!this.shippingMethodForActicles.some((el) => el === resultObject)) {
+      this.shippingMethodForActicles.push(resultObject);
+      console.dir(this.shippingMethodForActicles);
+    }
+
+    this.updatedItems.forEach((i) => {
+      this.shippingMethodForActicles.forEach((m) => {
+        if (!this.Exists(m.object_id, this.updatedItems)) {
+          i.shipment.rate = m.object_id;
+          console.dir(this.updatedItems, 'Shipment method added !');
+          this.shipmentService.update(this.token, i.shipment.id, i.shipment).subscribe(
+            (res) => console.dir(res, 'Update shipment succes !'),
+            (err) => console.dir(err, 'Update shipment error !')
+          );
+        }
+      });
+    });
+  }
+
+  updateOrderItems() {
+    this.updatedItems.map((item) => {
+      this.orderItemService.update(this.token, item.id, item).subscribe(
+        (res) => {
+          console.dir(res.body, 'update order items success !');
+        },
+        (err) => {
+          console.dir(err, 'update order items error !');
+        }
+      );
+    });
+  }
+
+  is_placed_order() {
+    this.place_order = true;
+  }
+
+  _pay() {
+    if (this.payInfos.paymentMethod === 'card') {
+      this.is_card = true;
+      this.is_paypal = false;
+      this.is_bank = false;
+    }
+
+    if (this.payInfos.paymentMethod === 'paypal') {
+      this.is_paypal = true;
+      this.is_card = false;
+      this.is_bank = false;
+      this.getClientToken();
+    }
+
+    if (this.payInfos.paymentMethod === 'bank') {
+      this.is_bank = true;
+      this.is_paypal = false;
+      this.is_card = false;
+    }
+  }
+
+  onSubmit() {
+    this.stripe
+      .confirmCardPayment(`${this.stripeToken}`, {
+        payment_method: {
+          card: this.card,
+        },
+      })
+      .then((result) => {
+        console.log(result);
+        if (result.error) {
+          this.errorMessage = result.error.message;
+        } else if (result.paymentIntent.status === 'succeeded') {
+          Swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: 'payment has been made',
+            showConfirmButton: false,
+            timer: 1500,
+          });
+
+          const order = this.orderId;
+
+          this.payment.confirmStripePayment(this.token, result.paymentIntent.id, order).subscribe((res) => {
+            this.cartService.deleteCart();
+            this.router.navigate(['/orders']);
+            console.log(res);
+          });
+        }
+      });
   }
 
   // checkout() {
@@ -686,8 +1072,7 @@ export class CheckoutComponent implements OnInit {
       c.numInCart = quantity - 1;
       // this.ChangeQuantity(index, true);
     }
-
-    console.dirxml(quantity, c);
+    console.dir(quantity, c);
     // }
   }
 }

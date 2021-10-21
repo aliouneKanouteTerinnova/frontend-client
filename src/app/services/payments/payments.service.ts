@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/restrict-plus-operands */
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import { Injectable } from '@angular/core';
 
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -6,13 +8,12 @@ import { environment } from '../../../environments/environment';
 import { PaymentDto } from 'src/app/dtos/payments/payment-dto';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class PaymentsService {
+  constructor(private http: HttpClient) {}
 
-  constructor(private http: HttpClient) { }
-
-  getBraintreeClientToken(token: any){
+  getBraintreeClientToken(token: any) {
     token = 'token ' + token;
     return this.http.get<any>(`${environment.baseUrl}/payments/braintree`, {
       headers: new HttpHeaders().set('Authorization', token),
@@ -20,7 +21,7 @@ export class PaymentsService {
     });
   }
 
-  braintreeTransactionSale(token: any, payment: PaymentDto){
+  braintreeTransactionSale(token: any, payment: PaymentDto) {
     token = 'token ' + token;
     return this.http.post<any>(`${environment.baseUrl}/payments/braintree`, payment, {
       headers: new HttpHeaders().set('Authorization', token),
@@ -28,7 +29,7 @@ export class PaymentsService {
     });
   }
 
-  creteStripePaymentIntent(token: any, payment: PaymentDto){
+  creteStripePaymentIntent(token: any, payment: PaymentDto) {
     token = 'token ' + token;
     return this.http.post(`${environment.baseUrl}/payments/stripe`, payment, {
       headers: new HttpHeaders().set('Authorization', token),
@@ -36,7 +37,7 @@ export class PaymentsService {
     });
   }
 
-  confirmStripePaymentIten(token: any, data: any, paymentItentId: string){
+  confirmStripePaymentIten(token: any, data: any, paymentItentId: string) {
     token = 'token ' + token;
     return this.http.put<any>(`${environment.baseUrl}/payments/stripe/${paymentItentId}`, data, {
       headers: new HttpHeaders().set('Authorization', token),

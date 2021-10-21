@@ -1,3 +1,7 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/naming-convention */
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
+/* eslint-disable @typescript-eslint/restrict-plus-operands */
 import { Injectable } from '@angular/core';
 import { OrderDto } from 'src/app/dtos/orders/order-dto';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
