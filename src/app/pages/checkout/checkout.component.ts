@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/semi */
+/* eslint-disable eqeqeq */
+/* eslint-disable no-unused-labels */
 /* eslint-disable no-debugger */
 /* eslint-disable prefer-arrow/prefer-arrow-functions */
 /* eslint-disable space-before-function-paren */
@@ -43,7 +46,7 @@ import { CartItem } from 'src/app/dtos/cart-item/cart-item';
 import { CartModel } from 'src/app/models/cart/cart-model';
 import { CartItemModel } from 'src/app/models/cart/cart-item-model';
 import { ShippingAdressService } from 'src/app/services/shipping-adress/shipping-adress.service';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { OrdersService } from 'src/app/services/orders/orders.service';
 import { Order } from 'src/app/models/order/order';
 import { OrderDto } from 'src/app/dtos/orders/order-dto';
@@ -58,6 +61,9 @@ import { StripePaymentDto } from 'src/app/dtos/payment/stripe-payment-dto';
 import { PaymentInfoDto } from 'src/app/dtos/payment/payment-info';
 import { TransactionDto } from 'src/app/dtos/payment/transaction-dto';
 import { ClientToken } from 'src/app/dtos/payment/client-token';
+import { LoaderComponent } from 'src/app/components/loader/loader.component';
+import { ReloadRouteComponent } from 'src/app/components/reload-route/reload-route.component';
+// import { LoaderService } from 'src/app/loader/loader.service';
 // import { ShippingMethod } from 'src/app/dtos/order/shipping-method';
 
 @Component({
@@ -68,6 +74,7 @@ import { ClientToken } from 'src/app/dtos/payment/client-token';
 export class CheckoutComponent implements OnInit {
   ShippingAdressForm: FormGroup;
   testForm: FormGroup;
+  ibanForm: FormGroup;
   emailRegex = /^(([^<>+()\[\]\\.,;:\s@"-#$%&=]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,3}))$/;
   currentUser: any;
   cartData: CartModelServer;
@@ -113,6 +120,9 @@ export class CheckoutComponent implements OnInit {
   is_bank = false;
   somme: any;
   paypalToken: ClientToken | undefined;
+  adressDefault = 'Choose shipping adress';
+  shipDefault = 'Choose shipping method';
+  bank: any;
 
   constructor(
     public cartService: CartService,
@@ -125,7 +135,7 @@ export class CheckoutComponent implements OnInit {
     private shippingAdressService: ShippingAdressService,
     private orderItemService: OrderItemsService,
     private shipmentService: ShipmentService,
-    private paymentService: PaymentsService
+    private paymentService: PaymentsService // public loaderService: LoaderService,
   ) {}
 
   ngOnInit(): void {
@@ -141,6 +151,7 @@ export class CheckoutComponent implements OnInit {
     });
 
     this.initForm('', '');
+    this.initIbanForm();
 
     this.ShippingAdressForm = this.formBuilder.group({
       fullname: [null, Validators.required],
@@ -186,7 +197,6 @@ export class CheckoutComponent implements OnInit {
     this.getBankAccount();
     // this.updateCartOnServer();
     this.resetCart();
-
     // this.selected = this.shippingAdresses[-1].name + ', ' + this.shippingAdresses[-1].city;
   }
 
@@ -226,7 +236,7 @@ export class CheckoutComponent implements OnInit {
 
         instance?.requestPaymentMethod((requestPaymentMethodErr, payload) => {
           if (requestPaymentMethodErr) {
-            console.error(requestPaymentMethodErr);
+            console.dir(requestPaymentMethodErr);
             return;
           }
 
@@ -234,8 +244,20 @@ export class CheckoutComponent implements OnInit {
           data.nonce = payload.nonce;
           data.device_data = payload.deviceData;
           data.amount = amount;
+          debugger;
           this.paymentService.braintreeTransactionSale(this.token, data).subscribe(
-            (response) => console.dir(response),
+            (response) => {
+              console.dir(response);
+              Swal.fire({
+                position: 'top-end',
+                icon: 'success',
+                title: 'Payment has been made !',
+                showConfirmButton: false,
+                timer: 2000,
+              });
+              this.cartService.deleteCart();
+              this.router.navigate(['/orders']);
+            },
             (error) => console.error(error)
           );
         });
@@ -292,13 +314,17 @@ export class CheckoutComponent implements OnInit {
     });
   }
 
+  initIbanForm() {
+    this.ibanForm = this.formBuilder.group({
+      name: [null, Validators.required],
+      email: [null, [Validators.required, Validators.pattern(this.emailRegex)]],
+    });
+  }
+
   initForm(amount, orderNumber) {
     this.testForm = this.formBuilder.group({
       amount: ['Amount : ' + amount, Validators.required],
       orderNumber: ['Order number : ' + orderNumber, Validators.required],
-      // cardNumber: ['', Validators.required],
-      // cvc: ['', Validators.required],
-      // cardExpiry: ['', Validators.required],
     });
   }
 
@@ -319,65 +345,96 @@ export class CheckoutComponent implements OnInit {
   // }
 
   initStripeForm() {
-    const elements = this.stripe.elements();
-    // eslint-disable-next-line no-var
+    if (this.payInfos.paymentMethod === 'card') {
+      const elements = this.stripe.elements();
+      // eslint-disable-next-line no-var
 
-    let style = {
-      base: {
-        hidePostalCode: true,
-
-        color: '#32325d',
-
-        fontFamily: 'Raleway, sans-serif',
-
-        fontSmoothing: 'antialiased',
-
-        fontSize: '16px',
-
-        '::placeholder': {
+      let style = {
+        base: {
           color: '#32325d',
-        },
 
+          fontFamily: 'Raleway, sans-serif',
+
+          fontSmoothing: 'antialiased',
+
+          fontSize: '16px',
+
+          '::placeholder': {
+            color: '#32325d',
+          },
+
+          invalid: {
+            fontFamily: 'Arial, sans-serif',
+
+            color: '#fa755a',
+
+            iconColor: '#fa755a',
+          },
+        },
+      };
+
+      this.card = elements.create('card', { hidePostalCode: true, style: style });
+
+      this.card.mount('#card-element');
+
+      this.card.on('change', function (event) {
+        // Disable the Pay button if there are no card details in the Element
+
+        document.querySelector('button').disabled = event.empty;
+
+        document.querySelector('#card-error').textContent = event.error ? event.error.message : '';
+      });
+
+      this.card.addEventListener('change', (event) => {
+        if (event.error) {
+          this.errorMessage = event.error.message;
+        } else {
+          this.errorMessage = '';
+        }
+      });
+    }
+
+    if (this.payInfos.paymentMethod === 'iban') {
+      let style = {
+        base: {
+          color: '#32325d',
+          fontSize: '16px',
+          '::placeholder': {
+            color: '#aab7c4',
+          },
+          ':-webkit-autofill': {
+            color: '#32325d',
+          },
+        },
         invalid: {
-          fontFamily: 'Arial, sans-serif',
-
           color: '#fa755a',
-
           iconColor: '#fa755a',
+          ':-webkit-autofill': {
+            color: '#fa755a',
+          },
         },
-      },
-    };
+      };
 
-    // let cardNumber = elements.create('cardNumber', {
-    //   style: style
-    // });
+      const options = {
+        clientSecret: `${this.stripeToken}`,
+        supportedCountries: ['SEPA'],
+        // Fully customizable with appearance API.
+        style: style,
+        placeholderCountry: 'FR',
+      };
 
-    // cardNumber.mount('#cardNumber');
+      const elements = this.stripe.elements();
+      this.bank = elements.create('iban', options);
+      this.bank.mount('#iban-element');
 
-    // let cardExpiry = elements.create('cardExpiry', {
-    //   style
-    // });
+      this.bank.on('change', function (event) {
+        // Disable the Pay button if there are no card details in the Element
 
-    // cardExpiry.mount('#cardExpire');
-    //   let cardCvc = elements.create('cardCvc', {
-    //   style
-    // });
+        // document.querySelector('button').disabled = event.empty;
 
-    // cardCvc.mount('#cardCvc');
-
-    // this.registerElements([cardNumber, cardExpiry, cardCvc]);
-
-    this.card = elements.create('card', { style: style });
-
-    this.card.mount('#card-element');
-
-    this.card.on('change', function (event) {
-      // Disable the Pay button if there are no card details in the Element
-
-      document.querySelector('button').disabled = event.empty;
-
-      document.querySelector('#card-error').textContent = event.error ? event.error.message : '';
-    });
+        document.querySelector('#card-error').textContent = event.error ? event.error.message : '';
+      });
+    }
 
     // Show a spinner on payment submission
 
@@ -398,14 +455,6 @@ export class CheckoutComponent implements OnInit {
         document.querySelector('#button-text').classList.remove('hidden');
       }
     };
-
-    this.card.addEventListener('change', (event) => {
-      if (event.error) {
-        this.errorMessage = event.error.message;
-      } else {
-        this.errorMessage = '';
-      }
-    });
   }
 
   allShippingAdress() {
@@ -519,6 +568,9 @@ export class CheckoutComponent implements OnInit {
           this.orderService.initiate(this.token, order).subscribe(
             (data) => {
               this.orderItem = data.body.order_items;
+              if (this.orderItem == undefined) {
+                this.router.navigate(['./checkout']);
+              }
               this.orderId = data.body.id;
             },
             (err) => {
@@ -598,7 +650,7 @@ export class CheckoutComponent implements OnInit {
   }
 
   initPayment() {
-    if (this.payInfos.paymentMethod === 'card') {
+    if (this.payInfos.paymentMethod == 'card') {
       this.info = {
         order: this.orderId,
         method: this.payInfos.paymentMethod,
@@ -618,8 +670,26 @@ export class CheckoutComponent implements OnInit {
         },
         (err) => console.dir(err, 'Init payment error !')
       );
-    } else if (this.payInfos.paymentMethod === 'bank') {
-      console.dir('Not yet avaible !');
+    } else if (this.payInfos.paymentMethod == 'iban') {
+      this.info = {
+        order: this.orderId,
+        method: 'sepa_debit',
+        amount: this.cartTotal,
+        currency: 'EUR',
+      };
+
+      this.payment.initiateStripePayment(this.token, this.info).subscribe(
+        (res) => {
+          console.dir(res, 'Init payment success !');
+          this.pbKey = res.body.public_key;
+          console.dir(this.pbKey, 'Store pbKey success !');
+          this.stripeToken = res.body.token;
+          this.stripe = Stripe(this.pbKey);
+          this.initStripeForm();
+          this.initIbanForm();
+        },
+        (err) => console.dir(err, 'Init payment error !')
+      );
     }
   }
 
@@ -705,6 +775,7 @@ export class CheckoutComponent implements OnInit {
     }
 
     console.dir(this.orderItem);
+
     this.shippingAdressesForActicles.map((ship) => {
       this.orderItem.map((item) => {
         if (ship.product === item.cart_item.product.id) {
@@ -843,7 +914,7 @@ export class CheckoutComponent implements OnInit {
       this.getClientToken();
     }
 
-    if (this.payInfos.paymentMethod === 'bank') {
+    if (this.payInfos.paymentMethod === 'iban') {
       this.is_bank = true;
       this.is_paypal = false;
       this.is_card = false;
@@ -868,6 +939,44 @@ export class CheckoutComponent implements OnInit {
             title: 'payment has been made',
             showConfirmButton: false,
             timer: 1500,
+          });
+
+          const order = this.orderId;
+
+          this.payment.confirmStripePayment(this.token, result.paymentIntent.id, order).subscribe((res) => {
+            this.cartService.deleteCart();
+            this.router.navigate(['/orders']);
+            console.log(res);
+          });
+        }
+      });
+  }
+
+  sepaSubmit() {
+    let name = this.ibanForm.get('name').value;
+    let email = this.ibanForm.get('email').value;
+
+    this.stripe
+      .confirmSepaDebitPayment(`${this.stripeToken}`, {
+        payment_method: {
+          sepa_debit: this.bank,
+          billing_details: {
+            name: name,
+            email: email,
+          },
+        },
+      })
+      .then((result) => {
+        console.log(result);
+        if (result.error) {
+          this.errorMessage = result.error.message;
+        } else if (result.paymentIntent.status === 'processing') {
+          Swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: 'Payment is in progress !',
+            showConfirmButton: false,
+            timer: 2000,
           });
 
           const order = this.orderId;

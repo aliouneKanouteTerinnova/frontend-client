@@ -124,6 +124,9 @@
   <!-- <div class="row"> -->
   <div class="billing">
     <mat-horizontal-stepper #stepper>
+      <!-- <div *ngIf="loaderService.isLoading | async" class="loader-container">
+        <mat-spinner style="top: 50%; left: 50%;"></mat-spinner>
+      </div> -->
       <mat-step>
         <ng-template matStepLabel>Shipping Adress</ng-template>
 
@@ -269,15 +272,19 @@
             <div class="selectadressship">
               <!-- <mat-form-field> -->
               <select
-                placeholder="Change shipping adress"
                 (change)="updateCartItems($event)"
                 formControlName="ship_adress"
-                [(value)]="selected"
+                [(value)]="adressDefault"
+                [(ngModel)]="adressDefault"
               >
                 <!-- <option value="product,{{ c.product.id }},ship_adress,{{ a.id }}" selected="selected">
                 {{ a.name }}, {{ a.city }}
               </option> -->
-                <option *ngFor="let a of shippingAdresses" value="product,{{ c.product.id }},ship_adress,{{ a.id }}">
+                <option
+                  *ngFor="let a of shippingAdresses"
+                  value="product,{{ c.product.id }},ship_adress,{{ a.id }}"
+                  placeholder="Change shipping adress"
+                >
                   {{ a.name }}, {{ a.city }}
                 </option>
               </select>
@@ -322,13 +329,12 @@
 
             <div class="selectshipmethod">
               <!-- <mat-form-field> -->
-              <select
-                (change)="updateShipmentMethod($event)"
-                placeholder="Choose shipping method"
-                [(value)]="selected"
-                formControlName="_rates"
-              >
-                <option *ngFor="let r of rates; let i = index" value="object_id,{{ r.object_id }}">
+              <select (change)="updateShipmentMethod($event)" [(value)]="selected" formControlName="_rates">
+                <option
+                  *ngFor="let r of rates; let i = index"
+                  value="object_id,{{ r.object_id }}"
+                  placeholder="Choose shipping method"
+                >
                   provider: {{ r.provider }} -- price: €{{ r.amount }}
                 </option>
               </select>
@@ -348,34 +354,34 @@
 
         <div>
           <h2>Select a payment method</h2>
-          {{ p.value | json }}
+
           <div class="paymentMethods">
             <form #p="ngForm" (ngSubmit)="choosePaymentMethod(p)">
               <mat-card class="col-12 mt-5">
-                <mat-card-title-group> <mat-card-title>Payments accounts</mat-card-title> </mat-card-title-group><br />
+                <mat-card-title-group> <mat-card-title>Payments Methods</mat-card-title> </mat-card-title-group><br />
                 <mat-card-content>
                   <mat-radio-group ngModel name="payment_method" class="example-radio-group">
-                    <div class="mt-4">
+                    <!-- <div class="mt-4">
                       <h4><b>Bank accounts</b></h4>
-                    </div>
+                    </div> -->
 
-                    <mat-radio-button *ngFor="let acc of bankAccounts" value="paymentMethod,bank,id,{{ acc.id }}">
-                      {{ acc.account_name }} - {{ acc.iban }}
-                      <a class="ml-5" routerLink="#" (click)="deleteBankAcc(acc.id)">Delete</a>
+                    <mat-radio-button value="paymentMethod,iban">
+                      Bank account
+                      <!-- <a class="ml-5" routerLink="#" (click)="deleteBankAcc(acc.id)">Delete</a> -->
                     </mat-radio-button>
 
-                    <div class="mt-4">
+                    <!-- <div class="mt-4">
                       <h4><b>Credit Cards accounts</b></h4>
-                    </div>
+                    </div> -->
 
-                    <mat-radio-button *ngFor="let credit of creditCards" value="paymentMethod,card,id,{{ credit.id }}">
-                      {{ credit.card_name }} - {{ credit.card_number }}
-                      <a class="ml-5" routerLink="#" (click)="deleteCreditCard(credit.id)">Delete</a>
+                    <mat-radio-button value="paymentMethod,card" class="mt-2">
+                      Credit Card
+                      <!-- <a class="ml-5" routerLink="#" (click)="deleteCreditCard(credit.id)">Delete</a> -->
                     </mat-radio-button>
 
-                    <div class="mt-4">
+                    <!-- <div class="mt-4">
                       <h4><b>Others payment methods</b></h4>
-                    </div>
+                    </div> -->
 
                     <mat-radio-button value="paymentMethod,paypal">
                       <div><img src="../../../assets/img/icons/logo-Paypal.jpg" height="40" width="90" /></div>
@@ -393,7 +399,7 @@
           </div>
 
           <hr />
-
+          <!--
           <mat-accordion>
             <mat-expansion-panel class="mb-4">
               <mat-expansion-panel-header>
@@ -521,7 +527,7 @@
               </div>
             </mat-expansion-panel>
 
-            <!-- <mat-expansion-panel class="mb-4">
+            <mat-expansion-panel class="mb-4">
               <mat-expansion-panel-header>
                 <mat-panel-title> Other payment methods </mat-panel-title>
               </mat-expansion-panel-header>
@@ -529,20 +535,79 @@
                 mat
               </div>
 
-            </mat-expansion-panel> -->
-          </mat-accordion>
+            </mat-expansion-panel>
+          </mat-accordion> -->
         </div>
 
         <div>
           <button class="mr-4" mat-button matStepperPrevious>⮜ Back</button>
-          <button mat-button matStepperNext (click)="choosePaymentMethod(p); place_order = !place_order">
-            Review ⮞
-          </button>
+          <button mat-button matStepperNext (click)="choosePaymentMethod(p); place_order = true">Review ⮞</button>
         </div>
       </mat-step>
 
       <mat-step>
         <ng-template matStepLabel>Review and payment</ng-template>
+
+        <div class="card-div mb-4 mt-2" *ngIf="is_card">
+          <form id="payment-form" (ngSubmit)="onSubmit()" [formGroup]="testForm">
+            <h3 style="text-align: center; font: bold, 16px, Raleway">Credit Card Payment</h3>
+
+            <div id="card-element"><!--Stripe.js injects the Card Element--></div>
+
+            <button id="submit" type="submit" class="payBtn">
+              <div class="spinner hidden" id="spinner"></div>
+
+              <span id="button-text" (click)="(loading)">Pay now</span>
+            </button>
+
+            <p id="card-error" role="alert"></p>
+
+            <p class="result-message hidden"></p>
+          </form>
+        </div>
+
+        <div class="iban-div mb-4 mt-2" *ngIf="is_bank">
+          <form id="payment-form" (ngSubmit)="sepaSubmit()" [formGroup]="ibanForm">
+            <h3 style="text-align: center; font: bold, 16px, Raleway">Bank Account Payment</h3>
+
+            <label for="name"> Name </label>
+            <input id="name" type="text" formControlName="name" placeholder="John Doe" required />
+
+            <label for="email"> Email Address </label>
+            <input id="email" type="email" formControlName="email" placeholder="john.doe@email.com" required />
+
+            <label for="iban-element"> IBAN </label>
+            <div id="iban-element">
+              <!-- A Stripe Element will be inserted here. -->
+            </div>
+
+            <button id="iban-submit" type="submit" class="payBtn mt-4">
+              <div class="spinner hidden" id="spinner"></div>
+
+              <span id="button-text">Pay now</span>
+            </button>
+
+            <!-- Display mandate acceptance text. -->
+            <div id="mandate-acceptance">
+              By providing your payment information and confirming this payment, you authorise (A)
+              <strong>INSERT YOUR BUSINESS NAME HERE</strong> and Stripe, our payment service provider and/or PPRO, its
+              local service provider, to send instructions to your bank to debit your account and (B) your bank to debit
+              your account in accordance with those instructions. As part of your rights, you are entitled to a refund
+              from your bank under the terms and conditions of your agreement with your bank. A refund must be claimed
+              within 8 weeks starting from the date on which your account was debited. Your rights are explained in a
+              statement that you can obtain from your bank. You agree to receive notifications for future debits up to 2
+              days before they occur.
+            </div>
+
+            <!-- Used to display form errors. -->
+            <div id="error-message" role="alert"></div>
+          </form>
+        </div>
+
+        <div class="uk-container mb-4 mt-2" *ngIf="is_paypal">
+          <p class="text-danger">{{ errorMessage }}</p>
+          <div id="paypal"></div>
+        </div>
 
         <div class="productrow" *ngFor="let c of cartData.data; let i = index">
           <div class="product">
@@ -558,6 +623,7 @@
               <p>Quantity: {{ c.numInCart }}</p>
             </div>
           </div>
+          <br />
 
           <div class="selectshipmethod">
             <!-- <mat-form-field> -->
@@ -580,7 +646,8 @@
 
         <div class="subtotal">
           <div class="subtotal1">
-            <span>Item Price :</span> <span class="devic">{{ formatPrice(cartTotal | currency: 'EUR') }}</span>
+            <span>Items Price :</span>
+            <span class="devic">{{ formatPrice(cartTotal | currency: 'EUR') }}</span>
           </div>
 
           <div class="taxe">
@@ -616,38 +683,5 @@
     </div>
   </div>
   <!-- </div> -->
-
-  <!-- <form (ngSubmit)="onSubmit()" [formGroup]="testForm" *ngIf="to_pay" id="to_pay">
-    <div class="card uk-card-default uk-width-*">
-      <div class="uk-card-header text-center pt-2" translate>payment.title</div>
-      <div class="uk-card-body">
-        <p class="text-danger">{{ errorMessage }}</p>
-
-        <input type="text" readonly id="amount" class="form-control" formControlName="amount" />
-        <input type="text" readonly id="orderNumber" class="form-control" formControlName="orderNumber" />
-        <div id="card-element" class="mt-3 mb-3"></div>
-        <button class="btn payBtn btn-block mt-3" type="submit" translate>payment.payment_button</button>
-      </div>
-    </div>
-  </form> -->
-
-  <form id="payment-form" (ngSubmit)="onSubmit()" [formGroup]="testForm" *ngIf="is_card">
-    <div id="card-element"><!--Stripe.js injects the Card Element--></div>
-
-    <button id="submit" type="submit" class="payBtn">
-      <div class="spinner hidden" id="spinner"></div>
-
-      <span id="button-text">Pay now</span>
-    </button>
-
-    <p id="card-error" role="alert"></p>
-
-    <p class="result-message hidden"></p>
-  </form>
-
-  <div class="uk-container mb-5 mt-5" *ngIf="is_paypal">
-    <p class="text-danger">{{ errorMessage }}</p>
-    <div id="paypal"></div>
-  </div>
 </div>
 <app-footer></app-footer>
